@@ -23,12 +23,16 @@ export default function HomePage() {
         </p>
         <div className="flex flex-wrap gap-3 justify-center mb-6">
           <Link href="/resize-image/to-50kb"
-            className="bg-white text-blue-700 font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors">
+            className="bg-white text-blue-700 font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-sm">
             Resize Image to 50KB
           </Link>
           <Link href="/compress-pdf/to-100kb"
             className="bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-400 transition-colors border border-blue-400">
             Compress PDF to 100KB
+          </Link>
+          <Link href="/image-size-guide"
+            className="bg-blue-900/30 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-900/50 transition-colors border border-blue-400/30">
+            Image Size Guide 2026
           </Link>
         </div>
       </div>

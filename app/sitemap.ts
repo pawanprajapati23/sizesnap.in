@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/privacy-policy`, priority: 0.5 },
     { url: `${BASE_URL}/terms-of-service`, priority: 0.5 },
     { url: `${BASE_URL}/blog`, priority: 0.8 },
+    { url: `${BASE_URL}/image-size-guide`, priority: 0.9 },
   ].map(page => ({
     ...page,
     lastModified: new Date(),

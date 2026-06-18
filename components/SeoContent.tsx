@@ -1,5 +1,7 @@
 import { Tool, ToolVariant } from '@/lib/toolConfigs'
-import { CheckCircle2, ShieldCheck, Zap, Files } from 'lucide-react'
+import { CheckCircle2, ShieldCheck, Zap, Files, BookOpen } from 'lucide-react'
+import { getRelatedBlogs } from '@/lib/blogConfigs'
+import Link from 'next/link'
 
 interface SeoContentProps {
   tool: Tool
@@ -14,6 +16,7 @@ export default function SeoContent({ tool, variant }: SeoContentProps) {
 
   const fileTypeStr = isPdfGroup ? 'PDF files' : 'images'
   const sizeValue = variant.config.maxKB ? `${variant.config.maxKB}KB` : variant.label
+  const relatedBlogs = getRelatedBlogs(tool.slug)
   
   return (
     <article className="mt-12 bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-8 prose prose-blue max-w-none text-gray-700">
@@ -34,6 +37,28 @@ export default function SeoContent({ tool, variant }: SeoContentProps) {
           or a professional submitting digital documents, keeping your {fileTypeStr} strictly within the {sizeValue} 
           limit is often mandatory. This free online tool makes the entire process incredibly fast and 100% secure.
         </p>
+
+        {/* Internal Linking to Blogs */}
+        {relatedBlogs.length > 0 && (
+          <div className="not-prose bg-blue-50 border border-blue-100 rounded-xl p-6 my-8">
+            <h3 className="text-blue-900 font-bold mb-4 flex items-center gap-2">
+              <BookOpen className="w-5 h-5" />
+              Helpful Guides & Instructions
+            </h3>
+            <div className="grid gap-3">
+              {relatedBlogs.map(blog => (
+                <Link 
+                  key={blog.slug} 
+                  href={`/blog/${blog.slug}`}
+                  className="bg-white p-3 rounded-lg shadow-sm border border-blue-100 hover:border-blue-400 hover:shadow-md transition-all flex justify-between items-center group"
+                >
+                  <span className="text-blue-700 font-medium group-hover:text-blue-800">{blog.title}</span>
+                  <span className="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
         
         {/* Bilingual Hindi Content for Tier-2 / Tier-3 Regional SEO */}
         <div className="bg-orange-50 border-l-4 border-orange-500 p-5 mt-6 rounded-r-lg">

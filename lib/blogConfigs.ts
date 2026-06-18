@@ -236,7 +236,7 @@ export const blogs = [
         <li>Rearrange the thumbnails so page 1 is first, page 2 is second, etc.</li>
         <li>Click "Convert to PDF" and save the file.</li>
       </ol>
-      <p>It's incredibly fast, and works seamlessly on both Android and iOS devices!</p>
+      <p>It&apos;s incredibly fast, and works seamlessly on both Android and iOS devices!</p>
     `
   },
   {
@@ -290,3 +290,10 @@ export const blogs = [
     `
   }
 ]
+
+export function getRelatedBlogs(toolSlug: string) {
+  return blogs.filter(blog => 
+    blog.content.toLowerCase().includes(toolSlug.toLowerCase()) ||
+    blog.slug.toLowerCase().includes(toolSlug.toLowerCase())
+  ).slice(0, 3)
+}

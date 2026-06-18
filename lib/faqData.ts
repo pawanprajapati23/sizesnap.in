@@ -100,5 +100,33 @@ export const faqData: Record<string, FAQ[]> = {
       question: 'What happens to the page order?',
       answer: 'The pages are merged in the same order you select the files. All pages from the first file will appear first, followed by the second file, and so on.'
     }
+  ],
+  'passport-photo': [
+    {
+      question: 'What is the standard Indian passport photo size?',
+      answer: 'The standard size is 3.5 cm x 4.5 cm (width x height). Our tool automatically sets these dimensions for you.'
+    },
+    {
+      question: 'Can I resize a selfie for a passport photo?',
+      answer: 'Yes, as long as it has a plain background and you are looking directly at the camera. Our tool lets you crop the face area perfectly.'
+    },
+    {
+      question: 'How many KB should a passport photo be for SSC/UPSC?',
+      answer: 'Most government portals require the photo to be between 20KB and 50KB. Our tool optimizes the file to hit this exact range.'
+    }
+  ],
+  'signature-resize': [
+    {
+      question: 'How do I get a clear signature scan?',
+      answer: 'Sign on a plain white paper using a dark blue or black pen. Take a photo in good lighting and upload it here.'
+    },
+    {
+      question: 'What is the signature size for SSC exams?',
+      answer: 'The signature should be between 10KB and 20KB, and dimensions are typically 4.0 cm x 2.0 cm.'
+    },
+    {
+      question: 'Can I resize a signature for PAN card?',
+      answer: 'Yes, our PAN Card Signature tool formats your signature to be under 10KB as required by NSDL.'
+    }
   ]
 }

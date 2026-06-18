@@ -39,7 +39,7 @@ export default function PdfCompressTool({ config }: Props) {
       if (!pdfjsLib) {
          // @ts-ignore
          pdfjsLib = await import('pdfjs-dist/build/pdf.mjs');
-         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
+         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.mjs`;
          (window as any).pdfjsLib = pdfjsLib;
       }
 

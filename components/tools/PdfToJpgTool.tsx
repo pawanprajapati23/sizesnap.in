@@ -8,7 +8,7 @@ if (typeof window !== 'undefined') {
   // @ts-ignore
   import('pdfjs-dist/build/pdf.mjs').then(mod => {
     pdfjsLib = mod
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.mjs`
   })
 }
 
@@ -35,7 +35,7 @@ export default function PdfToJpgTool({ config }: Props) {
       if (!pdfjsLib) {
          // @ts-ignore
          pdfjsLib = await import('pdfjs-dist/build/pdf.mjs')
-         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`
+         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.mjs`
       }
 
       const arrayBuffer = await file.arrayBuffer()

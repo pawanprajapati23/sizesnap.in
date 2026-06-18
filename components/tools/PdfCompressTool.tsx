@@ -44,7 +44,7 @@ export default function PdfCompressTool({ config }: Props) {
       }
 
       const arrayBuffer = await file.arrayBuffer()
-      const loadingTask = pdfjsLib.getDocument(new Uint8Array(arrayBuffer))
+      const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) })
       const pdf = await loadingTask.promise
       
       const numPages = pdf.numPages
@@ -119,6 +119,7 @@ export default function PdfCompressTool({ config }: Props) {
     setDragOver(false)
     const file = e.dataTransfer.files?.[0]
     if (file) processPdf(file)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const formatBytes = (bytes: number) => {

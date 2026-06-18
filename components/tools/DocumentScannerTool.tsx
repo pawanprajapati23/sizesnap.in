@@ -83,6 +83,7 @@ export default function DocumentScannerTool({ config }: Props) {
     if (originalImage) {
       applyFilter(originalImage, threshold)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [threshold])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +96,7 @@ export default function DocumentScannerTool({ config }: Props) {
     setDragOver(false)
     const file = e.dataTransfer.files?.[0]
     if (file) processImage(file)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleReset = () => {

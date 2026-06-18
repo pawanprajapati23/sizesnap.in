@@ -88,6 +88,7 @@ export default function ImageResizeTool({ config }: Props) {
     setDragOver(false)
     const file = e.dataTransfer.files?.[0]
     if (file) processImage(file)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config])
 
   const formatBytes = (bytes: number) => {

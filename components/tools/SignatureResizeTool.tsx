@@ -114,6 +114,7 @@ export default function SignatureResizeTool({ config }: Props) {
     setDragOver(false)
     const file = e.dataTransfer.files?.[0]
     if (file) processImage(file)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config])
 
   const handleReset = () => {
@@ -191,6 +192,7 @@ export default function SignatureResizeTool({ config }: Props) {
 
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 flex flex-col items-center">
                <div className="w-full max-w-sm bg-white border border-gray-300 shadow-sm rounded p-4 flex items-center justify-center min-h-[100px]">
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
                  <img src={resultUrl} alt="Signature" className="max-w-full max-h-full object-contain mix-blend-multiply" />
                </div>
                <p className="text-sm text-gray-500 mt-3 font-medium">

@@ -113,6 +113,7 @@ export default function PassportPhotoTool({ config }: Props) {
     setDragOver(false)
     const file = e.dataTransfer.files?.[0]
     if (file) processImage(file)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config])
 
   const handleReset = () => {
@@ -194,6 +195,7 @@ export default function PassportPhotoTool({ config }: Props) {
                 <div className="text-center">
                   <p className="text-xs text-gray-500 mb-2 font-semibold uppercase tracking-wider">Original</p>
                   <div className="w-32 h-40 opacity-70 rounded-lg overflow-hidden border border-gray-300">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={originalUrl} alt="Original" className="w-full h-full object-cover" />
                   </div>
                 </div>
@@ -202,6 +204,7 @@ export default function PassportPhotoTool({ config }: Props) {
               <div className="text-center">
                 <p className="text-xs text-green-600 mb-2 font-semibold uppercase tracking-wider">Passport Output</p>
                 <div className="w-32 h-40 rounded-lg overflow-hidden border-2 border-green-500 shadow-md">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={resultUrl} alt="Passport" className="w-full h-full object-cover" />
                 </div>
                 <p className="text-xs text-gray-500 mt-2">{(finalFile.size / 1024).toFixed(1)} KB</p>

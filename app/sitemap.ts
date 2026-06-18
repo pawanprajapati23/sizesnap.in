@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getAllPaths, tools } from '@/lib/toolConfigs'
 import { blogs } from '@/lib/blogConfigs'
+import { stories } from '@/lib/storyConfigs'
 
 const BASE_URL = 'https://sizesnap.in'
 const SITE_LAST_MODIFIED = new Date('2026-06-18')
@@ -20,6 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }))
 
+  const storyPages = stories.map(story => ({
+    url: `${BASE_URL}/stories/${story.slug}`,
+    lastModified: new Date(story.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
   const blogPages = blogs.map(blog => ({
     url: `${BASE_URL}/blog/${blog.slug}`,
     lastModified: new Date(blog.date),
@@ -34,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/terms-of-service`, priority: 0.5 },
     { url: `${BASE_URL}/blog`, priority: 0.8 },
     { url: `${BASE_URL}/image-size-guide`, priority: 0.9 },
+    { url: `${BASE_URL}/stories`, priority: 0.7 },
   ].map(page => ({
     ...page,
     lastModified: SITE_LAST_MODIFIED,
@@ -46,5 +55,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPages,
     ...toolHubPages,
     ...variantPages,
+    ...storyPages,
   ]
 }

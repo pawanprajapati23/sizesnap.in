@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import AdUnit from '@/components/AdUnit'
 import HomeSearch from '@/components/HomeSearch'
+import { stories } from '@/lib/storyConfigs'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -40,6 +41,23 @@ export default function HomePage() {
       <HomeSearch />
 
       <AdUnit slot="homepage-top" format="horizontal" />
+
+      <section className="rounded-3xl bg-slate-950/95 border border-slate-800 p-8 shadow-2xl text-white">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Featured Story</p>
+            <h2 className="mt-4 text-3xl font-bold">Avoid SSC Photo Rejection</h2>
+            <p className="mt-3 max-w-3xl text-slate-300">Learn the exact SSC photo upload rules and avoid common form rejection mistakes.</p>
+          </div>
+          <Link href={`/stories/${stories[0].slug}`}
+            className="inline-flex items-center justify-center rounded-full bg-yellow-400 px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-slate-950 shadow-lg hover:bg-yellow-300 transition"
+          >
+            Read Story
+          </Link>
+        </div>
+      </section>
+
+      <AdUnit slot="homepage-bottom" format="horizontal" />
 
       {/* Trust Signals */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">

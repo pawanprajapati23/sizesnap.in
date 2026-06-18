@@ -34,17 +34,76 @@ export default function PdfCompressTool({ config }: Props) {
     setErrorMsg('')
 
     try {
-      const arrayBuffer = await file.arrayBuffer()
-      const pdfDoc = await PDFDocument.load(arrayBuffer)
-      
-      // Save without object streams to compress metadata/unused objects
-      const pdfBytes = await pdfDoc.save({ useObjectStreams: false })
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
+      // 1. Dynamically load pdfjs to render pages
+      let pdfjsLib: any = (window as any).pdfjsLib;
+      if (!pdfjsLib) {
+         // @ts-ignore
+         pdfjsLib = await import('pdfjs-dist/build/pdf.mjs');
+         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
+         (window as any).pdfjsLib = pdfjsLib;
+      }
 
-      setResultUrl(URL.createObjectURL(blob))
-      setResultSize(blob.size)
+      const arrayBuffer = await file.arrayBuffer()
+      const loadingTask = pdfjsLib.getDocument(new Uint8Array(arrayBuffer))
+      const pdf = await loadingTask.promise
+      
+      const numPages = pdf.numPages
+      const targetSize = config.maxKB ? config.maxKB * 1024 : undefined
+
+      let currentScale = 1.5
+      let currentQuality = 0.8
+      let attempts = 0
+      let finalBlob: Blob | null = null
+
+      while (attempts < 4) {
+        const newPdfDoc = await PDFDocument.create()
+
+        for (let i = 1; i <= numPages; i++) {
+          const page = await pdf.getPage(i)
+          const viewport = page.getViewport({ scale: currentScale })
+          
+          const canvas = document.createElement('canvas')
+          const ctx = canvas.getContext('2d')!
+          canvas.width = viewport.width
+          canvas.height = viewport.height
+
+          await page.render({ canvasContext: ctx, viewport }).promise
+
+          const imgDataUrl = canvas.toDataURL('image/jpeg', currentQuality)
+          const img = await newPdfDoc.embedJpg(imgDataUrl)
+
+          const pdfPage = newPdfDoc.addPage([viewport.width, viewport.height])
+          pdfPage.drawImage(img, {
+            x: 0,
+            y: 0,
+            width: viewport.width,
+            height: viewport.height,
+          })
+        }
+
+        const pdfBytes = await newPdfDoc.save({ useObjectStreams: false })
+        finalBlob = new Blob([pdfBytes as any], { type: 'application/pdf' })
+        
+        if (targetSize && finalBlob.size > targetSize) {
+           currentScale -= 0.3
+           currentQuality -= 0.2
+           attempts++
+           // Floor values to prevent unreadable output
+           if (currentScale < 0.6) currentScale = 0.6
+           if (currentQuality < 0.2) currentQuality = 0.2
+        } else {
+           // Either hit target or no target specified
+           break
+        }
+      }
+
+      if (!finalBlob) throw new Error("Compression failed")
+
+      setResultUrl(URL.createObjectURL(finalBlob))
+      setResultSize(finalBlob.size)
       setStatus('done')
     } catch (err) {
+      console.error(err)
       setErrorMsg('Something went wrong. Make sure the PDF is not password protected.')
       setStatus('error')
     }

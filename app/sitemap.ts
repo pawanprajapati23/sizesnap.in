@@ -3,18 +3,19 @@ import { getAllPaths, tools } from '@/lib/toolConfigs'
 import { blogs } from '@/lib/blogConfigs'
 
 const BASE_URL = 'https://sizesnap.in'
+const SITE_LAST_MODIFIED = new Date('2026-06-18')
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const variantPages = getAllPaths().map(({ tool, variant }) => ({
     url: `${BASE_URL}/${tool}/${variant}`,
-    lastModified: new Date(),
+    lastModified: SITE_LAST_MODIFIED,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
 
   const toolHubPages = tools.map(tool => ({
     url: `${BASE_URL}/${tool.slug}`,
-    lastModified: new Date(),
+    lastModified: SITE_LAST_MODIFIED,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
   }))
@@ -35,12 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/image-size-guide`, priority: 0.9 },
   ].map(page => ({
     ...page,
-    lastModified: new Date(),
+    lastModified: SITE_LAST_MODIFIED,
     changeFrequency: 'monthly' as const,
   }))
 
   return [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1.0 },
+    { url: BASE_URL, lastModified: SITE_LAST_MODIFIED, changeFrequency: 'weekly', priority: 1.0 },
     ...staticPages,
     ...blogPages,
     ...toolHubPages,

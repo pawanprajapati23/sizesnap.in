@@ -2,7 +2,10 @@ import Link from 'next/link'
 import { tools } from '@/lib/toolConfigs'
 
 export default function RelatedTools({ currentToolSlug }: { currentToolSlug: string }) {
-  const related = tools.filter(t => t.slug !== currentToolSlug).slice(0, 6)
+  const currentTool = tools.find(t => t.slug === currentToolSlug)
+  const sameCategory = tools.filter(t => t.slug !== currentToolSlug && t.category === currentTool?.category)
+  const otherTools = tools.filter(t => t.slug !== currentToolSlug && t.category !== currentTool?.category)
+  const related = [...sameCategory, ...otherTools].slice(0, 6)
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5">
@@ -11,7 +14,7 @@ export default function RelatedTools({ currentToolSlug }: { currentToolSlug: str
         {related.map(tool => (
           <Link
             key={tool.slug}
-            href={`/${tool.slug}/${tool.variants[0].slug}`}
+            href={`/${tool.slug}`}
             className="flex items-center gap-3 p-3 rounded-lg border border-gray-100 hover:border-blue-200 hover:bg-blue-50 transition-all"
           >
             <span className="text-2xl">{tool.icon}</span>

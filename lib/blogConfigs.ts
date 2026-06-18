@@ -66,7 +66,7 @@ export const blogs = [
       <h3>Steps to Compress Your PDF</h3>
       <p>You don't need to download heavy software. Follow these steps:</p>
       <ol>
-        <li>Go to our <a href="/pdf-compress/to-100kb">PDF to 100KB</a> or <a href="/pdf-compress/to-200kb">PDF to 200KB</a> tool.</li>
+        <li>Go to our <a href="/compress-pdf/to-100kb">PDF to 100KB</a> or <a href="/compress-pdf/to-200kb">PDF to 200KB</a> tool.</li>
         <li>Upload your scanned document.</li>
         <li>Wait for the tool to optimize the file without losing readability.</li>
         <li>Download the perfectly sized PDF instantly.</li>
@@ -139,7 +139,7 @@ export const blogs = [
 
       <h3>How to Convert Using SizeSnap</h3>
       <ol>
-        <li>Open our <a href="/heic-to-jpg/iphone-photo">HEIC to JPG Converter</a>.</li>
+        <li>Open our <a href="/heic-to-jpg/convert">HEIC to JPG Converter</a>.</li>
         <li>Upload your HEIC file (you can do this directly from your iPhone browser).</li>
         <li>Wait a few seconds for the conversion process.</li>
         <li>Download your new, universally compatible JPG image!</li>
@@ -186,7 +186,7 @@ export const blogs = [
       <h3>How to Add a Watermark for Free</h3>
       <p>You don't need complex editing software to protect your images.</p>
       <ol>
-        <li>Use our <a href="/watermark-image/text">Add Text Watermark Tool</a>.</li>
+        <li>Use our <a href="/watermark-image/add-text">Add Text Watermark Tool</a>.</li>
         <li>Upload the image you want to protect.</li>
         <li>Type your watermark text, choose a font, and set the opacity (transparency) so it doesn't ruin the image.</li>
         <li>Position it across the center or in the bottom right corner.</li>
@@ -214,7 +214,7 @@ export const blogs = [
         <li>Drag and drop the files to rearrange them into the correct order.</li>
         <li>Click "Merge" and download your single, unified PDF document.</li>
       </ol>
-      <p><strong>Note:</strong> If the final merged PDF is too large, you can always run it through our <a href="/pdf-compress/to-500kb">PDF Compressor</a> afterward!</p>
+      <p><strong>Note:</strong> If the final merged PDF is too large, you can always run it through our <a href="/compress-pdf/to-500kb">PDF Compressor</a> afterward!</p>
     `
   },
   {
@@ -231,7 +231,7 @@ export const blogs = [
 
       <h3>How to Convert Images to PDF</h3>
       <ol>
-        <li>Click on the <a href="/image-to-pdf/jpg-to-pdf">JPG to PDF Tool</a> on SizeSnap.</li>
+        <li>Click on the <a href="/image-to-pdf/convert">JPG to PDF Tool</a> on SizeSnap.</li>
         <li>Upload all the photos you've taken of your document.</li>
         <li>Rearrange the thumbnails so page 1 is first, page 2 is second, etc.</li>
         <li>Click "Convert to PDF" and save the file.</li>
@@ -254,7 +254,7 @@ export const blogs = [
       <h3>How to Use It</h3>
       <ol>
         <li>Take a clear photo of your document using your regular phone camera. Make sure the lighting is good.</li>
-        <li>Open the <a href="/document-scanner/scan-to-pdf">Online Document Scanner</a>.</li>
+        <li>Open the <a href="/document-scanner/bw-filter">Online Document Scanner</a>.</li>
         <li>Upload your photo. The tool will automatically convert it to a crisp, high-contrast B&W document.</li>
         <li>Adjust the threshold slider if the text is too light or too dark.</li>
         <li>Save the result as an image or a PDF.</li>
@@ -281,7 +281,7 @@ export const blogs = [
       <h3>Cropping to the Correct Size</h3>
       <p>Different countries and exams have different size requirements, but the standard Indian passport size is 3.5cm x 4.5cm.</p>
       <ol>
-        <li>Open the <a href="/passport-photo/make-passport-photo">Passport Photo Creator</a>.</li>
+        <li>Open the <a href="/passport-photo/indian-passport">Passport Photo Creator</a>.</li>
         <li>Upload your photo.</li>
         <li>Use the crop box to frame your face correctly (your face should cover about 70-80% of the photo).</li>
         <li>The tool will automatically resize and crop it to exactly 3.5x4.5 cm (or your desired dimensions).</li>

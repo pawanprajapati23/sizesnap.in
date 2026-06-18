@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllPaths, getToolAndVariant } from '@/lib/toolConfigs'
-import { faqData } from '@/lib/faqData'
+import { getVariantFaqs } from '@/lib/variantFaqs'
 import PopularSizes from '@/components/PopularSizes'
 import FaqSection from '@/components/FaqSection'
 import AdUnit from '@/components/AdUnit'
@@ -45,7 +46,7 @@ export default async function ToolVariantPage({ params }: Props) {
   if (!result) notFound()
 
   const { tool, variant } = result
-  const faqs = faqData[tool.slug] || []
+  const faqs = getVariantFaqs(tool, variant)
 
   // WebApplication Schema for SEO
   const toolSchema = {
@@ -87,6 +88,9 @@ export default async function ToolVariantPage({ params }: Props) {
           <p className="text-gray-600 leading-relaxed">
             {variant.introParagraph}
           </p>
+          <p className="mt-3 text-sm font-medium text-green-700">
+            No files are uploaded. Everything is processed in your browser.
+          </p>
         </div>
 
         {/* TOOL UI */}
@@ -100,6 +104,21 @@ export default async function ToolVariantPage({ params }: Props) {
 
         {/* Popular Sizes — internal linking */}
         <PopularSizes tool={tool} currentVariantSlug={variant.slug} />
+
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <h2 className="font-semibold text-gray-800 mb-3">More from this topic</h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href={`/${tool.slug}`} className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
+              {tool.shortName} hub
+            </Link>
+            <Link href="/image-size-guide" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
+              Image size guide
+            </Link>
+            <Link href="/blog" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
+              Guides and tutorials
+            </Link>
+          </div>
+        </div>
         
         {/* Deep SEO Content generation (400-600 words) */}
         <SeoContent tool={tool} variant={variant} />

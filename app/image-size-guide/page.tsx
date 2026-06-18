@@ -41,7 +41,7 @@ export default function ImageSizeGuide() {
           <section className="prose prose-blue max-w-none">
             <h2 className="text-3xl font-bold text-gray-900">1. Understanding File Size (KB vs MB)</h2>
             <p>
-              When applying for government jobs in India (like SSC, UPSC, IBPS), you will often see limits like "Photo must be between 20KB to 50KB".
+              When applying for government jobs in India (like SSC, UPSC, IBPS), you will often see limits like &quot;Photo must be between 20KB to 50KB&quot;.
             </p>
             <ul>
               <li><strong>KB (Kilobyte):</strong> Small size, perfect for signatures and passport photos.</li>

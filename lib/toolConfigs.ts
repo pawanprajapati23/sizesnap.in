@@ -52,7 +52,8 @@ function buildSizeVariants(
     { slug: 'for-govt-form', label: 'For Govt Form', h1: `${toolType} for Govt Form`, desc: 'Perfectly sized for government job applications and portal uploads.' },
     { slug: 'for-instagram', label: 'For Instagram', h1: `${toolType} for Instagram`, desc: 'Optimize your photos for Instagram posts and stories without losing quality.' },
     { slug: 'for-linkedin', label: 'For LinkedIn', h1: `${toolType} for LinkedIn`, desc: 'Professional image optimization for LinkedIn profiles and posts.' },
-    { slug: 'for-resume', label: 'For Resume', h1: `${toolType} for Resume`, desc: 'Keep your resume file size small for online job applications.' }
+    { slug: 'for-resume', label: 'For Resume', h1: `${toolType} for Resume`, desc: 'Keep your resume file size small for online job applications.' },
+    { slug: 'without-losing-quality', label: 'No Quality Loss', h1: `${toolType} Without Losing Quality`, desc: 'Reduce file size carefully while keeping faces, text, and document details readable.' }
   ];
 
   for (const intent of intents) {

@@ -8,6 +8,7 @@ import AdUnit from '@/components/AdUnit'
 import RelatedTools from '@/components/RelatedTools'
 import ToolWrapper from '@/components/ToolWrapper'
 import SeoContent from '@/components/SeoContent'
+import PayPalDonate from '@/components/PayPalDonate'
 
 interface Props {
   params: Promise<{ tool: string; variant: string }>
@@ -90,6 +91,9 @@ export default async function ToolVariantPage({ params }: Props) {
 
         {/* TOOL UI */}
         <ToolWrapper toolSlug={tool.slug} config={variant.config} />
+
+        {/* PayPal Support Banner */}
+        <PayPalDonate />
 
         {/* Mid Ad — appears after tool use */}
         <AdUnit slot="0987654321" format="rectangle" className="min-h-[250px]" />

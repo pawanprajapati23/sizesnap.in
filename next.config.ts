@@ -21,9 +21,19 @@ const nextConfig: NextConfig = {
   },
   output: 'standalone',
   transpilePackages: ['motion'],
+  async rewrites() {
+    return [
+      {
+        // Pretty URL shown to users / Search Console
+        source: '/stories/ssc-photo-rejection',
+        // Actual static file served untouched from /public
+        destination: '/stories/ssc-photo-rejection.html',
+      },
+    ];
+  },
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.
-    // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+    // Do not modify—file watching is disabled to prevent flickering during agent edits.
     if (dev && process.env.DISABLE_HMR === 'true') {
       config.watchOptions = {
         ignored: /.*/,

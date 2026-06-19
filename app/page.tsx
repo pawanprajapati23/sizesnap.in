@@ -12,7 +12,24 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="space-y-10">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            'name': 'SizeSnap',
+            'url': 'https://sizesnap.in',
+            'potentialAction': {
+              '@type': 'SearchAction',
+              'target': 'https://sizesnap.in/?q={search_term_string}',
+              'query-input': 'required name=search_term_string'
+            }
+          })
+        }}
+      />
+      <div className="space-y-10">
       {/* Hero */}
       <div className="text-center pt-12 pb-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl text-white px-6 shadow-md relative">
         <h1 className="text-3xl md:text-5xl font-bold mb-4">
@@ -75,5 +92,6 @@ export default function HomePage() {
         ))}
       </section>
     </div>
+    </>
   )
 }

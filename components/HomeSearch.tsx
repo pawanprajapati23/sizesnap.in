@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { tools } from '@/lib/toolConfigs'
 import { Search } from 'lucide-react'
@@ -7,6 +7,14 @@ import { getPrettySlug } from '@/lib/customSeoContent'
 
 export default function HomeSearch() {
   const [query, setQuery] = useState('')
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const q = params.get('q')
+    if (q) {
+      setQuery(q)
+    }
+  }, [])
 
   const filteredTools = tools.filter(tool => {
      if (!query) return true

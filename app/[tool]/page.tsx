@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { BookOpen, FileText, ShieldCheck, Zap } from 'lucide-react'
 import { tools } from '@/lib/toolConfigs'
 import { getRelatedBlogs } from '@/lib/blogConfigs'
+import { getPrettySlug } from '@/lib/customSeoContent'
 
 interface Props {
   params: Promise<{ tool: string }>
@@ -60,16 +61,20 @@ export default async function ToolHubPage({ params }: Props) {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-900">Popular {tool.shortName} Sizes</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {featuredSizes.map(variant => (
-              <Link
-                key={variant.slug}
-                href={`/${tool.slug}/${variant.slug}`}
-                className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:border-blue-300 hover:bg-blue-50 transition-colors"
-              >
-                <span className="block font-bold text-gray-900">{variant.label}</span>
-                <span className="block text-xs text-gray-500 mt-1">Instant download</span>
-              </Link>
-            ))}
+            {featuredSizes.map(variant => {
+              const prettySlug = getPrettySlug(tool.slug, variant.slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+              return (
+                <Link
+                  key={variant.slug}
+                  href={linkHref}
+                  className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  <span className="block font-bold text-gray-900">{variant.label}</span>
+                  <span className="block text-xs text-gray-500 mt-1">Instant download</span>
+                </Link>
+              )
+            })}
           </div>
         </section>
       )}
@@ -78,16 +83,20 @@ export default async function ToolHubPage({ params }: Props) {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-900">Choose by Use Case</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {useCaseVariants.map(variant => (
-              <Link
-                key={variant.slug}
-                href={`/${tool.slug}/${variant.slug}`}
-                className="bg-white border border-gray-200 rounded-lg p-5 hover:border-green-300 hover:bg-green-50 transition-colors"
-              >
-                <h3 className="font-semibold text-gray-900">{variant.h1}</h3>
-                <p className="text-sm text-gray-600 mt-2 line-clamp-2">{variant.introParagraph}</p>
-              </Link>
-            ))}
+            {useCaseVariants.map(variant => {
+              const prettySlug = getPrettySlug(tool.slug, variant.slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+              return (
+                <Link
+                  key={variant.slug}
+                  href={linkHref}
+                  className="bg-white border border-gray-200 rounded-lg p-5 hover:border-green-300 hover:bg-green-50 transition-colors"
+                >
+                  <h3 className="font-semibold text-gray-900">{variant.h1}</h3>
+                  <p className="text-sm text-gray-600 mt-2 line-clamp-2">{variant.introParagraph}</p>
+                </Link>
+              )
+            })}
           </div>
         </section>
       )}

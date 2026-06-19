@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Tool } from '@/lib/toolConfigs'
+import { getPrettySlug } from '@/lib/customSeoContent'
 
 interface Props {
   tool: Tool
@@ -28,19 +29,23 @@ export default function PopularSizes({ tool, currentVariantSlug }: Props) {
             Popular {tool.shortName} Sizes
           </h2>
           <div className="flex flex-wrap gap-2">
-            {sizeVariants.map(variant => (
-              <Link
-                key={variant.slug}
-                href={`/${tool.slug}/${variant.slug}`}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm ${
-                  variant.slug === currentVariantSlug
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200'
-                }`}
-              >
-                {variant.label}
-              </Link>
-            ))}
+            {sizeVariants.map(variant => {
+              const prettySlug = getPrettySlug(tool.slug, variant.slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+              return (
+                <Link
+                  key={variant.slug}
+                  href={linkHref}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm ${
+                    variant.slug === currentVariantSlug
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200'
+                  }`}
+                >
+                  {variant.label}
+                </Link>
+              )
+            })}
           </div>
         </div>
       )}
@@ -52,19 +57,23 @@ export default function PopularSizes({ tool, currentVariantSlug }: Props) {
             Specific Use Cases
           </h2>
           <div className="flex flex-wrap gap-2">
-            {useCaseVariants.map(variant => (
-              <Link
-                key={variant.slug}
-                href={`/${tool.slug}/${variant.slug}`}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm ${
-                  variant.slug === currentVariantSlug
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200'
-                }`}
-              >
-                {variant.label}
-              </Link>
-            ))}
+            {useCaseVariants.map(variant => {
+              const prettySlug = getPrettySlug(tool.slug, variant.slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+              return (
+                <Link
+                  key={variant.slug}
+                  href={linkHref}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm ${
+                    variant.slug === currentVariantSlug
+                      ? 'bg-green-600 text-white'
+                      : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200'
+                  }`}
+                >
+                  {variant.label}
+                </Link>
+              )
+            })}
           </div>
         </div>
       )}

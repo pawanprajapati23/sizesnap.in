@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { tools } from '@/lib/toolConfigs'
 import { Search } from 'lucide-react'
+import { getPrettySlug } from '@/lib/customSeoContent'
 
 export default function HomeSearch() {
   const [query, setQuery] = useState('')
@@ -54,12 +55,16 @@ export default function HomeSearch() {
               <h3 className="font-semibold text-gray-800 mb-1">{tool.name}</h3>
               <p className="text-sm text-gray-500 mb-4">{tool.description}</p>
               <div className="flex flex-wrap gap-2">
-                {tool.variants.slice(0, 5).map(v => (
-                  <Link key={v.slug} href={`/${tool.slug}/${v.slug}`}
-                    className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium">
-                    {v.label}
-                  </Link>
-                ))}
+                {tool.variants.slice(0, 5).map(v => {
+                  const prettySlug = getPrettySlug(tool.slug, v.slug)
+                  const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${v.slug}`
+                  return (
+                    <Link key={v.slug} href={linkHref}
+                      className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium">
+                      {v.label}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           ))}
@@ -78,12 +83,16 @@ export default function HomeSearch() {
               <h3 className="font-semibold text-gray-800 mb-1">{tool.name}</h3>
               <p className="text-sm text-gray-500 mb-4">{tool.description}</p>
               <div className="flex flex-wrap gap-2">
-                {tool.variants.slice(0, 4).map(v => (
-                  <Link key={v.slug} href={`/${tool.slug}/${v.slug}`}
-                    className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium">
-                    {v.label}
-                  </Link>
-                ))}
+                {tool.variants.slice(0, 4).map(v => {
+                  const prettySlug = getPrettySlug(tool.slug, v.slug)
+                  const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${v.slug}`
+                  return (
+                    <Link key={v.slug} href={linkHref}
+                      className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium">
+                      {v.label}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           ))}

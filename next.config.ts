@@ -2,6 +2,7 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  optimizeFonts: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -29,6 +30,58 @@ const nextConfig: NextConfig = {
         // Actual static file served untouched from /public
         destination: '/stories/ssc-photo-rejection.html',
       },
+      {
+        source: '/resize-image-to-50kb',
+        destination: '/resize-image/to-50kb',
+      },
+      {
+        source: '/resize-image-to-20kb',
+        destination: '/resize-image/to-20kb',
+      },
+      {
+        source: '/resize-image-to-100kb',
+        destination: '/resize-image/to-100kb',
+      },
+      {
+        source: '/resize-image-to-200kb',
+        destination: '/resize-image/to-200kb',
+      },
+      {
+        source: '/resize-image-to-50kb-for-form',
+        destination: '/resize-image/to-50kb-for-form',
+      },
+      {
+        source: '/resize-image-to-50kb-for-whatsapp',
+        destination: '/resize-image/to-50kb-for-whatsapp',
+      },
+      {
+        source: '/resize-image-to-50kb-for-ssc-exam',
+        destination: '/resize-image/to-50kb-for-ssc-exam',
+      },
+      {
+        source: '/resize-image-to-50kb-without-losing-quality',
+        destination: '/resize-image/to-50kb-without-losing-quality',
+      },
+      {
+        source: '/compress-image-without-losing-quality',
+        destination: '/compress-image/without-losing-quality',
+      },
+      {
+        source: '/reduce-image-size-without-blur',
+        destination: '/resize-image/reduce-without-blur',
+      },
+      {
+        source: '/compress-image-to-50kb',
+        destination: '/compress-image/to-50kb',
+      },
+      {
+        source: '/image-size-for-ssc-form',
+        destination: '/passport-photo/ssc-exam',
+      },
+      {
+        source: '/photo-size-for-upsc-form',
+        destination: '/passport-photo/upsc-exam',
+      }
     ];
   },
   webpack: (config, {dev}) => {

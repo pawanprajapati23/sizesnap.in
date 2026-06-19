@@ -11,6 +11,8 @@ import ToolWrapper from '@/components/ToolWrapper'
 import SeoContent from '@/components/SeoContent'
 import PayPalDonate from '@/components/PayPalDonate'
 
+import { getCustomSeo, getPrettySlug } from '@/lib/customSeoContent'
+
 interface Props {
   params: Promise<{ tool: string; variant: string }>
 }
@@ -26,16 +28,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const result = getToolAndVariant(p.tool, p.variant)
   if (!result) return {}
 
-  const { variant } = result
+  const { tool, variant } = result
+  const customSeo = getCustomSeo(tool.slug, variant.slug)
+  const title = customSeo ? customSeo.metaTitle : variant.metaTitle
+  const description = customSeo ? customSeo.metaDescription : variant.metaDescription
+  
+  const prettySlug = getPrettySlug(tool.slug, variant.slug)
+  const canonicalUrl = prettySlug 
+    ? `https://sizesnap.in/${prettySlug}`
+    : `https://sizesnap.in/${p.tool}/${p.variant}`
+
   return {
-    title: variant.metaTitle,
-    description: variant.metaDescription,
+    title,
+    description,
     alternates: {
-      canonical: `https://sizesnap.in/${p.tool}/${p.variant}`
+      canonical: canonicalUrl
     },
     openGraph: {
-      title: variant.metaTitle,
-      description: variant.metaDescription,
+      title,
+      description,
     }
   }
 }
@@ -46,14 +57,17 @@ export default async function ToolVariantPage({ params }: Props) {
   if (!result) notFound()
 
   const { tool, variant } = result
-  const faqs = getVariantFaqs(tool, variant)
+  const customSeo = getCustomSeo(tool.slug, variant.slug)
+  const h1Text = customSeo ? customSeo.h1 : variant.h1
+  const introText = customSeo ? customSeo.introParagraph : variant.introParagraph
+  const faqs = customSeo ? customSeo.faqs : getVariantFaqs(tool, variant)
 
   // WebApplication Schema for SEO
   const toolSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: variant.h1,
-    description: variant.metaDescription,
+    name: h1Text,
+    description: customSeo ? customSeo.metaDescription : variant.metaDescription,
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -83,10 +97,10 @@ export default async function ToolVariantPage({ params }: Props) {
         {/* H1 + Intro */}
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-            {variant.h1}
+            {h1Text}
           </h1>
           <p className="text-gray-600 leading-relaxed">
-            {variant.introParagraph}
+            {introText}
           </p>
           <p className="mt-3 text-sm font-medium text-green-700">
             No files are uploaded. Everything is processed in your browser.

@@ -3,12 +3,24 @@ import { CheckCircle2, ShieldCheck, Zap, Files, BookOpen } from 'lucide-react'
 import { getRelatedBlogs } from '@/lib/blogConfigs'
 import Link from 'next/link'
 
+import { getCustomSeo } from '@/lib/customSeoContent'
+
 interface SeoContentProps {
   tool: Tool
   variant: ToolVariant
 }
 
 export default function SeoContent({ tool, variant }: SeoContentProps) {
+  const customSeo = getCustomSeo(tool.slug, variant.slug)
+  
+  if (customSeo) {
+    return (
+      <article className="mt-12 bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-8 prose prose-blue max-w-none text-gray-700">
+        <div dangerouslySetInnerHTML={{ __html: customSeo.bodyHtml }} />
+      </article>
+    )
+  }
+
   const isImageGroup = ['resize-image', 'compress-image', 'convert-image'].includes(tool.slug)
   const isPdfGroup = ['compress-pdf', 'image-to-pdf', 'merge-pdf'].includes(tool.slug)
   const isPassport = tool.slug === 'passport-photo'

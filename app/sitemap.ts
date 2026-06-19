@@ -3,16 +3,22 @@ import { getAllPaths, tools } from '@/lib/toolConfigs'
 import { blogs } from '@/lib/blogConfigs'
 import { stories } from '@/lib/storyConfigs'
 
+import { getPrettySlug } from '@/lib/customSeoContent'
+
 const BASE_URL = 'https://sizesnap.in'
 const SITE_LAST_MODIFIED = new Date('2026-06-18')
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const variantPages = getAllPaths().map(({ tool, variant }) => ({
-    url: `${BASE_URL}/${tool}/${variant}`,
-    lastModified: SITE_LAST_MODIFIED,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }))
+  const variantPages = getAllPaths().map(({ tool, variant }) => {
+    const prettySlug = getPrettySlug(tool, variant)
+    const relativePath = prettySlug ? prettySlug : `${tool}/${variant}`
+    return {
+      url: `${BASE_URL}/${relativePath}`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }
+  })
 
   const toolHubPages = tools.map(tool => ({
     url: `${BASE_URL}/${tool.slug}`,

@@ -81,6 +81,27 @@ function buildSizeVariants(
     });
   }
 
+  if (baseSlug === 'resize-image') {
+    const customIntents = [
+      { slug: 'to-50kb-for-form', label: '50KB for Form', h1: 'Resize Image to 50KB for Form', desc: 'Optimize your photo to exactly 50KB for college admission or recruitment portals.' },
+      { slug: 'to-50kb-for-whatsapp', label: '50KB for WhatsApp', h1: 'Resize Image to 50KB for WhatsApp', desc: 'Shrink your image under 50KB for fast sharing and quick DP updates.' },
+      { slug: 'to-50kb-for-ssc-exam', label: '50KB for SSC Exam', h1: 'Resize Image to 50KB for SSC Exam', desc: 'Crop and compress your passport photo under 50KB for SSC forms.' },
+      { slug: 'to-50kb-without-losing-quality', label: '50KB No Quality Loss', h1: 'Resize Image to 50KB Without Losing Quality', desc: 'Compress your photo to 50KB while keeping pixels and text sharp.' },
+      { slug: 'reduce-without-blur', label: 'Reduce without Blur', h1: 'Reduce Image Size Without Blur Online Free', desc: 'Shrink your certificate or profile photo to low KB without making it blurry.' }
+    ];
+    for (const intent of customIntents) {
+      variants.push({
+        slug: intent.slug,
+        label: intent.label,
+        metaTitle: `${intent.h1} | SizeSnap`,
+        metaDescription: `Free online tool to ${intent.h1.toLowerCase()} without signup. Works locally, 100% private.`,
+        h1: intent.h1,
+        introParagraph: intent.desc,
+        config: { maxKB: 50 }
+      });
+    }
+  }
+
   return variants;
 }
 

@@ -1,0 +1,387 @@
+<!doctype html>
+<html amp lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+  <title>Resize Image to 50KB for Online Forms – SizeSnap</title>
+  <link rel="canonical" href="https://www.sizesnap.in/stories/resize-to-50kb" />
+
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-story"
+    src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <style amp-custom>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    amp-story-page { font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', 'Segoe UI', Roboto, sans-serif; }
+
+    .bg-img img { object-fit: cover; }
+
+    /* Overlay */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 24px 80px;
+      gap: 16px;
+    }
+
+    /* Slide-specific overlays */
+    .ov-1 { background: linear-gradient(160deg, rgba(15,15,15,0.85) 0%, rgba(200,30,30,0.75) 100%); }
+    .ov-2 { background: linear-gradient(160deg, rgba(15,20,40,0.88) 0%, rgba(15,15,15,0.82) 100%); }
+    .ov-3 { background: linear-gradient(160deg, rgba(180,10,10,0.82) 0%, rgba(15,15,15,0.92) 100%); }
+    .ov-4 { background: linear-gradient(160deg, rgba(10,50,30,0.85) 0%, rgba(10,10,15,0.88) 100%); }
+    .ov-5 { background: linear-gradient(160deg, rgba(100,20,150,0.85) 0%, rgba(15,15,15,0.9) 100%); }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* Emoji */
+    .icon { font-size: 56px; line-height: 1; }
+
+    /* Headlines */
+    .h1 {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .h1 .accent { color: #FF3B30; }
+    .h1 .accent-y { color: #FFCC00; }
+    .h1 .accent-g { color: #34C759; }
+    .h1 .accent-b { color: #64B5F6; }
+
+    .h2 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    /* Sub text */
+    .sub {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    /* Divider */
+    .div {
+      width: 44px;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.30);
+    }
+
+    /* Info box */
+    .box {
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 18px 22px;
+      width: 100%;
+      max-width: 310px;
+    }
+    .box p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    /* Red alert box */
+    .alert-box {
+      background: rgba(255,59,48,0.15);
+      border-left: 4px solid #FF3B30;
+      border-radius: 10px;
+      padding: 14px 18px;
+      width: 100%;
+      max-width: 310px;
+      text-align: left;
+    }
+    .alert-box p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.8;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      width: 100%;
+      max-width: 300px;
+      text-align: left;
+    }
+    .checklist li {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      padding: 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.4;
+    }
+    .checklist li .tk { color: #34C759; font-size: 18px; flex-shrink: 0; }
+
+    /* CTA button */
+    .cta {
+      display: inline-block;
+      background: #FFCC00;
+      color: #0D0D0D;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 16px 36px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+    }
+    .note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    /* Danger badge */
+    .badge {
+      display: inline-block;
+      background: #FF3B30;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 999px;
+      letter-spacing: 0.4px;
+    }
+  </style>
+</head>
+<body>
+
+<amp-story
+  standalone
+  title="Resize Image to 50KB for Online Forms"
+  publisher="SizeSnap"
+  publisher-logo-src="https://www.sizesnap.in/logo.png"
+  poster-portrait-src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=720&h=960&fit=crop&q=80"
+  poster-square-src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=720&h=720&fit=crop&q=80"
+  poster-landscape-src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=853&h=640&fit=crop&q=80">
+
+  <!-- Slide 1: Hook -->
+  <amp-story-page id="s1" auto-advance-after="6s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Student frustrated with online form">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-1">
+        <p class="eyebrow">Online Form Error</p>
+        <div class="icon">😰</div>
+        <h1 class="h1"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Form upload<br/>
+          error aa raha?<br/>
+          <span class="accent">Image accept</span><br/>
+          nahi ho rahi?
+        </h1>
+        <div class="div"></div>
+        <p class="sub"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          Don't worry, 1-minute fix hai! 👇
+        </p>
+        <span class="badge"
+          animate-in="pulse"
+          animate-in-delay="0.5s">
+          SWIPE UP FOR SOLUTION ✅
+        </span>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 2: Problem -->
+  <amp-story-page id="s2" auto-advance-after="6s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Filling application form">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-2">
+        <p class="eyebrow">The Real Problem</p>
+        <div class="icon">📋</div>
+        <h2 class="h2"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Online forms me<br/>
+          <span class="accent-y">strict size limit</span><br/>
+          hoti hai
+        </h2>
+        <div class="box"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <p>
+            📁 Limit: <strong style="color:#FFCC00;">Usually 50KB max</strong><br/>
+            📐 Resolution: <strong>Strict specifications</strong><br/>
+            📸 Camera photo size: <strong>3MB – 10MB!</strong>
+          </p>
+        </div>
+        <p class="sub"
+          animate-in="fade-in"
+          animate-in-delay="0.5s">
+          Tabhi form reject hota hai! 😤
+        </p>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 3: Impact -->
+  <amp-story-page id="s3" auto-advance-after="6s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Dark error alert screen">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-3">
+        <p class="eyebrow">Warning</p>
+        <div class="icon">🚫</div>
+        <h2 class="h2"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Galat size =<br/>
+          <span class="accent">Direct Form Reject!</span>
+        </h2>
+        <div class="alert-box"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <p>
+            🛑 <strong>Time Barbaad</strong> ho jayega<br/>
+            🛑 Form <strong>dubara fill</strong> karna padega<br/>
+            🛑 Submission date <strong>miss</strong> ho sakti hai 😤
+          </p>
+        </div>
+        <span class="badge"
+          animate-in="pulse"
+          animate-in-delay="0.55s">
+          Avoid Rejection! ❌
+        </span>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 4: Solution -->
+  <amp-story-page id="s4" auto-advance-after="6s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Digital dashboard charts success">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-4">
+        <p class="eyebrow">The 1-Click Fix</p>
+        <div class="icon">💡</div>
+        <h2 class="h2"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Image ko exact<br/>
+          <span class="accent-g">50KB me convert</span><br/>
+          karo!
+        </h2>
+        <ul class="checklist"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <li><span class="tk">✔</span> Target size set karo (50KB)</li>
+          <li><span class="tk">✔</span> High resolution quality save</li>
+          <li><span class="tk">✔</span> 100% safe &amp; instant conversion</li>
+          <li><span class="tk">✔</span> No app download needed</li>
+        </ul>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 5: CTA -->
+  <amp-story-page id="s5" auto-advance-after="10s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Happy students group success">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-5">
+        <p class="eyebrow">Easiest Tool Online</p>
+        <div class="icon">⚡</div>
+        <h1 class="h1"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          <span class="accent-y">SizeSnap</span><br/>
+          use karo!
+        </h1>
+        <div class="box"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.2s"
+          animate-in-duration="0.5s">
+          <p style="text-align:center;">
+            ⚡ 1-Click compression to 50KB<br/>
+            🔒 Full privacy (no server upload)<br/>
+            🆓 100% Free, No signup/login
+          </p>
+        </div>
+        <a class="cta"
+          href="https://www.sizesnap.in/resize-image/to-50kb"
+          animate-in="pulse"
+          animate-in-delay="0.45s"
+          animate-in-duration="0.6s">
+          🚀 Try Now — Fix Instantly
+        </a>
+        <p class="note">sizesnap.in · Fast · Easy · Free</p>
+      </div>
+    </amp-story-grid-layer>
+    <amp-story-page-outlink layout="nodisplay">
+      <a href="https://www.sizesnap.in/resize-image/to-50kb"
+         title="SizeSnap – Resize Photo to 50KB for Online Forms">
+        Resize Your Photo to 50KB Now →
+      </a>
+    </amp-story-page-outlink>
+  </amp-story-page>
+
+</amp-story>
+</body>
+</html>

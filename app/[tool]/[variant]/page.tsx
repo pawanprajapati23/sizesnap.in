@@ -12,6 +12,8 @@ import SeoContent from '@/components/SeoContent'
 import PayPalDonate from '@/components/PayPalDonate'
 
 import { getCustomSeo, getPrettySlug } from '@/lib/customSeoContent'
+import { getRelatedBlogs } from '@/lib/blogConfigs'
+import { getRelatedStories } from '@/lib/storyConfigs'
 
 interface Props {
   params: Promise<{ tool: string; variant: string }>
@@ -61,6 +63,9 @@ export default async function ToolVariantPage({ params }: Props) {
   const h1Text = customSeo ? customSeo.h1 : variant.h1
   const introText = customSeo ? customSeo.introParagraph : variant.introParagraph
   const faqs = customSeo ? customSeo.faqs : getVariantFaqs(tool, variant)
+
+  const relatedBlogs = getRelatedBlogs(tool.slug)
+  const relatedStories = getRelatedStories(tool.slug)
 
   // WebApplication Schema for SEO
   const toolSchema = {
@@ -119,6 +124,56 @@ export default async function ToolVariantPage({ params }: Props) {
         {/* Popular Sizes — internal linking */}
         <PopularSizes tool={tool} currentVariantSlug={variant.slug} />
 
+        {/* Next Level Internal Linking: Related Blogs & Interactive Stories */}
+        {(relatedBlogs.length > 0 || relatedStories.length > 0) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedBlogs.length > 0 && (
+              <div className="bg-white rounded-xl border border-gray-200 p-5">
+                <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
+                  <span>📚</span> Related Guides &amp; Tutorials
+                </h3>
+                <ul className="space-y-3">
+                  {relatedBlogs.map(blog => (
+                    <li key={blog.slug}>
+                      <Link href={`/blog/${blog.slug}`} className="group block">
+                        <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                          {blog.title}
+                        </span>
+                        <span className="text-xs text-gray-500 line-clamp-1 mt-0.5">
+                          {blog.excerpt}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {relatedStories.length > 0 && (
+              <div className="bg-white rounded-xl border border-gray-200 p-5">
+                <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
+                  <span>⚡</span> Interactive Stories
+                </h3>
+                <ul className="space-y-3">
+                  {relatedStories.map(story => (
+                    <li key={story.slug}>
+                      <Link href={`/stories/${story.slug}`} className="group block">
+                        <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 group-hover:animate-ping" />
+                          {story.title}
+                        </span>
+                        <span className="text-xs text-gray-500 line-clamp-1 mt-0.5">
+                          {story.description}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="bg-white rounded-xl border border-gray-200 p-5">
           <h2 className="font-semibold text-gray-800 mb-3">More from this topic</h2>
           <div className="flex flex-wrap gap-2">
@@ -129,7 +184,10 @@ export default async function ToolVariantPage({ params }: Props) {
               Image size guide
             </Link>
             <Link href="/blog" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-              Guides and tutorials
+              All guides &amp; tutorials
+            </Link>
+            <Link href="/stories" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
+              All interactive stories
             </Link>
           </div>
         </div>

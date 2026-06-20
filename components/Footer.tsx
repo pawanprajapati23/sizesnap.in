@@ -49,6 +49,25 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+
+          <h4 className="text-white font-semibold mt-6 mb-3 text-sm">Web Stories</h4>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/stories" className="hover:text-white transition-colors">
+                All Stories
+              </Link>
+            </li>
+            <li>
+              <Link href="/stories/passport-photo-fix" className="hover:text-white transition-colors text-xs opacity-80">
+                Passport Photo Mistakes
+              </Link>
+            </li>
+            <li>
+              <Link href="/stories/ssc-photo-rejection" className="hover:text-white transition-colors text-xs opacity-80">
+                SSC Photo Rejection Fix
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
       <div className="border-t border-gray-800 px-4 py-8 text-center text-xs flex flex-col gap-4">
@@ -58,6 +77,7 @@ export default function Footer() {
           <Link href="/about-us" className="hover:text-white transition-colors">About Us</Link>
           <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
           <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+          <Link href="/stories" className="hover:text-white transition-colors">Stories</Link>
         </div>
         <div>
           © {new Date().getFullYear()} SizeSnap. All tools are free. Files never leave your browser.

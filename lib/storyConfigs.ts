@@ -21,4 +21,33 @@ export const stories: StoryConfig[] = [
     date: '2026-06-20',
     coverImage: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&h=800&fit=crop&q=80',
   },
+  {
+    slug: 'passport-photo-fix',
+    title: 'Passport Photo Rejection: 5 Mistakes Jo Sab Karte Hain',
+    description: 'Avoid passport size photo rejection in SSC, UPSC, and government exams. Learn the 5 most common mistakes students make.',
+    date: '2026-06-20',
+    coverImage: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=800&fit=crop&q=80',
+  },
 ]
+
+export function getRelatedStories(keyword: string) {
+  const normalized = keyword.toLowerCase()
+  return stories.filter(story => {
+    const text = (story.title + ' ' + story.description + ' ' + story.slug).toLowerCase()
+    if (
+      normalized.includes('photo') || 
+      normalized.includes('ssc') || 
+      normalized.includes('resize') || 
+      normalized.includes('size')
+    ) {
+      return (
+        text.includes('photo') || 
+        text.includes('ssc') || 
+        text.includes('size') || 
+        text.includes('resize')
+      )
+    }
+    return text.includes(normalized)
+  }).slice(0, 3)
+}
+

@@ -17,13 +17,21 @@ export default function BlogIndex() {
       <p className="text-gray-600 mb-8">Detailed guides on fixing image size problems for official applications.</p>
 
       <div className="grid gap-6">
-        {blogs.map(blog => (
-          <Link href={`/blog/${blog.slug}`} key={blog.slug} className="block border border-gray-200 rounded-xl p-6 bg-white hover:shadow-md transition-shadow">
-            <h2 className="text-xl font-bold text-blue-700 mb-2">{blog.title}</h2>
-            <div className="text-sm text-gray-500 mb-3">{new Date(blog.date).toLocaleDateString()}</div>
-            <p className="text-gray-700">{blog.excerpt}</p>
-          </Link>
-        ))}
+        {blogs.map(blog => {
+          const wordsCount = blog.content.split(/\s+/).length
+          const readTime = Math.max(1, Math.ceil(wordsCount / 200))
+          return (
+            <Link href={`/blog/${blog.slug}`} key={blog.slug} className="block border border-gray-200 rounded-xl p-6 bg-white hover:shadow-md transition-shadow group">
+              <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">{blog.title}</h2>
+              <div className="text-xs text-gray-500 mb-3 flex items-center gap-3">
+                <span>📅 {new Date(blog.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                <span className="h-1 w-1 rounded-full bg-gray-300" />
+                <span>⏱️ {readTime} min read</span>
+              </div>
+              <p className="text-gray-600 text-sm leading-relaxed">{blog.excerpt}</p>
+            </Link>
+          )
+        })}
       </div>
     </div>
   )

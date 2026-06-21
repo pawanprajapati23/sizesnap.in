@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'SizeSnap',
     url: 'https://sizesnap.in',
+    images: [
+      {
+        url: 'https://sizesnap.in/logo.png',
+        width: 512,
+        height: 512,
+        alt: 'SizeSnap — Free Online Image & PDF Tools Logo',
+      }
+    ],
   },
   icons: {
     icon: '/favicon.png',

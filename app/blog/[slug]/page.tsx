@@ -27,6 +27,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: 'article',
       url: `https://sizesnap.in/blog/${resolvedParams.slug}`,
       publishedTime: blog.date,
+      images: [
+        {
+          url: 'https://sizesnap.in/logo.png',
+          width: 512,
+          height: 512,
+          alt: blog.title,
+        }
+      ]
     }
   }
 }
@@ -102,8 +110,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       />
       <div className="max-w-3xl mx-auto py-12 px-4 md:px-0">
         <div className="mb-8">
-           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{blog.title}</h1>
-           <div className="text-gray-500">{new Date(blog.date).toLocaleDateString()}</div>
+           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">{blog.title}</h1>
+           <div className="text-xs text-gray-500 flex items-center gap-3">
+             <span>📅 {new Date(blog.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+             <span className="h-1 w-1 rounded-full bg-gray-300" />
+             <span>⏱️ {Math.max(1, Math.ceil(blog.content.split(/\s+/).length / 200))} min read</span>
+           </div>
         </div>
         <div 
           className="prose prose-blue max-w-none text-gray-800"

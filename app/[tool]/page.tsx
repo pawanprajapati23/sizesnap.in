@@ -193,5 +193,6 @@ export default async function ToolHubPage({ params }: Props) {
         </section>
       )}
     </div>
+    </>
   )
 }

@@ -88,11 +88,40 @@ export default async function ToolVariantPage({ params }: Props) {
   const pseudoRandomCount = 5000 + (variant.slug.length * 123) % 4000
   toolSchema.aggregateRating.ratingCount = pseudoRandomCount.toString()
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://sizesnap.in'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': tool.name,
+        'item': `https://sizesnap.in/${tool.slug}`
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': variant.label,
+        'item': `https://sizesnap.in/${tool.slug}/${variant.slug}`
+      }
+    ]
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className="space-y-6">

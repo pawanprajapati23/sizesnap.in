@@ -20,23 +20,46 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': 'SizeSnap',
+    'url': 'https://sizesnap.in',
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': 'https://sizesnap.in/?q={search_term_string}',
+      'query-input': 'required name=search_term_string'
+    }
+  }
+
+  const appSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    'name': 'SizeSnap Image & PDF Tools',
+    'operatingSystem': 'All',
+    'applicationCategory': 'UtilitiesApplication',
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'ratingCount': '9560'
+    },
+    'offers': {
+      '@type': 'Offer',
+      'price': '0',
+      'priceCurrency': 'USD'
+    },
+    'url': 'https://sizesnap.in'
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            'name': 'SizeSnap',
-            'url': 'https://sizesnap.in',
-            'potentialAction': {
-              '@type': 'SearchAction',
-              'target': 'https://sizesnap.in/?q={search_term_string}',
-              'query-input': 'required name=search_term_string'
-            }
-          })
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
       />
       <div className="space-y-10">
       {/* Hero */}

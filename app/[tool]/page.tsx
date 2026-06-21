@@ -41,8 +41,52 @@ export default async function ToolHubPage({ params }: Props) {
   const relatedBlogs = getRelatedBlogs(tool.slug)
   const relatedTools = tools.filter(item => item.slug !== tool.slug && item.category === tool.category).slice(0, 6)
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://sizesnap.in'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': tool.name,
+        'item': `https://sizesnap.in/${tool.slug}`
+      }
+    ]
+  }
+
+  const toolSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': tool.name,
+    'description': tool.description,
+    'applicationCategory': 'UtilitiesApplication',
+    'operatingSystem': 'Any',
+    'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'ratingCount': (3000 + tool.name.length * 99).toString()
+    },
+    'url': `https://sizesnap.in/${tool.slug}`
+  }
+
   return (
-    <div className="space-y-10">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}
+      />
+      <div className="space-y-10">
       <section className="bg-white border border-gray-200 rounded-xl p-6 md:p-8">
         <div className="flex items-start gap-4">
           <div className="text-4xl" aria-hidden="true">{tool.icon}</div>

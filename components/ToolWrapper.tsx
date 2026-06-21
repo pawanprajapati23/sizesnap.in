@@ -17,19 +17,31 @@ const WatermarkImageTool = dynamic(() => import('@/components/tools/WatermarkIma
 const WhatsAppDpTool = dynamic(() => import('@/components/tools/WhatsAppDpTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, config: any }) {
-  if (toolSlug === 'resize-image') return <ImageResizeTool config={config} />
-  if (toolSlug === 'compress-image') return <ImageCompressTool config={config} />
-  if (toolSlug === 'compress-pdf') return <PdfCompressTool config={config} />
-  if (toolSlug === 'convert-image') return <ConvertImageTool config={config} />
-  if (toolSlug === 'image-to-pdf') return <ImageToPdfTool config={config} />
-  if (toolSlug === 'merge-pdf') return <MergePdfTool config={config} />
-  if (toolSlug === 'passport-photo') return <PassportPhotoTool config={config} />
-  if (toolSlug === 'signature-resize') return <SignatureResizeTool config={config} />
-  if (toolSlug === 'heic-to-jpg') return <HeicToJpgTool config={config} />
-  if (toolSlug === 'bulk-image-compress') return <BulkImageCompressTool config={config} />
-  if (toolSlug === 'pdf-to-jpg') return <PdfToJpgTool config={config} />
-  if (toolSlug === 'document-scanner') return <DocumentScannerTool config={config} />
-  if (toolSlug === 'watermark-image') return <WatermarkImageTool config={config} />
-  if (toolSlug === 'whatsapp-dp') return <WhatsAppDpTool config={config} />
-  return null
+  let toolComponent = null
+  if (toolSlug === 'resize-image') toolComponent = <ImageResizeTool config={config} />
+  else if (toolSlug === 'compress-image') toolComponent = <ImageCompressTool config={config} />
+  else if (toolSlug === 'compress-pdf') toolComponent = <PdfCompressTool config={config} />
+  else if (toolSlug === 'convert-image') toolComponent = <ConvertImageTool config={config} />
+  else if (toolSlug === 'image-to-pdf') toolComponent = <ImageToPdfTool config={config} />
+  else if (toolSlug === 'merge-pdf') toolComponent = <MergePdfTool config={config} />
+  else if (toolSlug === 'passport-photo') toolComponent = <PassportPhotoTool config={config} />
+  else if (toolSlug === 'signature-resize') toolComponent = <SignatureResizeTool config={config} />
+  else if (toolSlug === 'heic-to-jpg') toolComponent = <HeicToJpgTool config={config} />
+  else if (toolSlug === 'bulk-image-compress') toolComponent = <BulkImageCompressTool config={config} />
+  else if (toolSlug === 'pdf-to-jpg') toolComponent = <PdfToJpgTool config={config} />
+  else if (toolSlug === 'document-scanner') toolComponent = <DocumentScannerTool config={config} />
+  else if (toolSlug === 'watermark-image') toolComponent = <WatermarkImageTool config={config} />
+  else if (toolSlug === 'whatsapp-dp') toolComponent = <WhatsAppDpTool config={config} />
+
+  if (!toolComponent) return null
+
+  return (
+    <div className="relative group/tool">
+      {/* Dynamic neon gradient backdrop glow */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover/tool:opacity-35 transition-opacity duration-500 pointer-events-none" />
+      <div className="relative">
+        {toolComponent}
+      </div>
+    </div>
+  )
 }

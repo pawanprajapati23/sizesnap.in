@@ -47,6 +47,58 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   const relatedStories = getRelatedStories(blog.slug)
 
+  // Determine relevant tools based on blog content/slug
+  const isPdfBlog = blog.slug.toLowerCase().includes('pdf')
+  const isPhotoBlog = blog.slug.toLowerCase().includes('photo') || blog.slug.toLowerCase().includes('signature') || blog.slug.toLowerCase().includes('resize')
+
+  const recommendedTools = []
+  if (isPdfBlog) {
+    recommendedTools.push({
+      name: 'Compress PDF to 100KB',
+      desc: 'Compress and shrink your PDF files under 100KB for application forms.',
+      href: '/compress-pdf/to-100kb',
+      icon: '📄'
+    })
+    recommendedTools.push({
+      name: 'Compress PDF to 200KB',
+      desc: 'Shrink scanned documents under 200KB limit brackets.',
+      href: '/compress-pdf/to-200kb',
+      icon: '🗜️'
+    })
+  } else if (isPhotoBlog) {
+    recommendedTools.push({
+      name: 'Resize Image to 50KB',
+      desc: 'Resize your passport photo or signature image under 50KB.',
+      href: '/resize-image/to-50kb',
+      icon: '🖼️'
+    })
+    recommendedTools.push({
+      name: 'SSC Exam Photo Resizer',
+      desc: 'Format passport photo to standard 3.5x4.5cm for SSC.',
+      href: '/passport-photo/ssc-exam',
+      icon: '🛂'
+    })
+    recommendedTools.push({
+      name: 'Resize Signature to 20KB',
+      desc: 'Scale scanned signature strictly under 20KB for uploads.',
+      href: '/signature-resize/ssc-signature',
+      icon: '✍️'
+    })
+  } else {
+    recommendedTools.push({
+      name: 'Resize Image to 50KB',
+      desc: 'Resize any image in KB or MB without quality loss.',
+      href: '/resize-image/to-50kb',
+      icon: '🖼️'
+    })
+    recommendedTools.push({
+      name: 'Compress PDF to 100KB',
+      desc: 'Reduce PDF file size online free.',
+      href: '/compress-pdf/to-100kb',
+      icon: '📄'
+    })
+  }
+
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -121,6 +173,35 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           className="prose prose-blue max-w-none text-gray-800"
           dangerouslySetInnerHTML={{ __html: blog.content }} 
         />
+
+        {recommendedTools.length > 0 && (
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <span>🔧</span> Recommended Tools for this Guide
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {recommendedTools.map(tool => (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-xl flex-shrink-0 group-hover:bg-blue-100 transition-colors">
+                    {tool.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-950 group-hover:text-blue-600 transition-colors">
+                      {tool.name}
+                    </h4>
+                    <p className="text-xs text-gray-500 mt-0.5 line-clamp-1 font-normal">
+                      {tool.desc}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {relatedStories.length > 0 && (
           <div className="mt-12 pt-8 border-t border-gray-200">

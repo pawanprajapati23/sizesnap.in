@@ -83,12 +83,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="google-analytics" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-EWE73QX6FS');`}
         </Script>
-        {/* Google AdSense */}
-        <Script 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5696239388754680" 
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense — Optimized lazy loading on user interaction for 95+ Core Web Vitals score */}
+        <Script id="adsense-lazy" strategy="afterInteractive">
+          {`
+            (function() {
+              var adsLoaded = false;
+              function loadAds() {
+                if (adsLoaded) return;
+                adsLoaded = true;
+                var script = document.createElement('script');
+                script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5696239388754680";
+                script.crossOrigin = "anonymous";
+                script.async = true;
+                document.head.appendChild(script);
+              }
+              window.addEventListener('scroll', loadAds, { passive: true });
+              window.addEventListener('mousemove', loadAds);
+              window.addEventListener('touchstart', loadAds, { passive: true });
+              // Fallback load after 4 seconds if no interaction
+              setTimeout(loadAds, 4000);
+            })();
+          `}
+        </Script>
       </body>
     </html>
   )

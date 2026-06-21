@@ -2,6 +2,7 @@ import Link from 'next/link'
 import AdUnit from '@/components/AdUnit'
 import HomeSearch from '@/components/HomeSearch'
 import { stories } from '@/lib/storyConfigs'
+import { blogs } from '@/lib/blogConfigs'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -30,6 +31,45 @@ export default function HomePage() {
       'target': 'https://sizesnap.in/?q={search_term_string}',
       'query-input': 'required name=search_term_string'
     }
+  }
+
+  const homeFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: "Is SizeSnap safe to use for sensitive documents like Aadhaar or Passport photos?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes, absolutely. Unlike other online compressors, SizeSnap is 100% client-side. All processing happens locally on your device within your browser. Your images and documents are never uploaded to any external server, ensuring complete privacy."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: "How does SizeSnap resize images under 50KB or 100KB without making them blurry?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "SizeSnap uses smart resizing algorithms (like canvas interpolation and quality scaling) to strip metadata and reduce file weight while keeping the face details, text lines, and signatures sharp and readable."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: "Is there a limit on how many files I can compress daily?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "No. SizeSnap is completely free to use. Since all operations run locally on your device, we don't have heavy server bandwidth costs, allowing us to keep it unlimited, ad-supported, and free from signups."
+        }
+      },
+      {
+        '@type': 'Question',
+        name: "Does this tool work on mobile phones?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes. SizeSnap is fully responsive and optimized to run on all modern mobile browsers (Chrome, Safari, Firefox) on both Android and iOS devices."
+        }
+      }
+    ]
   }
 
   const appSchema = {
@@ -146,6 +186,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Latest Guides & Tutorials */}
+      <section className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-1.5">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-blue-600 animate-pulse" />
+            Latest Guides &amp; Tutorials
+          </h2>
+          <Link href="/blog" className="text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors">
+            Read All Guides →
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {blogs.slice(0, 3).map(blog => {
+            const readTime = Math.max(1, Math.ceil(blog.content.split(/\s+/).length / 200))
+            return (
+              <Link
+                key={blog.slug}
+                href={`/blog/${blog.slug}`}
+                className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="text-xs text-gray-500 mb-2 flex items-center gap-2 font-medium">
+                    <span>📅 {new Date(blog.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                    <span className="h-1 w-1 rounded-full bg-gray-300" />
+                    <span>⏱️ {readTime} min read</span>
+                  </div>
+                  <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug mb-2 line-clamp-2">
+                    {blog.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed font-normal">
+                    {blog.excerpt}
+                  </p>
+                </div>
+                <div className="text-xs font-bold text-blue-600 group-hover:underline mt-4 flex items-center gap-1">
+                  Read Guide <span>→</span>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
+
       <AdUnit slot="homepage-bottom" format="horizontal" />
 
       {/* Trust Signals */}
@@ -162,6 +244,52 @@ export default function HomePage() {
             <p className="text-xs text-gray-500 mt-1">{item.desc}</p>
           </div>
         ))}
+      </section>
+
+      {/* Homepage FAQs Section with FAQPage Schema */}
+      <section className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
+        />
+        <h2 className="text-sm font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-1.5">
+          <span className="flex h-2.5 w-2.5 rounded-full bg-green-600 animate-pulse" />
+          Frequently Asked Questions (FAQs)
+        </h2>
+        <div className="space-y-4">
+          {[
+            {
+              q: "Is SizeSnap safe to use for sensitive documents like Aadhaar or Passport photos?",
+              a: "Yes, absolutely. Unlike other online compressors, SizeSnap is 100% client-side. All processing happens locally on your device within your browser. Your images and documents are never uploaded to any external server, ensuring complete privacy."
+            },
+            {
+              q: "How does SizeSnap resize images under 50KB or 100KB without making them blurry?",
+              a: "SizeSnap uses smart resizing algorithms (like canvas interpolation and quality scaling) to strip metadata and reduce file weight while keeping the face details, text lines, and signatures sharp and readable."
+            },
+            {
+              q: "Is there a limit on how many files I can compress daily?",
+              a: "No. SizeSnap is completely free to use. Since all operations run locally on your device, we don't have heavy server bandwidth costs, allowing us to keep it unlimited, ad-supported, and free from signups."
+            },
+            {
+              q: "Does this tool work on mobile phones?",
+              a: "Yes. SizeSnap is fully responsive and optimized to run on all modern mobile browsers (Chrome, Safari, Firefox) on both Android and iOS devices."
+            }
+          ].map((item, idx) => (
+            <details key={idx} className="group border border-gray-100 rounded-xl p-4 bg-gray-50/50 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 cursor-pointer list-none text-sm">
+                <span>{item.q}</span>
+                <span className="transition group-open:rotate-180">
+                  <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-3 text-xs text-gray-600 leading-relaxed font-normal">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
       </section>
     </div>
     </>

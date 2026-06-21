@@ -23,7 +23,26 @@ export const metadata: Metadata = {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/logo.png',
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SizeSnap — Free Online Image & PDF Tools',
+    description: 'Free online tools to resize images, compress PDFs, and more. No signup, no watermark, works on mobile.',
+    images: ['https://sizesnap.in/logo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

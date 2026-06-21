@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'SizeSnap — Free Online Image & PDF Tools | Resize, Compress, Convert',
   description: 'SizeSnap offers free online tools to resize images, compress PDFs, create passport photos, and more. No signup required. Works on mobile. 100% private — files stay on your device.',
   metadataBase: new URL('https://sizesnap.in'),
+  alternates: {
+    canonical: 'https://sizesnap.in',
+  },
+  openGraph: {
+    title: 'SizeSnap — Free Online Image & PDF Tools | Resize, Compress, Convert',
+    description: 'SizeSnap offers free online tools to resize images, compress PDFs, create passport photos, and more. No signup required. Works on mobile. 100% private.',
+    url: 'https://sizesnap.in',
+    type: 'website',
+  }
 }
 
 export default function HomePage() {

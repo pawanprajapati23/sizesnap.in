@@ -4,6 +4,9 @@ import { stories } from '@/lib/storyConfigs'
 export const metadata = {
   title: 'SizeSnap Web Stories - Fast Image Resize Guides',
   description: 'Browse visually rich, interactive AMP web stories about image compressing, SSC CGL application requirements, photo formatting, and size reduction.',
+  alternates: {
+    canonical: 'https://sizesnap.in/stories',
+  }
 }
 
 export default function StoriesIndexPage() {

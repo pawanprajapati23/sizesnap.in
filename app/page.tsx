@@ -57,6 +57,44 @@ export default function HomePage() {
 
       <HomeSearch />
 
+      {/* Modern Web Stories Circle Carousel Widget */}
+      <section className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-1.5">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse" />
+            Interactive Web Stories
+          </h2>
+          <Link href="/stories" className="text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors">
+            View All →
+          </Link>
+        </div>
+        <div className="flex gap-6 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {stories.map(story => (
+            <Link
+              key={story.slug}
+              href={`/stories/${story.slug}`}
+              className="flex flex-col items-center gap-2 flex-shrink-0 group focus:outline-none"
+            >
+              {/* Outer Glowing Gradient Ring */}
+              <div className="w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 group-hover:rotate-45 transition-transform duration-500 shadow-md">
+                {/* Inner Border Ring */}
+                <div className="w-full h-full rounded-full border-[2.5px] border-white overflow-hidden bg-gray-100 relative">
+                  <img
+                    src={story.coverImage}
+                    alt={story.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <span className="text-[11px] font-bold text-gray-700 text-center max-w-[80px] line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">
+                {story.title.replace('Passport Photo Rejection: ', '').replace('SSC CGL Form ', '')}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <AdUnit slot="homepage-top" format="horizontal" />
 
       <section className="rounded-3xl bg-slate-950/95 border border-slate-800 p-8 shadow-2xl text-white">

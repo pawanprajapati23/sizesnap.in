@@ -33,7 +33,7 @@ export default function HomeSearch() {
   return (
     <div className="space-y-8">
       {/* Search Bar */}
-      <div className="max-w-2xl mx-auto -mt-6 mb-8 relative z-10">
+      <div className="max-w-2xl mx-auto -mt-6 mb-8 relative z-10 space-y-3">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center p-2">
            <Search className="w-6 h-6 text-gray-400 ml-3" />
            <input 
@@ -43,6 +43,34 @@ export default function HomeSearch() {
              value={query}
              onChange={e => setQuery(e.target.value)}
            />
+        </div>
+
+        {/* Quick Search Badges */}
+        <div className="flex flex-wrap gap-2 justify-center text-xs text-gray-500 items-center">
+          <span className="font-semibold text-gray-400 uppercase tracking-wider text-[10px]">Trending:</span>
+          {[
+            { label: 'Resize 50KB', query: '50kb' },
+            { label: 'PDF to 100KB', query: 'pdf to 100kb' },
+            { label: 'Passport Photo', query: 'passport' },
+            { label: 'WhatsApp No Crop', query: 'whatsapp' },
+            { label: 'HEIC to JPG', query: 'heic' },
+          ].map(tag => (
+            <button
+              key={tag.label}
+              onClick={() => setQuery(tag.query)}
+              className="px-2.5 py-1 rounded-full bg-gray-100 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer border border-gray-200/50"
+            >
+              {tag.label}
+            </button>
+          ))}
+          {query && (
+            <button
+              onClick={() => setQuery('')}
+              className="text-red-500 font-bold hover:underline ml-2"
+            >
+              Clear ✕
+            </button>
+          )}
         </div>
       </div>
 

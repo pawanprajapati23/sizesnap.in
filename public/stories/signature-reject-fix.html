@@ -1,0 +1,391 @@
+<!doctype html>
+<html amp lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+  <title>Signature Upload Reject Kyu Hota Hai? 3 Rules Jo Sab Bhool Jate Hain – SizeSnap</title>
+  <link rel="canonical" href="https://sizesnap.in/stories/signature-reject-fix" />
+
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-story"
+    src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <style amp-custom>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    amp-story-page { font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', 'Segoe UI', Roboto, sans-serif; }
+
+    .bg-img img { object-fit: cover; }
+
+    /* Overlay */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 24px 80px;
+      gap: 16px;
+    }
+
+    /* Slide-specific overlays (dark gradients for readability) */
+    .ov-1 { background: linear-gradient(160deg, rgba(15,15,15,0.85) 0%, rgba(20,83,45,0.75) 100%); }
+    .ov-2 { background: linear-gradient(160deg, rgba(15,23,42,0.90) 0%, rgba(15,15,15,0.85) 100%); }
+    .ov-3 { background: linear-gradient(160deg, rgba(15,15,15,0.88) 0%, rgba(30,58,138,0.75) 100%); }
+    .ov-4 { background: linear-gradient(160deg, rgba(220,38,38,0.82) 0%, rgba(15,15,15,0.92) 100%); }
+    .ov-5 { background: linear-gradient(160deg, rgba(15,23,42,0.92) 0%, rgba(15,15,15,0.90) 100%); }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* Emoji */
+    .icon { font-size: 56px; line-height: 1; }
+
+    /* Headlines */
+    .h1 {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .h1 .accent { color: #EF4444; }
+    .h1 .accent-y { color: #F59E0B; }
+    .h1 .accent-g { color: #10B981; }
+    .h1 .accent-b { color: #3B82F6; }
+
+    .h2 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    /* Sub text */
+    .sub {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    /* Divider */
+    .div {
+      width: 44px;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.30);
+    }
+
+    /* Info box */
+    .box {
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 18px 22px;
+      width: 100%;
+      max-width: 310px;
+    }
+    .box p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    /* Red alert box */
+    .alert-box {
+      background: rgba(239,68,68,0.15);
+      border-left: 4px solid #EF4444;
+      border-radius: 10px;
+      padding: 14px 18px;
+      width: 100%;
+      max-width: 310px;
+      text-align: left;
+    }
+    .alert-box p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.8;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      width: 100%;
+      max-width: 300px;
+      text-align: left;
+    }
+    .checklist li {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      padding: 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.4;
+    }
+    .checklist li .tk { color: #10B981; font-size: 18px; flex-shrink: 0; }
+
+    /* CTA button */
+    .cta {
+      display: inline-block;
+      background: #F59E0B;
+      color: #0F172A;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 16px 36px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+    }
+    .note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    /* Danger badge */
+    .badge {
+      display: inline-block;
+      background: #EF4444;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 999px;
+      letter-spacing: 0.4px;
+    }
+  </style>
+</head>
+<body>
+
+<amp-story
+  standalone
+  title="Signature Upload Reject Kyu Hota Hai? 3 Rules Jo Sab Bhool Jate Hain"
+  publisher="SizeSnap"
+  publisher-logo-src="https://www.sizesnap.in/logo.png"
+  poster-portrait-src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=720&h=960&fit=crop&q=80"
+  poster-square-src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=720&h=720&fit=crop&q=80"
+  poster-landscape-src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=853&h=640&fit=crop&q=80">
+
+  <!-- Slide 1: Hook -->
+  <amp-story-page id="s1" auto-advance-after="7s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Person signing white paper with black pen">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-1">
+        <p class="eyebrow">Signature Rejection Alert</p>
+        <div class="icon">✍️❌</div>
+        <h1 class="h1"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Signature Reject<br/>
+          <span class="accent-y">Kyu Hota Hai?</span><br/>
+          3 Rules Jo Sab<br/>
+          Bhool Jate Hain!
+        </h1>
+        <div class="div"></div>
+        <p class="sub"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.3s"
+          animate-in-duration="0.5s">
+          Form fill karte waqt signature guidelines miss mat karna! 😰
+        </p>
+        <span class="badge"
+          animate-in="pulse"
+          animate-in-delay="0.6s">
+          Swipe Up to Learn Rules ⚡
+        </span>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 2: Rule 1 (Ink Color) -->
+  <amp-story-page id="s2" auto-advance-after="7s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Black ink ballpoint pen details close-up">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-2">
+        <p class="eyebrow">Rule #1</p>
+        <div class="icon">🖊️</div>
+        <h2 class="h2"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Wrong Ink Color<br/>
+          (Blue vs Black)
+        </h2>
+        <div class="box"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <p>
+            ❌ <strong>Mistake:</strong> Blue ya kisi aur colored ink se sign karna.<br/>
+            ✍️ <strong>Correct Way:</strong> Portals (SSC, UPSC etc.) strictly black ink pen require karte hain taaki machine scans bilkul clean rahein.
+          </p>
+        </div>
+        <p class="sub"
+          style="color:#EF4444; font-weight:700;"
+          animate-in="pulse"
+          animate-in-delay="0.55s">
+          Always use BLACK INK pen 🖊️
+        </p>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 3: Rule 2 (Paper & Background) -->
+  <amp-story-page id="s3" auto-advance-after="7s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Clean plain white notepad sheet">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-3">
+        <p class="eyebrow">Rule #2</p>
+        <div class="icon">🗒️</div>
+        <h2 class="h2"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Ruled Paper &amp;<br/>
+          Gray Background
+        </h2>
+        <div class="box"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <p>
+            ❌ <strong>Mistake:</strong> Line wale paper (ruled copy) par sign karna, ya low light me phone scan lena.<br/>
+            ✍️ <strong>Correct Way:</strong> Plain white paper par sign karein aur shadows se bachein. Scanner background plain white hi mangte hain.
+          </p>
+        </div>
+        <p class="sub"
+          style="font-size:14px; color:rgba(255,255,255,0.7);"
+          animate-in="fade-in"
+          animate-in-delay="0.55s">
+          Plain white background is mandatory!
+        </p>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 4: Rule 3 (File Size) -->
+  <amp-story-page id="s4" auto-advance-after="7s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Laptop checking upload file properties sizes">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-4">
+        <p class="eyebrow">Rule #3</p>
+        <div class="icon">📏</div>
+        <h2 class="h2"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          Strict KB Size Limits<br/>
+          (10KB – 20KB)
+        </h2>
+        <div class="alert-box"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <p>
+            ❌ <strong>Mistake:</strong> 10KB se choti quality-less image upload karna, ya 20KB se badi original file upload karna.<br/>
+            UPSC/SSC portals exact <span style="color:#F59E0B; font-weight:bold;">10KB–20KB</span> signature file size require karte hain.
+          </p>
+        </div>
+        <span class="badge"
+          animate-in="pulse"
+          animate-in-delay="0.55s">
+          Wrong Size = Direct Rejection ❌
+        </span>
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  <!-- Slide 5: Solution + CTA -->
+  <amp-story-page id="s5" auto-advance-after="12s">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1080&h=1920&fit=crop&q=80"
+        layout="fill"
+        alt="Happy candidates matching form guidelines success">
+      </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="fill">
+      <div class="overlay ov-5">
+        <p class="eyebrow">The Smart Fix</p>
+        <div class="icon">⚡</div>
+        <h1 class="h1"
+          animate-in="fly-in-bottom"
+          animate-in-duration="0.5s">
+          <span class="accent-g">SizeSnap</span> Se<br/>
+          Signature Resize
+        </h1>
+        <ul class="checklist"
+          animate-in="fly-in-bottom"
+          animate-in-delay="0.25s"
+          animate-in-duration="0.5s">
+          <li><span class="tk">✔</span> Exact 10KB–20KB signatures in 1-click</li>
+          <li><span class="tk">✔</span> Automatic background white cleaner</li>
+          <li><span class="tk">✔</span> High contrast &amp; no pixel blur</li>
+          <li><span class="tk">✔</span> 100% Free (No login required)</li>
+        </ul>
+        <a class="cta"
+          href="https://www.sizesnap.in/signature-resize/ssc-signature"
+          animate-in="pulse"
+          animate-in-delay="0.55s"
+          animate-in-duration="0.6s">
+          🚀 Fix Signature Instantly
+        </a>
+        <p class="note">sizesnap.in · 100% Secure &amp; Browser-based</p>
+      </div>
+    </amp-story-grid-layer>
+
+    <!-- Outlink on the last slide -->
+    <amp-story-page-outlink layout="nodisplay">
+      <a href="https://www.sizesnap.in/signature-resize/ssc-signature"
+         title="SizeSnap – Resize Signature Instantly">
+        Fix Signature Instantly
+      </a>
+    </amp-story-page-outlink>
+  </amp-story-page>
+
+</amp-story>
+</body>
+</html>

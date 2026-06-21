@@ -67,6 +67,11 @@ export default function Footer() {
                 SSC Photo Rejection Fix
               </Link>
             </li>
+            <li>
+              <Link href="/stories/signature-reject-fix" className="hover:text-white transition-colors text-xs opacity-80">
+                Signature Rejection Fix
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

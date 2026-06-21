@@ -28,6 +28,13 @@ export const stories: StoryConfig[] = [
     date: '2026-06-20',
     coverImage: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=800&fit=crop&q=80',
   },
+  {
+    slug: 'signature-reject-fix',
+    title: 'Signature Reject Ho Rahi Hai? 3 Rules Jo Sab Bhool Jate Hain',
+    description: 'Avoid signature scans rejection in SSC, UPSC, and PAN card online forms. Learn the 3 essential guidelines to format signatures.',
+    date: '2026-06-21',
+    coverImage: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&h=800&fit=crop&q=80',
+  },
 ]
 
 export function getRelatedStories(keyword: string) {
@@ -38,13 +45,15 @@ export function getRelatedStories(keyword: string) {
       normalized.includes('photo') || 
       normalized.includes('ssc') || 
       normalized.includes('resize') || 
-      normalized.includes('size')
+      normalized.includes('size') ||
+      normalized.includes('signature')
     ) {
       return (
         text.includes('photo') || 
         text.includes('ssc') || 
         text.includes('size') || 
-        text.includes('resize')
+        text.includes('resize') ||
+        text.includes('signature')
       )
     }
     return text.includes(normalized)

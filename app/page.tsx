@@ -116,6 +116,8 @@ export default function HomePage() {
                     alt={story.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     loading="lazy"
+                    width={64}
+                    height={64}
                   />
                 </div>
               </div>

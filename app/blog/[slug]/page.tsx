@@ -139,6 +139,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                       src={story.coverImage}
                       alt={story.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                      width={48}
+                      height={64}
                     />
                   </div>
                   <div>

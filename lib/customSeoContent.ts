@@ -242,6 +242,95 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'What is the required dimension for UPSC photo upload?', answer: 'Both photo and signature must be square, with dimensions ranging between 350x350 pixels and 1000x1000 pixels.' },
       { question: 'What is the file size limit for UPSC OTR?', answer: 'The uploaded file size must be between 20KB (minimum) and 300KB (maximum) in JPG format.' }
     ]
+  },
+  'passport-photo/neet-exam': {
+    metaTitle: 'NEET Exam Photo Size & Format Resizer Online Free | SizeSnap',
+    metaDescription: 'Resize passport photo (10KB-200KB) and postcard size photo (4x6 inch) for NTA NEET application form online. 100% free, private browser-based tool.',
+    h1: 'NEET Exam Passport & Postcard Photo Resizer',
+    introParagraph: 'National Testing Agency (NTA) NEET UG/PG applications require strict candidate photo formats. Use this tool to fit the exact 10KB to 200KB limit.',
+    bodyHtml: `
+      <h2>NTA NEET Photo Specifications & Guidelines</h2>
+      <p>NEET applications require two types of photos: a passport size photo and a postcard size photo (4" x 6"). Both photos must have a white background, and the candidate's name and date of taking the photo must be printed at the bottom of the passport photo.</p>
+      
+      <h3>NEET Photo Size Limits</h3>
+      <ul>
+        <li><strong>Passport Photo Size:</strong> 10 KB to 200 KB (JPEG format)</li>
+        <li><strong>Postcard Photo Size (4x6):</strong> 10 KB to 200 KB (JPEG format)</li>
+        <li><strong>Background:</strong> Plain white background with 80% face coverage.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'What is the required size for NEET postcard photo?', answer: 'The postcard photo must be 4 inches by 6 inches in physical dimensions, and the file size must be between 10KB and 200KB in JPG/JPEG format.' },
+      { question: 'Should the ears be visible in NEET photo?', answer: 'Yes, both ears must be clearly visible, and the candidate should not be wearing any cap or goggles.' }
+    ]
+  },
+  'passport-photo/jee-main': {
+    metaTitle: 'JEE Main Photo Size & Format Resizer Online Free | SizeSnap',
+    metaDescription: 'Resize and compress passport photo under 200KB for JEE Main exam registration. Clean white background standard. 100% free online resizer.',
+    h1: 'JEE Main Exam Passport Photo Resizer',
+    introParagraph: 'Format your passport size image for JEE Main and Advanced exam forms according to official NTA instructions. Fits strictly under 200KB.',
+    bodyHtml: `
+      <h2>JEE Main Photo Guidelines & Size Requirements</h2>
+      <p>NTA JEE Main online forms require passport-size photographs to be clear, recently clicked, and with 80% face coverage. Avoid blurred images or custom backgrounds to ensure your application gets approved instantly.</p>
+      
+      <h3>JEE Main Image Requirements</h3>
+      <ul>
+        <li><strong>File Size:</strong> 10 KB to 200 KB</li>
+        <li><strong>Format:</strong> JPG/JPEG only</li>
+        <li><strong>Background:</strong> Light or white plain background</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'What is the file size for JEE Main photo?', answer: 'The scanned passport photograph file size must be between 10KB and 200KB in JPEG format.' },
+      { question: 'Can I upload a black and white photo for JEE Main?', answer: 'Either color or black & white photo with 80% face coverage (without mask) is acceptable.' }
+    ]
+  },
+  'passport-photo/ibps-exam': {
+    metaTitle: 'IBPS Exam Photo Size Resizer Online Free | SizeSnap',
+    metaDescription: 'Crop and resize passport photo to 20KB-50KB for IBPS Clerk, PO, and RRB banking exams. Meet standard dimensions (4.5 x 3.5 cm) instantly.',
+    h1: 'IBPS Exam Passport Photo Resizer',
+    introParagraph: 'Ensure your banking exam application is secure. Format your photo to standard IBPS PO/Clerk requirements (20KB to 50KB).',
+    bodyHtml: `
+      <h2>IBPS Banking Exam Photo Upload Guidelines</h2>
+      <p>The Institute of Banking Personnel Selection (IBPS) PO, Clerk, and Specialist Officer forms require precise photo dimensions. Incorrect formatting can lead to application cancellation or delay in admit card generation.</p>
+      
+      <h3>IBPS Passport Photo Spec</h3>
+      <ul>
+        <li><strong>Dimensions:</strong> 4.5 cm (height) x 3.5 cm (width) or 200 x 230 pixels</li>
+        <li><strong>File Size:</strong> 20 KB to 50 KB</li>
+        <li><strong>Format:</strong> JPG/JPEG format</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'What is the photo size for IBPS Clerk and PO?', answer: 'The photo must have dimensions of 200 x 230 pixels and a file size between 20KB and 50KB in JPG format.' },
+      { question: 'Can I use a signature in capital letters for IBPS?', answer: 'No, signatures in capital letters are not accepted by IBPS and will lead to rejection.' }
+    ]
+  },
+  'signature-resize/neet-signature': {
+    metaTitle: 'Resize Signature for NEET Exam Online Free (4-30KB) | SizeSnap',
+    metaDescription: 'Compress and resize scanned signature image between 4KB and 30KB for NTA NEET application form. White background, black ink standard.',
+    h1: 'NEET Exam Signature Resizer',
+    introParagraph: 'Scale your signature image perfectly for NEET application guidelines. Keeps text sharp and readable between 4KB and 30KB.',
+    bodyHtml: `
+      <h2>NEET Scanned Signature Requirements</h2>
+      <p>NEET guidelines require signature uploads to be extremely clear and legible. Use a black ink pen on white paper to make the scan, and compress it using our browser resizer to avoid errors.</p>
+    `,
+    faqs: [
+      { question: 'What is the signature file size limit for NEET?', answer: 'The scanned signature file size must be between 4KB and 30KB in JPG/JPEG format.' }
+    ]
+  },
+  'signature-resize/jee-signature': {
+    metaTitle: 'Resize Signature for JEE Main Exam Online Free (4-30KB) | SizeSnap',
+    metaDescription: 'Compress and resize scanned signature image between 4KB and 30KB for NTA JEE Main application form. 100% free and secure.',
+    h1: 'JEE Main Exam Signature Resizer',
+    introParagraph: 'Scale your signature image perfectly for JEE Main registration guidelines. Keeps text sharp and readable between 4KB and 30KB.',
+    bodyHtml: `
+      <h2>JEE Main Scanned Signature Requirements</h2>
+      <p>JEE Main registration portal checks signature uploads strictly. Ensure you sign with a black pen on a plain white paper, and use our resizer to keep it under 30KB without making it blurry.</p>
+    `,
+    faqs: [
+      { question: 'What is the signature file size limit for JEE Main?', answer: 'The scanned signature file size must be between 4KB and 30KB in JPG/JPEG format.' }
+    ]
   }
 }
 
@@ -260,6 +349,11 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'compress-image/to-50kb': 'compress-image-to-50kb',
     'passport-photo/ssc-exam': 'image-size-for-ssc-form',
     'passport-photo/upsc-exam': 'photo-size-for-upsc-form',
+    'passport-photo/neet-exam': 'image-size-for-neet-form',
+    'passport-photo/jee-main': 'image-size-for-jee-main',
+    'passport-photo/ibps-exam': 'image-size-for-ibps-exam',
+    'signature-resize/neet-signature': 'resize-signature-for-neet',
+    'signature-resize/jee-signature': 'resize-signature-for-jee',
   }
   return mapping[`${tool}/${variant}`] || null
 }

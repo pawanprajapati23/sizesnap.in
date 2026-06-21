@@ -80,6 +80,26 @@ const nextConfig: NextConfig = {
         destination: '/stories/signature-reject-fix.html',
       },
       {
+        source: '/image-size-for-neet-form',
+        destination: '/passport-photo/neet-exam',
+      },
+      {
+        source: '/image-size-for-jee-main',
+        destination: '/passport-photo/jee-main',
+      },
+      {
+        source: '/image-size-for-ibps-exam',
+        destination: '/passport-photo/ibps-exam',
+      },
+      {
+        source: '/resize-signature-for-neet',
+        destination: '/signature-resize/neet-signature',
+      },
+      {
+        source: '/resize-signature-for-jee',
+        destination: '/signature-resize/jee-signature',
+      },
+      {
         source: '/resize-image-to-50kb',
         destination: '/resize-image/to-50kb',
       },

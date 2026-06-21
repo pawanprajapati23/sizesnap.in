@@ -9,9 +9,9 @@ export default function Sidebar() {
     <div className="space-y-6">
       {/* Image Tools */}
       <div>
-        <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">
+        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">
           🖼️ Image Tools
-        </h3>
+        </div>
         <nav className="space-y-1">
           {imageTools.map(tool => (
             <Link
@@ -27,9 +27,9 @@ export default function Sidebar() {
 
       {/* PDF Tools */}
       <div>
-        <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">
+        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">
           📄 PDF Tools
-        </h3>
+        </div>
         <nav className="space-y-1">
           {pdfTools.map(tool => (
             <Link
@@ -45,9 +45,9 @@ export default function Sidebar() {
 
       {/* Quick Size Links */}
       <div className="bg-blue-50 rounded-xl p-4">
-        <h3 className="text-xs font-semibold text-blue-700 uppercase tracking-wider mb-3">
+        <div className="text-xs font-semibold text-blue-700 uppercase tracking-wider mb-3">
           Popular Image Sizes
-        </h3>
+        </div>
         <div className="flex flex-wrap gap-2">
           {['to-10kb','to-20kb','to-50kb','to-100kb','to-200kb','to-500kb','to-1mb'].map(v => (
             <Link

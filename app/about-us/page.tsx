@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us | SizeSnap.in',
+  title: 'About Us - Free Image & PDF Resizing Tools | SizeSnap',
   description: 'Learn more about SizeSnap.in. We build free, fast, and secure client-side tools for sizing images and processing PDFs.'
 }
 

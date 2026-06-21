@@ -2,7 +2,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | SizeSnap.in',
+  title: 'Privacy Policy - Secure Browser Processing | SizeSnap',
   description: 'Learn how SizeSnap.in protects your privacy. We process all files locally in your browser and do not upload your images or PDFs to any server.'
 }
 

@@ -2,8 +2,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | SizeSnap.in',
-  description: 'Have a question or feedback? Contact the SizeSnap.in team.'
+  title: 'Contact Us - Support & Feedback | SizeSnap',
+  description: 'Have a question, feedback, or feature request? Contact the SizeSnap.in support team. We generally respond to all inquiries within 24 to 48 hours.'
 }
 
 export default function ContactPage() {

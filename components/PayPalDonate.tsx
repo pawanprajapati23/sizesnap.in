@@ -15,7 +15,7 @@ export default function PayPalDonate() {
         {/* QR Code for Indian Users */}
         <div className="w-24 h-24 bg-white p-1 rounded-lg border border-gray-200 shadow-sm mx-auto flex items-center justify-center overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/upi-qr.jpg" alt="UPI QR Code" className="max-w-full max-h-full object-contain" />
+          <img src="/upi-qr.jpg" alt="UPI QR Code" className="max-w-full max-h-full object-contain" width={96} height={96} />
         </div>
         <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider text-center leading-tight">
           Scan to Donate<br/>(GPay, PhonePe, Paytm, UPI)

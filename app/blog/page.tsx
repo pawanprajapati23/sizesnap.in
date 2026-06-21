@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { blogs } from '@/lib/blogConfigs'
 
 export const metadata: Metadata = {
-  title: 'Blog & Resources | SizeSnap',
+  title: 'Blog, Guides & PDF Optimization Tutorials | SizeSnap',
   description: 'Guides, tutorials, and document guidelines for online forms, PDF management, and photo resizing.',
   alternates: {
     canonical: 'https://sizesnap.in/blog',

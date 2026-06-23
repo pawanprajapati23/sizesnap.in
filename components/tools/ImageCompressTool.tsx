@@ -25,8 +25,18 @@ export default function ImageCompressTool({ config }: Props) {
   // Controls
   const [compressQuality, setCompressQuality] = useState<number>(75) // Default 75% quality
   const [targetKB, setTargetKB] = useState<number>(config.maxKB || 100)
+  const [loadingStep, setLoadingStep] = useState(0)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const loadingSteps = [
+    'Reading image file...',
+    'Analyzing color parameters...',
+    'Quantizing visual pixels...',
+    'Iterating resolution adjustments...',
+    'Evaluating size limits...',
+    'Finalizing byte buffers...'
+  ]
 
   // Local GPU-Accelerated Canvas Compression
   const compressImage = useCallback(async (file: File, qualityPercent: number, targetSizeKB?: number) => {
@@ -136,12 +146,18 @@ export default function ImageCompressTool({ config }: Props) {
     setOriginalSize(file.size)
     setStatus('processing')
     setErrorMsg('')
+    setLoadingStep(0)
+
+    const interval = setInterval(() => {
+      setLoadingStep(prev => (prev < 5 ? prev + 1 : prev))
+    }, 200)
 
     const q = overrideQuality !== undefined ? overrideQuality : compressQuality
     const kb = overrideKB !== undefined ? overrideKB : targetKB
 
     try {
       const blob = await compressImage(file, q, kb)
+      clearInterval(interval)
       
       if (resultUrl) URL.revokeObjectURL(resultUrl)
 
@@ -149,6 +165,7 @@ export default function ImageCompressTool({ config }: Props) {
       setResultSize(blob.size)
       setStatus('done')
     } catch (err: any) {
+      clearInterval(interval)
       setErrorMsg(err.message || 'Compression failed. Try a different format.')
       setStatus('error')
     }
@@ -355,10 +372,22 @@ export default function ImageCompressTool({ config }: Props) {
 
         {/* Processing Spinner */}
         {status === 'processing' && (
-          <div className="text-center py-10 bg-slate-50/40 rounded-2xl border border-gray-100 animate-pulse">
-            <RefreshCw className="w-12 h-12 text-indigo-600 mx-auto mb-4 animate-spin stroke-1.5" />
-            <h4 className="font-bold text-gray-800 text-base">Compressing File...</h4>
-            <p className="text-xs text-gray-500 mt-1.5">Removing redundant pixels and metadata locally.</p>
+          <div className="text-center py-10 bg-slate-50/40 rounded-2xl border border-gray-100 space-y-4 px-6">
+            <RefreshCw className="w-12 h-12 text-indigo-600 mx-auto animate-spin stroke-1.5" />
+            <div className="space-y-1">
+              <h4 className="font-bold text-gray-800 text-base">Compressing File...</h4>
+              <p className="text-xs text-indigo-600 font-semibold animate-pulse">
+                {loadingSteps[loadingStep]}
+              </p>
+            </div>
+            
+            {/* Smooth animated progress bar */}
+            <div className="w-full max-w-xs mx-auto bg-gray-200 h-1.5 rounded-full overflow-hidden">
+              <div 
+                className="bg-indigo-600 h-full transition-all duration-300 rounded-full" 
+                style={{ width: `${(loadingStep + 1) * 16.6}%` }}
+              />
+            </div>
           </div>
         )}
 

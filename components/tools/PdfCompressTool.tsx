@@ -24,6 +24,8 @@ export default function PdfCompressTool({ config }: Props) {
   const [mode, setMode] = useState<'quality' | 'size'>('quality')
   const [compressLevel, setCompressLevel] = useState<'low' | 'medium' | 'high'>('medium')
   const [targetKB, setTargetKB] = useState<number>(config.maxKB || 200)
+  const [progress, setProgress] = useState(0)
+  const [loadingMessage, setLoadingMessage] = useState('')
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -44,17 +46,22 @@ export default function PdfCompressTool({ config }: Props) {
     setOriginalSize(file.size)
     setStatus('processing')
     setErrorMsg('')
+    setProgress(5)
+    setLoadingMessage('Loading PDF reader module...')
 
     try {
       // 1. Load PDF.js dynamically
       let pdfjsLib: any = (window as any).pdfjsLib
       if (!pdfjsLib) {
+         setLoadingMessage('Initializing document parsing components...')
          // @ts-ignore
          pdfjsLib = await import('pdfjs-dist/build/pdf.mjs')
          pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.mjs`
          ;(window as any).pdfjsLib = pdfjsLib
       }
 
+      setProgress(10)
+      setLoadingMessage('Reading PDF structure and catalog...')
       const arrayBuffer = await file.arrayBuffer()
       const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) })
       let pdf: any
@@ -70,10 +77,10 @@ export default function PdfCompressTool({ config }: Props) {
       }
 
       // 2. High-Performance Optimization: Render pages ONCE at scale 1.5 and cache images
-      // Subsequent loop iterations will scale from images rather than rendering vector paths repeatedly
       const pageImages: HTMLImageElement[] = []
       
       for (let i = 1; i <= numPages; i++) {
+        setLoadingMessage(`Rasterizing page ${i} of ${numPages} (extracting layout)...`)
         const page = await pdf.getPage(i)
         const viewport = page.getViewport({ scale: 1.5 })
         
@@ -89,6 +96,8 @@ export default function PdfCompressTool({ config }: Props) {
         img.src = imgDataUrl
         await new Promise((res) => { img.onload = res })
         pageImages.push(img)
+        
+        setProgress(10 + Math.round((i / numPages) * 40)) // Up to 50%
       }
 
       // 3. Compression settings configuration
@@ -115,9 +124,12 @@ export default function PdfCompressTool({ config }: Props) {
       let finalBlob: Blob | null = null
 
       while (attempts < maxAttempts) {
+        const attemptLabel = mode === 'size' ? ` (Attempt ${attempts + 1}/${maxAttempts})` : ''
+        setLoadingMessage(`Optimizing documents rendering${attemptLabel}...`)
         const newPdfDoc = await PDFDocument.create()
 
         for (let i = 0; i < numPages; i++) {
+          setLoadingMessage(`Compiling and compressing page ${i + 1} of ${numPages}${attemptLabel}...`)
           const imgElement = pageImages[i]
           const targetW = Math.round(imgElement.width * currentScale)
           const targetH = Math.round(imgElement.height * currentScale)
@@ -139,8 +151,11 @@ export default function PdfCompressTool({ config }: Props) {
             width: targetW,
             height: targetH,
           })
+          
+          setProgress(50 + Math.round((i / numPages) * 40)) // Up to 90%
         }
 
+        setLoadingMessage(`Assembling optimized document components${attemptLabel}...`)
         const pdfBytes = await newPdfDoc.save({ useObjectStreams: false })
         finalBlob = new Blob([pdfBytes as any], { type: 'application/pdf' })
 
@@ -158,10 +173,14 @@ export default function PdfCompressTool({ config }: Props) {
 
       if (!finalBlob) throw new Error('Document assembly failed.')
 
+      setLoadingMessage('Finalizing output stream...')
+      setProgress(95)
+
       if (resultUrl) URL.revokeObjectURL(resultUrl)
 
       setResultUrl(URL.createObjectURL(finalBlob))
       setResultSize(finalBlob.size)
+      setProgress(100)
       setStatus('done')
     } catch (err: any) {
       console.error(err)
@@ -349,10 +368,22 @@ export default function PdfCompressTool({ config }: Props) {
 
         {/* Processing State */}
         {status === 'processing' && (
-          <div className="text-center py-10 bg-slate-50/40 rounded-2xl border border-gray-100 animate-pulse">
-            <RefreshCw className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-spin stroke-1.5" />
-            <h4 className="font-bold text-gray-800 text-base">Rasterizing & Compressing Pages...</h4>
-            <p className="text-xs text-gray-500 mt-1.5">This compresses all embedded images and shapes locally.</p>
+          <div className="text-center py-10 bg-slate-50/40 rounded-2xl border border-gray-100 space-y-4 px-6">
+            <RefreshCw className="w-12 h-12 text-blue-600 mx-auto animate-spin stroke-1.5" />
+            <div className="space-y-1">
+              <h4 className="font-bold text-gray-800 text-base">Rasterizing & Compressing Pages...</h4>
+              <p className="text-xs text-blue-600 font-semibold animate-pulse">
+                {loadingMessage}
+              </p>
+            </div>
+            
+            {/* Smooth animated progress bar */}
+            <div className="w-full max-w-xs mx-auto bg-gray-250 h-1.5 rounded-full overflow-hidden">
+              <div 
+                className="bg-blue-600 h-full transition-all duration-300 rounded-full" 
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </div>
         )}
 

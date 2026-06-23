@@ -24,8 +24,18 @@ export default function ImageResizeTool({ config }: Props) {
   // Custom target size in KB (initialized from config or defaulting to 50KB)
   const [targetKB, setTargetKB] = useState<number>(config.maxKB || 50)
   const [customRange, setCustomRange] = useState(false)
+  const [loadingStep, setLoadingStep] = useState(0)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const loadingSteps = [
+    'Reading image file...',
+    'Analyzing color parameters...',
+    'Quantizing visual pixels...',
+    'Iterating resolution adjustments...',
+    'Evaluating size limits...',
+    'Finalizing byte buffers...'
+  ]
 
   // Iterative Canvas-based compression to ensure output is strictly <= targetKB
   const compressImage = useCallback(async (file: File, maxKB: number) => {
@@ -134,11 +144,17 @@ export default function ImageResizeTool({ config }: Props) {
     setOriginalSize(file.size)
     setStatus('processing')
     setErrorMsg('')
+    setLoadingStep(0)
+
+    const interval = setInterval(() => {
+      setLoadingStep(prev => (prev < 5 ? prev + 1 : prev))
+    }, 200)
 
     const finalLimit = customLimit !== undefined ? customLimit : targetKB
 
     try {
       const compressedBlob = await compressImage(file, finalLimit)
+      clearInterval(interval)
       
       // Clean old URL
       if (resultUrl) URL.revokeObjectURL(resultUrl)
@@ -147,6 +163,7 @@ export default function ImageResizeTool({ config }: Props) {
       setResultSize(compressedBlob.size)
       setStatus('done')
     } catch (err: any) {
+      clearInterval(interval)
       setErrorMsg(err.message || 'Something went wrong. Please try a different photo.')
       setStatus('error')
     }
@@ -312,10 +329,22 @@ export default function ImageResizeTool({ config }: Props) {
 
         {/* Processing State */}
         {status === 'processing' && (
-          <div className="text-center py-10 bg-slate-50/40 rounded-2xl border border-gray-100">
-            <RefreshCw className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-spin stroke-1.5" />
-            <h4 className="font-bold text-gray-800 text-base">Optimizing and Resizing...</h4>
-            <p className="text-xs text-gray-500 mt-1.5 max-w-xs mx-auto">Re-allocating pixels to match target size boundaries safely.</p>
+          <div className="text-center py-10 bg-slate-50/40 rounded-2xl border border-gray-100 space-y-4 px-6">
+            <RefreshCw className="w-12 h-12 text-blue-600 mx-auto animate-spin stroke-1.5" />
+            <div className="space-y-1">
+              <h4 className="font-bold text-gray-800 text-base">Optimizing and Resizing...</h4>
+              <p className="text-xs text-blue-600 font-semibold animate-pulse">
+                {loadingSteps[loadingStep]}
+              </p>
+            </div>
+            
+            {/* Smooth animated progress bar */}
+            <div className="w-full max-w-xs mx-auto bg-gray-250 h-1.5 rounded-full overflow-hidden">
+              <div 
+                className="bg-blue-600 h-full transition-all duration-300 rounded-full" 
+                style={{ width: `${(loadingStep + 1) * 16.6}%` }}
+              />
+            </div>
           </div>
         )}
 

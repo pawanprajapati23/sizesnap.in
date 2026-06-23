@@ -150,6 +150,82 @@ const nextConfig: NextConfig = {
       {
         source: '/photo-size-for-upsc-form',
         destination: '/passport-photo/upsc-exam',
+      },
+      {
+        source: '/11kb-converter',
+        destination: '/resize-image/to-11kb',
+      },
+      {
+        source: '/passport-size-photo-maker',
+        destination: '/passport-photo/indian-passport',
+      },
+      {
+        source: '/pdf-under-500kb',
+        destination: '/compress-pdf/to-500kb',
+      },
+      {
+        source: '/compress-pdf-to-200kb',
+        destination: '/compress-pdf/to-200kb',
+      },
+      {
+        source: '/compress-pdf-to-300kb',
+        destination: '/compress-pdf/to-300kb',
+      },
+      {
+        source: '/compress-pdf-to-150kb',
+        destination: '/compress-pdf/to-150kb',
+      },
+      {
+        source: '/compress-pdf-to-1mb',
+        destination: '/compress-pdf/to-1mb',
+      },
+      {
+        source: '/photo-size-for-up-police-form',
+        destination: '/passport-photo/up-police-photo',
+      },
+      {
+        source: '/photo-size-for-bpsc-exam',
+        destination: '/passport-photo/bpsc-exam-photo',
+      },
+      {
+        source: '/photo-size-for-mppsc-form',
+        destination: '/passport-photo/mppsc-exam-photo',
+      },
+      {
+        source: '/photo-size-for-gate-exam',
+        destination: '/passport-photo/gate-exam',
+      },
+      {
+        source: '/photo-size-for-delhi-police-form',
+        destination: '/passport-photo/delhi-police-photo',
+      },
+      {
+        source: '/pan-card-photo-size',
+        destination: '/passport-photo/pan-card',
+      },
+      {
+        source: '/resize-signature-for-ssc',
+        destination: '/signature-resize/ssc-signature',
+      },
+      {
+        source: '/resize-signature-for-upsc',
+        destination: '/signature-resize/upsc-signature',
+      },
+      {
+        source: '/resize-signature-for-pan-card',
+        destination: '/signature-resize/pan-card-signature',
+      },
+      {
+        source: '/resize-image-to-30kb',
+        destination: '/resize-image/to-30kb',
+      },
+      {
+        source: '/resize-image-to-15kb',
+        destination: '/resize-image/to-15kb',
+      },
+      {
+        source: '/whatsapp-dp-size-without-cropping',
+        destination: '/whatsapp-dp/no-crop',
       }
     ];
   },

@@ -40,11 +40,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `https://sizesnap.in/${prettySlug}`
     : `https://sizesnap.in/${p.tool}/${p.variant}`
 
+  const ampMappings: Record<string, string> = {
+    'passport-photo/ssc-exam': 'https://sizesnap.in/stories/ssc-photo-rejection',
+    'resize-image/to-50kb': 'https://sizesnap.in/stories/resize-to-50kb',
+    'passport-photo/indian-passport': 'https://sizesnap.in/stories/passport-photo-fix',
+    'signature-resize/ssc-signature': 'https://sizesnap.in/stories/signature-reject-fix',
+  }
+  const ampUrl = ampMappings[`${tool.slug}/${variant.slug}`]
+
   return {
     title,
     description,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      ...(ampUrl && { amphtml: ampUrl })
     },
     openGraph: {
       title,

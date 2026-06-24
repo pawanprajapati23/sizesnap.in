@@ -123,6 +123,34 @@ export default async function ToolHubPage({ params }: Props) {
         </section>
       )}
 
+      {sizeVariants.length > featuredSizes.length && (
+        <section className="space-y-4">
+          <details className="group bg-white border border-gray-200 rounded-xl p-5 shadow-sm [&_summary::-webkit-details-marker]:hidden">
+            <summary className="flex items-center justify-between font-semibold text-gray-800 cursor-pointer list-none">
+              <span className="text-lg font-bold text-gray-900">All Other Sizes ({sizeVariants.length})</span>
+              <span className="transition group-open:rotate-180 text-gray-500 font-bold text-sm">
+                ▼
+              </span>
+            </summary>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 mt-4 pt-4 border-t border-gray-100">
+              {sizeVariants.map(variant => {
+                const prettySlug = getPrettySlug(tool.slug, variant.slug)
+                const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+                return (
+                  <Link
+                    key={variant.slug}
+                    href={linkHref}
+                    className="bg-gray-50 border border-gray-100 rounded-lg py-1.5 px-2 text-center text-xs font-semibold text-gray-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                  >
+                    {variant.label}
+                  </Link>
+                )
+              })}
+            </div>
+          </details>
+        </section>
+      )}
+
       {useCaseVariants.length > 0 && (
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-900">Choose by Use Case</h2>

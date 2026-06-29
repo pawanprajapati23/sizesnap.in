@@ -8,7 +8,6 @@ export default function CookieConsent() {
   useEffect(() => {
     // Check if consent is already given
     if (!localStorage.getItem('sizesnap_cookie_consent')) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShow(true)
     }
   }, [])

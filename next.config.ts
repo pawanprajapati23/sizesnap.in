@@ -1,5 +1,45 @@
 import type {NextConfig} from 'next';
 
+const MAPPINGS = [
+  { pretty: '/image-size-for-neet-form', raw: '/passport-photo/neet-exam' },
+  { pretty: '/image-size-for-jee-main', raw: '/passport-photo/jee-main' },
+  { pretty: '/image-size-for-ibps-exam', raw: '/passport-photo/ibps-exam' },
+  { pretty: '/resize-signature-for-neet', raw: '/signature-resize/neet-signature' },
+  { pretty: '/resize-signature-for-jee', raw: '/signature-resize/jee-signature' },
+  { pretty: '/resize-image-to-50kb', raw: '/resize-image/to-50kb' },
+  { pretty: '/resize-image-to-20kb', raw: '/resize-image/to-20kb' },
+  { pretty: '/resize-image-to-100kb', raw: '/resize-image/to-100kb' },
+  { pretty: '/resize-image-to-200kb', raw: '/resize-image/to-200kb' },
+  { pretty: '/resize-image-to-50kb-for-form', raw: '/resize-image/to-50kb-for-form' },
+  { pretty: '/resize-image-to-50kb-for-whatsapp', raw: '/resize-image/to-50kb-for-whatsapp' },
+  { pretty: '/resize-image-to-50kb-for-ssc-exam', raw: '/resize-image/to-50kb-for-ssc-exam' },
+  { pretty: '/resize-image-to-50kb-without-losing-quality', raw: '/resize-image/to-50kb-without-losing-quality' },
+  { pretty: '/compress-image-without-losing-quality', raw: '/compress-image/without-losing-quality' },
+  { pretty: '/reduce-image-size-without-blur', raw: '/resize-image/reduce-without-blur' },
+  { pretty: '/compress-image-to-50kb', raw: '/compress-image/to-50kb' },
+  { pretty: '/image-size-for-ssc-form', raw: '/passport-photo/ssc-exam' },
+  { pretty: '/photo-size-for-upsc-form', raw: '/passport-photo/upsc-exam' },
+  { pretty: '/11kb-converter', raw: '/resize-image/to-11kb' },
+  { pretty: '/passport-size-photo-maker', raw: '/passport-photo/indian-passport' },
+  { pretty: '/pdf-under-500kb', raw: '/compress-pdf/to-500kb' },
+  { pretty: '/compress-pdf-to-200kb', raw: '/compress-pdf/to-200kb' },
+  { pretty: '/compress-pdf-to-300kb', raw: '/compress-pdf/to-300kb' },
+  { pretty: '/compress-pdf-to-150kb', raw: '/compress-pdf/to-150kb' },
+  { pretty: '/compress-pdf-to-1mb', raw: '/compress-pdf/to-1mb' },
+  { pretty: '/photo-size-for-up-police-form', raw: '/passport-photo/up-police-photo' },
+  { pretty: '/photo-size-for-bpsc-exam', raw: '/passport-photo/bpsc-exam-photo' },
+  { pretty: '/photo-size-for-mppsc-form', raw: '/passport-photo/mppsc-exam-photo' },
+  { pretty: '/photo-size-for-gate-exam', raw: '/passport-photo/gate-exam' },
+  { pretty: '/photo-size-for-delhi-police-form', raw: '/passport-photo/delhi-police-photo' },
+  { pretty: '/pan-card-photo-size', raw: '/passport-photo/pan-card' },
+  { pretty: '/resize-signature-for-ssc', raw: '/signature-resize/ssc-signature' },
+  { pretty: '/resize-signature-for-upsc', raw: '/signature-resize/upsc-signature' },
+  { pretty: '/resize-signature-for-pan-card', raw: '/signature-resize/pan-card-signature' },
+  { pretty: '/resize-image-to-30kb', raw: '/resize-image/to-30kb' },
+  { pretty: '/resize-image-to-15kb', raw: '/resize-image/to-15kb' },
+  { pretty: '/whatsapp-dp-size-without-cropping', raw: '/whatsapp-dp/no-crop' }
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   eslint: {
@@ -59,7 +99,26 @@ const nextConfig: NextConfig = {
       }
     ];
   },
+  async redirects() {
+    return MAPPINGS.map(m => ({
+      source: m.raw,
+      missing: [
+        {
+          type: 'query',
+          key: 'rewritten',
+          value: 'true',
+        }
+      ],
+      destination: m.pretty,
+      permanent: true,
+    }));
+  },
   async rewrites() {
+    const customRewrites = MAPPINGS.map(m => ({
+      source: m.pretty,
+      destination: `${m.raw}?rewritten=true`,
+    }));
+
     return [
       {
         // Pretty URL shown to users / Search Console
@@ -79,154 +138,7 @@ const nextConfig: NextConfig = {
         source: '/stories/signature-reject-fix',
         destination: '/stories/signature-reject-fix.html',
       },
-      {
-        source: '/image-size-for-neet-form',
-        destination: '/passport-photo/neet-exam',
-      },
-      {
-        source: '/image-size-for-jee-main',
-        destination: '/passport-photo/jee-main',
-      },
-      {
-        source: '/image-size-for-ibps-exam',
-        destination: '/passport-photo/ibps-exam',
-      },
-      {
-        source: '/resize-signature-for-neet',
-        destination: '/signature-resize/neet-signature',
-      },
-      {
-        source: '/resize-signature-for-jee',
-        destination: '/signature-resize/jee-signature',
-      },
-      {
-        source: '/resize-image-to-50kb',
-        destination: '/resize-image/to-50kb',
-      },
-      {
-        source: '/resize-image-to-20kb',
-        destination: '/resize-image/to-20kb',
-      },
-      {
-        source: '/resize-image-to-100kb',
-        destination: '/resize-image/to-100kb',
-      },
-      {
-        source: '/resize-image-to-200kb',
-        destination: '/resize-image/to-200kb',
-      },
-      {
-        source: '/resize-image-to-50kb-for-form',
-        destination: '/resize-image/to-50kb-for-form',
-      },
-      {
-        source: '/resize-image-to-50kb-for-whatsapp',
-        destination: '/resize-image/to-50kb-for-whatsapp',
-      },
-      {
-        source: '/resize-image-to-50kb-for-ssc-exam',
-        destination: '/resize-image/to-50kb-for-ssc-exam',
-      },
-      {
-        source: '/resize-image-to-50kb-without-losing-quality',
-        destination: '/resize-image/to-50kb-without-losing-quality',
-      },
-      {
-        source: '/compress-image-without-losing-quality',
-        destination: '/compress-image/without-losing-quality',
-      },
-      {
-        source: '/reduce-image-size-without-blur',
-        destination: '/resize-image/reduce-without-blur',
-      },
-      {
-        source: '/compress-image-to-50kb',
-        destination: '/compress-image/to-50kb',
-      },
-      {
-        source: '/image-size-for-ssc-form',
-        destination: '/passport-photo/ssc-exam',
-      },
-      {
-        source: '/photo-size-for-upsc-form',
-        destination: '/passport-photo/upsc-exam',
-      },
-      {
-        source: '/11kb-converter',
-        destination: '/resize-image/to-11kb',
-      },
-      {
-        source: '/passport-size-photo-maker',
-        destination: '/passport-photo/indian-passport',
-      },
-      {
-        source: '/pdf-under-500kb',
-        destination: '/compress-pdf/to-500kb',
-      },
-      {
-        source: '/compress-pdf-to-200kb',
-        destination: '/compress-pdf/to-200kb',
-      },
-      {
-        source: '/compress-pdf-to-300kb',
-        destination: '/compress-pdf/to-300kb',
-      },
-      {
-        source: '/compress-pdf-to-150kb',
-        destination: '/compress-pdf/to-150kb',
-      },
-      {
-        source: '/compress-pdf-to-1mb',
-        destination: '/compress-pdf/to-1mb',
-      },
-      {
-        source: '/photo-size-for-up-police-form',
-        destination: '/passport-photo/up-police-photo',
-      },
-      {
-        source: '/photo-size-for-bpsc-exam',
-        destination: '/passport-photo/bpsc-exam-photo',
-      },
-      {
-        source: '/photo-size-for-mppsc-form',
-        destination: '/passport-photo/mppsc-exam-photo',
-      },
-      {
-        source: '/photo-size-for-gate-exam',
-        destination: '/passport-photo/gate-exam',
-      },
-      {
-        source: '/photo-size-for-delhi-police-form',
-        destination: '/passport-photo/delhi-police-photo',
-      },
-      {
-        source: '/pan-card-photo-size',
-        destination: '/passport-photo/pan-card',
-      },
-      {
-        source: '/resize-signature-for-ssc',
-        destination: '/signature-resize/ssc-signature',
-      },
-      {
-        source: '/resize-signature-for-upsc',
-        destination: '/signature-resize/upsc-signature',
-      },
-      {
-        source: '/resize-signature-for-pan-card',
-        destination: '/signature-resize/pan-card-signature',
-      },
-      {
-        source: '/resize-image-to-30kb',
-        destination: '/resize-image/to-30kb',
-      },
-      {
-        source: '/resize-image-to-15kb',
-        destination: '/resize-image/to-15kb',
-      },
-      {
-        source: '/whatsapp-dp-size-without-cropping',
-        destination: '/whatsapp-dp/no-crop',
-      }
+      ...customRewrites
     ];
   },
   webpack: (config, {dev}) => {

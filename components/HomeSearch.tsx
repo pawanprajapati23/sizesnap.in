@@ -72,6 +72,29 @@ export default function HomeSearch() {
             </button>
           )}
         </div>
+
+        {/* Live Application Forms Resizers */}
+        <div className="pt-3 border-t border-gray-100 flex flex-wrap justify-center gap-2 items-center text-xs">
+          <span className="font-semibold text-gray-400 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            Live Forms:
+          </span>
+          {[
+            { label: 'SSC MTS 2026 Resizer', path: '/image-size-for-ssc-mts-exam' },
+            { label: 'IBPS PO 2026 Resizer', path: '/image-size-for-ibps-exam' },
+            { label: 'UPSC Form Photo', path: '/photo-size-for-upsc-form' },
+            { label: 'SSC Signature (20KB)', path: '/resize-signature-for-ssc' },
+            { label: 'PAN Card Photo', path: '/pan-card-photo-size' },
+          ].map(lnk => (
+            <Link
+              key={lnk.label}
+              href={lnk.path}
+              className="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 border border-red-100 text-red-700 hover:text-red-800 font-bold transition-all shadow-sm flex items-center gap-1"
+            >
+              🔥 {lnk.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {filteredTools.length === 0 && (

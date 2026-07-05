@@ -76,6 +76,11 @@ export default async function ToolVariantPage({ params }: Props) {
   const relatedBlogs = getRelatedBlogs(tool.slug)
   const relatedStories = getRelatedStories(tool.slug)
 
+  const prettySlug = getPrettySlug(tool.slug, variant.slug)
+  const canonicalUrl = prettySlug 
+    ? `https://sizesnap.in/${prettySlug}`
+    : `https://sizesnap.in/${p.tool}/${p.variant}`
+
   // WebApplication Schema for SEO
   const toolSchema = {
     '@context': 'https://schema.org',
@@ -90,7 +95,7 @@ export default async function ToolVariantPage({ params }: Props) {
       ratingValue: '4.9',
       ratingCount: '5000',
     },
-    url: `https://sizesnap.in/${p.tool}/${p.variant}`
+    url: canonicalUrl
   }
 
   // Generate deterministic rating count based on slug length so it doesn't change on every render
@@ -117,7 +122,7 @@ export default async function ToolVariantPage({ params }: Props) {
         '@type': 'ListItem',
         'position': 3,
         'name': variant.label,
-        'item': `https://sizesnap.in/${tool.slug}/${variant.slug}`
+        'item': canonicalUrl
       }
     ]
   }

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Image as ImageIcon, ShieldCheck, Cpu, Sliders } from 'lucide-react'
+import CompareSlider from '@/components/CompareSlider'
 
 interface Props {
   config: {
@@ -15,6 +16,7 @@ type Status = 'idle' | 'processing' | 'done' | 'error'
 export default function ImageResizeTool({ config }: Props) {
   const [status, setStatus] = useState<Status>('idle')
   const [originalFile, setOriginalFile] = useState<File | null>(null)
+  const [originalUrl, setOriginalUrl] = useState<string | null>(null)
   const [resultUrl, setResultUrl] = useState<string | null>(null)
   const [originalSize, setOriginalSize] = useState(0)
   const [resultSize, setResultSize] = useState(0)
@@ -141,6 +143,10 @@ export default function ImageResizeTool({ config }: Props) {
     }
 
     setOriginalFile(file)
+    // Clean old original URL if exists
+    if (originalUrl) URL.revokeObjectURL(originalUrl)
+    setOriginalUrl(URL.createObjectURL(file))
+
     setOriginalSize(file.size)
     setStatus('processing')
     setErrorMsg('')
@@ -167,7 +173,7 @@ export default function ImageResizeTool({ config }: Props) {
       setErrorMsg(err.message || 'Something went wrong. Please try a different photo.')
       setStatus('error')
     }
-  }, [targetKB, compressImage, resultUrl])
+  }, [targetKB, compressImage, resultUrl, originalUrl])
 
   // Automatically re-compress if targetKB slider changes
   const handleSliderChange = (newVal: number) => {
@@ -198,6 +204,8 @@ export default function ImageResizeTool({ config }: Props) {
   const handleReset = () => {
     setStatus('idle')
     setOriginalFile(null)
+    if (originalUrl) URL.revokeObjectURL(originalUrl)
+    setOriginalUrl(null)
     if (resultUrl) URL.revokeObjectURL(resultUrl)
     setResultUrl(null)
     setOriginalSize(0)
@@ -209,9 +217,10 @@ export default function ImageResizeTool({ config }: Props) {
   // Cleanup URLs on unmount
   useEffect(() => {
     return () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl)
       if (resultUrl) URL.revokeObjectURL(resultUrl)
     }
-  }, [resultUrl])
+  }, [originalUrl, resultUrl])
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
@@ -395,12 +404,11 @@ export default function ImageResizeTool({ config }: Props) {
             <div className="space-y-1.5">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
                 <ImageIcon className="w-4 h-4" />
-                Live Result Preview:
+                Live Result Preview (Drag slider to compare quality):
               </span>
-              <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50 p-2 flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={resultUrl} alt="Resized output" className="max-h-64 object-contain rounded-lg shadow-sm" />
-              </div>
+              {originalUrl && resultUrl && (
+                <CompareSlider originalUrl={originalUrl} resultUrl={resultUrl} />
+              )}
             </div>
 
             {/* CTA action buttons */}

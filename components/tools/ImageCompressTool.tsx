@@ -1,6 +1,7 @@
 'use client'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Sliders, ShieldCheck, Cpu, Percent } from 'lucide-react'
+import CompareSlider from '@/components/CompareSlider'
 
 interface Props {
   config: {
@@ -13,6 +14,7 @@ type Status = 'idle' | 'processing' | 'done' | 'error'
 export default function ImageCompressTool({ config }: Props) {
   const [status, setStatus] = useState<Status>('idle')
   const [originalFile, setOriginalFile] = useState<File | null>(null)
+  const [originalUrl, setOriginalUrl] = useState<string | null>(null)
   const [resultUrl, setResultUrl] = useState<string | null>(null)
   const [originalSize, setOriginalSize] = useState(0)
   const [resultSize, setResultSize] = useState(0)
@@ -143,6 +145,10 @@ export default function ImageCompressTool({ config }: Props) {
     }
 
     setOriginalFile(file)
+    // Clean old original URL if exists
+    if (originalUrl) URL.revokeObjectURL(originalUrl)
+    setOriginalUrl(URL.createObjectURL(file))
+
     setOriginalSize(file.size)
     setStatus('processing')
     setErrorMsg('')
@@ -169,7 +175,7 @@ export default function ImageCompressTool({ config }: Props) {
       setErrorMsg(err.message || 'Compression failed. Try a different format.')
       setStatus('error')
     }
-  }, [compressQuality, targetKB, compressImage, resultUrl])
+  }, [compressQuality, targetKB, compressImage, resultUrl, originalUrl])
 
   // Triggers processing immediately on control adjustments
   const handleQualityChange = (val: number) => {
@@ -217,6 +223,8 @@ export default function ImageCompressTool({ config }: Props) {
   const handleReset = () => {
     setStatus('idle')
     setOriginalFile(null)
+    if (originalUrl) URL.revokeObjectURL(originalUrl)
+    setOriginalUrl(null)
     if (resultUrl) URL.revokeObjectURL(resultUrl)
     setResultUrl(null)
     setOriginalSize(0)
@@ -227,9 +235,10 @@ export default function ImageCompressTool({ config }: Props) {
 
   useEffect(() => {
     return () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl)
       if (resultUrl) URL.revokeObjectURL(resultUrl)
     }
-  }, [resultUrl])
+  }, [originalUrl, resultUrl])
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
@@ -434,11 +443,10 @@ export default function ImageCompressTool({ config }: Props) {
 
             {/* Preview Box */}
             <div className="space-y-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Live Result Preview:</span>
-              <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50 p-2 flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={resultUrl} alt="Compressed output" className="max-h-64 object-contain rounded-lg shadow-sm" />
-              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Live Result Preview (Drag slider to compare quality):</span>
+              {originalUrl && resultUrl && (
+                <CompareSlider originalUrl={originalUrl} resultUrl={resultUrl} />
+              )}
             </div>
 
             {/* Actions CTA */}

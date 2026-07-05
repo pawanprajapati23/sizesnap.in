@@ -38,10 +38,13 @@ export default function PrivacyPolicyPage() {
       <h2>5. Opting Out of Ads</h2>
       <p>Users may opt out of personalized advertising by visiting Google's <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Ads Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">AboutAds.info</a>.</p>
 
-      <h2>6. Changes to This Policy</h2>
+      <h2>6. GDPR & CCPA/CPRA Privacy Rights</h2>
+      <p>If you are a resident of the European Economic Area (EEA) or California, you have certain data protection rights under the GDPR and CCPA/CPRA. SizeSnap.in processes all files locally, so we do not store, collect, or share your personal documents or sensitive media. For any cookies or analytics data collected, you can request access, correction, or deletion by contacting us.</p>
+
+      <h2>7. Changes to This Policy</h2>
       <p>We may update our Privacy Policy periodically. We encourage users to frequently check this page for any changes. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
 
-      <h2>7. Contact Us</h2>
+      <h2>8. Contact Us</h2>
       <p>If you have any questions or concerns regarding your privacy while using SizeSnap.in, please reach out directly via email to our owner:</p>
       <p><strong>Email:</strong> <a href="mailto:diplomawithbtech@gmail.com">diplomawithbtech@gmail.com</a></p>
     </div>

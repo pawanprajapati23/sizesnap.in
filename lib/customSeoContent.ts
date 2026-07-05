@@ -617,8 +617,91 @@ export const customSeoData: Record<string, CustomSeoData> = {
     faqs: [
       { question: 'Does WhatsApp DP require square frames?', answer: 'Yes, social profile updates normal aspects ratio scale standard square format constraints.' }
     ]
+  },
+  'passport-photo/rrb-ntpc': {
+    metaTitle: 'Railway RRB NTPC Photo Size Resizer Online Free | 35x45 mm',
+    metaDescription: 'Resize your passport photo for Railway RRB NTPC, ALP, and Group D application forms online. Free tool to crop photo to 20KB-50KB with white background.',
+    h1: 'Railway RRB NTPC & Group D Photo Resizer',
+    introParagraph: 'Railway Recruitment Board (RRB) NTPC, ALP, aur Group D recruitment forms ki guidelines ke anusaar passport photo format karein (3.5x4.5cm, 20-50KB).',
+    bodyHtml: `
+      <h2>Railway RRB Application Photo Guidelines</h2>
+      <p>RRB NTPC, ALP, aur Technician forms me photo upload rules strictly follow karne hote hain. Candidates ko light color ya plain white background ke sath clean passport photo upload karni hoti hai. File size 20KB se 50KB ke beech honi chahiye. Goggles ya caps wear ki hui photo reject ho jayegi.</p>
+      <h3>Browser-side Resize aur Full Security</h3>
+      <p>SizeSnap par compression local device me hota hai, isliye aapke scanned documents bilkul safe hain. 1-click me RRB-compliant photo generate ho kar ready ho jayegi.</p>
+    `,
+    faqs: [
+      { question: 'What is the photo size limit for RRB NTPC form?', answer: 'The passport size photo must be between 20KB to 50KB in JPEG format.' }
+    ]
+  },
+  'passport-photo/ssc-gd': {
+    metaTitle: 'SSC GD Constable Photo Resizer Online Free | SizeSnap',
+    metaDescription: 'Resize and crop passport photo for SSC GD Constable application portal. Under 20KB-50KB standard limit, white background.',
+    h1: 'SSC GD Constable Photo Resizer',
+    introParagraph: 'Ensure your GD Constable application form isn\'t rejected. Crop and compress your passport photo under 50KB automatically in your browser.',
+    bodyHtml: `
+      <h2>SSC GD Constable Photo Dimensions and Specifications</h2>
+      <p>Staff Selection Commission (SSC) GD Constable application requires candidate passport size photo (3.5 cm width x 4.5 cm height) within 20KB to 50KB limit. Ensure the photograph is clear, not blurred, and ears are visible. Our tool locks correct dimension ratios automatically.</p>
+      <h3>Direct local processing</h3>
+      <p>Your photos are not uploaded to our servers, protecting your privacy during browser-side local image processing.</p>
+    `,
+    faqs: [
+      { question: 'What is the required image size for SSC GD form?', answer: 'Passport photo must be 20KB to 50KB and signature must be 10KB to 20KB in size.' }
+    ]
+  },
+  'passport-photo/upsssc-pet': {
+    metaTitle: 'UPSSSC PET Photo Resizer Online Free (20KB-50KB) | SizeSnap',
+    metaDescription: 'Resize and format passport photo for UPSSSC PET recruitment portal online. Fits under 50KB limit automatically in 3.5x4.5cm.',
+    h1: 'UPSSSC PET Photo Resizer',
+    introParagraph: 'Format your photo perfectly for the UPSSSC Preliminary Eligibility Test (PET) application form. Adjust to exactly 20-50KB.',
+    bodyHtml: `
+      <h2>UPSSSC PET Exam Form Photo Requirements</h2>
+      <p>Uttar Pradesh Subordinate Services Selection Commission (UPSSSC) PET notification requests passport photographs with white or light gray background. The file size limit is 50KB. Use this utility to adjust resolution to 3.5x4.5cm instantly.</p>
+    `,
+    faqs: [
+      { question: 'What is the maximum limit for UPSSSC PET photo?', answer: 'The photo file size must not exceed 50KB and must be in JPEG/JPG format.' }
+    ]
+  },
+  'signature-resize/rrb-signature': {
+    metaTitle: 'Resize Signature for Railway RRB NTPC Exam (10-20KB) | SizeSnap',
+    metaDescription: 'Resize and compress your signature scan under 20KB for Railway RRB NTPC, Group D, and ALP online. Meets standard 10KB to 20KB limit.',
+    h1: 'RRB NTPC Signature Resizer',
+    introParagraph: 'Crop and compress your scanned signature to exactly 10KB-20KB for the Railway RRB exam application.',
+    bodyHtml: `
+      <h2>Railway RRB Signature Scanning Guidelines</h2>
+      <p>Signatures on Railway recruitment forms must be done on clean white paper with a black pen and scanned clearly. The scanned file size must be between 10KB and 20KB. Do not use blue ink as it might get flagged by the system.</p>
+    `,
+    faqs: [
+      { question: 'What is the limit for RRB signature upload?', answer: 'The signature file size must be strictly between 10KB and 20KB in JPEG format.' }
+    ]
+  },
+  'signature-resize/ssc-gd-signature': {
+    metaTitle: 'Resize Signature for SSC GD Constable Exam Online | SizeSnap',
+    metaDescription: 'Resize signature scan for SSC GD Constable registration form. 10KB-20KB standard limit with correct aspects ratio.',
+    h1: 'SSC GD Constable Signature Resizer',
+    introParagraph: 'Ensure your signature image meets the official 10KB to 20KB guidelines for the SSC portal.',
+    bodyHtml: `
+      <h2>SSC GD Signature Guidelines</h2>
+      <p>For SSC GD Constable applications, signatures must be clear and within 10KB to 20KB. Keep your camera focused on the signature to avoid black shadows.</p>
+    `,
+    faqs: [
+      { question: 'Is blue ink allowed in SSC GD signature?', answer: 'Black or blue ink on clean white paper is accepted, but black is highly recommended for readability.' }
+    ]
+  },
+  'signature-resize/upsssc-signature': {
+    metaTitle: 'Resize Signature for UPSSSC PET Form Online Free | SizeSnap',
+    metaDescription: 'Resize signature scan for UPSSSC PET application portal. Fits under 20KB limit with white background.',
+    h1: 'UPSSSC PET Signature Resizer',
+    introParagraph: 'Format your scanned signature perfectly for the UPSSSC PET application form.',
+    bodyHtml: `
+      <h2>UPSSSC PET Signature Guidelines</h2>
+      <p>The signature must be under 20KB and should have the candidate\'s signature with their full name written underneath in Hindi. Use this tool to crop and compress it easily.</p>
+    `,
+    faqs: [
+      { question: 'What is the signature size for UPSSSC PET?', answer: 'The scanned signature file size must be under 20KB.' }
+    ]
   }
 }
+
 
 export function getPrettySlug(tool: string, variant: string): string | null {
   const mapping: Record<string, string> = {
@@ -642,6 +725,16 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'passport-photo/ibps-exam': 'image-size-for-ibps-exam',
     'signature-resize/neet-signature': 'resize-signature-for-neet',
     'signature-resize/jee-signature': 'resize-signature-for-jee',
+    'passport-photo/rrb-ntpc': 'image-size-for-rrb-exam',
+    'passport-photo/sbi-bank': 'photo-size-for-sbi-form',
+    'passport-photo/ctet-exam': 'image-size-for-ctet-form',
+    'passport-photo/ssc-gd': 'image-size-for-ssc-gd',
+    'passport-photo/upsssc-pet': 'photo-size-for-upsssc-pet',
+    'signature-resize/rrb-signature': 'resize-signature-for-rrb',
+    'signature-resize/sbi-signature': 'resize-signature-for-sbi',
+    'signature-resize/ctet-signature': 'resize-signature-for-ctet',
+    'signature-resize/ssc-gd-signature': 'resize-signature-for-ssc-gd',
+    'signature-resize/upsssc-signature': 'resize-signature-for-upsssc',
     'resize-image/to-11kb': '11kb-converter',
     'passport-photo/indian-passport': 'passport-size-photo-maker',
     'compress-pdf/to-500kb': 'pdf-under-500kb',

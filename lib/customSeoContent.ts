@@ -376,7 +376,7 @@ export const customSeoData: Record<string, CustomSeoData> = {
       <p>SizeSnap user safety guidelines strictly observe karta hai. Kisi bhi security violation ya server tracking details se bachne ke liye, data operations sandboxed javascript layers me host hote hain. Processing purely client browser execution me run hoti hai bina cloud nodes use kiye.</p>
 
       <h2>Related Document & Photo Resizing Tools</h2>
-      <p>Passport size photo frame convert karne ke sath-sath aap dusre formats aur size presets check kar sakte hain. Signature resize ke liye <a href="/image-size-for-ssc-form">SSC Exam Form Resizer</a> check karein, ya low weight conversion limits ke liye <a href="/11kb-converter">11KB Converter</a> use karein, aur documents compress karne ke liye <a href="/resize-image-to-100kb">100KB Document Resizer</a> explore karein.</p>
+      <p>Passport size photo frame convert karne ke sath-sath aap dusre formats aur size presets check kar sakte hain. Signature resize ke liye <a href="/resize-signature-for-ssc">SSC Signature Resizer</a> check karein, ya low weight conversion limits ke liye <a href="/11kb-converter">11KB Converter</a> use karein, aur documents compress karne ke liye <a href="/resize-image-to-100kb">100KB Document Resizer</a> explore karein.</p>
     `,
     faqs: [
       { question: 'Passport size photo ki standard dimensions kya hoti hain?', answer: 'India aur kai official boards me passport photo ki standard physical dimensions 3.5 cm (width) x 4.5 cm (height) hoti hai, jisse digital format pixels me width 413px aur height 531px banti hai.' },

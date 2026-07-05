@@ -332,6 +332,22 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'What is the signature file size limit for JEE Main?', answer: 'The scanned signature file size must be between 4KB and 30KB in JPG/JPEG format.' }
     ]
   },
+  'signature-resize/ibps-signature': {
+    metaTitle: 'Resize Signature for IBPS PO & Clerk 2026 | 10KB-20KB Free',
+    metaDescription: 'Resize signature scan for IBPS PO & Clerk 2026 application form online. Format under 10KB-20KB and 140x60px limit. Black ink compliance optimizer.',
+    h1: 'IBPS PO & Clerk 2026 Signature Resizer',
+    introParagraph: 'IBPS PO and Clerk notification strictly demands scanned signatures to be between 10KB and 20KB in JPEG format, signed in black ink. Format yours instantly.',
+    bodyHtml: `
+      <h2>IBPS PO & Clerk Signature Upload Rules</h2>
+      <p>Bank exams like IBPS PO, Clerk, and Specialist Officer require precise signature scanning to verify candidate identity. Double check that you do not sign in CAPITAL letters, as this will lead to rejection.</p>
+      <h3>Ink Color and Format Details</h3>
+      <p>Sign strictly with a black ink pen on white paper. If you signed in blue pen, use our <strong>Ink Optimizer</strong> on the crop page to shift it to compliance black ink dynamically inside your browser.</p>
+    `,
+    faqs: [
+      { question: 'Is blue ink allowed for IBPS signature?', answer: 'No, IBPS strictly rejects blue ink signatures. Sign with black ink or use our optimizer to convert blue to black ink.' },
+      { question: 'What is the signature aspect ratio for IBPS PO?', answer: 'The recommended pixel size is 140 x 60 pixels, and file size must be between 10KB and 20KB.' }
+    ]
+  },
   'resize-image/to-11kb': {
     metaTitle: '11KB Converter Online Free (No Quality Loss) | SizeSnap',
     metaDescription: 'Need to resize photo or signature to 11KB? Use our free online 11KB converter to compress JPG, PNG files under 11KB instantly. 100% private.',
@@ -790,6 +806,7 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'passport-photo/neet-exam': 'image-size-for-neet-form',
     'passport-photo/jee-main': 'image-size-for-jee-main',
     'passport-photo/ibps-exam': 'image-size-for-ibps-exam',
+    'signature-resize/ibps-signature': 'resize-signature-for-ibps-exam',
     'signature-resize/neet-signature': 'resize-signature-for-neet',
     'signature-resize/jee-signature': 'resize-signature-for-jee',
     'passport-photo/rrb-ntpc': 'image-size-for-rrb-exam',

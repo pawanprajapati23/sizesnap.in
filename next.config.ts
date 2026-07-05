@@ -54,7 +54,8 @@ const MAPPINGS = [
   { pretty: '/resize-image-to-30kb', raw: '/resize-image/to-30kb' },
   { pretty: '/resize-image-to-15kb', raw: '/resize-image/to-15kb' },
   { pretty: '/whatsapp-dp-size-without-cropping', raw: '/whatsapp-dp/no-crop' },
-  { pretty: '/word-to-pdf', raw: '/word-to-pdf/convert' }
+  { pretty: '/word-to-pdf', raw: '/word-to-pdf/convert' },
+  { pretty: '/resize-signature-for-ibps-exam', raw: '/signature-resize/ibps-signature' }
 ];
 
 const nextConfig: NextConfig = {

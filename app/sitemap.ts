@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/terms-of-service`, priority: 0.5 },
     { url: `${BASE_URL}/blog`, priority: 0.8 },
     { url: `${BASE_URL}/image-size-guide`, priority: 0.9 },
+    { url: `${BASE_URL}/exam-photo-specifications`, priority: 0.95 },
     { url: `${BASE_URL}/stories`, priority: 0.7 },
     { url: `${BASE_URL}/sizesnap`, priority: 0.8 },
   ].map(page => ({

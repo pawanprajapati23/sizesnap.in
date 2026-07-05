@@ -699,6 +699,73 @@ export const customSeoData: Record<string, CustomSeoData> = {
     faqs: [
       { question: 'What is the signature size for UPSSSC PET?', answer: 'The scanned signature file size must be under 20KB.' }
     ]
+  },
+  'passport-photo/rrb-alp': {
+    metaTitle: 'Railway RRB ALP Photo Resizer Online Free | SizeSnap',
+    metaDescription: 'Resize your passport photo for Railway RRB Assistant Loco Pilot (ALP) application forms. Free tool to crop and compress photo strictly under 20KB-50KB.',
+    h1: 'RRB ALP Exam Photo Resizer',
+    introParagraph: 'Railway Recruitment Board (RRB) Assistant Loco Pilot (ALP) apply karne ke liye passport photo standard rules (3.5x4.5cm, 20-50KB) me scale karein.',
+    bodyHtml: `
+      <h2>RRB Assistant Loco Pilot Photo Spec and Rules</h2>
+      <p>Candidates applying for the RRB ALP exams need to submit a recent color passport photograph with white/light background. Spectacles or caps are not allowed. File size limit is strictly 50KB.</p>
+    `,
+    faqs: [
+      { question: 'What is the background color for RRB ALP photo?', answer: 'Plain white background is mandatory for RRB ALP application forms.' }
+    ]
+  },
+  'passport-photo/rrb-groupd': {
+    metaTitle: 'Railway RRB Group D Photo Resizer Online Free | SizeSnap',
+    metaDescription: 'Resize and crop passport photo for Railway RRB Group D exam online. Fit under 20KB-50KB limit with white background.',
+    h1: 'RRB Group D Exam Photo Resizer',
+    introParagraph: 'Format your photo perfectly under 50KB for the Railway RRB Group D application portal. Safe and local processing.',
+    bodyHtml: `
+      <h2>RRB Group D Photo Specifications</h2>
+      <p>Ensure your photo matches the standard 3.5cm x 4.5cm and file size is between 20KB and 50KB. Blurry photos lead to automatic reject alerts.</p>
+    `,
+    faqs: [
+      { question: 'What is the photo size for RRB Group D?', answer: 'It is 3.5cm x 4.5cm, under 50KB max size.' }
+    ]
+  },
+  'signature-resize/rrb-alp-signature': {
+    metaTitle: 'Resize Signature for Railway RRB ALP Exam (10-20KB) | SizeSnap',
+    metaDescription: 'Resize and compress your signature scan under 20KB for Railway RRB ALP online. Meets standard 10KB to 20KB limit.',
+    h1: 'RRB ALP Signature Resizer',
+    introParagraph: 'Crop and compress your scanned signature to exactly 10KB-20KB for the Railway RRB ALP exam application.',
+    bodyHtml: `
+      <h2>Railway RRB ALP Signature Guidelines</h2>
+      <p>The signature must be done on clean white paper with black ink and scanned. Scale it under 20KB using this client-side tool.</p>
+    `,
+    faqs: [
+      { question: 'What is the size limit for RRB ALP signature?', answer: 'It must be between 10KB and 20KB in JPEG/JPG format.' }
+    ]
+  },
+  'signature-resize/rrb-groupd-signature': {
+    metaTitle: 'Resize Signature for Railway RRB Group D Exam (10-20KB) | SizeSnap',
+    metaDescription: 'Resize and compress your signature scan under 20KB for Railway RRB Group D online. Meets standard 10KB to 20KB limit.',
+    h1: 'RRB Group D Signature Resizer',
+    introParagraph: 'Crop and compress your scanned signature to exactly 10KB-20KB for the Railway RRB Group D exam application.',
+    bodyHtml: `
+      <h2>Railway RRB Group D Signature Guidelines</h2>
+      <p>Use black ink on white paper for the signature. Ensure the file size is under 20KB to prevent portal rejection.</p>
+    `,
+    faqs: [
+      { question: 'Is black ink required for Group D signature?', answer: 'Yes, black ink is highly recommended for scanning clarity.' }
+    ]
+  },
+  'word-to-pdf/convert': {
+    metaTitle: 'Convert Word and Text to PDF Online Free | SizeSnap',
+    metaDescription: 'Convert plain text files (.txt) or paste Word document text to generate PDF files online instantly. 100% free, private browser-based tool.',
+    h1: 'Convert Word & Text to PDF Online Free',
+    introParagraph: 'Apne text ya Word document ke content ko instantly standard PDF format me convert karein. SizeSnap local conversion engine safety standard ko lock karta hai.',
+    bodyHtml: `
+      <h2>Word / Text to PDF Converter Ke Fayde</h2>
+      <p>Kai applications aur portals par resume, cover letter ya write-ups ko strictly PDF format me submit karna mandatory hota hai. Hamara local converter tool bina kisi server upload ke aapki file ko PDF document me compile kar deta hai.</p>
+      <h3>Browser-side local conversion technology</h3>
+      <p>Aapki file aur text hamare servers par nahi jaate. Processing poori tarah browser ke andhar execute hoti hai, jo 100% security aur privacy verify karti hai.</p>
+    `,
+    faqs: [
+      { question: 'Kya ye tool phone me chalta hai?', answer: 'Haan, mobile browser me document text paste karke direct PDF download kiya ja sakta hai.' }
+    ]
   }
 }
 
@@ -726,11 +793,15 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'signature-resize/neet-signature': 'resize-signature-for-neet',
     'signature-resize/jee-signature': 'resize-signature-for-jee',
     'passport-photo/rrb-ntpc': 'image-size-for-rrb-exam',
+    'passport-photo/rrb-alp': 'image-size-for-rrb-alp-exam',
+    'passport-photo/rrb-groupd': 'image-size-for-rrb-group-d',
     'passport-photo/sbi-bank': 'photo-size-for-sbi-form',
     'passport-photo/ctet-exam': 'image-size-for-ctet-form',
     'passport-photo/ssc-gd': 'image-size-for-ssc-gd',
     'passport-photo/upsssc-pet': 'photo-size-for-upsssc-pet',
     'signature-resize/rrb-signature': 'resize-signature-for-rrb',
+    'signature-resize/rrb-alp-signature': 'resize-signature-for-rrb-alp',
+    'signature-resize/rrb-groupd-signature': 'resize-signature-for-rrb-group-d',
     'signature-resize/sbi-signature': 'resize-signature-for-sbi',
     'signature-resize/ctet-signature': 'resize-signature-for-ctet',
     'signature-resize/ssc-gd-signature': 'resize-signature-for-ssc-gd',
@@ -754,6 +825,7 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'resize-image/to-30kb': 'resize-image-to-30kb',
     'resize-image/to-15kb': 'resize-image-to-15kb',
     'whatsapp-dp/no-crop': 'whatsapp-dp-size-without-cropping',
+    'word-to-pdf/convert': 'word-to-pdf',
   }
   return mapping[`${tool}/${variant}`] || null
 }

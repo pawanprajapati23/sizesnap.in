@@ -38,18 +38,23 @@ const MAPPINGS = [
   { pretty: '/resize-signature-for-upsc', raw: '/signature-resize/upsc-signature' },
   { pretty: '/resize-signature-for-pan-card', raw: '/signature-resize/pan-card-signature' },
   { pretty: '/image-size-for-rrb-exam', raw: '/passport-photo/rrb-ntpc' },
+  { pretty: '/image-size-for-rrb-alp-exam', raw: '/passport-photo/rrb-alp' },
+  { pretty: '/image-size-for-rrb-group-d', raw: '/passport-photo/rrb-groupd' },
   { pretty: '/photo-size-for-sbi-form', raw: '/passport-photo/sbi-bank' },
   { pretty: '/image-size-for-ctet-form', raw: '/passport-photo/ctet-exam' },
   { pretty: '/image-size-for-ssc-gd', raw: '/passport-photo/ssc-gd' },
   { pretty: '/photo-size-for-upsssc-pet', raw: '/passport-photo/upsssc-pet' },
   { pretty: '/resize-signature-for-rrb', raw: '/signature-resize/rrb-signature' },
+  { pretty: '/resize-signature-for-rrb-alp', raw: '/signature-resize/rrb-alp-signature' },
+  { pretty: '/resize-signature-for-rrb-group-d', raw: '/signature-resize/rrb-groupd-signature' },
   { pretty: '/resize-signature-for-sbi', raw: '/signature-resize/sbi-signature' },
   { pretty: '/resize-signature-for-ctet', raw: '/signature-resize/ctet-signature' },
   { pretty: '/resize-signature-for-ssc-gd', raw: '/signature-resize/ssc-gd-signature' },
   { pretty: '/resize-signature-for-upsssc', raw: '/signature-resize/upsssc-signature' },
   { pretty: '/resize-image-to-30kb', raw: '/resize-image/to-30kb' },
   { pretty: '/resize-image-to-15kb', raw: '/resize-image/to-15kb' },
-  { pretty: '/whatsapp-dp-size-without-cropping', raw: '/whatsapp-dp/no-crop' }
+  { pretty: '/whatsapp-dp-size-without-cropping', raw: '/whatsapp-dp/no-crop' },
+  { pretty: '/word-to-pdf', raw: '/word-to-pdf/convert' }
 ];
 
 const nextConfig: NextConfig = {

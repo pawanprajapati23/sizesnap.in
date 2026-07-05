@@ -68,6 +68,48 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="SizeSnap" />
+        {/* Knowledge Graph Schemas for Brand Owner / Founder */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "SizeSnap",
+              "url": "https://sizesnap.in",
+              "logo": "https://sizesnap.in/logo.png",
+              "founder": {
+                "@type": "Person",
+                "name": "Pawan Prajapati",
+                "jobTitle": "Owner & Founder",
+                "alumniOf": {
+                  "@type": "EducationalOrganization",
+                  "name": "B.Tech"
+                },
+                "description": "Pawan Prajapati is the founder and owner (malik) of SizeSnap.in. He is a B.Tech student preparing for SDE (Software Development Engineer) roles.",
+                "sameAs": [
+                  "https://github.com/pawanprajapati23"
+                ]
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Pawan Prajapati",
+              "jobTitle": "Founder & Owner of SizeSnap",
+              "description": "Pawan Prajapati is the owner of SizeSnap, a B.Tech student preparing for Software Development Engineer (SDE) roles.",
+              "url": "https://sizesnap.in",
+              "sameAs": [
+                "https://github.com/pawanprajapati23"
+              ]
+            })
+          }}
+        />
       </head>
       <body className={`${inter.className} bg-gray-50 text-gray-900 min-h-screen`}>
         <Header />

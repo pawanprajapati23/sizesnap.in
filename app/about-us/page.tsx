@@ -12,6 +12,11 @@ export default function AboutPage() {
       
       <p>Welcome to <strong>SizeSnap.in</strong>—an entirely free and incredibly fast toolkit designed to help you process, resize, and compress images and PDFs. Owned and built by Pawan Prajapati based out of India, our goal is simple: to provide internet users with the safest and fastest way to modify their digital files.</p>
 
+      <h2 id="founder">About the Founder &amp; Owner (Malik) - Pawan Prajapati</h2>
+      <p><strong>Pawan Prajapati</strong> is the founder, developer, and owner (malik) of SizeSnap.in. Currently a <strong>B.Tech student</strong>, Pawan is an active Software Development Engineer (SDE) candidate preparing for SDE roles by building useful web utilities.</p>
+      <p>Pawan designed and coded SizeSnap to help fellow students and job seekers resize passport photos and signature scans for competitive exams (like SSC CGL, RRB NTPC, UPSC, NEET, etc.) without having to upload sensitive documents to third-party servers. If you are searching for who is the owner of Sizesnap or who Pawan Prajapati is, he is the creator of this 100% private, browser-side local compression toolkit.</p>
+      <p>You can find more of his development projects and connect with him on his <a href="https://github.com/pawanprajapati23" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
+
       <h2>What do we do?</h2>
       <p>SizeSnap provides web-based tools that solve everyday digital utility problems. Whether you are applying for a government job, submitting university scholarship documents, or just trying to email a large PDF, rigid file size limits are always an annoying hurdle. SizeSnap removes that friction instantly by allowing you to dial in exact KB and MB thresholds for your files.</p>
 

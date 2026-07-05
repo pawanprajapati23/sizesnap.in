@@ -85,7 +85,7 @@ export default function Footer() {
           <Link href="/stories" className="hover:text-white transition-colors">Stories</Link>
         </div>
         <div>
-          © {new Date().getFullYear()} SizeSnap. All tools are free. Files never leave your browser.
+          © {new Date().getFullYear()} SizeSnap. Created and owned by <Link href="/about-us#founder" className="text-white hover:underline">Pawan Prajapati</Link> (B.Tech student & SDE aspirant). All files are processed locally.
         </div>
       </div>
     </footer>

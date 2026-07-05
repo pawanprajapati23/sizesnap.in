@@ -1,6 +1,6 @@
 'use client'
 import { useState, useCallback, useRef } from 'react'
-import { Upload, Download, RefreshCw, FileText, CheckCircle, AlertCircle, ShieldCheck, Cpu } from 'lucide-react'
+import { Upload, Download, RefreshCw, FileText, CheckCircle, AlertCircle, ShieldCheck, Cpu, Share2 } from 'lucide-react'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 
 interface Props {
@@ -198,6 +198,27 @@ export default function WordToPdfTool({ config }: Props) {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  const handleShare = async () => {
+    if (!resultUrl) return
+    try {
+      const res = await fetch(resultUrl)
+      const blob = await res.blob()
+      const file = new File([blob], `${fileName}.pdf`, { type: 'application/pdf' })
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'My PDF Document - SizeSnap',
+          text: 'I converted my text to PDF using SizeSnap.in!',
+        })
+      } else {
+        await navigator.clipboard.writeText("https://sizesnap.in")
+        alert("Link copied to clipboard! You can paste and share it with your friends on WhatsApp.")
+      }
+    } catch (err) {
+      console.error("Share failed", err)
+    }
+  }
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 space-y-6">
       {status === 'idle' && (
@@ -355,6 +376,13 @@ export default function WordToPdfTool({ config }: Props) {
               <Download className="w-5 h-5" />
               Download PDF
             </a>
+            <button
+              onClick={handleShare}
+              className="py-3 px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Share2 className="w-4 h-4" />
+              Share / Send
+            </button>
             <button
               onClick={triggerReset}
               className="px-6 py-3 border border-gray-300 hover:border-gray-400 text-gray-700 font-bold rounded-xl transition-all"

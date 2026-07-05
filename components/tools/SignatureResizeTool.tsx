@@ -1,6 +1,6 @@
 'use client'
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Crop, MoveVertical, MoveHorizontal, ZoomIn, ShieldCheck, Cpu, Sliders, Type, Check } from 'lucide-react'
+import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Crop, MoveVertical, MoveHorizontal, ZoomIn, ShieldCheck, Cpu, Sliders, Type, Check, Share2 } from 'lucide-react'
 
 interface Props {
   config: {
@@ -329,6 +329,25 @@ export default function SignatureResizeTool({ config }: Props) {
     setInkColor('black')
     setErrorMsg('')
     if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  const handleShare = async () => {
+    if (!resultUrl || !finalFile) return
+    try {
+      const file = new File([finalFile], "signature.jpg", { type: "image/jpeg" })
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'My Scanned Signature - SizeSnap',
+          text: 'I resized and optimized my signature using SizeSnap.in!',
+        })
+      } else {
+        await navigator.clipboard.writeText("https://sizesnap.in")
+        alert("Link copied to clipboard! You can paste and share it with your friends on WhatsApp.")
+      }
+    } catch (err) {
+      console.error("Share failed", err)
+    }
   }
 
   useEffect(() => {
@@ -781,6 +800,13 @@ export default function SignatureResizeTool({ config }: Props) {
                 <Download className="w-5 h-5" />
                 Download Signature Image
               </a>
+              <button
+                onClick={handleShare}
+                className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-sm cursor-pointer"
+              >
+                <Share2 className="w-4 h-4" />
+                Share / Send
+              </button>
               <button
                 onClick={handleReset}
                 className="px-5 py-3 border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all font-semibold flex items-center justify-center gap-2 text-sm"

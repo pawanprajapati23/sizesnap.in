@@ -9,8 +9,20 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+    <div className="sticky top-0 z-50 shadow-sm border-b border-gray-200 bg-white">
+      {/* Live Exam Alert Bar */}
+      <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white text-[11px] md:text-xs py-2 px-4 font-semibold shadow-inner flex items-center justify-center gap-2 text-center">
+        <span className="bg-red-500 text-white text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded animate-pulse shrink-0">
+          Exam Alert
+        </span>
+        <span className="truncate">Railway RRB ALP &amp; Group D, SSC MTS, and NEET resizers are now active.</span>
+        <Link href="/exam-photo-specifications" className="underline hover:text-amber-300 font-extrabold shrink-0">
+          Check Specifications &amp; Resize →
+        </Link>
+      </div>
+
+      <header className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-600">
           <Image src="/logo.png" alt="SizeSnap Logo" width={32} height={32} className="w-8 h-8 object-contain" />
@@ -54,5 +66,6 @@ export default function Header() {
         </div>
       )}
     </header>
+    </div>
   )
 }

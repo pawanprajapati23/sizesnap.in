@@ -1,6 +1,6 @@
 'use client'
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Image as ImageIcon, ShieldCheck, Cpu, Sliders } from 'lucide-react'
+import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Image as ImageIcon, ShieldCheck, Cpu, Sliders, Share2 } from 'lucide-react'
 import CompareSlider from '@/components/CompareSlider'
 
 interface Props {
@@ -214,6 +214,28 @@ export default function ImageResizeTool({ config }: Props) {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  const handleShare = async () => {
+    if (!resultUrl || !originalFile) return
+    try {
+      // Fetch the blob from resultUrl
+      const res = await fetch(resultUrl)
+      const blob = await res.blob()
+      const file = new File([blob], originalFile.name || 'image.jpg', { type: 'image/jpeg' })
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'My Resized Image - SizeSnap',
+          text: 'I resized my image to target size using SizeSnap.in!',
+        })
+      } else {
+        await navigator.clipboard.writeText("https://sizesnap.in")
+        alert("Link copied to clipboard! You can paste and share it with your friends on WhatsApp.")
+      }
+    } catch (err) {
+      console.error("Share failed", err)
+    }
+  }
+
   // Cleanup URLs on unmount
   useEffect(() => {
     return () => {
@@ -421,6 +443,13 @@ export default function ImageResizeTool({ config }: Props) {
                 <Download className="w-5 h-5" />
                 Download {formatBytes(resultSize)} Image
               </a>
+              <button
+                onClick={handleShare}
+                className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-sm cursor-pointer"
+              >
+                <Share2 className="w-4 h-4" />
+                Share / Send
+              </button>
               <button
                 onClick={handleReset}
                 className="px-5 py-3 border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all font-semibold flex items-center justify-center gap-2 text-sm"

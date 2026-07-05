@@ -1,6 +1,6 @@
 'use client'
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, ShieldCheck, Cpu, ArrowUp, ArrowDown, Trash2, Plus, FileText } from 'lucide-react'
+import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, ShieldCheck, Cpu, ArrowUp, ArrowDown, Trash2, Plus, FileText, Share2 } from 'lucide-react'
 import { PDFDocument } from 'pdf-lib'
 
 interface Props {
@@ -225,6 +225,27 @@ export default function ImageToPdfTool({ config }: Props) {
     setErrorMsg('')
     setPdfName('compiled-document')
     if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  const handleShare = async () => {
+    if (!resultUrl) return
+    try {
+      const res = await fetch(resultUrl)
+      const blob = await res.blob()
+      const file = new File([blob], `${pdfName}.pdf`, { type: 'application/pdf' })
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'My PDF Document - SizeSnap',
+          text: 'I compiled my images into a single PDF document using SizeSnap.in!',
+        })
+      } else {
+        await navigator.clipboard.writeText("https://sizesnap.in")
+        alert("Link copied to clipboard! You can paste and share it with your friends on WhatsApp.")
+      }
+    } catch (err) {
+      console.error("Share failed", err)
+    }
   }
 
   useEffect(() => {
@@ -517,6 +538,13 @@ export default function ImageToPdfTool({ config }: Props) {
                 <Download className="w-5 h-5" />
                 Download PDF Document
               </a>
+              <button
+                onClick={handleShare}
+                className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-sm cursor-pointer"
+              >
+                <Share2 className="w-4 h-4" />
+                Share / Send
+              </button>
               <button
                 onClick={handleReset}
                 className="px-5 py-3 border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all font-semibold flex items-center justify-center gap-2 text-sm"

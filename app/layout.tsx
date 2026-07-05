@@ -63,6 +63,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="SizeSnap" />
       </head>
       <body className={`${inter.className} bg-gray-50 text-gray-900 min-h-screen`}>
         <Header />
@@ -103,6 +108,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               // Fallback load after 4 seconds if no interaction
               setTimeout(loadAds, 4000);
             })();
+          `}
+        </Script>
+        {/* PWA Service Worker Registration */}
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {
+                    console.log('Service Worker registration successful with scope: ', registration.scope);
+                  },
+                  function(err) {
+                    console.log('Service Worker registration failed: ', err);
+                  }
+                );
+              });
+            }
           `}
         </Script>
       </body>

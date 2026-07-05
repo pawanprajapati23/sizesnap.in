@@ -634,6 +634,8 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'resize-image/reduce-without-blur': 'reduce-image-size-without-blur',
     'compress-image/to-50kb': 'compress-image-to-50kb',
     'passport-photo/ssc-exam': 'image-size-for-ssc-form',
+    'passport-photo/ssc-mts': 'image-size-for-ssc-mts-exam',
+    'signature-resize/ssc-mts-signature': 'resize-signature-for-ssc-mts',
     'passport-photo/upsc-exam': 'photo-size-for-upsc-form',
     'passport-photo/neet-exam': 'image-size-for-neet-form',
     'passport-photo/jee-main': 'image-size-for-jee-main',

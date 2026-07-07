@@ -16,6 +16,7 @@ const DocumentScannerTool = dynamic(() => import('@/components/tools/DocumentSca
 const WatermarkImageTool = dynamic(() => import('@/components/tools/WatermarkImageTool'), { ssr: false })
 const WhatsAppDpTool = dynamic(() => import('@/components/tools/WhatsAppDpTool'), { ssr: false })
 const WordToPdfTool = dynamic(() => import('@/components/tools/WordToPdfTool'), { ssr: false })
+const DpiConverterTool = dynamic(() => import('@/components/tools/DpiConverterTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, config: any }) {
   let toolComponent = null
@@ -34,6 +35,7 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, co
   else if (toolSlug === 'watermark-image') toolComponent = <WatermarkImageTool config={config} />
   else if (toolSlug === 'whatsapp-dp') toolComponent = <WhatsAppDpTool config={config} />
   else if (toolSlug === 'word-to-pdf') toolComponent = <WordToPdfTool config={config} />
+  else if (toolSlug === 'dpi-converter') toolComponent = <DpiConverterTool config={config} />
 
   if (!toolComponent) return null
 

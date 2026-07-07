@@ -55,7 +55,8 @@ const MAPPINGS = [
   { pretty: '/resize-image-to-15kb', raw: '/resize-image/to-15kb' },
   { pretty: '/whatsapp-dp-size-without-cropping', raw: '/whatsapp-dp/no-crop' },
   { pretty: '/word-to-pdf', raw: '/word-to-pdf/convert' },
-  { pretty: '/resize-signature-for-ibps-exam', raw: '/signature-resize/ibps-signature' }
+  { pretty: '/resize-signature-for-ibps-exam', raw: '/signature-resize/ibps-signature' },
+  { pretty: '/add-name-and-date-on-photo-online', raw: '/watermark-image/add-text' }
 ];
 
 const nextConfig: NextConfig = {

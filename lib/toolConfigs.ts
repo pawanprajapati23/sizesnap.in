@@ -10,6 +10,7 @@ export type ToolVariant = {
     width?: number
     height?: number
     format?: string
+    dpi?: number
   }
 }
 
@@ -318,6 +319,18 @@ export const tools: Tool[] = [
     icon: '📝',
     variants: [
       { slug: 'convert', label: 'Word to PDF', metaTitle: 'Convert Word and Text to PDF Online Free | SizeSnap', metaDescription: 'Convert plain text files (.txt) or paste Word document text to generate PDF files online instantly. 100% free, private browser-based tool.', h1: 'Convert Word & Text to PDF Online Free', introParagraph: 'Easily format and compile your text content into a standard PDF document locally. Select custom page size, margins, font styles, and page layouts.', config: { format: 'pdf' } }
+    ]
+  },
+  {
+    slug: 'dpi-converter',
+    name: 'Change Image DPI Online',
+    shortName: 'DPI Converter',
+    category: 'image',
+    description: 'Change the DPI resolution (density metadata) of your JPEG/PNG images online to 200 DPI or 300 DPI locally in your browser.',
+    icon: '🎯',
+    variants: [
+      { slug: 'to-300', label: '300 DPI', metaTitle: 'Convert Image to 300 DPI Online Free | SizeSnap', metaDescription: 'Change image DPI to 300 online free. Convert JPG, JPEG, and PNG files to exactly 300 DPI locally in your browser without uploading.', h1: 'Convert Image to 300 DPI Online Free', introParagraph: 'Set your image density parameters to exactly 300 DPI. Mandatory for UPSC, EPFO, advocate portals, and passport applications.', config: { dpi: 300 } },
+      { slug: 'to-200', label: '200 DPI', metaTitle: 'Convert Image to 200 DPI Online Free | SizeSnap', metaDescription: 'Change image DPI to 200 online free. Convert signature scans, marksheets, and passport photos to 200 DPI locally.', h1: 'Convert Image to 200 DPI Online Free', introParagraph: 'Set your scanned signature or certificate images to 200 DPI to meet government recruitment specifications.', config: { dpi: 200 } }
     ]
   }
 ]

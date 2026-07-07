@@ -88,6 +88,8 @@ export default function HomeSearch() {
             { label: 'UPSC Form Photo', path: '/photo-size-for-upsc-form' },
             { label: 'SSC Signature (20KB)', path: '/resize-signature-for-ssc' },
             { label: 'PAN Card Photo', path: '/pan-card-photo-size' },
+            { label: 'Photo Name & Date Maker', path: '/add-name-and-date-on-photo-online' },
+            { label: '300 DPI Converter', path: '/convert-image-to-300-dpi' },
           ].map(lnk => (
             <Link
               key={lnk.label}

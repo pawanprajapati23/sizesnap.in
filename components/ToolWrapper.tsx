@@ -17,6 +17,9 @@ const WatermarkImageTool = dynamic(() => import('@/components/tools/WatermarkIma
 const WhatsAppDpTool = dynamic(() => import('@/components/tools/WhatsAppDpTool'), { ssr: false })
 const WordToPdfTool = dynamic(() => import('@/components/tools/WordToPdfTool'), { ssr: false })
 const DpiConverterTool = dynamic(() => import('@/components/tools/DpiConverterTool'), { ssr: false })
+const CardJoinerTool = dynamic(() => import('@/components/tools/CardJoinerTool'), { ssr: false })
+const DocumentEnhancerTool = dynamic(() => import('@/components/tools/DocumentEnhancerTool'), { ssr: false })
+const SplitPdfTool = dynamic(() => import('@/components/tools/SplitPdfTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, config: any }) {
   let toolComponent = null
@@ -36,6 +39,10 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, co
   else if (toolSlug === 'whatsapp-dp') toolComponent = <WhatsAppDpTool config={config} />
   else if (toolSlug === 'word-to-pdf') toolComponent = <WordToPdfTool config={config} />
   else if (toolSlug === 'dpi-converter') toolComponent = <DpiConverterTool config={config} />
+  else if (toolSlug === 'card-joiner') toolComponent = <CardJoinerTool config={config} />
+  else if (toolSlug === 'postcard-photo') toolComponent = <PassportPhotoTool config={config} />
+  else if (toolSlug === 'document-enhancer') toolComponent = <DocumentEnhancerTool config={config} />
+  else if (toolSlug === 'split-pdf') toolComponent = <SplitPdfTool />
 
   if (!toolComponent) return null
 

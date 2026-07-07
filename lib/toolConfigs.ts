@@ -332,6 +332,53 @@ export const tools: Tool[] = [
       { slug: 'to-300', label: '300 DPI', metaTitle: 'Convert Image to 300 DPI Online Free | SizeSnap', metaDescription: 'Change image DPI to 300 online free. Convert JPG, JPEG, and PNG files to exactly 300 DPI locally in your browser without uploading.', h1: 'Convert Image to 300 DPI Online Free', introParagraph: 'Set your image density parameters to exactly 300 DPI. Mandatory for UPSC, EPFO, advocate portals, and passport applications.', config: { dpi: 300 } },
       { slug: 'to-200', label: '200 DPI', metaTitle: 'Convert Image to 200 DPI Online Free | SizeSnap', metaDescription: 'Change image DPI to 200 online free. Convert signature scans, marksheets, and passport photos to 200 DPI locally.', h1: 'Convert Image to 200 DPI Online Free', introParagraph: 'Set your scanned signature or certificate images to 200 DPI to meet government recruitment specifications.', config: { dpi: 200 } }
     ]
+  },
+  {
+    slug: 'card-joiner',
+    name: 'Aadhaar & ID Card Front-Back Joiner',
+    shortName: 'Merge ID Card',
+    category: 'image',
+    description: 'Combine front and back photos of your Aadhaar card, PAN card, or ID card into a single page online.',
+    icon: '🪪',
+    variants: [
+      { slug: 'aadhaar-merge', label: 'Merge Aadhaar', metaTitle: 'Merge Aadhaar Card Front and Back Online Free | SizeSnap', metaDescription: 'Combine Aadhaar card front and back side images into a single photo online for free. Clean, private browser-based tool to merge ID cards.', h1: 'Merge Aadhaar Card Front and Back Online Free', introParagraph: 'Apne Aadhaar card ya kisi bhi identity card ki front aur back side ki photographs ko merge karke ek single picture ya document sheet taiyar karein. Government forms, bank accounts aur portal submissions ke liye fully optimized.', config: {} },
+      { slug: 'pan-merge', label: 'Merge PAN', metaTitle: 'Merge PAN Card Front and Back Online Free | SizeSnap', metaDescription: 'Combine PAN card front and back side images into a single photo online for free. Clean, private browser-based tool to merge ID cards.', h1: 'Merge PAN Card Front and Back Online Free', introParagraph: 'Apne PAN card ya kisi bhi identity card ki front aur back side ki photographs ko merge karke ek single picture ya document sheet taiyar karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'postcard-photo',
+    name: 'Postcard Size Photo Resizer',
+    shortName: 'Postcard Resizer',
+    category: 'image',
+    description: 'Crop and resize passport or selfie photos to postcard sizes like 5x7 inch or 4x6 inch for official notifications.',
+    icon: '🖼️',
+    variants: [
+      { slug: 'dsssb-postcard', label: 'DSSSB 5x7 Postcard', metaTitle: 'DSSSB Postcard Size Photo Resizer Online (5x7 Inch) | SizeSnap', metaDescription: 'Resize and crop photo to postcard size 5x7 inches under 300KB for DSSSB online application form free. 100% private browser processing.', h1: 'DSSSB Postcard Size Photo Resizer (5x7 Inch)', introParagraph: 'DSSSB notifications ke according photo ko exactly 5x7 inch (480x672 pixels) dimension aur under 300KB compress karein. Automatic crop layouts optimized.', config: { width: 480, height: 672, maxKB: 300 } },
+      { slug: 'neet-postcard', label: 'NEET 4x6 Postcard', metaTitle: 'NEET Postcard Size Photo Resizer Online (4x6 Inch) | SizeSnap', metaDescription: 'Resize and crop photo to postcard size 4x6 inches under 200KB for NTA NEET application form free. 100% private browser processing.', h1: 'NEET Postcard Size Photo Resizer (4x6 Inch)', introParagraph: 'NEET registration guidelines ke according 4x6 inch size photo under 200KB format dimensions design karein.', config: { width: 400, height: 600, maxKB: 200 } }
+    ]
+  },
+  {
+    slug: 'document-enhancer',
+    name: 'Scanned Document & Signature Enhancer',
+    shortName: 'Enhance Scan',
+    category: 'image',
+    description: 'Remove shadows, increase contrast, and sharpen text/signatures on scanned documents to make them pure white & clear.',
+    icon: '✍️',
+    variants: [
+      { slug: 'remove-shadow', label: 'Remove Shadow', metaTitle: 'Remove Shadow from Document Photo Online Free | SizeSnap', metaDescription: 'Clean and remove dark shadows from photos of documents, marksheets, or signatures. Make paper background pure white and text black.', h1: 'Remove Shadow from Document Photos Online', introParagraph: 'Apne mobile se khinchi gayi marksheet, certificate ya signature photo se unwanted light shadows, dark corners, aur grayish background ko remove karein. Background ko clean white aur text ko high contrast dark banayein.', config: {} },
+      { slug: 'signature-sharpener', label: 'Sharpen Signature', metaTitle: 'Sharpen Scanned Signature Online Free | SizeSnap', metaDescription: 'Sharpen your scanned signature online. Make paper background pure white and ink solid black or blue for exam portals.', h1: 'Sharpen Scanned Signature Online Free', introParagraph: 'Signature scan photo ko enhance aur clean karein. Background brightness increase karein aur pen line ink values ko sharp aur visible banayein.', config: {} }
+    ]
+  },
+  {
+    slug: 'split-pdf',
+    name: 'Split PDF & Extract Pages Online',
+    shortName: 'Split PDF',
+    category: 'pdf',
+    description: 'Extract specific pages or split multi-page PDF documents into individual PDF files locally in your browser.',
+    icon: '📄',
+    variants: [
+      { slug: 'extract-pages', label: 'Extract Pages', metaTitle: 'Split PDF & Extract Pages Online Free | SizeSnap', metaDescription: 'Split PDF and extract specific pages into a new PDF file online free. Works locally in your browser, 100% private.', h1: 'Split PDF & Extract Pages Online Free', introParagraph: 'Apne multi-page PDF document me se specific pages (jaise page 1 ya selected sheets) ko extract karke ek nayi choti PDF file banayein.', config: {} }
+    ]
   }
 ]
 

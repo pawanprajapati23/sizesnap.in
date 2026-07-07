@@ -28,6 +28,19 @@ interface ExamSpec {
 
 const EXAM_SPECS: ExamSpec[] = [
   {
+    name: 'DSSSB Postcard Photo 2026',
+    category: 'State PSC',
+    status: 'Live',
+    statusColor: 'bg-red-500 text-white',
+    lastDate: 'Active Vacancy',
+    photoSpec: '5 x 7 inch Postcard Photo',
+    photoKb: '50 KB - 300 KB',
+    signSpec: 'Rectangular Signature scan',
+    signKb: '10 KB - 50 KB',
+    photoLink: '/dsssb-postcard-photo-resizer',
+    signLink: '/resize-image-to-50kb',
+  },
+  {
     name: 'Railway RRB NTPC 2026',
     category: 'Railways',
     status: 'Live',

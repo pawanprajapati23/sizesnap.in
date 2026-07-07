@@ -875,6 +875,122 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Kya offline conversion image size in KB ko affect karta hai?', answer: 'Nahi. is process me resolution metadata tags edit format modifications dynamic process load parameters scale execute ho jata hai bina basic pixel weight variables heavy badle.' }
     ]
   },
+  'card-joiner/aadhaar-merge': {
+    metaTitle: 'Merge Aadhaar Card Front and Back Side Online Free | SizeSnap',
+    metaDescription: 'Combine your Aadhaar card front and back side photos into a single image online for free. Clean, private browser-based tool to merge ID cards.',
+    h1: 'Merge Aadhaar Card Front & Back Online',
+    introParagraph: 'Apne Aadhaar card ki front aur back side ki photo ko aaps me jodkar ek single page or document sheet ready karein. Online portals aur banking verifications me upload karne ke liye fully optimized layout.',
+    bodyHtml: `
+      <h2>Aadhaar Card Front aur Back Side Photo Kaise Jodein?</h2>
+      <p>Kai online application systems aur recruitment forms me scanned ID proofs upload karne ke liye sirf ek upload block/slot hota hai. Is wajah se candidates ko front aur back side ki pictures ko aaps me join karna padta hai. SizeSnap is merging utility ko 100% free aur browser-side local memory me automate karta hai.</p>
+      
+      <h3>Bilingual Steps (English and Hindi guide):</h3>
+      <ol>
+        <li>Aap apne Aadhaar Card ki Front and Back side photos select/upload karein.</li>
+        <li>Choose target arrangement format: <strong>Vertical</strong> (Top-Down) ya <strong>Horizontal</strong> (Side-by-Side).</li>
+        <li>Margins width, background colors aur aspect ratio adjustments dynamic select karein.</li>
+        <li>Format compile complete hote hi click download target image directly under 100KB limits.</li>
+      </ol>
+      
+      <h3>Browser sandboxing secure privacy features</h3>
+      <p>Aadhaar cards contain sensitive personal identification numbers. To protect your details, all operations are done locally in your browser sandbox. No details or documents are uploaded to our cloud network services.</p>
+    `,
+    faqs: [
+      { question: 'Aadhaar front back merge standard dimensions kya hoti hain?', answer: 'Portals normally standard A4 vertical sheets or side-by-side card proportions accept karte hain, jo standard resizers me auto fit dimensions me adjust ho jate hain.' },
+      { question: 'Kya ye merge utility mobile browser par work karegi?', answer: 'Yes, SizeSnap.in mobile screens aur browsers ke liye fully optimized layout support provide karta hai.' }
+    ]
+  },
+  'card-joiner/pan-merge': {
+    metaTitle: 'Merge PAN Card Front and Back Online Free | SizeSnap',
+    metaDescription: 'Combine PAN card front and back side images into a single photo online for free. Clean, private browser-based tool to merge ID cards.',
+    h1: 'Merge PAN Card Front & Back Online',
+    introParagraph: 'Apne PAN card ya voter ID card ki front aur back side photographs ko aaps me join karke ek single picture document set prepare karein.',
+    bodyHtml: `
+      <h2>PAN Card Front and Back side merger tool</h2>
+      <p>Bank accounts opening, loan verifications, aur e-filing systems me PAN card attachments single page documents require karte hain. Sizesnap dynamic cards merger tool se files instantly merge karein browser me bina graphics software ke.</p>
+    `,
+    faqs: [
+      { question: 'Voter card images merge ho sakti hain?', answer: 'Yes, aap Aadhaar, PAN, Voter ID, driving license aur marksheet sheets merge kar sakte hain.' }
+    ]
+  },
+  'postcard-photo/dsssb-postcard': {
+    metaTitle: 'DSSSB Postcard Size Photo Resizer Online (5x7 Inch) | SizeSnap',
+    metaDescription: 'Resize and crop photo to postcard size 5x7 inches under 300KB for DSSSB online application form free. 100% private browser processing.',
+    h1: 'DSSSB Postcard Size Photo Resizer (5x7 Inch)',
+    introParagraph: 'DSSSB notifications ke guidelines ke according apne passport size ya portrait photo ko postcard size 5x7 inch (480x672 pixels) layout aur under 300KB me resize karein.',
+    bodyHtml: `
+      <h2>DSSSB Postcard Size (5x7) Requirement Kya Hai?</h2>
+      <p>Delhi Subordinate Services Selection Board (DSSSB) candidates ke registrations rules me strictly 5x7 inch size postcard photo upload mandatory hai, jo standard passport dimensions se choti ya badi hone par automatic software check block reject kar deta hai.</p>
+      <h3>DSSSB Layout Specifications:</h3>
+      <ul>
+        <li><strong>Physical dimensions:</strong> 5 inches width x 7 inches height.</li>
+        <li><strong>Resolution equivalent:</strong> 480 x 672 pixels.</li>
+        <li><strong>File weight limits:</strong> 50 KB to 300 KB maximum.</li>
+        <li><strong>Aspect ratio:</strong> 5:7 proportions lock.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'DSSSB postcard photo background color kya hona chahiye?', answer: 'Generally plain white background color with clear face expression specifications verify rule accepted hai.' }
+    ]
+  },
+  'postcard-photo/neet-postcard': {
+    metaTitle: 'NEET Postcard Size Photo Resizer Online (4x6 Inch) | SizeSnap',
+    metaDescription: 'Resize and crop photo to postcard size 4x6 inches under 200KB for NTA NEET application form free. 100% private browser processing.',
+    h1: 'NEET Postcard Size Photo Resizer (4x6 Inch)',
+    introParagraph: 'NEET admission guidelines parameters ke matching 4x6 inch postcard dimensions (400x600 pixels) under 200KB formats optimize select karein.',
+    bodyHtml: `
+      <h2>NEET Postcard size (4"x6") guidelines</h2>
+      <p>NTA NEET registration files check system passport photo ke sath-sath postcard format photos demand karta hai, details coverage face area 80% and ears details clear readability targets base checks perform check rules limits standard configurations use click downloads.</p>
+    `,
+    faqs: [
+      { question: 'NEET postcard size measurements kya hain?', answer: 'Physical size 4x6 inches scale, digital equivalent 400x600 pixels limits under 10-200KB range.' }
+    ]
+  },
+  'document-enhancer/remove-shadow': {
+    metaTitle: 'Remove Shadow from Document Photo Online Free | SizeSnap',
+    metaDescription: 'Clean and remove dark shadows from photos of documents, marksheets, or signatures. Make paper background pure white and text black.',
+    h1: 'Remove Shadow from Document Photos Online',
+    introParagraph: 'Apne mobile se khinchi gayi marksheet, certificate ya signature photo se unwanted light shadows, dark corners, aur grayish background ko remove karein. Background ko clean white aur text ko high contrast dark banayein.',
+    bodyHtml: `
+      <h2>Document Photos Se Parchhai/Shadow Kaise Hatayein?</h2>
+      <p>Mobile camera se captured documents (certificates, marksheet scans, IDs) me uneven lightning, corners shadow aur grey blur sheets errors common issues hote hain. online portals digital uploads check filters gray sheets reject kar dete hain. sizeSnap dynamic enhancer filter image elements restructure karke clean scanner effect provide karta hai.</p>
+      <h3>Bilingual scanner features:</h3>
+      <ul>
+        <li><strong>Adaptive White threshold:</strong> Greyish background values ko bright pure white paper format output me convert karein.</li>
+        <li><strong>Text contrast sharpening:</strong> Signature ink details aur certificate letters values sharpen models set verify filters.</li>
+        <li><strong>Private processing:</strong> Documents processed offline securely.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Kya ye marksheet scan numbers change to nahi karega?', answer: 'Nahi. isme simple pixel color correction matrices perform hote hain, coordinates values aur textual data intact locked format properties me rehti hain.' }
+    ]
+  },
+  'document-enhancer/signature-sharpener': {
+    metaTitle: 'Sharpen Scanned Signature Online Free | SizeSnap',
+    metaDescription: 'Sharpen your scanned signature online. Make paper background pure white and ink solid black or blue for exam portals.',
+    h1: 'Sharpen Scanned Signature Online Free',
+    introParagraph: 'Apne signature scan document file ko target high contrast solid colors filters compile features check complete levels adjust parameters details clean coordinates set parameters.',
+    bodyHtml: `
+      <h2>Scanned Signature Text Clarify Sharpener</h2>
+      <p>Faded signature scans verification systems verify checks read criteria failure issues solve parameters coordinates set, black ink values optimized properties.</p>
+    `,
+    faqs: [
+      { question: 'Ink optimizer black options check kya hai?', answer: 'Blue ink values ko solid black ink specifications conversion dynamic filter options support.' }
+    ]
+  },
+  'split-pdf/extract-pages': {
+    metaTitle: 'Split PDF & Extract Pages Online Free | SizeSnap',
+    metaDescription: 'Split PDF and extract specific pages into a new PDF file online free. Works locally in your browser, 100% private.',
+    h1: 'Split PDF & Extract Pages Online Free',
+    introParagraph: 'Apne multi-page PDF document me se specific pages (jaise page 1 ya selected sheets) ko extract karke ek nayi choti PDF file banayein.',
+    bodyHtml: `
+      <h2>PDF File Ke Pages Kaise Alag Karein? (PDF Splitter)</h2>
+      <p>Kuch government registration portals aur marksheet uploads me maximum limits choti rakhne ke sath-sath single pages documents attach require guidelines rules follow details coordinate models, sizeSnap client browser parameters me pdf-lib structures use split actions perform dynamic tools.</p>
+    `,
+    faqs: [
+      { question: 'Kya single files pages compile separate downloads check possible hai?', answer: 'Yes, split pages numbers options dynamic choose click settings direct save download coordinates accessible.' }
+    ]
+  },
 }
 
 
@@ -938,6 +1054,13 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'watermark-image/add-text': 'add-name-and-date-on-photo-online',
     'dpi-converter/to-300': 'convert-image-to-300-dpi',
     'dpi-converter/to-200': 'convert-image-to-200-dpi',
+    'card-joiner/aadhaar-merge': 'merge-aadhaar-card-front-and-back',
+    'card-joiner/pan-merge': 'merge-pan-card-front-and-back',
+    'postcard-photo/dsssb-postcard': 'dsssb-postcard-photo-resizer',
+    'postcard-photo/neet-postcard': 'neet-postcard-photo-resizer',
+    'document-enhancer/remove-shadow': 'remove-shadow-from-document',
+    'document-enhancer/signature-sharpener': 'sharpen-scanned-signature',
+    'split-pdf/extract-pages': 'split-pdf-extract-pages',
   }
   return mapping[`${tool}/${variant}`] || null
 }

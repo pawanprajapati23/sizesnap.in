@@ -54,6 +54,10 @@ export default function HomeSearch() {
             { label: 'Passport Photo', query: 'passport' },
             { label: 'WhatsApp No Crop', query: 'whatsapp' },
             { label: 'HEIC to JPG', query: 'heic' },
+            { label: 'Merge Aadhaar', query: 'merge' },
+            { label: 'DSSSB 5x7', query: 'dsssb' },
+            { label: 'Remove Shadow', query: 'shadow' },
+            { label: 'Split PDF', query: 'split' },
           ].map(tag => (
             <button
               key={tag.label}
@@ -90,6 +94,10 @@ export default function HomeSearch() {
             { label: 'PAN Card Photo', path: '/pan-card-photo-size' },
             { label: 'Photo Name & Date Maker', path: '/add-name-and-date-on-photo-online' },
             { label: '300 DPI Converter', path: '/convert-image-to-300-dpi' },
+            { label: 'Merge Aadhaar Card', path: '/merge-aadhaar-card-front-and-back' },
+            { label: 'DSSSB 5x7 Postcard', path: '/dsssb-postcard-photo-resizer' },
+            { label: 'Shadow Remover Scan', path: '/remove-shadow-from-document' },
+            { label: 'Split PDF pages', path: '/split-pdf-extract-pages' },
           ].map(lnk => (
             <Link
               key={lnk.label}

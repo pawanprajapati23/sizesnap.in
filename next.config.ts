@@ -58,7 +58,14 @@ const MAPPINGS = [
   { pretty: '/resize-signature-for-ibps-exam', raw: '/signature-resize/ibps-signature' },
   { pretty: '/add-name-and-date-on-photo-online', raw: '/watermark-image/add-text' },
   { pretty: '/convert-image-to-300-dpi', raw: '/dpi-converter/to-300' },
-  { pretty: '/convert-image-to-200-dpi', raw: '/dpi-converter/to-200' }
+  { pretty: '/convert-image-to-200-dpi', raw: '/dpi-converter/to-200' },
+  { pretty: '/merge-aadhaar-card-front-and-back', raw: '/card-joiner/aadhaar-merge' },
+  { pretty: '/merge-pan-card-front-and-back', raw: '/card-joiner/pan-merge' },
+  { pretty: '/dsssb-postcard-photo-resizer', raw: '/postcard-photo/dsssb-postcard' },
+  { pretty: '/neet-postcard-photo-resizer', raw: '/postcard-photo/neet-postcard' },
+  { pretty: '/remove-shadow-from-document', raw: '/document-enhancer/remove-shadow' },
+  { pretty: '/sharpen-scanned-signature', raw: '/document-enhancer/signature-sharpener' },
+  { pretty: '/split-pdf-extract-pages', raw: '/split-pdf/extract-pages' }
 ];
 
 const nextConfig: NextConfig = {

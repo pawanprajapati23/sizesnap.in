@@ -56,7 +56,9 @@ const MAPPINGS = [
   { pretty: '/whatsapp-dp-size-without-cropping', raw: '/whatsapp-dp/no-crop' },
   { pretty: '/word-to-pdf', raw: '/word-to-pdf/convert' },
   { pretty: '/resize-signature-for-ibps-exam', raw: '/signature-resize/ibps-signature' },
-  { pretty: '/add-name-and-date-on-photo-online', raw: '/watermark-image/add-text' }
+  { pretty: '/add-name-and-date-on-photo-online', raw: '/watermark-image/add-text' },
+  { pretty: '/convert-image-to-300-dpi', raw: '/dpi-converter/to-300' },
+  { pretty: '/convert-image-to-200-dpi', raw: '/dpi-converter/to-200' }
 ];
 
 const nextConfig: NextConfig = {

@@ -288,6 +288,61 @@ export const blogs = [
       </ol>
       <p>You can even generate an A4 sheet layout to print multiple copies at a local printing shop for just a few rupees!</p>
     `
+  },
+  {
+    slug: 'rrb-railway-photo-signature-guidelines',
+    title: 'Railway RRB NTPC & ALP Photo and Signature Guidelines 2026',
+    date: '2026-07-06',
+    excerpt: 'Applying for Railway RRB NTPC, ALP, or Group D recruitment? Check the official photo dimensions, signature specs, and avoid form rejections.',
+    content: `
+      <h2>Railway RRB Recruitment Image specifications 2026</h2>
+      <p>Railway Recruitment Board (RRB) has released strict guidelines for candidate photo and signature uploads for NTPC, ALP (Assistant Loco Pilot), Technician, and Group D posts. Thousands of candidates face application cancellation due to wrong formatting. Let's look at the exact specs.</p>
+      
+      <h3>1. Photo Specifications</h3>
+      <ul>
+        <li><strong>Dimensions:</strong> 3.5 cm (width) x 4.5 cm (height)</li>
+        <li><strong>File Size:</strong> 20 KB to 50 KB (JPEG format)</li>
+        <li><strong>Background:</strong> Plain white background is mandatory. Backgrounds with dark colors, outdoor scenery, or patterns will lead to automatic rejection.</li>
+        <li><strong>Face Coverage:</strong> Face must occupy at least 70% of the photograph. Both ears must be clearly visible, eyes open, looking straight. No hats, caps, or goggles allowed.</li>
+      </ul>
+
+      <h3>2. Signature Specifications</h3>
+      <ul>
+        <li><strong>Dimensions:</strong> Rectangular layout box.</li>
+        <li><strong>File Size:</strong> 10 KB to 20 KB (JPEG format)</li>
+        <li><strong>Guidelines:</strong> The candidate must sign on a white sheet using a black ink pen. Do not sign in CAPITAL letters. Signatures in blue ink or pencil are rejected.</li>
+      </ul>
+
+      <h3>How to Resize for RRB Forms?</h3>
+      <p>Instead of manually cropping, you can use our dynamic browser tools to format your files in seconds. Use the <a href="/image-size-for-rrb-exam">RRB NTPC Photo Resizer</a> or <a href="/image-size-for-rrb-alp-exam">RRB ALP Photo Tool</a> for passport photos, and our <a href="/resize-signature-for-rrb">RRB Signature Resizer</a> to set signatures under 20KB locally in your browser.</p>
+    `
+  },
+  {
+    slug: 'up-police-constable-photo-specification',
+    title: 'UP Police Photo and Signature Size Guidelines 2026',
+    date: '2026-07-07',
+    excerpt: 'Detailed instructions to crop and resize passport size photos and signatures for UP Police Constable & SI recruitment forms.',
+    content: `
+      <h2>UP Police Constable & SI Recruitment Photo Rules</h2>
+      <p>Uttar Pradesh Police Recruitment and Promotion Board (UPPRPB) requires candidates to upload clear, recent passport-size photos and signatures matching precise weight and dimension limits. Let's review the requirements.</p>
+
+      <h3>1. Passport Photo Guidelines</h3>
+      <ul>
+        <li><strong>File Size:</strong> 20 KB to 50 KB</li>
+        <li><strong>Dimensions:</strong> 3.5 cm x 4.5 cm</li>
+        <li><strong>Background:</strong> Light grey or white background. Do not upload photos with colourful backgrounds.</li>
+        <li><strong>Name & Date Option:</strong> Although recent forms do not strictly enforce candidate name and date overlays, adding them is highly recommended to confirm the photo is recent. You can use our <a href="/add-name-and-date-on-photo-online">Photo Name & Date Adder</a> tool to generate this overlay automatically.</li>
+      </ul>
+
+      <h3>2. Signature Guidelines</h3>
+      <ul>
+        <li><strong>File Size:</strong> 5 KB to 20 KB</li>
+        <li><strong>Ink & Format:</strong> Candidates must sign on white paper with black ink pen. Scanned signatures should be clean, without shadows.</li>
+      </ul>
+
+      <h3>Quick Sizing Tools</h3>
+      <p>Use our dedicated <a href="/photo-size-for-up-police-form">UP Police Photo Resizer</a> to instantly scale your passport photo under 50KB, and use the <a href="/11kb-converter">11KB Converter</a> for signatures to get them document-ready instantly.</p>
+    `
   }
 ]
 

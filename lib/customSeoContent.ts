@@ -784,56 +784,95 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'watermark-image/add-text': {
-    metaTitle: 'Add Name and Date on Photo Online Free | SSC & UPSC | SizeSnap',
-    metaDescription: 'Add name and date to your passport size photo online for free. Print candidate name and date of photo (DOPO) at the bottom for SSC CGL, CHSL, and state government forms.',
+    metaTitle: 'Add Name and Date on Photo Online Free | Passport Photo Maker | SizeSnap',
+    metaDescription: 'Need to add name and date to passport size photo online? Print candidate name and Date of Photo (DOPO) at the bottom of your image for SSC, NEET, and government forms free.',
     h1: 'Add Name and Date on Photo Online Free',
-    introParagraph: 'Apne passport size photograph ke niche candidate ka naam aur photo khinchne ki date (DOPO) print karein. SizeSnap local maker tool automatic official white panel overlay generate karta hai.',
+    introParagraph: 'Apne passport size photograph par candidate ka naam aur photo click hone ki tareekh (Date of Photo - DOPO) online add karein. Government recruitment exams jaise SSC CGL, CHSL, Constable, Navy, aur state levels board applications me mandatory formats me custom text panel overlay set karna bohot zaroori hai. Hamara free tool ise 100% private browser mode me design karta hai.',
     bodyHtml: `
-      <h2>Passport Photo Par Naam Aur Date Kaise Likhe Online?</h2>
-      <p>Kai sarkari exams (jaise UP Police Constable, Indian Navy, Coast Guard aur Central jobs) me form submit karne ke liye aisi photo mandatory hoti hai jiske bottom me white plate par black text me candidate name aur clear date printed ho. Hamara utility tool is process ko 3 seconds me complete karta hai.</p>
-      <h3>Browser-side Text Editor Features</h3>
+      <h2>Passport Photo Par Name Aur Date Kaise Likhein? (Step-by-Step Guide)</h2>
+      <p>Kai sarkari naukriyon ke online forms (jaise SSC CGL/CHSL, Navy, Coast Guard, aur state-level police posts) me ek aisi passport photograph upload karni hoti hai jiske niche candidate ka naam aur date print ho. Standard graphics software ya default photo editors me isko align karna mushkil hota hai. SizeSnap is utility process ko bilkul simple banata hai:</p>
+      
+      <ol>
+        <li>Aap apni passport size photograph (JPG, JPEG, ya PNG format) select/upload karein.</li>
+        <li>Hamara tool image ke niche automatically ek safe white panel layer draw kar deta hai.</li>
+        <li>Aap text box me apna full name aur correct Date of Photo (DOPO) enter karein.</li>
+        <li>Font color aur text position adjust karne ke baad instant download option click karke format compile kar sakte hain.</li>
+      </ol>
+      
+      <h3>Official Examination Portal Board Guidelines</h3>
+      <p>Sarkari portals jaise Staff Selection Commission (SSC), NTA (NEET/JEE) aur central banking systems application processes me uploaded image check rules strict rakhte hain:</p>
       <ul>
-        <li><strong>Plate Color customizer:</strong> Standard white plate ya black plate margins choose karein.</li>
-        <li><strong>Local processing:</strong> Aapki images aur files hamare server par bilkul nahi jati, privacy 100% secure hai.</li>
-        <li><strong>Compression lock:</strong> Photo ka background area overlay karne ke sath size ko exactly 50KB or 20KB target limit me adjust karein.</li>
+        <li><strong>Date Verification:</strong> Photo notification ki date se 3 mahine se purani nahi honi chahiye aur date formats clear DD/MM/YYYY target setup me hone chahiye.</li>
+        <li><strong>Face Visibility:</strong> White background, front face alignment aur clean shoulders visible hone chahiye.</li>
+        <li><strong>Legible Print:</strong> White stripe par printed naam aur date strictly read hone chahiye bina visual blurring filters ke.</li>
       </ul>
+
+      <h3>100% Safe client-side execution model (Privacy First)</h3>
+      <p>Hum security regulations aur rules ko tightly follow karte hain. User photos hamare control nodes ya external databases par bilkul save ya transfer nahi hote hain. Pure document modifications aapke local phone ya desktop memory me runtime processes ke through safe bounds me perform hoti hain. Is wajah se sizesnap transaction completely secure hai.</p>
+
+      <h3>Internal References to Related Tools</h3>
+      <p>Custom name and date print karne ke baad aap humare dusre utilities check kar sakte hain. Passport dimension frames update karne ke liye use <a href="/passport-size-photo-maker">Passport Size Photo Maker</a>, scanned files and signature weight adjust karne ke liye use <a href="/11kb-converter">11KB Converter</a> ya file sizes check karne ke liye use <a href="/resize-image-to-50kb">50KB Photo Compressor</a>, aur standard sign adjust ke liye read <a href="/resize-signature-for-ssc">SSC Signature Resizer</a> templates guides.</p>
     `,
     faqs: [
-      { question: 'SSC CGL/CHSL form me photo par name and date mandatory hai?', answer: 'SSC ke kuch notifications me iski demand ab compulsory nahi hoti, lekin state recruitment exams and police forms me abhi bhi candidate name aur correct date photo ke bottom me print karna mandatory rules ke under hai.' },
-      { question: 'What is the date format for passport photo?', answer: 'Generally, DD/MM/YYYY format (jaise 20/06/2026) print karna accepted standard hai.' }
+      { question: 'SSC CGL/CHSL exam me photo par name aur date print karna mandatory hai?', answer: 'SSC ke kuch recent notifications guidelines me name and date compulsory nahi hai but state recruitments (jaise UP Police, Navy, Coast Guard, etc.) aur specific bank profiles me candidate name aur correct photo click date bottom panel me clear likhna mandatory parameters check under hai.' },
+      { question: 'What is the date format for passport photo?', answer: 'Sabhi official portals par standard date format DD/MM/YYYY (jaise: 15/07/2026) print karna standard valid format hai.' },
+      { question: 'Kya is name/date adder tool se passport photo ki quality kharab hoti hai?', answer: 'Nahi, SizeSnap smart pixel layout algorithms perform karta hai jisse original face characteristics locked aur crisp rehte hain.' },
+      { question: 'Photo par name aur date add karte waqt background/text colors kya hone chahiye?', answer: 'Standard guidelines ke anusaar bottom panel white background color ka hona chahiye aur text print solid black ink characters me display hona chahiye.' }
     ]
   },
   'dpi-converter/to-300': {
-    metaTitle: 'Convert Image to 300 DPI Online Free | JPG & PNG | SizeSnap',
-    metaDescription: 'Convert image to 300 DPI online for free. Change the resolution density of your scanned photo, signature, or document to 300 DPI locally in your browser.',
+    metaTitle: 'Convert Image to 300 DPI Online Free | Change DPI in Browser | SizeSnap',
+    metaDescription: 'Convert image to 300 DPI online for free. Change the resolution density of your scanned passport photo, signature, or document to exactly 300 DPI locally in your browser.',
     h1: 'Convert Image to 300 DPI Online Free',
-    introParagraph: 'Apne scanned document, photo ya signature ki print density ko exactly 300 DPI me badlein. UPSC, EPFO, banking portals, and legal websites rules support ke liye perfect conversion.',
+    introParagraph: 'Apne scanned documents, photograph ya signatures ki pixel print density resolution ko directly modify karke exactly 300 DPI banayein. Standard government portals, EPFO online forms, court legal filings, aur college admission portfolios strictly demand karte hain ki certificates 300 DPI me scanned honi chahiye taaki clarity bani rahe. SizeSnap browser sandbox me local execution ke zariye file change karta hai.',
     bodyHtml: `
-      <h2>DPI Kya Hai Aur 300 DPI Kyu Zaroori Hai?</h2>
-      <p>DPI (Dots Per Inch) image ki printing print resolution and density ko indicate karta hai. Kai state government job forms, passport OTR portals aur advocate systems strictly demand karte hain ki uploaded document 300 DPI ka hona chahiye, taki verify aur print karte samay details clear rahein. Hamara browser resizer binary details edit karke metadata adjust kar deta hai.</p>
-      <h3>Browser-side DPI Converter Features</h3>
-      <ul>
-        <li><strong>No file upload:</strong> Files are processed locally. Aapke highly confidential marksheet scans bilkul safe hain.</li>
-        <li><strong>Format options:</strong> Standard JPG aur PNG dono format options and DPI values modify ho sakti hain.</li>
-        <li><strong>Single-tap download:</strong> Modify hote hi single click download aur WhatsApp native sharing features.</li>
-      </ul>
+      <h2>300 DPI Resolution Kya Hai Aur Kyu Zaroori Hai?</h2>
+      <p>DPI (Dots Per Inch) image files ki printing resolution capability aur display density block configuration measure karta hai. online portals database parameters setup karte waqt 300 DPI scan details strictly verify karte hain. iska purpose scan text blocks (jaise marksheet details, bank passbook scans) high resolution verification screens par clear padhna hai.</p>
+      
+      <h3>How to Change Image to 300 DPI? (Problem & Solution)</h3>
+      <p>Aapke smart devices normally standard canvas screen outputs check parameters (like 72 DPI ya 96 DPI) setup save karte hain. inko default mobile options se exactly 300 DPI change karna binary changes details setup without visual resolution distortion check demands karta hai. SizeSnap is metadata property ko structure change performs karke modify karta hai:</p>
+      
+      <ol>
+        <li>Aap target file (JPG, JPEG ya PNG document scan) select/drag drop box choose karein.</li>
+        <li>Preset selectors me click <strong>300 DPI</strong> target density option confirm karein.</li>
+        <li>System background binary parsing perform karke JFIF (JPEG) headers customize settings modify set verify kar deta hai.</li>
+        <li>Complete hote hi direct output standard high resolution file download blocks save settings choose download deliver options perform karein.</li>
+      </ol>
+      
+      <h3>EPFO, Court filings aur Banking applications requirements</h3>
+      <p>EPFO Claim validation process, passport office credentials uploads aur judicial electronic system records scan copies check strictly 300 DPI instructions check perform valid rules limits accept karte hain, parameters failure check applications delay error notifications return details show karte hain.</p>
+
+      <h3>Internal References to Related Conversions</h3>
+      <p>DPI adjustments scale formats update karne ke sath and templates verify controls use resources are available. For lower density needs go to <a href="/convert-image-to-200-dpi">Convert Image to 200 DPI</a>, optimize files weight using <a href="/resize-image-to-100kb">100KB Document Resizer</a> or crop certificates directly using <a href="/pdf-under-500kb">PDF under 500KB</a> utilities templates links.</p>
     `,
     faqs: [
-      { question: 'EPFO portal ke liye standard DPI kya hai?', answer: 'EPFO and standard central government recruitment portals ask for exactly 300 DPI scans.' },
-      { question: 'What happens if DPI is low?', answer: 'If DPI is lower than 200, scanned text and signatures look blurred on high resolution verification screens, which may trigger form rejection.' }
+      { question: 'DPI badalne se photo ka dimensions pixels me change ho jata hai?', answer: 'Nahi. DPI changing operation print density metadata parameters change karta hai. original image coordinates (width & height in pixels) unchanged lock parameters perform hote hain.' },
+      { question: 'Scanned marksheets and certificates ko 300 DPI me convert karna kyu mandatory hai?', answer: 'Taki documents printable layout parameters aur digital verification screens par readable rahein, letters/numbers blur na ho.' },
+      { question: 'EPFO portal par 300 DPI conversion error kaise fix karein?', answer: 'Apni passbook or identity scan upload karein, preset option 300 DPI select karein aur change buffer download file portal verification box direct submit pass options ho jayega.' }
     ]
   },
   'dpi-converter/to-200': {
-    metaTitle: 'Convert Image to 200 DPI Online Free | JPG & PNG | SizeSnap',
-    metaDescription: 'Convert image to 200 DPI online for free. Change your signature scan, passport photo, or document to 200 DPI locally in your browser.',
+    metaTitle: 'Convert Image to 200 DPI Online Free | Change DPI to 200 | SizeSnap',
+    metaDescription: 'Convert image to 200 DPI online for free. Change your signature scans, passport size photos, or certificate documents to exactly 200 DPI locally inside your browser.',
     h1: 'Convert Image to 200 DPI Online Free',
-    introParagraph: 'Apne signature aur photos ki density ko exactly 200 DPI set karein. Standard online admission aur job application specifications ke according optimized.',
+    introParagraph: 'Apne scanned signatures, documents, marksheet copies aur passport size photographs ki resolution print density ko update karke exactly 200 DPI standard config set karein. UPSC, SSC, IBPS Banking notifications, aur regular admission portals standard layout instructions check pass karne ke liye 200 DPI target demand karte hain. Local JS code framework use karke properties dynamic download karein.',
     bodyHtml: `
-      <h2>200 DPI Density Convert Kaise Karein?</h2>
-      <p>Scanned signature scans and marksheets ko verify karne ke liye standard state recruitment boards 200 DPI resolution rules require karte hain. SizeSnap DPI customizer tool images ke parameters ko restructure karke exactly 200 DPI standard density format verify kar deta hai.</p>
+      <h2>200 DPI Converter (Signature & Document Scan Density Fix)</h2>
+      <p>Government exam forms filling process check instructions settings me candidate signature scans density target check limits minimum 200 DPI compulsory rules config parameters me set hoti hai. 200 DPI resolution setup marksheet checks verification system readable format properties values maintain rakhta hai.</p>
+      
+      <h3>Bilingual instructions: Signature details optimization (Hindi & English)</h3>
+      <p>Signature compress convert karte waqt dhyan de ki solid white page sheets background block use karein aur dark blue or black ink pens signatures perform karein. shadows eliminate rules parameters process complete details configure setup safe:</p>
+      <ul>
+        <li>SizeSnap local tool files convert browser memory framework processing sandbox options runtime checks complete details performance setup coordinate maintain lock features.</li>
+        <li>No internet connection uploads transfer require, keeping official signatures highly confidential models.</li>
+      </ul>
+
+      <h3>Quick conversion details</h3>
+      <p>Aap images format configurations setup check easily targets presets selected change metrics downloads click access options perform. Related conversions details help to <a href="/convert-image-to-300-dpi">Convert Image to 300 DPI</a>, sign sizing optimizations to <a href="/resize-signature-for-ibps-exam">IBPS Signature Resizer</a> or small payload resizing parameters check <a href="/resize-image-to-20kb">20KB Image Compressor</a> resources pages.</p>
     `,
     faqs: [
-      { question: 'Is 200 DPI enough for scanned signature?', answer: 'Yes, 200 DPI is the widely accepted standard size density for signatures on SSC, IBPS, and state PSC forms.' }
+      { question: '200 DPI signature scan format rules kya hain?', answer: 'Scanned signature image background plain white, borders cropped aur print density value exactly 200 DPI parameters verification guidelines meet karni mandatory targets parameters checks satisfy structure.' },
+      { question: 'Kya offline conversion image size in KB ko affect karta hai?', answer: 'Nahi. is process me resolution metadata tags edit format modifications dynamic process load parameters scale execute ho jata hai bina basic pixel weight variables heavy badle.' }
     ]
   },
 }

@@ -126,17 +126,22 @@ export default function HomeSearch() {
         <h2 className="text-xl font-bold text-gray-800 mb-5">🖼️ Image Tools</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {imageTools.map(tool => (
-            <div key={tool.slug} className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow">
-              <div className="text-3xl mb-3">{tool.icon}</div>
-              <h3 className="font-semibold text-gray-800 mb-1">{tool.name}</h3>
-              <p className="text-sm text-gray-500 mb-4">{tool.description}</p>
-              <div className="flex flex-wrap gap-2">
+            <div key={tool.slug} className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/80 p-5 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                {/* Icon wrapper with soft bg glow */}
+                <div className="w-12 h-12 rounded-xl bg-blue-50/70 group-hover:bg-blue-100 flex items-center justify-center text-2xl mb-4 transition-all duration-300 shadow-sm border border-blue-50/20">
+                  {tool.icon}
+                </div>
+                <h3 className="font-extrabold text-gray-900 mb-1 text-base group-hover:text-blue-600 transition-colors leading-tight">{tool.name}</h3>
+                <p className="text-xs text-gray-500 mb-4 leading-relaxed font-normal">{tool.description}</p>
+              </div>
+              <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
                 {tool.variants.slice(0, 5).map(v => {
                   const prettySlug = getPrettySlug(tool.slug, v.slug)
                   const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${v.slug}`
                   return (
                     <Link key={v.slug} href={linkHref}
-                      className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium">
+                      className="text-[11px] bg-slate-50 hover:bg-blue-600 text-gray-600 hover:text-white border border-gray-200 hover:border-blue-600 px-2.5 py-1 rounded-lg transition-all duration-200 font-bold shadow-xs">
                       {v.label}
                     </Link>
                   )
@@ -154,17 +159,22 @@ export default function HomeSearch() {
         <h2 className="text-xl font-bold text-gray-800 mb-5">📄 PDF Tools</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pdfTools.map(tool => (
-            <div key={tool.slug} className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow">
-              <div className="text-3xl mb-3">{tool.icon}</div>
-              <h3 className="font-semibold text-gray-800 mb-1">{tool.name}</h3>
-              <p className="text-sm text-gray-500 mb-4">{tool.description}</p>
-              <div className="flex flex-wrap gap-2">
+            <div key={tool.slug} className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/80 p-5 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                {/* Icon wrapper with soft bg glow */}
+                <div className="w-12 h-12 rounded-xl bg-blue-50/70 group-hover:bg-blue-100 flex items-center justify-center text-2xl mb-4 transition-all duration-300 shadow-sm border border-blue-50/20">
+                  {tool.icon}
+                </div>
+                <h3 className="font-extrabold text-gray-900 mb-1 text-base group-hover:text-blue-600 transition-colors leading-tight">{tool.name}</h3>
+                <p className="text-xs text-gray-500 mb-4 leading-relaxed font-normal">{tool.description}</p>
+              </div>
+              <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
                 {tool.variants.slice(0, 4).map(v => {
                   const prettySlug = getPrettySlug(tool.slug, v.slug)
                   const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${v.slug}`
                   return (
                     <Link key={v.slug} href={linkHref}
-                      className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium">
+                      className="text-[11px] bg-slate-50 hover:bg-blue-600 text-gray-600 hover:text-white border border-gray-200 hover:border-blue-600 px-2.5 py-1 rounded-lg transition-all duration-200 font-bold shadow-xs">
                       {v.label}
                     </Link>
                   )

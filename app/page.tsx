@@ -104,31 +104,36 @@ export default function HomePage() {
       />
       <div className="space-y-10">
       {/* Hero */}
-      <div className="text-center py-6 px-4 md:py-12 md:px-8 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl text-white shadow-lg relative overflow-hidden">
-        {/* Modern ambient overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent_50%)] pointer-events-none" />
+      <div className="text-center py-8 px-5 md:py-16 md:px-10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 rounded-3xl text-white shadow-2xl relative overflow-hidden border border-white/10">
+        {/* Glow ambient background lights */}
+        <div className="absolute top-0 left-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none animate-pulse-subtle" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none animate-pulse-subtle" />
         
-        <h1 className="text-2xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-100 via-white to-blue-200 bg-clip-text text-transparent mb-3">
-          Free Online Image &amp; PDF Tools
+        {/* Sleek top badge */}
+        <div className="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-400/25 px-3 py-1 rounded-full text-blue-300 text-[10px] font-black tracking-widest uppercase mb-4 animate-pulse-subtle">
+          ⚡ 100% Client-Side &amp; Secure
+        </div>
+
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-4">
+          Free Online <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Image &amp; PDF Tools</span>
         </h1>
         
-        <p className="text-blue-100/90 text-sm md:text-lg max-w-xl mx-auto mb-4 md:mb-6 font-medium">
-          Resize images, compress PDFs, change photo backgrounds — free, instant,
-          and 100% private. No signup required.
+        <p className="text-slate-300 text-sm md:text-lg max-w-xl mx-auto mb-6 md:mb-8 font-medium leading-relaxed">
+          Resize, compress, crop, and convert files locally in your browser. Your private documents never touch any servers.
         </p>
 
         {/* Action badges only on tablet/desktop to save vertical space on mobile */}
-        <div className="hidden sm:flex flex-wrap gap-2.5 justify-center">
+        <div className="hidden sm:flex flex-wrap gap-3 justify-center">
           <Link href="/resize-image/to-50kb"
-            className="bg-white text-blue-700 font-bold px-4 py-2 rounded-lg text-xs hover:bg-blue-50 transition-colors shadow-sm">
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md">
             Resize Image to 50KB
           </Link>
           <Link href="/compress-pdf/to-100kb"
-            className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-xs hover:bg-blue-400 transition-colors border border-blue-400">
+            className="bg-white/10 hover:bg-white/15 text-white font-bold px-5 py-2.5 rounded-xl text-xs border border-white/10 transition-all">
             Compress PDF to 100KB
           </Link>
           <Link href="/image-size-guide"
-            className="bg-blue-900/30 text-white font-bold px-4 py-2 rounded-lg text-xs hover:bg-blue-900/50 transition-colors border border-blue-400/30">
+            className="bg-slate-900/60 hover:bg-slate-800 text-slate-300 font-bold px-5 py-2.5 rounded-xl text-xs border border-slate-800/80 transition-all">
             Image Size Guide 2026
           </Link>
         </div>

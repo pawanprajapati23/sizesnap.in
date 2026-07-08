@@ -56,45 +56,45 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     recommendedTools.push({
       name: 'Compress PDF to 100KB',
       desc: 'Compress and shrink your PDF files under 100KB for application forms.',
-      href: '/compress-pdf/to-100kb',
+      href: '/compress-pdf-to-100kb',
       icon: '📄'
     })
     recommendedTools.push({
       name: 'Compress PDF to 200KB',
       desc: 'Shrink scanned documents under 200KB limit brackets.',
-      href: '/compress-pdf/to-200kb',
+      href: '/compress-pdf-to-200kb',
       icon: '🗜️'
     })
   } else if (isPhotoBlog) {
     recommendedTools.push({
       name: 'Resize Image to 50KB',
       desc: 'Resize your passport photo or signature image under 50KB.',
-      href: '/resize-image/to-50kb',
+      href: '/resize-image-to-50kb',
       icon: '🖼️'
     })
     recommendedTools.push({
       name: 'SSC Exam Photo Resizer',
       desc: 'Format passport photo to standard 3.5x4.5cm for SSC.',
-      href: '/passport-photo/ssc-exam',
+      href: '/image-size-for-ssc-form',
       icon: '🛂'
     })
     recommendedTools.push({
       name: 'Resize Signature to 20KB',
       desc: 'Scale scanned signature strictly under 20KB for uploads.',
-      href: '/signature-resize/ssc-signature',
+      href: '/resize-signature-for-ssc',
       icon: '✍️'
     })
   } else {
     recommendedTools.push({
       name: 'Resize Image to 50KB',
       desc: 'Resize any image in KB or MB without quality loss.',
-      href: '/resize-image/to-50kb',
+      href: '/resize-image-to-50kb',
       icon: '🖼️'
     })
     recommendedTools.push({
       name: 'Compress PDF to 100KB',
       desc: 'Reduce PDF file size online free.',
-      href: '/compress-pdf/to-100kb',
+      href: '/compress-pdf-to-100kb',
       icon: '📄'
     })
   }

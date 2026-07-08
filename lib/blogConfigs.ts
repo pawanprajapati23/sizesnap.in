@@ -25,7 +25,7 @@ export const blogs = [
       </ul>
 
       <h3>How to Resize?</h3>
-      <p>Instead of struggling with Photoshop, you can use our <a href="/resize-image/to-50kb">Image to 50KB Tool</a> for photos and our <a href="/signature-resize/ssc-signature">SSC Signature Resizer</a> to instantly format your files accurately right inside your browser.</p>
+      <p>Instead of struggling with Photoshop, you can use our <a href="/resize-image-to-50kb">Image to 50KB Tool</a> for photos and our <a href="/resize-signature-for-ssc">SSC Signature Resizer</a> to instantly format your files accurately right inside your browser.</p>
     `
   },
   {
@@ -44,7 +44,7 @@ export const blogs = [
        <p>The signature must be perfectly cropped. The file must not exceed 50 KB. Many applications fail because the original phone scan is 2MB or larger.</p>
 
        <h3>The Quickest Solution</h3>
-       <p>Use our dedicated <a href="/passport-photo/pan-card">PAN Card Photo Tool</a> and <a href="/signature-resize/pan-card-signature">PAN Signature Tool</a> to magically fit your images to exactly these requirements without manual cropping.</p>
+        <p>Use our dedicated <a href="/pan-card-photo-size">PAN Card Photo Tool</a> and <a href="/resize-signature-for-pan-card">PAN Signature Tool</a> to magically fit your images to exactly these requirements without manual cropping.</p>
     `
   },
   {
@@ -66,7 +66,7 @@ export const blogs = [
       <h3>Steps to Compress Your PDF</h3>
       <p>You don't need to download heavy software. Follow these steps:</p>
       <ol>
-        <li>Go to our <a href="/compress-pdf/to-100kb">PDF to 100KB</a> or <a href="/compress-pdf/to-200kb">PDF to 200KB</a> tool.</li>
+        <li>Go to our <a href="/compress-pdf-to-100kb">PDF to 100KB</a> or <a href="/compress-pdf-to-200kb">PDF to 200KB</a> tool.</li>
         <li>Upload your scanned document.</li>
         <li>Wait for the tool to optimize the file without losing readability.</li>
         <li>Download the perfectly sized PDF instantly.</li>
@@ -117,7 +117,7 @@ export const blogs = [
       <h3>The Best Way to Reduce Size to 20KB</h3>
       <p>Using an AI-powered compression tool is the most reliable method.</p>
       <ol>
-        <li>Visit the <a href="/resize-image/to-20kb">Image to 20KB Tool</a> on SizeSnap.</li>
+        <li>Visit the <a href="/resize-image-to-20kb">Image to 20KB Tool</a> on SizeSnap.</li>
         <li>Select your photo or signature from your gallery.</li>
         <li>Our tool automatically adjusts the resolution and quality to hit the 20KB mark while keeping the text or face clear.</li>
         <li>Click download!</li>
@@ -214,7 +214,7 @@ export const blogs = [
         <li>Drag and drop the files to rearrange them into the correct order.</li>
         <li>Click "Merge" and download your single, unified PDF document.</li>
       </ol>
-      <p><strong>Note:</strong> If the final merged PDF is too large, you can always run it through our <a href="/compress-pdf/to-500kb">PDF Compressor</a> afterward!</p>
+      <p><strong>Note:</strong> If the final merged PDF is too large, you can always run it through our <a href="/pdf-under-500kb">PDF Compressor</a> afterward!</p>
     `
   },
   {
@@ -281,7 +281,7 @@ export const blogs = [
       <h3>Cropping to the Correct Size</h3>
       <p>Different countries and exams have different size requirements, but the standard Indian passport size is 3.5cm x 4.5cm.</p>
       <ol>
-        <li>Open the <a href="/passport-photo/indian-passport">Passport Photo Creator</a>.</li>
+        <li>Open the <a href="/passport-size-photo-maker">Passport Photo Creator</a>.</li>
         <li>Upload your photo.</li>
         <li>Use the crop box to frame your face correctly (your face should cover about 70-80% of the photo).</li>
         <li>The tool will automatically resize and crop it to exactly 3.5x4.5 cm (or your desired dimensions).</li>

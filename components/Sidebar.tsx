@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { tools, getToolsByCategory } from '@/lib/toolConfigs'
+import { getPrettySlug } from '@/lib/customSeoContent'
 
 export default function Sidebar() {
   const imageTools = getToolsByCategory('image')
@@ -9,37 +10,45 @@ export default function Sidebar() {
     <div className="space-y-6">
       {/* Image Tools */}
       <div>
-        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">
+        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">
           🖼️ Image Tools
         </div>
         <nav className="space-y-1">
-          {imageTools.map(tool => (
-            <Link
-              key={tool.slug}
-              href={`/${tool.slug}/${tool.variants[0].slug}`}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-            >
-              {tool.icon} {tool.shortName}
-            </Link>
-          ))}
+          {imageTools.map(tool => {
+            const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
+            const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
+            return (
+              <Link
+                key={tool.slug}
+                href={linkHref}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+              >
+                {tool.icon} {tool.shortName}
+              </Link>
+            )
+          })}
         </nav>
       </div>
 
       {/* PDF Tools */}
       <div>
-        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">
+        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">
           📄 PDF Tools
         </div>
         <nav className="space-y-1">
-          {pdfTools.map(tool => (
-            <Link
-              key={tool.slug}
-              href={`/${tool.slug}/${tool.variants[0].slug}`}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-            >
-              {tool.icon} {tool.shortName}
-            </Link>
-          ))}
+          {pdfTools.map(tool => {
+            const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
+            const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
+            return (
+              <Link
+                key={tool.slug}
+                href={linkHref}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+              >
+                {tool.icon} {tool.shortName}
+              </Link>
+            )
+          })}
         </nav>
       </div>
 
@@ -49,15 +58,19 @@ export default function Sidebar() {
           Popular Image Sizes
         </div>
         <div className="flex flex-wrap gap-2">
-          {['to-10kb','to-20kb','to-50kb','to-100kb','to-200kb','to-500kb','to-1mb'].map(v => (
-            <Link
-              key={v}
-              href={`/resize-image/${v}`}
-              className="text-xs bg-white text-blue-600 border border-blue-200 px-2 py-1 rounded-md hover:bg-blue-600 hover:text-white transition-colors"
-            >
-              {v.replace('to-', '').toUpperCase()}
-            </Link>
-          ))}
+          {['to-10kb','to-20kb','to-50kb','to-100kb','to-200kb','to-500kb','to-1mb'].map(v => {
+            const prettySlug = getPrettySlug('resize-image', v)
+            const linkHref = prettySlug ? `/${prettySlug}` : `/resize-image/${v}`
+            return (
+              <Link
+                key={v}
+                href={linkHref}
+                className="text-xs bg-white text-blue-600 border border-blue-200 px-2 py-1 rounded-md hover:bg-blue-600 hover:text-white transition-colors"
+              >
+                {v.replace('to-', '').toUpperCase()}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </div>

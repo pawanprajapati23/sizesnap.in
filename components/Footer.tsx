@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { tools } from '@/lib/toolConfigs'
+import { getPrettySlug } from '@/lib/customSeoContent'
 
 export default function Footer() {
   return (
@@ -18,40 +19,49 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Image Tools</h4>
           <ul className="space-y-2 text-sm">
-            {tools.filter(t => t.category === 'image').map(tool => (
-              <li key={tool.slug}>
-                <Link href={`/${tool.slug}/${tool.variants[0].slug}`}
-                  className="hover:text-white transition-colors">
-                  {tool.shortName}
-                </Link>
-              </li>
-            ))}
+            {tools.filter(t => t.category === 'image').map(tool => {
+              const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
+              return (
+                <li key={tool.slug}>
+                  <Link href={linkHref} className="hover:text-white transition-colors">
+                    {tool.shortName}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">PDF Tools</h4>
           <ul className="space-y-2 text-sm">
-            {tools.filter(t => t.category === 'pdf').map(tool => (
-              <li key={tool.slug}>
-                <Link href={`/${tool.slug}/${tool.variants[0].slug}`}
-                  className="hover:text-white transition-colors">
-                  {tool.shortName}
-                </Link>
-              </li>
-            ))}
+            {tools.filter(t => t.category === 'pdf').map(tool => {
+              const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
+              return (
+                <li key={tool.slug}>
+                  <Link href={linkHref} className="hover:text-white transition-colors">
+                    {tool.shortName}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Popular Sizes</h4>
           <ul className="space-y-2 text-sm">
-            {['10kb','20kb','50kb','100kb','200kb','500kb','1mb'].map(size => (
-              <li key={size}>
-                <Link href={`/resize-image/to-${size}`}
-                  className="hover:text-white transition-colors">
-                  Resize to {size.toUpperCase()}
-                </Link>
-              </li>
-            ))}
+            {['10kb','20kb','50kb','100kb','200kb','500kb','1mb'].map(size => {
+              const prettySlug = getPrettySlug('resize-image', `to-${size}`)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/resize-image/to-${size}`
+              return (
+                <li key={size}>
+                  <Link href={linkHref} className="hover:text-white transition-colors">
+                    Resize to {size.toUpperCase()}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
 
           <h4 className="text-white font-semibold mt-6 mb-3 text-sm">Web Stories</h4>
@@ -80,7 +90,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-gray-800 px-4 py-8 text-center text-xs flex flex-col gap-4">
-        <div className="flex justify-center gap-6">
+        <div className="flex justify-center gap-6 flex-wrap">
           <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
           <Link href="/about-us" className="hover:text-white transition-colors">About Us</Link>

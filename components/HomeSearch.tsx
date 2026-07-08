@@ -33,21 +33,21 @@ export default function HomeSearch() {
   return (
     <div className="space-y-8">
       {/* Search Bar */}
-      <div className="max-w-2xl mx-auto -mt-6 mb-8 relative z-10 space-y-3">
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center p-2">
-           <Search className="w-6 h-6 text-gray-400 ml-3" />
+      <div className="max-w-3xl mx-auto mb-8 relative z-10 space-y-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50 px-2 focus-within:border-blue-500 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-50">
+           <Search className="w-5 h-5 text-slate-400 ml-2" />
            <input 
              type="text" 
              placeholder="What do you want to do? (e.g. compress 50kb, convert to jpg...)" 
-             className="w-full p-3 outline-none text-gray-700 bg-transparent text-lg"
+             className="w-full p-3 outline-none text-slate-800 bg-transparent text-sm md:text-base font-medium placeholder:text-slate-400"
              value={query}
              onChange={e => setQuery(e.target.value)}
            />
         </div>
 
         {/* Quick Search Badges */}
-        <div className="flex flex-wrap gap-2 justify-center text-xs text-gray-500 items-center">
-          <span className="font-semibold text-gray-400 uppercase tracking-wider text-[10px]">Trending:</span>
+        <div className="flex flex-wrap gap-2 justify-center text-xs text-slate-500 items-center">
+          <span className="font-bold text-slate-400 uppercase tracking-wider text-[10px]">Trending:</span>
           {[
             { label: 'Resize 50KB', query: '50kb' },
             { label: 'PDF to 100KB', query: 'pdf to 100kb' },
@@ -64,7 +64,7 @@ export default function HomeSearch() {
             <button
               key={tag.label}
               onClick={() => setQuery(tag.query)}
-              className="px-2.5 py-1 rounded-full bg-gray-100 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer border border-gray-200/50"
+              className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 transition-colors cursor-pointer border border-slate-200"
             >
               {tag.label}
             </button>
@@ -72,7 +72,7 @@ export default function HomeSearch() {
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="text-red-500 font-bold hover:underline ml-2"
+              className="text-rose-600 font-bold hover:underline ml-2"
             >
               Clear ✕
             </button>
@@ -80,9 +80,9 @@ export default function HomeSearch() {
         </div>
 
         {/* Live Application Forms Resizers */}
-        <div className="pt-3 border-t border-gray-100 flex flex-wrap justify-center gap-2 items-center text-xs">
-          <span className="font-semibold text-gray-400 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <div className="pt-4 border-t border-slate-100 flex flex-wrap justify-center gap-2 items-center text-xs">
+          <span className="font-bold text-slate-400 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
             Live Forms:
           </span>
           {[
@@ -106,9 +106,9 @@ export default function HomeSearch() {
             <Link
               key={lnk.label}
               href={lnk.path}
-              className="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 border border-red-100 text-red-700 hover:text-red-800 font-bold transition-all shadow-sm flex items-center gap-1.5 text-xs animate-pulse-subtle"
+              className="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-bold transition-all shadow-sm flex items-center gap-1.5 text-xs"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-red-500 shrink-0" />
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
               {lnk.label}
             </Link>
           ))}
@@ -124,15 +124,15 @@ export default function HomeSearch() {
       {/* Image Tools Section */}
       {imageTools.length > 0 && (
       <section id="all-tools">
-        <h2 className="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-5 flex items-center gap-2 select-none">
+        <h2 className="text-[11px] font-black tracking-[0.18em] text-slate-500 uppercase mb-5 flex items-center gap-2 select-none">
           <ImageIcon className="w-4 h-4 text-blue-600" /> Image Tools
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {imageTools.map(tool => (
-            <div key={tool.slug} className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/80 p-5 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div key={tool.slug} className="group relative bg-white rounded-xl border border-slate-200 p-5 hover:border-blue-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
               <div>
                 {/* Icon wrapper with soft bg glow */}
-                <div className="w-12 h-12 rounded-xl bg-blue-50/70 group-hover:bg-blue-100 flex items-center justify-center text-2xl mb-4 transition-all duration-300 shadow-sm border border-blue-50/20">
+                <div className="w-11 h-11 rounded-lg bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center text-xl mb-4 transition-all duration-200 border border-blue-100">
                   {tool.icon}
                 </div>
                 <h3 className="font-extrabold text-gray-900 mb-1 text-base group-hover:text-blue-600 transition-colors leading-tight">{tool.name}</h3>
@@ -144,7 +144,7 @@ export default function HomeSearch() {
                   const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${v.slug}`
                   return (
                     <Link key={v.slug} href={linkHref}
-                      className="text-[11px] bg-slate-50 hover:bg-blue-600 text-gray-600 hover:text-white border border-gray-200 hover:border-blue-600 px-2.5 py-1 rounded-lg transition-all duration-200 font-bold shadow-xs">
+                      className="text-[11px] bg-slate-50 hover:bg-blue-600 text-slate-600 hover:text-white border border-slate-200 hover:border-blue-600 px-2.5 py-1 rounded-md transition-all duration-200 font-bold">
                       {v.label}
                     </Link>
                   )
@@ -159,15 +159,15 @@ export default function HomeSearch() {
       {/* PDF Tools Section */}
       {pdfTools.length > 0 && (
       <section>
-        <h2 className="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-5 flex items-center gap-2 select-none">
+        <h2 className="text-[11px] font-black tracking-[0.18em] text-slate-500 uppercase mb-5 flex items-center gap-2 select-none">
           <FileText className="w-4 h-4 text-indigo-600" /> PDF Tools
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pdfTools.map(tool => (
-            <div key={tool.slug} className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/80 p-5 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div key={tool.slug} className="group relative bg-white rounded-xl border border-slate-200 p-5 hover:border-blue-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
               <div>
                 {/* Icon wrapper with soft bg glow */}
-                <div className="w-12 h-12 rounded-xl bg-blue-50/70 group-hover:bg-blue-100 flex items-center justify-center text-2xl mb-4 transition-all duration-300 shadow-sm border border-blue-50/20">
+                <div className="w-11 h-11 rounded-lg bg-indigo-50 group-hover:bg-indigo-100 flex items-center justify-center text-xl mb-4 transition-all duration-200 border border-indigo-100">
                   {tool.icon}
                 </div>
                 <h3 className="font-extrabold text-gray-900 mb-1 text-base group-hover:text-blue-600 transition-colors leading-tight">{tool.name}</h3>
@@ -179,7 +179,7 @@ export default function HomeSearch() {
                   const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${v.slug}`
                   return (
                     <Link key={v.slug} href={linkHref}
-                      className="text-[11px] bg-slate-50 hover:bg-blue-600 text-gray-600 hover:text-white border border-gray-200 hover:border-blue-600 px-2.5 py-1 rounded-lg transition-all duration-200 font-bold shadow-xs">
+                      className="text-[11px] bg-slate-50 hover:bg-blue-600 text-slate-600 hover:text-white border border-slate-200 hover:border-blue-600 px-2.5 py-1 rounded-md transition-all duration-200 font-bold">
                       {v.label}
                     </Link>
                   )

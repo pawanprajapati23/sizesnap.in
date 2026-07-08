@@ -5,6 +5,17 @@ import ExamPresetCalculator from '@/components/ExamPresetCalculator'
 import { stories } from '@/lib/storyConfigs'
 import { blogs } from '@/lib/blogConfigs'
 import type { Metadata } from 'next'
+import {
+  ArrowRight,
+  CheckCircle2,
+  FileCheck2,
+  FileText,
+  Image as ImageIcon,
+  Lock,
+  ShieldCheck,
+  Smartphone,
+  Zap
+} from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'SizeSnap — Free Online Image & PDF Tools | Resize, Compress, Convert',
@@ -104,40 +115,103 @@ export default function HomePage() {
       />
       <div className="space-y-10">
       {/* Hero */}
-      <div className="text-center py-8 px-5 md:py-16 md:px-10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 rounded-3xl text-white shadow-2xl relative overflow-hidden border border-white/10">
-        {/* Glow ambient background lights */}
-        <div className="absolute top-0 left-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none animate-pulse-subtle" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none animate-pulse-subtle" />
-        
-        {/* Sleek top badge */}
-        <div className="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-400/25 px-3 py-1 rounded-full text-blue-300 text-[10px] font-black tracking-widest uppercase mb-4 animate-pulse-subtle">
-          ⚡ 100% Client-Side &amp; Secure
-        </div>
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="px-5 py-8 sm:px-8 md:py-12 lg:px-10">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-700">
+              <ShieldCheck className="h-3.5 w-3.5" />
+              Private browser processing
+            </div>
 
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-4">
-          Free Online <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Image &amp; PDF Tools</span>
-        </h1>
-        
-        <p className="text-slate-300 text-sm md:text-lg max-w-xl mx-auto mb-6 md:mb-8 font-medium leading-relaxed">
-          Resize, compress, crop, and convert files locally in your browser. Your private documents never touch any servers.
-        </p>
+            <h1 className="max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-slate-950 md:text-5xl">
+              Professional image and PDF tools for forms, exams, and documents.
+            </h1>
 
-        {/* Action badges only on tablet/desktop to save vertical space on mobile */}
-        <div className="hidden sm:flex flex-wrap gap-3 justify-center">
-          <Link href="/resize-image/to-50kb"
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md">
-            Resize Image to 50KB
-          </Link>
-          <Link href="/compress-pdf/to-100kb"
-            className="bg-white/10 hover:bg-white/15 text-white font-bold px-5 py-2.5 rounded-xl text-xs border border-white/10 transition-all">
-            Compress PDF to 100KB
-          </Link>
-          <Link href="/image-size-guide"
-            className="bg-slate-900/60 hover:bg-slate-800 text-slate-300 font-bold px-5 py-2.5 rounded-xl text-xs border border-slate-800/80 transition-all">
-            Image Size Guide 2026
-          </Link>
+            <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-slate-600 md:text-base">
+              Resize photos, compress PDFs, create passport photos, and prepare upload-ready files in seconds. No signup, no watermark, and files stay on your device.
+            </p>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/resize-image-to-50kb"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-slate-800"
+              >
+                Start with Image Resizer
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/compress-pdf-to-100kb"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 hover:border-slate-400 hover:bg-slate-50"
+              >
+                Compress PDF
+              </Link>
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                ['50KB', 'photo resize'],
+                ['100KB', 'PDF compress'],
+                ['35x45mm', 'passport photo'],
+                ['300 DPI', 'print ready'],
+              ].map(([value, label]) => (
+                <div key={value} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3">
+                  <p className="text-base font-extrabold text-slate-950">{value}</p>
+                  <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-slate-200 bg-slate-50 p-5 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">File workspace</p>
+                  <h2 className="mt-1 text-base font-extrabold text-slate-950">Ready for upload</h2>
+                </div>
+                <div className="rounded-lg bg-emerald-50 p-2 text-emerald-700">
+                  <CheckCircle2 className="h-5 w-5" />
+                </div>
+              </div>
+
+              <div className="space-y-3 py-5">
+                {[
+                  { icon: ImageIcon, title: 'Passport photo.jpg', meta: '413 x 531 px · under 50KB', tone: 'bg-blue-50 text-blue-700' },
+                  { icon: FileText, title: 'Application document.pdf', meta: 'Compressed under 100KB', tone: 'bg-rose-50 text-rose-700' },
+                  { icon: FileCheck2, title: 'Signature scan.png', meta: 'Crisp edges · form accepted', tone: 'bg-amber-50 text-amber-700' },
+                ].map(item => {
+                  const Icon = item.icon
+                  return (
+                    <div key={item.title} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3">
+                      <div className={`rounded-lg p-2 ${item.tone}`}>
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-bold text-slate-900">{item.title}</p>
+                        <p className="truncate text-xs font-medium text-slate-500">{item.meta}</p>
+                      </div>
+                      <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700">Done</span>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 border-t border-slate-100 pt-4 text-center">
+                {[
+                  ['Local', 'processing'],
+                  ['Fast', 'results'],
+                  ['Free', 'forever'],
+                ].map(([value, label]) => (
+                  <div key={value} className="rounded-lg bg-slate-50 px-2 py-3">
+                    <p className="text-sm font-extrabold text-slate-900">{value}</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <HomeSearch />
 
@@ -245,19 +319,23 @@ export default function HomePage() {
       <AdUnit slot="homepage-bottom" format="horizontal" />
 
       {/* Trust Signals */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { icon: '🔒', title: '100% Private', desc: 'Files stay on your device' },
-          { icon: '⚡', title: 'Instant', desc: 'Results in 1–3 seconds' },
-          { icon: '📱', title: 'Mobile Ready', desc: 'Works on any device' },
-          { icon: '🆓', title: 'Always Free', desc: 'No hidden charges' },
-        ].map(item => (
-          <div key={item.title} className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-center items-center shadow-sm">
-            <div className="text-3xl mb-3">{item.icon}</div>
-            <p className="font-semibold text-gray-800 text-sm">{item.title}</p>
-            <p className="text-xs text-gray-500 mt-1">{item.desc}</p>
+          { icon: Lock, title: '100% Private', desc: 'Files stay inside your browser' },
+          { icon: Zap, title: 'Fast Results', desc: 'Optimized for quick form uploads' },
+          { icon: Smartphone, title: 'Mobile Ready', desc: 'Works smoothly on phone browsers' },
+          { icon: ShieldCheck, title: 'No Signup', desc: 'Use every tool without an account' },
+        ].map(item => {
+          const Icon = item.icon
+          return (
+          <div key={item.title} className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <div className="mb-4 inline-flex rounded-lg bg-slate-100 p-2 text-slate-700">
+              <Icon className="h-5 w-5" />
+            </div>
+            <p className="font-bold text-gray-900 text-sm">{item.title}</p>
+            <p className="text-xs text-gray-500 mt-1 leading-relaxed">{item.desc}</p>
           </div>
-        ))}
+        )})}
       </section>
 
       {/* Homepage FAQs Section with FAQPage Schema */}

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { tools } from '@/lib/toolConfigs'
-import { Search } from 'lucide-react'
+import { Search, Image as ImageIcon, FileText } from 'lucide-react'
 import { getPrettySlug } from '@/lib/customSeoContent'
 
 export default function HomeSearch() {
@@ -106,9 +106,10 @@ export default function HomeSearch() {
             <Link
               key={lnk.label}
               href={lnk.path}
-              className="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 border border-red-100 text-red-700 hover:text-red-800 font-bold transition-all shadow-sm flex items-center gap-1 animate-pulse-subtle"
+              className="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 border border-red-100 text-red-700 hover:text-red-800 font-bold transition-all shadow-sm flex items-center gap-1.5 text-xs animate-pulse-subtle"
             >
-              🔥 {lnk.label}
+              <span className="h-1.5 w-1.5 rounded-full bg-red-500 shrink-0" />
+              {lnk.label}
             </Link>
           ))}
         </div>
@@ -123,7 +124,9 @@ export default function HomeSearch() {
       {/* Image Tools Section */}
       {imageTools.length > 0 && (
       <section id="all-tools">
-        <h2 className="text-xl font-bold text-gray-800 mb-5">🖼️ Image Tools</h2>
+        <h2 className="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-5 flex items-center gap-2 select-none">
+          <ImageIcon className="w-4 h-4 text-blue-600" /> Image Tools
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {imageTools.map(tool => (
             <div key={tool.slug} className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/80 p-5 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
@@ -156,7 +159,9 @@ export default function HomeSearch() {
       {/* PDF Tools Section */}
       {pdfTools.length > 0 && (
       <section>
-        <h2 className="text-xl font-bold text-gray-800 mb-5">📄 PDF Tools</h2>
+        <h2 className="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-5 flex items-center gap-2 select-none">
+          <FileText className="w-4 h-4 text-indigo-600" /> PDF Tools
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pdfTools.map(tool => (
             <div key={tool.slug} className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/80 p-5 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">

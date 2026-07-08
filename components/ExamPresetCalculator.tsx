@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { FileText, Image as ImageIcon, CheckCircle, ArrowRight, ShieldCheck, Flame } from 'lucide-react'
+import { FileText, Image as ImageIcon, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react'
 
 interface PresetSpec {
   name: string
@@ -107,10 +107,14 @@ export default function ExamPresetCalculator() {
 
       {/* Header Badge */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="bg-red-500 hover:bg-red-600 text-white font-extrabold text-[10px] tracking-widest px-2.5 py-1 rounded-full uppercase flex items-center gap-1 shadow-md animate-pulse">
-          <Flame className="w-3 h-3 fill-white" /> Live presets
+        <span className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/25 text-red-400 text-[10px] font-black tracking-widest px-2.5 py-1 rounded-full uppercase">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+          </span>
+          Live Specifications
         </span>
-        <span className="text-slate-400 text-xs font-semibold">Official 2026 Exam Specifications</span>
+        <span className="text-slate-400 text-xs font-semibold">Official 2026 Guidelines</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">

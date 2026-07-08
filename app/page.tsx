@@ -149,15 +149,22 @@ export default function HomePage() {
 
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
-                ['50KB', 'photo resize'],
-                ['100KB', 'PDF compress'],
-                ['35x45mm', 'passport photo'],
-                ['300 DPI', 'print ready'],
-              ].map(([value, label]) => (
-                <div key={value} className="rounded-xl border border-slate-200 bg-slate-50 p-2.5 sm:p-3">
-                  <p className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight">{value}</p>
-                  <p className="mt-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wide text-slate-500 leading-tight">{label}</p>
-                </div>
+                { value: '50KB', label: 'photo resize', href: '/resize-image-to-50kb' },
+                { value: '100KB', label: 'PDF compress', href: '/compress-pdf-to-100kb' },
+                { value: '35x45mm', label: 'passport photo', href: '/passport-size-photo-maker' },
+                { value: '300 DPI', label: 'print ready', href: '/convert-image-to-300-dpi' },
+              ].map((item) => (
+                <Link
+                  key={item.value}
+                  href={item.href}
+                  className="group rounded-xl border border-slate-200 bg-slate-50 p-2.5 sm:p-3 block hover:bg-blue-50/50 hover:border-blue-300 transition-all hover:shadow-xs focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
+                >
+                  <p className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight group-hover:text-blue-600 transition-colors flex items-center justify-between">
+                    <span>{item.value}</span>
+                    <span className="opacity-0 group-hover:opacity-100 transition-all transform translate-x-1 group-hover:translate-x-0 text-blue-600 text-xs font-bold leading-none">→</span>
+                  </p>
+                  <p className="mt-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wide text-slate-500 leading-tight">{item.label}</p>
+                </Link>
               ))}
             </div>
           </div>

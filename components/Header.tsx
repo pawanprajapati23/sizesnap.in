@@ -73,45 +73,47 @@ export default function Header() {
   }, [])
 
   return (
-    <div className="sticky top-0 z-50 shadow-xs border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-      
-      {/* Live Exam Alert Bar */}
-      <div className="bg-slate-900 text-white text-[11px] md:text-xs py-2.5 px-4 font-medium shadow-inner flex items-center justify-center gap-2 text-center border-b border-slate-800">
-        <span className="inline-flex h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0" />
-        <span className="text-slate-300 truncate">Railway RRB, SSC MTS, and NEET resizers are active.</span>
-        <Link href="/exam-photo-specifications" className="text-white hover:text-blue-300 underline font-bold shrink-0 flex items-center gap-0.5 ml-1 transition-colors">
-          Specs List <ArrowRight className="w-3 h-3" />
-        </Link>
+    <>
+      <div className="sticky top-0 z-50 shadow-xs border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+        
+        {/* Live Exam Alert Bar */}
+        <div className="bg-slate-900 text-white text-[11px] md:text-xs py-2.5 px-4 font-medium shadow-inner flex items-center justify-center gap-2 text-center border-b border-slate-800">
+          <span className="inline-flex h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+          <span className="text-slate-300 truncate">Railway RRB, SSC MTS, and NEET resizers are active.</span>
+          <Link href="/exam-photo-specifications" className="text-white hover:text-blue-300 underline font-bold shrink-0 flex items-center gap-0.5 ml-1 transition-colors">
+            Specs List <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        <header className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 font-extrabold text-lg text-slate-900 tracking-tight">
+            <Image src="/logo.png" alt="SizeSnap Logo" width={30} height={30} className="w-7.5 h-7.5 object-contain" />
+            <span>SizeSnap</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-600 uppercase tracking-wider">
+            <Link href="/resize-image-to-50kb" className={`hover:text-blue-600 transition-colors ${pathname === '/resize-image-to-50kb' ? 'text-blue-600' : ''}`}>Resize Image</Link>
+            <Link href="/compress-pdf-to-100kb" className={`hover:text-blue-600 transition-colors ${pathname === '/compress-pdf-to-100kb' ? 'text-blue-600' : ''}`}>Compress PDF</Link>
+            <Link href="/change-photo-background-to-white" className={`hover:text-blue-600 transition-colors ${pathname === '/change-photo-background-to-white' ? 'text-blue-600' : ''}`}>Background Changer</Link>
+            <Link href="/#all-tools" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-xs text-center lowercase first-letter:uppercase tracking-normal font-semibold">
+              All Tools
+            </Link>
+          </nav>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open navigation menu"
+          >
+            <Menu className="w-5.5 h-5.5" />
+          </button>
+        </header>
       </div>
 
-      <header className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 font-extrabold text-lg text-slate-900 tracking-tight">
-          <Image src="/logo.png" alt="SizeSnap Logo" width={30} height={30} className="w-7.5 h-7.5 object-contain" />
-          <span>SizeSnap</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-600 uppercase tracking-wider">
-          <Link href="/resize-image-to-50kb" className={`hover:text-blue-600 transition-colors ${pathname === '/resize-image-to-50kb' ? 'text-blue-600' : ''}`}>Resize Image</Link>
-          <Link href="/compress-pdf-to-100kb" className={`hover:text-blue-600 transition-colors ${pathname === '/compress-pdf-to-100kb' ? 'text-blue-600' : ''}`}>Compress PDF</Link>
-          <Link href="/change-photo-background-to-white" className={`hover:text-blue-600 transition-colors ${pathname === '/change-photo-background-to-white' ? 'text-blue-600' : ''}`}>Background Changer</Link>
-          <Link href="/#all-tools" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-xs text-center lowercase first-letter:uppercase tracking-normal font-semibold">
-            All Tools
-          </Link>
-        </nav>
-
-        {/* Mobile Menu Toggle Button */}
-        <button
-          className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open navigation menu"
-        >
-          <Menu className="w-5.5 h-5.5" />
-        </button>
-      </header>
-
-      {/* Slide-over Mobile Navigation Drawer */}
+      {/* Slide-over Mobile Navigation Drawer - Moved outside sticky backdrop-blur container */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop Blur Overlay */}
@@ -188,6 +190,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

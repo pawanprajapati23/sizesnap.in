@@ -23,6 +23,7 @@ const MAPPINGS = [
   { pretty: '/11kb-converter', raw: '/resize-image/to-11kb' },
   { pretty: '/passport-size-photo-maker', raw: '/passport-photo/indian-passport' },
   { pretty: '/pdf-under-500kb', raw: '/compress-pdf/to-500kb' },
+  { pretty: '/compress-pdf-to-100kb', raw: '/compress-pdf/to-100kb' },
   { pretty: '/compress-pdf-to-200kb', raw: '/compress-pdf/to-200kb' },
   { pretty: '/compress-pdf-to-300kb', raw: '/compress-pdf/to-300kb' },
   { pretty: '/compress-pdf-to-150kb', raw: '/compress-pdf/to-150kb' },

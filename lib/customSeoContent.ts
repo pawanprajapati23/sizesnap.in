@@ -1068,6 +1068,7 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'resize-image/to-11kb': '11kb-converter',
     'passport-photo/indian-passport': 'passport-size-photo-maker',
     'compress-pdf/to-500kb': 'pdf-under-500kb',
+    'compress-pdf/to-100kb': 'compress-pdf-to-100kb',
     'compress-pdf/to-200kb': 'compress-pdf-to-200kb',
     'compress-pdf/to-300kb': 'compress-pdf-to-300kb',
     'compress-pdf/to-150kb': 'compress-pdf-to-150kb',

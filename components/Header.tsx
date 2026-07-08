@@ -1,7 +1,8 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { Menu, X, Image as ImageIcon, FileText, Shield, ArrowRight, Layers, FileCode2 } from 'lucide-react'
 
 interface ToolMenuItem {
@@ -46,6 +47,30 @@ const CATEGORIES: CategoryGroup[] = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
+  // Close menu on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <div className="sticky top-0 z-50 shadow-xs border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
@@ -68,9 +93,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-600 uppercase tracking-wider">
-          <Link href="/resize-image-to-50kb" className="hover:text-blue-600 transition-colors">Resize Image</Link>
-          <Link href="/compress-pdf-to-100kb" className="hover:text-blue-600 transition-colors">Compress PDF</Link>
-          <Link href="/change-photo-background-to-white" className="hover:text-blue-600 transition-colors">Background Changer</Link>
+          <Link href="/resize-image-to-50kb" className={`hover:text-blue-600 transition-colors ${pathname === '/resize-image-to-50kb' ? 'text-blue-600' : ''}`}>Resize Image</Link>
+          <Link href="/compress-pdf-to-100kb" className={`hover:text-blue-600 transition-colors ${pathname === '/compress-pdf-to-100kb' ? 'text-blue-600' : ''}`}>Compress PDF</Link>
+          <Link href="/change-photo-background-to-white" className={`hover:text-blue-600 transition-colors ${pathname === '/change-photo-background-to-white' ? 'text-blue-600' : ''}`}>Background Changer</Link>
           <Link href="/#all-tools" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-xs text-center lowercase first-letter:uppercase tracking-normal font-semibold">
             All Tools
           </Link>
@@ -78,7 +103,7 @@ export default function Header() {
 
         {/* Mobile Menu Toggle Button */}
         <button
-          className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none"
+          className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
           onClick={() => setMenuOpen(true)}
           aria-label="Open navigation menu"
         >
@@ -88,25 +113,25 @@ export default function Header() {
 
       {/* Slide-over Mobile Navigation Drawer */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden animate-fadeIn">
+        <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop Blur Overlay */}
           <div 
-            className="absolute inset-0 bg-slate-900/30 backdrop-blur-xs transition-opacity duration-300"
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs animate-backdropFade"
             onClick={() => setMenuOpen(false)}
           />
 
           {/* Drawer Body */}
-          <div className="absolute top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-l border-slate-100 animate-slideIn">
+          <div className="absolute top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl p-6 flex flex-col justify-between border-l border-slate-200 animate-slideIn">
             
             {/* Drawer Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-slate-150">
-              <div className="flex items-center gap-2 font-bold text-slate-800">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200/60">
+              <div className="flex items-center gap-2.5 font-extrabold text-slate-900">
                 <Image src="/logo.png" alt="SizeSnap Logo" width={24} height={24} className="w-6 h-6 object-contain" />
-                <span className="text-sm">Navigation Menu</span>
+                <span className="text-base tracking-tight">Navigation</span>
               </div>
               <button 
                 onClick={() => setMenuOpen(false)}
-                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
                 aria-label="Close navigation menu"
               >
                 <X className="w-5 h-5" />
@@ -114,24 +139,31 @@ export default function Header() {
             </div>
 
             {/* Scrollable Categories List */}
-            <div className="flex-1 py-6 space-y-6 overflow-y-auto">
+            <div className="flex-1 py-5 space-y-6 overflow-y-auto min-h-0 scrollbar-thin">
               {CATEGORIES.map(category => (
                 <div key={category.name} className="space-y-2">
-                  <h3 className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  <h3 className="text-[11px] font-bold tracking-[0.12em] text-slate-400 uppercase">
                     {category.name}
                   </h3>
                   <div className="space-y-1">
                     {category.items.map(item => {
                       const Icon = item.icon
+                      const isActive = pathname === item.path
                       return (
                         <Link
                           key={item.label}
                           href={item.path}
                           onClick={() => setMenuOpen(false)}
-                          className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 text-xs font-semibold text-slate-700 hover:text-blue-600 transition-all"
+                          className={`group flex items-center gap-3 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none ${
+                            isActive 
+                              ? 'bg-blue-50 text-blue-600 border-l-2 border-blue-600 rounded-l-none' 
+                              : 'text-slate-700 hover:bg-slate-50 hover:text-blue-600'
+                          }`}
                         >
-                          <Icon className="w-4 h-4 text-slate-400 group-hover:text-blue-500 flex-shrink-0" />
-                          <span>{item.label}</span>
+                          <Icon className={`w-4.5 h-4.5 flex-shrink-0 transition-colors ${
+                            isActive ? 'text-blue-500' : 'text-slate-400 group-hover:text-blue-500'
+                          }`} />
+                          <span className="truncate">{item.label}</span>
                         </Link>
                       )
                     })}
@@ -141,15 +173,15 @@ export default function Header() {
             </div>
 
             {/* Drawer Footer */}
-            <div className="pt-4 border-t border-slate-150 space-y-3.5 text-center">
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-bold uppercase">
+            <div className="pt-4 border-t border-slate-200/60 space-y-3.5 text-center">
+              <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                 <Shield className="w-3.5 h-3.5 text-emerald-500" />
                 <span>100% Client-Side Safe</span>
               </div>
-              <div className="flex justify-center gap-4 text-[10px] font-bold text-slate-400 uppercase">
-                <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:text-slate-600">About</Link>
-                <Link href="/privacy-policy" onClick={() => setMenuOpen(false)} className="hover:text-slate-600">Privacy</Link>
-                <Link href="/terms-of-service" onClick={() => setMenuOpen(false)} className="hover:text-slate-600">Terms</Link>
+              <div className="flex justify-center gap-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <Link href="/about-us" onClick={() => setMenuOpen(false)} className="hover:text-slate-700 transition-colors">About</Link>
+                <Link href="/privacy-policy" onClick={() => setMenuOpen(false)} className="hover:text-slate-700 transition-colors">Privacy</Link>
+                <Link href="/terms-of-service" onClick={() => setMenuOpen(false)} className="hover:text-slate-700 transition-colors">Terms</Link>
               </div>
             </div>
 

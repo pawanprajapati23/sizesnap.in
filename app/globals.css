@@ -54,3 +54,17 @@
   animation: pulseSubtle 3s infinite ease-in-out;
 }
 
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-backdropFade {
+  animation: backdropFadeIn 0.2s ease-out forwards;
+}
+
+

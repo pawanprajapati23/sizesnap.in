@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import AdUnit from '@/components/AdUnit'
 import HomeSearch from '@/components/HomeSearch'
+import ExamPresetCalculator from '@/components/ExamPresetCalculator'
 import { stories } from '@/lib/storyConfigs'
 import { blogs } from '@/lib/blogConfigs'
 import type { Metadata } from 'next'
@@ -128,6 +129,8 @@ export default function HomePage() {
       </div>
 
       <HomeSearch />
+
+      <ExamPresetCalculator />
 
       {/* Modern Web Stories Circle Carousel Widget */}
       <section className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">

@@ -58,6 +58,8 @@ export default function HomeSearch() {
             { label: 'DSSSB 5x7', query: 'dsssb' },
             { label: 'Remove Shadow', query: 'shadow' },
             { label: 'Split PDF', query: 'split' },
+            { label: 'White BG', query: 'white' },
+            { label: 'Blue BG', query: 'blue' },
           ].map(tag => (
             <button
               key={tag.label}
@@ -98,6 +100,8 @@ export default function HomeSearch() {
             { label: 'DSSSB 5x7 Postcard', path: '/dsssb-postcard-photo-resizer' },
             { label: 'Shadow Remover Scan', path: '/remove-shadow-from-document' },
             { label: 'Split PDF pages', path: '/split-pdf-extract-pages' },
+            { label: 'White Background Maker', path: '/change-photo-background-to-white' },
+            { label: 'Blue Background Maker', path: '/change-photo-background-to-blue' },
           ].map(lnk => (
             <Link
               key={lnk.label}

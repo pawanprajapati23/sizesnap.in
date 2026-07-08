@@ -65,7 +65,9 @@ const MAPPINGS = [
   { pretty: '/neet-postcard-photo-resizer', raw: '/postcard-photo/neet-postcard' },
   { pretty: '/remove-shadow-from-document', raw: '/document-enhancer/remove-shadow' },
   { pretty: '/sharpen-scanned-signature', raw: '/document-enhancer/signature-sharpener' },
-  { pretty: '/split-pdf-extract-pages', raw: '/split-pdf/extract-pages' }
+  { pretty: '/split-pdf-extract-pages', raw: '/split-pdf/extract-pages' },
+  { pretty: '/change-photo-background-to-white', raw: '/background-changer/to-white' },
+  { pretty: '/change-photo-background-to-blue', raw: '/background-changer/to-blue' }
 ];
 
 const nextConfig: NextConfig = {

@@ -991,6 +991,40 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Kya single files pages compile separate downloads check possible hai?', answer: 'Yes, split pages numbers options dynamic choose click settings direct save download coordinates accessible.' }
     ]
   },
+  'background-changer/to-white': {
+    metaTitle: 'Change Photo Background to White Online Free | SizeSnap',
+    metaDescription: 'Change your photo background to pure white online for free. Convert passport size photo background color locally in your browser.',
+    h1: 'Change Photo Background to White Online',
+    introParagraph: 'Apne passport size photo ya portrait image ka background color select karke use instantly pure white color sheet me change karein. 100% free and client-side safe.',
+    bodyHtml: `
+      <h2>Passport Photo Background White Kaise Karein?</h2>
+      <p>NEET, SSC, UPSC aur banking exams me strictly instructions rules verify criteria follow settings use background color exactly <strong>White</strong> demand kiye jate hain. SizeSnap.in browser-side graphics tool se coordinates check and threshold pixels adjust karke color change process execute karta hai.</p>
+      
+      <h3>Bilingual Steps (Hindi & English instructions):</h3>
+      <ol>
+        <li>Upload target portrait image file choose parameters.</li>
+        <li>Select standard background replace preset: <strong>Pure White</strong>.</li>
+        <li>Borders tolerance value check controls adjust coordinates settings.</li>
+        <li>Generate files weight compressed download file options safe.</li>
+      </ol>
+    `,
+    faqs: [
+      { question: 'Background white replace karne se file key properties affect hongi?', answer: 'Nahi, is process me image elements quality and features values strictly local browser me correct settings configurations follow karte hain.' }
+    ]
+  },
+  'background-changer/to-blue': {
+    metaTitle: 'Change Photo Background to Blue Online Free | SizeSnap',
+    metaDescription: 'Change your photo background to blue online for free. Clean background color changer for passport size photos.',
+    h1: 'Change Photo Background to Blue Online',
+    introParagraph: 'Apne photo ka background sky blue color filter layout preset me convert karein jo NEET, RRB aur banks notifications rules specifications demand karte hain.',
+    bodyHtml: `
+      <h2>Blue Background Photo Editor</h2>
+      <p>State levels recruitments aur judicial applications profiles photos checks me background sky blue target rules verify parameters use karte hain.</p>
+    `,
+    faqs: [
+      { question: 'Kaun se blue color range supported hain?', answer: 'Standard sky blue and dark blue preset colors easily adjust controls me pre-set metrics coordinate settings verify available hain.' }
+    ]
+  },
 }
 
 
@@ -1061,6 +1095,8 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'document-enhancer/remove-shadow': 'remove-shadow-from-document',
     'document-enhancer/signature-sharpener': 'sharpen-scanned-signature',
     'split-pdf/extract-pages': 'split-pdf-extract-pages',
+    'background-changer/to-white': 'change-photo-background-to-white',
+    'background-changer/to-blue': 'change-photo-background-to-blue',
   }
   return mapping[`${tool}/${variant}`] || null
 }

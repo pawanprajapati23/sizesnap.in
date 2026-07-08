@@ -20,6 +20,8 @@ const DpiConverterTool = dynamic(() => import('@/components/tools/DpiConverterTo
 const CardJoinerTool = dynamic(() => import('@/components/tools/CardJoinerTool'), { ssr: false })
 const DocumentEnhancerTool = dynamic(() => import('@/components/tools/DocumentEnhancerTool'), { ssr: false })
 const SplitPdfTool = dynamic(() => import('@/components/tools/SplitPdfTool'), { ssr: false })
+const BackgroundChangerTool = dynamic(() => import('@/components/tools/BackgroundChangerTool'), { ssr: false })
+
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, config: any }) {
   let toolComponent = null
@@ -43,6 +45,7 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, co
   else if (toolSlug === 'postcard-photo') toolComponent = <PassportPhotoTool config={config} />
   else if (toolSlug === 'document-enhancer') toolComponent = <DocumentEnhancerTool config={config} />
   else if (toolSlug === 'split-pdf') toolComponent = <SplitPdfTool />
+  else if (toolSlug === 'background-changer') toolComponent = <BackgroundChangerTool config={config} />
 
   if (!toolComponent) return null
 

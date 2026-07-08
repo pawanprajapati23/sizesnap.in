@@ -11,6 +11,7 @@ export type ToolVariant = {
     height?: number
     format?: string
     dpi?: number
+    targetColor?: string
   }
 }
 
@@ -378,6 +379,18 @@ export const tools: Tool[] = [
     icon: '📄',
     variants: [
       { slug: 'extract-pages', label: 'Extract Pages', metaTitle: 'Split PDF & Extract Pages Online Free | SizeSnap', metaDescription: 'Split PDF and extract specific pages into a new PDF file online free. Works locally in your browser, 100% private.', h1: 'Split PDF & Extract Pages Online Free', introParagraph: 'Apne multi-page PDF document me se specific pages (jaise page 1 ya selected sheets) ko extract karke ek nayi choti PDF file banayein.', config: {} }
+    ]
+  },
+  {
+    slug: 'background-changer',
+    name: 'Passport Photo Background Color Changer',
+    shortName: 'Background Changer',
+    category: 'image',
+    description: 'Change the background color of your passport size photo to plain white or sky blue online for free.',
+    icon: '🎨',
+    variants: [
+      { slug: 'to-white', label: 'Change Background to White', metaTitle: 'Change Photo Background to White Online Free | SizeSnap', metaDescription: 'Change your photo background to pure white online for free. Clean background editor for passport size photos.', h1: 'Change Photo Background to White Online', introParagraph: 'Apne passport size photo ya portrait image ka background color automatic detect karke change karein aur use pure white background filter me convert karein.', config: { targetColor: 'white' } },
+      { slug: 'to-blue', label: 'Change Background to Blue', metaTitle: 'Change Photo Background to Blue Online Free | SizeSnap', metaDescription: 'Change your photo background to sky blue online for free. Clean background editor for passport size photos.', h1: 'Change Photo Background to Blue Online', introParagraph: 'Apne photo ka background sky blue color filter layout preset me convert karein jo NEET, RRB aur banks notifications rules specifications demand karte hain.', config: { targetColor: 'blue' } }
     ]
   }
 ]

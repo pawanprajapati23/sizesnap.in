@@ -117,31 +117,31 @@ export default function HomePage() {
       {/* Hero */}
       <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="px-5 py-8 sm:px-8 md:py-12 lg:px-10">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-700">
+          <div className="px-4 py-7 sm:px-8 md:py-12 lg:px-10">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-700">
               <ShieldCheck className="h-3.5 w-3.5" />
               Private browser processing
             </div>
 
-            <h1 className="max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-slate-950 md:text-5xl">
+            <h1 className="max-w-3xl text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight tracking-tight text-slate-950">
               Professional image and PDF tools for forms, exams, and documents.
             </h1>
 
-            <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-slate-600 md:text-base">
+            <p className="mt-4 max-w-2xl text-xs sm:text-sm font-medium leading-relaxed text-slate-600 md:text-base">
               Resize photos, compress PDFs, create passport photos, and prepare upload-ready files in seconds. No signup, no watermark, and files stay on your device.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/resize-image-to-50kb"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-slate-800"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-5 py-3.5 text-sm font-bold text-white shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
               >
                 Start with Image Resizer
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/compress-pdf-to-100kb"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 hover:border-slate-400 hover:bg-slate-50"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-250 bg-white hover:bg-slate-50 px-5 py-3.5 text-sm font-bold text-slate-700 shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
               >
                 Compress PDF
               </Link>
@@ -154,27 +154,28 @@ export default function HomePage() {
                 ['35x45mm', 'passport photo'],
                 ['300 DPI', 'print ready'],
               ].map(([value, label]) => (
-                <div key={value} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3">
-                  <p className="text-base font-extrabold text-slate-950">{value}</p>
-                  <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+                <div key={value} className="rounded-xl border border-slate-200 bg-slate-50 p-2.5 sm:p-3">
+                  <p className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight">{value}</p>
+                  <p className="mt-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wide text-slate-500 leading-tight">{label}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="border-t border-slate-200 bg-slate-50 p-5 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+          {/* Graphic mockup: hidden on mobile/tablet, visible on desktop (lg) */}
+          <div className="hidden lg:flex flex-col justify-center border-l border-slate-200 bg-slate-50/50 p-8 lg:p-10">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4 max-w-sm mx-auto w-full">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">File workspace</p>
-                  <h2 className="mt-1 text-base font-extrabold text-slate-950">Ready for upload</h2>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">File workspace</p>
+                  <h2 className="mt-0.5 text-sm font-extrabold text-slate-950">Ready for upload</h2>
                 </div>
                 <div className="rounded-lg bg-emerald-50 p-2 text-emerald-700">
-                  <CheckCircle2 className="h-5 w-5" />
+                  <CheckCircle2 className="h-4.5 w-4.5" />
                 </div>
               </div>
 
-              <div className="space-y-3 py-5">
+              <div className="space-y-2.5">
                 {[
                   { icon: ImageIcon, title: 'Passport photo.jpg', meta: '413 x 531 px · under 50KB', tone: 'bg-blue-50 text-blue-700' },
                   { icon: FileText, title: 'Application document.pdf', meta: 'Compressed under 100KB', tone: 'bg-rose-50 text-rose-700' },
@@ -182,29 +183,29 @@ export default function HomePage() {
                 ].map(item => {
                   const Icon = item.icon
                   return (
-                    <div key={item.title} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3">
-                      <div className={`rounded-lg p-2 ${item.tone}`}>
-                        <Icon className="h-5 w-5" />
+                    <div key={item.title} className="flex items-center gap-3 rounded-xl border border-slate-150 bg-slate-50/30 p-2.5">
+                      <div className={`rounded-lg p-2 shrink-0 ${item.tone}`}>
+                        <Icon className="h-4.5 w-4.5" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-bold text-slate-900">{item.title}</p>
-                        <p className="truncate text-xs font-medium text-slate-500">{item.meta}</p>
+                        <p className="truncate text-xs font-bold text-slate-900 leading-tight">{item.title}</p>
+                        <p className="truncate text-[10px] font-medium text-slate-500 mt-0.5">{item.meta}</p>
                       </div>
-                      <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700">Done</span>
+                      <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-emerald-700 shrink-0">Done</span>
                     </div>
                   )
                 })}
               </div>
 
-              <div className="grid grid-cols-3 gap-2 border-t border-slate-100 pt-4 text-center">
+              <div className="grid grid-cols-3 gap-1.5 border-t border-slate-100 pt-3 text-center">
                 {[
                   ['Local', 'processing'],
                   ['Fast', 'results'],
                   ['Free', 'forever'],
                 ].map(([value, label]) => (
-                  <div key={value} className="rounded-lg bg-slate-50 px-2 py-3">
-                    <p className="text-sm font-extrabold text-slate-900">{value}</p>
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+                  <div key={value} className="rounded-lg bg-slate-50 py-2">
+                    <p className="text-xs font-extrabold text-slate-950 leading-none">{value}</p>
+                    <p className="text-[9px] font-semibold uppercase tracking-wide text-slate-500 mt-0.5 leading-none">{label}</p>
                   </div>
                 ))}
               </div>

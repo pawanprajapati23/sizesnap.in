@@ -104,25 +104,31 @@ export default function HomePage() {
       />
       <div className="space-y-10">
       {/* Hero */}
-      <div className="text-center pt-12 pb-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl text-white px-6 shadow-md relative">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">
-          Free Online Image & PDF Tools
+      <div className="text-center py-6 px-4 md:py-12 md:px-8 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl text-white shadow-lg relative overflow-hidden">
+        {/* Modern ambient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent_50%)] pointer-events-none" />
+        
+        <h1 className="text-2xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-100 via-white to-blue-200 bg-clip-text text-transparent mb-3">
+          Free Online Image &amp; PDF Tools
         </h1>
-        <p className="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-          Resize images, compress PDFs, create passport photos — all free, instant,
-          and 100% private. No signup needed.
+        
+        <p className="text-blue-100/90 text-sm md:text-lg max-w-xl mx-auto mb-4 md:mb-6 font-medium">
+          Resize images, compress PDFs, change photo backgrounds — free, instant,
+          and 100% private. No signup required.
         </p>
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
+
+        {/* Action badges only on tablet/desktop to save vertical space on mobile */}
+        <div className="hidden sm:flex flex-wrap gap-2.5 justify-center">
           <Link href="/resize-image/to-50kb"
-            className="bg-white text-blue-700 font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-sm">
+            className="bg-white text-blue-700 font-bold px-4 py-2 rounded-lg text-xs hover:bg-blue-50 transition-colors shadow-sm">
             Resize Image to 50KB
           </Link>
           <Link href="/compress-pdf/to-100kb"
-            className="bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-400 transition-colors border border-blue-400">
+            className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-xs hover:bg-blue-400 transition-colors border border-blue-400">
             Compress PDF to 100KB
           </Link>
           <Link href="/image-size-guide"
-            className="bg-blue-900/30 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-900/50 transition-colors border border-blue-400/30">
+            className="bg-blue-900/30 text-white font-bold px-4 py-2 rounded-lg text-xs hover:bg-blue-900/50 transition-colors border border-blue-400/30">
             Image Size Guide 2026
           </Link>
         </div>

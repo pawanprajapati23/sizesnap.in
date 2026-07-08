@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { tools } from '@/lib/toolConfigs'
 
 export default function Footer() {
@@ -6,7 +7,10 @@ export default function Footer() {
     <footer className="bg-gray-900 text-gray-400 mt-16">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
         <div className="col-span-2 md:col-span-1">
-          <p className="text-white font-bold text-lg mb-2">📐 SizeSnap</p>
+          <div className="flex items-center gap-2 mb-3">
+            <Image src="/logo.png" alt="SizeSnap Logo" width={22} height={22} className="w-5.5 h-5.5 object-contain" />
+            <span className="text-white font-bold text-lg tracking-tight">SizeSnap</span>
+          </div>
           <p className="text-sm leading-relaxed">
             Free online tools for images and PDFs. Fast, private, and mobile-friendly.
           </p>

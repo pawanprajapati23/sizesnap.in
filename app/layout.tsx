@@ -4,6 +4,7 @@ import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
+import NativeBanner from '@/components/NativeBanner'
 
 import Script from 'next/script'
 
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-gray-50 text-gray-900 min-h-screen">
         <Header />
+        <NativeBanner />
         <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6">
           {/* Sidebar — hidden on mobile, visible on lg+ */}
           <aside className="hidden lg:block w-64 flex-shrink-0">

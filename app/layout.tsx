@@ -117,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-gray-50 text-gray-900 min-h-screen">
           <Header />
   <Banner320x50 />
-  <NativeBanner />
+  {/* <NativeBanner /> - Disabled temporarily during AdSense review to avoid policy violations */}
         <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6">
           {/* Sidebar — hidden on mobile, visible on lg+ */}
           <aside className="hidden lg:block w-64 flex-shrink-0">

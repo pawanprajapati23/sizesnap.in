@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
 import NativeBanner from '@/components/NativeBanner'
 import Banner320x50 from '@/components/Banner320x50'
+import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
 
 import Script from 'next/script'
 
@@ -130,6 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         <Footer />
         <CookieConsent />
+        <ServiceWorkerRegister />
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">

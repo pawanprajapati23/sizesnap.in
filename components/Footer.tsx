@@ -19,7 +19,7 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Image Tools</h4>
           <ul className="space-y-2 text-sm">
-            {tools.filter(t => t.category === 'image').map(tool => {
+            {tools.filter(t => t.category === 'image').slice(0, 8).map(tool => {
               const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
               const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
               return (
@@ -33,9 +33,9 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="text-white font-semibold mb-3 text-sm">PDF Tools</h4>
+          <h4 className="text-white font-semibold mb-3 text-sm">PDF & Sarkari Tools</h4>
           <ul className="space-y-2 text-sm">
-            {tools.filter(t => t.category === 'pdf').map(tool => {
+            {tools.filter(t => t.category === 'pdf' || t.category === 'form').map(tool => {
               const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
               const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
               return (

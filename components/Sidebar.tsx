@@ -5,9 +5,34 @@ import { getPrettySlug } from '@/lib/customSeoContent'
 export default function Sidebar() {
   const imageTools = getToolsByCategory('image')
   const pdfTools = getToolsByCategory('pdf')
+  const formTools = getToolsByCategory('form')
 
   return (
     <div className="space-y-6">
+      {/* Sarkari Exam & Form Tools */}
+      {formTools.length > 0 && (
+        <div>
+          <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-3 px-2 flex items-center gap-1.5">
+            ⚡ Sarkari Tools
+          </div>
+          <nav className="space-y-1">
+            {formTools.map(tool => {
+              const prettySlug = getPrettySlug(tool.slug, tool.variants[0].slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${tool.variants[0].slug}`
+              return (
+                <Link
+                  key={tool.slug}
+                  href={linkHref}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 bg-amber-50/50 hover:bg-amber-100 hover:text-amber-900 transition-colors"
+                >
+                  {tool.icon} {tool.shortName}
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
+      )}
+
       {/* Image Tools */}
       <div>
         <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">

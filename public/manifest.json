@@ -1,12 +1,14 @@
 {
   "name": "SizeSnap — Free Online Image & PDF Tools",
   "short_name": "SizeSnap",
-  "description": "Free online tools to resize images, compress PDFs, and format photos for government forms offline.",
+  "description": "Free 100% private offline tools to resize images to 20KB/50KB, compress PDFs, make passport photos, and resize signatures for government exams.",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#0f172a",
   "theme_color": "#2563eb",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
+  "categories": ["utilities", "productivity", "photo"],
   "icons": [
     {
       "src": "/logo.png",
@@ -17,7 +19,38 @@
     {
       "src": "/favicon.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Resize Image to 50KB",
+      "short_name": "50KB Resizer",
+      "description": "Resize photos strictly under 50KB for government forms",
+      "url": "/resize-image-to-50kb",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Compress PDF",
+      "short_name": "PDF Compress",
+      "description": "Compress PDF documents under 100KB/200KB/500KB",
+      "url": "/compress-pdf-to-100kb",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Passport Photo Maker",
+      "short_name": "Passport Photo",
+      "description": "Create Indian Passport & Exam photo sizes",
+      "url": "/passport-size-photo-maker",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Signature Resizer",
+      "short_name": "Signature",
+      "description": "Resize scanned signature under 10KB-20KB",
+      "url": "/signature-resize",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192" }]
     }
   ]
 }

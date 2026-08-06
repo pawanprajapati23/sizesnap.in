@@ -127,6 +127,48 @@ export default async function ToolVariantPage({ params }: Props) {
     ]
   }
 
+  // FAQPage Schema for Google Rich Snippets
+  const faqSchema = faqs && faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  } : null
+
+  // HowTo Schema for Step-by-Step Google Snippets
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to use ${h1Text}`,
+    description: `Step-by-step instructions to process and format your file using SizeSnap ${h1Text}.`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Upload Your File',
+        text: 'Drag and drop or select your photo or document directly in your browser. No files are uploaded to any server.'
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Auto-Format & Adjust',
+        text: 'SizeSnap instantly resizes, compresses, and adjusts dimensions to meet official portal specifications.'
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Download Compliant File',
+        text: 'Download your ready-to-upload, high-resolution JPG or PDF file directly to your device.'
+      }
+    ]
+  }
+
   return (
     <>
       <script
@@ -137,6 +179,16 @@ export default async function ToolVariantPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="space-y-6">
         {/* Top Ad */}

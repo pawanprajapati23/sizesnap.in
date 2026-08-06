@@ -1,7 +1,8 @@
 'use client'
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Image as ImageIcon, ShieldCheck, Cpu, Sliders, Share2 } from 'lucide-react'
+import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Image as ImageIcon, ShieldCheck, Cpu, Sliders, Share2, Zap } from 'lucide-react'
 import CompareSlider from '@/components/CompareSlider'
+import { processImageWithWorker } from '@/lib/imageWorker'
 
 interface Props {
   config: {
@@ -39,93 +40,16 @@ export default function ImageResizeTool({ config }: Props) {
     'Finalizing byte buffers...'
   ]
 
-  // Iterative Canvas-based compression to ensure output is strictly <= targetKB
+  // Web Worker accelerated compression
   const compressImage = useCallback(async (file: File, maxKB: number) => {
-    return new Promise<Blob>((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = (event) => {
-        const img = new Image()
-        img.onload = async () => {
-          let width = img.width
-          let height = img.height
-
-          // Standardize huge camera images to a max width/height to avoid memory lag
-          const maxDim = 1600
-          if (!config.width && !config.height && (width > maxDim || height > maxDim)) {
-            const ratio = Math.min(maxDim / width, maxDim / height)
-            width = Math.round(width * ratio)
-            height = Math.round(height * ratio)
-          }
-
-          // If fixed width/height requested by form spec
-          if (config.width && config.height) {
-            width = config.width
-            height = config.height
-          }
-
-          const canvas = document.createElement('canvas')
-          const ctx = canvas.getContext('2d')
-          if (!ctx) {
-            reject(new Error('Browser graphics context unavailable.'))
-            return
-          }
-
-          let quality = 0.95
-          let scale = 1.0
-          let resultBlob: Blob | null = null
-          let iterations = 0
-          const maxIterations = 8
-          const safetyMargin = 0.98 // 2% safety buffer to guarantee portal acceptance
-
-          while (iterations < maxIterations) {
-            canvas.width = Math.round(width * scale)
-            canvas.height = Math.round(height * scale)
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-            resultBlob = await new Promise<Blob | null>((res) => {
-              canvas.toBlob((b) => res(b), 'image/jpeg', quality)
-            })
-
-            if (!resultBlob) {
-              reject(new Error('Failed to render compressed frames.'))
-              return
-            }
-
-            const currentSizeKB = resultBlob.size / 1024
-
-            if (currentSizeKB <= maxKB * safetyMargin) {
-              // Sweet spot found
-              if (currentSizeKB >= maxKB * 0.75 || quality >= 0.9) {
-                break
-              }
-              // If file is too small compared to limit, try keeping quality high
-              break
-            } else {
-              // Too large - decrease quality first
-              if (quality > 0.4) {
-                const ratio = (maxKB * safetyMargin) / currentSizeKB
-                quality = Math.max(0.3, quality * ratio)
-              } else {
-                // If quality already low, scale dimensions down
-                scale = scale * 0.85
-              }
-            }
-            iterations++
-          }
-
-          if (resultBlob) {
-            resolve(resultBlob)
-          } else {
-            reject(new Error('Compression algorithm failed.'))
-          }
-        }
-        img.onerror = () => reject(new Error('Corrupted image file.'))
-        img.src = event.target?.result as string
-      }
-      reader.onerror = () => reject(new Error('Failed to read image stream.'))
-      reader.readAsDataURL(file)
+    const res = await processImageWithWorker(file, {
+      targetKB: maxKB,
+      targetWidth: config.width,
+      targetHeight: config.height,
+      format: 'image/jpeg',
+      initialQuality: 0.95
     })
+    return res.blob
   }, [config])
 
   const processImage = useCallback(async (file: File, customLimit?: number) => {

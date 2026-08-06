@@ -22,8 +22,24 @@ const DocumentEnhancerTool = dynamic(() => import('@/components/tools/DocumentEn
 const SplitPdfTool = dynamic(() => import('@/components/tools/SplitPdfTool'), { ssr: false })
 const BackgroundChangerTool = dynamic(() => import('@/components/tools/BackgroundChangerTool'), { ssr: false })
 
+// Smart AI & New Utilities
+const AiBackgroundRemoverTool = dynamic(() => import('@/components/tools/AiBackgroundRemoverTool'), { ssr: false })
+const OcrTextExtractorTool = dynamic(() => import('@/components/tools/OcrTextExtractorTool'), { ssr: false })
+const PdfProtectTool = dynamic(() => import('@/components/tools/PdfProtectTool'), { ssr: false })
+const PdfUnlockTool = dynamic(() => import('@/components/tools/PdfUnlockTool'), { ssr: false })
+const PdfRotateTool = dynamic(() => import('@/components/tools/PdfRotateTool'), { ssr: false })
+const CropImageTool = dynamic(() => import('@/components/tools/CropImageTool'), { ssr: false })
 
-export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, config: any }) {
+// 3 Killer Features
+const ExamPackGeneratorTool = dynamic(() => import('@/components/tools/ExamPackGeneratorTool'), { ssr: false })
+const PassportPrintSheetTool = dynamic(() => import('@/components/tools/PassportPrintSheetTool'), { ssr: false })
+const PhotoComplianceCheckerTool = dynamic(() => import('@/components/tools/PhotoComplianceCheckerTool'), { ssr: false })
+
+// SEO King Traffic Magnets
+const AgeCalculatorTool = dynamic(() => import('@/components/tools/AgeCalculatorTool'), { ssr: false })
+const DimensionResizerTool = dynamic(() => import('@/components/tools/DimensionResizerTool'), { ssr: false })
+
+export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   let toolComponent = null
   if (toolSlug === 'resize-image') toolComponent = <ImageResizeTool config={config} />
   else if (toolSlug === 'compress-image') toolComponent = <ImageCompressTool config={config} />
@@ -45,7 +61,29 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, co
   else if (toolSlug === 'postcard-photo') toolComponent = <PassportPhotoTool config={config} />
   else if (toolSlug === 'document-enhancer') toolComponent = <DocumentEnhancerTool config={config} />
   else if (toolSlug === 'split-pdf') toolComponent = <SplitPdfTool />
-  else if (toolSlug === 'background-changer') toolComponent = <BackgroundChangerTool config={config} />
+  else if (toolSlug === 'background-changer' || toolSlug === 'ai-background-remover') {
+    toolComponent = <AiBackgroundRemoverTool config={config} />
+  } else if (toolSlug === 'ocr-text-extractor' || toolSlug === 'image-to-text') {
+    toolComponent = <OcrTextExtractorTool config={config} />
+  } else if (toolSlug === 'pdf-protect' || toolSlug === 'protect-pdf') {
+    toolComponent = <PdfProtectTool config={config} />
+  } else if (toolSlug === 'pdf-unlock' || toolSlug === 'unlock-pdf') {
+    toolComponent = <PdfUnlockTool config={config} />
+  } else if (toolSlug === 'pdf-rotate' || toolSlug === 'rotate-pdf') {
+    toolComponent = <PdfRotateTool />
+  } else if (toolSlug === 'crop-image' || toolSlug === 'circle-crop') {
+    toolComponent = <CropImageTool config={config} />
+  } else if (toolSlug === 'exam-pack-generator' || toolSlug === 'sarkari-exam-pack') {
+    toolComponent = <ExamPackGeneratorTool />
+  } else if (toolSlug === 'passport-print-sheet' || toolSlug === 'passport-sheet-maker') {
+    toolComponent = <PassportPrintSheetTool />
+  } else if (toolSlug === 'photo-compliance-checker' || toolSlug === 'photo-validator') {
+    toolComponent = <PhotoComplianceCheckerTool />
+  } else if (toolSlug === 'age-calculator' || toolSlug === 'sarkari-age-calculator') {
+    toolComponent = <AgeCalculatorTool config={config} />
+  } else if (toolSlug === 'dimension-resizer' || toolSlug === 'cm-resizer') {
+    toolComponent = <DimensionResizerTool config={config} />
+  }
 
   if (!toolComponent) return null
 
@@ -53,9 +91,7 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string, co
     <div className="relative group/tool">
       {/* Dynamic neon gradient backdrop glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover/tool:opacity-35 transition-opacity duration-500 pointer-events-none" />
-      <div className="relative">
-        {toolComponent}
-      </div>
+      <div className="relative">{toolComponent}</div>
     </div>
   )
 }

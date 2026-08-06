@@ -390,7 +390,120 @@ export const tools: Tool[] = [
     icon: '🎨',
     variants: [
       { slug: 'to-white', label: 'Change Background to White', metaTitle: 'Change Photo Background to White Online Free | SizeSnap', metaDescription: 'Change your photo background to pure white online for free. Clean background editor for passport size photos.', h1: 'Change Photo Background to White Online', introParagraph: 'Apne passport size photo ya portrait image ka background color automatic detect karke change karein aur use pure white background filter me convert karein.', config: { targetColor: 'white' } },
-      { slug: 'to-blue', label: 'Change Background to Blue', metaTitle: 'Change Photo Background to Blue Online Free | SizeSnap', metaDescription: 'Change your photo background to sky blue online for free. Clean background editor for passport size photos.', h1: 'Change Photo Background to Blue Online', introParagraph: 'Apne photo ka background sky blue color filter layout preset me convert karein jo NEET, RRB aur banks notifications rules specifications demand karte hain.', config: { targetColor: 'blue' } }
+      { slug: 'to-blue', label: 'Change Background to Blue', metaTitle: 'Change Photo Background to Blue Online Free | SizeSnap', metaDescription: 'Change your photo background to sky blue online for free. Clean background editor for passport size photos.', h1: 'Change Photo Background to Blue Online', introParagraph: 'Apne photo ka background sky blue color filter layout preset me convert karein jo NEET, RRB aur banks notifications rules specifications demand karte hain.', config: { targetColor: 'blue' } },
+      { slug: 'to-transparent', label: 'Remove Background (Transparent PNG)', metaTitle: 'Remove Background to Transparent PNG Free | SizeSnap', metaDescription: 'Remove photo background to transparent PNG online for free. Clean cutout editor with hair smoothing.', h1: 'Remove Background to Transparent PNG Online', introParagraph: 'Photo background ko cut karke clean transparent PNG format me download karein.', config: { targetColor: 'transparent' } }
+    ]
+  },
+  {
+    slug: 'ocr-text-extractor',
+    name: 'Document & Image OCR Text Extractor',
+    shortName: 'OCR Text Extractor',
+    category: 'image',
+    description: 'Extract text from marksheet photos, certificates, handwritten notes, and scanned documents locally in your browser.',
+    icon: '🔍',
+    variants: [
+      { slug: 'from-marksheet', label: 'Marksheet Text OCR', metaTitle: 'Extract Text from Marksheet Photo Online Free (OCR) | SizeSnap', metaDescription: 'Extract text and roll numbers from marksheet photos and certificates online. 100% private browser OCR.', h1: 'Extract Text from Marksheet & Certificate Online Free', introParagraph: 'Apni marksheet ya certificate photo se roll number, marks aur text data instantly extract karein aur clipboard me copy ya PDF me save karein.', config: {} },
+      { slug: 'from-image', label: 'Image to Text Converter', metaTitle: 'Image to Text Converter Online Free (OCR) | SizeSnap', metaDescription: 'Convert image to text online free with client-side OCR. Supports Hindi and English text extraction.', h1: 'Convert Image to Text Online Free (Hindi & English OCR)', introParagraph: 'Kissi bhi image ya scanned document se Hindi aur English text ko copyable text me convert karein bina kisi server upload ke.', config: {} }
+    ]
+  },
+  {
+    slug: 'pdf-protect',
+    name: 'Password Protect & Lock PDF Document',
+    shortName: 'Protect PDF',
+    category: 'pdf',
+    description: 'Encrypt and set a password on your sensitive PDF documents (Aadhaar, marksheet, payslips) directly in your browser.',
+    icon: '🔒',
+    variants: [
+      { slug: 'add-password', label: 'Lock PDF with Password', metaTitle: 'Password Protect PDF Online Free (100% Private) | SizeSnap', metaDescription: 'Lock and password protect PDF files online for free. Secure your sensitive documents locally in browser.', h1: 'Password Protect PDF Documents Online Free', introParagraph: 'Apne personal documents, Aadhaar cards, aur marksheets ko password encrypt karke secure karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'pdf-unlock',
+    name: 'Unlock & Remove Password from PDF',
+    shortName: 'Unlock PDF',
+    category: 'pdf',
+    description: 'Permanently remove passwords and printing/copying restrictions from protected PDF documents.',
+    icon: '🔓',
+    variants: [
+      { slug: 'remove-password', label: 'Remove PDF Password', metaTitle: 'Unlock PDF & Remove Password Online Free | SizeSnap', metaDescription: 'Remove password and restrictions from protected PDF files online for free. 100% client-side privacy.', h1: 'Unlock Protected PDF Documents Online Free', introParagraph: 'e-Aadhaar ya bank statement PDFs se password permanently remove karein taaki bar-bar password na enter karna pade.', config: {} }
+    ]
+  },
+  {
+    slug: 'pdf-rotate',
+    name: 'Rotate & Reorder PDF Pages',
+    shortName: 'Rotate PDF',
+    category: 'pdf',
+    description: 'Visually rotate individual or all PDF pages 90°/180°, delete pages, and reorder document page sequence.',
+    icon: '🔄',
+    variants: [
+      { slug: 'organize-pages', label: 'Rotate & Reorder Pages', metaTitle: 'Rotate & Reorder PDF Pages Online Free | SizeSnap', metaDescription: 'Rotate PDF pages 90 degrees and reorder page sequence online free with visual thumbnails.', h1: 'Rotate & Reorder PDF Pages Online Free', introParagraph: 'Apne PDF document ke ulte ya sideways pages ko 90 degree rotate karein aur pages ki sequence ko arrange karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'crop-image',
+    name: 'Crop & Circle Image Tool',
+    shortName: 'Crop Image',
+    category: 'image',
+    description: 'Crop images to 1:1 square, round circle avatar, 16:9 banner, 35x45mm passport size, or custom aspect ratio.',
+    icon: '✂️',
+    variants: [
+      { slug: 'square-crop', label: '1:1 Square Crop', metaTitle: 'Crop Image to 1:1 Square Online Free | SizeSnap', metaDescription: 'Crop photo to square 1:1 ratio online free for profile picture and avatars.', h1: 'Crop Image to 1:1 Square Online Free', introParagraph: 'Apni photo ko perfect 1:1 square ratio me crop karein profile picture aur avatar ke liye.', config: { aspect: '1:1' } },
+      { slug: 'circle-crop', label: 'Circle Crop Avatar', metaTitle: 'Circle Crop Image to Round Avatar Online Free | SizeSnap', metaDescription: 'Crop photo into circle round avatar PNG online free. Instant round cutout.', h1: 'Circle Crop Photo to Round Avatar Online Free', introParagraph: 'Photo ko round circle avatar PNG me crop karein with transparent background.', config: { aspect: 'circle' } }
+    ]
+  },
+  {
+    slug: 'exam-pack-generator',
+    name: '1-Click Sarkari Exam Form Pack Generator',
+    shortName: 'Exam Pack Generator',
+    category: 'image',
+    description: '1-Click auto format Photo (with Name/Date), Signature, Thumb & Marksheets to official exam guidelines (SSC, NEET, UPSC, IBPS) in single ZIP.',
+    icon: '⚡',
+    variants: [
+      { slug: 'sarkari-exam-pack', label: 'Sarkari Exam Pack', metaTitle: '1-Click Sarkari Exam Photo & Signature Pack Generator | SizeSnap', metaDescription: 'Generate ready-to-upload Photo (with Name/Date), Signature, and Documents for SSC, NEET, UPSC, IBPS in 1-Click ZIP.', h1: '1-Click Sarkari Exam Form Pack Generator (SSC, NEET, UPSC, IBPS)', introParagraph: 'Kisi bhi Sarkari Exam ka online application form bharne ke liye photo, signature aur documents ko 1-Click me auto format karein aur ready-to-upload ZIP download karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'passport-print-sheet',
+    name: '4x6 & A4 Passport Photo Print Sheet Maker',
+    shortName: 'Print Sheet Maker',
+    category: 'image',
+    description: 'Arrange 6, 8, 12, or 30 passport size photos on 4x6 inch or A4 photo paper with cutting lines ready for printing (300 DPI PDF).',
+    icon: '🖨️',
+    variants: [
+      { slug: 'passport-sheet-maker', label: 'Passport Print Sheet', metaTitle: 'Passport Photo 4x6 & A4 Print Sheet Maker Online Free (300 DPI) | SizeSnap', metaDescription: 'Create 6, 8, or 30 passport size photo print sheet on 4x6 inch or A4 paper with cutting lines for Cyber Cafe & CSC centers.', h1: 'Passport Photo 4x6 & A4 Print Sheet Maker Online (300 DPI PDF)', introParagraph: 'Single photo se 4x6 inch glossy paper ya A4 sheet par 6, 8 ya 30 passport photos ka printable 300 DPI PDF / JPG sheet generate karein with scissor cutting borders.', config: {} }
+    ]
+  },
+  {
+    slug: 'photo-compliance-checker',
+    name: 'Sarkari Form Photo AI Compliance Checker',
+    shortName: 'Photo AI Validator',
+    category: 'image',
+    description: 'Instant 8-point automated compliance audit for SSC, NEET, UPSC, IBPS application photos to prevent form rejection.',
+    icon: '🛡️',
+    variants: [
+      { slug: 'photo-validator', label: 'Photo Compliance Audit', metaTitle: 'Sarkari Form Photo AI Compliance Checker & Validator | SizeSnap', metaDescription: 'Check if your photo meets SSC, NEET, UPSC, IBPS guidelines (Size, Background, Dimensions, Blur). Prevent form rejection.', h1: 'Sarkari Form Photo AI Compliance Checker & Rejection Prevention', introParagraph: 'Apni application photo ko submit karne se pehle 8-point automated rules check karein taaki form reject na ho.', config: {} }
+    ]
+  },
+  {
+    slug: 'age-calculator',
+    name: 'Sarkari Exam Age Calculator & Eligibility Checker',
+    shortName: 'Age Calculator',
+    category: 'form',
+    description: 'Calculate exact age (Years, Months, Days) as on any exam cutoff date with live SSC, UPSC, Police, and Railway eligibility status.',
+    icon: '🎂',
+    variants: [
+      { slug: 'sarkari-exam', label: 'Sarkari Exam Age Calculator', metaTitle: 'Sarkari Exam Age Calculator Online Free (As on Date) | SizeSnap', metaDescription: 'Calculate your exact age as on cutoff date for SSC CGL, UPSC, UP Police, RRB, and Banking exams with category relaxation. 100% Free.', h1: 'Sarkari Exam Age Calculator & Cutoff Eligibility Online Free', introParagraph: 'Apni Date of Birth aur exam cutoff date enter karke exact age (Years, Months, Days) calculate karein aur live eligibility status check karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'dimension-resizer',
+    name: 'Image Resizer in CM, MM, Inches & Pixels',
+    shortName: 'CM/MM Resizer',
+    category: 'image',
+    description: 'Resize photo to exact physical dimensions (3.5x4.5 cm, 35x45 mm, 2x2 inch) at 200/300 DPI with target KB limits.',
+    icon: '📐',
+    variants: [
+      { slug: 'in-cm', label: 'Resize in CM & MM', metaTitle: 'Resize Image in CM & MM Online Free (3.5 x 4.5 cm) | SizeSnap', metaDescription: 'Resize photos to exact 3.5x4.5 cm, 4x2 cm signature or 35x45 mm online free at 300 DPI. 100% in-browser.', h1: 'Resize Image in CM, MM & Inches Online Free (300 DPI)', introParagraph: 'Physical dimensions (CM/MM/Inches) select karke apni photo ko exact exam portal dimensions aur target KB me resize karein.', config: {} }
     ]
   }
 ]

@@ -199,27 +199,37 @@ export default function ExamPresetCalculator() {
           </div>
 
           {/* Action Links */}
-          <div className="mt-5 pt-4 border-t border-white/10 flex flex-col sm:flex-row gap-2.5">
+          <div className="mt-5 pt-4 border-t border-white/10 space-y-2.5">
             <Link
-              href={active.photoLink}
-              className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-3 px-4 rounded-xl transition-all shadow flex items-center justify-center gap-1.5"
+              href="/sarkari-exam-pack-generator"
+              className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 text-xs font-extrabold py-3.5 px-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
             >
-              <ImageIcon className="w-3.5 h-3.5" /> Resize Photo <ArrowRight className="w-3.5 h-3.5" />
+              <span>⚡ 1-Click Complete {active.name.split(' ')[0]} Form Pack (ZIP)</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
 
-            <Link
-              href={active.signLink}
-              className="w-full sm:flex-1 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-3 px-4 rounded-xl border border-white/10 transition-all flex items-center justify-center gap-1.5"
-            >
-              <FileText className="w-3.5 h-3.5" /> Resize Signature <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Link
+                href={active.photoLink}
+                className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-all shadow flex items-center justify-center gap-1.5"
+              >
+                <ImageIcon className="w-3.5 h-3.5" /> Resize Photo
+              </Link>
+
+              <Link
+                href={active.signLink}
+                className="w-full sm:flex-1 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl border border-white/10 transition-all flex items-center justify-center gap-1.5"
+              >
+                <FileText className="w-3.5 h-3.5" /> Resize Signature
+              </Link>
+            </div>
 
             {active.postcardLink && (
               <Link
                 href={active.postcardLink}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 px-4 rounded-xl transition-all shadow flex items-center justify-center gap-1.5"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-all shadow flex items-center justify-center gap-1.5"
               >
-                <CheckCircle className="w-3.5 h-3.5" /> Make Postcard Size (5x7/4x6)
+                <CheckCircle className="w-3.5 h-3.5" /> Make Postcard Size (4x6)
               </Link>
             )}
           </div>

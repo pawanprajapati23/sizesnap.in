@@ -2,6 +2,8 @@ import Link from 'next/link'
 import AdUnit from '@/components/AdUnit'
 import HomeSearch from '@/components/HomeSearch'
 import ExamPresetCalculator from '@/components/ExamPresetCalculator'
+import ProStudioSection from '@/components/ProStudioSection'
+import ViralShareWidget from '@/components/ViralShareWidget'
 import { stories } from '@/lib/storyConfigs'
 import { blogs } from '@/lib/blogConfigs'
 import type { Metadata } from 'next'
@@ -223,6 +225,8 @@ export default function HomePage() {
 
       <HomeSearch />
 
+      <ProStudioSection />
+
       <ExamPresetCalculator />
 
       {/* Modern Web Stories Circle Carousel Widget */}
@@ -324,7 +328,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <AdUnit slot="homepage-bottom" format="horizontal" />
+      <ViralShareWidget />
 
       {/* Trust Signals */}
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">

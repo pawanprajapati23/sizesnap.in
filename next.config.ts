@@ -68,7 +68,24 @@ const MAPPINGS = [
   { pretty: '/sharpen-scanned-signature', raw: '/document-enhancer/signature-sharpener' },
   { pretty: '/split-pdf-extract-pages', raw: '/split-pdf/extract-pages' },
   { pretty: '/change-photo-background-to-white', raw: '/background-changer/to-white' },
-  { pretty: '/change-photo-background-to-blue', raw: '/background-changer/to-blue' }
+  { pretty: '/change-photo-background-to-blue', raw: '/background-changer/to-blue' },
+  { pretty: '/remove-background-to-transparent', raw: '/background-changer/to-transparent' },
+  { pretty: '/ai-background-remover', raw: '/background-changer/to-white' },
+  { pretty: '/ocr-extract-text-from-marksheet', raw: '/ocr-text-extractor/from-marksheet' },
+  { pretty: '/image-to-text-converter', raw: '/ocr-text-extractor/from-image' },
+  { pretty: '/password-protect-pdf', raw: '/pdf-protect/add-password' },
+  { pretty: '/unlock-pdf-remove-password', raw: '/pdf-unlock/remove-password' },
+  { pretty: '/rotate-and-reorder-pdf-pages', raw: '/pdf-rotate/organize-pages' },
+  { pretty: '/crop-image-to-square', raw: '/crop-image/square-crop' },
+  { pretty: '/circle-crop-avatar', raw: '/crop-image/circle-crop' },
+  { pretty: '/sarkari-exam-pack-generator', raw: '/exam-pack-generator/sarkari-exam-pack' },
+  { pretty: '/passport-photo-print-sheet-maker', raw: '/passport-print-sheet/passport-sheet-maker' },
+  { pretty: '/photo-compliance-checker', raw: '/photo-compliance-checker/photo-validator' },
+  { pretty: '/sarkari-exam-age-calculator', raw: '/age-calculator/sarkari-exam' },
+  { pretty: '/resize-image-in-cm-and-mm', raw: '/dimension-resizer/in-cm' },
+  { pretty: '/merge-pdf-online', raw: '/merge-pdf/combine' },
+  { pretty: '/jpg-to-pdf', raw: '/image-to-pdf/convert' },
+  { pretty: '/pdf-to-jpg', raw: '/pdf-to-jpg/extract' }
 ];
 
 const nextConfig: NextConfig = {

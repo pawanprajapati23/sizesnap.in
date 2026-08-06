@@ -1025,6 +1025,182 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Kaun se blue color range supported hain?', answer: 'Standard sky blue and dark blue preset colors easily adjust controls me pre-set metrics coordinate settings verify available hain.' }
     ]
   },
+  'exam-pack-generator/sarkari-exam-pack': {
+    metaTitle: '1-Click Sarkari Exam Photo & Signature Pack Generator (SSC, NEET, UPSC, IBPS) | SizeSnap',
+    metaDescription: 'Auto-format Photo (with Name/Date), Signature, Thumb Impression & Marksheet for SSC, NEET, UPSC, IBPS in 1-Click ZIP. 100% Free & In-Browser Private.',
+    h1: '1-Click Sarkari Exam Form Pack Generator (Photo, Signature & Documents in 1 ZIP)',
+    introParagraph: 'Kisi bhi Sarkari Exam (SSC CGL, NEET, UPSC, IBPS, Police) ka form bharne ke liye photo, signature aur documents ko official guidelines ke hisaab se 1-click me resize karein aur ready-to-upload ZIP bundle download karein.',
+    bodyHtml: `
+      <h2>1-Click Sarkari Exam Form Pack Generator Online</h2>
+      <p>Sarkari Exam portals jaise SSC, NTA NEET, UPSC aur IBPS par alag-alag documents ke liye alag-alag size aur dimension requirements hoti hain. SizeSnap ka 1-Click Exam Pack Generator sabhi required documents ko ek hi screen par accept karta hai aur instant ready-to-upload ZIP create karta hai.</p>
+      <h3>Supported Official Exam Presets:</h3>
+      <ul>
+        <li><strong>SSC CGL / CHSL / MTS / GD:</strong> Photo (20-50KB, 3.5x4.5cm) + Signature (10-20KB, 4x2cm) + Marksheet (50-200KB).</li>
+        <li><strong>NTA NEET UG 2026:</strong> Passport (10-200KB) + Postcard 4x6 (10-200KB) + Signature (4-30KB) + Thumb Impression (10-200KB).</li>
+        <li><strong>UPSC Civil Services & NDA:</strong> Photo (20-300KB) + Signature (20-300KB) + Photo ID Card (20-300KB).</li>
+        <li><strong>IBPS & SBI Bank PO/Clerk:</strong> Photo (20-50KB) + Signature (10-20KB) + Left Thumb (20-50KB) + Declaration (50-100KB).</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Kya Candidate Name aur Date of Photo print hoga?', answer: 'Haan, aap apna naam aur date of photo enter karke photo ke bottom me official standard white banner ke saath print kar sakte hain.' },
+      { question: 'Kya ZIP file mobile phone me download hoti hai?', answer: 'Haan, ZIP file Android aur iOS dono mobile devices par directly download ho jaati hai aur individual files bhi download kar sakte hain.' },
+      { question: 'Kya documents kisi server par upload hote hain?', answer: 'Nahi, sabhi processing 100% client-side browser me hoti hai, aapka data poori tarah private rehta hai.' }
+    ]
+  },
+  'passport-print-sheet/passport-sheet-maker': {
+    metaTitle: '4x6 & A4 Passport Photo Print Sheet Maker Online Free (300 DPI PDF) | SizeSnap',
+    metaDescription: 'Create 6, 8, 12, or 30 passport size photos (35x45mm) on 4x6 inch glossy paper or A4 sheet with scissor cutting lines for Cyber Cafe & CSC centers.',
+    h1: '1-Click 4x6 & A4 Passport Photo Print Sheet Maker (300 DPI Print Ready)',
+    introParagraph: 'Single photo upload karke 4x6 inch photo paper ya A4 sheet par 6, 8, ya 30 passport photos ka printable 300 DPI PDF aur JPG layout generate karein with scissor cutting borders.',
+    bodyHtml: `
+      <h2>Passport Size Photo Print Sheet Studio for Cyber Cafe & CSC</h2>
+      <p>Photoshop 7.0 ki zaroorat ke bina, apne customers ke liye 1 second me 4x6 inch paper par 6 ya 8 passport photos aur A4 paper par 30 photos ka 300 DPI high-definition printable sheet banayein.</p>
+      <h3>Key Features:</h3>
+      <ul>
+        <li><strong>Standard Paper Sizes:</strong> 4x6 inch glossy paper, A4 sheet (210x297mm), and 5x7 inch.</li>
+        <li><strong>Scissor Cutting Lines:</strong> Dashed cutting guides for fast and clean manual cutting.</li>
+        <li><strong>300 DPI Print PDF:</strong> Direct Ctrl+P ready for Epson, Canon, and HP photo printers.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: '4x6 paper par kitne passport photos print ho sakte hain?', answer: 'Standard 4x6 inch paper par 6 photos ya 8 photos perfectly print ho sakte hain.' },
+      { question: 'Print quality kaisi aayegi?', answer: 'SizeSnap 300 DPI ultra-high definition resolution par PDF render karta hai jisse print bilkul sharp aur professional studio quality ka aata hai.' }
+    ]
+  },
+  'photo-compliance-checker/photo-validator': {
+    metaTitle: 'Sarkari Form Photo AI Compliance Checker & Rejection Prevention | SizeSnap',
+    metaDescription: 'Instant 8-point automated compliance audit for SSC, NEET, UPSC, IBPS application photos (Size, Background, Dimensions, Blur). Prevent form rejection.',
+    h1: 'Sarkari Form Photo AI Compliance Checker & Audit',
+    introParagraph: 'Apni application photo ko exam portal par submit karne se pehle 8-point automated rules check karein taaki aapka application form reject na ho.',
+    bodyHtml: `
+      <h2>8-Point Automated Sarkari Photo Compliance Engine</h2>
+      <p>Lakho students ke Sarkari Exam applications minor photo errors (wrong size, dark background, blurry face, incorrect ratio) ki wajah se reject ho jaate hain. SizeSnap ka Compliance Checker 8 criteria verify karta hai aur 1-click me automatically fix karta hai.</p>
+    `,
+    faqs: [
+      { question: 'SSC CGL me photo reject kyu hoti hai?', answer: 'Spectacles glare, cap/mask pehanne, dark background, 20-50KB limit cross hone, ya blurred image hone ki wajah se SSC forms reject ho jaate hain.' },
+      { question: 'Kya ye checker 1-click me photo fix kar sakta hai?', answer: 'Haan, "1-Click Auto-Fix & Download" button click karne par photo automatically correct dimensions aur target KB me convert hokar download ho jaati hai.' }
+    ]
+  },
+  'ocr-text-extractor/from-marksheet': {
+    metaTitle: 'OCR Extract Text from Marksheet & Certificate Online Free | SizeSnap',
+    metaDescription: 'Extract Roll Numbers, Candidate Names, Marks, and text from scanned marksheets and documents with zero typing. 100% in-browser OCR.',
+    h1: 'OCR Extract Text from Marksheet & Certificate Online Free',
+    introParagraph: 'Scanned 10th/12th marksheets, degree certificates aur documents se roll number aur marks bina type kiye copy karein.',
+    bodyHtml: `
+      <h2>Client-Side OCR Marksheet Text Extractor</h2>
+      <p>High-accuracy Tesseract.js engine use karke apne document image se instant editable text extract karein.</p>
+    `,
+    faqs: [
+      { question: 'Kya Hindi documents ka text extract hota hai?', answer: 'Haan, English aur Hindi dono document formats supported hain.' }
+    ]
+  },
+  'pdf-protect/add-password': {
+    metaTitle: 'Lock & Password Protect PDF Online Free (AES Encryption) | SizeSnap',
+    metaDescription: 'Add strong password protection and AES encryption to confidential PDF documents online free. 100% private in-browser.',
+    h1: 'Lock & Password Protect PDF Documents Online Free',
+    introParagraph: 'Apne confidential PDFs aur bank statements me password protection lagayein without uploading files to any server.',
+    bodyHtml: `
+      <h2>Secure Client-Side PDF Encryption</h2>
+      <p>AES encryption standard ke saath apne sensitive documents ko lock karein.</p>
+    `,
+    faqs: [
+      { question: 'Kya ye password kisi server par save hota hai?', answer: 'Nahi, poori encryption aapke device ke browser me hoti hai, koi bhi data server par nahi jaata.' }
+    ]
+  },
+  'pdf-unlock/remove-password': {
+    metaTitle: 'Unlock Password Protected PDF Online Free | SizeSnap',
+    metaDescription: 'Remove known password from Aadhaar, Salary Slip, and Bank Statement PDFs for permanent unlock online free.',
+    h1: 'Unlock Password Protected PDF Online Free',
+    introParagraph: 'Aadhaar card aur bank statement PDFs se permanent password remove karein taaki bar-bar password na enter karna pade.',
+    bodyHtml: `
+      <h2>Instant Client-Side PDF Password Removal</h2>
+      <p>Aadhaar card PDF aur e-statements ko unlock karke clean unencrypted PDF download karein.</p>
+    `,
+    faqs: [
+      { question: 'Kya mujhe password pata hona zaroori hai?', answer: 'Haan, authorized access ke liye current password enter karna hota hai jiske baad permanently unlocked PDF milta hai.' }
+    ]
+  },
+  'age-calculator/sarkari-exam': {
+    metaTitle: 'Sarkari Exam Age Calculator Online (As on Cutoff Date 2026) | SizeSnap',
+    metaDescription: 'Calculate exact age (Years, Months, Days) as on cutoff date for SSC CGL, UPSC, UP Police, RRB NTPC, IBPS with category relaxation. 100% Free.',
+    h1: 'Sarkari Exam Age Calculator & Cutoff Eligibility Online Free',
+    introParagraph: 'Calculate your exact age as on notification cutoff date (e.g. 01-08-2026 or 01-01-2026) with live eligibility badges and category age relaxations for General, OBC (+3y), SC/ST (+5y), and PwD (+10y).',
+    bodyHtml: `
+      <h2>Why use SizeSnap Sarkari Exam Age Calculator?</h2>
+      <p>Sarkari recruitment notifications like SSC, UPSC CSE, UP Police Constable, Railway RRB, and Banking exams strictly specify age eligibility as on a specific cutoff date. Calculating leap years, exact months, and days manually often leads to application errors.</p>
+      <ul>
+        <li><strong>Exact Precision:</strong> Gives detailed breakdown of Years, Months, and Days as on the cutoff date.</li>
+        <li><strong>Category Age Relaxation:</strong> Automatic +3 years for OBC, +5 years for SC/ST, and +10 years for PwD candidates.</li>
+        <li><strong>Live Multi-Exam Matrix:</strong> Real-time eligibility check for 10+ major national exams in 1 click.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'How is age calculated for SSC CGL & UPSC exams?', answer: 'The age is calculated from your Date of Birth to the cutoff date specified in the official notification (usually August 1st or January 1st of the exam year).' },
+      { question: 'Does this calculator apply OBC/SC/ST age relaxation?', answer: 'Yes! Select your category (General, OBC, SC/ST, PwD) from the dropdown and the system will automatically calculate your relaxed maximum age limit.' },
+      { question: 'Is my Date of Birth data stored anywhere?', answer: 'No. SizeSnap runs 100% locally in your browser. No personal information is sent to any server.' }
+    ]
+  },
+  'dimension-resizer/in-cm': {
+    metaTitle: 'Resize Image in CM & MM Online Free (3.5 x 4.5 cm @ 300 DPI) | SizeSnap',
+    metaDescription: 'Resize photos to exact 3.5x4.5 cm, 4x2 cm signature, 2x2 inch, or 35x45 mm online free at 200/300 DPI with KB compressor. 100% in-browser.',
+    h1: 'Resize Image in CM, MM, Inches & Pixels Online Free',
+    introParagraph: 'Resize photos and scanned signatures into exact physical dimensions (Centimeters, Millimeters, Inches) at 200/300 DPI with target file size control (≤50KB, ≤100KB) for government exam portals.',
+    bodyHtml: `
+      <h2>Convert Physical Dimensions (CM/MM) to High-Quality Digital Photos</h2>
+      <p>Official examination portals (SSC, UPSC, NTA NEET, State PSCs) mandate exact physical dimensions like <strong>3.5 cm × 4.5 cm</strong> for passport photos and <strong>4.0 cm × 2.0 cm</strong> for signatures at 200 or 300 DPI.</p>
+      <ul>
+        <li><strong>Multi-Unit Support:</strong> Centimeters (CM), Millimeters (MM), Inches, and Pixels (PX).</li>
+        <li><strong>DPI Resolution Control:</strong> 100, 200 (Govt Forms standard), 300 (Studio Print standard), or 600 DPI.</li>
+        <li><strong>Smart KB Limiter:</strong> Automatically compresses the output image below your required KB limit without blur.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'How many pixels is 3.5 x 4.5 cm at 300 DPI?', answer: '3.5 cm × 4.5 cm at 300 DPI is exactly 413 × 531 pixels.' },
+      { question: 'How many pixels is 3.5 x 4.5 cm at 200 DPI?', answer: '3.5 cm × 4.5 cm at 200 DPI is exactly 276 × 354 pixels (standard for SSC and UPSC uploads).' },
+      { question: 'Will resizing in CM reduce photo clarity?', answer: 'No, SizeSnap uses bicubic multi-step interpolation to preserve facial sharpness, eye clarity, and signature edges.' }
+    ]
+  },
+  'merge-pdf/combine': {
+    metaTitle: 'Merge PDF Online Free (Combine Multiple PDF Files) | SizeSnap',
+    metaDescription: 'Combine multiple PDF files into one single document online free. 100% private, client-side PDF merger for marksheets and certificates.',
+    h1: 'Merge PDF Files Online Free (100% Client-Side Private)',
+    introParagraph: 'Combine multiple PDF files (10th marksheet, 12th marksheet, degree certificate, caste certificate) into a single organized PDF document directly in your browser.',
+    bodyHtml: `
+      <h2>Instant Multi-PDF Combiner for Job Applications</h2>
+      <p>Combine multiple scanned documents and certificates into one unified PDF file with custom page ordering. 100% secure processing with zero server uploads.</p>
+    `,
+    faqs: [
+      { question: 'Is there a limit on how many PDF files I can merge?', answer: 'You can merge multiple PDF documents directly on your device without any restriction or watermark.' },
+      { question: 'Are my confidential documents uploaded to a server?', answer: 'No, SizeSnap merges your PDF files 100% inside your browser using pdf-lib. Your files never leave your device.' }
+    ]
+  },
+  'image-to-pdf/convert': {
+    metaTitle: 'JPG to PDF Converter Online Free (Image to PDF Under 200KB) | SizeSnap',
+    metaDescription: 'Convert JPG, PNG images to PDF online free. Set target PDF size under 200KB or 500KB for exam portals. Fast, secure, 100% in-browser.',
+    h1: 'Convert JPG & PNG Images to PDF Online Free',
+    introParagraph: 'Convert photos, bills, ID cards, and document photos into standard PDF format with custom compression to meet recruitment portal file limits.',
+    bodyHtml: `
+      <h2>Fast Image to PDF Conversion with Custom Compression</h2>
+      <p>Transform single or multiple images into a clean, printable PDF document formatted for official portal uploads.</p>
+    `,
+    faqs: [
+      { question: 'Can I convert multiple JPG photos into a single PDF?', answer: 'Yes! Select multiple photos and combine them into a single multi-page PDF document.' },
+      { question: 'Can I compress the generated PDF under 200KB?', answer: 'Yes, our built-in image compression ensures your output PDF meets strict recruitment portal size limits.' }
+    ]
+  },
+  'pdf-to-jpg/extract': {
+    metaTitle: 'PDF to JPG Converter Online Free (Extract High-Res Images) | SizeSnap',
+    metaDescription: 'Convert PDF pages to high-quality JPG/PNG images online free. Extract every page in 1-Click ZIP. 100% client-side privacy.',
+    h1: 'Convert PDF Pages to JPG Images Online Free',
+    introParagraph: 'Extract all pages from your PDF document into crisp, high-resolution JPG or PNG image files directly in your web browser.',
+    bodyHtml: `
+      <h2>Extract High-Quality JPG Images from Any PDF</h2>
+      <p>Convert e-books, marksheets, scanned forms, and brochures from PDF into clear JPG pictures for easy editing and sharing.</p>
+    `,
+    faqs: [
+      { question: 'How do I download all extracted pages at once?', answer: 'You can download individual page images or download all pages combined in a single ZIP file.' }
+    ]
+  }
 }
 
 
@@ -1098,6 +1274,22 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'split-pdf/extract-pages': 'split-pdf-extract-pages',
     'background-changer/to-white': 'change-photo-background-to-white',
     'background-changer/to-blue': 'change-photo-background-to-blue',
+    'background-changer/to-transparent': 'remove-background-to-transparent',
+    'ocr-text-extractor/from-marksheet': 'ocr-extract-text-from-marksheet',
+    'ocr-text-extractor/from-image': 'image-to-text-converter',
+    'pdf-protect/add-password': 'password-protect-pdf',
+    'pdf-unlock/remove-password': 'unlock-pdf-remove-password',
+    'pdf-rotate/organize-pages': 'rotate-and-reorder-pdf-pages',
+    'crop-image/square-crop': 'crop-image-to-square',
+    'crop-image/circle-crop': 'circle-crop-avatar',
+    'exam-pack-generator/sarkari-exam-pack': 'sarkari-exam-pack-generator',
+    'passport-print-sheet/passport-sheet-maker': 'passport-photo-print-sheet-maker',
+    'photo-compliance-checker/photo-validator': 'photo-compliance-checker',
+    'age-calculator/sarkari-exam': 'sarkari-exam-age-calculator',
+    'dimension-resizer/in-cm': 'resize-image-in-cm-and-mm',
+    'merge-pdf/combine': 'merge-pdf-online',
+    'image-to-pdf/convert': 'jpg-to-pdf',
+    'pdf-to-jpg/extract': 'pdf-to-jpg'
   }
   return mapping[`${tool}/${variant}`] || null
 }

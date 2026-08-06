@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Image as ImageIcon, FileText, Shield, ArrowRight, Layers, FileCode2 } from 'lucide-react'
+import { Menu, X, Image as ImageIcon, FileText, Shield, ArrowRight, Layers, FileCode2, ScanText, Lock, Unlock, RotateCw, Crop, Sparkles, Zap, Printer, FileCheck } from 'lucide-react'
 
 interface ToolMenuItem {
   label: string
@@ -18,27 +18,44 @@ interface CategoryGroup {
 
 const CATEGORIES: CategoryGroup[] = [
   {
-    name: 'Image Utilities',
+    name: '⚡ Sarkari Exam & Pro Studio',
     items: [
-      { label: 'Resize Image to 50KB', path: '/resize-image-to-50kb', icon: ImageIcon },
+      { label: '1-Click Exam Pack Generator', path: '/sarkari-exam-pack-generator', icon: Zap },
+      { label: 'Sarkari Exam Age Calculator', path: '/sarkari-exam-age-calculator', icon: Shield },
+      { label: '4x6 / A4 Print Sheet Maker', path: '/passport-photo-print-sheet-maker', icon: Printer },
+      { label: 'Photo AI Compliance Checker', path: '/photo-compliance-checker', icon: FileCheck }
+    ]
+  },
+  {
+    name: 'Image & AI Tools',
+    items: [
+      { label: 'Resize in CM, MM & Inches', path: '/resize-image-in-cm-and-mm', icon: ImageIcon },
+      { label: 'Resize to 50KB / 20KB', path: '/resize-image-to-50kb', icon: ImageIcon },
       { label: 'Passport Photo Maker', path: '/passport-size-photo-maker', icon: ImageIcon },
-      { label: 'Add Name & Date', path: '/add-name-and-date-on-photo-online', icon: ImageIcon },
-      { label: 'Background Changer', path: '/change-photo-background-to-white', icon: ImageIcon },
+      { label: 'AI Background Remover', path: '/remove-background-to-transparent', icon: Sparkles },
+      { label: 'Crop & Circle Avatar', path: '/crop-image-to-square', icon: Crop },
+      { label: 'Add Name & Date on Photo', path: '/add-name-and-date-on-photo-online', icon: ImageIcon },
       { label: '300 DPI Converter', path: '/convert-image-to-300-dpi', icon: ImageIcon }
     ]
   },
   {
-    name: 'PDF & Documents',
+    name: 'PDF Security & Utilities',
     items: [
-      { label: 'Compress PDF', path: '/compress-pdf-to-100kb', icon: FileText },
-      { label: 'Extract PDF Pages', path: '/split-pdf-extract-pages', icon: FileText },
-      { label: 'PDF to JPG images', path: '/pdf-to-jpg/extract', icon: FileText }
+      { label: 'Merge PDF Online', path: '/merge-pdf-online', icon: FileText },
+      { label: 'JPG to PDF Converter', path: '/jpg-to-pdf', icon: FileText },
+      { label: 'PDF to JPG Converter', path: '/pdf-to-jpg', icon: FileText },
+      { label: 'Compress PDF (100KB/200KB)', path: '/compress-pdf-to-100kb', icon: FileText },
+      { label: 'Lock & Protect PDF', path: '/password-protect-pdf', icon: Lock },
+      { label: 'Unlock Protected PDF', path: '/unlock-pdf-remove-password', icon: Unlock },
+      { label: 'Rotate & Reorder Pages', path: '/rotate-and-reorder-pdf-pages', icon: RotateCw },
+      { label: 'Extract PDF Pages', path: '/split-pdf-extract-pages', icon: FileText }
     ]
   },
   {
-    name: 'Cards & Scans',
+    name: 'Cards & Smart OCR',
     items: [
-      { label: 'Merge Aadhaar Card', path: '/merge-aadhaar-card-front-and-back', icon: Layers },
+      { label: 'OCR Text Extractor', path: '/ocr-extract-text-from-marksheet', icon: ScanText },
+      { label: 'Merge Aadhaar Front & Back', path: '/merge-aadhaar-card-front-and-back', icon: Layers },
       { label: 'Remove Shadow from scan', path: '/remove-shadow-from-document', icon: Layers },
       { label: 'Sharpen Scanned Signature', path: '/sharpen-scanned-signature', icon: Layers }
     ]

@@ -1359,6 +1359,49 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Can I add my candidate roll number along with page numbers?', answer: 'Yes! Select the "Roll No + Page" style and type your exam roll number or candidate ID.' },
       { question: 'Does SizeSnap add watermarks to my numbered PDF?', answer: 'No. SizeSnap is 100% free and never adds any watermark or branding to your documents.' }
     ]
+  },
+  'self-attestation/self-attest-document': {
+    metaTitle: 'Self Attested Document Maker Online Free (Add Signature & Date) | SizeSnap',
+    metaDescription: 'Add "Self Attested" text, candidate signature and date on marksheet, certificate & Aadhaar card online free. Output under 100KB/200KB in JPG & A4 PDF.',
+    h1: 'Self Attested Document & Marksheet Maker Online Free',
+    introParagraph: 'College admission aur sarkari exam form ke liye marksheet, degree certificate ya Aadhaar card par "Self Attested" stamp, signature aur date lagayein bina print nikaale.',
+    bodyHtml: `
+      <h2>Create Official Self-Attested Documents Online in Seconds</h2>
+      <p>Almost every Indian university admission, scholarship application, bank KYC, and sarkari exam verification (SSC, UPSC, State PSC) demands that you submit a <strong>"Self Attested"</strong> copy of your marksheet, passing certificate, and ID proof.</p>
+      <ul>
+        <li><strong>No Printer or Pen Needed:</strong> Avoid printing pages, signing physically, and scanning again with low quality.</li>
+        <li><strong>Smart Attestation Stamp Box:</strong> Automatically adds "Self Attested", candidate signature, and current date stamp.</li>
+        <li><strong>Flexible Placements:</strong> Place stamp on Bottom Right, Bottom Center, or Bottom Left of the document.</li>
+        <li><strong>Strict File Size Guarantee:</strong> Compress to exact ≤100KB, ≤200KB or ≤300KB limits required by admission and recruitment portals.</li>
+        <li><strong>Dual Export:</strong> Download both high-res JPG image and 1-page standard A4 PDF.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'What is a self-attested document?', answer: 'A self-attested document is a photocopy or digital copy of an original document (such as 10th marksheet or Aadhaar card) signed by the owner with the text "Self Attested" and the current date to verify its authenticity.' },
+      { question: 'How can I self attest my marksheet online without printing?', answer: 'Upload your marksheet image to SizeSnap, upload or type your signature, set the date, and click Download as JPG or A4 PDF under 200KB.' },
+      { question: 'Is online self attestation safe for Aadhaar card?', answer: 'Yes, 100% safe. SizeSnap runs entirely inside your browser (Client-Side). No documents or personal details are uploaded to any server.' }
+    ]
+  },
+  'document-grayscale/convert-to-black-and-white': {
+    metaTitle: 'Convert Document & Marksheet to Black & White (Grayscale) Online Free | SizeSnap',
+    metaDescription: 'Convert color marksheet and certificate photos to high contrast Black & White (Grayscale) online free. Compress under 50KB/100KB in JPG & A4 PDF.',
+    h1: 'Convert Document to Black & White (Grayscale) Online Free',
+    introParagraph: 'Sarkari forms ke liye color marksheet aur certificate photo ko official Black & White (Grayscale) me convert karein, background saaf karein aur exact 100KB me download karein.',
+    bodyHtml: `
+      <h2>Convert Color Documents to Official Black & White (Grayscale)</h2>
+      <p>Many government job recruitment portals (such as UPSSSC, MPPEB, RPSC, Railway RRB, and State Police) specifically require candidates to upload <strong>Black & White / Grayscale scanned copies</strong> of marksheets and certificates under 100KB.</p>
+      <ul>
+        <li><strong>Official Grayscale & 1-Bit B&W:</strong> Remove color noise while boosting black text readability.</li>
+        <li><strong>Paper Whitening & Brightness:</strong> Eliminates yellow paper tint and phone shadows.</li>
+        <li><strong>Sharp Contrast Slider:</strong> Makes faded handwritten ink and seal stamps crystal clear.</li>
+        <li><strong>Direct 50KB / 100KB Compressor:</strong> Ensures instant acceptance on state exam portals.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Why do government exam forms require Black & White documents?', answer: 'B&W (Grayscale) documents have smaller file sizes and cleaner text contrast, making them faster to verify on high-volume government servers.' },
+      { question: 'How do I convert my color marksheet photo to B&W online?', answer: 'Upload your photo, select the "Official Grayscale" or "High Contrast Text" mode, adjust brightness/contrast if needed, and download in JPG or A4 PDF under 100KB.' },
+      { question: 'Will text quality degrade during B&W conversion?', answer: 'No. SizeSnap enhances text edges and binarizes background pixels to ensure maximum readability.' }
+    ]
   }
 }
 
@@ -1455,7 +1498,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'photo-signature-joiner/photo-and-signature-joint': 'combine-photo-and-signature-for-exam',
     'marksheet-id-merger/merge-marksheet-and-aadhaar': 'merge-marksheet-and-aadhaar-card-pdf',
     'thumb-resizer/left-thumb-impression': 'thumb-impression-resizer-for-ssc-and-neet',
-    'pdf-page-numberer/add-page-numbers-to-pdf': 'add-page-numbers-to-pdf-online'
+    'pdf-page-numberer/add-page-numbers-to-pdf': 'add-page-numbers-to-pdf-online',
+    'self-attestation/self-attest-document': 'self-attested-document-maker-online',
+    'document-grayscale/convert-to-black-and-white': 'convert-document-to-black-and-white'
   }
   return mapping[`${tool}/${variant}`] || null
 }

@@ -45,6 +45,8 @@ const PhotoSignatureJoinerTool = dynamic(() => import('@/components/tools/PhotoS
 const CertificateIdMergerA4Tool = dynamic(() => import('@/components/tools/CertificateIdMergerA4Tool'), { ssr: false })
 const ThumbImpressionResizerTool = dynamic(() => import('@/components/tools/ThumbImpressionResizerTool'), { ssr: false })
 const PdfPageNumbererTool = dynamic(() => import('@/components/tools/PdfPageNumbererTool'), { ssr: false })
+const SelfAttestationTool = dynamic(() => import('@/components/tools/SelfAttestationTool'), { ssr: false })
+const DocumentGrayscaleTool = dynamic(() => import('@/components/tools/DocumentGrayscaleTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   let toolComponent = null
@@ -104,6 +106,10 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <ThumbImpressionResizerTool config={config} />
   } else if (toolSlug === 'pdf-page-numberer' || toolSlug === 'add-page-numbers-to-pdf') {
     toolComponent = <PdfPageNumbererTool config={config} />
+  } else if (toolSlug === 'self-attestation' || toolSlug === 'self-attested-document') {
+    toolComponent = <SelfAttestationTool config={config} />
+  } else if (toolSlug === 'document-grayscale' || toolSlug === 'black-and-white-document') {
+    toolComponent = <DocumentGrayscaleTool config={config} />
   }
 
   if (!toolComponent) return null

@@ -583,6 +583,28 @@ export const tools: Tool[] = [
     variants: [
       { slug: 'add-page-numbers-to-pdf', label: 'Add Page Numbers to PDF', metaTitle: 'Add Page Numbers to PDF Online Free (Page 1 of N / Roll No) | SizeSnap', metaDescription: 'Add page numbers, bates numbering, and candidate roll numbers to PDF documents online free. Fast, secure, 100% in-browser with zero uploads.', h1: 'Add Page Numbers to PDF Online Free', introParagraph: 'Apni PDF files me page numbers, candidate roll number ya official footer stamp lagayein bina kisi watermark aur server upload ke.', config: {} }
     ]
+  },
+  {
+    slug: 'self-attestation',
+    name: 'Self Attested Document & Marksheet Maker Online',
+    shortName: 'Self Attestation',
+    category: 'form',
+    description: 'Add official "Self Attested" stamp, candidate signature, and date on Marksheet, Certificate & Aadhaar card for online forms.',
+    icon: '✍️',
+    variants: [
+      { slug: 'self-attest-document', label: 'Self Attestation Maker', metaTitle: 'Self Attested Document Maker Online Free (Add Signature & Date) | SizeSnap', metaDescription: 'Add "Self Attested" text, candidate signature and date on marksheet, certificate & Aadhaar card online free. Output under 100KB/200KB in JPG & A4 PDF.', h1: 'Self Attested Document & Marksheet Maker Online Free', introParagraph: 'College admission aur sarkari exam form ke liye marksheet, degree certificate ya Aadhaar card par "Self Attested" stamp, signature aur date lagayein bina print nikaale.', config: {} }
+    ]
+  },
+  {
+    slug: 'document-grayscale',
+    name: 'Convert Color Document / Marksheet to Black & White (Grayscale)',
+    shortName: 'B&W Doc Converter',
+    category: 'pdf',
+    description: 'Convert color marksheet photos and document scans to official Black & White (Grayscale) under 50KB or 100KB for exam uploads.',
+    icon: '📄',
+    variants: [
+      { slug: 'convert-to-black-and-white', label: 'B&W Document Converter', metaTitle: 'Convert Document & Marksheet to Black & White (Grayscale) Online Free | SizeSnap', metaDescription: 'Convert color marksheet and certificate photos to high contrast Black & White (Grayscale) online free. Compress under 50KB/100KB in JPG & A4 PDF.', h1: 'Convert Document to Black & White (Grayscale) Online Free', introParagraph: 'Sarkari forms ke liye color marksheet aur certificate photo ko official Black & White (Grayscale) me convert karein, background saaf karein aur exact 100KB me download karein.', config: {} }
+    ]
   }
 ]
 

@@ -28,6 +28,16 @@ const PRO_TOOLS = [
     iconBg: 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white'
   },
   {
+    title: 'Self-Attested Document & Marksheet Maker',
+    desc: 'Add "Self Attested" stamp, your signature & date on Marksheet, Certificate or Aadhaar in JPG / A4 PDF.',
+    tag: '✍️ SELF ATTESTATION',
+    path: '/self-attested-document-maker-online',
+    icon: FileCheck,
+    gradient: 'from-blue-500/10 via-indigo-500/10 to-cyan-500/10',
+    border: 'border-blue-500/30 hover:border-blue-500',
+    iconBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white'
+  },
+  {
     title: 'Thumb Impression Resizer & Ridge Booster',
     desc: 'Auto-enhance Left/Right thumb impression ridges, clean paper shadow, and resize to 10KB-20KB for SSC & NEET.',
     tag: '🪪 THUMB RESIZER',

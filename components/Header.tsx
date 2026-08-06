@@ -21,14 +21,14 @@ const CATEGORIES: CategoryGroup[] = [
     name: '⚡ Sarkari Exam & Pro Studio',
     items: [
       { label: '1-Click Exam Pack Generator', path: '/sarkari-exam-pack-generator', icon: Zap },
+      { label: 'Self Attested Document Maker', path: '/self-attested-document-maker-online', icon: FileCheck },
       { label: 'Thumb Impression Resizer (LTI/RTI)', path: '/thumb-impression-resizer-for-ssc-and-neet', icon: Fingerprint },
       { label: 'Photo & Signature Joint Maker', path: '/combine-photo-and-signature-for-exam', icon: Layers },
       { label: 'Marksheet & ID 1-Page A4 Merger', path: '/merge-marksheet-and-aadhaar-card-pdf', icon: FileText },
       { label: 'Add Name & Date (DOP) on Photo', path: '/add-name-and-date-on-photo-for-ssc', icon: ImageIcon },
       { label: 'Signature Ink Converter & BG Remover', path: '/make-signature-transparent-and-convert-ink', icon: Sparkles },
       { label: 'Sarkari Exam Age Calculator', path: '/sarkari-exam-age-calculator', icon: Shield },
-      { label: '4x6 / A4 Print Sheet Maker', path: '/passport-photo-print-sheet-maker', icon: Printer },
-      { label: 'Photo AI Compliance Checker', path: '/photo-compliance-checker', icon: FileCheck }
+      { label: '4x6 / A4 Print Sheet Maker', path: '/passport-photo-print-sheet-maker', icon: Printer }
     ]
   },
   {
@@ -47,6 +47,7 @@ const CATEGORIES: CategoryGroup[] = [
   {
     name: 'PDF Security & Utilities',
     items: [
+      { label: 'Convert to B&W / Grayscale', path: '/convert-document-to-black-and-white', icon: FileText },
       { label: 'Add Page Numbers to PDF', path: '/add-page-numbers-to-pdf-online', icon: Hash },
       { label: 'Merge PDF Online', path: '/merge-pdf-online', icon: FileText },
       { label: 'JPG to PDF Converter', path: '/jpg-to-pdf', icon: FileText },
@@ -54,8 +55,7 @@ const CATEGORIES: CategoryGroup[] = [
       { label: 'Compress PDF (100KB/200KB)', path: '/compress-pdf-to-100kb', icon: FileText },
       { label: 'Lock & Protect PDF', path: '/password-protect-pdf', icon: Lock },
       { label: 'Unlock Protected PDF', path: '/unlock-pdf-remove-password', icon: Unlock },
-      { label: 'Rotate & Reorder Pages', path: '/rotate-and-reorder-pdf-pages', icon: RotateCw },
-      { label: 'Extract PDF Pages', path: '/split-pdf-extract-pages', icon: FileText }
+      { label: 'Rotate & Reorder Pages', path: '/rotate-and-reorder-pdf-pages', icon: RotateCw }
     ]
   },
   {

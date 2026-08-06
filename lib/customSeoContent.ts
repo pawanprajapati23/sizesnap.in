@@ -1200,6 +1200,39 @@ export const customSeoData: Record<string, CustomSeoData> = {
     faqs: [
       { question: 'How do I download all extracted pages at once?', answer: 'You can download individual page images or download all pages combined in a single ZIP file.' }
     ]
+  },
+  'photo-clarifier/unblur-and-enhance': {
+    metaTitle: 'Unblur Image & Clarify Marksheet Photo Online Free | SizeSnap',
+    metaDescription: 'Unblur blurry photos, enhance scanned marksheets, and brighten dark signatures online free. 1-Click client-side AI image enhancer.',
+    h1: 'Photo & Marksheet Clarifier & Unblur Online Free',
+    introParagraph: 'Mobile phone se li gayi andheri ya dhundhli photo aur marksheet scans ko 1-click me unblur, bright aur crystal clear banayein.',
+    bodyHtml: `
+      <h2>1-Click AI Image Unblur & Document Clarifier</h2>
+      <p>Phone camera se click ki gayi marksheets aur passport photos me aksar shadow, yellow tint ya blur hota hai jo Sarkari exam portals par reject ho jata hai.</p>
+      <ul>
+        <li><strong>Smart Auto-Clarify:</strong> Adaptive histogram balance se dark photos ko natural bright banata hai.</li>
+        <li><strong>Unblur Text Kernel:</strong> Convolution unsharp mask se blurry roll numbers aur signature edges ko sharp karta hai.</li>
+        <li><strong>Yellow Cast & Shadow Removal:</strong> Scanned paper ke background ko clean white banata hai.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Can this tool unblur blurry text on marksheets?', answer: 'Yes! Our high-frequency unsharp convolution filter sharpens document text edges, roll numbers, and signatures.' },
+      { question: 'Does it remove yellow tint from phone camera photos?', answer: 'Yes, select the "Remove Yellow Shadow" preset to instantly normalize white paper background.' },
+      { question: 'Are my private marksheet photos uploaded to any server?', answer: 'No! All photo enhancement runs 100% locally inside your web browser using HTML5 Canvas.' }
+    ]
+  },
+  'photo-clarifier/enhance-marksheet': {
+    metaTitle: 'Enhance Scanned Marksheet & Document Online Free | SizeSnap',
+    metaDescription: 'Sharpen text, remove yellow paper background, and make marksheet scans readable for recruitment uploads. 100% free.',
+    h1: 'Enhance Scanned Marksheet & Document Online Free',
+    introParagraph: 'Marksheet aur certificate ke blurry text aur roll number ko crisp aur clear banayein taaki form verification me koi issue na aaye.',
+    bodyHtml: `
+      <h2>Make Scanned Marksheets Crystal Clear for Form Uploads</h2>
+      <p>Clean up scanned 10th/12th marksheets, degree certificates, and caste certificates with high-contrast document filters.</p>
+    `,
+    faqs: [
+      { question: 'How to make marksheet scan readable?', answer: 'Upload your marksheet photo, choose "Unblur Marksheet Text" or "High-Contrast Scan", and download the clarified JPG.' }
+    ]
   }
 }
 
@@ -1289,7 +1322,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'dimension-resizer/in-cm': 'resize-image-in-cm-and-mm',
     'merge-pdf/combine': 'merge-pdf-online',
     'image-to-pdf/convert': 'jpg-to-pdf',
-    'pdf-to-jpg/extract': 'pdf-to-jpg'
+    'pdf-to-jpg/extract': 'pdf-to-jpg',
+    'photo-clarifier/unblur-and-enhance': 'unblur-photo-and-marksheet',
+    'photo-clarifier/enhance-marksheet': 'enhance-scanned-marksheet'
   }
   return mapping[`${tool}/${variant}`] || null
 }

@@ -7,6 +7,8 @@ import CookieConsent from '@/components/CookieConsent'
 import NativeBanner from '@/components/NativeBanner'
 import Banner320x50 from '@/components/Banner320x50'
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
+import PwaInstallBanner from '@/components/PwaInstallBanner'
+import SessionDownloadTray from '@/components/SessionDownloadTray'
 
 import Script from 'next/script'
 
@@ -69,6 +71,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="SizeSnap" />
+        {/* Google Sitelinks Searchbox Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "SizeSnap",
+              "url": "https://sizesnap.in",
+              "description": "Free Online Image & PDF Utilities for Sarkari Exams, Dimensions Resizing, and PDF Merging.",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://sizesnap.in/?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
         {/* Knowledge Graph Schemas for Brand Owner / Founder */}
         <script
           type="application/ld+json"
@@ -117,8 +140,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-gray-50 text-gray-900 min-h-screen">
           <Header />
-  <Banner320x50 />
-  {/* <NativeBanner /> - Disabled temporarily during AdSense review to avoid policy violations */}
+          <Banner320x50 />
+          {/* <NativeBanner /> - Disabled temporarily during AdSense review to avoid policy violations */}
         <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6">
           {/* Sidebar — hidden on mobile, visible on lg+ */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
@@ -132,6 +155,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieConsent />
         <ServiceWorkerRegister />
+        <PwaInstallBanner />
+        <SessionDownloadTray />
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">

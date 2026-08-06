@@ -38,6 +38,7 @@ const PhotoComplianceCheckerTool = dynamic(() => import('@/components/tools/Phot
 // SEO King Traffic Magnets
 const AgeCalculatorTool = dynamic(() => import('@/components/tools/AgeCalculatorTool'), { ssr: false })
 const DimensionResizerTool = dynamic(() => import('@/components/tools/DimensionResizerTool'), { ssr: false })
+const PhotoClarifierTool = dynamic(() => import('@/components/tools/PhotoClarifierTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   let toolComponent = null
@@ -83,6 +84,8 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <AgeCalculatorTool config={config} />
   } else if (toolSlug === 'dimension-resizer' || toolSlug === 'cm-resizer') {
     toolComponent = <DimensionResizerTool config={config} />
+  } else if (toolSlug === 'photo-clarifier' || toolSlug === 'unblur-photo' || toolSlug === 'enhance-document') {
+    toolComponent = <PhotoClarifierTool config={config} />
   }
 
   if (!toolComponent) return null

@@ -85,7 +85,9 @@ const MAPPINGS = [
   { pretty: '/resize-image-in-cm-and-mm', raw: '/dimension-resizer/in-cm' },
   { pretty: '/merge-pdf-online', raw: '/merge-pdf/combine' },
   { pretty: '/jpg-to-pdf', raw: '/image-to-pdf/convert' },
-  { pretty: '/pdf-to-jpg', raw: '/pdf-to-jpg/extract' }
+  { pretty: '/pdf-to-jpg', raw: '/pdf-to-jpg/extract' },
+  { pretty: '/unblur-photo-and-marksheet', raw: '/photo-clarifier/unblur-and-enhance' },
+  { pretty: '/enhance-scanned-marksheet', raw: '/photo-clarifier/enhance-marksheet' }
 ];
 
 const nextConfig: NextConfig = {

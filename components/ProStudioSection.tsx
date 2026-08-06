@@ -64,6 +64,16 @@ const PRO_TOOLS = [
     iconBg: 'bg-gradient-to-tr from-rose-600 to-red-600 text-white'
   },
   {
+    title: 'Photo & Marksheet Clarifier & Unblur',
+    desc: 'Auto-contrast, sharpen blurry roll numbers, and remove yellow phone camera tint in 1-click.',
+    tag: '🪄 1-CLICK UNBLUR',
+    path: '/unblur-photo-and-marksheet',
+    icon: Sparkles,
+    gradient: 'from-amber-500/10 via-yellow-500/10 to-orange-500/10',
+    border: 'border-amber-500/30 hover:border-amber-500',
+    iconBg: 'bg-gradient-to-tr from-amber-600 to-yellow-600 text-white'
+  },
+  {
     title: 'Photo AI Compliance Checker',
     desc: 'Run 8-point automated compliance audit (Size, Ratio, White Background, Blur) to prevent form rejection.',
     tag: '🛡️ REJECTION SHIELD',

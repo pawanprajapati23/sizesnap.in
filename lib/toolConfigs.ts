@@ -505,6 +505,18 @@ export const tools: Tool[] = [
     variants: [
       { slug: 'in-cm', label: 'Resize in CM & MM', metaTitle: 'Resize Image in CM & MM Online Free (3.5 x 4.5 cm) | SizeSnap', metaDescription: 'Resize photos to exact 3.5x4.5 cm, 4x2 cm signature or 35x45 mm online free at 300 DPI. 100% in-browser.', h1: 'Resize Image in CM, MM & Inches Online Free (300 DPI)', introParagraph: 'Physical dimensions (CM/MM/Inches) select karke apni photo ko exact exam portal dimensions aur target KB me resize karein.', config: {} }
     ]
+  },
+  {
+    slug: 'photo-clarifier',
+    name: 'Photo & Marksheet Clarifier & Unblur Tool',
+    shortName: 'Photo Clarifier',
+    category: 'image',
+    description: '1-Click unblur, auto-contrast, yellow tint removal, and sharpness enhancer for dark photos and blurry marksheet scans.',
+    icon: '🪄',
+    variants: [
+      { slug: 'unblur-and-enhance', label: 'Photo Clarifier & Unblur', metaTitle: 'Unblur Image & Clarify Marksheet Photo Online Free | SizeSnap', metaDescription: 'Unblur blurry photos, enhance scanned marksheets, and brighten dark signatures online free. 1-Click client-side AI enhancer.', h1: 'Photo & Marksheet Clarifier & Unblur Online Free', introParagraph: 'Mobile phone se li gayi andheri ya dhundhli photo aur marksheet scans ko 1-click me unblur, bright aur crystal clear banayein.', config: {} },
+      { slug: 'enhance-marksheet', label: 'Enhance Scanned Marksheet', metaTitle: 'Enhance Scanned Marksheet & Document Online Free | SizeSnap', metaDescription: 'Sharpen text, remove yellow paper background, and make marksheet scans readable for recruitment uploads.', h1: 'Enhance Scanned Marksheet & Document Online Free', introParagraph: 'Marksheet aur certificate ke blurry text aur roll number ko crisp aur clear banayein.', config: {} }
+    ]
   }
 ]
 

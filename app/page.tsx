@@ -3,6 +3,7 @@ import AdUnit from '@/components/AdUnit'
 import HomeSearch from '@/components/HomeSearch'
 import ExamPresetCalculator from '@/components/ExamPresetCalculator'
 import ProStudioSection from '@/components/ProStudioSection'
+import ExamRuleFinder from '@/components/ExamRuleFinder'
 import ViralShareWidget from '@/components/ViralShareWidget'
 import { stories } from '@/lib/storyConfigs'
 import { blogs } from '@/lib/blogConfigs'
@@ -226,6 +227,8 @@ export default function HomePage() {
       <HomeSearch />
 
       <ProStudioSection />
+
+      <ExamRuleFinder />
 
       <ExamPresetCalculator />
 

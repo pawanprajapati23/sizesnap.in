@@ -29,6 +29,7 @@ const CATEGORIES: CategoryGroup[] = [
   {
     name: 'Image & AI Tools',
     items: [
+      { label: 'Photo Clarifier & Unblur', path: '/unblur-photo-and-marksheet', icon: Sparkles },
       { label: 'Resize in CM, MM & Inches', path: '/resize-image-in-cm-and-mm', icon: ImageIcon },
       { label: 'Resize to 50KB / 20KB', path: '/resize-image-to-50kb', icon: ImageIcon },
       { label: 'Passport Photo Maker', path: '/passport-size-photo-maker', icon: ImageIcon },

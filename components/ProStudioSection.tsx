@@ -26,6 +26,26 @@ const PRO_TOOLS = [
     iconBg: 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white'
   },
   {
+    title: 'Photo & Signature Joint Maker',
+    desc: 'Combine passport photo and signature into single image/PDF (vertical or horizontal) under 50KB for SSC, UPSC & DSSSB.',
+    tag: '🤝 PHOTO+SIGN JOINT',
+    path: '/combine-photo-and-signature-for-exam',
+    icon: Sparkles,
+    gradient: 'from-blue-500/10 via-cyan-500/10 to-indigo-500/10',
+    border: 'border-blue-500/30 hover:border-blue-500',
+    iconBg: 'bg-gradient-to-tr from-blue-600 to-cyan-600 text-white'
+  },
+  {
+    title: 'Marksheet & ID 1-Page A4 Merger',
+    desc: 'Merge 10th/12th marksheet, degree certificate and Aadhaar card into a single crisp A4 PDF document under 200KB.',
+    tag: '📑 1-PAGE A4 MERGER',
+    path: '/merge-marksheet-and-aadhaar-card-pdf',
+    icon: FileCheck,
+    gradient: 'from-emerald-500/10 via-teal-500/10 to-cyan-500/10',
+    border: 'border-emerald-500/30 hover:border-emerald-500',
+    iconBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white'
+  },
+  {
     title: 'Signature Ink Converter & BG Remover',
     desc: 'Convert blue ink signature to official deep black ink, clean paper shadows, and auto-crop under 10-20KB.',
     tag: '✍️ INK CONVERTER',

@@ -21,6 +21,8 @@ const CATEGORIES: CategoryGroup[] = [
     name: '⚡ Sarkari Exam & Pro Studio',
     items: [
       { label: '1-Click Exam Pack Generator', path: '/sarkari-exam-pack-generator', icon: Zap },
+      { label: 'Photo & Signature Joint Maker', path: '/combine-photo-and-signature-for-exam', icon: Layers },
+      { label: 'Marksheet & ID 1-Page A4 Merger', path: '/merge-marksheet-and-aadhaar-card-pdf', icon: FileText },
       { label: 'Add Name & Date (DOP) on Photo', path: '/add-name-and-date-on-photo-for-ssc', icon: ImageIcon },
       { label: 'Signature Ink Converter & BG Remover', path: '/make-signature-transparent-and-convert-ink', icon: Sparkles },
       { label: 'Sarkari Exam Age Calculator', path: '/sarkari-exam-age-calculator', icon: Shield },

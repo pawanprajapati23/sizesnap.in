@@ -539,6 +539,28 @@ export const tools: Tool[] = [
     variants: [
       { slug: 'add-name-date-stamp', label: 'Photo Name & Date Maker', metaTitle: 'Add Name and Date on Photo Online Free for SSC & NEET | SizeSnap', metaDescription: 'Add Candidate Name and Date of Photo (DOP) on passport size photo online free for SSC CGL, CHSL, MTS, GD, NEET & UPSC. Exact 50KB JPG.', h1: 'Add Name and Date (DOP) on Photo Online Free', introParagraph: 'SSC, NEET aur UPSC exam guidelines ke anusar apni passport photo par apna naam aur photo date (DOP) ka official printed bar lagayein.', config: {} }
     ]
+  },
+  {
+    slug: 'photo-signature-joiner',
+    name: 'Photo and Signature Joint Maker for Exams',
+    shortName: 'Photo + Sign Joint',
+    category: 'form',
+    description: 'Combine passport photo and signature into 1 single image/PDF (vertical or horizontal) under 50KB for SSC, UPSC, and DSSSB.',
+    icon: '🤝',
+    variants: [
+      { slug: 'photo-and-signature-joint', label: 'Photo & Signature Joiner', metaTitle: 'Photo and Signature Joiner Online Free (50KB JPG / PDF) | SizeSnap', metaDescription: 'Combine passport photo and signature together into single JPG / PDF under 50KB or 100KB online free. Vertical & horizontal layouts for SSC, DSSSB & Bank exams.', h1: 'Photo and Signature Joint Maker Online Free', introParagraph: 'Passport photo aur signature ko ek sath vertically ya horizontally attach karke single JPG ya A4 PDF document banayein jo exam portal me 100% accept ho.', config: {} }
+    ]
+  },
+  {
+    slug: 'marksheet-id-merger',
+    name: 'Marksheet & Aadhaar Card 1-Page A4 PDF Merger',
+    shortName: '1-Page A4 Merger',
+    category: 'pdf',
+    description: 'Merge 10th/12th marksheet, degree certificate, and Aadhaar card into a single crisp A4 PDF document under 200KB.',
+    icon: '📑',
+    variants: [
+      { slug: 'merge-marksheet-and-aadhaar', label: 'Marksheet & ID 1-Page A4 Merger', metaTitle: 'Merge Marksheet and Aadhaar Card in One Page PDF Free (200KB) | SizeSnap', metaDescription: 'Merge marksheet, degree certificate and Aadhaar card front & back into 1 single-page A4 PDF under 200KB or 500KB online free.', h1: 'Merge Marksheet and Aadhaar Card in One Page PDF Online', introParagraph: 'Apni marksheet, certificate aur Aadhaar card ko ek single A4 PDF page me combine karein jo sarkari recruitment aur admission portals par turant upload ho sake.', config: {} }
+    ]
   }
 ]
 

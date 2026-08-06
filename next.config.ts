@@ -87,9 +87,10 @@ const MAPPINGS = [
   { pretty: '/jpg-to-pdf', raw: '/image-to-pdf/convert' },
   { pretty: '/pdf-to-jpg', raw: '/pdf-to-jpg/extract' },
   { pretty: '/unblur-photo-and-marksheet', raw: '/photo-clarifier/unblur-and-enhance' },
-  { pretty: '/enhance-scanned-marksheet', raw: '/photo-clarifier/enhance-marksheet' },
   { pretty: '/make-signature-transparent-and-convert-ink', raw: '/signature-extractor/transparent-signature' },
-  { pretty: '/add-name-and-date-on-photo-for-ssc', raw: '/photo-name-date/add-name-date-stamp' }
+  { pretty: '/add-name-and-date-on-photo-for-ssc', raw: '/photo-name-date/add-name-date-stamp' },
+  { pretty: '/combine-photo-and-signature-for-exam', raw: '/photo-signature-joiner/photo-and-signature-joint' },
+  { pretty: '/merge-marksheet-and-aadhaar-card-pdf', raw: '/marksheet-id-merger/merge-marksheet-and-aadhaar' }
 ];
 
 const nextConfig: NextConfig = {

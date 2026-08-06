@@ -1274,6 +1274,48 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'What is the date format for DOP on photo?', answer: 'The standard format is "DOP: DD/MM/YYYY" printed in bold capital letters on a white banner.' },
       { question: 'Will the final photo size be under 50KB?', answer: 'Yes, the tool automatically optimizes the stamped photo between 20KB and 50KB JPG.' }
     ]
+  },
+  'photo-signature-joiner/photo-and-signature-joint': {
+    metaTitle: 'Photo and Signature Joiner Online Free (50KB JPG / PDF) | SizeSnap',
+    metaDescription: 'Combine passport photo and signature together into single JPG / PDF under 50KB or 100KB online free. Vertical & horizontal layouts for SSC, DSSSB & Bank exams.',
+    h1: 'Photo and Signature Joint Maker Online Free',
+    introParagraph: 'Passport photo aur signature ko ek sath vertically ya horizontally attach karke single JPG ya A4 PDF document banayein jo exam portal me 100% accept ho.',
+    bodyHtml: `
+      <h2>Combine Passport Photo & Signature into Single JPG / PDF Online</h2>
+      <p>Many government exams and recruitment boards like DSSSB, Indian Navy, Coast Guard, Bank PO, and High Court forms require candidates to upload photo and signature joined together in a single file.</p>
+      <ul>
+        <li><strong>Vertical Stack (Standard):</strong> Passport photo on top, signature placed directly below it with optional Name & DOP banner.</li>
+        <li><strong>Side-by-Side Horizontal:</strong> Photo on left, signature on right for ID cards and admission applications.</li>
+        <li><strong>Target File Size ≤50KB / ≤100KB:</strong> 100% client-side compression without server upload.</li>
+        <li><strong>Instant JPG & PDF Export:</strong> Download single image JPG or printable A4 PDF document.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Which exams require photo and signature in single file?', answer: 'Exams like DSSSB, Indian Navy, Coast Guard, various state high courts, and certain bank recruitment portals require a combined photo and signature joint.' },
+      { question: 'Can I add candidate name and photo date on the joint photo?', answer: 'Yes, you can check the "Add Name & Date of Photo (DOP) Bar" option to automatically print your name and date between the photo and signature.' },
+      { question: 'Will the output file be under 50KB?', answer: 'Yes, you can choose the ≤50KB, ≤100KB, or ≤200KB limit and our smart compression engine will keep the file within the exact limit.' }
+    ]
+  },
+  'marksheet-id-merger/merge-marksheet-and-aadhaar': {
+    metaTitle: 'Merge Marksheet and Aadhaar Card in One Page PDF Free (200KB) | SizeSnap',
+    metaDescription: 'Merge marksheet, degree certificate and Aadhaar card front & back into 1 single-page A4 PDF under 200KB or 500KB online free.',
+    h1: 'Merge Marksheet and Aadhaar Card in One Page PDF Online',
+    introParagraph: 'Apni marksheet, certificate aur Aadhaar card ko ek single A4 PDF page me combine karein jo sarkari recruitment aur admission portals par turant upload ho sake.',
+    bodyHtml: `
+      <h2>Merge Scanned Marksheet and ID Card on 1 Single A4 PDF Page</h2>
+      <p>Online government recruitment, scholarship portals, and college admission forms often ask candidates to upload multiple proofs (like 10th Marksheet + Aadhaar Card, or Degree + Caste Certificate) into a single 1-page PDF file under 200KB.</p>
+      <ul>
+        <li><strong>1-Page Standard A4 Layout:</strong> Top half for Marksheet / Certificate, Bottom half for Aadhaar / ID proof.</li>
+        <li><strong>Custom Headings:</strong> Add official section headers like "10th Marksheet" and "Aadhaar Card Front & Back".</li>
+        <li><strong>Strictly Under 200KB / 500KB:</strong> Guaranteed to fit the file size limits of state PSC and national exam portals.</li>
+        <li><strong>100% Private In-Browser:</strong> Your sensitive government documents never leave your phone or computer.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'How to merge marksheet and Aadhaar card in one page PDF?', answer: 'Upload your marksheet in Document 1 and your Aadhaar card in Document 2. The tool will automatically arrange them on an official A4 template and generate a single PDF under 200KB.' },
+      { question: 'Is this document safe to use for sensitive Aadhaar cards?', answer: 'Yes! SizeSnap operates 100% client-side in your web browser. No files or personal data are ever uploaded to any server.' },
+      { question: 'Can I choose the output file size limit?', answer: 'Yes, presets for ≤100KB, ≤200KB, ≤300KB, and ≤500KB are available.' }
+    ]
   }
 }
 
@@ -1366,7 +1408,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'photo-clarifier/unblur-and-enhance': 'unblur-photo-and-marksheet',
     'photo-clarifier/enhance-marksheet': 'enhance-scanned-marksheet',
     'signature-extractor/transparent-signature': 'make-signature-transparent-and-convert-ink',
-    'photo-name-date/add-name-date-stamp': 'add-name-and-date-on-photo-for-ssc'
+    'photo-name-date/add-name-date-stamp': 'add-name-and-date-on-photo-for-ssc',
+    'photo-signature-joiner/photo-and-signature-joint': 'combine-photo-and-signature-for-exam',
+    'marksheet-id-merger/merge-marksheet-and-aadhaar': 'merge-marksheet-and-aadhaar-card-pdf'
   }
   return mapping[`${tool}/${variant}`] || null
 }

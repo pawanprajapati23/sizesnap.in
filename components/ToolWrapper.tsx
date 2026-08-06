@@ -41,6 +41,8 @@ const DimensionResizerTool = dynamic(() => import('@/components/tools/DimensionR
 const PhotoClarifierTool = dynamic(() => import('@/components/tools/PhotoClarifierTool'), { ssr: false })
 const SignatureExtractorTool = dynamic(() => import('@/components/tools/SignatureExtractorTool'), { ssr: false })
 const PhotoNameDateStamperTool = dynamic(() => import('@/components/tools/PhotoNameDateStamperTool'), { ssr: false })
+const PhotoSignatureJoinerTool = dynamic(() => import('@/components/tools/PhotoSignatureJoinerTool'), { ssr: false })
+const CertificateIdMergerA4Tool = dynamic(() => import('@/components/tools/CertificateIdMergerA4Tool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   let toolComponent = null
@@ -92,6 +94,10 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <SignatureExtractorTool config={config} />
   } else if (toolSlug === 'photo-name-date' || toolSlug === 'add-name-date-stamp') {
     toolComponent = <PhotoNameDateStamperTool config={config} />
+  } else if (toolSlug === 'photo-signature-joiner' || toolSlug === 'photo-sign-joint') {
+    toolComponent = <PhotoSignatureJoinerTool config={config} />
+  } else if (toolSlug === 'marksheet-id-merger' || toolSlug === 'combine-documents-a4') {
+    toolComponent = <CertificateIdMergerA4Tool config={config} />
   }
 
   if (!toolComponent) return null

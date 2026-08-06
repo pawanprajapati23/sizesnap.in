@@ -39,6 +39,8 @@ const PhotoComplianceCheckerTool = dynamic(() => import('@/components/tools/Phot
 const AgeCalculatorTool = dynamic(() => import('@/components/tools/AgeCalculatorTool'), { ssr: false })
 const DimensionResizerTool = dynamic(() => import('@/components/tools/DimensionResizerTool'), { ssr: false })
 const PhotoClarifierTool = dynamic(() => import('@/components/tools/PhotoClarifierTool'), { ssr: false })
+const SignatureExtractorTool = dynamic(() => import('@/components/tools/SignatureExtractorTool'), { ssr: false })
+const PhotoNameDateStamperTool = dynamic(() => import('@/components/tools/PhotoNameDateStamperTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   let toolComponent = null
@@ -86,6 +88,10 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <DimensionResizerTool config={config} />
   } else if (toolSlug === 'photo-clarifier' || toolSlug === 'unblur-photo' || toolSlug === 'enhance-document') {
     toolComponent = <PhotoClarifierTool config={config} />
+  } else if (toolSlug === 'signature-extractor' || toolSlug === 'transparent-signature') {
+    toolComponent = <SignatureExtractorTool config={config} />
+  } else if (toolSlug === 'photo-name-date' || toolSlug === 'add-name-date-stamp') {
+    toolComponent = <PhotoNameDateStamperTool config={config} />
   }
 
   if (!toolComponent) return null

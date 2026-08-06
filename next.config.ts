@@ -87,7 +87,9 @@ const MAPPINGS = [
   { pretty: '/jpg-to-pdf', raw: '/image-to-pdf/convert' },
   { pretty: '/pdf-to-jpg', raw: '/pdf-to-jpg/extract' },
   { pretty: '/unblur-photo-and-marksheet', raw: '/photo-clarifier/unblur-and-enhance' },
-  { pretty: '/enhance-scanned-marksheet', raw: '/photo-clarifier/enhance-marksheet' }
+  { pretty: '/enhance-scanned-marksheet', raw: '/photo-clarifier/enhance-marksheet' },
+  { pretty: '/make-signature-transparent-and-convert-ink', raw: '/signature-extractor/transparent-signature' },
+  { pretty: '/add-name-and-date-on-photo-for-ssc', raw: '/photo-name-date/add-name-date-stamp' }
 ];
 
 const nextConfig: NextConfig = {

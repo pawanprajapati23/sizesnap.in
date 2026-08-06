@@ -9,7 +9,9 @@ import {
   Lock,
   ArrowRight,
   CheckCircle,
-  FileCheck
+  FileCheck,
+  PenTool,
+  Tag
 } from 'lucide-react'
 
 const PRO_TOOLS = [
@@ -24,9 +26,29 @@ const PRO_TOOLS = [
     iconBg: 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white'
   },
   {
+    title: 'Signature Ink Converter & BG Remover',
+    desc: 'Convert blue ink signature to official deep black ink, clean paper shadows, and auto-crop under 10-20KB.',
+    tag: '✍️ INK CONVERTER',
+    path: '/make-signature-transparent-and-convert-ink',
+    icon: PenTool,
+    gradient: 'from-blue-500/10 via-indigo-500/10 to-cyan-500/10',
+    border: 'border-blue-500/30 hover:border-blue-500',
+    iconBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white'
+  },
+  {
+    title: 'Add Name & Date (DOP) on Photo',
+    desc: 'Print candidate name and Date of Photo banner on passport photo as mandated by SSC & NEET.',
+    tag: '🏷️ DOP STAMPER',
+    path: '/add-name-and-date-on-photo-for-ssc',
+    icon: Tag,
+    gradient: 'from-violet-500/10 via-purple-500/10 to-indigo-500/10',
+    border: 'border-violet-500/30 hover:border-violet-500',
+    iconBg: 'bg-gradient-to-tr from-violet-600 to-purple-600 text-white'
+  },
+  {
     title: 'Sarkari Exam Age Calculator',
-    desc: 'Calculate exact age (Years, Months, Days) as on cutoff date with live SSC, UPSC, Police eligibility badges.',
-    tag: '🎂 SEO TRAFFIC KING',
+    desc: 'Check cutoff eligibility for SSC, UPSC, RRB, Banking with relaxation category rules in 1-click.',
+    tag: '🛡️ ELIGIBILITY CHECK',
     path: '/sarkari-exam-age-calculator',
     icon: ShieldCheck,
     gradient: 'from-emerald-500/10 via-teal-500/10 to-cyan-500/10',
@@ -34,19 +56,19 @@ const PRO_TOOLS = [
     iconBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white'
   },
   {
-    title: '4x6 & A4 Passport Print Sheet Maker',
-    desc: 'Arrange 6, 8, or 30 passport photos with cutting borders ready for printing (300 DPI PDF).',
-    tag: '🖨️ CSC & CYBER CAFE',
+    title: '4x6 / A4 Passport Sheet Maker',
+    desc: 'Fit 6, 8, or 12 passport photos with cut-lines on 4x6 / A4 glossy photo paper for ₹2 cyber cafe print.',
+    tag: '🖨️ PRINT SHEET',
     path: '/passport-photo-print-sheet-maker',
     icon: Printer,
-    gradient: 'from-blue-500/10 via-indigo-500/10 to-cyan-500/10',
+    gradient: 'from-blue-500/10 via-indigo-500/10 to-sky-500/10',
     border: 'border-blue-500/30 hover:border-blue-500',
-    iconBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white'
+    iconBg: 'bg-gradient-to-tr from-blue-600 to-cyan-600 text-white'
   },
   {
-    title: 'Resize Image in CM, MM & Inches',
-    desc: 'Convert photo to 3.5x4.5 cm, 4x2 cm signature scan at 200/300 DPI with KB limiter.',
-    tag: '📐 PHYSICAL UNITS',
+    title: 'Resize in CM, MM & Inches',
+    desc: 'Resize photo & signature to exact physical dimensions (3.5x4.5 cm, 35x45 mm) at 300 DPI.',
+    tag: '📐 PHYSICAL SIZE',
     path: '/resize-image-in-cm-and-mm',
     icon: Sparkles,
     gradient: 'from-indigo-500/10 via-purple-500/10 to-pink-500/10',

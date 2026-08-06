@@ -1233,9 +1233,49 @@ export const customSeoData: Record<string, CustomSeoData> = {
     faqs: [
       { question: 'How to make marksheet scan readable?', answer: 'Upload your marksheet photo, choose "Unblur Marksheet Text" or "High-Contrast Scan", and download the clarified JPG.' }
     ]
+  },
+  'signature-extractor/transparent-signature': {
+    metaTitle: 'Make Signature Transparent & Convert Blue Ink to Black Online Free | SizeSnap',
+    metaDescription: 'Remove paper background from signature, convert blue ink to official black ink for SSC/UPSC exams, and auto-crop under 10-20KB online free.',
+    h1: 'Signature Background Remover & Ink Color Converter Online',
+    introParagraph: 'Paper par kiye gaye signature ki photo se background remove karein, blue ink ko official black ink me convert karein aur 10-20KB me save karein.',
+    bodyHtml: `
+      <h2>1-Click Signature Background Cleaner & Ink Converter</h2>
+      <p>Sarkari exam portals (SSC, UPSC, IBPS, NTA) par paper shadow ya light blue signature reject ho jata hai. Is tool se aap:</p>
+      <ul>
+        <li><strong>Convert Blue Ink to Deep Black:</strong> Mandated for SSC CGL, CHSL, MTS & UPSC applications.</li>
+        <li><strong>Paper Shadow Removal:</strong> Phone camera se liye gaye signature ka background 100% pure white ya transparent PNG banayein.</li>
+        <li><strong>Auto-Crop Tight Bounding Box:</strong> Signature ke around extra empty paper area ko automatic crop karein.</li>
+        <li><strong>Save Under 10KB - 20KB:</strong> Exact official size limit me instant client-side download karein.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Why is black ink signature required in SSC and UPSC exams?', answer: 'Official exam guidelines mandate pure black ballpoint pen signature on white paper for high-speed automated document scanning and optical verification.' },
+      { question: 'Can I change my blue ink signature photo to black ink?', answer: 'Yes! Select the "Deep Black Ink" mode to automatically convert blue or colored strokes into crisp black ink.' },
+      { question: 'Can I download transparent PNG signature for PDF signing?', answer: 'Yes, switch to "100% Transparent PNG" mode to download signature with zero background.' }
+    ]
+  },
+  'photo-name-date/add-name-date-stamp': {
+    metaTitle: 'Add Name and Date on Photo Online Free for SSC & NEET (DOP / DOB) | SizeSnap',
+    metaDescription: 'Add Candidate Name and Date of Photo (DOP) on passport size photo online free for SSC CGL, CHSL, MTS, GD, NEET & UPSC. Exact 50KB JPG.',
+    h1: 'Add Name and Date (DOP) on Photo Online Free',
+    introParagraph: 'SSC, NEET aur UPSC exam guidelines ke anusar apni passport photo par apna naam aur photo date (DOP) ka official printed bar lagayein.',
+    bodyHtml: `
+      <h2>Official SSC / NEET Candidate Name & Date Stamp Maker</h2>
+      <p>SSC notifications me mandatory hota hai ki candidate ka naam aur photo lene ki tarikh (Date of Photo - DOP) passport photo ke niche printed ho.</p>
+      <ul>
+        <li><strong>Official Format:</strong> 3.5 x 4.5 cm passport ratio with bottom solid white name bar.</li>
+        <li><strong>Custom Date & DOB:</strong> Set current date or custom DOP/DOB with 1-click.</li>
+        <li><strong>Exact 20KB - 50KB JPG:</strong> Guaranteed upload-ready without form rejection.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'Is Name and Date of Photo (DOP) mandatory for SSC CGL/CHSL/MTS?', answer: 'Yes, SSC photo rules state that the photograph must clearly show the candidate name and the date on which the photo was taken at the bottom.' },
+      { question: 'What is the date format for DOP on photo?', answer: 'The standard format is "DOP: DD/MM/YYYY" printed in bold capital letters on a white banner.' },
+      { question: 'Will the final photo size be under 50KB?', answer: 'Yes, the tool automatically optimizes the stamped photo between 20KB and 50KB JPG.' }
+    ]
   }
 }
-
 
 export function getPrettySlug(tool: string, variant: string): string | null {
   const mapping: Record<string, string> = {
@@ -1324,7 +1364,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'image-to-pdf/convert': 'jpg-to-pdf',
     'pdf-to-jpg/extract': 'pdf-to-jpg',
     'photo-clarifier/unblur-and-enhance': 'unblur-photo-and-marksheet',
-    'photo-clarifier/enhance-marksheet': 'enhance-scanned-marksheet'
+    'photo-clarifier/enhance-marksheet': 'enhance-scanned-marksheet',
+    'signature-extractor/transparent-signature': 'make-signature-transparent-and-convert-ink',
+    'photo-name-date/add-name-date-stamp': 'add-name-and-date-on-photo-for-ssc'
   }
   return mapping[`${tool}/${variant}`] || null
 }

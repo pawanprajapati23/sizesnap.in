@@ -517,6 +517,28 @@ export const tools: Tool[] = [
       { slug: 'unblur-and-enhance', label: 'Photo Clarifier & Unblur', metaTitle: 'Unblur Image & Clarify Marksheet Photo Online Free | SizeSnap', metaDescription: 'Unblur blurry photos, enhance scanned marksheets, and brighten dark signatures online free. 1-Click client-side AI enhancer.', h1: 'Photo & Marksheet Clarifier & Unblur Online Free', introParagraph: 'Mobile phone se li gayi andheri ya dhundhli photo aur marksheet scans ko 1-click me unblur, bright aur crystal clear banayein.', config: {} },
       { slug: 'enhance-marksheet', label: 'Enhance Scanned Marksheet', metaTitle: 'Enhance Scanned Marksheet & Document Online Free | SizeSnap', metaDescription: 'Sharpen text, remove yellow paper background, and make marksheet scans readable for recruitment uploads.', h1: 'Enhance Scanned Marksheet & Document Online Free', introParagraph: 'Marksheet aur certificate ke blurry text aur roll number ko crisp aur clear banayein.', config: {} }
     ]
+  },
+  {
+    slug: 'signature-extractor',
+    name: 'Signature Background Remover & Ink Color Converter',
+    shortName: 'Signature Extractor',
+    category: 'image',
+    description: 'Remove paper background, switch blue ink to official black ink, and crop signature under 10-20KB for exams.',
+    icon: '✍️',
+    variants: [
+      { slug: 'transparent-signature', label: 'Signature Background Remover', metaTitle: 'Make Signature Transparent & Convert Blue Ink to Black Online Free | SizeSnap', metaDescription: 'Remove paper background from signature, convert blue ink to black ink for SSC/UPSC exams, and auto-crop under 10-20KB online free.', h1: 'Signature Background Remover & Ink Color Converter Online', introParagraph: 'Paper par kiye gaye signature ki photo se background remove karein, blue ink ko official black ink me convert karein aur 10-20KB me save karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'photo-name-date',
+    name: 'Sarkari Photo Name & Date (DOP/DOB) Stamp Maker',
+    shortName: 'Name & Date Stamper',
+    category: 'form',
+    description: 'Add candidate name and Date of Photo (DOP) / Date of Birth (DOB) banner on passport photo for SSC, NEET, UPSC forms.',
+    icon: '🏷️',
+    variants: [
+      { slug: 'add-name-date-stamp', label: 'Photo Name & Date Maker', metaTitle: 'Add Name and Date on Photo Online Free for SSC & NEET | SizeSnap', metaDescription: 'Add Candidate Name and Date of Photo (DOP) on passport size photo online free for SSC CGL, CHSL, MTS, GD, NEET & UPSC. Exact 50KB JPG.', h1: 'Add Name and Date (DOP) on Photo Online Free', introParagraph: 'SSC, NEET aur UPSC exam guidelines ke anusar apni passport photo par apna naam aur photo date (DOP) ka official printed bar lagayein.', config: {} }
+    ]
   }
 ]
 

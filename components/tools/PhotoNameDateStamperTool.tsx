@@ -248,7 +248,7 @@ export default function PhotoNameDateStamperTool({ config }: { config?: any }) {
                   }}
                   className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold cursor-pointer"
                 >
-                  Set Today's Date
+                  Set Today&apos;s Date
                 </button>
                 <button
                   onClick={() => setDateText('DOB: 12/04/2002')}

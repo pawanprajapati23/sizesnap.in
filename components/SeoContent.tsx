@@ -15,8 +15,67 @@ export default function SeoContent({ tool, variant }: SeoContentProps) {
   
   if (customSeo) {
     return (
-      <article className="mt-12 bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-8 prose prose-blue max-w-none text-gray-700">
+      <article className="mt-12 bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 md:p-10 space-y-8 prose prose-blue dark:prose-invert max-w-none text-slate-700 dark:text-slate-300">
         <div dangerouslySetInnerHTML={{ __html: customSeo.bodyHtml }} />
+
+        {/* Bilingual Hindi & Hinglish Content for Tier-2 / Tier-3 Regional Search Queries */}
+        <div className="not-prose bg-amber-50/80 dark:bg-amber-950/30 border border-amber-300/60 dark:border-amber-700/40 p-6 rounded-2xl">
+          <h3 className="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+            🇮🇳 हिंदी में महत्वपूर्ण जानकारी (Sarkari Form Image Guide)
+          </h3>
+          <p className="text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+            अगर आप SSC CGL, CHSL, MTS, GD, UPSC, NEET, Railway (RRB NTPC/ALP) या State Police का ऑनलाइन फॉर्म भर रहे हैं, तो फोटो या सिग्नेचर की साइज व डायमेंशन गलत होने से फॉर्म रिजेक्ट हो सकता है।
+          </p>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+            <li className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span><strong>100% सुरक्षित (Client-Side):</strong> आपकी फाइल सर्वर पर नहीं जाती।</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span><strong>फ्री व अनलिमिटेड:</strong> बिना किसी लॉगिन या वाटरमार्क के इस्तेमाल करें।</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span><strong>मोबाइल सपोर्ट:</strong> सीधे फोन से फोटो खींचकर तुरंत फॉर्म साइज बनाएं।</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span><strong>ऑफिशियल एग्जाम रूल्स:</strong> 300 DPI, White Bg & KB लिमिट कम्प्लायंट।</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Key Features Grid */}
+        <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="flex gap-3 items-start border border-slate-200 dark:border-slate-800 p-4 rounded-2xl bg-slate-50/50 dark:bg-slate-800/40">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-bold text-slate-900 dark:text-white text-xs">Zero Server Upload</h4>
+              <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                Processed 100% locally in your browser memory for maximum privacy.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-3 items-start border border-slate-200 dark:border-slate-800 p-4 rounded-2xl bg-slate-50/50 dark:bg-slate-800/40">
+            <Zap className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-bold text-slate-900 dark:text-white text-xs">Instant Processing</h4>
+              <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                Ultra fast canvas rendering without queue times or download limits.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-3 items-start border border-slate-200 dark:border-slate-800 p-4 rounded-2xl bg-slate-50/50 dark:bg-slate-800/40">
+            <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-bold text-slate-900 dark:text-white text-xs">Rejection-Proof</h4>
+              <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                Conforms strictly with official Central & State government recruitment portals.
+              </p>
+            </div>
+          </div>
+        </div>
       </article>
     )
   }

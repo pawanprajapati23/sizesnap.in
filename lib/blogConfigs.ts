@@ -331,7 +331,7 @@ export const blogs = [
         <li><strong>File Size:</strong> 20 KB to 50 KB</li>
         <li><strong>Dimensions:</strong> 3.5 cm x 4.5 cm</li>
         <li><strong>Background:</strong> Light grey or white background. Do not upload photos with colourful backgrounds.</li>
-        <li><strong>Name & Date Option:</strong> Although recent forms do not strictly enforce candidate name and date overlays, adding them is highly recommended to confirm the photo is recent. You can use our <a href="/add-name-and-date-on-photo-online">Photo Name & Date Adder</a> tool to generate this overlay automatically.</li>
+        <li><strong>Name & Date Option:</strong> Although recent forms do not strictly enforce candidate name and date overlays, adding them is highly recommended to confirm the photo is recent. You can use our <a href="/add-name-and-date-on-photo-for-ssc">Photo Name & Date Adder</a> tool to generate this overlay automatically.</li>
       </ul>
 
       <h3>2. Signature Guidelines</h3>
@@ -342,6 +342,74 @@ export const blogs = [
 
       <h3>Quick Sizing Tools</h3>
       <p>Use our dedicated <a href="/photo-size-for-up-police-form">UP Police Photo Resizer</a> to instantly scale your passport photo under 50KB, and use the <a href="/11kb-converter">11KB Converter</a> for signatures to get them document-ready instantly.</p>
+    `
+  },
+  {
+    slug: 'ssc-photo-signature-rejection-reasons-and-fix',
+    title: 'How to Prevent SSC CGL / CHSL / MTS Photo & Signature Rejection 2026',
+    date: '2026-08-01',
+    excerpt: 'Top reasons why Staff Selection Commission rejects candidate application forms and how to auto-format photo with Name/Date and Black ink signature.',
+    content: `
+      <h2>Why SSC Forms Get Rejected (And How to Fix It)</h2>
+      <p>Every year, more than 15% of SSC applications are rejected due to blurred photos, wrong dimensions, colored backgrounds, or blue ink signatures on shadow-filled paper scans.</p>
+
+      <h3>1. SSC Photo Rules (Must-Follow)</h3>
+      <ul>
+        <li><strong>Dimensions:</strong> Exactly 3.5 cm width x 4.5 cm height (approx 413 x 531 pixels at 300 DPI).</li>
+        <li><strong>File Size:</strong> 20 KB to 50 KB in JPG/JPEG format.</li>
+        <li><strong>Name & Date (DOP):</strong> The photograph must clearly display the candidate name and Date of Photo (DOP) printed across a white banner at the bottom. Use our <a href="/add-name-and-date-on-photo-for-ssc">SSC Name & Date Tool</a>.</li>
+        <li><strong>No Caps or Spectacles:</strong> Both ears must be clearly visible, with eyes open looking straight into the camera.</li>
+      </ul>
+
+      <h3>2. SSC Signature Rules</h3>
+      <ul>
+        <li><strong>Dimensions:</strong> 4.0 cm width x 2.0 cm height.</li>
+        <li><strong>File Size:</strong> 10 KB to 20 KB.</li>
+        <li><strong>Ink:</strong> Must be signed in pure BLACK ink on clean white paper. If you signed in blue ink, use our <a href="/make-signature-transparent-and-convert-ink">Signature Ink Converter</a> to instantly convert it to black ink without paper shadows.</li>
+      </ul>
+    `
+  },
+  {
+    slug: 'neet-postcard-and-passport-photo-specifications',
+    title: 'NEET 2026 Photo Requirements: 4x6 Postcard & Passport Size Guidelines',
+    date: '2026-08-02',
+    excerpt: 'Complete National Testing Agency (NTA) NEET UG/PG photo rules: 4x6 Postcard size, 80% face coverage, white background, and name date format.',
+    content: `
+      <h2>NTA NEET Photo & Signature Specifications</h2>
+      <p>National Testing Agency (NTA) enforces strict image rules for NEET registrations. Candidates must upload both a Passport Size Photo and a larger 4x6 inch Postcard Photo.</p>
+
+      <h3>1. Postcard Photo (4x6 Inch)</h3>
+      <ul>
+        <li><strong>Size:</strong> 4 inches x 6 inches (Postcard size).</li>
+        <li><strong>File Weight:</strong> 10 KB to 200 KB.</li>
+        <li><strong>Face Coverage:</strong> Minimum 80% face coverage against a pure white background.</li>
+        <li><strong>Name & Date:</strong> Candidate Name and Date of taking the photograph must be printed at the bottom.</li>
+      </ul>
+
+      <h3>2. Passport Photo (3.5x4.5 cm)</h3>
+      <ul>
+        <li><strong>File Weight:</strong> 10 KB to 200 KB in JPG format.</li>
+        <li>Use our <a href="/neet-postcard-photo-resizer">NEET Postcard Resizer</a> and <a href="/sarkari-exam-pack-generator">1-Click Exam Pack Generator</a> to format both files together in seconds.</li>
+      </ul>
+    `
+  },
+  {
+    slug: 'how-to-merge-aadhaar-and-pan-card-in-one-page',
+    title: 'How to Merge Aadhaar Card Front and Back in One Page PDF / JPG',
+    date: '2026-08-03',
+    excerpt: 'Step-by-step guide to combine both sides of Aadhaar Card or PAN Card into a single page document under 100KB for government job portals.',
+    content: `
+      <h2>Combining ID Card Both Sides for Form Uploads</h2>
+      <p>Most online recruitment and college admission forms only permit a single document upload for identity verification. Uploading only the front side leads to verification rejection.</p>
+
+      <h3>How to Join Front and Back Sides:</h3>
+      <ol>
+        <li>Take clear photos of the Front and Back sides of your Aadhaar or PAN card.</li>
+        <li>Open the <a href="/merge-aadhaar-card-front-and-back">Aadhaar Card Front & Back Merger</a> on SizeSnap.</li>
+        <li>Choose Vertical (top-and-bottom) or Horizontal (side-by-side) layout.</li>
+        <li>Set the target file size limit to under 100KB or 200KB.</li>
+        <li>Download your 1-page combined document instantly.</li>
+      </ol>
     `
   }
 ]

@@ -561,6 +561,28 @@ export const tools: Tool[] = [
     variants: [
       { slug: 'merge-marksheet-and-aadhaar', label: 'Marksheet & ID 1-Page A4 Merger', metaTitle: 'Merge Marksheet and Aadhaar Card in One Page PDF Free (200KB) | SizeSnap', metaDescription: 'Merge marksheet, degree certificate and Aadhaar card front & back into 1 single-page A4 PDF under 200KB or 500KB online free.', h1: 'Merge Marksheet and Aadhaar Card in One Page PDF Online', introParagraph: 'Apni marksheet, certificate aur Aadhaar card ko ek single A4 PDF page me combine karein jo sarkari recruitment aur admission portals par turant upload ho sake.', config: {} }
     ]
+  },
+  {
+    slug: 'thumb-resizer',
+    name: 'Thumb Impression Resizer & Ridge Enhancer for Exams',
+    shortName: 'Thumb Resizer',
+    category: 'form',
+    description: 'Enhance scanned Left/Right thumb impression, clean paper background, and resize under 10KB-20KB for SSC, IBPS, and NEET.',
+    icon: '🪪',
+    variants: [
+      { slug: 'left-thumb-impression', label: 'Thumb Impression Resizer', metaTitle: 'Thumb Impression Resizer for SSC, NEET & IBPS Online Free (10KB - 20KB) | SizeSnap', metaDescription: 'Resize and clarify Left & Right thumb impression photo online free under 10KB, 20KB or 50KB for SSC, NEET, IBPS & Railway exams. Auto-enhance ridge clarity.', h1: 'Thumb Impression Resizer & Ridge Enhancer Online Free', introParagraph: 'SSC, IBPS aur NEET exam ke liye apni Left/Right thumb impression (LTI/RTI) ki photo ko crystal clear banayein, background safed karein aur exact 10KB - 20KB me resize karein.', config: {} }
+    ]
+  },
+  {
+    slug: 'pdf-page-numberer',
+    name: 'Add Page Numbers to PDF Online Free',
+    shortName: 'PDF Numberer',
+    category: 'pdf',
+    description: 'Insert page numbers, candidate roll number, and header stamps onto multi-page PDF documents locally in your browser.',
+    icon: '🔢',
+    variants: [
+      { slug: 'add-page-numbers-to-pdf', label: 'Add Page Numbers to PDF', metaTitle: 'Add Page Numbers to PDF Online Free (Page 1 of N / Roll No) | SizeSnap', metaDescription: 'Add page numbers, bates numbering, and candidate roll numbers to PDF documents online free. Fast, secure, 100% in-browser with zero uploads.', h1: 'Add Page Numbers to PDF Online Free', introParagraph: 'Apni PDF files me page numbers, candidate roll number ya official footer stamp lagayein bina kisi watermark aur server upload ke.', config: {} }
+    ]
   }
 ]
 

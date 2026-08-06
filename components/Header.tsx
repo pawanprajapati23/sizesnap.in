@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Image as ImageIcon, FileText, Shield, ArrowRight, Layers, FileCode2, ScanText, Lock, Unlock, RotateCw, Crop, Sparkles, Zap, Printer, FileCheck } from 'lucide-react'
+import { Menu, X, Image as ImageIcon, FileText, Shield, ArrowRight, Layers, FileCode2, ScanText, Lock, Unlock, RotateCw, Crop, Sparkles, Zap, Printer, FileCheck, Fingerprint, Hash } from 'lucide-react'
 
 interface ToolMenuItem {
   label: string
@@ -21,6 +21,7 @@ const CATEGORIES: CategoryGroup[] = [
     name: '⚡ Sarkari Exam & Pro Studio',
     items: [
       { label: '1-Click Exam Pack Generator', path: '/sarkari-exam-pack-generator', icon: Zap },
+      { label: 'Thumb Impression Resizer (LTI/RTI)', path: '/thumb-impression-resizer-for-ssc-and-neet', icon: Fingerprint },
       { label: 'Photo & Signature Joint Maker', path: '/combine-photo-and-signature-for-exam', icon: Layers },
       { label: 'Marksheet & ID 1-Page A4 Merger', path: '/merge-marksheet-and-aadhaar-card-pdf', icon: FileText },
       { label: 'Add Name & Date (DOP) on Photo', path: '/add-name-and-date-on-photo-for-ssc', icon: ImageIcon },
@@ -46,6 +47,7 @@ const CATEGORIES: CategoryGroup[] = [
   {
     name: 'PDF Security & Utilities',
     items: [
+      { label: 'Add Page Numbers to PDF', path: '/add-page-numbers-to-pdf-online', icon: Hash },
       { label: 'Merge PDF Online', path: '/merge-pdf-online', icon: FileText },
       { label: 'JPG to PDF Converter', path: '/jpg-to-pdf', icon: FileText },
       { label: 'PDF to JPG Converter', path: '/pdf-to-jpg', icon: FileText },

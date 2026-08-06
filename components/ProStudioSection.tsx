@@ -11,7 +11,9 @@ import {
   CheckCircle,
   FileCheck,
   PenTool,
-  Tag
+  Tag,
+  Fingerprint,
+  Hash
 } from 'lucide-react'
 
 const PRO_TOOLS = [
@@ -24,6 +26,16 @@ const PRO_TOOLS = [
     gradient: 'from-amber-500/10 via-orange-500/10 to-yellow-500/10',
     border: 'border-amber-500/30 hover:border-amber-500',
     iconBg: 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white'
+  },
+  {
+    title: 'Thumb Impression Resizer & Ridge Booster',
+    desc: 'Auto-enhance Left/Right thumb impression ridges, clean paper shadow, and resize to 10KB-20KB for SSC & NEET.',
+    tag: '🪪 THUMB RESIZER',
+    path: '/thumb-impression-resizer-for-ssc-and-neet',
+    icon: Fingerprint,
+    gradient: 'from-blue-500/10 via-indigo-500/10 to-violet-500/10',
+    border: 'border-blue-500/30 hover:border-blue-500',
+    iconBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white'
   },
   {
     title: 'Photo & Signature Joint Maker',

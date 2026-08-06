@@ -1316,6 +1316,49 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Is this document safe to use for sensitive Aadhaar cards?', answer: 'Yes! SizeSnap operates 100% client-side in your web browser. No files or personal data are ever uploaded to any server.' },
       { question: 'Can I choose the output file size limit?', answer: 'Yes, presets for ≤100KB, ≤200KB, ≤300KB, and ≤500KB are available.' }
     ]
+  },
+  'thumb-resizer/left-thumb-impression': {
+    metaTitle: 'Thumb Impression Resizer for SSC, NEET & IBPS Online Free (10KB - 20KB) | SizeSnap',
+    metaDescription: 'Resize and clarify Left & Right thumb impression photo online free under 10KB, 20KB or 50KB for SSC, NEET, IBPS & Railway exams. Auto-enhance ridge clarity.',
+    h1: 'Thumb Impression Resizer & Ridge Enhancer Online Free',
+    introParagraph: 'SSC, IBPS aur NEET exam ke liye apni Left/Right thumb impression (LTI/RTI) ki photo ko crystal clear banayein, background safed karein aur exact 10KB - 20KB me resize karein.',
+    bodyHtml: `
+      <h2>Left & Right Thumb Impression (LTI) Resizer for Government Recruitment</h2>
+      <p>Almost every national exam portal (SSC CGL/CHSL/MTS/GD, NTA NEET, IBPS PO/Clerk, SBI, CTET, and State Police) mandates uploading a scanned Left Hand Thumb Impression (LTI) strictly between <strong>10KB to 20KB or 20KB to 50KB</strong>.</p>
+      <ul>
+        <li><strong>AI Ridge Pattern Enhancer:</strong> Auto-boosts fingerprint loop and whorl line contrast so the impression is never rejected for being blurry.</li>
+        <li><strong>Paper Shadow Remover:</strong> Converts yellow or dim phone camera paper backgrounds into 100% pure crisp white.</li>
+        <li><strong>Official Ink Selector:</strong> Convert faded ink into official Blue Stamp Pad ink or deep Black ink.</li>
+        <li><strong>LTI / RTI Printed Footer:</strong> Optionally attach an official "LEFT THUMB IMPRESSION (LTI)" label bar.</li>
+        <li><strong>Exact 10KB - 20KB Compressor:</strong> Guaranteed acceptance on SSC, IBPS, and NEET candidate login portals.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'What is the standard thumb impression size for SSC exams?', answer: 'SSC requires Left Thumb Impression (LTI) in JPG format between 10KB to 20KB with 4cm x 3cm (or 4:3) aspect ratio.' },
+      { question: 'Which hand thumb impression is required for NEET and IBPS?', answer: 'Unless stated otherwise, male and female candidates should upload their Left Hand Thumb Impression (LTI). If left thumb is unavailable, right thumb can be used.' },
+      { question: 'How do I clean dark phone shadows from my thumb impression photo?', answer: 'Simply upload your photo to SizeSnap Thumb Resizer. Our automated paper whitening and ridge contrast filters will instantly make the background crisp white.' }
+    ]
+  },
+  'pdf-page-numberer/add-page-numbers-to-pdf': {
+    metaTitle: 'Add Page Numbers to PDF Online Free (Page 1 of N / Roll No) | SizeSnap',
+    metaDescription: 'Add page numbers, bates numbering, and candidate roll numbers to PDF documents online free. Fast, secure, 100% in-browser with zero uploads.',
+    h1: 'Add Page Numbers to PDF Online Free',
+    introParagraph: 'Apni PDF files me page numbers, candidate roll number ya official footer stamp lagayein bina kisi watermark aur server upload ke.',
+    bodyHtml: `
+      <h2>Fast, Free & Secure PDF Page Numbering Online</h2>
+      <p>Number your PDF pages in seconds for college projects, online exam document submissions, court filings, and official recruitment verification.</p>
+      <ul>
+        <li><strong>Flexible Pagination Formats:</strong> Choose from <code>Page 1 of N</code>, <code>1, 2, 3...</code>, or custom <code>Roll No: [XXXX] | Page [X]</code>.</li>
+        <li><strong>Multiple Position Locations:</strong> Stamp numbers at Bottom Right, Bottom Center, Bottom Left, or Top Right.</li>
+        <li><strong>Skip Cover Page:</strong> Set a custom starting page offset (e.g. start numbering from page 2).</li>
+        <li><strong>100% Client-Side Privacy:</strong> Your PDF documents are modified directly in your browser without ever being uploaded to any server.</li>
+      </ul>
+    `,
+    faqs: [
+      { question: 'How do I add page numbers to a PDF for free?', answer: 'Upload your PDF to SizeSnap, choose your preferred format (e.g. Page 1 of N) and position (e.g. Bottom Right), then click Download.' },
+      { question: 'Can I add my candidate roll number along with page numbers?', answer: 'Yes! Select the "Roll No + Page" style and type your exam roll number or candidate ID.' },
+      { question: 'Does SizeSnap add watermarks to my numbered PDF?', answer: 'No. SizeSnap is 100% free and never adds any watermark or branding to your documents.' }
+    ]
   }
 }
 
@@ -1410,7 +1453,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'signature-extractor/transparent-signature': 'make-signature-transparent-and-convert-ink',
     'photo-name-date/add-name-date-stamp': 'add-name-and-date-on-photo-for-ssc',
     'photo-signature-joiner/photo-and-signature-joint': 'combine-photo-and-signature-for-exam',
-    'marksheet-id-merger/merge-marksheet-and-aadhaar': 'merge-marksheet-and-aadhaar-card-pdf'
+    'marksheet-id-merger/merge-marksheet-and-aadhaar': 'merge-marksheet-and-aadhaar-card-pdf',
+    'thumb-resizer/left-thumb-impression': 'thumb-impression-resizer-for-ssc-and-neet',
+    'pdf-page-numberer/add-page-numbers-to-pdf': 'add-page-numbers-to-pdf-online'
   }
   return mapping[`${tool}/${variant}`] || null
 }

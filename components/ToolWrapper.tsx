@@ -43,6 +43,8 @@ const SignatureExtractorTool = dynamic(() => import('@/components/tools/Signatur
 const PhotoNameDateStamperTool = dynamic(() => import('@/components/tools/PhotoNameDateStamperTool'), { ssr: false })
 const PhotoSignatureJoinerTool = dynamic(() => import('@/components/tools/PhotoSignatureJoinerTool'), { ssr: false })
 const CertificateIdMergerA4Tool = dynamic(() => import('@/components/tools/CertificateIdMergerA4Tool'), { ssr: false })
+const ThumbImpressionResizerTool = dynamic(() => import('@/components/tools/ThumbImpressionResizerTool'), { ssr: false })
+const PdfPageNumbererTool = dynamic(() => import('@/components/tools/PdfPageNumbererTool'), { ssr: false })
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   let toolComponent = null
@@ -98,6 +100,10 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <PhotoSignatureJoinerTool config={config} />
   } else if (toolSlug === 'marksheet-id-merger' || toolSlug === 'combine-documents-a4') {
     toolComponent = <CertificateIdMergerA4Tool config={config} />
+  } else if (toolSlug === 'thumb-resizer' || toolSlug === 'thumb-impression-resizer') {
+    toolComponent = <ThumbImpressionResizerTool config={config} />
+  } else if (toolSlug === 'pdf-page-numberer' || toolSlug === 'add-page-numbers-to-pdf') {
+    toolComponent = <PdfPageNumbererTool config={config} />
   }
 
   if (!toolComponent) return null

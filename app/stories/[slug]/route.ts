@@ -1,8 +1,8 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-export async function GET(request: Request, context: any) {
-  const slug = context.params.slug
+export async function GET(request: Request, context: { params: Promise<{ slug: string }> }) {
+  const { slug } = await context.params
   const filePath = path.join(process.cwd(), 'public', 'stories', `${slug}.html`)
 
   try {

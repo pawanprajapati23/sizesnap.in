@@ -36,7 +36,10 @@ export default async function ToolHubPage({ params }: Props) {
   const sizeVariants = tool.variants.filter(variant => variant.slug.includes('kb') || variant.slug.includes('mb'))
   const useCaseVariants = tool.variants.filter(variant => !variant.slug.includes('kb') && !variant.slug.includes('mb'))
   const featuredSizes = sizeVariants.filter(variant =>
-    ['to-20kb', 'to-50kb', 'to-100kb', 'to-200kb', 'to-500kb', 'to-1mb'].includes(variant.slug)
+    [
+      'to-11kb', 'to-12kb', 'to-13kb', 'to-14kb', 'to-15kb',
+      'to-20kb', 'to-28kb', 'to-50kb', 'to-100kb', 'to-200kb', 'to-500kb', 'to-1mb'
+    ].includes(variant.slug)
   )
   const relatedBlogs = getRelatedBlogs(tool.slug)
   const relatedTools = tools.filter(item => item.slug !== tool.slug && item.category === tool.category).slice(0, 6)

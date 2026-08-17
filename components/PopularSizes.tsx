@@ -8,8 +8,11 @@ interface Props {
 }
 
 export default function PopularSizes({ tool, currentVariantSlug }: Props) {
-  // Curated list of popular sizes
-  const popularSlugs = ['to-20kb', 'to-50kb', 'to-100kb', 'to-200kb', 'to-500kb', 'to-1mb']
+  // Curated list of popular sizes based on GSC data and SEO clustering
+  const popularSlugs = [
+    'to-11kb', 'to-12kb', 'to-13kb', 'to-14kb', 'to-15kb',
+    'to-20kb', 'to-28kb', 'to-50kb', 'to-100kb', 'to-200kb', 'to-500kb', 'to-1mb'
+  ]
   
   // Use cases are usually the ones without "kb" or "mb" in slug (except specific ones)
   const useCaseVariants = tool.variants.filter(v => 

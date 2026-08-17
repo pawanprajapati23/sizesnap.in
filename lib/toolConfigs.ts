@@ -39,8 +39,8 @@ function buildSizeVariants(
     variants.push({
       slug: `to-${kb}kb`,
       label: `${kb} KB`,
-      metaTitle: `${toolType} to ${kb}KB Online Free (No Quality Loss) | SizeSnap`,
-      metaDescription: `Free tool to ${toolType.toLowerCase()} to ${kb}KB online. Best for government forms and exams. Works in browser, 100% private.`,
+      metaTitle: `${toolType} to ${kb}KB Online (Free & Fast) - Best for Forms`,
+      metaDescription: `Instantly ${toolType.toLowerCase()} to ${kb}KB or less online without losing quality. Perfect for government job forms, exams (SSC, UPSC), and portal uploads. 100% free and private.`,
       h1: `${toolType} to ${kb}KB Online Free`,
       introParagraph: `Need your file under ${kb}KB? This free online tool will ${toolType.toLowerCase()} to exactly ${kb}KB or less. ${extraIntro}`,
       config: { maxKB: kb }
@@ -75,8 +75,8 @@ function buildSizeVariants(
     variants.push({
       slug: `to-${mb.toString().replace('.', '-')}mb`,
       label: `${mb} MB`,
-      metaTitle: `${toolType} to ${mb}MB Online Free (No Quality Loss) | SizeSnap`,
-      metaDescription: `Free tool to ${toolType.toLowerCase()} to ${mb}MB online. Works in your browser. No watermark, no signup, 100% private.`,
+      metaTitle: `${toolType} to ${mb}MB Online (Free & Fast) - High Quality`,
+      metaDescription: `Instantly ${toolType.toLowerCase()} to ${mb}MB or less online. Best for portal uploads and email attachments. Works in your browser. No watermark, 100% private.`,
       h1: `${toolType} to ${mb}MB Online Free`,
       introParagraph: `Need your file under ${mb}MB? This free online tool will ${toolType.toLowerCase()} to exactly ${mb}MB or less. ${extraIntro}`,
       config: { maxKB: maxKB }

@@ -380,23 +380,28 @@ export const customSeoData: Record<string, CustomSeoData> = {
     h1: 'Passport Size Photo Maker Online Free',
     introParagraph: 'Kya aapko online registration ya passport application ke liye perfect passport size photo banani hai? Hamare free passport size photo maker tool se aap image crop aur scale kar sakte hain.',
     bodyHtml: `
-      <h2>Passport Size Photo Maker Kaise Use Karein? (Problem & Solution)</h2>
-      <p>Mobile phone se normal camera click karne par photo ke background me uninvited objects ya fir incorrect dimensions (jaise width aur height ka anupat) ki problem aati hai. Kisi bhi exam form ya official passport application portal par incorrect size upload karne se validation failed error aa jata hai. Standard passport size photo maker online options use karte waqt aapki privacy unsafe rehti hai.</p>
+      <h2>Passport Size Photo Maker Kaise Use Karein? (Step-by-Step Guide)</h2>
+      <p>Mobile phone se normal camera click karne par photo ke background me uninvited objects ya fir incorrect dimensions (jaise width aur height ka anupat) ki problem aati hai. Kisi bhi exam form (SSC, UPSC, IBPS) ya official passport application portal par incorrect size upload karne se validation failed error aa jata hai. Standard passport size photo maker online options use karte waqt aapki privacy unsafe rehti hai.</p>
       
-      <p>SizeSnap is issue ko smart local resolution controls se solve karta hai. Aapko simple photo upload karni hai, standard 3.5 x 4.5 cm aspect ratio lock criteria match karna hai aur system coordinates set karke automatically crop block generate kar dega. <strong>Upload your file and fix instantly</strong>.</p>
+      <p>SizeSnap is issue ko smart local resolution controls se solve karta hai. Aapko simple photo upload karni hai, standard <strong>3.5 x 4.5 cm (35x45 mm)</strong> aspect ratio lock criteria match karna hai aur system coordinates set karke automatically crop block generate kar dega. <strong>Upload your file and fix instantly</strong>.</p>
       
       <h2>Why Correct Dimensions are Crucial for Official Portals?</h2>
-      <p>Chahe woh Staff Selection Commission (SSC) ho, state levels ke public service commissions (BPSC, UPPSC, etc.), bank jobs (IBPS) ya visa formats ho, candidates ko exact dimension guidelines rules follow karne padte hain. Incorrect dimensions hone par portals form verification check ke dauran candidate images reject kar dete hain.</p>
+      <p>Chahe woh Staff Selection Commission (SSC) ho, state levels ke public service commissions (BPSC, UPPSC, etc.), bank jobs (IBPS) ya visa formats ho, candidates ko exact dimension guidelines rules follow karne padte hain. Incorrect dimensions ya file size (jaise 20KB-50KB limit) hone par portals form verification check ke dauran candidate images reject kar dete hain. Hamara tool size aur dimensions dono ko ek sath perfect banata hai.</p>
       
+      <h2>What are the Standard Passport Size Photo Dimensions in India?</h2>
+      <p>India me standard passport size photo ki dimensions <strong>3.5 cm width aur 4.5 cm height</strong> hoti hai (35mm x 45mm). Agar pixels me baat karein (300 DPI par), toh yeh lagbhag <strong>413 x 531 pixels</strong> hota hai. SizeSnap in dimensions ko default set karke rakhta hai taaki aapse koi galti na ho.</p>
+
       <h2>100% Secure & Local Browser Processing (Privacy First)</h2>
-      <p>SizeSnap user safety guidelines strictly observe karta hai. Kisi bhi security violation ya server tracking details se bachne ke liye, data operations sandboxed javascript layers me host hote hain. Processing purely client browser execution me run hoti hai bina cloud nodes use kiye.</p>
+      <p>SizeSnap user safety guidelines strictly observe karta hai. Kisi bhi security violation ya server tracking details se bachne ke liye, data operations sandboxed javascript layers me host hote hain. Processing purely client browser execution me run hoti hai bina cloud nodes use kiye. Aapki photo kabhi hamare server par upload nahi hoti.</p>
 
       <h2>Related Document & Photo Resizing Tools</h2>
       <p>Passport size photo frame convert karne ke sath-sath aap dusre formats aur size presets check kar sakte hain. Signature resize ke liye <a href="/resize-signature-for-ssc">SSC Signature Resizer</a> check karein, ya low weight conversion limits ke liye <a href="/11kb-converter">11KB Converter</a> use karein, aur documents compress karne ke liye <a href="/resize-image-to-100kb">100KB Document Resizer</a> explore karein.</p>
     `,
     faqs: [
       { question: 'Passport size photo ki standard dimensions kya hoti hain?', answer: 'India aur kai official boards me passport photo ki standard physical dimensions 3.5 cm (width) x 4.5 cm (height) hoti hai, jisse digital format pixels me width 413px aur height 531px banti hai.' },
-      { question: 'Kya background edit ya size change safe hai?', answer: 'Haan, standard rules ke anusaar local processing tool use karke output build karna security standpoint se extremely safe aur secure hai.' },
+      { question: 'Ghar par mobile se passport size photo kaise banayein?', answer: 'Aap apne mobile camera se ek plain light background (jaise white deewar) ke aage photo click karein. Phir use SizeSnap.in/passport-size-photo-maker par upload karein. Tool automatically usko 3.5x4.5 cm aur sahi file size me crop aur compress kar dega.' },
+      { question: 'Kya yeh tool photo ka size 20KB-50KB tak kam kar sakta hai?', answer: 'Haan! Humara tool dimensions (35x45mm) theek karne ke sath-sath aapki file ka size automatically form guidelines (jaise 20KB se 50KB) ke andar compress kar deta hai.' },
+      { question: 'Kya background edit ya size change safe hai?', answer: 'Haan, standard rules ke anusaar local processing tool use karke output build karna security standpoint se extremely safe aur secure hai kyuki data aapke browser me hi rehta hai.' },
       { question: 'Mobile screen par passport size photo kaise banayein?', answer: 'SizeSnap.in/passport-size-photo-maker link open karein, file browse karke crop coordinate confirm karein, instant download options ready ho jayenge.' }
     ]
   },

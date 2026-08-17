@@ -156,7 +156,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieConsent />
         <ServiceWorkerRegister />
-        <PwaInstallBanner />
+        {/* <PwaInstallBanner /> */}
         <SessionDownloadTray />
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="afterInteractive" />

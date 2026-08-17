@@ -14,6 +14,7 @@ import Script from 'next/script'
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sizesnap.in'),
   title: 'SizeSnap — Free Online Image & PDF Tools',
   description: 'Free online tools to resize images, compress PDFs, and more. No signup, no watermark, works on mobile. Visit sizesnap.in',
   keywords: 'image resizer, pdf compressor, compress image, resize photo online free, sizesnap',

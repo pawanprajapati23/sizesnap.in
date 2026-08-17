@@ -17,29 +17,43 @@ export default function SizeSnapBrandPage() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'Kya SizeSnap ka use karne ke liye login ya payment zaroori hai?',
+        name: 'Do I need to login or pay to use SizeSnap?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Bilkul nahi. SizeSnap ek 100% free online tool suite hai. Yahan koi paywalls, registration steps, ya hidden subscription charges nahi hain. Aap bina login kiye unlimited compress aur download kar sakte hain.'
+          text: 'Not at all. SizeSnap is a 100% free online tool suite. There are no paywalls, registration steps, or hidden subscription charges. You can compress and download unlimited files without logging in.'
         }
       },
       {
         '@type': 'Question',
-        name: 'Mera document SizeSnap servers par safe rehta hai kya?',
+        name: 'Are my documents safe on SizeSnap servers?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'SizeSnap 100% client-side technology par run karta hai. Iska matlab hai ki aapka koi bhi personal marksheet, Aadhaar scan, ya photo hamare server par upload hi nahi hota hai. Sabhi file processing directly aapke mobile ya computer browser ke RAM me local execute hoti hai.'
+          text: 'SizeSnap runs entirely on 100% client-side technology. This means your personal marksheets, ID scans, or photos are never uploaded to our servers. All file processing happens locally in your device\'s browser.'
         }
       },
       {
         '@type': 'Question',
-        name: 'Mobile user SizeSnap tools kaise run karein?',
+        name: 'How can mobile users run SizeSnap tools?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Aap directly apne Android ya iPhone device ke Chrome/Safari browser me sizesnap.in search karke home screen se koi bhi utility tool open kar sakte hain. Upload button par tab karke file select karein aur direct fix download karein.'
+          text: 'You can access sizesnap.in directly from your Android or iPhone device via Chrome or Safari. Simply select a tool from the homepage, tap upload to select your file, and download the processed result instantly.'
         }
       }
     ]
+  }
+
+  const softwareSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': 'SizeSnap',
+    'url': 'https://sizesnap.in/sizesnap',
+    'applicationCategory': 'UtilityApplication',
+    'operatingSystem': 'All',
+    'offers': {
+      '@type': 'Offer',
+      'price': '0',
+      'priceCurrency': 'USD'
+    }
   }
 
   return (
@@ -47,6 +61,10 @@ export default function SizeSnapBrandPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(brandFaqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
       
       <div className="max-w-4xl mx-auto py-10 px-4 md:px-0 space-y-10">
@@ -97,40 +115,68 @@ export default function SizeSnapBrandPage() {
           </div>
         </section>
 
+        {/* Additional Tool Links Grid */}
+        <section className="space-y-4">
+          <h2 className="text-xl font-bold text-gray-900">Explore more categories:</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            <Link href="/image-to-pdf/convert" className="bg-white border border-gray-200 rounded-xl p-5 hover:border-indigo-400 transition hover:shadow-md block group">
+              <span className="text-2xl block mb-2">📑</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition flex items-center gap-1">
+                JPG to PDF Converter <ArrowRight className="h-4 w-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">Combine multiple images into a single PDF document securely.</p>
+            </Link>
+            <Link href="/convert-image/to-webp" className="bg-white border border-gray-200 rounded-xl p-5 hover:border-indigo-400 transition hover:shadow-md block group">
+              <span className="text-2xl block mb-2">🔄</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition flex items-center gap-1">
+                Image Format Converter <ArrowRight className="h-4 w-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">Convert between JPG, PNG, and WebP formats instantly.</p>
+            </Link>
+            <Link href="/document-scanner/bw-filter" className="bg-white border border-gray-200 rounded-xl p-5 hover:border-indigo-400 transition hover:shadow-md block group">
+              <span className="text-2xl block mb-2">📱</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition flex items-center gap-1">
+                Online Document Scanner <ArrowRight className="h-4 w-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">Apply black and white high-contrast filters to your scanned documents.</p>
+            </Link>
+          </div>
+        </section>
+
         {/* Content Block */}
         <section className="prose prose-blue max-w-none bg-white border border-gray-200 rounded-2xl p-6 md:p-8 space-y-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">SizeSnap Kya Hai? (Problem & Solution)</h2>
+            <h2 className="text-2xl font-bold text-gray-900">What is SizeSnap? (The Problem & Solution)</h2>
             <p className="text-sm text-gray-600 leading-relaxed mt-2">
-              Kai online application forms jaise SSC, NEET, UPSC, banking (IBPS), aur college admissions portal me certificates upload karte waqt heavy restriction criteria aate hain. Normal mobile cameras se click ki gayi documents or photo files ki size ranges 2MB se 10MB tak hoti hain. Manual resizing complex computer programming softwares bina dynamic target ke resolve nahi kar pati hai.
+              Many online application forms such as SSC, NEET, UPSC, banking (IBPS), and college admissions portals enforce strict file size limits for uploaded documents. Standard photos taken on mobile cameras typically range from 2MB to 10MB. Manual resizing often requires complex software and can result in significant quality degradation if not done properly.
             </p>
             <p className="text-sm text-gray-600 leading-relaxed mt-2">
-              <strong>SizeSnap</strong> is standard workflow issue ko seamless interface se solve karta hai. Hum dynamic target-based compilers aur resizers offer karte hain jo custom ranges setup (jaise image under 50KB or PDF below 500KB) bina dynamic resolution degrade kiye instantly configure kar dete hain. <strong>Upload your file and fix instantly</strong>.
+              <strong>SizeSnap</strong> solves this standard workflow issue with a seamless interface. We offer dynamic, target-based compressors and resizers that accurately configure your custom file size requirements (such as images under 50KB or PDFs below 500KB) without unnecessarily reducing visual clarity. <strong>Upload your file and fix it instantly</strong>.
             </p>
           </div>
 
           <hr className="border-gray-200" />
 
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">SizeSnap Par Core Tools Ka Use Case (Job Forms, SSC & NEET)</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Use Cases for SizeSnap Core Tools</h2>
             <p className="text-sm text-gray-600 leading-relaxed mt-2">
-              Humare digital utility converters niche likhe sectors me candidates ki preference par design hain:
+              Our digital utility converters are designed primarily to assist candidates with the following common challenges:
             </p>
             <ul className="text-sm text-gray-600 list-disc pl-5 mt-2 space-y-1">
-              <li><strong>Government Forms (SSC CGL, CHSL, Railway):</strong> Signatures resize range strictly 10KB to 20KB aur photos correct physical dimensions (3.5x4.5 cm) presets ensure karein.</li>
-              <li><strong>National Level Entrance Exams (NEET, JEE Mains):</strong> Card photo size requirements 100KB ya 200KB limit constraints resolve karne ke liye.</li>
-              <li><strong>Document Transcripts:</strong> Certificates transcripts ko compile karke PDF merge ya compress under 500KB format me convert karne ke liye.</li>
+              <li><strong>Government Forms (SSC CGL, CHSL, Railway):</strong> Resizing signatures strictly to the 10KB to 20KB range and ensuring photos match physical dimension presets (3.5x4.5 cm).</li>
+              <li><strong>National Level Entrance Exams (NEET, JEE Mains):</strong> Meeting the 100KB or 200KB upload constraints for admit card photos and ID proofs.</li>
+              <li><strong>Document Transcripts:</strong> Compiling multiple certificate transcripts and compressing the merged PDF format below 500KB.</li>
             </ul>
           </div>
 
           <hr className="border-gray-200" />
 
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">100% Private Browser-Side Technology (Safety Guarantee)</h2>
+            <h2 className="text-2xl font-bold text-gray-900">100% Private Browser-Side Technology</h2>
             <p className="text-sm text-gray-600 leading-relaxed mt-2 flex items-start gap-2">
               <ShieldCheck className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
               <span>
-                Privacy hamari absolute priority hai. SizeSnap online tools me files transfer or server copy save nahi hoti hain. Processing directly browser-side WebAssembly aur Canvas APIs local execution nodes me process hoti hai, jisse dynamic database safety 100% stable rehti hai.
+                Privacy is our absolute priority. Unlike other online tools, SizeSnap never transfers or saves copies of your files to our servers. All processing runs directly in your browser using WebAssembly and Canvas APIs, ensuring 100% local execution and absolute data security.
               </span>
             </p>
           </div>
@@ -144,7 +190,7 @@ export default function SizeSnapBrandPage() {
           <div className="space-y-4">
             <details className="group border border-gray-100 rounded-xl p-4 bg-gray-50/50 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between font-semibold text-gray-900 cursor-pointer list-none text-sm">
-                <span>Kya SizeSnap ka use karne ke liye login ya payment zaroori hai?</span>
+                <span>Do I need to login or pay to use SizeSnap?</span>
                 <span className="transition group-open:rotate-180">
                   <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -152,12 +198,12 @@ export default function SizeSnapBrandPage() {
                 </span>
               </summary>
               <p className="mt-3 text-xs text-gray-600 leading-relaxed font-normal">
-                Bilkul nahi. SizeSnap ek 100% free online tool suite hai. Yahan koi paywalls, registration steps, ya hidden subscription charges nahi hain. Aap bina login kiye unlimited compress aur download kar sakte hain.
+                Not at all. SizeSnap is a 100% free online tool suite. There are no paywalls, registration steps, or hidden subscription charges. You can compress and download unlimited files without logging in.
               </p>
             </details>
             <details className="group border border-gray-100 rounded-xl p-4 bg-gray-50/50 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between font-semibold text-gray-900 cursor-pointer list-none text-sm">
-                <span>Mera document SizeSnap servers par safe rehta hai kya?</span>
+                <span>Are my documents safe on SizeSnap servers?</span>
                 <span className="transition group-open:rotate-180">
                   <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -165,12 +211,12 @@ export default function SizeSnapBrandPage() {
                 </span>
               </summary>
               <p className="mt-3 text-xs text-gray-600 leading-relaxed font-normal">
-                SizeSnap 100% client-side technology par run karta hai. Iska matlab hai ki aapka koi bhi personal marksheet, Aadhaar scan, ya photo hamare server par upload hi nahi hota hai. Sabhi file processing directly aapke mobile ya computer browser ke RAM me local execute hoti hai.
+                SizeSnap runs entirely on 100% client-side technology. This means your personal marksheets, ID scans, or photos are never uploaded to our servers. All file processing happens locally in your device&apos;s browser.
               </p>
             </details>
             <details className="group border border-gray-100 rounded-xl p-4 bg-gray-50/50 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between font-semibold text-gray-900 cursor-pointer list-none text-sm">
-                <span>Mobile user SizeSnap tools kaise run karein?</span>
+                <span>How can mobile users run SizeSnap tools?</span>
                 <span className="transition group-open:rotate-180">
                   <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -178,7 +224,7 @@ export default function SizeSnapBrandPage() {
                 </span>
               </summary>
               <p className="mt-3 text-xs text-gray-600 leading-relaxed font-normal">
-                Aap directly apne Android ya iPhone device ke Chrome/Safari browser me sizesnap.in search karke home screen se koi bhi utility tool open kar sakte hain. Upload button par tab karke file select karein aur direct fix download karein.
+                You can access sizesnap.in directly from your Android or iPhone device via Chrome or Safari. Simply select a tool from the homepage, tap upload to select your file, and download the processed result instantly.
               </p>
             </details>
           </div>

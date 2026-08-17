@@ -1,41 +1,126 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { Shield, Zap, Lock, Code, ServerOff } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'About Us - Free Image & PDF Resizing Tools | SizeSnap',
-  description: 'Learn more about SizeSnap.in. We build free, fast, and secure client-side tools for sizing images and processing PDFs.'
+  description: 'Learn more about SizeSnap.in. We build free, fast, and secure client-side tools for sizing images and processing PDFs.',
+  alternates: {
+    canonical: 'https://sizesnap.in/about-us'
+  },
+  openGraph: {
+    title: 'About Us | SizeSnap.in',
+    description: 'Free, fast, and secure client-side tools for sizing images and processing PDFs.',
+    url: 'https://sizesnap.in/about-us',
+    siteName: 'SizeSnap',
+    locale: 'en_US',
+    type: 'website',
+  }
 }
 
 export default function AboutPage() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'AboutPage',
+        '@id': 'https://sizesnap.in/about-us',
+        'url': 'https://sizesnap.in/about-us',
+        'name': 'About SizeSnap.in',
+        'description': 'Learn more about SizeSnap.in and its founder Pawan Prajapati.'
+      },
+      {
+        '@type': 'Person',
+        '@id': 'https://sizesnap.in/about-us#founder',
+        'name': 'Pawan Prajapati',
+        'jobTitle': 'Founder & Developer',
+        'url': 'https://sizesnap.in/about-us#founder',
+        'sameAs': [
+          'https://github.com/pawanprajapati23',
+          'https://www.linkedin.com/in/pawanprajapati23'
+        ],
+        'knowsAbout': ['Web Development', 'Client-side Image Processing', 'PDF Optimization'],
+        'worksFor': {
+          '@type': 'Organization',
+          'name': 'SizeSnap'
+        }
+      }
+    ]
+  }
+
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4 md:px-0 prose prose-blue">
-      <h1>About SizeSnap.in</h1>
-      
-      <p>Welcome to <strong>SizeSnap.in</strong>—an entirely free and incredibly fast toolkit designed to help you process, resize, and compress images and PDFs. Owned and built by Pawan Prajapati based out of India, our goal is simple: to provide internet users with the safest and fastest way to modify their digital files.</p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <div className="max-w-4xl mx-auto py-12 px-4 md:px-0">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">About SizeSnap.in</h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            An entirely free and incredibly fast toolkit designed to help you process, resize, and compress images and PDFs natively in your browser.
+          </p>
+        </div>
 
-      <h2 id="founder">About the Founder &amp; Owner (Malik) - Pawan Prajapati</h2>
-      <p><strong>Pawan Prajapati</strong> is the founder, developer, and owner (malik) of SizeSnap.in. Currently a <strong>B.Tech student</strong>, Pawan is an active Software Development Engineer (SDE) candidate preparing for SDE roles by building useful web utilities.</p>
-      <p>Pawan designed and coded SizeSnap to help fellow students and job seekers resize passport photos and signature scans for competitive exams (like SSC CGL, RRB NTPC, UPSC, NEET, etc.) without having to upload sensitive documents to third-party servers. If you are searching for who is the owner of Sizesnap or who Pawan Prajapati is, he is the creator of this 100% private, browser-side local compression toolkit.</p>
-      <p>You can find more of his development projects and connect with him on his <a href="https://github.com/pawanprajapati23" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
+        {/* Founder Bio Card */}
+        <div id="founder" className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-8 items-start mb-12">
+          <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-3xl flex-shrink-0">
+            PP
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Pawan Prajapati</h2>
+            <p className="text-blue-600 font-medium mb-4">Founder & Developer (Malik)</p>
+            <p className="text-gray-600 mb-4 leading-relaxed">
+              Currently a B.Tech student, Pawan is an active Software Development Engineer (SDE) candidate. 
+              He built SizeSnap to help fellow students and job seekers resize passport photos and signature scans 
+              for competitive exams (SSC CGL, RRB NTPC, UPSC, NEET) without uploading sensitive documents to third-party servers.
+            </p>
+            <div className="flex gap-4">
+              <a href="https://github.com/pawanprajapati23" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-900 hover:text-blue-600 flex items-center gap-2">
+                <Code className="w-4 h-4" /> GitHub Profile
+              </a>
+            </div>
+          </div>
+        </div>
 
-      <h2>What do we do?</h2>
-      <p>SizeSnap provides web-based tools that solve everyday digital utility problems. Whether you are applying for a government job, submitting university scholarship documents, or just trying to email a large PDF, rigid file size limits are always an annoying hurdle. SizeSnap removes that friction instantly by allowing you to dial in exact KB and MB thresholds for your files.</p>
+        {/* Trust Badges */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="bg-slate-50 p-6 rounded-xl text-center border border-slate-100">
+            <ServerOff className="w-8 h-8 mx-auto text-indigo-600 mb-3" />
+            <h3 className="font-bold text-gray-900 mb-2">100% Client-Side</h3>
+            <p className="text-sm text-gray-600">Zero Server Storage. Your files never leave your device.</p>
+          </div>
+          <div className="bg-slate-50 p-6 rounded-xl text-center border border-slate-100">
+            <Zap className="w-8 h-8 mx-auto text-amber-500 mb-3" />
+            <h3 className="font-bold text-gray-900 mb-2">WASM Powered</h3>
+            <p className="text-sm text-gray-600">Lightning fast local processing directly in your browser.</p>
+          </div>
+          <div className="bg-slate-50 p-6 rounded-xl text-center border border-slate-100">
+            <Lock className="w-8 h-8 mx-auto text-green-600 mb-3" />
+            <h3 className="font-bold text-gray-900 mb-2">Completely Free</h3>
+            <p className="text-sm text-gray-600">No watermarks, no paywalls, and no login required.</p>
+          </div>
+        </div>
 
-      <h2>Why Choose Us?</h2>
-      <ul>
-        <li><strong>Uncompromising Privacy:</strong> Our absolute guarantee is this: <strong>No files are uploaded to any server</strong>. Most online converters force you to upload your sensitive documents to their servers. We don&apos;t. All scripts run 100% inside your browser using the HTML5 Canvas API and WebAssembly. Your files never touch our network.</li>
-        <li><strong>Completely Free:</strong> There are no paywalls, no daily limits, no hidden features, and no login required.</li>
-        <li><strong>No Watermarks:</strong> The files you create and download are entirely yours. We do not brand your edited images or generated PDFs.</li>
-        <li><strong>Lightning Processing:</strong> Because there is no upload lag or server queue time, the processing happens locally on your machine—making it blazingly fast.</li>
-      </ul>
-
-      <h2>Who is this for?</h2>
-      <p>This platform was meticulously designed for:</p>
-      <ul>
-        <li><strong>Students & Candidates:</strong> Submitting application portals (SSC, UPSC, NEET, Universities) that strictly demand 20KB to 50KB image and signature uploads.</li>
-        <li><strong>Professionals:</strong> Dealing with strict email attachment limitations or e-filing payloads where PDFs must be reduced below a megabyte.</li>
-        <li><strong>General Web Users:</strong> Anyone looking for a fast, no-nonsense utility that simply gets the job done securely in the quickest time possible.</li>
-      </ul>
-      <p>Instead of downloading bloated desktop software or risking privacy leaks on sketchy proxy servers, SizeSnap offers a precise, one-click solution directly in your browser.</p>
-    </div>
+        <div className="prose prose-blue max-w-none">
+          <h2>Who is this for?</h2>
+          <p>This platform was meticulously designed for:</p>
+          <ul>
+            <li><strong>Students & Candidates:</strong> Submitting application portals (SSC, UPSC, NEET, Universities) that strictly demand 20KB to 50KB image and signature uploads.</li>
+            <li><strong>Professionals:</strong> Dealing with strict email attachment limitations or e-filing payloads where PDFs must be reduced below a megabyte.</li>
+            <li><strong>General Web Users:</strong> Anyone looking for a fast, no-nonsense utility that simply gets the job done securely in the quickest time possible.</li>
+          </ul>
+          
+          <div className="mt-8 flex gap-4">
+            <Link href="/" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition no-underline">
+              Explore Tools
+            </Link>
+            <Link href="/contact" className="bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition no-underline">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

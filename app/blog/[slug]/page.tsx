@@ -107,10 +107,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     'datePublished': blog.date,
     'dateModified': blog.date,
     'author': {
-      '@type': 'Organization',
-      'name': 'SizeSnap',
-      'url': 'https://sizesnap.in'
+      '@type': 'Person',
+      'name': 'Pawan Prajapati',
+      'url': 'https://sizesnap.in/about-us#founder'
     },
+    'image': 'https://sizesnap.in/logo.png',
     'publisher': {
       '@type': 'Organization',
       'name': 'SizeSnap',
@@ -150,6 +151,19 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     ]
   }
 
+  // Generate TOC
+  const tocMatches = [...blog.content.matchAll(/<h2>(.*?)<\/h2>/g)];
+  const toc = tocMatches.map((match, index) => {
+    const title = match[1].replace(/<[^>]+>/g, '').trim();
+    const id = `heading-${index}`;
+    return { title, id, original: match[0], innerHTML: match[1] };
+  });
+
+  let modifiedContent = blog.content;
+  toc.forEach(({ id, original, innerHTML }) => {
+    modifiedContent = modifiedContent.replace(original, `<h2 id="${id}" class="scroll-mt-20">${innerHTML}</h2>`);
+  });
+
   return (
     <>
       <script
@@ -169,10 +183,38 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
              <span>⏱️ {Math.max(1, Math.ceil(blog.content.split(/\s+/).length / 200))} min read</span>
            </div>
         </div>
+
+        {toc.length > 0 && (
+          <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-100">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Table of Contents</h2>
+            <ul className="space-y-2">
+              {toc.map(({ title, id }) => (
+                <li key={id}>
+                  <a href={`#${id}`} className="text-sm text-blue-600 hover:underline">{title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div 
           className="prose prose-blue max-w-none text-gray-800"
-          dangerouslySetInnerHTML={{ __html: blog.content }} 
+          dangerouslySetInnerHTML={{ __html: modifiedContent }} 
         />
+
+        {/* Author Bio Box */}
+        <div className="mt-12 bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col md:flex-row gap-6 items-center md:items-start">
+          <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl flex-shrink-0">
+            PP
+          </div>
+          <div>
+            <h3 className="font-bold text-gray-900 mb-1">Written by Pawan Prajapati</h3>
+            <p className="text-sm text-gray-600 mb-2">Founder & Developer at SizeSnap</p>
+            <p className="text-xs text-gray-500">
+              Last updated on {new Date(blog.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </p>
+          </div>
+        </div>
 
         {recommendedTools.length > 0 && (
           <div className="mt-12 pt-8 border-t border-gray-200">

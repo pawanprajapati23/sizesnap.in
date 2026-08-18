@@ -48,7 +48,41 @@ const PdfPageNumbererTool = dynamic(() => import('@/components/tools/PdfPageNumb
 const SelfAttestationTool = dynamic(() => import('@/components/tools/SelfAttestationTool'), { ssr: false })
 const DocumentGrayscaleTool = dynamic(() => import('@/components/tools/DocumentGrayscaleTool'), { ssr: false })
 
+import { useEffect, useRef } from 'react'
+import { trackEvent } from '@/lib/analytics'
+
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // 1. Track tool open event asynchronously
+    trackEvent('tool_open', { toolSlug, toolName: config?.title || toolSlug })
+
+    // 2. Add an isolated non-blocking click listener to infer successful downloads
+    const handleGlobalClick = (e: MouseEvent) => {
+      try {
+        const target = e.target as HTMLElement
+        // If they click anything inside this tool containing the text "Download" or "Save"
+        if (
+          target &&
+          wrapperRef.current?.contains(target) &&
+          (target.tagName === 'A' || target.tagName === 'BUTTON') &&
+          (target.innerText?.toLowerCase().includes('download') || target.innerText?.toLowerCase().includes('save'))
+        ) {
+          trackEvent('tool_download', { toolSlug, toolName: config?.title || toolSlug })
+        }
+      } catch (err) {
+        // Silently fail to protect UI
+      }
+    }
+
+    document.addEventListener('click', handleGlobalClick, { capture: true, passive: true })
+    
+    return () => {
+      document.removeEventListener('click', handleGlobalClick, { capture: true })
+    }
+  }, [toolSlug, config?.title])
+
   let toolComponent = null
   if (toolSlug === 'resize-image') toolComponent = <ImageResizeTool config={config} />
   else if (toolSlug === 'compress-image') toolComponent = <ImageCompressTool config={config} />
@@ -115,7 +149,7 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
   if (!toolComponent) return null
 
   return (
-    <div className="relative group/tool">
+    <div ref={wrapperRef} className="relative group/tool">
       {/* Dynamic neon gradient backdrop glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover/tool:opacity-35 transition-opacity duration-500 pointer-events-none" />
       <div className="relative">{toolComponent}</div>

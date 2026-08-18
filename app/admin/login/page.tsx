@@ -19,11 +19,20 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      if (!auth) throw new Error('Firebase configuration missing')
-      await signInWithEmailAndPassword(auth, email, password)
-      router.push('/admin') // Redirect to dashboard on success
+      console.log("Firebase Auth Object:", auth)
+      console.log("Attempting login with email:", email)
+      
+      if (!auth) throw new Error('Firebase configuration missing (auth is undefined)')
+      
+      const cred = await signInWithEmailAndPassword(auth, email, password)
+      console.log("Login successful!", cred.user.uid)
+      router.push('/admin')
     } catch (err: any) {
-      setError(err.message || 'Failed to login')
+      console.error("FIREBASE LOGIN ERROR DETAILS:", err)
+      console.error("Error Code:", err.code)
+      console.error("Error Message:", err.message)
+      
+      setError(`${err.code || 'Error'}: ${err.message}. Please check browser console (F12) for exact network failure details.`)
     } finally {
       setLoading(false)
     }

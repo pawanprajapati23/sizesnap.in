@@ -48,8 +48,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!user) return null
 
   const navItems = [
-    { name: 'Overview', href: '/admin', icon: LayoutDashboard },
-    { name: 'Realtime', href: '/admin/realtime', icon: Activity },
+    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { name: 'Tools Analytics', href: '/admin/tools', icon: Wrench },
     { name: 'Pages & Content', href: '/admin/pages', icon: FileText },
     { name: 'SEO & Search', href: '/admin/seo', icon: Search },

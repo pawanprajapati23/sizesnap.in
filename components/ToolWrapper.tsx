@@ -49,38 +49,40 @@ const SelfAttestationTool = dynamic(() => import('@/components/tools/SelfAttesta
 const DocumentGrayscaleTool = dynamic(() => import('@/components/tools/DocumentGrayscaleTool'), { ssr: false })
 
 import { useEffect, useRef } from 'react'
-import { trackEvent } from '@/lib/analytics'
 
 export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; config: any }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // 1. Track tool open event asynchronously
-    trackEvent('tool_open', { toolSlug, toolName: config?.title || toolSlug })
+    // Dynamically load analytics to ensure zero impact on initial page load size
+    import('@/lib/analytics').then(({ trackEvent }) => {
+      // 1. Track tool open event asynchronously
+      trackEvent('tool_open', { toolSlug, toolName: config?.title || toolSlug })
 
-    // 2. Add an isolated non-blocking click listener to infer successful downloads
-    const handleGlobalClick = (e: MouseEvent) => {
-      try {
-        const target = e.target as HTMLElement
-        // If they click anything inside this tool containing the text "Download" or "Save"
-        if (
-          target &&
-          wrapperRef.current?.contains(target) &&
-          (target.tagName === 'A' || target.tagName === 'BUTTON') &&
-          (target.innerText?.toLowerCase().includes('download') || target.innerText?.toLowerCase().includes('save'))
-        ) {
-          trackEvent('tool_download', { toolSlug, toolName: config?.title || toolSlug })
+      // 2. Add an isolated non-blocking click listener to infer successful downloads
+      const handleGlobalClick = (e: MouseEvent) => {
+        try {
+          const target = e.target as HTMLElement
+          // If they click anything inside this tool containing the text "Download" or "Save"
+          if (
+            target &&
+            wrapperRef.current?.contains(target) &&
+            (target.tagName === 'A' || target.tagName === 'BUTTON') &&
+            (target.innerText?.toLowerCase().includes('download') || target.innerText?.toLowerCase().includes('save'))
+          ) {
+            trackEvent('tool_download', { toolSlug, toolName: config?.title || toolSlug })
+          }
+        } catch (err) {
+          // Silently fail to protect UI
         }
-      } catch (err) {
-        // Silently fail to protect UI
       }
-    }
 
-    document.addEventListener('click', handleGlobalClick, { capture: true, passive: true })
-    
-    return () => {
-      document.removeEventListener('click', handleGlobalClick, { capture: true })
-    }
+      document.addEventListener('click', handleGlobalClick, { capture: true, passive: true })
+      
+      return () => {
+        document.removeEventListener('click', handleGlobalClick, { capture: true })
+      }
+    }).catch(() => {})
   }, [toolSlug, config?.title])
 
   let toolComponent = null

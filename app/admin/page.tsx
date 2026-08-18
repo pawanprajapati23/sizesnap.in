@@ -1,9 +1,63 @@
 'use client'
 
-import { auth } from '@/lib/firebase'
+import { useEffect, useState } from 'react'
+import { auth, db } from '@/lib/firebase'
+import { collection, query, where, getDocs, Timestamp } from 'firebase/firestore'
 import { ArrowUpRight, ArrowDownRight, Users, Activity, Download, MousePointerClick, Zap } from 'lucide-react'
 
 export default function AdminDashboard() {
+  const [stats, setStats] = useState({
+    toolOpens: 0,
+    downloads: 0,
+    activeNow: 0
+  })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchStats() {
+      if (!db) return
+      
+      try {
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+        
+        // Only fetch events from today to save reads
+        const eventsRef = collection(db, 'analytics_events_raw')
+        const q = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(today)))
+        
+        const snapshot = await getDocs(q)
+        
+        let opens = 0
+        let downloads = 0
+        let recent = 0
+        const fiveMinsAgo = Date.now() - (5 * 60 * 1000)
+
+        snapshot.forEach((doc) => {
+          const data = doc.data()
+          if (data.eventName === 'tool_open') opens++
+          if (data.eventName === 'tool_download') downloads++
+          
+          // Count as "active now" if event happened in last 5 mins
+          if (data.timestamp && data.timestamp.toMillis() > fiveMinsAgo) {
+            recent++
+          }
+        })
+
+        setStats({
+          toolOpens: opens,
+          downloads: downloads,
+          activeNow: recent
+        })
+      } catch (err) {
+        console.error("Error fetching stats:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchStats()
+  }, [])
+
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -16,17 +70,23 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-3">
           <span className="flex items-center text-sm font-medium text-green-600 bg-green-50 dark:bg-green-900/30 px-3 py-1.5 rounded-full border border-green-200 dark:border-green-800/50">
             <span className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-            System Healthy
+            Database Connected
           </span>
         </div>
       </div>
 
       {/* Top Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <MetricCard title="Visitors Today" value="24,821" change="+18.4%" isPositive={true} icon={Users} />
-        <MetricCard title="Tool Uses" value="18,291" change="+12.7%" isPositive={true} icon={Activity} />
-        <MetricCard title="Downloads" value="12,483" change="+21.3%" isPositive={true} icon={Download} />
-        <MetricCard title="Conversion Rate" value="68.2%" change="-2.1%" isPositive={false} icon={MousePointerClick} />
+        <MetricCard title="Active Users (5m)" value={loading ? "..." : stats.activeNow} change="Live" isPositive={true} icon={Users} />
+        <MetricCard title="Tool Uses (Today)" value={loading ? "..." : stats.toolOpens} change="Updating" isPositive={true} icon={Activity} />
+        <MetricCard title="Downloads (Today)" value={loading ? "..." : stats.downloads} change="Updating" isPositive={true} icon={Download} />
+        <MetricCard 
+          title="Conversion Rate" 
+          value={loading ? "..." : stats.toolOpens > 0 ? `${Math.round((stats.downloads / stats.toolOpens) * 100)}%` : "0%"} 
+          change="Today" 
+          isPositive={true} 
+          icon={MousePointerClick} 
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -40,26 +100,20 @@ export default function AdminDashboard() {
             <span className="text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-1 rounded-md">LIVE</span>
           </div>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800">
-              <div className="flex items-center">
-                <span className="text-2xl mr-4">🇮🇳</span>
-                <div>
-                  <p className="font-medium text-slate-900 dark:text-white">Compress Image → 50KB</p>
-                  <p className="text-sm text-slate-500">Mobile • 2 mins ago</p>
+            {stats.activeNow === 0 ? (
+               <p className="text-slate-500 text-center py-8">No recent activity detected.</p>
+            ) : (
+              <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800">
+                <div className="flex items-center">
+                  <span className="text-2xl mr-4">⚡</span>
+                  <div>
+                    <p className="font-medium text-slate-900 dark:text-white">Active Sessions Detected</p>
+                    <p className="text-sm text-slate-500">Just now</p>
+                  </div>
                 </div>
+                <span className="text-sm font-medium text-green-600">Processing</span>
               </div>
-              <span className="text-sm font-medium text-green-600">Success</span>
-            </div>
-            <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800">
-              <div className="flex items-center">
-                <span className="text-2xl mr-4">🇺🇸</span>
-                <div>
-                  <p className="font-medium text-slate-900 dark:text-white">Passport Photo Maker</p>
-                  <p className="text-sm text-slate-500">Desktop • Just now</p>
-                </div>
-              </div>
-              <span className="text-sm font-medium text-blue-600">Processing</span>
-            </div>
+            )}
           </div>
         </div>
 

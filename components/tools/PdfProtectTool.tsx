@@ -97,7 +97,7 @@ export default function PdfProtectTool({ config }: Props) {
       const pdfBytes = await pdfDoc.save()
 
       // For standard browser client-side password protection, we can utilize custom standard security dictionary headers
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
       const url = URL.createObjectURL(blob)
 
       if (resultUrl) URL.revokeObjectURL(resultUrl)

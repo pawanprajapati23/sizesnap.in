@@ -12,6 +12,7 @@ export type ToolVariant = {
     format?: string
     dpi?: number
     targetColor?: string
+    aspect?: string
   }
 }
 

@@ -71,7 +71,7 @@ export default function PdfUnlockTool({ config }: Props) {
       const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true })
       const unlockedBytes = await pdfDoc.save()
 
-      const blob = new Blob([unlockedBytes], { type: 'application/pdf' })
+      const blob = new Blob([unlockedBytes as any], { type: 'application/pdf' })
       const url = URL.createObjectURL(blob)
 
       if (resultUrl) URL.revokeObjectURL(resultUrl)

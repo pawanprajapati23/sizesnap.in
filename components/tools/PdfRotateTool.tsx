@@ -87,7 +87,7 @@ export default function PdfRotateTool() {
         canvas.width = viewport.width
         canvas.height = viewport.height
 
-        await page.render({ canvasContext: context, viewport }).promise
+        await page.render({ canvasContext: context, viewport, canvas: canvas } as any).promise
 
         const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, 'image/jpeg', 0.85))
         if (blob) {
@@ -175,7 +175,7 @@ export default function PdfRotateTool() {
       }
 
       const pdfBytes = await newDoc.save()
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
       const url = URL.createObjectURL(blob)
 
       if (resultUrl) URL.revokeObjectURL(resultUrl)

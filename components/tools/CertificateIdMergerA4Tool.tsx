@@ -199,7 +199,7 @@ export default function CertificateIdMergerA4Tool({ config }: { config?: any }) 
       })
 
       const pdfBytes = await pdfDoc.save()
-      const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' })
+      const pdfBlob = new Blob([pdfBytes as any], { type: 'application/pdf' })
       const pdfDownloadUrl = URL.createObjectURL(pdfBlob)
 
       const link = document.createElement('a')

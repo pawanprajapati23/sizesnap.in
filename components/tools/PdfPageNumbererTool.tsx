@@ -107,7 +107,7 @@ export default function PdfPageNumbererTool({ config }: { config?: any }) {
       }
 
       const modifiedPdfBytes = await pdfDoc.save()
-      const blob = new Blob([modifiedPdfBytes], { type: 'application/pdf' })
+      const blob = new Blob([modifiedPdfBytes as any], { type: 'application/pdf' })
       const outUrl = URL.createObjectURL(blob)
       setOutputUrl(outUrl)
       const finalKb = Math.round(blob.size / 1024)

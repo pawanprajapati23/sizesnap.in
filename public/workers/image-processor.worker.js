@@ -12,7 +12,7 @@ self.onmessage = async (e) => {
         targetHeight,
         format = 'image/jpeg',
         initialQuality = 0.92,
-        maxIterations = 10,
+        maxIterations = 30,
         safetyMargin = 0.98
       } = options;
 
@@ -93,6 +93,24 @@ self.onmessage = async (e) => {
         }
 
         iteration++;
+      }
+
+      // Emergency fallback if target still not met
+      if (targetKB && bestBlob.size / 1024 > targetKB) {
+        let emergencyScale = scale * 0.7;
+        while (bestBlob.size / 1024 > targetKB && emergencyScale > 0.05) {
+          const currentWidth = Math.max(1, Math.round(width * emergencyScale));
+          const currentHeight = Math.max(1, Math.round(height * emergencyScale));
+          const canvas = new OffscreenCanvas(currentWidth, currentHeight);
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(imageBitmap, 0, 0, currentWidth, currentHeight);
+          
+          bestBlob = await canvas.convertToBlob({
+            type: format,
+            quality: 0.3
+          });
+          emergencyScale *= 0.7;
+        }
       }
 
       self.postMessage({

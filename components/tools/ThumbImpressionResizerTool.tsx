@@ -165,6 +165,24 @@ export default function ThumbImpressionResizerTool({ config }: { config?: any })
         if (sizeKb > targetKb) maxQ = mid
         else minQ = mid
       }
+      
+      // Emergency scale down fallback
+      if (bestBlob && bestBlob.size / 1024 > targetKb) {
+        let emergencyScale = 0.9
+        while (bestBlob && bestBlob.size / 1024 > targetKb && emergencyScale > 0.1) {
+          const ew = Math.max(1, Math.round(targetW * emergencyScale))
+          const eh = Math.max(1, Math.round(targetH * emergencyScale))
+          const eCanvas = document.createElement('canvas')
+          eCanvas.width = ew
+          eCanvas.height = eh
+          const eCtx = eCanvas.getContext('2d')
+          if (eCtx) {
+            eCtx.drawImage(canvas, 0, 0, targetW, targetH, 0, 0, ew, eh)
+            bestBlob = await new Promise<Blob | null>(res => eCanvas.toBlob(res, 'image/jpeg', 0.4))
+          }
+          emergencyScale *= 0.8
+        }
+      }
 
       if (bestBlob) {
         const outUrl = URL.createObjectURL(bestBlob)

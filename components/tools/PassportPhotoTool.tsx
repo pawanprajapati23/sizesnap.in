@@ -183,6 +183,24 @@ export default function PassportPhotoTool({ config }: Props) {
             low = quality
           }
         }
+
+        // Emergency fallback if binary search on quality wasn't enough to hit maxKB
+        if (blob && blob.size / 1024 > config.maxKB) {
+          let emergencyScale = 0.9
+          while (blob && blob.size / 1024 > config.maxKB && emergencyScale > 0.1) {
+            const ew = Math.max(1, Math.round(targetWidth * emergencyScale))
+            const eh = Math.max(1, Math.round(targetHeight * emergencyScale))
+            const eCanvas = document.createElement('canvas')
+            eCanvas.width = ew
+            eCanvas.height = eh
+            const eCtx = eCanvas.getContext('2d')
+            if (eCtx) {
+              eCtx.drawImage(canvas, 0, 0, targetWidth, targetHeight, 0, 0, ew, eh)
+              blob = await new Promise<Blob | null>(res => eCanvas.toBlob(res, 'image/jpeg', 0.4))
+            }
+            emergencyScale *= 0.8
+          }
+        }
       } else {
         blob = await getBlob(quality)
       }

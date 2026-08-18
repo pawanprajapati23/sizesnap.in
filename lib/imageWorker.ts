@@ -115,7 +115,7 @@ async function fallbackMainThreadProcess(
         const safetyMargin = 0.98;
         let iterations = 0;
 
-        while (iterations < 10) {
+        while (iterations < 30) {
           canvas.width = Math.max(1, Math.round(width * scale));
           canvas.height = Math.max(1, Math.round(height * scale));
           ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -147,6 +147,24 @@ async function fallbackMainThreadProcess(
             break;
           }
           iterations++;
+        }
+
+        // Emergency fallback
+        if (targetKB && resultBlob && (resultBlob.size / 1024) > targetKB) {
+          let emergencyScale = scale * 0.7;
+          while ((resultBlob.size / 1024) > targetKB && emergencyScale > 0.05) {
+            canvas.width = Math.max(1, Math.round(width * emergencyScale));
+            canvas.height = Math.max(1, Math.round(height * emergencyScale));
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            resultBlob = await new Promise<Blob | null>((res) => {
+              canvas.toBlob((b) => res(b), options.format || 'image/jpeg', 0.3);
+            });
+            
+            if (!resultBlob) break;
+            emergencyScale *= 0.7;
+          }
         }
 
         if (resultBlob) {

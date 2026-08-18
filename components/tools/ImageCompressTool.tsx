@@ -75,12 +75,12 @@ export default function ImageCompressTool({ config }: Props) {
             let scale = 1.0
             let resultBlob: Blob | null = null
             let iterations = 0
-            const maxIterations = 8
+            const maxIterations = 30
             const safetyMargin = 0.98
 
             while (iterations < maxIterations) {
-              canvas.width = Math.round(width * scale)
-              canvas.height = Math.round(height * scale)
+              canvas.width = Math.max(1, Math.round(width * scale))
+              canvas.height = Math.max(1, Math.round(height * scale))
               ctx.clearRect(0, 0, canvas.width, canvas.height)
               ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
@@ -97,14 +97,31 @@ export default function ImageCompressTool({ config }: Props) {
               if (currentSizeKB <= targetSizeKB * safetyMargin) {
                 break
               } else {
-                if (quality > 0.4) {
-                  const ratio = (targetSizeKB * safetyMargin) / currentSizeKB
-                  quality = Math.max(0.3, quality * ratio)
+                if (quality > 0.45) {
+                  quality -= 0.12
                 } else {
                   scale = scale * 0.85
                 }
               }
               iterations++
+            }
+
+            // Emergency Fallback
+            if (resultBlob && resultBlob.size / 1024 > targetSizeKB) {
+              let emergencyScale = scale * 0.7
+              while (resultBlob.size / 1024 > targetSizeKB && emergencyScale > 0.05) {
+                canvas.width = Math.max(1, Math.round(width * emergencyScale))
+                canvas.height = Math.max(1, Math.round(height * emergencyScale))
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+                resultBlob = await new Promise<Blob | null>((res) => {
+                  canvas.toBlob((b) => res(b), 'image/jpeg', 0.3)
+                })
+
+                if (!resultBlob) break
+                emergencyScale *= 0.7
+              }
             }
 
             if (resultBlob) {

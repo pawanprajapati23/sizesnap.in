@@ -279,9 +279,26 @@ export default function SignatureResizeTool({ config }: Props) {
         }
       }
 
-      // Check one last fallback
+      // Check one last fallback and emergency scale down
       if (blob && (blob.size / 1024) > targetKB) {
         blob = await getBlob(0.05)
+      }
+      
+      if (blob && (blob.size / 1024) > targetKB) {
+        let emergencyScale = 0.9
+        while (blob && blob.size / 1024 > targetKB && emergencyScale > 0.1) {
+          const ew = Math.max(1, Math.round(activeWidth * emergencyScale))
+          const eh = Math.max(1, Math.round(activeHeight * emergencyScale))
+          const eCanvas = document.createElement('canvas')
+          eCanvas.width = ew
+          eCanvas.height = eh
+          const eCtx = eCanvas.getContext('2d')
+          if (eCtx) {
+            eCtx.drawImage(canvas, 0, 0, activeWidth, activeHeight, 0, 0, ew, eh)
+            blob = await new Promise<Blob | null>(res => eCanvas.toBlob(res, 'image/jpeg', 0.4))
+          }
+          emergencyScale *= 0.8
+        }
       }
 
       if (!blob) throw new Error('Failed to output signature stream.')

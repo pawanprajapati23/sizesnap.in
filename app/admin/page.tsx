@@ -18,14 +18,10 @@ export default function AdminDashboard() {
     async function fetchStats() {
       if (!db) {
          setStats({
-            toolOpens: 1245,
-            downloads: 832,
-            activeNow: 42,
-            recentEvents: [
-              { id: '1', eventName: 'tool_download', toolName: 'Image Compressor', timeMs: Date.now() - 12000 },
-              { id: '2', eventName: 'tool_open', toolName: 'PDF to JPG', timeMs: Date.now() - 45000 },
-              { id: '3', eventName: 'tool_download', toolName: 'Video Trimmer', timeMs: Date.now() - 89000 },
-            ]
+            toolOpens: 0,
+            downloads: 0,
+            activeNow: 0,
+            recentEvents: []
          })
          setLoading(false)
          return
@@ -64,26 +60,18 @@ export default function AdminDashboard() {
         recentList.sort((a, b) => b.timeMs - a.timeMs)
 
         setStats({
-          toolOpens: opens || 892,
-          downloads: downloads || 431,
-          activeNow: recent || 12,
-          recentEvents: recentList.length > 0 ? recentList.slice(0, 10) : [
-             { id: '1', eventName: 'tool_download', toolName: 'Image Compressor', timeMs: Date.now() - 12000 },
-             { id: '2', eventName: 'tool_open', toolName: 'PDF to JPG', timeMs: Date.now() - 45000 },
-             { id: '3', eventName: 'tool_download', toolName: 'Video Trimmer', timeMs: Date.now() - 89000 },
-          ]
+          toolOpens: opens,
+          downloads: downloads,
+          activeNow: recent,
+          recentEvents: recentList.slice(0, 10)
         })
       } catch (err) {
         console.error("Error fetching stats:", err)
         setStats({
-            toolOpens: 1245,
-            downloads: 832,
-            activeNow: 42,
-            recentEvents: [
-              { id: '1', eventName: 'tool_download', toolName: 'Image Compressor', timeMs: Date.now() - 12000 },
-              { id: '2', eventName: 'tool_open', toolName: 'PDF to JPG', timeMs: Date.now() - 45000 },
-              { id: '3', eventName: 'tool_download', toolName: 'Video Trimmer', timeMs: Date.now() - 89000 },
-            ]
+            toolOpens: 0,
+            downloads: 0,
+            activeNow: 0,
+            recentEvents: []
          })
       } finally {
         setLoading(false)

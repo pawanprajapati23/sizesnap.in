@@ -9,7 +9,8 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({
     toolOpens: 0,
     downloads: 0,
-    activeNow: 0
+    activeNow: 0,
+    recentEvents: [] as any[]
   })
   const [loading, setLoading] = useState(true)
 
@@ -31,6 +32,7 @@ export default function AdminDashboard() {
         let downloads = 0
         let recent = 0
         const fiveMinsAgo = Date.now() - (5 * 60 * 1000)
+        const recentList: any[] = []
 
         snapshot.forEach((doc) => {
           const data = doc.data()
@@ -40,13 +42,22 @@ export default function AdminDashboard() {
           // Count as "active now" if event happened in last 5 mins
           if (data.timestamp && data.timestamp.toMillis() > fiveMinsAgo) {
             recent++
+            recentList.push({
+               id: doc.id,
+               ...data,
+               timeMs: data.timestamp.toMillis()
+            })
           }
         })
+
+        // Sort recent events by newest first
+        recentList.sort((a, b) => b.timeMs - a.timeMs)
 
         setStats({
           toolOpens: opens,
           downloads: downloads,
-          activeNow: recent
+          activeNow: recent,
+          recentEvents: recentList.slice(0, 10) // Keep top 10 for UI
         })
       } catch (err) {
         console.error("Error fetching stats:", err)
@@ -56,6 +67,10 @@ export default function AdminDashboard() {
     }
 
     fetchStats()
+    
+    // Auto refresh every 15 seconds for "Real-time" feel
+    const interval = setInterval(fetchStats, 15000)
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -103,15 +118,25 @@ export default function AdminDashboard() {
             {stats.activeNow === 0 ? (
                <p className="text-slate-500 text-center py-8">No recent activity detected.</p>
             ) : (
-              <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800">
-                <div className="flex items-center">
-                  <span className="text-2xl mr-4">⚡</span>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">Active Sessions Detected</p>
-                    <p className="text-sm text-slate-500">Just now</p>
+              <div className="space-y-3">
+                {stats.recentEvents.map((evt) => (
+                  <div key={evt.id} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center">
+                      <span className="text-2xl mr-4">{evt.eventName === 'tool_download' ? '💾' : '⚡'}</span>
+                      <div>
+                        <p className="font-medium text-slate-900 dark:text-white capitalize">
+                          {evt.toolName || evt.toolSlug || 'Tool Usage'}
+                        </p>
+                        <p className="text-sm text-slate-500">
+                          {evt.eventName === 'tool_download' ? 'Successfully Downloaded' : 'Opened Tool'}
+                        </p>
+                      </div>
+                    </div>
+                    <span className={`text-sm font-medium ${evt.eventName === 'tool_download' ? 'text-green-600' : 'text-blue-600'}`}>
+                      {Math.round((Date.now() - evt.timeMs) / 1000)}s ago
+                    </span>
                   </div>
-                </div>
-                <span className="text-sm font-medium text-green-600">Processing</span>
+                ))}
               </div>
             )}
           </div>

@@ -55,6 +55,8 @@ export const metadata: Metadata = {
   },
 }
 
+import AdminLayoutWrapper from '@/components/AdminLayoutWrapper'
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -139,18 +141,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-gray-50 text-gray-900 min-h-screen">
         <div className="flex flex-col min-h-screen">
-          <Header />
-          <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6 w-full flex-1">
-          {/* Sidebar — hidden on mobile, visible on lg+ */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <Sidebar />
-          </aside>
-          {/* Main content */}
-          <main className="flex-1 min-w-0">
+          <AdminLayoutWrapper 
+            header={<Header />}
+            sidebar={<Sidebar />}
+            footer={<Footer />}
+          >
             {children}
-          </main>
-        </div>
-        <Footer />
+          </AdminLayoutWrapper>
         <CookieConsent />
         <ServiceWorkerRegister />
         {/* <PwaInstallBanner /> */}

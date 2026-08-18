@@ -9,6 +9,7 @@ import { LayoutDashboard, Activity, Wrench, FileText, Search, Settings, LogOut, 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
@@ -17,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       setLoading(false)
       return
     }
-
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
@@ -31,7 +32,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     })
 
     return () => unsubscribe()
-  }, [router, pathname])
+  }, [pathname, router])
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
 
   if (loading) {
     return (
@@ -57,21 +63,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex font-sans selection:bg-indigo-500/30 relative">
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden" 
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-72 bg-white dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800/60 flex flex-col hidden lg:flex shadow-sm z-10">
-        <div className="px-6 py-8 flex items-center gap-3">
-          <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-indigo-600 flex items-center justify-center">
-             <img src="/logo.png" alt="SizeSnap Logo" className="absolute inset-0 w-full h-full object-cover bg-white" onError={(e) => { e.currentTarget.style.display = 'none' }} />
-             <span className="text-white font-bold text-sm z-0">S</span>
+      <aside className={`fixed lg:static inset-y-0 left-0 w-72 bg-white dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800/60 flex flex-col shadow-xl lg:shadow-sm z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="px-6 py-8 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-indigo-600 flex items-center justify-center">
+               <img src="/logo.png" alt="SizeSnap Logo" className="absolute inset-0 w-full h-full object-cover bg-white" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+               <span className="text-white font-bold text-sm z-0">S</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">SizeSnap</h2>
+              <p className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mt-0.5">Admin Portal</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">SizeSnap</h2>
-            <p className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mt-0.5">Admin Portal</p>
-          </div>
+          <button onClick={() => setMobileMenuOpen(false)} className="lg:hidden p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white">
+            ✕
+          </button>
         </div>
         
-        <div className="px-4 pb-4">
+        <div className="px-4 pb-4 overflow-y-auto">
           <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 px-3">Main Navigation</div>
           <nav className="space-y-1">
             {navItems.map((item) => {
@@ -110,7 +129,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </div>
           <button 
-            onClick={() => auth?.signOut()}
+            onClick={() => auth.signOut()}
             className="flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-all duration-200 group"
           >
             <LogOut className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -121,20 +140,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between px-8 sticky top-0 z-20">
-          <div className="flex items-center">
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-white capitalize">
+        <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-20">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+            <h1 className="text-lg font-semibold text-slate-900 dark:text-white capitalize truncate max-w-[200px] sm:max-w-xs">
               {pathname === '/admin' ? 'Dashboard Overview' : pathname.split('/').pop()?.replace('-', ' ')}
             </h1>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 hidden sm:flex">
              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-600 dark:text-slate-300">
                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                System Operational
              </div>
           </div>
         </header>
-        <div className="flex-1 overflow-y-auto p-8 bg-slate-50/50 dark:bg-slate-950">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50/50 dark:bg-slate-950">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>

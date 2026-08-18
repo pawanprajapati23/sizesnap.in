@@ -163,7 +163,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Google AdSense — Loaded standard for crawler verification during approval phase */}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5696239388754680"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2945912073877101"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />

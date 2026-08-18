@@ -184,6 +184,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }
           `}
         </Script>
+        </div>
       </body>
     </html>
   )

@@ -79,7 +79,7 @@ export default function SEOGrowthCenter() {
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Language Inconsistency on Main Tool Page</h3>
                 <p className="text-slate-600 dark:text-slate-300 mt-1 text-sm leading-relaxed">
-                  The <code className="text-xs bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">/sizesnap</code> page uses English metadata but the actual FAQ answers are in Hinglish (e.g., "Kya SizeSnap ka use..."). This conflicts with the `<html lang="en">` tag and severely penalizes the page for English queries. Additionally, a `WebApplication` schema is missing.
+                  The <code className="text-xs bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">/sizesnap</code> page uses English metadata but the actual FAQ answers are in Hinglish (e.g., "Kya SizeSnap ka use..."). This conflicts with the <code>{"<html lang=\"en\">"}</code> tag and severely penalizes the page for English queries. Additionally, a <code>WebApplication</code> schema is missing.
                 </p>
                 <div className="mt-4 flex gap-3">
                   <span className="text-xs font-medium bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300 px-2.5 py-1 rounded-full">Medium Priority</span>

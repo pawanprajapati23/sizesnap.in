@@ -267,17 +267,7 @@ const EXAM_PRESETS: ExamPreset[] = [
   }
 ]
 
-// Dynamic JSZip loader
-const loadJSZip = async (): Promise<any> => {
-  if ((window as any).JSZip) return (window as any).JSZip
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'
-    script.onload = () => resolve((window as any).JSZip)
-    script.onerror = reject
-    document.head.appendChild(script)
-  })
-}
+
 
 interface SlotState {
   file: File | null
@@ -454,47 +444,37 @@ export default function ExamPackGeneratorTool() {
   }
 
   // Generate and download all files as a ZIP
-  const handleDownloadAllZip = async () => {
-    setIsZipping(true)
-    try {
-      const JSZip = await loadJSZip()
-      const zip = new JSZip()
-      const folderName = `${selectedExam.id}-exam-pack`
-      const folder = zip.folder(folderName)
-
-      let addedCount = 0
-      for (const slot of selectedExam.slots) {
-        const state = slotStates[slot.id]
-        if (state && state.processedBlob) {
+  // Trigger multiple individual downloads (mobile friendly instead of ZIP)
+  const handleDownloadAllIndividually = async () => {
+    setIsZipping(true) // Reusing the state just for button loading indicator
+    let delay = 0
+    let addedCount = 0
+    for (const slot of selectedExam.slots) {
+      const state = slotStates[slot.id]
+      if (state && state.processedUrl) {
+        addedCount++
+        // Slight delay to prevent browser from blocking multiple rapid downloads
+        setTimeout(() => {
           const ext = 'jpg'
-          const safeName = `${slot.id}-${candidateName ? candidateName.replace(/\s+/g, '_') : 'file'}.${ext}`
-          folder.file(safeName, state.processedBlob)
-          addedCount++
-        }
+          const safeName = `${slot.id}-${candidateName ? candidateName.replace(/\\s+/g, '_') : 'file'}.${ext}`
+          const a = document.createElement('a')
+          a.href = state.processedUrl!
+          a.download = safeName
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+        }, delay)
+        delay += 500
       }
-
-      if (addedCount === 0) {
-        alert('Please upload at least 1 document to download.')
-        setIsZipping(false)
-        return
-      }
-
-      const zipBlob = await zip.generateAsync({ type: 'blob' })
-      const url = URL.createObjectURL(zipBlob)
-
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `${selectedExam.id}-ready-to-upload-pack.zip`
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
-    } catch (err) {
-      console.error('ZIP generation error:', err)
-      alert('Could not create ZIP pack.')
-    } finally {
-      setIsZipping(false)
     }
+    
+    if (addedCount === 0) {
+      alert('Please upload at least 1 document to download.')
+    }
+    
+    setTimeout(() => {
+      setIsZipping(false)
+    }, delay)
   }
 
   const allReadyCount = selectedExam.slots.filter((s) => slotStates[s.id]?.status === 'ready').length
@@ -722,24 +702,24 @@ export default function ExamPackGeneratorTool() {
         </div>
       </div>
 
-      {/* Big Master Action: Download Complete Exam Pack ZIP */}
+      {/* Big Master Action: Download Complete Exam Pack */}
       <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h4 className="text-sm font-bold text-slate-900 dark:text-white">
             Download {selectedExam.shortLabel} (Ready-to-Upload Bundle)
           </h4>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Single zip file containing all official photo, signature, and marksheet files ready for direct portal upload.
+            Auto-downloads all completed files (photo, signature, etc.) individually to your device without requiring ZIP extraction.
           </p>
         </div>
 
         <button
-          onClick={handleDownloadAllZip}
+          onClick={handleDownloadAllIndividually}
           disabled={allReadyCount === 0 || isZipping}
           className="w-full sm:w-auto px-6 py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-2xl text-xs shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <FolderArchive className="w-4 h-4" />
-          {isZipping ? 'Bundling ZIP...' : `Download Exam Pack (${allReadyCount} Ready)`}
+          {isZipping ? 'Downloading Files...' : `Download ${allReadyCount} Ready Files`}
         </button>
       </div>
     </div>

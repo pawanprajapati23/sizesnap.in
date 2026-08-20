@@ -15,6 +15,9 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let unsubscribeAuth: any;
+    let interval: any;
+
     async function fetchStats() {
       if (!db) {
          setStats({
@@ -78,9 +81,25 @@ export default function AdminDashboard() {
       }
     }
 
-    fetchStats()
-    const interval = setInterval(fetchStats, 15000)
-    return () => clearInterval(interval)
+    if (auth) {
+      import('firebase/auth').then(({ onAuthStateChanged }) => {
+        unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+          if (user) {
+            fetchStats();
+            interval = setInterval(fetchStats, 15000);
+          } else {
+            window.location.href = '/admin/login';
+          }
+        });
+      });
+    } else {
+      setLoading(false);
+    }
+
+    return () => {
+      if (unsubscribeAuth) unsubscribeAuth();
+      if (interval) clearInterval(interval);
+    }
   }, [])
 
   return (

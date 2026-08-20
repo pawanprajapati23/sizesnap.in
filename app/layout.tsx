@@ -67,7 +67,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -149,8 +148,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </AdminLayoutWrapper>
         <CookieConsent />
-        <ServiceWorkerRegister />
-        <PwaInstallBanner />
+        {/* <ServiceWorkerRegister /> */}
+        {/* <PwaInstallBanner /> */}
         <SessionDownloadTray />
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="afterInteractive" />
@@ -164,23 +163,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        {/* PWA Service Worker Registration */}
-        <Script id="register-sw" strategy="afterInteractive">
-          {`
-            if ('serviceWorker' in navigator) {
-              window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(
-                  function(registration) {
-                    console.log('Service Worker registration successful with scope: ', registration.scope);
-                  },
-                  function(err) {
-                    console.log('Service Worker registration failed: ', err);
-                  }
-                );
-              });
-            }
-          `}
-        </Script>
         </div>
       </body>
     </html>

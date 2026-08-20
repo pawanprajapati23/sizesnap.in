@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { auth, db } from '@/lib/firebase'
 import { collection, query, where, getDocs, Timestamp, orderBy, limit } from 'firebase/firestore'
-import { Users, Download, Activity, MessageSquare, Clock } from 'lucide-react'
+import { Users, Download, Activity, MessageSquare, Clock, ArrowUpRight } from 'lucide-react'
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -118,75 +118,87 @@ export default function AdminDashboard() {
   }, [timeRange])
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-6xl">
+    <div className="space-y-6 animate-in fade-in duration-500">
       
       {/* Overview Header with Time Filter */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
          <div>
-            <h1 className="text-2xl font-bold text-slate-800">Analytics Dashboard</h1>
-            <p className="text-slate-500 text-sm">Real-time usage and user feedback</p>
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">Analytics</h1>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Real-time usage metrics and user feedback.</p>
          </div>
-         <div className="flex bg-slate-100 rounded-lg p-1">
+         <div className="flex bg-zinc-100 dark:bg-zinc-900/50 p-1 rounded-md border border-zinc-200 dark:border-zinc-800">
             {(['24hr', '7day', '30day', '3month'] as const).map(tr => (
                <button 
                  key={tr}
                  onClick={() => setTimeRange(tr)}
-                 className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${timeRange === tr ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-600 hover:text-slate-900'}`}
+                 className={`px-3 py-1.5 text-xs font-medium rounded-sm transition-colors ${timeRange === tr ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 shadow-sm border border-zinc-200 dark:border-zinc-700' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'}`}
                >
-                 {tr === '24hr' ? 'Last 24 Hours' : tr === '7day' ? '7 Days' : tr === '30day' ? '30 Days' : '3 Months'}
+                 {tr === '24hr' ? '24h' : tr === '7day' ? '7d' : tr === '30day' ? '30d' : '3m'}
                </button>
             ))}
          </div>
       </div>
 
       {/* Top Metrics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <MetricCard title={`Total Visitors (${timeRange})`} value={loading ? "..." : stats.totalVisitors} icon={Users} color="indigo" />
-        <MetricCard title="Today's Visitors" value={loading ? "..." : stats.todayVisitors} icon={Activity} color="emerald" />
-        <MetricCard title={`Downloads (${timeRange})`} value={loading ? "..." : stats.totalDownloads} icon={Download} color="blue" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <MetricCard title={`Visitors (${timeRange})`} value={loading ? "..." : stats.totalVisitors} />
+        <MetricCard title="Today's Visitors" value={loading ? "..." : stats.todayVisitors} />
+        <MetricCard title={`Downloads (${timeRange})`} value={loading ? "..." : stats.totalDownloads} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         
         {/* Tool Analytics */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col">
-          <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-             <Activity className="w-5 h-5 text-indigo-500" /> Tool Usage Analytics
-          </h2>
+        <div className="bg-white dark:bg-[#0A0A0A] rounded-lg border border-zinc-200 dark:border-zinc-800 flex flex-col">
+          <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800">
+             <h2 className="text-sm font-semibold">Tool Usage</h2>
+          </div>
           {loading ? (
-             <div className="flex-1 flex items-center justify-center py-10"><div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div></div>
+             <div className="flex-1 flex items-center justify-center py-10"><div className="w-5 h-5 border-2 border-zinc-300 dark:border-zinc-700 border-t-zinc-900 dark:border-t-white rounded-full animate-spin"></div></div>
           ) : toolStats.length === 0 ? (
-             <div className="text-center text-slate-500 py-10">No tool usage data found for this period.</div>
+             <div className="text-center text-zinc-500 text-sm py-10">No data found for this period.</div>
           ) : (
-             <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
-               {toolStats.map((tool, i) => (
-                  <div key={i} className="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
-                     <span className="font-semibold text-slate-700 capitalize text-sm">{tool.name.replace(/-/g, ' ')}</span>
-                     <span className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">{tool.count} uses</span>
-                  </div>
-               ))}
+             <div className="flex-1 overflow-y-auto max-h-[300px]">
+               <table className="w-full text-sm text-left">
+                  <thead className="text-xs text-zinc-500 bg-zinc-50 dark:bg-zinc-900/50 sticky top-0 border-b border-zinc-200 dark:border-zinc-800">
+                     <tr>
+                        <th className="px-5 py-3 font-medium">Tool Name</th>
+                        <th className="px-5 py-3 font-medium text-right">Uses</th>
+                     </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/50">
+                     {toolStats.map((tool, i) => (
+                        <tr key={i} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30 transition-colors">
+                           <td className="px-5 py-3 font-medium capitalize text-zinc-900 dark:text-zinc-200">{tool.name.replace(/-/g, ' ')}</td>
+                           <td className="px-5 py-3 text-right text-zinc-600 dark:text-zinc-400">{tool.count}</td>
+                        </tr>
+                     ))}
+                  </tbody>
+               </table>
              </div>
           )}
         </div>
 
         {/* User Feedback Messages */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col">
-          <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-             <MessageSquare className="w-5 h-5 text-emerald-500" /> Recent User Feedback
-          </h2>
+        <div className="bg-white dark:bg-[#0A0A0A] rounded-lg border border-zinc-200 dark:border-zinc-800 flex flex-col">
+          <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800">
+             <h2 className="text-sm font-semibold">Recent Feedback</h2>
+          </div>
           {loading ? (
-             <div className="flex-1 flex items-center justify-center py-10"><div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin"></div></div>
+             <div className="flex-1 flex items-center justify-center py-10"><div className="w-5 h-5 border-2 border-zinc-300 dark:border-zinc-700 border-t-zinc-900 dark:border-t-white rounded-full animate-spin"></div></div>
           ) : messages.length === 0 ? (
-             <div className="text-center text-slate-500 py-10">No messages received yet.</div>
+             <div className="text-center text-zinc-500 text-sm py-10">No messages received yet.</div>
           ) : (
-             <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+             <div className="flex-1 overflow-y-auto max-h-[300px] divide-y divide-zinc-100 dark:divide-zinc-800/50">
                {messages.map((msg, i) => (
-                  <div key={i} className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100/50">
-                     <div className="flex justify-between items-start mb-2">
-                        <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded flex items-center gap-1"><Clock className="w-3 h-3"/> {msg.timestamp ? new Date(msg.timestamp.toMillis()).toLocaleString() : 'Just now'}</span>
-                        <span className="text-xs font-semibold text-slate-500 truncate max-w-[150px]" title={msg.pageUrl}>{msg.pageUrl}</span>
+                  <div key={i} className="p-5 hover:bg-zinc-50 dark:hover:bg-zinc-900/30 transition-colors">
+                     <div className="flex items-center justify-between mb-2 text-xs">
+                        <span className="text-zinc-500">{msg.timestamp ? new Date(msg.timestamp.toMillis()).toLocaleString() : 'Just now'}</span>
+                        <a href={msg.pageUrl} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 truncate max-w-[200px]" title={msg.pageUrl}>
+                           {new URL(msg.pageUrl || 'https://sizesnap.in').pathname} <ArrowUpRight className="w-3 h-3" />
+                        </a>
                      </div>
-                     <p className="text-sm text-slate-700 font-medium">{msg.message}</p>
+                     <p className="text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed">{msg.message}</p>
                   </div>
                ))}
              </div>
@@ -198,19 +210,11 @@ export default function AdminDashboard() {
   )
 }
 
-function MetricCard({ title, value, icon: Icon, color }: any) {
-  const colorMap: any = {
-     indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100',
-     emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-     blue: 'bg-blue-50 text-blue-600 border-blue-100'
-  }
+function MetricCard({ title, value }: { title: string, value: any }) {
   return (
-    <div className={`p-6 rounded-2xl border ${colorMap[color]}`}>
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-slate-600 font-semibold text-sm">{title}</h3>
-        <Icon className="w-6 h-6 opacity-80" />
-      </div>
-      <p className="text-4xl font-bold tracking-tight">{value}</p>
+    <div className="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0A0A0A] flex flex-col">
+      <h3 className="text-zinc-500 dark:text-zinc-400 text-xs font-medium tracking-wide uppercase">{title}</h3>
+      <p className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 mt-2">{value}</p>
     </div>
   )
 }

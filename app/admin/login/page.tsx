@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '@/lib/firebase'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
-import { Lock, Mail, AlertCircle } from 'lucide-react'
+import { Lock, Mail, AlertCircle, ArrowRight } from 'lucide-react'
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -20,13 +20,9 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      console.log("Firebase Auth Object:", auth)
-      console.log("Attempting login with email:", email)
-      
       if (!auth) throw new Error('Firebase configuration missing (auth is undefined)')
       
       const cred = await signInWithEmailAndPassword(auth, email, password)
-      console.log("Login successful!", cred.user.uid)
       
       // Enforce single active device per user
       const sessionId = crypto.randomUUID()
@@ -41,78 +37,64 @@ export default function AdminLogin() {
       
       router.push('/admin')
     } catch (err: any) {
-      console.error("FIREBASE LOGIN ERROR DETAILS:", err)
-      console.error("Error Code:", err.code)
-      console.error("Error Message:", err.message)
-      
-      setError(`${err.code || 'Error'}: ${err.message}. Please check browser console (F12) for exact network failure details.`)
+      setError(`${err.code || 'Error'}: ${err.message}.`)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 p-4">
-      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 border border-slate-200 dark:border-slate-700">
-        <div className="text-center mb-8">
-          <div className="bg-blue-100 dark:bg-blue-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+    <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] dark:bg-black p-4 font-sans text-zinc-900 dark:text-zinc-100">
+      <div className="max-w-[400px] w-full bg-white dark:bg-[#0A0A0A] p-8 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
+        <div className="mb-8">
+          <div className="w-10 h-10 bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-lg rounded-md mb-6">
+            S
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Access</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-2">Sign in to manage SizeSnap</p>
+          <h1 className="text-xl font-semibold tracking-tight">Sign in to SizeSnap</h1>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1.5">Enter your admin credentials below</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-4 rounded-xl text-sm mb-6 flex items-start">
-            <AlertCircle className="w-5 h-5 mr-2 shrink-0 mt-0.5" />
-            <span>{error}</span>
+          <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 p-3 rounded-md text-sm mb-6 flex items-start">
+            <AlertCircle className="w-4 h-4 mr-2 shrink-0 mt-0.5" />
+            <span className="leading-relaxed">{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-slate-400" />
-              </div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none text-slate-900 dark:text-white"
-                placeholder="admin@sizesnap.in"
-              />
-            </div>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Email address</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-3 py-2 bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-md focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 focus:border-zinc-900 dark:focus:border-zinc-100 transition-all outline-none text-sm placeholder:text-zinc-400"
+              placeholder="admin@sizesnap.in"
+            />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Password</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-slate-400" />
-              </div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none text-slate-900 dark:text-white"
-                placeholder="••••••••"
-              />
-            </div>
+          <div className="space-y-1.5">
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-3 py-2 bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-md focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 focus:border-zinc-900 dark:focus:border-zinc-100 transition-all outline-none text-sm placeholder:text-zinc-400"
+              placeholder="••••••••"
+            />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl transition-colors disabled:opacity-70 flex items-center justify-center"
+            className="w-full bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black text-sm font-medium py-2.5 rounded-md transition-colors disabled:opacity-70 flex items-center justify-center mt-2 group"
           >
             {loading ? (
-              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              <div className="w-4 h-4 border-2 border-white/30 dark:border-black/30 border-t-white dark:border-t-black rounded-full animate-spin"></div>
             ) : (
-              'Sign In'
+              <>Sign In <ArrowRight className="w-4 h-4 ml-2 opacity-70 group-hover:translate-x-0.5 transition-transform" /></>
             )}
           </button>
         </form>

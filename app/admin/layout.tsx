@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { auth, db } from '@/lib/firebase'
 import { onAuthStateChanged, User, signOut } from 'firebase/auth'
 import { doc, onSnapshot } from 'firebase/firestore'
-import { LayoutDashboard, Activity, Wrench, FileText, Search, Settings, LogOut, ShieldAlert } from 'lucide-react'
+import { LayoutDashboard, LogOut } from 'lucide-react'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -62,8 +62,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="w-10 h-10 border-4 border-indigo-600/30 border-t-indigo-600 rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] dark:bg-black">
+        <div className="w-5 h-5 border-2 border-zinc-900 dark:border-white border-t-transparent rounded-full animate-spin"></div>
       </div>
     )
   }
@@ -75,108 +75,102 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!user) return null
 
   const navItems = [
-    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Overview', href: '/admin', icon: LayoutDashboard },
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex font-sans selection:bg-indigo-500/30 relative">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-black flex font-sans selection:bg-zinc-200 dark:selection:bg-zinc-800 text-zinc-900 dark:text-zinc-100">
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden" 
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden" 
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 w-72 bg-white dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800/60 flex flex-col shadow-xl lg:shadow-sm z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="px-6 py-8 flex items-center justify-between gap-3">
+      <aside className={`fixed lg:static inset-y-0 left-0 w-64 bg-[#FAFAFA] dark:bg-black border-r border-zinc-200 dark:border-zinc-800 flex flex-col z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="px-6 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-indigo-600 flex items-center justify-center">
-               <img src="/logo.png" alt="SizeSnap Logo" className="absolute inset-0 w-full h-full object-cover bg-white" onError={(e) => { e.currentTarget.style.display = 'none' }} />
-               <span className="text-white font-bold text-sm z-0">S</span>
+            <div className="w-6 h-6 bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-xs rounded-sm">
+               S
             </div>
-            <div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">SizeSnap</h2>
-              <p className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mt-0.5">Admin Portal</p>
+            <div className="flex flex-col">
+              <span className="text-sm font-semibold tracking-tight">SizeSnap</span>
             </div>
           </div>
-          <button onClick={() => setMobileMenuOpen(false)} className="lg:hidden p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white">
+          <button onClick={() => setMobileMenuOpen(false)} className="lg:hidden p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-white">
             ✕
           </button>
         </div>
         
-        <div className="px-4 pb-4 overflow-y-auto">
-          <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 px-3">Main Navigation</div>
-          <nav className="space-y-1">
+        <div className="px-3 pb-4 flex-1 overflow-y-auto mt-4">
+          <nav className="space-y-0.5">
             {navItems.map((item) => {
               const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/admin')
               return (
                 <a
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 group ${
+                  className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
                     isActive
-                      ? 'bg-indigo-50/80 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300 shadow-sm ring-1 ring-indigo-500/10'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                      ? 'bg-zinc-200/50 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-50 font-medium'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-50'
                   }`}
                 >
-                  <item.icon className={`mr-3 w-5 h-5 transition-colors ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 group-hover:text-slate-500 dark:group-hover:text-slate-300'}`} strokeWidth={isActive ? 2.5 : 2} />
+                  <item.icon className={`mr-3 w-4 h-4 ${isActive ? 'text-zinc-900 dark:text-white' : 'text-zinc-400'}`} strokeWidth={isActive ? 2 : 1.5} />
                   {item.name}
-                  {isActive && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400" />}
                 </a>
               )
             })}
           </nav>
         </div>
 
-        <div className="mt-auto p-4 border-t border-slate-200/60 dark:border-slate-800/60">
-          <div className="flex items-center px-3 py-3 mb-3 bg-slate-50 dark:bg-slate-950/50 rounded-xl ring-1 ring-slate-200/50 dark:ring-slate-800/50">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm mr-3 shadow-inner">
-              {user.email ? user.email.charAt(0).toUpperCase() : 'A'}
-            </div>
-            <div className="overflow-hidden flex-1">
-              <div className="text-sm font-semibold text-slate-900 dark:text-slate-200 truncate">
-                Admin User
+        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center justify-between group">
+            <div className="flex items-center gap-3 overflow-hidden">
+              <div className="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-300 dark:border-zinc-700">
+                {user.email ? user.email.charAt(0).toUpperCase() : 'A'}
               </div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
-                {user.email}
+              <div className="truncate">
+                <p className="text-xs font-medium truncate">{user.email}</p>
+                <p className="text-[10px] text-zinc-500">Admin</p>
               </div>
             </div>
+            <button 
+              onClick={() => auth.signOut()}
+              className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              title="Sign Out"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
-          <button 
-            onClick={() => auth.signOut()}
-            className="flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-all duration-200 group"
-          >
-            <LogOut className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" />
-            Sign Out
-          </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-20">
+      <main className="flex-1 flex flex-col h-screen overflow-hidden bg-white dark:bg-[#0A0A0A] border-l border-transparent sm:border-zinc-200 sm:dark:border-zinc-800 lg:border-l-0 sm:rounded-tl-2xl lg:rounded-none lg:shadow-none shadow-sm shadow-zinc-200/20">
+        <header className="h-14 flex items-center justify-between px-6 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-[#0A0A0A]/80 backdrop-blur-md sticky top-0 z-20">
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+              className="lg:hidden -ml-2 p-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-white capitalize truncate max-w-[200px] sm:max-w-xs">
-              {pathname === '/admin' ? 'Dashboard Overview' : pathname.split('/').pop()?.replace('-', ' ')}
+            <h1 className="text-sm font-semibold capitalize">
+              {pathname === '/admin' ? 'Overview' : pathname.split('/').pop()?.replace('-', ' ')}
             </h1>
           </div>
-          <div className="flex items-center gap-4 hidden sm:flex">
-             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-600 dark:text-slate-300">
-               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-               System Operational
+          <div className="flex items-center">
+             <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 px-2 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-[#FAFAFA] dark:bg-black">
+               <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+               Production
              </div>
           </div>
         </header>
-        <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50/50 dark:bg-slate-950">
-          <div className="max-w-7xl mx-auto">
+        <div className="flex-1 overflow-y-auto p-6 lg:p-8">
+          <div className="max-w-6xl mx-auto">
             {children}
           </div>
         </div>

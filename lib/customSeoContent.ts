@@ -1166,17 +1166,29 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'merge-pdf/combine': {
-    metaTitle: 'Merge PDF Online Free (Combine Multiple PDF Files) | SizeSnap',
-    metaDescription: 'Combine multiple PDF files into one single document online free. 100% private, client-side PDF merger for marksheets and certificates.',
-    h1: 'Merge PDF Files Online Free (100% Client-Side Private)',
-    introParagraph: 'Combine multiple PDF files (10th marksheet, 12th marksheet, degree certificate, caste certificate) into a single organized PDF document directly in your browser.',
+    metaTitle: 'Merge PDF Online Free (100% Private, No Upload) | SizeSnap',
+    metaDescription: 'Combine multiple PDF files into one document instantly in your browser. Our secure, client-side PDF merger ensures your marksheets & IDs never leave your device.',
+    h1: 'Merge PDF Files Online Free (Secure & Private)',
+    introParagraph: 'Need to combine your 10th marksheet, 12th marksheet, degree certificate, and Aadhaar card into a single PDF? Merge them securely directly in your browser without uploading to any server.',
     bodyHtml: `
       <h2>Instant Multi-PDF Combiner for Job Applications</h2>
-      <p>Combine multiple scanned documents and certificates into one unified PDF file with custom page ordering. 100% secure processing with zero server uploads.</p>
+      <p>When applying for government jobs (SSC, UPSC) or university admissions, you often need to upload all your educational certificates as a single PDF document. SizeSnap allows you to combine multiple scanned documents and certificates into one unified PDF file with custom page ordering. The processing is 100% secure with zero server uploads.</p>
+      
+      <h3>Why Use a Client-Side PDF Merger?</h3>
+      <p>Traditional PDF mergers upload your sensitive documents (like Aadhaar, PAN, and marksheets) to remote servers, which can be a privacy risk. SizeSnap uses advanced WebAssembly and Canvas APIs to merge your files locally on your phone or laptop. Your data never touches the internet.</p>
+
+      <h3>How to Combine PDF Files Online</h3>
+      <ul>
+        <li><strong>Step 1:</strong> Click 'Select Files' to choose two or more PDFs from your device.</li>
+        <li><strong>Step 2:</strong> Drag and drop the thumbnails to reorder the pages as per the application requirements.</li>
+        <li><strong>Step 3:</strong> Click 'Merge' and download your combined document instantly.</li>
+      </ul>
     `,
     faqs: [
       { question: 'Is there a limit on how many PDF files I can merge?', answer: 'You can merge multiple PDF documents directly on your device without any restriction or watermark.' },
-      { question: 'Are my confidential documents uploaded to a server?', answer: 'No, SizeSnap merges your PDF files 100% inside your browser using pdf-lib. Your files never leave your device.' }
+      { question: 'Are my confidential documents uploaded to a server?', answer: 'No, SizeSnap merges your PDF files 100% inside your browser. Your files never leave your device.' },
+      { question: 'Does merging PDFs reduce the quality?', answer: 'No, our tool combines the files without compressing the original pages, so your text and images remain perfectly sharp and readable.' },
+      { question: 'Can I reorder the pages before merging?', answer: 'Yes! Once you select the files, you can visually drag and drop them into the exact order you need before generating the final PDF.' }
     ]
   },
   'image-to-pdf/convert': {

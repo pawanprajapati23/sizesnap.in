@@ -156,7 +156,26 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
       {/* Dynamic neon gradient backdrop glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover/tool:opacity-35 transition-opacity duration-500 pointer-events-none" />
       <div className="relative">
-        {toolComponent}
+        <div className="mb-6 md:mb-8">
+          {toolComponent}
+        </div>
+
+        {/* Strategic SEO Internal Linking for Stuck Keywords */}
+        <div className="mb-6 flex flex-wrap gap-2 text-xs font-medium text-gray-500 dark:text-gray-400">
+          <span>Also Try:</span>
+          <Link href="/passport-size-photo-maker" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+            Passport Size Photo Maker
+          </Link>
+          <span>•</span>
+          <Link href="/resize-image-to-100kb" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+            Resize Image to 100KB
+          </Link>
+          <span>•</span>
+          <Link href="/merge-pdf-online" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+            Merge PDF Online
+          </Link>
+        </div>
+
         <div className="mt-8">
             <FeedbackWidget />
         </div>

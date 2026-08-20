@@ -384,13 +384,23 @@ export default function ImageCompressTool({ config }: Props) {
           </div>
         )}
 
+        {/* Privacy & Trust Badge */}
+        {status === 'idle' && (
+          <div className="mb-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3 flex items-center justify-center gap-2 animate-fadeIn">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <span className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">
+              100% Private: Photos are processed locally on your device. Never uploaded to any server.
+            </span>
+          </div>
+        )}
+
         {/* Upload Zone */}
         {status === 'idle' && (
           <div
             className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
               dragOver
-                ? 'border-indigo-500 bg-indigo-50/30'
-                : 'border-gray-300 hover:border-indigo-400 hover:bg-gray-50/30'
+                ? 'border-indigo-500 bg-indigo-50/30 dark:bg-indigo-900/20'
+                : 'border-gray-300 dark:border-zinc-700 hover:border-indigo-400 hover:bg-gray-50/30 dark:hover:bg-zinc-800/50'
             }`}
             onClick={() => fileInputRef.current?.click()}
             onDragOver={e => { e.preventDefault(); setDragOver(true) }}
@@ -398,10 +408,10 @@ export default function ImageCompressTool({ config }: Props) {
             onDrop={handleDrop}
           >
             <Upload className="w-12 h-12 text-indigo-500 mx-auto mb-4 stroke-1.5" />
-            <h4 className="font-bold text-gray-800 text-base mb-1">
+            <h4 className="font-bold text-gray-800 dark:text-zinc-100 text-base mb-1">
               Select Image to Compress
             </h4>
-            <p className="text-xs text-gray-500">Supports JPG, PNG, WEBP files up to 25MB</p>
+            <p className="text-xs text-gray-500 dark:text-zinc-400">Supports JPG, PNG, WEBP files up to 25MB</p>
             
             <button className="mt-4 px-5 py-2.5 bg-indigo-50 text-indigo-700 font-semibold text-sm rounded-xl hover:bg-indigo-100 transition-colors inline-flex items-center gap-2">
               Select Photo
@@ -532,6 +542,17 @@ export default function ImageCompressTool({ config }: Props) {
                 <RefreshCw className="w-4 h-4" />
                 Compress Another
               </button>
+            </div>
+
+            {/* Cross-Sell Feature */}
+            <div className="mt-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-100 dark:border-indigo-800/50 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
+              <div>
+                <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">Applying for Sarkari Exams? 🏛️</h4>
+                <p className="text-xs text-indigo-700 dark:text-indigo-400 mt-1">Generate your complete SSC/UPSC Photo & Signature pack in 1 click.</p>
+              </div>
+              <a href="/sarkari-exam-pack-generator" className="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-lg hover:bg-indigo-700 whitespace-nowrap shadow-sm">
+                Try Exam Pack Maker &rarr;
+              </a>
             </div>
           </div>
         )}

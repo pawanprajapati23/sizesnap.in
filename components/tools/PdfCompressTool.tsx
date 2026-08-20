@@ -354,6 +354,16 @@ export default function PdfCompressTool({ config }: Props) {
           </div>
         )}
 
+        {/* Privacy & Trust Badge */}
+        {status === 'idle' && (
+          <div className="mb-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3 flex items-center justify-center gap-2 animate-fadeIn">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <span className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">
+              100% Secure: PDFs are compressed locally in your browser. Never uploaded to any server.
+            </span>
+          </div>
+        )}
+
         {/* Upload Zone */}
         {status === 'idle' && (
           <div

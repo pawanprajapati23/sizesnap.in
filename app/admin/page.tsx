@@ -18,94 +18,30 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    let unsubscribeAuth: any;
-    
-    async function fetchData() {
-      if (!db) return
-      
+    const fetchData = async () => {
       try {
         setLoading(true)
         
-        // Time calculations
-        const now = new Date()
-        const todayStart = new Date(now)
-        todayStart.setHours(0, 0, 0, 0)
-
-        let rangeStart = new Date(now)
-        if (timeRange === '24hr') rangeStart.setHours(now.getHours() - 24)
-        if (timeRange === '7day') rangeStart.setDate(now.getDate() - 7)
-        if (timeRange === '30day') rangeStart.setDate(now.getDate() - 30)
-        if (timeRange === '3month') rangeStart.setMonth(now.getMonth() - 3)
-
-        const eventsRef = collection(db, 'analytics_events_raw')
+        // Fetch aggregated data securely from our backend API
+        const res = await fetch(`/api/admin/dashboard?timeRange=${timeRange}`)
+        const data = await res.json()
         
-        // Helper to add timeout to getDocs
-        const fetchWithTimeout = async (q: any) => {
-          const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout fetching data')), 5000))
-          return Promise.race([getDocs(q), timeout]) as Promise<any>
+        if (data.success) {
+          setStats(data.stats)
+          setToolStats(data.toolStats)
+          setMessages(data.messages)
+        } else {
+          console.error("Failed to fetch dashboard data:", data.error)
         }
 
-        // Get events for the selected range (limited to 1000 to prevent browser crash/infinite loading)
-        const rangeQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(rangeStart)), limit(1000))
-        const rangeSnap = await fetchWithTimeout(rangeQ)
-        
-        // Get today's events for the static "Today" stat
-        const todayQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(todayStart)), limit(1000))
-        const todaySnap = await fetchWithTimeout(todayQ)
-
-        let rangeVisitors = 0
-        let rangeDownloads = 0
-        let todayVisitors = 0
-        
-        const toolCounts: Record<string, number> = {}
-
-        rangeSnap.forEach((doc: any) => {
-          const data = doc.data()
-          if (data.eventName === 'tool_open') {
-             rangeVisitors++
-             const tool = data.toolName || data.toolSlug || 'Unknown'
-             toolCounts[tool] = (toolCounts[tool] || 0) + 1
-          }
-          if (data.eventName === 'tool_download') {
-             rangeDownloads++
-          }
-        })
-
-        todaySnap.forEach((doc: any) => {
-          if (doc.data().eventName === 'tool_open') {
-             todayVisitors++
-          }
-        })
-
-        const sortedTools = Object.entries(toolCounts)
-          .map(([name, count]) => ({ name, count }))
-          .sort((a, b) => b.count - a.count)
-
-        setStats({
-          totalVisitors: rangeVisitors,
-          todayVisitors: todayVisitors,
-          totalDownloads: rangeDownloads
-        })
-        
-        setToolStats(sortedTools)
-
-        // Fetch Feedback Messages
-        const msgRef = collection(db, 'user_feedback')
-        const msgQ = query(msgRef, orderBy('timestamp', 'desc'), limit(50))
-        const msgSnap = await fetchWithTimeout(msgQ)
-        const loadedMsgs: any[] = []
-        msgSnap.forEach((doc: any) => {
-           loadedMsgs.push({ id: doc.id, ...doc.data() })
-        })
-        setMessages(loadedMsgs)
-
       } catch (err) {
-        console.warn("Could not fetch some data, possibly due to permission rules or network.", err)
+        console.warn("Network error or API failed:", err)
       } finally {
         setLoading(false)
       }
     }
 
+    let unsubscribeAuth: any;
     if (auth) {
       import('firebase/auth').then(({ onAuthStateChanged }) => {
         unsubscribeAuth = onAuthStateChanged(auth, (user) => {

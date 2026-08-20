@@ -195,6 +195,16 @@ export default function ImageCompressTool({ config }: Props) {
       setResultUrl(URL.createObjectURL(blob))
       setResultSize(blob.size)
       setStatus('done')
+      
+      // Fire confetti gamification!
+      import('canvas-confetti').then((confetti) => {
+        confetti.default({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#4F46E5', '#10B981', '#3B82F6']
+        });
+      });
     } catch (err: any) {
       clearInterval(interval)
       setErrorMsg(err.message || 'Compression failed. Try a different format.')

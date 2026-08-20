@@ -195,7 +195,13 @@ export default function AdminDashboard() {
                      <div className="flex items-center justify-between mb-2 text-xs">
                         <span className="text-zinc-500">{msg.timestamp ? new Date(msg.timestamp.toMillis()).toLocaleString() : 'Just now'}</span>
                         <a href={msg.pageUrl} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 truncate max-w-[200px]" title={msg.pageUrl}>
-                           {new URL(msg.pageUrl || 'https://sizesnap.in').pathname} <ArrowUpRight className="w-3 h-3" />
+                           {(() => {
+                              try {
+                                 return new URL(msg.pageUrl || 'https://sizesnap.in').pathname
+                              } catch {
+                                 return msg.pageUrl || 'Unknown'
+                              }
+                           })()} <ArrowUpRight className="w-3 h-3" />
                         </a>
                      </div>
                      <p className="text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed">{msg.message}</p>

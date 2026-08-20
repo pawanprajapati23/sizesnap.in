@@ -135,7 +135,7 @@ export default function AdminDashboard() {
                {messages.map((msg, i) => (
                   <div key={i} className="p-5 hover:bg-zinc-50 dark:hover:bg-zinc-900/30 transition-colors">
                      <div className="flex items-center justify-between mb-2 text-xs">
-                        <span className="text-zinc-500">{msg.timestamp ? new Date(msg.timestamp.toMillis()).toLocaleString() : 'Just now'}</span>
+                        <span className="text-zinc-500">{msg.timestamp ? new Date(msg.timestamp).toLocaleString() : 'Just now'}</span>
                         <a href={msg.pageUrl} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 truncate max-w-[200px]" title={msg.pageUrl}>
                            {(() => {
                               try {

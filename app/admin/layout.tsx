@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { auth } from '@/lib/firebase'
-import { onAuthStateChanged, User } from 'firebase/auth'
+import { auth, db } from '@/lib/firebase'
+import { onAuthStateChanged, User, signOut } from 'firebase/auth'
+import { doc, onSnapshot } from 'firebase/firestore'
 import { LayoutDashboard, Activity, Wrench, FileText, Search, Settings, LogOut, ShieldAlert } from 'lucide-react'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -19,9 +20,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return
     }
     
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    let unsubscribeSession: () => void;
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
+        
+        // Single session enforcement
+        if (db) {
+           unsubscribeSession = onSnapshot(doc(db, 'admin_settings', 'active_session'), (docSnap) => {
+              if (docSnap.exists()) {
+                 const data = docSnap.data()
+                 const currentSession = localStorage.getItem('sizesnap_admin_session')
+                 if (data.sessionId && data.sessionId !== currentSession) {
+                    console.log('Another device logged in. Logging out...')
+                    alert('You have been logged out because this admin account was accessed from another device.')
+                    signOut(auth)
+                 }
+              }
+           })
+        }
       } else {
         setUser(null)
         if (pathname !== '/admin/login') {
@@ -31,7 +49,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       setLoading(false)
     })
 
-    return () => unsubscribe()
+    return () => {
+      unsubscribeAuth()
+      if (unsubscribeSession) unsubscribeSession()
+    }
   }, [pathname, router])
 
   // Close mobile menu on route change

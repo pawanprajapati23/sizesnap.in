@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
+import { auth, db } from '@/lib/firebase'
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 import { Lock, Mail, AlertCircle } from 'lucide-react'
 
@@ -26,6 +27,18 @@ export default function AdminLogin() {
       
       const cred = await signInWithEmailAndPassword(auth, email, password)
       console.log("Login successful!", cred.user.uid)
+      
+      // Enforce single active device
+      const sessionId = crypto.randomUUID()
+      if (db) {
+        await setDoc(doc(db, 'admin_settings', 'active_session'), {
+          sessionId,
+          lastLogin: serverTimestamp(),
+          uid: cred.user.uid
+        })
+      }
+      localStorage.setItem('sizesnap_admin_session', sessionId)
+      
       router.push('/admin')
     } catch (err: any) {
       console.error("FIREBASE LOGIN ERROR DETAILS:", err)

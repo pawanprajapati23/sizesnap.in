@@ -30,11 +30,17 @@ export default function AdminLogin() {
       
       if (db) {
         try {
-          await setDoc(doc(db, 'admin_settings', 'active_session'), {
+          const setDocPromise = setDoc(doc(db, 'admin_settings', 'active_session'), {
             sessionId,
             lastLogin: serverTimestamp(),
             uid: cred.user.uid
           })
+          
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("Timeout: Firestore write taking too long.")), 3000)
+          )
+          
+          await Promise.race([setDocPromise, timeoutPromise])
         } catch (firestoreError) {
           console.warn("Could not save session to Firestore (check rules). Skipping single-device enforcement.", firestoreError)
         }

@@ -16,7 +16,9 @@ export default function SeoContent({ tool, variant }: SeoContentProps) {
   if (customSeo) {
     return (
       <article className="mt-12 bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 md:p-10 space-y-8 prose prose-blue dark:prose-invert max-w-none text-slate-700 dark:text-slate-300">
-        <div dangerouslySetInnerHTML={{ __html: customSeo.bodyHtml }} />
+        {customSeo.bodyHtml && (
+          <div dangerouslySetInnerHTML={{ __html: customSeo.bodyHtml }} />
+        )}
 
         {/* Bilingual Hindi & Hinglish Content for Tier-2 / Tier-3 Regional Search Queries */}
         <div className="not-prose bg-amber-50/80 dark:bg-amber-950/30 border border-amber-300/60 dark:border-amber-700/40 p-6 rounded-2xl">

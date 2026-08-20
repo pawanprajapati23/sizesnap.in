@@ -220,6 +220,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
       
       <h3>Signature guidelines details</h3>
       <p>Signatures must be scanned clearly at 4.0cm width x 2.0cm height dimensions, and the file size must reside strictly within 10KB to 20KB brackets. Crop and optimize signature files together with your photo on SizeSnap to proceed smoothly.</p>
+
+      <h3>Managing PDF Documents for Document Verification (DV)</h3>
+      <p>Later in the recruitment process, SSC document verification requires uploading educational certificates. If you have multiple scanned marksheet files, use our <a href="/merge-pdf-online">Secure PDF Merger</a> to combine them into one file, and our <a href="/pdf-under-500kb">PDF Compressor</a> to keep the final document under the portal size limits.</p>
     `,
     faqs: [
       { question: 'What is the exact photo size for SSC form?', answer: 'The photo must be 3.5 cm in width x 4.5 cm in height, and the file size should be between 20KB and 50KB.' },
@@ -237,6 +240,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
       
       <h3>Getting the Aspect Ratio Right</h3>
       <p>To avoid manual cropping and distorted ratios, SizeSnap formats images to square ratios automatically while maintaining candidate details, ensuring successful uploads on the UPSC One Time Registration (OTR) page.</p>
+
+      <h3>Handling UPSC PDF Documents</h3>
+      <p>For uploading detailed scanned documents (like degree certificates and ID proofs), the UPSC portal sets strict PDF file size limits. Use our <a href="/compress-pdf-to-300kb">PDF to 300KB Compressor</a> to ensure your documents meet the upload criteria without becoming blurry.</p>
     `,
     faqs: [
       { question: 'What is the required dimension for UPSC photo upload?', answer: 'Both photo and signature must be square, with dimensions ranging between 350x350 pixels and 1000x1000 pixels.' },

@@ -1,5 +1,31 @@
 export const blogs = [
   {
+    slug: 'how-to-remove-shadow-from-aadhar-pan-card-mobile',
+    title: 'How to Remove Shadows from Aadhar & PAN Card Photos (Using Mobile)',
+    date: '2026-08-21',
+    excerpt: 'Stop getting your government forms rejected due to dark shadows. Learn how to instantly clear shadows from your ID scans using just your phone.',
+    content: `
+      <h2>Why Shadows Cause Document Rejection</h2>
+      <p>When taking a photo of your Aadhar card, PAN card, or marksheet using your mobile phone, it is very common for your hand or phone to cast a dark shadow over the document. When you upload these documents to government portals (like SSC, UPSC, or Bank KYC), they are often rejected by automated systems or verification officers because the text becomes unreadable.</p>
+
+      <h3>The Old Way: Photoshop</h3>
+      <p>In the past, removing a shadow required opening Photoshop, using the dodge/burn tools, and manually adjusting contrast levels. Not only does this require a laptop, but it also takes time and skill.</p>
+
+      <h3>The New Way: SizeSnap AI Document Enhancer</h3>
+      <p>You don't need an app or a laptop. You can remove shadows instantly right from your mobile browser.</p>
+      
+      <ol>
+        <li>Click a photo of your Aadhar/PAN card using your phone camera (don't worry about shadows).</li>
+        <li>Open our free <a href="/remove-shadow-from-document">Shadow Remover Tool</a>.</li>
+        <li>Upload your photo.</li>
+        <li>Our algorithm instantly detects the document boundaries, balances the exposure, and completely removes the shadow, making it look like it was scanned from a printer!</li>
+        <li>Click <strong>Download</strong>.</li>
+      </ol>
+
+      <p>The best part? This process happens 100% locally in your browser. Your sensitive ID proofs are <strong>never uploaded to any server</strong>, keeping your identity completely safe.</p>
+    `
+  },
+  {
     slug: 'ssc-cgl-form-photo-guidelines',
     title: 'SSC CGL Form Photo and Signature Guidelines 2026',
     date: '2026-06-15',

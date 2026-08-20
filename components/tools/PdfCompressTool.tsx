@@ -449,19 +449,38 @@ export default function PdfCompressTool({ config }: Props) {
               </div>
             </div>
 
-            {/* Actions CTA */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            {/* Actions CTA (Sticky on Mobile) */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-2 pb-6 sm:pb-0">
               <a
                 href={resultUrl}
                 download={`compressed-${originalFile?.name || 'document.pdf'}`}
-                className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white py-3 px-5 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-sm text-center"
+                className="hidden sm:flex flex-1 items-center justify-center gap-2 bg-blue-600 text-white py-3 px-5 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-sm text-center"
               >
                 <Download className="w-5 h-5" />
                 Download {formatBytes(resultSize)} PDF
               </a>
+              
+              {/* Mobile Sticky Download */}
+              <div className="sm:hidden fixed bottom-6 left-4 right-4 z-50 flex gap-2">
+                <a
+                  href={resultUrl}
+                  download={`compressed-${originalFile?.name || 'document.pdf'}`}
+                  className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white py-4 px-5 rounded-2xl font-bold active:bg-blue-800 shadow-xl text-center text-lg shadow-blue-600/30 border border-blue-500"
+                >
+                  <Download className="w-6 h-6 animate-bounce" />
+                  Download Now
+                </a>
+                <button
+                  onClick={handleShare}
+                  className="px-4 bg-emerald-600 text-white font-bold rounded-2xl shadow-xl flex items-center justify-center active:bg-emerald-800"
+                >
+                  <Share2 className="w-5 h-5" />
+                </button>
+              </div>
+
               <button
                 onClick={handleShare}
-                className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-sm cursor-pointer"
+                className="hidden sm:flex px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-sm items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 <Share2 className="w-4 h-4" />
                 Share / Send

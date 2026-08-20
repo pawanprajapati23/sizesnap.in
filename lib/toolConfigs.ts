@@ -37,11 +37,23 @@ function buildSizeVariants(
   const variants: ToolVariant[] = [];
 
   for (const kb of sizesKb) {
+    let metaTitle = '';
+    let metaDescription = '';
+
+    if (toolType === 'Compress PDF') {
+      metaTitle = `Compress PDF to ${kb}KB Online (Exactly & Free) - SizeSnap`;
+      metaDescription = `Reduce your PDF file size to exactly ${kb}KB or less without losing quality. Fast, free, and secure online compressor for ${kb} KB limit form uploads.`;
+    } else {
+      const action = toolType === 'Resize Image' ? 'Resize' : 'Compress';
+      metaTitle = `${action} Photo to ${kb}KB (Exactly ${kb} KB JPG/JPEG) Free`;
+      metaDescription = `Need your photo or signature under ${kb}KB? Use our free tool to instantly ${action.toLowerCase()} to exactly ${kb}KB in JPG/JPEG format without losing quality. Perfect for Sarkari forms!`;
+    }
+
     variants.push({
       slug: `to-${kb}kb`,
       label: `${kb} KB`,
-      metaTitle: `${toolType} to ${kb}KB Online (Free & Fast) - Best for Forms`,
-      metaDescription: `Instantly ${toolType.toLowerCase()} to ${kb}KB or less online without losing quality. Perfect for government job forms, exams (SSC, UPSC), and portal uploads. 100% free and private.`,
+      metaTitle,
+      metaDescription,
       h1: `${toolType} to ${kb}KB Online Free`,
       introParagraph: `Need your file under ${kb}KB? This free online tool will ${toolType.toLowerCase()} to exactly ${kb}KB or less. ${extraIntro}`,
       config: { maxKB: kb }

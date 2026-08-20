@@ -8,6 +8,27 @@ export type CustomSeoData = {
 }
 
 export const customSeoData: Record<string, CustomSeoData> = {
+  'live-document-scanner/camscanner-clone': {
+    metaTitle: 'Free CamScanner Alternative Online | Live Document Scanner | SizeSnap',
+    metaDescription: 'Use your phone camera to scan documents directly in the browser. Apply Magic B&W filters and save as A4 PDF instantly without downloading any app.',
+    h1: 'Live Document Scanner (Turn Phone into Scanner)',
+    introParagraph: 'Ab aapko physical documents scan karne ke liye koi bhaari 3rd-party app (jaise CamScanner) download karne ki zaroorat nahi hai. SizeSnap ka Live Document Scanner aapke phone ke camera ko direct browser se connect karke highest quality PDF generate karta hai.',
+    bodyHtml: `
+      <h2>Browser-Based CamScanner Clone Kaise Kaam Karta Hai?</h2>
+      <p>Aamtaur par kisi paper document ko scan karne ke liye log play store se alag-alag apps download karte hain, jo bohot saare ads dikhati hain aur aapke data ka galat istemaal kar sakti hain. Humne ek aisi technology develop ki hai jisse aapka mobile camera sidha is website (browser) ke andar khulta hai.</p>
+      
+      <h3>Magic Black & White Filter (Like Original Scanner)</h3>
+      <p>Jab aap normal phone camera se photo khinchte hain, toh usme parchaai (shadows) aur low light ki wajah se text clear nahi aata. Hamara tool photo capture hote hi us par "Magic Filter" laga deta hai. Ye filter automatically shadows ko hatata hai, contrast badhata hai, aur paper ko ekdum white karke text ko deep black (grayscale) me convert kar deta hai. Isse lagta hai jaise document kisi professional machine se scan hua ho.</p>
+
+      <h3>100% Secure & Private Scanning</h3>
+      <p>Kyunki ye tool pura browser ke andar offline chal raha hai (HTML5 aur Canvas API ki madad se), isliye aapke scanned documents jaise Aadhar card, PAN card, ya bank statements kabhi bhi hamare server par upload nahi hote. Sab kuch aapke phone me process hota hai aur wahin se direct A4 size ka PDF bankar aapke phone me save ho jata hai.</p>
+    `,
+    faqs: [
+      { question: 'Kya mujhe document scan karne ke liye koi App install karni padegi?', answer: 'Nahi! Ye ek Web App hai. Aapko bas apna Safari ya Chrome browser use karna hai aur "Open Camera" par tap karna hai.' },
+      { question: 'Kya ye tool Multiple Pages ko ek hi PDF me combine kar sakta hai?', answer: 'Haan, aap ek-ek karke kitne bhi pages click kar sakte hain. "Save as PDF" dabane par wo sab ek single PDF file me compile ho jayenge.' },
+      { question: 'Kya mere documents (Aadhar/PAN) ka data safe hai?', answer: '100% safe. Processing browser (client-side) me hoti hai, matlab data aapke phone se bahar nahi jata.' }
+    ]
+  },
   'resize-image/to-50kb': {
     metaTitle: 'Resize Image to 50KB Online Free (No Quality Loss) | SizeSnap',
     metaDescription: 'Need to resize photo to 50KB? Use our free online tool to compress and reduce image size under 50KB in 1-click. 100% private browser processing.',

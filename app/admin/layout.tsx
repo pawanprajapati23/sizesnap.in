@@ -28,7 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         
         // Single session enforcement
         if (db) {
-           unsubscribeSession = onSnapshot(doc(db, 'admin_settings', 'active_session'), (docSnap) => {
+           unsubscribeSession = onSnapshot(doc(db, 'admin_sessions', user.uid), (docSnap) => {
               if (docSnap.exists()) {
                  const data = docSnap.data()
                  const currentSession = localStorage.getItem('sizesnap_admin_session')

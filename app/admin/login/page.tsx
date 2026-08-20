@@ -28,10 +28,10 @@ export default function AdminLogin() {
       const cred = await signInWithEmailAndPassword(auth, email, password)
       console.log("Login successful!", cred.user.uid)
       
-      // Enforce single active device
+      // Enforce single active device per user
       const sessionId = crypto.randomUUID()
       if (db) {
-        await setDoc(doc(db, 'admin_settings', 'active_session'), {
+        await setDoc(doc(db, 'admin_sessions', cred.user.uid), {
           sessionId,
           lastLogin: serverTimestamp(),
           uid: cred.user.uid

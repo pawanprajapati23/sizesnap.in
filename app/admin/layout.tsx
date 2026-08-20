@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { auth, db } from '@/lib/firebase'
 import { onAuthStateChanged, User, signOut } from 'firebase/auth'
 import { doc, onSnapshot } from 'firebase/firestore'
-import { LayoutDashboard, LogOut } from 'lucide-react'
+import { LayoutDashboard, LogOut, MessageSquare, Activity, Settings } from 'lucide-react'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -76,6 +76,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { name: 'Overview', href: '/admin', icon: LayoutDashboard },
+    { name: 'Feedback', href: '/admin/feedback', icon: MessageSquare },
+    { name: 'System Health', href: '/admin/system-health', icon: Activity },
+    { name: 'Settings', href: '/admin/settings', icon: Settings },
   ]
 
   return (

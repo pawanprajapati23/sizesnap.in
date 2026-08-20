@@ -7,6 +7,9 @@ import { ArrowRight, CheckCircle2, Image as ImageIcon, PenLine, FileText } from 
 export const metadata: Metadata = {
   title: 'Sarkari Exam Photo & Signature Size Guide (Live Hub) | SizeSnap',
   description: '1-Click auto-format tool for SSC, UPSC, Railway, and IBPS exams. Get your passport photo and signature resized to exact official dimensions and KB limits.',
+  alternates: {
+    canonical: 'https://sizesnap.in/image-size-guide',
+  }
 }
 
 const EXAM_DATA = [

@@ -1166,13 +1166,16 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'merge-pdf/combine': {
-    metaTitle: 'Merge PDF Online Free (100% Private, No Upload) | SizeSnap',
-    metaDescription: 'Combine multiple PDF files into one document instantly in your browser. Our secure, client-side PDF merger ensures your marksheets & IDs never leave your device.',
-    h1: 'Merge PDF Files Online Free (Secure & Private)',
-    introParagraph: 'Need to combine your 10th marksheet, 12th marksheet, degree certificate, and Aadhaar card into a single PDF? Merge them securely directly in your browser without uploading to any server.',
+    metaTitle: 'Merge PDF Online Free (Small Size & 100% Private) | SizeSnap',
+    metaDescription: 'Merge PDF into a small size file online. Combine multiple PDF documents and compress them securely in your browser without uploading to any server.',
+    h1: 'Merge PDF Files Online Free (Small Size & Secure)',
+    introParagraph: 'Need to combine your 10th marksheet, 12th marksheet, and Aadhaar card into a single PDF? Merge and keep your PDF in a small size securely in your browser without uploading to any server.',
     bodyHtml: `
       <h2>Instant Multi-PDF Combiner for Job Applications</h2>
-      <p>When applying for government jobs (SSC, UPSC) or university admissions, you often need to upload all your educational certificates as a single PDF document. SizeSnap allows you to combine multiple scanned documents and certificates into one unified PDF file with custom page ordering. The processing is 100% secure with zero server uploads.</p>
+      <p>When applying for government jobs (SSC, UPSC) or university admissions, you often need to upload all your educational certificates as a single PDF document under a strict size limit. SizeSnap allows you to combine multiple scanned documents and certificates into one unified PDF file with custom page ordering. The processing is 100% secure with zero server uploads.</p>
+      
+      <h3>Merge and Compress PDF (Small Size)</h3>
+      <p>Many users struggle because merging multiple PDFs creates a very large file that gets rejected by portals. While our merger combines your files instantly, you can seamlessly use our <a href="/compress-pdf-to-500kb">PDF Compressor tool</a> right after merging to shrink the final combined document into a small size (like 100KB or 500KB) without losing quality.</p>
       
       <h3>Why Use a Client-Side PDF Merger?</h3>
       <p>Traditional PDF mergers upload your sensitive documents (like Aadhaar, PAN, and marksheets) to remote servers, which can be a privacy risk. SizeSnap uses advanced WebAssembly and Canvas APIs to merge your files locally on your phone or laptop. Your data never touches the internet.</p>
@@ -1188,6 +1191,7 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Is there a limit on how many PDF files I can merge?', answer: 'You can merge multiple PDF documents directly on your device without any restriction or watermark.' },
       { question: 'Are my confidential documents uploaded to a server?', answer: 'No, SizeSnap merges your PDF files 100% inside your browser. Your files never leave your device.' },
       { question: 'Does merging PDFs reduce the quality?', answer: 'No, our tool combines the files without compressing the original pages, so your text and images remain perfectly sharp and readable.' },
+      { question: 'How do I merge and compress a PDF to a small size?', answer: 'First, use this tool to combine your PDFs. Once downloaded, upload that single file to our PDF Compressor to instantly reduce its size to exactly what you need (e.g., under 300KB).' },
       { question: 'Can I reorder the pages before merging?', answer: 'Yes! Once you select the files, you can visually drag and drop them into the exact order you need before generating the final PDF.' }
     ]
   },

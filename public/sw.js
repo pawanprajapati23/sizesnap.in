@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sizesnap-v2';
+const CACHE_NAME = 'sizesnap-v3';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -37,13 +37,15 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Skip cross-origin ads, tracking, or telemetry
+  // Skip cross-origin ads, tracking, telemetry, and Firebase APIs
   if (
     event.request.method !== 'GET' ||
     url.hostname.includes('googlesyndication') ||
     url.hostname.includes('google-analytics') ||
     url.hostname.includes('googletagmanager') ||
-    url.hostname.includes('adservice')
+    url.hostname.includes('adservice') ||
+    url.hostname.includes('googleapis') ||
+    url.hostname.includes('firebaseio')
   ) {
     return;
   }

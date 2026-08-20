@@ -470,6 +470,32 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Kya 150KB output clear open hoga?', answer: 'Haan, dynamic compiler configuration vector properties lock rakhti hai.' }
     ]
   },
+  'compress-pdf/to-12kb': {
+    metaTitle: 'Compress PDF to 12KB Online Free (High Quality) | SizeSnap',
+    metaDescription: 'Need to compress your PDF under 12KB? Shrink your PDF file size to exactly 12KB online free. Keep your signature and documents readable for exam portals.',
+    h1: 'Compress PDF to 12KB Online Free',
+    introParagraph: 'Many exam and government portals require very strict PDF sizes, often under 12KB. SizeSnap allows you to compress your PDF down to exactly 12KB locally in your browser.',
+    bodyHtml: `
+      <h2>How to Reduce PDF Size Under 12KB</h2>
+      <p>Shrinking a PDF document to a tiny size like 12KB is extremely difficult using normal tools without making the text illegible. SizeSnap applies targeted compression vectors to bring your file under the strict 12KB boundary while maintaining essential readability.</p>
+    `,
+    faqs: [
+      { question: 'Will my 12KB PDF still be readable?', answer: 'Yes, our smart compiler targets metadata and redundant layers to keep the actual text layout as clear as possible even at 12KB.' }
+    ]
+  },
+  'compress-pdf/to-15kb': {
+    metaTitle: 'Compress PDF to 15KB Online Free (Best for Forms) | SizeSnap',
+    metaDescription: 'Instantly reduce and compress your PDF file to 15KB online free. Ideal for online form submissions, scholarship portals, and signature documents.',
+    h1: 'Compress PDF to 15KB Online Free',
+    introParagraph: 'Format your PDF files strictly under 15KB for online application portals. Our client-side compressor hits the 15KB limit instantly without uploading your files.',
+    bodyHtml: `
+      <h2>PDF Size Under 15KB Compression Guidelines</h2>
+      <p>Certain specific portal fields, like scanned signatures in PDF format or thumb impressions, require a maximum size of 15KB. Upload your document and our resizer will safely compress it under 15KB using your browser\'s local processing power.</p>
+    `,
+    faqs: [
+      { question: 'Is my document safe during compression?', answer: 'Absolutely. The 15KB compression happens entirely on your device, ensuring zero data leakage.' }
+    ]
+  },
   'compress-pdf/to-1mb': {
     metaTitle: 'Compress PDF to 1MB Online Free (Without Quality Loss) | SizeSnap',
     metaDescription: 'Need to reduce PDF size under 1MB? Try our free online PDF compressor to shrink heavy eBooks and portfolios under 1MB instantly. 100% secure.',
@@ -1521,7 +1547,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'thumb-resizer/left-thumb-impression': 'thumb-impression-resizer-for-ssc-and-neet',
     'pdf-page-numberer/add-page-numbers-to-pdf': 'add-page-numbers-to-pdf-online',
     'self-attestation/self-attest-document': 'self-attested-document-maker-online',
-    'document-grayscale/convert-to-black-and-white': 'convert-document-to-black-and-white'
+    'document-grayscale/convert-to-black-and-white': 'convert-document-to-black-and-white',
+    'compress-pdf/to-12kb': 'compress-pdf-to-12kb',
+    'compress-pdf/to-15kb': 'compress-pdf-to-15kb'
   }
   return mapping[`${tool}/${variant}`] || null
 }

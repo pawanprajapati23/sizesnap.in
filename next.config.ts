@@ -27,6 +27,8 @@ const MAPPINGS = [
   { pretty: '/compress-pdf-to-200kb', raw: '/compress-pdf/to-200kb' },
   { pretty: '/compress-pdf-to-300kb', raw: '/compress-pdf/to-300kb' },
   { pretty: '/compress-pdf-to-150kb', raw: '/compress-pdf/to-150kb' },
+  { pretty: '/compress-pdf-to-12kb', raw: '/compress-pdf/to-12kb' },
+  { pretty: '/compress-pdf-to-15kb', raw: '/compress-pdf/to-15kb' },
   { pretty: '/compress-pdf-to-1mb', raw: '/compress-pdf/to-1mb' },
   { pretty: '/photo-size-for-up-police-form', raw: '/passport-photo/up-police-photo' },
   { pretty: '/photo-size-for-bpsc-exam', raw: '/passport-photo/bpsc-exam-photo' },

@@ -39,13 +39,19 @@ export default function AdminDashboard() {
 
         const eventsRef = collection(db, 'analytics_events_raw')
         
+        // Helper to add timeout to getDocs
+        const fetchWithTimeout = async (q: any) => {
+          const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout fetching data')), 5000))
+          return Promise.race([getDocs(q), timeout]) as Promise<any>
+        }
+
         // Get events for the selected range (limited to 1000 to prevent browser crash/infinite loading)
         const rangeQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(rangeStart)), limit(1000))
-        const rangeSnap = await getDocs(rangeQ)
+        const rangeSnap = await fetchWithTimeout(rangeQ)
         
         // Get today's events for the static "Today" stat
         const todayQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(todayStart)), limit(1000))
-        const todaySnap = await getDocs(todayQ)
+        const todaySnap = await fetchWithTimeout(todayQ)
 
         let rangeVisitors = 0
         let rangeDownloads = 0
@@ -53,7 +59,7 @@ export default function AdminDashboard() {
         
         const toolCounts: Record<string, number> = {}
 
-        rangeSnap.forEach(doc => {
+        rangeSnap.forEach((doc: any) => {
           const data = doc.data()
           if (data.eventName === 'tool_open') {
              rangeVisitors++
@@ -65,7 +71,7 @@ export default function AdminDashboard() {
           }
         })
 
-        todaySnap.forEach(doc => {
+        todaySnap.forEach((doc: any) => {
           if (doc.data().eventName === 'tool_open') {
              todayVisitors++
           }
@@ -86,15 +92,15 @@ export default function AdminDashboard() {
         // Fetch Feedback Messages
         const msgRef = collection(db, 'user_feedback')
         const msgQ = query(msgRef, orderBy('timestamp', 'desc'), limit(50))
-        const msgSnap = await getDocs(msgQ)
+        const msgSnap = await fetchWithTimeout(msgQ)
         const loadedMsgs: any[] = []
-        msgSnap.forEach(doc => {
+        msgSnap.forEach((doc: any) => {
            loadedMsgs.push({ id: doc.id, ...doc.data() })
         })
         setMessages(loadedMsgs)
 
       } catch (err) {
-        console.error("Error fetching data:", err)
+        console.warn("Could not fetch some data, possibly due to permission rules or network.", err)
       } finally {
         setLoading(false)
       }

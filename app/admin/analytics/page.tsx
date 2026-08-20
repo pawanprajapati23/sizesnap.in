@@ -17,7 +17,8 @@ export default function DeepAnalytics() {
         setLoading(true)
         // In a real app, this would be an aggregated collection, but for now we'll simulate by fetching recent raw events
         const q = query(collection(db, 'analytics_events_raw'), orderBy('timestamp', 'desc'), limit(500))
-        const snap = await getDocs(q)
+        const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout fetching data')), 5000))
+        const snap = await Promise.race([getDocs(q), timeout]) as any
         
         let total = 0
         const toolCounts: Record<string, number> = {}

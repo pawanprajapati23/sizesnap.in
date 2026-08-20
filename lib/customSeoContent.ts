@@ -1255,7 +1255,7 @@ export const customSeoData: Record<string, CustomSeoData> = {
   },
   'pdf-to-jpg/extract': {
     metaTitle: 'PDF to JPG Converter Online Free (Extract High-Res Images) | SizeSnap',
-    metaDescription: 'Convert PDF pages to high-quality JPG/PNG images online free. Extract every page in 1-Click ZIP. 100% client-side privacy.',
+    metaDescription: 'Convert PDF pages to high-quality JPG/PNG images online free. Extract every page instantly without any ZIP files. 100% client-side privacy.',
     h1: 'Convert PDF Pages to JPG Images Online Free',
     introParagraph: 'Extract all pages from your PDF document into crisp, high-resolution JPG or PNG image files directly in your web browser.',
     bodyHtml: `
@@ -1263,7 +1263,7 @@ export const customSeoData: Record<string, CustomSeoData> = {
       <p>Convert e-books, marksheets, scanned forms, and brochures from PDF into clear JPG pictures for easy editing and sharing.</p>
     `,
     faqs: [
-      { question: 'How do I download all extracted pages at once?', answer: 'You can download individual page images or download all pages combined in a single ZIP file.' }
+      { question: 'How do I download all extracted pages at once?', answer: 'Click the Download All button to securely download every page consecutively directly to your device without needing to extract annoying ZIP files.' }
     ]
   },
   'photo-clarifier/unblur-and-enhance': {

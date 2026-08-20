@@ -2,15 +2,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, FileImage, ShieldCheck, Cpu, ArrowRight, Layers } from 'lucide-react'
 
-// Dynamic import pdfjs to avoid SSR compilation failures
-let pdfjsLib: any
-if (typeof window !== 'undefined') {
-  // @ts-ignore
-  import('pdfjs-dist/build/pdf.mjs').then(mod => {
-    pdfjsLib = mod
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.mjs`
-  })
-}
+// pdfjsLib will be loaded dynamically on client side
 
 interface Props {
   config?: any
@@ -45,10 +37,12 @@ export default function PdfToJpgTool({ config }: Props) {
     setProgress(0)
 
     try {
+      let pdfjsLib: any = (window as any).pdfjsLib
       if (!pdfjsLib) {
          // @ts-ignore
          pdfjsLib = await import('pdfjs-dist/build/pdf.mjs')
          pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.mjs`
+         ;(window as any).pdfjsLib = pdfjsLib
       }
 
       const arrayBuffer = await file.arrayBuffer()

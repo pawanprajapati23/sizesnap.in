@@ -248,13 +248,18 @@ export default function ImageToPdfTool({ config }: Props) {
     }
   }
 
+  // Maintain a ref to the latest imageList to safely clean up on unmount without re-triggering useEffect
+  const latestListRef = useRef<ImageFileItem[]>([])
+  useEffect(() => {
+    latestListRef.current = imageList
+  }, [imageList])
+
   useEffect(() => {
     return () => {
-      imageList.forEach(x => URL.revokeObjectURL(x.previewUrl))
+      latestListRef.current.forEach(x => URL.revokeObjectURL(x.previewUrl))
       if (resultUrl) URL.revokeObjectURL(resultUrl)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [resultUrl])
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">

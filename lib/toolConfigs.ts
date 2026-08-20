@@ -303,6 +303,17 @@ export const tools: Tool[] = [
     ]
   },
   {
+    slug: 'live-document-scanner',
+    name: 'Live Mobile Document Scanner',
+    shortName: 'Live Scanner',
+    category: 'image',
+    description: 'Use your mobile camera to scan physical documents directly on the web and save as A4 PDF (No app required).',
+    icon: '📸',
+    variants: [
+      { slug: 'camscanner-clone', label: 'CamScanner Online', metaTitle: 'Free CamScanner Alternative Online | Live Document Scanner', metaDescription: 'Use your phone camera to scan documents directly in the browser. Apply B&W filters and save as PDF instantly without downloading any app.', h1: 'Live Document Scanner (Turn Phone into Scanner)', introParagraph: 'Scan physical papers using your mobile camera. We auto-apply professional contrast filters to make it look like a real scan and compile it to a PDF.', config: {} }
+    ]
+  },
+  {
     slug: 'document-scanner',
     name: 'Document Scanner (B&W Filter)',
     shortName: 'Doc Scanner',

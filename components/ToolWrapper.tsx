@@ -15,6 +15,7 @@ const HeicToJpgTool = dynamic(() => import('@/components/tools/HeicToJpgTool'), 
 const BulkImageCompressTool = dynamic(() => import('@/components/tools/BulkImageCompressTool'), { ssr: false })
 const PdfToJpgTool = dynamic(() => import('@/components/tools/PdfToJpgTool'), { ssr: false })
 const DocumentScannerTool = dynamic(() => import('@/components/tools/DocumentScannerTool'), { ssr: false })
+const LiveDocumentScannerTool = dynamic(() => import('@/components/tools/LiveDocumentScannerTool'), { ssr: false })
 const WatermarkImageTool = dynamic(() => import('@/components/tools/WatermarkImageTool'), { ssr: false })
 const WhatsAppDpTool = dynamic(() => import('@/components/tools/WhatsAppDpTool'), { ssr: false })
 const WordToPdfTool = dynamic(() => import('@/components/tools/WordToPdfTool'), { ssr: false })
@@ -148,6 +149,8 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <SelfAttestationTool config={config} />
   } else if (toolSlug === 'document-grayscale' || toolSlug === 'black-and-white-document') {
     toolComponent = <DocumentGrayscaleTool config={config} />
+  } else if (toolSlug === 'live-document-scanner' || toolSlug === 'camscanner-clone') {
+    toolComponent = <LiveDocumentScannerTool config={config} />
   }
 
   if (!toolComponent) return null

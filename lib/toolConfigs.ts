@@ -191,7 +191,18 @@ export const tools: Tool[] = [
     category: 'pdf',
     description: 'Reduce PDF file size online without losing quality.',
     icon: '📄',
-    variants: buildSizeVariants('Compress PDF', 'compress-pdf', 'Shrink your document for email attachments or portals. Secure, fast, client-side compression.')
+    variants: [
+      ...buildSizeVariants('Compress PDF', 'compress-pdf', 'Shrink your document for email attachments or portals. Secure, fast, client-side compression.'),
+      {
+        slug: 'custom-size',
+        label: 'Custom Size Compress',
+        metaTitle: 'Compress PDF to Custom Size (KB/MB) Online | SizeSnap',
+        metaDescription: 'Enter any target size in KB or MB and compress your PDF exactly to that size online. No limits, 100% free and client-side private processing.',
+        h1: 'Compress PDF to Custom Target Size (KB)',
+        introParagraph: 'Need your PDF under a very specific file limit? Simply type your required KB (e.g. 37KB, 250KB) and our tool will automatically shrink it to exactly match your requirement.',
+        config: { maxKB: 200 }
+      }
+    ]
   },
   {
     slug: 'passport-photo',

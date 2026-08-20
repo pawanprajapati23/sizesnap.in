@@ -476,6 +476,18 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Kya 150KB output clear open hoga?', answer: 'Haan, dynamic compiler configuration vector properties lock rakhti hai.' }
     ]
   },
+  'compress-pdf/custom-size': {
+    h1: 'Compress PDF to Custom Size (Enter Any KB)',
+    metaTitle: 'Compress PDF to Custom Target Size (KB/MB) Online | SizeSnap',
+    metaDescription: 'Need a very specific PDF file limit? Enter your required size (like 37KB or 1.5MB) and our tool will compress your PDF exactly to that target.',
+    introParagraph: 'Use this smart custom compressor to shrink your PDF files to an exact file size limit (KB). Just enter the maximum allowed size for your upload portal, and we will do the rest without losing text clarity.',
+    faqs: [
+      {
+        question: 'How do I compress a PDF to an exact custom size?',
+        answer: 'Upload your PDF, select the "Compress to Target Size" mode, type in your exact KB requirement (e.g., 37KB), and the tool will automatically adjust the compression ratio to meet your limit.'
+      }
+    ]
+  },
   'compress-pdf/to-12kb': {
     metaTitle: 'Compress PDF to 12KB Online Free (High Quality) | SizeSnap',
     metaDescription: 'Need to compress your PDF under 12KB? Shrink your PDF file size to exactly 12KB online free. Keep your signature and documents readable for exam portals.',
@@ -1555,7 +1567,9 @@ export function getPrettySlug(tool: string, variant: string): string | null {
     'self-attestation/self-attest-document': 'self-attested-document-maker-online',
     'document-grayscale/convert-to-black-and-white': 'convert-document-to-black-and-white',
     'compress-pdf/to-12kb': 'compress-pdf-to-12kb',
-    'compress-pdf/to-15kb': 'compress-pdf-to-15kb'
+    'compress-pdf/to-15kb': 'compress-pdf-to-15kb',
+    'compress-pdf/to-400kb': 'compress-pdf-to-400kb',
+    'compress-pdf/custom-size': 'compress-pdf-to-custom-size'
   }
   return mapping[`${tool}/${variant}`] || null
 }

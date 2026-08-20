@@ -82,16 +82,22 @@ export default function ConvertImageTool({ config }: Props) {
       // Convert quality scale 0-100 to 0.0-1.0
       const finalQuality = qVal / 100
 
-      canvas.toBlob(blob => {
-        if (blob) {
-          if (resultUrl) URL.revokeObjectURL(resultUrl)
-          setResultUrl(URL.createObjectURL(blob))
-          setConvertedSize(blob.size)
-          setStatus('done')
-        } else {
-          throw new Error('Blob output generated null')
-        }
-      }, mimeType, finalQuality)
+      try {
+        canvas.toBlob(blob => {
+          if (blob) {
+            if (resultUrl) URL.revokeObjectURL(resultUrl)
+            setResultUrl(URL.createObjectURL(blob))
+            setConvertedSize(blob.size)
+            setStatus('done')
+          } else {
+            setErrorMsg('Failed to generate converted image blob.')
+            setStatus('error')
+          }
+        }, mimeType, finalQuality)
+      } catch (err: any) {
+        setErrorMsg(err.message || 'Image formatting failed due to canvas error.')
+        setStatus('error')
+      }
 
     } catch (e: any) {
       setErrorMsg(e.message || 'Image formatting failed.')

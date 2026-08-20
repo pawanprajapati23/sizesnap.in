@@ -35,8 +35,18 @@ export default function BulkImageCompressTool({ config }: Props) {
   const handleUpload = (files: FileList | null) => {
     if (!files || files.length === 0) return
 
+    // Calculate how many more files we can accept
+    const remainingSlots = Math.max(0, 25 - filesList.length)
+    if (remainingSlots === 0) {
+      setErrorMsg('Maximum 25 files allowed.')
+      return
+    }
+
     const items: BulkFileItem[] = []
+    let processed = 0
     for (let i = 0; i < files.length; i++) {
+      if (processed >= remainingSlots) break
+      
       const file = files[i]
       if (!file.type.startsWith('image/')) continue
 
@@ -46,6 +56,7 @@ export default function BulkImageCompressTool({ config }: Props) {
         previewUrl: URL.createObjectURL(file),
         originalSize: file.size
       })
+      processed++
     }
 
     if (items.length === 0 && filesList.length === 0) {
@@ -54,8 +65,7 @@ export default function BulkImageCompressTool({ config }: Props) {
       return
     }
 
-    // Limit to max 25 files to preserve memory
-    setFilesList(prev => [...prev, ...items].slice(0, 25))
+    setFilesList(prev => [...prev, ...items])
     setStatus('editing')
     setErrorMsg('')
   }
@@ -193,14 +203,19 @@ export default function BulkImageCompressTool({ config }: Props) {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  // Maintain a ref to the latest filesList to safely clean up on unmount without re-triggering useEffect
+  const latestFilesRef = useRef<BulkFileItem[]>([])
+  useEffect(() => {
+    latestFilesRef.current = filesList
+  }, [filesList])
+
   useEffect(() => {
     return () => {
-      filesList.forEach(item => {
-        URL.revokeObjectURL(item.previewUrl)
+      latestFilesRef.current.forEach(item => {
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl)
         if (item.compressedUrl) URL.revokeObjectURL(item.compressedUrl)
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

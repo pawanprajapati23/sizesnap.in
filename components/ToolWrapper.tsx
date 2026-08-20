@@ -1,5 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import FeedbackWidget from './FeedbackWidget'
 
 const ImageResizeTool = dynamic(() => import('@/components/tools/ImageResizeTool'), { ssr: false })

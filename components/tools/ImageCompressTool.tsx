@@ -47,97 +47,105 @@ export default function ImageCompressTool({ config }: Props) {
       reader.onload = (event) => {
         const img = new Image()
         img.onload = async () => {
-          let width = img.width
-          let height = img.height
+          try {
+            let width = img.width
+            let height = img.height
 
-          // Limit huge dimensions to optimize processing speeds
-          const maxDim = 1600
-          if (width > maxDim || height > maxDim) {
-            const ratio = Math.min(maxDim / width, maxDim / height)
-            width = Math.round(width * ratio)
-            height = Math.round(height * ratio)
-          }
-
-          const canvas = document.createElement('canvas')
-          const ctx = canvas.getContext('2d')
-          if (!ctx) {
-            reject(new Error('Browser canvas context not available.'))
-            return
-          }
-
-          canvas.width = width
-          canvas.height = height
-          ctx.drawImage(img, 0, 0, width, height)
-
-          // Mode 1: Compress to exact KB limit using iteration
-          if (mode === 'size' && targetSizeKB) {
-            let quality = 0.95
-            let scale = 1.0
-            let resultBlob: Blob | null = null
-            let iterations = 0
-            const maxIterations = 30
-            const safetyMargin = 0.98
-
-            while (iterations < maxIterations) {
-              canvas.width = Math.max(1, Math.round(width * scale))
-              canvas.height = Math.max(1, Math.round(height * scale))
-              ctx.clearRect(0, 0, canvas.width, canvas.height)
-              ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-              resultBlob = await new Promise<Blob | null>((res) => {
-                canvas.toBlob((b) => res(b), 'image/jpeg', quality)
-              })
-
-              if (!resultBlob) {
-                reject(new Error('Failed to compress.'))
-                return
-              }
-
-              const currentSizeKB = resultBlob.size / 1024
-              if (currentSizeKB <= targetSizeKB * safetyMargin) {
-                break
-              } else {
-                if (quality > 0.45) {
-                  quality -= 0.12
-                } else {
-                  scale = scale * 0.85
-                }
-              }
-              iterations++
+            // Limit huge dimensions to optimize processing speeds
+            const maxDim = 1600
+            if (width > maxDim || height > maxDim) {
+              const ratio = Math.min(maxDim / width, maxDim / height)
+              width = Math.round(width * ratio)
+              height = Math.round(height * ratio)
             }
 
-            // Emergency Fallback
-            if (resultBlob && resultBlob.size / 1024 > targetSizeKB) {
-              let emergencyScale = scale * 0.7
-              while (resultBlob.size / 1024 > targetSizeKB && emergencyScale > 0.05) {
-                canvas.width = Math.max(1, Math.round(width * emergencyScale))
-                canvas.height = Math.max(1, Math.round(height * emergencyScale))
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
+            if (!ctx) {
+              reject(new Error('Browser canvas context not available.'))
+              return
+            }
+
+            canvas.width = width
+            canvas.height = height
+            ctx.drawImage(img, 0, 0, width, height)
+
+            // Mode 1: Compress to exact KB limit using iteration
+            if (mode === 'size' && targetSizeKB) {
+              let quality = 0.95
+              let scale = 1.0
+              let resultBlob: Blob | null = null
+              let iterations = 0
+              const maxIterations = 30
+              const safetyMargin = 0.98
+
+              while (iterations < maxIterations) {
+                canvas.width = Math.max(1, Math.round(width * scale))
+                canvas.height = Math.max(1, Math.round(height * scale))
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
                 resultBlob = await new Promise<Blob | null>((res) => {
-                  canvas.toBlob((b) => res(b), 'image/jpeg', 0.3)
+                  canvas.toBlob((b) => res(b), 'image/jpeg', quality)
                 })
 
-                if (!resultBlob) break
-                emergencyScale *= 0.7
-              }
-            }
+                if (!resultBlob) {
+                  reject(new Error('Failed to compress.'))
+                  return
+                }
 
-            if (resultBlob) {
-              resolve(resultBlob)
-            } else {
-              reject(new Error('Failed to compress target size.'))
-            }
-          } else {
-            // Mode 2: Simple Quality Compression (instant)
-            canvas.toBlob((blob) => {
-              if (blob) {
-                resolve(blob)
-              } else {
-                reject(new Error('Failed to generate image blob.'))
+                const currentSizeKB = resultBlob.size / 1024
+                if (currentSizeKB <= targetSizeKB * safetyMargin) {
+                  break
+                } else {
+                  if (quality > 0.45) {
+                    quality -= 0.12
+                  } else {
+                    scale = scale * 0.85
+                  }
+                }
+                iterations++
               }
-            }, 'image/jpeg', qualityPercent / 100)
+
+              // Emergency Fallback
+              if (resultBlob && resultBlob.size / 1024 > targetSizeKB) {
+                let emergencyScale = scale * 0.7
+                while (resultBlob.size / 1024 > targetSizeKB && emergencyScale > 0.05) {
+                  canvas.width = Math.max(1, Math.round(width * emergencyScale))
+                  canvas.height = Math.max(1, Math.round(height * emergencyScale))
+                  ctx.clearRect(0, 0, canvas.width, canvas.height)
+                  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+                  resultBlob = await new Promise<Blob | null>((res) => {
+                    canvas.toBlob((b) => res(b), 'image/jpeg', 0.3)
+                  })
+
+                  if (!resultBlob) break
+                  emergencyScale *= 0.7
+                }
+              }
+
+              if (resultBlob) {
+                resolve(resultBlob)
+              } else {
+                reject(new Error('Failed to compress target size.'))
+              }
+            } else {
+              // Mode 2: Simple Quality Compression (instant)
+              try {
+                canvas.toBlob((blob) => {
+                  if (blob) {
+                    resolve(blob)
+                  } else {
+                    reject(new Error('Failed to generate image blob.'))
+                  }
+                }, 'image/jpeg', qualityPercent / 100)
+              } catch (err) {
+                reject(err)
+              }
+            }
+          } catch (error) {
+            reject(error instanceof Error ? error : new Error('Unknown error during compression.'))
           }
         }
         img.onerror = () => reject(new Error('Corrupted image file.'))

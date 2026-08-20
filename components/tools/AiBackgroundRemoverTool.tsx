@@ -276,30 +276,35 @@ export default function AiBackgroundRemoverTool({ config = {} }: Props) {
     const mime = format === 'png' ? 'image/png' : 'image/jpeg'
     const quality = format === 'png' ? 1.0 : 0.95
 
-    canvas.toBlob(
-      (blob) => {
-        if (!blob) {
-          setErrorMsg('Export failed')
-          setStatus('error')
-          return
-        }
+    try {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            setErrorMsg('Export failed')
+            setStatus('error')
+            return
+          }
 
-        const url = URL.createObjectURL(blob)
-        setResultUrl(url)
-        setResultSize(blob.size)
-        setStatus('done')
+          const url = URL.createObjectURL(blob)
+          setResultUrl(url)
+          setResultSize(blob.size)
+          setStatus('done')
 
-        // Auto trigger download
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `sizesnap-bg-removed.${format}`
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-      },
-      mime,
-      quality
-    )
+          // Auto trigger download
+          const a = document.createElement('a')
+          a.href = url
+          a.download = `sizesnap-bg-removed.${format}`
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+        },
+        mime,
+        quality
+      )
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Export failed due to canvas error.')
+      setStatus('error')
+    }
   }
 
   const resetAll = () => {

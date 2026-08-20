@@ -18,12 +18,19 @@ export default function FeedbackWidget() {
     setStatus('sending')
     try {
       if (db) {
-        await addDoc(collection(db, 'user_feedback'), {
+        // Use Promise.race to add a timeout in case Firestore hangs due to permission issues
+        const addDocPromise = addDoc(collection(db, 'user_feedback'), {
           message: feedback,
           pageUrl: pathname || 'Unknown Page',
           timestamp: serverTimestamp(),
           read: false
         })
+        
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error("Timeout: Feedback taking too long. Check Firebase Rules.")), 5000)
+        )
+        
+        await Promise.race([addDocPromise, timeoutPromise])
       }
       setStatus('success')
       setFeedback('')

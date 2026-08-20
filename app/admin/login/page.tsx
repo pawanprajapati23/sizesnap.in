@@ -29,11 +29,15 @@ export default function AdminLogin() {
       localStorage.setItem('sizesnap_admin_session', sessionId)
       
       if (db) {
-        await setDoc(doc(db, 'admin_settings', 'active_session'), {
-          sessionId,
-          lastLogin: serverTimestamp(),
-          uid: cred.user.uid
-        })
+        try {
+          await setDoc(doc(db, 'admin_settings', 'active_session'), {
+            sessionId,
+            lastLogin: serverTimestamp(),
+            uid: cred.user.uid
+          })
+        } catch (firestoreError) {
+          console.warn("Could not save session to Firestore (check rules). Skipping single-device enforcement.", firestoreError)
+        }
       }
       
       router.push('/admin')

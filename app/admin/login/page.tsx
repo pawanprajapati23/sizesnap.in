@@ -29,7 +29,7 @@ export default function AdminLogin() {
       localStorage.setItem('sizesnap_admin_session', sessionId)
       
       if (db) {
-        await setDoc(doc(db, 'admin_sessions', cred.user.uid), {
+        await setDoc(doc(db, 'admin_settings', 'active_session'), {
           sessionId,
           lastLogin: serverTimestamp(),
           uid: cred.user.uid

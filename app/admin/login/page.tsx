@@ -26,6 +26,8 @@ export default function AdminLogin() {
       
       // Enforce single active device per user
       const sessionId = crypto.randomUUID()
+      localStorage.setItem('sizesnap_admin_session', sessionId)
+      
       if (db) {
         await setDoc(doc(db, 'admin_sessions', cred.user.uid), {
           sessionId,
@@ -33,7 +35,6 @@ export default function AdminLogin() {
           uid: cred.user.uid
         })
       }
-      localStorage.setItem('sizesnap_admin_session', sessionId)
       
       router.push('/admin')
     } catch (err: any) {

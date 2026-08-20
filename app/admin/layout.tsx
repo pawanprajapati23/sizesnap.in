@@ -26,8 +26,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       if (user) {
         setUser(user)
         
-        // Single session enforcement
-        if (db) {
+        // Single session enforcement (skip on login page to prevent race condition during login)
+        if (db && pathname !== '/admin/login') {
            unsubscribeSession = onSnapshot(doc(db, 'admin_sessions', user.uid), (docSnap) => {
               if (docSnap.exists()) {
                  const data = docSnap.data()

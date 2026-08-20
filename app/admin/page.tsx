@@ -39,12 +39,12 @@ export default function AdminDashboard() {
 
         const eventsRef = collection(db, 'analytics_events_raw')
         
-        // Get all events for the selected range
-        const rangeQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(rangeStart)))
+        // Get events for the selected range (limited to 1000 to prevent browser crash/infinite loading)
+        const rangeQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(rangeStart)), limit(1000))
         const rangeSnap = await getDocs(rangeQ)
         
         // Get today's events for the static "Today" stat
-        const todayQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(todayStart)))
+        const todayQ = query(eventsRef, where('timestamp', '>=', Timestamp.fromDate(todayStart)), limit(1000))
         const todaySnap = await getDocs(todayQ)
 
         let rangeVisitors = 0

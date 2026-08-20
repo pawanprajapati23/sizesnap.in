@@ -47,8 +47,9 @@ export default function AdminLogin() {
     <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] dark:bg-black p-4 font-sans text-zinc-900 dark:text-zinc-100">
       <div className="max-w-[400px] w-full bg-white dark:bg-[#0A0A0A] p-8 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
         <div className="mb-8">
-          <div className="w-10 h-10 bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-lg rounded-md mb-6">
-            S
+          <div className="relative w-10 h-10 mb-6 rounded-md overflow-hidden bg-white border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shadow-sm">
+            <img src="/logo.png" alt="SizeSnap Logo" className="w-full h-full object-contain" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+            <span className="absolute inset-0 flex items-center justify-center text-zinc-900 font-bold text-lg -z-10">S</span>
           </div>
           <h1 className="text-xl font-semibold tracking-tight">Sign in to SizeSnap</h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1.5">Enter your admin credentials below</p>

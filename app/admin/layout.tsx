@@ -92,8 +92,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className={`fixed lg:static inset-y-0 left-0 w-64 bg-[#FAFAFA] dark:bg-black border-r border-zinc-200 dark:border-zinc-800 flex flex-col z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="px-6 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-xs rounded-sm">
-               S
+            <div className="relative w-7 h-7 bg-white rounded-md border border-zinc-200 dark:border-zinc-800 flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
+               <img src="/logo.png" alt="SizeSnap Logo" className="w-full h-full object-contain" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+               <span className="absolute inset-0 flex items-center justify-center text-zinc-900 font-bold text-xs -z-10">S</span>
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-semibold tracking-tight">SizeSnap</span>

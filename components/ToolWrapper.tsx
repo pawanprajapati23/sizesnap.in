@@ -119,7 +119,7 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
   } else if (toolSlug === 'crop-image' || toolSlug === 'circle-crop') {
     toolComponent = <CropImageTool config={config} />
   } else if (toolSlug === 'exam-pack-generator' || toolSlug === 'sarkari-exam-pack') {
-    toolComponent = <ExamPackGeneratorTool />
+    toolComponent = <ExamPackGeneratorTool config={config} />
   } else if (toolSlug === 'passport-print-sheet' || toolSlug === 'passport-sheet-maker') {
     toolComponent = <PassportPrintSheetTool />
   } else if (toolSlug === 'photo-compliance-checker' || toolSlug === 'photo-validator') {

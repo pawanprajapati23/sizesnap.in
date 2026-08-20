@@ -264,6 +264,99 @@ const EXAM_PRESETS: ExamPreset[] = [
         description: 'Black pen on clean white sheet'
       }
     ]
+  },
+  {
+    id: 'rrb',
+    name: 'Railway RRB NTPC / ALP / Group D',
+    shortLabel: 'RRB Railway Suite',
+    badge: 'Railway Specs',
+    color: 'from-blue-700 to-sky-600',
+    slots: [
+      {
+        id: 'photo',
+        name: 'Passport Photo (White BG)',
+        type: 'photo',
+        targetKbMin: 20,
+        targetKbMax: 50,
+        aspectRatioLabel: '35 x 45 mm',
+        widthPx: 350,
+        heightPx: 450,
+        description: 'Must have a plain white background (Mandatory for RRB)'
+      },
+      {
+        id: 'signature',
+        name: 'Running Signature',
+        type: 'signature',
+        targetKbMin: 10,
+        targetKbMax: 20,
+        aspectRatioLabel: '50 x 20 mm',
+        widthPx: 500,
+        heightPx: 200,
+        description: 'Signed on white paper with black/blue pen, no block letters'
+      }
+    ]
+  },
+  {
+    id: 'ctet',
+    name: 'CBSE CTET Exam',
+    shortLabel: 'CTET Suite',
+    badge: 'Teaching Exam',
+    color: 'from-fuchsia-600 to-purple-600',
+    slots: [
+      {
+        id: 'photo',
+        name: 'Candidate Photo',
+        type: 'photo',
+        targetKbMin: 10,
+        targetKbMax: 100,
+        aspectRatioLabel: '3.5 x 4.5 cm',
+        widthPx: 350,
+        heightPx: 450,
+        description: 'Clear face with no dark glasses'
+      },
+      {
+        id: 'signature',
+        name: 'Signature',
+        type: 'signature',
+        targetKbMin: 3,
+        targetKbMax: 30,
+        aspectRatioLabel: '3.5 x 1.5 cm',
+        widthPx: 350,
+        heightPx: 150,
+        description: 'Black or blue ink on plain white paper'
+      }
+    ]
+  },
+  {
+    id: 'agniveer',
+    name: 'Indian Army Agniveer',
+    shortLabel: 'Agniveer Suite',
+    badge: 'Defence Specs',
+    color: 'from-green-700 to-emerald-600',
+    slots: [
+      {
+        id: 'photo',
+        name: 'Passport Photo',
+        type: 'photo',
+        targetKbMin: 10,
+        targetKbMax: 20,
+        aspectRatioLabel: '35 x 45 mm',
+        widthPx: 350,
+        heightPx: 450,
+        description: 'Light color background, no cap or dark glasses'
+      },
+      {
+        id: 'signature',
+        name: 'Signature',
+        type: 'signature',
+        targetKbMin: 5,
+        targetKbMax: 10,
+        aspectRatioLabel: '3.5 x 1.5 cm',
+        widthPx: 350,
+        heightPx: 150,
+        description: 'Black or blue ink on plain white paper'
+      }
+    ]
   }
 ]
 
@@ -278,8 +371,14 @@ interface SlotState {
   error?: string
 }
 
-export default function ExamPackGeneratorTool() {
-  const [selectedExam, setSelectedExam] = useState<ExamPreset>(EXAM_PRESETS[0])
+export default function ExamPackGeneratorTool({ config }: { config?: any }) {
+  const [selectedExam, setSelectedExam] = useState<ExamPreset>(() => {
+    if (config?.presetId) {
+      const found = EXAM_PRESETS.find(p => p.id === config.presetId)
+      if (found) return found
+    }
+    return EXAM_PRESETS[0]
+  })
   const [candidateName, setCandidateName] = useState<string>('')
   const [photoDate, setPhotoDate] = useState<string>(() => {
     const d = new Date()

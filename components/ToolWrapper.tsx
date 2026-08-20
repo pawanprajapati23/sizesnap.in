@@ -1,5 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic'
+import FeedbackWidget from './FeedbackWidget'
 
 const ImageResizeTool = dynamic(() => import('@/components/tools/ImageResizeTool'), { ssr: false })
 const ImageCompressTool = dynamic(() => import('@/components/tools/ImageCompressTool'), { ssr: false })
@@ -154,7 +155,12 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     <div ref={wrapperRef} className="relative group/tool">
       {/* Dynamic neon gradient backdrop glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover/tool:opacity-35 transition-opacity duration-500 pointer-events-none" />
-      <div className="relative">{toolComponent}</div>
+      <div className="relative">
+        {toolComponent}
+        <div className="mt-8">
+            <FeedbackWidget />
+        </div>
+      </div>
     </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { auth } from '@/lib/firebase'
-import { Download, AlertTriangle, TrendingUp, Search, FileText, ArrowUp, ArrowDown, Bot, CheckCircle, MessageSquare, Activity, Target } from 'lucide-react'
+import { Download, AlertTriangle, TrendingUp, Search, FileText, ArrowUp, ArrowDown, Bot, CheckCircle, MessageSquare, Activity, Target, Sparkles, Filter } from 'lucide-react'
 
 export default function SEOManagement() {
   const [data, setData] = useState<any>(null)
@@ -10,6 +10,7 @@ export default function SEOManagement() {
   const [timeRange, setTimeRange] = useState('28days')
   const [showAllOpps, setShowAllOpps] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
+  const [toolFilter, setToolFilter] = useState('All')
 
   useEffect(() => {
     fetchData()
@@ -33,10 +34,8 @@ export default function SEOManagement() {
       alert("No action plan available.");
       return;
     }
-    
     const date = new Date().toISOString().split('T')[0]
     const { current, changes } = data.overview;
-    
     const formatChange = (val: any) => {
        const num = parseFloat(val);
        if (isNaN(num) || num === 0) return '(No change)';
@@ -47,13 +46,11 @@ export default function SEOManagement() {
     md += `**Project:** SizeSnap\n`;
     md += `**Period:** ${timeRange === '7days' ? '7 Days' : timeRange === '28days' ? '28 Days' : '3 Months'}\n`;
     md += `**Generated:** ${date}\n\n`;
-    
     md += `## 1. Overall Performance Summary\n`;
     md += `- **Total Clicks:** ${current.clicks.toLocaleString()} ${formatChange(changes.clicks)}\n`;
     md += `- **Total Impressions:** ${current.impressions.toLocaleString()} ${formatChange(changes.impressions)}\n`;
     md += `- **Average CTR:** ${current.ctr}% ${formatChange(changes.ctr)}\n`;
     md += `- **Average Position:** ${current.position} (Change: ${parseFloat(changes.position) > 0 ? '+' : ''}${changes.position})\n\n`;
-    
     md += `## 2. Priority SEO Opportunities\n\n`;
     
     data.actionPlan.forEach((opp: any, idx: number) => {
@@ -61,14 +58,12 @@ export default function SEOManagement() {
        md += `- **Query:** "${opp.query}"\n`;
        md += `- **Type:** ${opp.type.replace(/_/g, ' ')}\n`;
        md += `- **Evidence:** ${opp.impressions} impressions | ${opp.clicks} clicks | CTR: ${opp.ctr}% | Pos: ${opp.position}\n`;
-       
        if (opp.uses > 0 || opp.feedback > 0) {
           md += `- **User Signals:** `;
           if (opp.uses > 0) md += `${opp.uses} recorded tool uses. `;
           if (opp.feedback > 0) md += `${opp.feedback} related user feedback requests. `;
           md += `\n`;
        }
-       
        md += `- **Why it matters:** ${opp.reason.split(' Tool usage:')[0]}\n`;
        md += `- **Recommended Action:** ${opp.action}\n\n`;
     });
@@ -109,10 +104,8 @@ export default function SEOManagement() {
            headers: { 'Content-Type': 'application/json' },
            body: JSON.stringify({ id: opp.id, status: newStatus, actionData: opp })
         })
-        fetchData() // Refresh to get updated stats
-     } catch(e) {
-        alert("Failed to update status")
-     }
+        fetchData()
+     } catch(e) { alert("Failed to update status") }
   }
 
   const updateFeedbackStatus = async (id: string, newStatus: string) => {
@@ -123,9 +116,7 @@ export default function SEOManagement() {
            body: JSON.stringify({ id, status: newStatus })
         })
         fetchData()
-     } catch(e) {
-        alert("Failed to update feedback")
-     }
+     } catch(e) { alert("Failed to update feedback") }
   }
 
   return (
@@ -155,15 +146,14 @@ export default function SEOManagement() {
         )}
       </div>
 
-      {/* Tabs */}
       {data?.connected && (
-         <div className="flex border-b border-zinc-200 dark:border-zinc-800">
-            {['overview', 'tracker', 'feedback'].map(tab => (
+         <div className="flex border-b border-zinc-200 dark:border-zinc-800 overflow-x-auto hide-scrollbar">
+            {['overview', 'tracker', 'new-tools', 'feedback'].map(tab => (
                <button 
                  key={tab} onClick={() => setActiveTab(tab)}
-                 className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === tab ? 'border-zinc-900 dark:border-white text-zinc-900 dark:text-white' : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300'}`}
+                 className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tab ? 'border-zinc-900 dark:border-white text-zinc-900 dark:text-white' : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300'}`}
                >
-                 {tab === 'overview' ? 'Growth Dashboard' : tab === 'tracker' ? 'Action Tracker' : 'User Requests'}
+                 {tab === 'overview' ? 'Growth Dashboard' : tab === 'tracker' ? 'Action Tracker' : tab === 'new-tools' ? '🚀 New Tools' : 'User Requests'}
                </button>
             ))}
          </div>
@@ -208,11 +198,10 @@ export default function SEOManagement() {
                onClick={generateAntigravityTask}
                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
              >
-               <Download className="w-4 h-4" /> Generate Antigravity Task
+               <Download className="w-4 h-4" /> Download Antigravity Task
              </button>
           </div>
 
-          {/* Action Plan Cards */}
           <div className="grid grid-cols-1 gap-4">
              {data.actionPlan?.length > 0 ? (
                 data.actionPlan.map((opp: any, idx: number) => (
@@ -279,31 +268,6 @@ export default function SEOManagement() {
                 </div>
              )}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
-               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"><h3 className="text-sm font-semibold flex items-center gap-2"><Search className="w-4 h-4 text-blue-500" /> Top Queries</h3></div>
-               <div className="overflow-x-auto">
-                 <table className="w-full text-left text-sm">
-                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium"><tr><th className="px-5 py-3">Query</th><th className="px-5 py-3 text-right">Clicks</th><th className="px-5 py-3 text-right">Imp.</th></tr></thead>
-                   <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                     {data.topQueries?.slice(0, 10).map((row: any, idx: number) => (<tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30"><td className="px-5 py-3 font-medium">{row.query}</td><td className="px-5 py-3 text-right">{row.clicks}</td><td className="px-5 py-3 text-right">{row.impressions}</td></tr>))}
-                   </tbody>
-                 </table>
-               </div>
-            </div>
-            <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
-               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"><h3 className="text-sm font-semibold flex items-center gap-2"><FileText className="w-4 h-4 text-green-500" /> Top Pages</h3></div>
-               <div className="overflow-x-auto">
-                 <table className="w-full text-left text-sm">
-                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium"><tr><th className="px-5 py-3">Page</th><th className="px-5 py-3 text-right">Clicks</th><th className="px-5 py-3 text-right">Imp.</th></tr></thead>
-                   <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                     {data.topPages?.slice(0, 10).map((row: any, idx: number) => (<tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30"><td className="px-5 py-3 font-medium truncate max-w-[200px]" title={row.page}>{row.page}</td><td className="px-5 py-3 text-right">{row.clicks}</td><td className="px-5 py-3 text-right">{row.impressions}</td></tr>))}
-                   </tbody>
-                 </table>
-               </div>
-            </div>
-          </div>
         </div>
         )}
 
@@ -336,7 +300,73 @@ export default function SEOManagement() {
                           </tbody>
                         </table>
                      </div>
-                  ) : (<div className="p-10 text-center text-zinc-500">No actions tracked yet. Mark an action as "In Progress" to track it here.</div>)}
+                  ) : (<div className="p-10 text-center text-zinc-500">No actions tracked yet.</div>)}
+              </div>
+           </div>
+        )}
+
+        {activeTab === 'new-tools' && (
+           <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                 <div>
+                    <h2 className="text-lg font-semibold flex items-center gap-2"><Sparkles className="w-5 h-5 text-amber-500" /> New Tool Opportunities</h2>
+                    <p className="text-sm text-zinc-500">Dynamically scored based on search demand (40%), user feedback (25%), product fit (20%), and existing gaps (15%).</p>
+                 </div>
+                 <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md p-1">
+                    <Filter className="w-4 h-4 text-zinc-500 ml-2" />
+                    <select value={toolFilter} onChange={(e) => setToolFilter(e.target.value)} className="bg-transparent text-sm font-medium border-none outline-none pr-2">
+                       <option value="All">All Priorities</option>
+                       <option value="HIGH">High Priority</option>
+                       <option value="MEDIUM">Medium Priority</option>
+                       <option value="LOW">Low Priority</option>
+                    </select>
+                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                 {data.newToolOpportunities?.filter((t:any) => toolFilter === 'All' || t.priority === toolFilter).length > 0 ? (
+                    data.newToolOpportunities.filter((t:any) => toolFilter === 'All' || t.priority === toolFilter).map((tool: any, idx: number) => (
+                       <div key={idx} className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 flex flex-col md:flex-row gap-6">
+                          <div className="flex-1 space-y-3">
+                             <div className="flex items-center gap-2">
+                                <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${tool.priority === 'HIGH' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : tool.priority === 'MEDIUM' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-400'}`}>
+                                  {tool.priority} PRIORITY
+                                </span>
+                                <span className="text-xs text-zinc-500 font-medium">Gap: {tool.existingGap}</span>
+                             </div>
+                             <div>
+                                <h3 className="text-xl font-bold text-zinc-900 dark:text-white capitalize">{tool.concept}</h3>
+                             </div>
+                             <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 border border-zinc-100 dark:border-zinc-800/50">
+                                <span className="font-semibold block mb-1">Why this opportunity was detected:</span>
+                                {tool.evidence}
+                             </div>
+                          </div>
+                          <div className="w-full md:w-1/3">
+                             <div className="mb-4">
+                                <div className="flex justify-between items-end mb-1">
+                                   <span className="text-xs font-semibold text-zinc-500">Opportunity Score</span>
+                                   <span className="text-xl font-bold">{tool.score}<span className="text-sm text-zinc-400 font-normal">/100</span></span>
+                                </div>
+                                <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                                   <div className={`h-full rounded-full ${tool.score >= 75 ? 'bg-red-500' : tool.score >= 50 ? 'bg-amber-500' : 'bg-zinc-500'}`} style={{ width: `${tool.score}%` }}></div>
+                                </div>
+                             </div>
+                             <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-xs">
+                                <div><span className="text-zinc-500 block mb-0.5">Search Demand</span><span className="font-medium">{tool.searchDemand} ({tool.impressions} imp)</span></div>
+                                <div><span className="text-zinc-500 block mb-0.5">User Demand</span><span className="font-medium">{tool.userDemand}</span></div>
+                                <div><span className="text-zinc-500 block mb-0.5">Product Fit</span><span className="font-medium">{tool.productFit}</span></div>
+                                <div><span className="text-zinc-500 block mb-0.5">Existing Tool</span><span className="font-medium text-red-500">No</span></div>
+                             </div>
+                          </div>
+                       </div>
+                    ))
+                 ) : (
+                    <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-10 text-center text-zinc-500">
+                      <CheckCircle className="w-10 h-10 mx-auto text-zinc-400 mb-4" />
+                      <p>No new tool opportunities met the scoring threshold for the selected filters.</p>
+                    </div>
+                 )}
               </div>
            </div>
         )}

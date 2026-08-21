@@ -224,6 +224,17 @@ export const tools: Tool[] = [
     ]
   },
   {
+    slug: 'passport-print-grid',
+    name: 'Passport Photo Print Grid Maker',
+    shortName: 'Print Grid Maker',
+    category: 'image',
+    description: 'Convert a single passport photo into an A4 or 4x6 inch ready-to-print grid with cut lines.',
+    icon: '🖨️',
+    variants: [
+      { slug: 'maker', label: 'Passport Grid Maker', metaTitle: 'Passport Photo Print Grid Maker Online (A4 & 4x6) | SizeSnap', metaDescription: 'Create a ready-to-print A4 or 4x6 grid of passport photos from a single image. Perfect for Cyber Cafes and home printing.', h1: 'Passport Photo Print Grid Maker', introParagraph: 'Easily generate a grid of 30 passport photos on A4 or 8 photos on 4x6 inch paper from a single photo. Includes cut guides for easy printing and trimming.', config: {} },
+    ]
+  },
+  {
     slug: 'passport-photo',
     name: 'Passport Photo Maker',
     shortName: 'Passport Maker',

@@ -75,12 +75,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!user) return null
 
   const navItems = [
-    { name: 'Overview', href: '/admin', icon: LayoutDashboard },
-    { name: 'Exam Profiles', href: '/admin/exams', icon: FileText },
-    { name: 'Analytics', href: '/admin/analytics', icon: PieChart },
-    { name: 'Blog Manager', href: '/admin/blog', icon: BookOpen },
+    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Tools', href: '/admin/tools', icon: Activity },
+    { name: 'SEO', href: '/admin/seo', icon: PieChart },
     { name: 'Feedback', href: '/admin/feedback', icon: MessageSquare },
-    { name: 'System Health', href: '/admin/system-health', icon: Activity },
+    { name: 'Content', href: '/admin/content', icon: BookOpen },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ]
 
@@ -144,13 +143,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <p className="text-[10px] text-zinc-500">Admin</p>
               </div>
             </div>
-            <button 
-              onClick={() => auth.signOut()}
-              className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              title="Sign Out"
-            >
+            <div className="flex gap-1 shrink-0">
+               <a 
+                 href="/"
+                 target="_blank"
+                 rel="noreferrer"
+                 className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                 title="View Website"
+               >
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+               </a>
+               <button 
+                 onClick={() => auth.signOut()}
+                 className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                 title="Sign Out"
+               >
               <LogOut className="w-4 h-4" />
             </button>
+            </div>
           </div>
         </div>
       </aside>

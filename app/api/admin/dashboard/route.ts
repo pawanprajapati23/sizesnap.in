@@ -61,6 +61,12 @@ export async function GET(request: Request) {
     const msgSnap = await msgQ.get()
     
     const messages: any[] = []
+    let totalFeedbackCount = 0;
+    
+    // Get total feedback count for this range
+    const allMsgSnap = await msgRef.where('timestamp', '>=', rangeStart).get()
+    totalFeedbackCount = allMsgSnap.size
+
     msgSnap.forEach(doc => {
       const data = doc.data()
       messages.push({
@@ -76,7 +82,9 @@ export async function GET(request: Request) {
       stats: {
         totalVisitors: rangeVisitors,
         todayVisitors: todayVisitors,
-        totalDownloads: rangeDownloads
+        totalDownloads: rangeDownloads,
+        feedbackCount: totalFeedbackCount,
+        organicClicks: null // GSC not connected
       },
       toolStats: sortedTools,
       messages: messages

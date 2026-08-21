@@ -52,7 +52,21 @@ export async function GET(request: Request) {
     })
 
     const searchconsole = google.searchconsole({ version: 'v1', auth: oauth2Client })
-    const siteUrl = 'https://sizesnap.in/'
+    
+    // Dynamically find the correct site URL registered in GSC (e.g. sc-domain:sizesnap.in or https://www.sizesnap.in/)
+    let siteUrl = 'https://sizesnap.in/'
+    try {
+      const sitesRes = await searchconsole.sites.list();
+      const sites = sitesRes.data.siteEntry || [];
+      const matchedSite = sites.find(s => s.siteUrl?.includes('sizesnap.in'));
+      if (matchedSite && matchedSite.siteUrl) {
+        siteUrl = matchedSite.siteUrl;
+      } else if (sites.length > 0 && sites[0].siteUrl) {
+        siteUrl = sites[0].siteUrl;
+      }
+    } catch (siteErr) {
+      console.warn("Could not fetch sites list, falling back to default siteUrl", siteErr)
+    }
 
     // Calculate dates
     const endDate = new Date()

@@ -2,57 +2,78 @@
 
 import { useEffect, useState } from 'react'
 import { auth } from '@/lib/firebase'
-import { Download, AlertTriangle, TrendingUp, Search, FileText, ArrowUp, ArrowDown, Bot, CheckCircle } from 'lucide-react'
+import { Download, AlertTriangle, TrendingUp, Search, FileText, ArrowUp, ArrowDown, Bot, CheckCircle, MessageSquare, Activity, Target } from 'lucide-react'
 
 export default function SEOManagement() {
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [timeRange, setTimeRange] = useState('28days')
   const [showAllOpps, setShowAllOpps] = useState(false)
+  const [activeTab, setActiveTab] = useState('overview')
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const res = await fetch(`/api/admin/seo?timeRange=${timeRange}`)
-        const json = await res.json()
-        setData(json)
-      } catch (err) {
-        console.error("Failed to fetch SEO data", err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    let unsubscribeAuth: any;
-    if (auth) {
-      import('firebase/auth').then(({ onAuthStateChanged }) => {
-        unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-          if (user) fetchData();
-        });
-      });
-    }
-    return () => { if (unsubscribeAuth) unsubscribeAuth(); }
+    fetchData()
   }, [timeRange])
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const res = await fetch(`/api/admin/seo?timeRange=${timeRange}`)
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      console.error("Failed to fetch SEO data", err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const generateAntigravityTask = () => {
     if (!data?.actionPlan || data.actionPlan.length === 0) {
       alert("No action plan available.");
       return;
     }
-    let prompt = "Please help me implement the following SEO recommendations:\n\n";
+    const date = new Date().toISOString().split('T')[0]
+    let prompt = `PROJECT: SizeSnap\nWEEK: ${timeRange} (Generated ${date})\nOBJECTIVE: Improve organic search performance based on verified GSC evidence.\n\nTASKS:\n\n`;
     data.actionPlan.forEach((opp: any, idx: number) => {
-      prompt += `${idx + 1}. [${opp.priority}] Query: "${opp.query}" -> ${opp.action}\n`
+      prompt += `${idx + 1}. Page: ${opp.page}\n   Query: "${opp.query}"\n   Evidence: ${opp.impressions} imp, ${opp.clicks} clicks (Pos ${opp.position})\n   Recommended action: ${opp.action}\n   Reason: ${opp.reason}\n   Priority: ${opp.priority}\n\n`
     });
+    prompt += `\nSTRICT RULES:\n- Inspect existing code first.\n- Do not rebuild existing systems.\n- Prefer improving existing pages over creating new ones.\n- Do not invent facts or search volumes.\n- Run lint and build after changes.\n- Review git diff before ending.\n`;
     const blob = new Blob([prompt], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `SEO-Action-Plan-${new Date().toISOString().split('T')[0]}.txt`
+    a.download = `SEO-Weekly-Task-${date}.txt`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
+  }
+
+  const updateActionStatus = async (opp: any, newStatus: string) => {
+     try {
+        await fetch('/api/admin/seo-action', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ id: opp.id, status: newStatus, actionData: opp })
+        })
+        fetchData() // Refresh to get updated stats
+     } catch(e) {
+        alert("Failed to update status")
+     }
+  }
+
+  const updateFeedbackStatus = async (id: string, newStatus: string) => {
+     try {
+        await fetch('/api/admin/feedback-status', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ id, status: newStatus })
+        })
+        fetchData()
+     } catch(e) {
+        alert("Failed to update feedback")
+     }
   }
 
   return (
@@ -60,10 +81,10 @@ export default function SEOManagement() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
-             SEO Growth Center
+             SEO Growth Engine V2
           </h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Real-time organic search intelligence and automated action plans.
+            Real-time organic search intelligence combined with actual product usage.
           </p>
         </div>
         
@@ -82,10 +103,24 @@ export default function SEOManagement() {
         )}
       </div>
 
+      {/* Tabs */}
+      {data?.connected && (
+         <div className="flex border-b border-zinc-200 dark:border-zinc-800">
+            {['overview', 'tracker', 'feedback'].map(tab => (
+               <button 
+                 key={tab} onClick={() => setActiveTab(tab)}
+                 className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === tab ? 'border-zinc-900 dark:border-white text-zinc-900 dark:text-white' : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300'}`}
+               >
+                 {tab === 'overview' ? 'Growth Dashboard' : tab === 'tracker' ? 'Action Tracker' : 'User Requests'}
+               </button>
+            ))}
+         </div>
+      )}
+
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20">
           <div className="w-5 h-5 border-2 border-zinc-300 dark:border-zinc-700 border-t-zinc-900 dark:border-t-white rounded-full animate-spin"></div>
-          <p className="text-sm text-zinc-500 mt-4">Analyzing Search Console Data...</p>
+          <p className="text-sm text-zinc-500 mt-4">Analyzing GSC, Tool Usage, and Feedback...</p>
         </div>
       ) : !data?.connected ? (
         <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-10 flex flex-col items-center justify-center text-center">
@@ -105,6 +140,8 @@ export default function SEOManagement() {
           {data?.error && <p className="mt-4 text-xs text-red-500">{data.error}</p>}
         </div>
       ) : (
+        <>
+        {activeTab === 'overview' && (
         <div className="space-y-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <MetricCard title="Total Clicks" value={data.overview?.current?.clicks || 0} change={data.overview?.changes?.clicks} higherIsBetter={true} />
@@ -114,12 +151,12 @@ export default function SEOManagement() {
           </div>
 
           <div className="flex items-center justify-between mt-8 mb-4">
-             <h2 className="text-lg font-semibold flex items-center gap-2"><Bot className="w-5 h-5 text-indigo-500"/> This Week's SEO Action Plan</h2>
+             <h2 className="text-lg font-semibold flex items-center gap-2"><Bot className="w-5 h-5 text-indigo-500"/> 🔥 Top Actions This Week</h2>
              <button 
                onClick={generateAntigravityTask}
                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
              >
-               <Download className="w-4 h-4" /> Download Antigravity Task
+               <Download className="w-4 h-4" /> Generate Antigravity Task
              </button>
           </div>
 
@@ -127,17 +164,28 @@ export default function SEOManagement() {
           <div className="grid grid-cols-1 gap-4">
              {data.actionPlan?.length > 0 ? (
                 data.actionPlan.map((opp: any, idx: number) => (
-                  <div key={idx} className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 flex flex-col md:flex-row gap-6">
+                  <div key={idx} className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 flex flex-col md:flex-row gap-6 relative overflow-hidden">
+                     {opp.status === 'Done' && <div className="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">COMPLETED</div>}
                      <div className="flex-1 space-y-3">
                         <div className="flex items-center gap-2">
                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${opp.priority === 'HIGH' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : opp.priority === 'MEDIUM' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'}`}>
                              {opp.priority} PRIORITY
                            </span>
                            <span className="text-xs text-zinc-500 font-medium bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">{opp.type.replace(/_/g, ' ')}</span>
+                           <select 
+                              value={opp.status} 
+                              onChange={(e) => updateActionStatus(opp, e.target.value)}
+                              className="ml-auto text-xs bg-zinc-100 dark:bg-zinc-800 border-none rounded px-2 py-1 outline-none"
+                           >
+                              <option value="Pending">Pending</option>
+                              <option value="In Progress">In Progress</option>
+                              <option value="Done">Done</option>
+                              <option value="Ignored">Ignored</option>
+                           </select>
                         </div>
                         <div>
-                           <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">Query: "{opp.query}"</h3>
-                           <p className="text-sm text-zinc-500">Page: {opp.page}</p>
+                           <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">Improve: {opp.page}</h3>
+                           <p className="text-sm text-zinc-500">Query: "{opp.query}"</p>
                         </div>
                         <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 border border-zinc-100 dark:border-zinc-800/50">
                            <span className="font-semibold block mb-1">Why this matters:</span>
@@ -145,28 +193,28 @@ export default function SEOManagement() {
                         </div>
                      </div>
                      <div className="w-full md:w-1/3 flex flex-col justify-between">
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                           <div>
-                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Impressions</p>
-                              <p className="font-semibold">{opp.impressions}</p>
+                        {opp.status === 'Done' && opp.beforeStats && opp.afterStats ? (
+                           <div className="mb-4 bg-green-50/50 dark:bg-green-900/10 p-3 rounded-lg border border-green-100 dark:border-green-900/30">
+                              <p className="text-[10px] text-green-600 dark:text-green-400 uppercase tracking-wider mb-2 font-semibold">Results (Before vs After)</p>
+                              <div className="grid grid-cols-2 gap-2 text-xs">
+                                 <div>Imp: {opp.beforeStats.impressions} → <span className="font-bold">{opp.afterStats.impressions}</span></div>
+                                 <div>Clk: {opp.beforeStats.clicks} → <span className="font-bold">{opp.afterStats.clicks}</span></div>
+                                 <div>Pos: {opp.beforeStats.position} → <span className="font-bold">{opp.afterStats.position}</span></div>
+                                 <div>CTR: {opp.beforeStats.ctr}% → <span className="font-bold">{opp.afterStats.ctr}%</span></div>
+                              </div>
                            </div>
-                           <div>
-                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Clicks</p>
-                              <p className="font-semibold">{opp.clicks}</p>
+                        ) : (
+                           <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div><p className="text-[10px] text-zinc-500 uppercase tracking-wider">Impressions</p><p className="font-semibold">{opp.impressions}</p></div>
+                              <div><p className="text-[10px] text-zinc-500 uppercase tracking-wider">Clicks</p><p className="font-semibold">{opp.clicks}</p></div>
+                              <div><p className="text-[10px] text-zinc-500 uppercase tracking-wider">CTR</p><p className="font-semibold">{opp.ctr}%</p></div>
+                              <div><p className="text-[10px] text-zinc-500 uppercase tracking-wider">Position</p><p className="font-semibold">{opp.position}</p></div>
                            </div>
-                           <div>
-                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">CTR</p>
-                              <p className="font-semibold">{opp.ctr}%</p>
-                           </div>
-                           <div>
-                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Position</p>
-                              <p className="font-semibold">{opp.position}</p>
-                           </div>
-                        </div>
+                        )}
                         <div>
                            <p className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">Recommended Action</p>
                            <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 flex items-start gap-1">
-                             <CheckCircle className="w-4 h-4 mt-0.5 shrink-0" /> {opp.action}
+                             <Target className="w-4 h-4 mt-0.5 shrink-0" /> {opp.action}
                            </p>
                         </div>
                      </div>
@@ -180,108 +228,101 @@ export default function SEOManagement() {
              )}
           </div>
 
-          {/* Actionable Opportunities */}
-          {data.opportunities?.length > 0 && (
-             <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden mb-6">
-                <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 flex justify-between items-center">
-                   <h3 className="text-sm font-semibold flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-amber-500" /> More Opportunities
-                   </h3>
-                   {data.opportunities.length > 5 && (
-                      <button onClick={() => setShowAllOpps(!showAllOpps)} className="text-xs text-blue-600 font-medium">
-                         {showAllOpps ? 'Show Less' : `View all (${data.opportunities.length})`}
-                      </button>
-                   )}
-                </div>
-                <div className="p-0 text-sm text-zinc-600 dark:text-zinc-400">
-                   <div className="overflow-x-auto">
-                     <table className="w-full text-left">
-                       <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
-                         <tr>
-                           <th className="px-5 py-3">Query</th>
-                           <th className="px-5 py-3 text-right">Imp.</th>
-                           <th className="px-5 py-3 text-right">Clicks</th>
-                           <th className="px-5 py-3 text-right">Pos.</th>
-                           <th className="px-5 py-3">Recommendation</th>
-                         </tr>
-                       </thead>
-                       <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                         {(showAllOpps ? data.opportunities : data.opportunities.slice(0, 5)).map((opp: any, idx: number) => (
-                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
-                             <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100">{opp.query}</td>
-                             <td className="px-5 py-3 text-right">{opp.impressions}</td>
-                             <td className="px-5 py-3 text-right">{opp.clicks}</td>
-                             <td className="px-5 py-3 text-right">{opp.position}</td>
-                             <td className="px-5 py-3 text-zinc-500">{opp.action}</td>
-                           </tr>
-                         ))}
-                       </tbody>
-                     </table>
-                   </div>
-                </div>
-             </div>
-          )}
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            {/* Top Queries */}
             <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
-               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
-                  <h3 className="text-sm font-semibold flex items-center gap-2">
-                     <Search className="w-4 h-4 text-blue-500" /> Top Queries
-                  </h3>
-               </div>
+               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"><h3 className="text-sm font-semibold flex items-center gap-2"><Search className="w-4 h-4 text-blue-500" /> Top Queries</h3></div>
                <div className="overflow-x-auto">
                  <table className="w-full text-left text-sm">
-                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
-                     <tr>
-                       <th className="px-5 py-3">Query</th>
-                       <th className="px-5 py-3 text-right">Clicks</th>
-                       <th className="px-5 py-3 text-right">Imp.</th>
-                     </tr>
-                   </thead>
+                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium"><tr><th className="px-5 py-3">Query</th><th className="px-5 py-3 text-right">Clicks</th><th className="px-5 py-3 text-right">Imp.</th></tr></thead>
                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                     {data.topQueries?.slice(0, 10).map((row: any, idx: number) => (
-                       <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
-                         <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100">{row.query}</td>
-                         <td className="px-5 py-3 text-right">{row.clicks}</td>
-                         <td className="px-5 py-3 text-right">{row.impressions}</td>
-                       </tr>
-                     ))}
+                     {data.topQueries?.slice(0, 10).map((row: any, idx: number) => (<tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30"><td className="px-5 py-3 font-medium">{row.query}</td><td className="px-5 py-3 text-right">{row.clicks}</td><td className="px-5 py-3 text-right">{row.impressions}</td></tr>))}
                    </tbody>
                  </table>
                </div>
             </div>
-
-            {/* Top Pages */}
             <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
-               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
-                  <h3 className="text-sm font-semibold flex items-center gap-2">
-                     <FileText className="w-4 h-4 text-green-500" /> Top Pages
-                  </h3>
-               </div>
+               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"><h3 className="text-sm font-semibold flex items-center gap-2"><FileText className="w-4 h-4 text-green-500" /> Top Pages</h3></div>
                <div className="overflow-x-auto">
                  <table className="w-full text-left text-sm">
-                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
-                     <tr>
-                       <th className="px-5 py-3">Page</th>
-                       <th className="px-5 py-3 text-right">Clicks</th>
-                       <th className="px-5 py-3 text-right">Imp.</th>
-                     </tr>
-                   </thead>
+                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium"><tr><th className="px-5 py-3">Page</th><th className="px-5 py-3 text-right">Clicks</th><th className="px-5 py-3 text-right">Imp.</th></tr></thead>
                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                     {data.topPages?.slice(0, 10).map((row: any, idx: number) => (
-                       <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
-                         <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100 truncate max-w-[200px]" title={row.page}>{row.page}</td>
-                         <td className="px-5 py-3 text-right">{row.clicks}</td>
-                         <td className="px-5 py-3 text-right">{row.impressions}</td>
-                       </tr>
-                     ))}
+                     {data.topPages?.slice(0, 10).map((row: any, idx: number) => (<tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30"><td className="px-5 py-3 font-medium truncate max-w-[200px]" title={row.page}>{row.page}</td><td className="px-5 py-3 text-right">{row.clicks}</td><td className="px-5 py-3 text-right">{row.impressions}</td></tr>))}
                    </tbody>
                  </table>
                </div>
             </div>
           </div>
         </div>
+        )}
+
+        {activeTab === 'tracker' && (
+           <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
+              <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"><h3 className="text-sm font-semibold flex items-center gap-2"><Activity className="w-4 h-4 text-blue-500" /> SEO Action History</h3></div>
+              <div className="p-0 text-sm">
+                  {data.actionTracker?.length > 0 ? (
+                     <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                          <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
+                            <tr><th className="px-5 py-3">Date</th><th className="px-5 py-3">Query</th><th className="px-5 py-3">Action</th><th className="px-5 py-3">Status</th></tr>
+                          </thead>
+                          <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                            {data.actionTracker.map((act: any) => (
+                              <tr key={act.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
+                                <td className="px-5 py-3 text-zinc-500 whitespace-nowrap">{new Date(act.createdAt).toLocaleDateString()}</td>
+                                <td className="px-5 py-3 font-medium">{act.query}</td>
+                                <td className="px-5 py-3 text-zinc-500 max-w-sm truncate" title={act.action}>{act.action}</td>
+                                <td className="px-5 py-3">
+                                   <select value={act.status} onChange={(e) => updateActionStatus(act, e.target.value)} className="text-xs bg-transparent border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1">
+                                      <option value="Pending">Pending</option>
+                                      <option value="In Progress">In Progress</option>
+                                      <option value="Done">Done</option>
+                                      <option value="Ignored">Ignored</option>
+                                   </select>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                     </div>
+                  ) : (<div className="p-10 text-center text-zinc-500">No actions tracked yet. Mark an action as "In Progress" to track it here.</div>)}
+              </div>
+           </div>
+        )}
+
+        {activeTab === 'feedback' && (
+           <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
+              <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50"><h3 className="text-sm font-semibold flex items-center gap-2"><MessageSquare className="w-4 h-4 text-purple-500" /> User Requests & Feedback Signals</h3></div>
+              <div className="p-0 text-sm">
+                  {data.feedbackList?.length > 0 ? (
+                     <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                          <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
+                            <tr><th className="px-5 py-3">Date</th><th className="px-5 py-3">Tool</th><th className="px-5 py-3">Feedback</th><th className="px-5 py-3">Status</th></tr>
+                          </thead>
+                          <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                            {data.feedbackList.map((fb: any) => (
+                              <tr key={fb.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
+                                <td className="px-5 py-3 text-zinc-500 whitespace-nowrap">{new Date(fb.timestamp).toLocaleDateString()}</td>
+                                <td className="px-5 py-3 font-medium">{fb.toolSlug || 'Unknown'}</td>
+                                <td className="px-5 py-3 text-zinc-600 dark:text-zinc-300 max-w-md">{fb.message}</td>
+                                <td className="px-5 py-3">
+                                   <select value={fb.status || 'Reviewed'} onChange={(e) => updateFeedbackStatus(fb.id, e.target.value)} className="text-xs bg-transparent border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1">
+                                      <option value="Reviewed">Reviewed</option>
+                                      <option value="Planned">Planned</option>
+                                      <option value="Implemented">Implemented</option>
+                                      <option value="Rejected">Rejected</option>
+                                   </select>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                     </div>
+                  ) : (<div className="p-10 text-center text-zinc-500">No user feedback in this period.</div>)}
+              </div>
+           </div>
+        )}
+        </>
       )}
     </div>
   )
@@ -290,17 +331,9 @@ export default function SEOManagement() {
 function MetricCard({ title, value, change, rawChange, higherIsBetter }: { title: string, value: any, change?: any, rawChange?: any, higherIsBetter?: boolean }) {
   const isPositive = parseFloat(change) > 0;
   const isNegative = parseFloat(change) < 0;
-  
-  // For average position, lower raw number is better, but the logic above passed change = prev - curr, so it's aligned.
-  // We'll just display rawChange or change directly.
   let changeStr = change ? (parseFloat(change) > 0 ? `+${change}%` : `${change}%`) : null;
-  if (rawChange) {
-      changeStr = parseFloat(rawChange) > 0 ? `+${rawChange}` : `${rawChange}`;
-  }
-
+  if (rawChange) changeStr = parseFloat(rawChange) > 0 ? `+${rawChange}` : `${rawChange}`;
   const isGood = isPositive;
-  const isBad = isNegative;
-
   return (
     <div className="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0A0A0A] flex flex-col justify-between">
       <h3 className="text-zinc-500 dark:text-zinc-400 text-xs font-medium tracking-wide uppercase">{title}</h3>

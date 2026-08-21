@@ -10,17 +10,10 @@ export async function GET(request: Request) {
     // Get tokens from secure storage
     const tokenDoc = await adminDb.collection('admin_settings').doc('google_oauth').get()
     
-    if (!tokenDoc.exists) {
-       return NextResponse.json({ 
-          success: true, 
-          connected: false 
-       })
-    }
+    if (!tokenDoc.exists) return NextResponse.json({ success: true, connected: false })
 
     const { tokens } = tokenDoc.data() as any
-    if (!tokens || !tokens.access_token) {
-       return NextResponse.json({ success: true, connected: false })
-    }
+    if (!tokens || !tokens.access_token) return NextResponse.json({ success: true, connected: false })
 
     const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
     const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
@@ -30,20 +23,12 @@ export async function GET(request: Request) {
       return NextResponse.json({ success: false, connected: false, error: "Missing OAuth credentials" }, { status: 500 })
     }
 
-    const oauth2Client = new google.auth.OAuth2(
-      GOOGLE_CLIENT_ID,
-      GOOGLE_CLIENT_SECRET,
-      GOOGLE_REDIRECT_URI
-    )
-
-    // Set credentials and handle automatic refresh token persistence
+    const oauth2Client = new google.auth.OAuth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI)
     oauth2Client.setCredentials(tokens)
     
     oauth2Client.on('tokens', async (newTokens) => {
-      const updatedTokens = { ...tokens, ...newTokens }
       await adminDb.collection('admin_settings').doc('google_oauth').set({
-        tokens: updatedTokens,
-        updatedAt: new Date().toISOString()
+        tokens: { ...tokens, ...newTokens }, updatedAt: new Date().toISOString()
       }, { merge: true })
     })
 
@@ -54,16 +39,11 @@ export async function GET(request: Request) {
       const sitesRes = await searchconsole.sites.list();
       const sites = sitesRes.data.siteEntry || [];
       const matchedSite = sites.find(s => s.siteUrl?.includes('sizesnap.in'));
-      if (matchedSite && matchedSite.siteUrl) {
-        siteUrl = matchedSite.siteUrl;
-      } else if (sites.length > 0 && sites[0].siteUrl) {
-        siteUrl = sites[0].siteUrl;
-      }
-    } catch (siteErr) {
-      console.warn("Could not fetch sites list, falling back to default siteUrl", siteErr)
-    }
+      if (matchedSite && matchedSite.siteUrl) siteUrl = matchedSite.siteUrl;
+      else if (sites.length > 0 && sites[0].siteUrl) siteUrl = sites[0].siteUrl;
+    } catch (siteErr) { console.warn("Could not fetch sites list", siteErr) }
 
-    // Calculate dates for current and previous period
+    // Calculate dates
     let durationDays = 28
     if (timeRange === '7days') durationDays = 7
     if (timeRange === '3months') durationDays = 90
@@ -82,40 +62,56 @@ export async function GET(request: Request) {
     const pStart = prevStart.toISOString().split('T')[0]
     const pEnd = prevEnd.toISOString().split('T')[0]
 
-    // Parallel requests for speed
-    const [overviewRes, prevOverviewRes, queriesRes, prevQueriesRes, pagesRes, queryPageRes, dateRes] = await Promise.all([
-      // 1. Current Overview
+    // Fetch Google Data & Firebase Data Parallelly
+    const [
+      overviewRes, prevOverviewRes, queriesRes, prevQueriesRes, pagesRes, queryPageRes, dateRes,
+      toolSnap, feedbackSnap, actionsSnap
+    ] = await Promise.all([
       searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: start, endDate: end, rowLimit: 1 } }).catch(() => ({ data: { rows: [] } })),
-      // 2. Prev Overview
       searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: pStart, endDate: pEnd, rowLimit: 1 } }).catch(() => ({ data: { rows: [] } })),
-      // 3. Current Queries
       searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: start, endDate: end, dimensions: ['query'], rowLimit: 100 } }).catch(() => ({ data: { rows: [] } })),
-      // 4. Prev Queries (for rising/declining)
       searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: pStart, endDate: pEnd, dimensions: ['query'], rowLimit: 100 } }).catch(() => ({ data: { rows: [] } })),
-      // 5. Current Pages
       searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: start, endDate: end, dimensions: ['page'], rowLimit: 100 } }).catch(() => ({ data: { rows: [] } })),
-      // 6. Current Query + Page (for detailed opps & cannibalization)
       searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: start, endDate: end, dimensions: ['query', 'page'], rowLimit: 300 } }).catch(() => ({ data: { rows: [] } })),
-      // 7. Date-wise performance
-      searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: start, endDate: end, dimensions: ['date'], rowLimit: 100 } }).catch(() => ({ data: { rows: [] } }))
+      searchconsole.searchanalytics.query({ siteUrl, requestBody: { startDate: start, endDate: end, dimensions: ['date'], rowLimit: 100 } }).catch(() => ({ data: { rows: [] } })),
+      adminDb.collection('analytics_events_raw').where('timestamp', '>=', prevStart).get().catch(()=>({docs:[]})),
+      adminDb.collection('user_feedback').orderBy('timestamp', 'desc').limit(200).get().catch(()=>({docs:[]})),
+      adminDb.collection('seo_actions').get().catch(()=>({docs:[]}))
     ]);
 
+    // Parse Firebase Data
+    const toolStats: Record<string, number> = {};
+    (toolSnap.docs || []).forEach(doc => {
+       const d = doc.data()
+       if (d.eventName === 'tool_open') {
+          const slug = d.toolSlug || d.toolName || 'Unknown'
+          toolStats[slug] = (toolStats[slug] || 0) + 1
+       }
+    });
+
+    const feedbackList: any[] = [];
+    const feedbackCountByTool: Record<string, number> = {};
+    (feedbackSnap.docs || []).forEach(doc => {
+       const d = doc.data()
+       feedbackList.push({ id: doc.id, ...d, timestamp: d.timestamp?.toDate?.()?.toISOString() || new Date().toISOString() })
+       if (d.toolSlug) {
+          feedbackCountByTool[d.toolSlug] = (feedbackCountByTool[d.toolSlug] || 0) + 1
+       }
+    });
+
+    const existingActions = (actionsSnap.docs || []).map(d => ({ id: d.id, ...d.data() }));
+
+    // Parse Overview Stats
     const getRowStats = (res: any) => {
-       const row = res.data?.rows && res.data.rows.length > 0 ? res.data.rows[0] : { clicks: 0, impressions: 0, ctr: 0, position: 0 }
+       const row = res.data?.rows?.[0] || { clicks: 0, impressions: 0, ctr: 0, position: 0 }
        return {
-          clicks: row.clicks || 0,
-          impressions: row.impressions || 0,
-          ctr: ((row.ctr || 0) * 100).toFixed(2),
-          position: (row.position || 0).toFixed(1)
+          clicks: row.clicks || 0, impressions: row.impressions || 0,
+          ctr: ((row.ctr || 0) * 100).toFixed(2), position: (row.position || 0).toFixed(1)
        }
     }
-
     const currentStats = getRowStats(overviewRes);
     const prevStats = getRowStats(prevOverviewRes);
-    
-    // Comparison Math
     const calcChange = (curr: number, prev: number) => prev === 0 ? 0 : (((curr - prev) / prev) * 100).toFixed(1);
-    
     const changes = {
        clicks: calcChange(currentStats.clicks, prevStats.clicks),
        impressions: calcChange(currentStats.impressions, prevStats.impressions),
@@ -123,62 +119,57 @@ export async function GET(request: Request) {
        position: (parseFloat(currentStats.position) - parseFloat(prevStats.position)).toFixed(1)
     };
 
-    // Calculate Opportunities & Action Plan
-    const rawOpps: any[] = [];
-    
     const cleanUrl = (url: string) => url ? url.replace('https://sizesnap.in', '').replace('https://www.sizesnap.in', '') || '/' : '/';
-    
-    // Process Query + Page combinations for Rules A, B, C, D
+    const extractSlug = (url: string) => { const c = cleanUrl(url); return c === '/' ? 'home' : c.split('/')[1] || c; };
+
+    const rawOpps: any[] = [];
     const queryGroups: Record<string, any[]> = {};
+    
     (queryPageRes.data?.rows || []).forEach((row: any) => {
        const q = row.keys?.[0] || '';
-       let p = row.keys?.[1] || '';
-       p = cleanUrl(p);
-       
+       let p = cleanUrl(row.keys?.[1] || '');
        const imp = row.impressions || 0;
        const clk = row.clicks || 0;
        const ctr = row.ctr || 0;
        const pos = row.position || 0;
        
-       if (imp < 10) return; // Skip complete noise
+       if (imp < 10) return;
        
        if (!queryGroups[q]) queryGroups[q] = [];
        queryGroups[q].push({ page: p, imp, clk, ctr, pos });
 
-       let type = '';
-       let reason = '';
-       let action = '';
+       let type = '', reason = '', action = '', objective = '';
        let priorityScore = (imp / 100) + (clk * 2);
-       let objective = '';
 
-       // D. High Impression / Low Click
+       const slug = extractSlug(p);
+       const uses = toolStats[slug] || 0;
+       const feedback = feedbackCountByTool[slug] || 0;
+       const extraEvidence = `${uses > 0 ? ` Tool usage: ${uses}.` : ''}${feedback > 0 ? ` Feedback requests: ${feedback}.` : ''}`;
+
+       if (uses > 50) priorityScore += (uses / 100);
+       if (feedback > 0) priorityScore += feedback;
+
        if (imp > 500 && clk < 5) {
           type = 'INTENT_MISMATCH';
-          reason = 'High search visibility but very few clicks.';
+          reason = 'High search visibility but very few clicks.' + extraEvidence;
           action = 'Improve search intent matching, title, and meta description.';
           objective = 'Increase CTR for high visibility query.';
           priorityScore *= 1.5;
-       } 
-       // A. Low CTR Opportunities
-       else if (pos <= 7 && ctr < 0.02 && imp > 50) {
+       } else if (pos <= 7 && ctr < 0.02 && imp > 50) {
           type = 'LOW_CTR';
-          reason = 'Good ranking (Page 1) but low click-through rate.';
+          reason = 'Good ranking (Page 1) but low click-through rate.' + extraEvidence;
           action = 'Improve title and meta description to attract clicks.';
           objective = 'Boost traffic from existing Page 1 rankings.';
           priorityScore *= 2.0;
-       }
-       // B. Page 8-20 Opportunities
-       else if (pos > 7 && pos <= 20 && imp > 50) {
+       } else if (pos > 7 && pos <= 20 && imp > 50) {
           type = 'PAGE_2_BOOST';
-          reason = 'Ranking close to Page 1. Pushing to Page 1 can significantly increase traffic.';
+          reason = 'Ranking close to Page 1.' + extraEvidence;
           action = 'Improve content depth, optimize H1, and add internal links.';
           objective = 'Achieve Page 1 ranking.';
           priorityScore *= 1.2;
-       }
-       // C. Ranking 20-50 Opportunities
-       else if (pos > 20 && pos <= 50 && imp > 50) {
+       } else if (pos > 20 && pos <= 50 && imp > 50) {
           type = 'CONTENT_IMPROVEMENT';
-          reason = 'Ranking low but receiving meaningful impressions.';
+          reason = 'Ranking low but receiving meaningful impressions.' + extraEvidence;
           action = 'Major content improvement needed. Enhance topical coverage.';
           objective = 'Move up in rankings from deep pages.';
           priorityScore *= 0.8;
@@ -188,15 +179,13 @@ export async function GET(request: Request) {
           rawOpps.push({
              type, query: q, page: p, impressions: imp, clicks: clk, 
              ctr: (ctr * 100).toFixed(2), position: pos.toFixed(1), 
-             reason, action, objective, priorityScore
+             reason, action, objective, priorityScore, uses, feedback
           });
        }
     });
 
-    // F. Content Opportunities & H. Cannibalization
     Object.entries(queryGroups).forEach(([q, pages]) => {
        if (pages.length > 1) {
-          // Cannibalization: multiple pages rank for same query with decent impressions
           const highImpPages = pages.filter(p => p.imp > 20);
           if (highImpPages.length > 1) {
              highImpPages.sort((a,b) => b.imp - a.imp);
@@ -205,64 +194,70 @@ export async function GET(request: Request) {
              rawOpps.push({
                 type: 'CANNIBALIZATION', query: q, page: 'Multiple Pages',
                 impressions: combinedImp, clicks: combinedClk,
-                ctr: ((combinedClk / combinedImp) * 100).toFixed(2),
-                position: highImpPages[0].pos.toFixed(1),
+                ctr: ((combinedClk / combinedImp) * 100).toFixed(2), position: highImpPages[0].pos.toFixed(1),
                 reason: 'Multiple pages appear to rank for the same important query.',
                 action: 'Possible cannibalization — review manually. Consider merging or differentiating intent.',
-                objective: 'Consolidate ranking signals.',
-                priorityScore: (combinedImp / 100) * 1.5
+                objective: 'Consolidate ranking signals.', priorityScore: (combinedImp / 100) * 1.5, uses: 0, feedback: 0
              });
           }
        } else if (pages.length === 1 && pages[0].imp > 200 && pages[0].page === '/') {
-          // Content Opp: high impressions on homepage, maybe needs a dedicated page
           rawOpps.push({
              type: 'CONTENT_GAP', query: q, page: '/',
              impressions: pages[0].imp, clicks: pages[0].clk,
              ctr: (pages[0].ctr * 100).toFixed(2), position: pages[0].pos.toFixed(1),
              reason: 'Homepage ranks for specific query. No dedicated page exists.',
              action: 'Potential new content/page opportunity to capture specific intent.',
-             objective: 'Create highly targeted landing page.',
-             priorityScore: (pages[0].imp / 100) * 1.3
+             objective: 'Create highly targeted landing page.', priorityScore: (pages[0].imp / 100) * 1.3, uses: 0, feedback: 0
           });
        }
     });
 
-    // E. Rising / Declining Performance
     const prevMap: Record<string, any> = {};
     (prevQueriesRes.data?.rows || []).forEach((r: any) => { prevMap[r.keys?.[0] || ''] = r; });
-    
     (queriesRes.data?.rows || []).forEach((r: any) => {
        const q = r.keys?.[0] || '';
        const prev = prevMap[q];
-       if (prev && r.impressions > 50) {
-          if (r.clicks < (prev.clicks || 0) * 0.5 && prev.clicks > 10) {
-             rawOpps.push({
-                type: 'DECLINING', query: q, page: 'Various',
-                impressions: r.impressions, clicks: r.clicks,
-                ctr: ((r.ctr || 0) * 100).toFixed(2), position: (r.position || 0).toFixed(1),
-                reason: `Clicks dropped from ${prev.clicks} to ${r.clicks} compared to previous period.`,
-                action: 'Investigate ranking drop or seasonal trend.',
-                objective: 'Recover lost traffic.',
-                priorityScore: (prev.clicks - r.clicks) * 3 // High priority for big drops
-             });
-          }
+       if (prev && r.impressions > 50 && r.clicks < (prev.clicks || 0) * 0.5 && prev.clicks > 10) {
+          rawOpps.push({
+             type: 'DECLINING', query: q, page: 'Various',
+             impressions: r.impressions, clicks: r.clicks,
+             ctr: ((r.ctr || 0) * 100).toFixed(2), position: (r.position || 0).toFixed(1),
+             reason: `Clicks dropped from ${prev.clicks} to ${r.clicks} compared to previous period.`,
+             action: 'Investigate ranking drop or seasonal trend.',
+             objective: 'Recover lost traffic.', priorityScore: (prev.clicks - r.clicks) * 3, uses: 0, feedback: 0
+          });
        }
     });
 
-    // Sort, Assign Priority, Deduplicate
     rawOpps.sort((a, b) => b.priorityScore - a.priorityScore);
-    
     const uniqueOpps: any[] = [];
     const seen = new Set();
+    
+    // Attach stable IDs & Action Tracking Status
     rawOpps.forEach(opp => {
        const key = opp.query + opp.type;
        if (!seen.has(key)) {
           seen.add(key);
+          const rawId = Buffer.from(key).toString('base64');
+          // simple safe id
+          opp.id = rawId.replace(/[^a-zA-Z0-9]/g, '').substring(0, 16);
+          const existing = existingActions.find(e => e.id === opp.id);
+          opp.status = existing ? existing.status : 'Pending';
+          opp.completedAt = existing?.completedAt;
+          opp.beforeStats = existing?.beforeStats;
+          
+          if (opp.status === 'Done' && opp.beforeStats) {
+              opp.afterStats = {
+                 impressions: opp.impressions,
+                 clicks: opp.clicks,
+                 ctr: opp.ctr,
+                 position: opp.position
+              }
+          }
           uniqueOpps.push(opp);
        }
     });
 
-    // Top 20% HIGH, next 30% MEDIUM, rest LOW
     uniqueOpps.forEach((opp, idx) => {
        if (idx < uniqueOpps.length * 0.2) opp.priority = 'HIGH';
        else if (idx < uniqueOpps.length * 0.5) opp.priority = 'MEDIUM';
@@ -270,31 +265,27 @@ export async function GET(request: Request) {
     });
 
     const actionPlan = uniqueOpps.slice(0, 10);
-    const opportunities = uniqueOpps.slice(10, 50); // Keep dashboard light
+    const actionTracker = existingActions.sort((a: any, b: any) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
 
     return NextResponse.json({
-       success: true,
-       connected: true,
-       overview: {
-          current: currentStats,
-          previous: prevStats,
-          changes
-       },
-       topQueries: (queriesRes.data?.rows || []).map((r: any) => ({
+       success: true, connected: true,
+       overview: { current: currentStats, previous: prevStats, changes },
+       topQueries: (queriesRes.data?.rows || []).slice(0, 50).map((r: any) => ({
          query: r.keys?.[0], clicks: r.clicks, impressions: r.impressions, ctr: ((r.ctr || 0) * 100).toFixed(2), position: (r.position || 0).toFixed(1)
-       })).slice(0, 50),
-       topPages: (pagesRes.data?.rows || []).map((r: any) => ({
+       })),
+       topPages: (pagesRes.data?.rows || []).slice(0, 50).map((r: any) => ({
          page: cleanUrl(r.keys?.[0]), clicks: r.clicks, impressions: r.impressions, ctr: ((r.ctr || 0) * 100).toFixed(2), position: (r.position || 0).toFixed(1)
-       })).slice(0, 50),
+       })),
        performanceByDate: (dateRes.data?.rows || []).map((r: any) => ({
          date: r.keys?.[0], clicks: r.clicks, impressions: r.impressions
        })).sort((a: any, b: any) => a.date?.localeCompare(b.date || '') || 0),
        actionPlan,
-       opportunities
+       actionTracker,
+       feedbackList,
+       opportunities: uniqueOpps.slice(10, 50)
     });
 
   } catch (error: any) {
-    console.error('SEO API Error:', error)
     if (error.code === 401 || error.message?.includes('invalid_grant')) {
       return NextResponse.json({ success: true, connected: false, error: 'Token expired or revoked. Please reconnect.' })
     }

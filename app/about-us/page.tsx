@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { Shield, Zap, Lock, Code, ServerOff } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'About Us - Free Image & PDF Resizing Tools | SizeSnap',
-  description: 'Learn more about SizeSnap.in. We build free, fast, and secure client-side tools for sizing images and processing PDFs.',
+  title: 'About Us - Who is the Owner of SizeSnap? | SizeSnap',
+  description: 'Learn more about SizeSnap.in and its owner Pawan Prajapati. We build free, fast, and secure client-side tools for sizing images and processing PDFs.',
   alternates: {
     canonical: 'https://sizesnap.in/about-us'
   },
   openGraph: {
-    title: 'About Us | SizeSnap.in',
+    title: 'About Us | Owner of SizeSnap - Pawan Prajapati',
     description: 'Free, fast, and secure client-side tools for sizing images and processing PDFs.',
     url: 'https://sizesnap.in/about-us',
     siteName: 'SizeSnap',
@@ -27,18 +27,14 @@ export default function AboutPage() {
         '@id': 'https://sizesnap.in/about-us',
         'url': 'https://sizesnap.in/about-us',
         'name': 'About SizeSnap.in',
-        'description': 'Learn more about SizeSnap.in and its founder Pawan Prajapati.'
+        'description': 'Learn more about SizeSnap.in and its founder & owner Pawan Prajapati.'
       },
       {
         '@type': 'Person',
         '@id': 'https://sizesnap.in/about-us#founder',
         'name': 'Pawan Prajapati',
-        'jobTitle': 'Founder & Developer',
+        'jobTitle': 'Owner, Founder & Developer',
         'url': 'https://sizesnap.in/about-us#founder',
-        'sameAs': [
-          'https://github.com/pawanprajapati23',
-          'https://www.linkedin.com/in/pawanprajapati23'
-        ],
         'knowsAbout': ['Web Development', 'Client-side Image Processing', 'PDF Optimization'],
         'worksFor': {
           '@type': 'Organization',
@@ -68,18 +64,13 @@ export default function AboutPage() {
             PP
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Pawan Prajapati</h2>
-            <p className="text-blue-600 font-medium mb-4">Founder & Developer (Malik)</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Who is the owner of SizeSnap?</h2>
+            <p className="text-blue-600 font-medium mb-4">Pawan Prajapati is the Owner and Founder of SizeSnap.in</p>
             <p className="text-gray-600 mb-4 leading-relaxed">
-              Currently a B.Tech student, Pawan is an active Software Development Engineer (SDE) candidate. 
+              Currently a B.Tech student, <strong>Pawan Prajapati</strong> is an active Software Development Engineer (SDE) candidate and the sole developer behind SizeSnap. 
               He built SizeSnap to help fellow students and job seekers resize passport photos and signature scans 
               for competitive exams (SSC CGL, RRB NTPC, UPSC, NEET) without uploading sensitive documents to third-party servers.
             </p>
-            <div className="flex gap-4">
-              <a href="https://github.com/pawanprajapati23" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-900 hover:text-blue-600 flex items-center gap-2">
-                <Code className="w-4 h-4" /> GitHub Profile
-              </a>
-            </div>
           </div>
         </div>
 

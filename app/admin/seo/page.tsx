@@ -33,21 +33,73 @@ export default function SEOManagement() {
       alert("No action plan available.");
       return;
     }
+    
     const date = new Date().toISOString().split('T')[0]
-    let prompt = `PROJECT: SizeSnap\nWEEK: ${timeRange} (Generated ${date})\nOBJECTIVE: Improve organic search performance based on verified GSC evidence.\n\nTASKS:\n\n`;
+    const { current, changes } = data.overview;
+    
+    const formatChange = (val: any) => {
+       const num = parseFloat(val);
+       if (isNaN(num) || num === 0) return '(No change)';
+       return num > 0 ? `(+${val}%)` : `(${val}%)`;
+    };
+    
+    let md = `# SizeSnap SEO Growth Task\n\n`;
+    md += `**Project:** SizeSnap\n`;
+    md += `**Period:** ${timeRange === '7days' ? '7 Days' : timeRange === '28days' ? '28 Days' : '3 Months'}\n`;
+    md += `**Generated:** ${date}\n\n`;
+    
+    md += `## 1. Overall Performance Summary\n`;
+    md += `- **Total Clicks:** ${current.clicks.toLocaleString()} ${formatChange(changes.clicks)}\n`;
+    md += `- **Total Impressions:** ${current.impressions.toLocaleString()} ${formatChange(changes.impressions)}\n`;
+    md += `- **Average CTR:** ${current.ctr}% ${formatChange(changes.ctr)}\n`;
+    md += `- **Average Position:** ${current.position} (Change: ${parseFloat(changes.position) > 0 ? '+' : ''}${changes.position})\n\n`;
+    
+    md += `## 2. Priority SEO Opportunities\n\n`;
+    
     data.actionPlan.forEach((opp: any, idx: number) => {
-      prompt += `${idx + 1}. Page: ${opp.page}\n   Query: "${opp.query}"\n   Evidence: ${opp.impressions} imp, ${opp.clicks} clicks (Pos ${opp.position})\n   Recommended action: ${opp.action}\n   Reason: ${opp.reason}\n   Priority: ${opp.priority}\n\n`
+       md += `### ${idx + 1}. [${opp.priority} PRIORITY] Target: ${opp.page}\n`;
+       md += `- **Query:** "${opp.query}"\n`;
+       md += `- **Type:** ${opp.type.replace(/_/g, ' ')}\n`;
+       md += `- **Evidence:** ${opp.impressions} impressions | ${opp.clicks} clicks | CTR: ${opp.ctr}% | Pos: ${opp.position}\n`;
+       
+       if (opp.uses > 0 || opp.feedback > 0) {
+          md += `- **User Signals:** `;
+          if (opp.uses > 0) md += `${opp.uses} recorded tool uses. `;
+          if (opp.feedback > 0) md += `${opp.feedback} related user feedback requests. `;
+          md += `\n`;
+       }
+       
+       md += `- **Why it matters:** ${opp.reason.split(' Tool usage:')[0]}\n`;
+       md += `- **Recommended Action:** ${opp.action}\n\n`;
     });
-    prompt += `\nSTRICT RULES:\n- Inspect existing code first.\n- Do not rebuild existing systems.\n- Prefer improving existing pages over creating new ones.\n- Do not invent facts or search volumes.\n- Run lint and build after changes.\n- Review git diff before ending.\n`;
-    const blob = new Blob([prompt], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `SEO-Weekly-Task-${date}.txt`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    
+    md += `## 3. Strict Antigravity Instructions & Safety Rules\n`;
+    md += `Please implement the above recommendations strictly adhering to the following rules:\n`;
+    md += `1. **Inspect First**: Always read the existing codebase and relevant components before making changes.\n`;
+    md += `2. **No Duplication**: Do not create duplicate pages. Prefer improving existing pages (e.g., adding deeper content, optimizing H1/titles).\n`;
+    md += `3. **No Deletion**: Do not delete existing URLs or break existing routing.\n`;
+    md += `4. **Internal Linking**: If adding internal links, use only real, existing routes on the site. Do not invent URLs.\n`;
+    md += `5. **No Fake Data**: Do not invent facts, fake statistics, search volumes, or fake user reviews.\n`;
+    md += `6. **No Keyword Stuffing**: Keep all content natural, helpful, and user-centric.\n`;
+    md += `7. **Protect Existing Features**: Do not break the Google OAuth system, Firebase analytics, feedback systems, or existing tool functionalities.\n`;
+    md += `8. **No Unapproved Deployments**: Do not automatically deploy to production. Prepare recommendations for review.\n\n`;
+    
+    md += `## 4. Final Verification Checklist\n`;
+    md += `- [ ] Code changes implemented according to recommendations.\n`;
+    md += `- [ ] \`npm run lint\` passes with no new errors.\n`;
+    md += `- [ ] \`npm run build\` successfully compiles the optimized production build.\n`;
+    md += `- [ ] Affected pages tested locally (no crashes/UI breaks).\n`;
+    md += `- [ ] Git diff reviewed to ensure no unintended breakages.\n`;
+
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `SizeSnap-SEO-Task-${date}.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
 
   const updateActionStatus = async (opp: any, newStatus: string) => {

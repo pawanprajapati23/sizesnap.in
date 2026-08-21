@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import { auth } from '@/lib/firebase'
-import { TrendingUp, Download, AlertTriangle, Search, FileText, Calendar } from 'lucide-react'
+import { Download, AlertTriangle, TrendingUp, Search, FileText, ArrowUp, ArrowDown, Bot, CheckCircle } from 'lucide-react'
 
-export default function SEOGrowthCenter() {
+export default function SEOManagement() {
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [timeRange, setTimeRange] = useState('28days')
+  const [showAllOpps, setShowAllOpps] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,61 +36,58 @@ export default function SEOGrowthCenter() {
   }, [timeRange])
 
   const generateAntigravityTask = () => {
-     if (!data || !data.connected || !data.opportunities) return;
-     
-     // Generate markdown content
-     const date = new Date().toISOString().split('T')[0]
-     let md = `You are modifying the existing SizeSnap production codebase.\n\nFirst inspect the current implementation.\nDo not rebuild existing systems.\nUse the following verified Search Console evidence.\n\n# WEEKLY SEO REPORT\nPeriod: ${timeRange}\nGenerated: ${date}\n\n## PERFORMANCE\nClicks: ${data.overview.clicks}\nImpressions: ${data.overview.impressions}\nCTR: ${data.overview.ctr}%\nAverage Position: ${data.overview.position}\n\n## HIGH PRIORITY OPPORTUNITIES\n`
-     
-     data.opportunities.forEach((opp: any) => {
-        md += `\nPAGE: ${opp.page}\nQUERY: ${opp.query}\nIMPRESSIONS: ${opp.impressions}\nCLICKS: ${opp.clicks}\nCTR: ${opp.ctr}%\nPOSITION: ${opp.position}\nRECOMMENDATION: ${opp.recommendation}\n`
-     })
-     
-     md += `\n## SAFETY RULES\n- Do not delete pages.\n- Do not create duplicate pages.\n- Do not change URLs unnecessarily.\n- Do not change canonical URLs without strong evidence.\n- Do not modify robots.txt automatically.\n- Do not invent facts.\n- Do not keyword stuff.\n- Prefer improving existing pages.\n- Preserve existing working tools.\n- Run build/tests before finalizing changes.\n`
-     
-     // Download file
-     const blob = new Blob([md], { type: 'text/markdown' })
-     const url = URL.createObjectURL(blob)
-     const a = document.createElement('a')
-     a.href = url
-     a.download = `sizesnap-weekly-seo-${date}.md`
-     document.body.appendChild(a)
-     a.click()
-     document.body.removeChild(a)
-     URL.revokeObjectURL(url)
-  }
-
-  if (loading) {
-     return <div className="flex items-center justify-center py-20"><div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>
+    if (!data?.actionPlan || data.actionPlan.length === 0) {
+      alert("No action plan available.");
+      return;
+    }
+    let prompt = "Please help me implement the following SEO recommendations:\n\n";
+    data.actionPlan.forEach((opp: any, idx: number) => {
+      prompt += `${idx + 1}. [${opp.priority}] Query: "${opp.query}" -> ${opp.action}\n`
+    });
+    const blob = new Blob([prompt], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `SEO-Action-Plan-${new Date().toISOString().split('T')[0]}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
   }
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
              SEO Growth Center
           </h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Real Google Search Console data and actionable opportunities.
+            Real-time organic search intelligence and automated action plans.
           </p>
         </div>
+        
         {data?.connected && (
-           <div className="flex bg-zinc-100 dark:bg-zinc-900/50 p-1 rounded-md border border-zinc-200 dark:border-zinc-800">
-              {(['7days', '28days', '3months'] as const).map(tr => (
-                 <button 
-                   key={tr}
-                   onClick={() => setTimeRange(tr)}
-                   className={`px-3 py-1.5 text-xs font-medium rounded-sm transition-colors ${timeRange === tr ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 shadow-sm border border-zinc-200 dark:border-zinc-700' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'}`}
-                 >
-                   {tr === '7days' ? '7 Days' : tr === '28days' ? '28 Days' : '3 Months'}
-                 </button>
-              ))}
-           </div>
+          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 p-1 rounded-lg border border-zinc-200 dark:border-zinc-800">
+             {['7days', '28days', '3months'].map(tr => (
+                <button 
+                  key={tr}
+                  onClick={() => setTimeRange(tr)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${timeRange === tr ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+                >
+                  {tr === '7days' ? '7 Days' : tr === '28days' ? '28 Days' : '3 Months'}
+                </button>
+             ))}
+          </div>
         )}
       </div>
 
-      {!data?.connected ? (
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-5 h-5 border-2 border-zinc-300 dark:border-zinc-700 border-t-zinc-900 dark:border-t-white rounded-full animate-spin"></div>
+          <p className="text-sm text-zinc-500 mt-4">Analyzing Search Console Data...</p>
+        </div>
+      ) : !data?.connected ? (
         <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-10 flex flex-col items-center justify-center text-center">
           <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-6">
              <TrendingUp className="w-8 h-8 text-blue-500" />
@@ -109,62 +107,122 @@ export default function SEOGrowthCenter() {
       ) : (
         <div className="space-y-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <MetricCard title="Total Clicks" value={data.overview?.clicks || 0} />
-            <MetricCard title="Total Impressions" value={data.overview?.impressions || 0} />
-            <MetricCard title="Average CTR" value={`${data.overview?.ctr || 0}%`} />
-            <MetricCard title="Average Position" value={data.overview?.position || 0} />
+            <MetricCard title="Total Clicks" value={data.overview?.current?.clicks || 0} change={data.overview?.changes?.clicks} higherIsBetter={true} />
+            <MetricCard title="Total Impressions" value={data.overview?.current?.impressions || 0} change={data.overview?.changes?.impressions} higherIsBetter={true} />
+            <MetricCard title="Average CTR" value={`${data.overview?.current?.ctr || 0}%`} change={data.overview?.changes?.ctr} higherIsBetter={true} />
+            <MetricCard title="Average Position" value={data.overview?.current?.position || 0} change={data.overview?.changes?.position * -1} rawChange={data.overview?.changes?.position} higherIsBetter={true} />
           </div>
 
           <div className="flex items-center justify-between mt-8 mb-4">
-             <h2 className="text-lg font-semibold">Weekly SEO Report</h2>
+             <h2 className="text-lg font-semibold flex items-center gap-2"><Bot className="w-5 h-5 text-indigo-500"/> This Week's SEO Action Plan</h2>
              <button 
                onClick={generateAntigravityTask}
-               className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
              >
                <Download className="w-4 h-4" /> Download Antigravity Task
              </button>
           </div>
 
-          {/* Actionable Opportunities */}
-          <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden mb-6">
-             <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
-                <h3 className="text-sm font-semibold flex items-center gap-2">
-                   <AlertTriangle className="w-4 h-4 text-amber-500" /> Actionable Opportunities
-                </h3>
-             </div>
-             <div className="p-0 text-sm text-zinc-600 dark:text-zinc-400">
-                {data.opportunities?.length > 0 ? (
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                      <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
-                        <tr>
-                          <th className="px-5 py-3">Query</th>
-                          <th className="px-5 py-3 text-right">Imp.</th>
-                          <th className="px-5 py-3 text-right">Clicks</th>
-                          <th className="px-5 py-3 text-right">Pos.</th>
-                          <th className="px-5 py-3">Recommendation</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                        {data.opportunities.map((opp: any, idx: number) => (
-                          <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
-                            <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100">{opp.query}</td>
-                            <td className="px-5 py-3 text-right">{opp.impressions}</td>
-                            <td className="px-5 py-3 text-right">{opp.clicks}</td>
-                            <td className="px-5 py-3 text-right">{opp.position}</td>
-                            <td className="px-5 py-3 text-zinc-500">{opp.recommendation}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+          {/* Action Plan Cards */}
+          <div className="grid grid-cols-1 gap-4">
+             {data.actionPlan?.length > 0 ? (
+                data.actionPlan.map((opp: any, idx: number) => (
+                  <div key={idx} className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 flex flex-col md:flex-row gap-6">
+                     <div className="flex-1 space-y-3">
+                        <div className="flex items-center gap-2">
+                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${opp.priority === 'HIGH' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : opp.priority === 'MEDIUM' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'}`}>
+                             {opp.priority} PRIORITY
+                           </span>
+                           <span className="text-xs text-zinc-500 font-medium bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">{opp.type.replace(/_/g, ' ')}</span>
+                        </div>
+                        <div>
+                           <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">Query: "{opp.query}"</h3>
+                           <p className="text-sm text-zinc-500">Page: {opp.page}</p>
+                        </div>
+                        <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 border border-zinc-100 dark:border-zinc-800/50">
+                           <span className="font-semibold block mb-1">Why this matters:</span>
+                           {opp.reason}
+                        </div>
+                     </div>
+                     <div className="w-full md:w-1/3 flex flex-col justify-between">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                           <div>
+                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Impressions</p>
+                              <p className="font-semibold">{opp.impressions}</p>
+                           </div>
+                           <div>
+                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Clicks</p>
+                              <p className="font-semibold">{opp.clicks}</p>
+                           </div>
+                           <div>
+                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">CTR</p>
+                              <p className="font-semibold">{opp.ctr}%</p>
+                           </div>
+                           <div>
+                              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Position</p>
+                              <p className="font-semibold">{opp.position}</p>
+                           </div>
+                        </div>
+                        <div>
+                           <p className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">Recommended Action</p>
+                           <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 flex items-start gap-1">
+                             <CheckCircle className="w-4 h-4 mt-0.5 shrink-0" /> {opp.action}
+                           </p>
+                        </div>
+                     </div>
                   </div>
-                ) : (
-                  <div className="p-5">No opportunities found for the selected period.</div>
-                )}
-             </div>
+                ))
+             ) : (
+                <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg p-10 text-center text-zinc-500">
+                  <CheckCircle className="w-10 h-10 mx-auto text-green-500 mb-4" />
+                  <p>Your SEO is highly optimized. No critical action plan items for this period.</p>
+                </div>
+             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Actionable Opportunities */}
+          {data.opportunities?.length > 0 && (
+             <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden mb-6">
+                <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 flex justify-between items-center">
+                   <h3 className="text-sm font-semibold flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-500" /> More Opportunities
+                   </h3>
+                   {data.opportunities.length > 5 && (
+                      <button onClick={() => setShowAllOpps(!showAllOpps)} className="text-xs text-blue-600 font-medium">
+                         {showAllOpps ? 'Show Less' : `View all (${data.opportunities.length})`}
+                      </button>
+                   )}
+                </div>
+                <div className="p-0 text-sm text-zinc-600 dark:text-zinc-400">
+                   <div className="overflow-x-auto">
+                     <table className="w-full text-left">
+                       <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
+                         <tr>
+                           <th className="px-5 py-3">Query</th>
+                           <th className="px-5 py-3 text-right">Imp.</th>
+                           <th className="px-5 py-3 text-right">Clicks</th>
+                           <th className="px-5 py-3 text-right">Pos.</th>
+                           <th className="px-5 py-3">Recommendation</th>
+                         </tr>
+                       </thead>
+                       <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                         {(showAllOpps ? data.opportunities : data.opportunities.slice(0, 5)).map((opp: any, idx: number) => (
+                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
+                             <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100">{opp.query}</td>
+                             <td className="px-5 py-3 text-right">{opp.impressions}</td>
+                             <td className="px-5 py-3 text-right">{opp.clicks}</td>
+                             <td className="px-5 py-3 text-right">{opp.position}</td>
+                             <td className="px-5 py-3 text-zinc-500">{opp.action}</td>
+                           </tr>
+                         ))}
+                       </tbody>
+                     </table>
+                   </div>
+                </div>
+             </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             {/* Top Queries */}
             <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
                <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
@@ -213,7 +271,7 @@ export default function SEOGrowthCenter() {
                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                      {data.topPages?.slice(0, 10).map((row: any, idx: number) => (
                        <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
-                         <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100 truncate max-w-[200px]" title={row.page}>{row.page.replace('https://sizesnap.in', '') || '/'}</td>
+                         <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100 truncate max-w-[200px]" title={row.page}>{row.page}</td>
                          <td className="px-5 py-3 text-right">{row.clicks}</td>
                          <td className="px-5 py-3 text-right">{row.impressions}</td>
                        </tr>
@@ -229,11 +287,32 @@ export default function SEOGrowthCenter() {
   )
 }
 
-function MetricCard({ title, value }: { title: string, value: any }) {
+function MetricCard({ title, value, change, rawChange, higherIsBetter }: { title: string, value: any, change?: any, rawChange?: any, higherIsBetter?: boolean }) {
+  const isPositive = parseFloat(change) > 0;
+  const isNegative = parseFloat(change) < 0;
+  
+  // For average position, lower raw number is better, but the logic above passed change = prev - curr, so it's aligned.
+  // We'll just display rawChange or change directly.
+  let changeStr = change ? (parseFloat(change) > 0 ? `+${change}%` : `${change}%`) : null;
+  if (rawChange) {
+      changeStr = parseFloat(rawChange) > 0 ? `+${rawChange}` : `${rawChange}`;
+  }
+
+  const isGood = isPositive;
+  const isBad = isNegative;
+
   return (
-    <div className="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0A0A0A] flex flex-col">
+    <div className="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0A0A0A] flex flex-col justify-between">
       <h3 className="text-zinc-500 dark:text-zinc-400 text-xs font-medium tracking-wide uppercase">{title}</h3>
-      <p className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 mt-2">{typeof value === 'number' ? value.toLocaleString() : value}</p>
+      <div className="mt-2 flex items-baseline gap-2">
+         <p className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">{typeof value === 'number' ? value.toLocaleString() : value}</p>
+         {changeStr && parseFloat(change) !== 0 && (
+            <span className={`flex items-center text-xs font-medium ${isGood ? 'text-green-500' : 'text-red-500'}`}>
+               {isGood ? <ArrowUp className="w-3 h-3 mr-0.5" /> : <ArrowDown className="w-3 h-3 mr-0.5" />}
+               {changeStr.replace('-', '')}
+            </span>
+         )}
+      </div>
     </div>
   )
 }

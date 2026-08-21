@@ -77,6 +77,44 @@ export async function GET(request: Request) {
       })
     })
 
+    let organicClicks: number | null = null;
+    try {
+       const tokenDoc = await adminDb.collection('admin_settings').doc('google_oauth').get()
+       if (tokenDoc.exists) {
+          const { tokens } = tokenDoc.data() as any
+          if (tokens && tokens.access_token) {
+             const { google } = require('googleapis')
+             const oauth2Client = new google.auth.OAuth2(
+                process.env.GOOGLE_CLIENT_ID,
+                process.env.GOOGLE_CLIENT_SECRET,
+                process.env.GOOGLE_REDIRECT_URI || 'https://sizesnap.in/api/admin/oauth/callback'
+             )
+             oauth2Client.setCredentials(tokens)
+             const searchconsole = google.searchconsole({ version: 'v1', auth: oauth2Client })
+             
+             let siteUrl = 'https://sizesnap.in/'
+             try {
+                const sitesRes = await searchconsole.sites.list();
+                const sites = sitesRes.data.siteEntry || [];
+                const matchedSite = sites.find((s: any) => s.siteUrl?.includes('sizesnap.in'));
+                if (matchedSite && matchedSite.siteUrl) siteUrl = matchedSite.siteUrl;
+                else if (sites.length > 0 && sites[0].siteUrl) siteUrl = sites[0].siteUrl;
+             } catch(e) {}
+
+             const startStr = rangeStart.toISOString().split('T')[0]
+             const endStr = now.toISOString().split('T')[0]
+             
+             const overviewRes = await searchconsole.searchanalytics.query({
+                siteUrl,
+                requestBody: { startDate: startStr, endDate: endStr, rowLimit: 1 }
+             })
+             organicClicks = (overviewRes.data.rows && overviewRes.data.rows.length > 0) ? (overviewRes.data.rows[0].clicks || 0) : 0;
+          }
+       }
+    } catch (gscError) {
+       console.error("Dashboard GSC Error:", gscError)
+    }
+
     return NextResponse.json({
       success: true,
       stats: {
@@ -84,7 +122,7 @@ export async function GET(request: Request) {
         todayVisitors: todayVisitors,
         totalDownloads: rangeDownloads,
         feedbackCount: totalFeedbackCount,
-        organicClicks: null // GSC not connected
+        organicClicks: organicClicks
       },
       toolStats: sortedTools,
       messages: messages

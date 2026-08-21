@@ -119,38 +119,67 @@ export default function BulkImageCompressTool({ config }: Props) {
         if (targetFormat === 'jpg') outputType = 'image/jpeg'
         if (targetFormat === 'webp') outputType = 'image/webp'
 
-        if (outputType === 'image/jpeg') {
-          ctx.fillStyle = '#FFFFFF'
-          ctx.fillRect(0, 0, canvas.width, canvas.height)
+        const testCompress = async (testScale: number, testQuality: number) => {
+           const tW = Math.max(1, Math.round(img.width * testScale))
+           const tH = Math.max(1, Math.round(img.height * testScale))
+           const tCanvas = document.createElement('canvas')
+           tCanvas.width = tW
+           tCanvas.height = tH
+           const tCtx = tCanvas.getContext('2d')!
+           if (outputType === 'image/jpeg') {
+              tCtx.fillStyle = '#FFFFFF'
+              tCtx.fillRect(0, 0, tW, tH)
+           }
+           tCtx.drawImage(img, 0, 0, img.width, img.height, 0, 0, tW, tH)
+           return await new Promise<Blob | null>(res => tCanvas.toBlob(res, outputType, testQuality))
         }
 
-        ctx.drawImage(img, 0, 0)
+        let bestBlob: Blob | null = null
+        let bestDiff = Infinity
+        const maxBytes = targetKb * 1024
 
-        const getBlob = (q: number) => new Promise<Blob | null>(res => canvas.toBlob(res, outputType, q))
-
-        // Binary search quality loop to match target KB limits
-        let quality = 0.85
-        let blob: Blob | null = null
-        let low = 0.05
-        let high = 0.95
-        const maxBytes = targetKb * 1024 * 0.98 // 98% safety margin
-
-        for (let i = 0; i < 9; i++) {
-          quality = (low + high) / 2
-          blob = await getBlob(quality)
-          if (!blob) break
-
-          if (blob.size > maxBytes) {
-            high = quality
-          } else {
-            low = quality
-          }
+        // 1. Binary Search Quality
+        let qLow = 0.05, qHigh = 1.0
+        for (let i = 0; i < 7; i++) {
+           const qMid = (qLow + qHigh) / 2
+           const blob = await testCompress(1.0, qMid)
+           if (!blob) break
+           if (blob.size <= maxBytes) {
+              if (maxBytes - blob.size < bestDiff) {
+                 bestDiff = maxBytes - blob.size
+                 bestBlob = blob
+              }
+              qLow = qMid
+           } else {
+              qHigh = qMid
+           }
         }
 
-        // Final fallback if high compression required
-        if (blob && blob.size > targetKb * 1024) {
-          blob = await getBlob(0.05)
+        // 2. Binary Search Scale
+        if (!bestBlob) {
+           let sLow = 0.1, sHigh = 0.95
+           bestDiff = Infinity
+           for (let i = 0; i < 7; i++) {
+              const sMid = (sLow + sHigh) / 2
+              const blob = await testCompress(sMid, 0.6)
+              if (!blob) break
+              if (blob.size <= maxBytes) {
+                 if (maxBytes - blob.size < bestDiff) {
+                    bestDiff = maxBytes - blob.size
+                    bestBlob = blob
+                 }
+                 sLow = sMid
+              } else {
+                 sHigh = sMid
+              }
+           }
         }
+
+        if (!bestBlob) {
+           bestBlob = await testCompress(0.2, 0.2)
+        }
+
+        const blob = bestBlob
 
         if (blob) {
           if (item.compressedUrl) URL.revokeObjectURL(item.compressedUrl)

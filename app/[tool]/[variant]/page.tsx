@@ -200,9 +200,7 @@ export default async function ToolVariantPage({ params }: Props) {
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
             {h1Text}
           </h1>
-          <p className="text-gray-600 leading-relaxed">
-            {introText}
-          </p>
+          <div className="text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: introText }} />
           <p className="mt-3 text-sm font-medium text-green-700">
             No files are uploaded. Everything is processed in your browser.
           </p>

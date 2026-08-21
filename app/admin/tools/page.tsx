@@ -68,7 +68,8 @@ export default function ToolManagement() {
               <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/50">
                 {configTools.map((tool, idx) => {
                    // Try to match the slug in stats
-                   const toolStat = stats[tool.slug] || Object.values(stats).find((s: any, k: any) => k?.includes(tool.slug)) || { uses: 0, downloads: 0, feedback: 0 }
+                   const matchedEntry = Object.entries(stats).find(([k]) => k.includes(tool.slug));
+                   const toolStat = stats[tool.slug] || (matchedEntry ? matchedEntry[1] : { uses: 0, downloads: 0, feedback: 0 });
                    
                    return (
                       <tr key={tool.slug || idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30 transition-colors">

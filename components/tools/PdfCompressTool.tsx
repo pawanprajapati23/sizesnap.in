@@ -119,56 +119,100 @@ export default function PdfCompressTool({ config }: Props) {
         }
       }
 
-      let attempts = 0
-      const maxAttempts = mode === 'size' ? 5 : 1
       let finalBlob: Blob | null = null
 
-      while (attempts < maxAttempts) {
-        const attemptLabel = mode === 'size' ? ` (Attempt ${attempts + 1}/${maxAttempts})` : ''
-        setLoadingMessage(`Optimizing documents rendering${attemptLabel}...`)
+      if (mode === 'size' && targetSize) {
+         setLoadingMessage('Finding mathematically perfect compression ratio...')
+         
+         const testCompressPdf = async (testScale: number, testQuality: number) => {
+            const newPdfDoc = await PDFDocument.create()
+            for (let i = 0; i < numPages; i++) {
+               const imgElement = pageImages[i]
+               const targetW = Math.max(1, Math.round(imgElement.width * testScale))
+               const targetH = Math.max(1, Math.round(imgElement.height * testScale))
+
+               const canvas = document.createElement('canvas')
+               const ctx = canvas.getContext('2d')!
+               canvas.width = targetW
+               canvas.height = targetH
+               ctx.drawImage(imgElement, 0, 0, targetW, targetH)
+               
+               const compressedUrl = canvas.toDataURL('image/jpeg', testQuality)
+               const pdfImg = await newPdfDoc.embedJpg(compressedUrl)
+               const pdfPage = newPdfDoc.addPage([targetW, targetH])
+               pdfPage.drawImage(pdfImg, { x: 0, y: 0, width: targetW, height: targetH })
+            }
+            const pdfBytes = await newPdfDoc.save({ useObjectStreams: false })
+            return new Blob([pdfBytes as any], { type: 'application/pdf' })
+         }
+
+         let bestBlob: Blob | null = null
+         let bestDiff = Infinity
+
+         // 1. Binary Search Quality
+         let qLow = 0.05, qHigh = 1.0
+         for (let i = 0; i < 6; i++) {
+            setProgress(50 + (i * 4))
+            const qMid = (qLow + qHigh) / 2
+            const blob = await testCompressPdf(1.0, qMid)
+            if (blob.size <= targetSize) {
+               if (targetSize - blob.size < bestDiff) {
+                  bestDiff = targetSize - blob.size
+                  bestBlob = blob
+               }
+               qLow = qMid
+            } else {
+               qHigh = qMid
+            }
+         }
+
+         // 2. Binary Search Scale
+         if (!bestBlob) {
+            let sLow = 0.1, sHigh = 0.95
+            bestDiff = Infinity
+            for (let i = 0; i < 6; i++) {
+               setProgress(75 + (i * 4))
+               const sMid = (sLow + sHigh) / 2
+               const blob = await testCompressPdf(sMid, 0.6)
+               if (blob.size <= targetSize) {
+                  if (targetSize - blob.size < bestDiff) {
+                     bestDiff = targetSize - blob.size
+                     bestBlob = blob
+                  }
+                  sLow = sMid
+               } else {
+                  sHigh = sMid
+               }
+            }
+         }
+
+         if (!bestBlob) {
+            finalBlob = await testCompressPdf(0.2, 0.2)
+         } else {
+            finalBlob = bestBlob
+         }
+
+      } else {
+        // Standard quality mode
+        setLoadingMessage('Compiling optimized document components...')
         const newPdfDoc = await PDFDocument.create()
-
         for (let i = 0; i < numPages; i++) {
-          setLoadingMessage(`Compiling and compressing page ${i + 1} of ${numPages}${attemptLabel}...`)
           const imgElement = pageImages[i]
-          const targetW = Math.round(imgElement.width * currentScale)
-          const targetH = Math.round(imgElement.height * currentScale)
-
+          const targetW = Math.max(1, Math.round(imgElement.width * currentScale))
+          const targetH = Math.max(1, Math.round(imgElement.height * currentScale))
           const canvas = document.createElement('canvas')
           const ctx = canvas.getContext('2d')!
           canvas.width = targetW
           canvas.height = targetH
-
           ctx.drawImage(imgElement, 0, 0, targetW, targetH)
-
           const compressedUrl = canvas.toDataURL('image/jpeg', currentQuality)
           const pdfImg = await newPdfDoc.embedJpg(compressedUrl)
-
           const pdfPage = newPdfDoc.addPage([targetW, targetH])
-          pdfPage.drawImage(pdfImg, {
-            x: 0,
-            y: 0,
-            width: targetW,
-            height: targetH,
-          })
-          
-          setProgress(50 + Math.round((i / numPages) * 40)) // Up to 90%
+          pdfPage.drawImage(pdfImg, { x: 0, y: 0, width: targetW, height: targetH })
+          setProgress(50 + Math.round((i / numPages) * 40))
         }
-
-        setLoadingMessage(`Assembling optimized document components${attemptLabel}...`)
         const pdfBytes = await newPdfDoc.save({ useObjectStreams: false })
         finalBlob = new Blob([pdfBytes as any], { type: 'application/pdf' })
-
-        if (targetSize && finalBlob.size > targetSize) {
-           currentScale -= 0.15
-           currentQuality -= 0.12
-           attempts++
-           
-           if (currentScale < 0.45) currentScale = 0.45
-           if (currentQuality < 0.15) currentQuality = 0.15
-        } else {
-           break
-        }
       }
 
       if (!finalBlob) throw new Error('Document assembly failed.')

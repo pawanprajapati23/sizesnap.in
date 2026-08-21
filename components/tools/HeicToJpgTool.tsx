@@ -332,7 +332,6 @@ export default function HeicToJpgTool({ config }: Props) {
                       )}
                     </>
                   )}
-                </div>
 
                   {/* Stats summary */}
                   <div className="text-xs text-gray-500 pt-3 border-t border-gray-200 space-y-2">

@@ -70,65 +70,79 @@ export default function ImageCompressTool({ config }: Props) {
             canvas.height = height
             ctx.drawImage(img, 0, 0, width, height)
 
-            // Mode 1: Compress to exact KB limit using iteration
+            // Mode 1: Compress to exact KB limit using Binary Search
             if (mode === 'size' && targetSizeKB) {
-              let quality = 0.95
-              let scale = 1.0
-              let resultBlob: Blob | null = null
-              let iterations = 0
-              const maxIterations = 30
-              const safetyMargin = 0.98
-
-              while (iterations < maxIterations) {
-                canvas.width = Math.max(1, Math.round(width * scale))
-                canvas.height = Math.max(1, Math.round(height * scale))
-                ctx.clearRect(0, 0, canvas.width, canvas.height)
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-                resultBlob = await new Promise<Blob | null>((res) => {
-                  canvas.toBlob((b) => res(b), 'image/jpeg', quality)
-                })
-
-                if (!resultBlob) {
-                  reject(new Error('Failed to compress.'))
-                  return
-                }
-
-                const currentSizeKB = resultBlob.size / 1024
-                if (currentSizeKB <= targetSizeKB * safetyMargin) {
-                  break
-                } else {
-                  if (quality > 0.45) {
-                    quality -= 0.12
-                  } else {
-                    scale = scale * 0.85
-                  }
-                }
-                iterations++
-              }
-
-              // Emergency Fallback
-              if (resultBlob && resultBlob.size / 1024 > targetSizeKB) {
-                let emergencyScale = scale * 0.7
-                while (resultBlob.size / 1024 > targetSizeKB && emergencyScale > 0.05) {
-                  canvas.width = Math.max(1, Math.round(width * emergencyScale))
-                  canvas.height = Math.max(1, Math.round(height * emergencyScale))
+              
+              const testCompress = (testScale: number, testQuality: number): Promise<Blob | null> => {
+                return new Promise((res) => {
+                  canvas.width = Math.max(1, Math.round(width * testScale))
+                  canvas.height = Math.max(1, Math.round(height * testScale))
                   ctx.clearRect(0, 0, canvas.width, canvas.height)
                   ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+                  canvas.toBlob((b) => res(b), 'image/jpeg', testQuality)
+                })
+              }
 
-                  resultBlob = await new Promise<Blob | null>((res) => {
-                    canvas.toBlob((b) => res(b), 'image/jpeg', 0.3)
-                  })
-
-                  if (!resultBlob) break
-                  emergencyScale *= 0.7
+              let bestBlob: Blob | null = null
+              let bestDiff = Infinity
+              
+              // 1. Binary Search on Quality (Scale = 1.0)
+              let qLow = 0.05
+              let qHigh = 1.0
+              
+              for (let i = 0; i < 7; i++) {
+                const qMid = (qLow + qHigh) / 2
+                const blob = await testCompress(1.0, qMid)
+                if (!blob) break
+                const kb = blob.size / 1024
+                
+                if (kb <= targetSizeKB) {
+                  const diff = targetSizeKB - kb
+                  if (diff < bestDiff) {
+                    bestDiff = diff
+                    bestBlob = blob
+                  }
+                  qLow = qMid // Try higher quality to get closer to target
+                } else {
+                  qHigh = qMid // Size too large, lower quality
                 }
               }
 
-              if (resultBlob) {
-                resolve(resultBlob)
+              // 2. If even at q=0.05 it's too big, Binary Search on Scale (Quality = 0.6)
+              if (!bestBlob) {
+                let sLow = 0.1
+                let sHigh = 0.95
+                bestDiff = Infinity
+                
+                for (let i = 0; i < 8; i++) {
+                  const sMid = (sLow + sHigh) / 2
+                  const blob = await testCompress(sMid, 0.6)
+                  if (!blob) break
+                  const kb = blob.size / 1024
+                  
+                  if (kb <= targetSizeKB) {
+                    const diff = targetSizeKB - kb
+                    if (diff < bestDiff) {
+                      bestDiff = diff
+                      bestBlob = blob
+                    }
+                    sLow = sMid // Try larger scale
+                  } else {
+                    sHigh = sMid // Scale too large
+                  }
+                }
+              }
+
+              if (bestBlob) {
+                resolve(bestBlob)
               } else {
-                reject(new Error('Failed to compress target size.'))
+                // Extreme fallback
+                const extremeBlob = await testCompress(0.2, 0.2)
+                if (extremeBlob && (extremeBlob.size / 1024) <= targetSizeKB) {
+                   resolve(extremeBlob)
+                } else {
+                   reject(new Error('Cannot compress this image below target size.'))
+                }
               }
             } else {
               // Mode 2: Simple Quality Compression (instant)

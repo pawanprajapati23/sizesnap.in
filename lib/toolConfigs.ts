@@ -30,7 +30,7 @@ const sizesKb = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
 const sizesMb = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
 function buildSizeVariants(
-  toolType: 'Resize Image' | 'Compress Image' | 'Compress PDF',
+  toolType: 'Resize Image' | 'Compress Image' | 'Compress PDF' | 'HEIC to JPG',
   baseSlug: string,
   extraIntro: string = ''
 ): ToolVariant[] {
@@ -39,14 +39,21 @@ function buildSizeVariants(
   for (const kb of sizesKb) {
     let metaTitle = '';
     let metaDescription = '';
+    let introParagraph = '';
 
     if (toolType === 'Compress PDF') {
       metaTitle = `Compress PDF to ${kb}KB Online (Exactly & Free) - SizeSnap`;
       metaDescription = `Reduce your PDF file size to exactly ${kb}KB or less without losing quality. Fast, free, and secure online compressor for ${kb} KB limit form uploads.`;
+      introParagraph = `Need a PDF under ${kb}KB? Use our intelligent client-side PDF compressor to shrink your document exactly to the ${kb}KB limit safely without uploading it to any server.`;
+    } else if (toolType === 'HEIC to JPG') {
+      metaTitle = `Convert HEIC to JPG ${kb}KB Online Free`;
+      metaDescription = `Convert your iPhone HEIC photos to standard JPG format exactly under ${kb}KB for Sarkari forms and ID uploads. 100% free and client-side.`;
+      introParagraph = `iPhone photos (HEIC/HEIF) are often rejected by exam portals. Convert your Apple photos to standard JPG and perfectly compress them to ${kb}KB in one click without uploading to a server.`;
     } else {
       const action = toolType === 'Resize Image' ? 'Resize' : 'Compress';
       metaTitle = `${action} Photo to ${kb}KB (Exactly ${kb} KB JPG/JPEG) Free`;
       metaDescription = `Need your photo or signature under ${kb}KB? Use our free tool to instantly ${action.toLowerCase()} to exactly ${kb}KB in JPG/JPEG format without losing quality. Perfect for Sarkari forms!`;
+      introParagraph = `Easily ${action.toLowerCase()} your passport photo, signature, or document scan to exactly ${kb}KB. Our smart compression algorithm ensures maximum quality while keeping the file size strictly below ${kb} KB.`;
     }
 
     variants.push({
@@ -277,7 +284,8 @@ export const tools: Tool[] = [
     description: 'Convert iPhone HEIC photos to standard JPG format directly in your browser.',
     icon: '🍏',
     variants: [
-      { slug: 'convert', label: 'HEIC to JPG', metaTitle: 'HEIC to JPG Converter Online Free | Apple Photo to JPG', metaDescription: 'Convert iPhone HEIC format images to JPG online instantly. Free, secure, client-side processing.', h1: 'Convert HEIC to JPG Online', introParagraph: 'Easily change your iPhone Apple Photos formats (HEIC) into standard JPG format for uploading anywhere.', config: {} }
+      { slug: 'convert', label: 'HEIC to JPG', metaTitle: 'HEIC to JPG Converter Online Free | Apple Photo to JPG', metaDescription: 'Convert iPhone HEIC format images to JPG online instantly. Free, secure, client-side processing.', h1: 'Convert HEIC to JPG Online', introParagraph: 'Easily change your iPhone Apple Photos formats (HEIC) into standard JPG format for uploading anywhere.', config: {} },
+      ...buildSizeVariants('HEIC to JPG', 'heic-to-jpg')
     ]
   },
   {

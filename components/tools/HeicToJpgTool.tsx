@@ -51,15 +51,103 @@ export default function HeicToJpgTool({ config }: Props) {
       if (targetFormat === 'png') mimeType = 'image/png'
       if (targetFormat === 'webp') mimeType = 'image/webp'
 
-      // heic2any handles the heavy conversion on main thread or worker
+      // First convert HEIC to standard Blob
       const convertedBlob = await heic2any({
         blob: file,
         toType: mimeType,
-        quality: quality / 100
+        quality: 1.0 // Convert at max quality first, we will compress it down next
       })
 
-      const blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob
+      let blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob
       if (!blob) throw new Error('Conversion result returned empty')
+
+      // If we have a targetKB config, use binary search to compress it accurately
+      if (config?.maxKB && mimeType === 'image/jpeg') {
+        const targetSizeKB = config.maxKB
+        blob = await new Promise<Blob>((resolve, reject) => {
+          const img = new Image()
+          img.onload = async () => {
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
+            if (!ctx) return resolve(blob) // fallback
+
+            const width = img.width
+            const height = img.height
+
+            const testCompress = (testScale: number, testQuality: number): Promise<Blob | null> => {
+              return new Promise((res) => {
+                canvas.width = Math.max(1, Math.round(width * testScale))
+                canvas.height = Math.max(1, Math.round(height * testScale))
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+                canvas.toBlob((b) => res(b), 'image/jpeg', testQuality)
+              })
+            }
+
+            let bestBlob: Blob | null = null
+            let bestDiff = Infinity
+            
+            // 1. Binary Search on Quality (Scale = 1.0)
+            let qLow = 0.05
+            let qHigh = 1.0
+            
+            for (let i = 0; i < 7; i++) {
+              const qMid = (qLow + qHigh) / 2
+              const b = await testCompress(1.0, qMid)
+              if (!b) break
+              const kb = b.size / 1024
+              if (kb <= targetSizeKB) {
+                if (targetSizeKB - kb < bestDiff) {
+                  bestDiff = targetSizeKB - kb
+                  bestBlob = b
+                }
+                qLow = qMid 
+              } else {
+                qHigh = qMid 
+              }
+            }
+
+            // 2. Binary Search on Scale if still too big
+            if (!bestBlob) {
+              let sLow = 0.1
+              let sHigh = 0.95
+              bestDiff = Infinity
+              for (let i = 0; i < 8; i++) {
+                const sMid = (sLow + sHigh) / 2
+                const b = await testCompress(sMid, 0.6)
+                if (!b) break
+                const kb = b.size / 1024
+                if (kb <= targetSizeKB) {
+                  if (targetSizeKB - kb < bestDiff) {
+                    bestDiff = targetSizeKB - kb
+                    bestBlob = b
+                  }
+                  sLow = sMid
+                } else {
+                  sHigh = sMid
+                }
+              }
+            }
+            
+            resolve(bestBlob || blob)
+          }
+          img.src = URL.createObjectURL(blob)
+        })
+      } else if (targetFormat !== 'png') {
+         // Standard compression without target KB (just quality)
+         blob = await new Promise<Blob>((resolve) => {
+           const img = new Image()
+           img.onload = () => {
+             const canvas = document.createElement('canvas')
+             canvas.width = img.width
+             canvas.height = img.height
+             const ctx = canvas.getContext('2d')
+             ctx?.drawImage(img, 0, 0)
+             canvas.toBlob((b) => resolve(b || blob), mimeType, quality / 100)
+           }
+           img.src = URL.createObjectURL(blob)
+         })
+      }
 
       if (resultUrl) URL.revokeObjectURL(resultUrl)
 
@@ -199,50 +287,52 @@ export default function HeicToJpgTool({ config }: Props) {
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-gray-400 block">
                     Format & Details
                   </span>
-
-                  {/* Format selectors */}
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-600 block">Target Output Format:</label>
-                    <div className="grid grid-cols-3 gap-2">
-                      {(['jpg', 'png', 'webp'] as const).map((fmt) => (
-                        <button
-                          key={fmt}
-                          onClick={() => setTargetFormat(fmt)}
-                          className={`py-2 px-1 rounded-lg text-xs font-bold border transition-all text-center uppercase ${
-                            targetFormat === fmt
-                              ? 'bg-blue-600 text-white border-blue-600'
-                              : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                          }`}
-                        >
-                          {fmt}
-                        </button>
-                      ))}
+                  
+                  {config?.maxKB ? (
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-sm text-blue-800">
+                      <strong>Target Size Lock:</strong> Image has been automatically converted to JPG and compressed exactly under <strong>{config.maxKB} KB</strong>.
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div>
+                        <label className="text-xs font-semibold text-gray-700 mb-1.5 block">Target Format</label>
+                        <div className="flex bg-gray-200/50 p-1 rounded-lg">
+                          {['jpg', 'png', 'webp'].map((fmt) => (
+                            <button
+                              key={fmt}
+                              onClick={() => setTargetFormat(fmt as any)}
+                              className={`flex-1 py-1.5 text-xs font-bold rounded-md capitalize transition-all ${
+                                targetFormat === fmt 
+                                  ? 'bg-white text-blue-700 shadow-sm' 
+                                  : 'text-gray-500 hover:text-gray-700'
+                              }`}
+                            >
+                              {fmt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
 
-                  {/* Quality Selector (for JPG/WEBP) */}
-                  {targetFormat !== 'png' && (
-                    <div className="space-y-1.5 pt-2 border-t border-gray-200">
-                      <div className="flex items-center justify-between text-xs font-bold text-gray-600">
-                        <span>Output Quality:</span>
-                        <span className="text-blue-600">{quality}%</span>
-                      </div>
-                      <input
-                        type="range"
-                        min={10}
-                        max={100}
-                        step={5}
-                        value={quality}
-                        onChange={e => setQuality(Number(e.target.value))}
-                        className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                      />
-                      <div className="flex justify-between text-[10px] text-gray-400">
-                        <span>Min Size</span>
-                        <span>Balanced</span>
-                        <span>High Quality</span>
-                      </div>
-                    </div>
+                      {targetFormat !== 'png' && (
+                        <div>
+                          <label className="text-xs font-semibold text-gray-700 mb-1.5 flex justify-between">
+                            <span>Image Quality</span>
+                            <span className="text-blue-600">{quality}%</span>
+                          </label>
+                          <input
+                            type="range"
+                            min="10"
+                            max="100"
+                            step="1"
+                            value={quality}
+                            onChange={(e) => setQuality(Number(e.target.value))}
+                            className="w-full accent-blue-600"
+                          />
+                        </div>
+                      )}
+                    </>
                   )}
+                </div>
 
                   {/* Stats summary */}
                   <div className="text-xs text-gray-500 pt-3 border-t border-gray-200 space-y-2">

@@ -112,63 +112,69 @@ async function fallbackMainThreadProcess(
         let scale = 1.0;
         let resultBlob: Blob | null = null;
         const targetKB = options.targetKB;
-        const safetyMargin = 0.98;
-        let iterations = 0;
+        
+        const testCompress = (testScale: number, testQuality: number): Promise<Blob | null> => {
+           return new Promise((res) => {
+             canvas.width = Math.max(1, Math.round(width * testScale));
+             canvas.height = Math.max(1, Math.round(height * testScale));
+             ctx.clearRect(0, 0, canvas.width, canvas.height);
+             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+             canvas.toBlob((b) => res(b), options.format || 'image/jpeg', testQuality);
+           });
+        };
 
-        while (iterations < 30) {
-          canvas.width = Math.max(1, Math.round(width * scale));
-          canvas.height = Math.max(1, Math.round(height * scale));
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        let bestBlob: Blob | null = null;
+        let bestDiff = Infinity;
 
-          resultBlob = await new Promise<Blob | null>((res) => {
-            canvas.toBlob((b) => res(b), options.format || 'image/jpeg', quality);
-          });
-
-          if (!resultBlob) {
-            reject(new Error('Failed to render compressed frames.'));
-            return;
-          }
-
-          const currentKB = resultBlob.size / 1024;
-
-          if (targetKB) {
-            if (currentKB <= targetKB * safetyMargin) {
-              if (currentKB >= targetKB * 0.75 || quality >= 0.9) break;
-            }
-            if (currentKB > targetKB) {
-              if (quality > 0.45) quality -= 0.12;
-              else scale *= 0.88;
-            } else {
-              if (quality < 0.92) quality += 0.05;
-              else break;
-            }
-          } else {
-            break;
-          }
-          iterations++;
+        if (targetKB) {
+           // 1. Binary Search Quality
+           let qLow = 0.05, qHigh = 1.0;
+           for(let i=0; i<7; i++){
+              const qMid = (qLow + qHigh) / 2;
+              const blob = await testCompress(1.0, qMid);
+              if(!blob) break;
+              const kb = blob.size / 1024;
+              if (kb <= targetKB) {
+                 if (targetKB - kb < bestDiff) {
+                    bestDiff = targetKB - kb;
+                    bestBlob = blob;
+                 }
+                 qLow = qMid;
+              } else {
+                 qHigh = qMid;
+              }
+           }
+           
+           // 2. Binary Search Scale
+           if(!bestBlob) {
+              let sLow = 0.1, sHigh = 0.95;
+              bestDiff = Infinity;
+              for(let i=0; i<8; i++){
+                 const sMid = (sLow + sHigh) / 2;
+                 const blob = await testCompress(sMid, 0.6);
+                 if(!blob) break;
+                 const kb = blob.size / 1024;
+                 if(kb <= targetKB){
+                    if (targetKB - kb < bestDiff) {
+                       bestDiff = targetKB - kb;
+                       bestBlob = blob;
+                    }
+                    sLow = sMid;
+                 } else {
+                    sHigh = sMid;
+                 }
+              }
+           }
+           
+           if (!bestBlob) {
+              bestBlob = await testCompress(0.2, 0.2);
+           }
+        } else {
+           bestBlob = await testCompress(1.0, options.initialQuality || 0.92);
         }
 
-        // Emergency fallback
-        if (targetKB && resultBlob && (resultBlob.size / 1024) > targetKB) {
-          let emergencyScale = scale * 0.7;
-          while ((resultBlob.size / 1024) > targetKB && emergencyScale > 0.05) {
-            canvas.width = Math.max(1, Math.round(width * emergencyScale));
-            canvas.height = Math.max(1, Math.round(height * emergencyScale));
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            
-            resultBlob = await new Promise<Blob | null>((res) => {
-              canvas.toBlob((b) => res(b), options.format || 'image/jpeg', 0.3);
-            });
-            
-            if (!resultBlob) break;
-            emergencyScale *= 0.7;
-          }
-        }
-
-        if (resultBlob) {
-          resolve({ blob: resultBlob, size: resultBlob.size });
+        if (bestBlob) {
+          resolve({ blob: bestBlob, size: bestBlob.size });
         } else {
           reject(new Error('Compression could not be completed.'));
         }

@@ -32,85 +32,66 @@ self.onmessage = async (e) => {
         height = targetHeight;
       }
 
-      if (typeof OffscreenCanvas === 'undefined') {
-        throw new Error('OffscreenCanvas is not supported in this browser worker.');
-      }
-
-      let scale = 1.0;
-      let quality = initialQuality;
-      let bestBlob = null;
-      let iteration = 0;
-
-      while (iteration < maxIterations) {
-        const currentWidth = Math.max(1, Math.round(width * scale));
-        const currentHeight = Math.max(1, Math.round(height * scale));
-
+      const testCompress = async (testScale, testQuality) => {
+        const currentWidth = Math.max(1, Math.round(width * testScale));
+        const currentHeight = Math.max(1, Math.round(height * testScale));
         const canvas = new OffscreenCanvas(currentWidth, currentHeight);
         const ctx = canvas.getContext('2d');
-
-        if (!ctx) {
-          throw new Error('Canvas 2D context unavailable in worker');
-        }
-
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(imageBitmap, 0, 0, currentWidth, currentHeight);
-
-        const blob = await canvas.convertToBlob({
+        return await canvas.convertToBlob({
           type: format,
-          quality: Math.min(1.0, Math.max(0.1, quality))
+          quality: testQuality
         });
+      };
 
-        const currentKB = blob.size / 1024;
-        bestBlob = blob;
+      let bestBlob = null;
+      let bestDiff = Infinity;
 
-        if (targetKB) {
-          if (currentKB <= targetKB * safetyMargin) {
-            // Target satisfied within threshold
-            if (currentKB >= targetKB * 0.75 || quality >= 0.9) {
-              break;
-            }
-          }
-
-          if (currentKB > targetKB) {
-            // Oversized, reduce quality or scale
-            if (quality > 0.45) {
-              quality -= 0.12;
-            } else {
-              scale *= 0.88;
-            }
+      if (targetKB) {
+        // 1. Binary Search Quality
+        let qLow = 0.05, qHigh = 1.0;
+        for (let i = 0; i < 7; i++) {
+          const qMid = (qLow + qHigh) / 2;
+          const blob = await testCompress(1.0, qMid);
+          const kb = blob.size / 1024;
+          if (kb <= targetKB) {
+             if (targetKB - kb < bestDiff) {
+                bestDiff = targetKB - kb;
+                bestBlob = blob;
+             }
+             qLow = qMid;
           } else {
-            // Undersized, try increasing quality slightly
-            if (quality < 0.92) {
-              quality += 0.05;
-            } else {
-              break;
-            }
+             qHigh = qMid;
           }
-        } else {
-          // No target KB specified, single pass complete
-          break;
         }
-
-        iteration++;
-      }
-
-      // Emergency fallback if target still not met
-      if (targetKB && bestBlob.size / 1024 > targetKB) {
-        let emergencyScale = scale * 0.7;
-        while (bestBlob.size / 1024 > targetKB && emergencyScale > 0.05) {
-          const currentWidth = Math.max(1, Math.round(width * emergencyScale));
-          const currentHeight = Math.max(1, Math.round(height * emergencyScale));
-          const canvas = new OffscreenCanvas(currentWidth, currentHeight);
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(imageBitmap, 0, 0, currentWidth, currentHeight);
-          
-          bestBlob = await canvas.convertToBlob({
-            type: format,
-            quality: 0.3
-          });
-          emergencyScale *= 0.7;
+        
+        // 2. Binary Search Scale
+        if (!bestBlob) {
+          let sLow = 0.1, sHigh = 0.95;
+          bestDiff = Infinity;
+          for (let i = 0; i < 8; i++) {
+             const sMid = (sLow + sHigh) / 2;
+             const blob = await testCompress(sMid, 0.6);
+             const kb = blob.size / 1024;
+             if (kb <= targetKB) {
+                if (targetKB - kb < bestDiff) {
+                   bestDiff = targetKB - kb;
+                   bestBlob = blob;
+                }
+                sLow = sMid;
+             } else {
+                sHigh = sMid;
+             }
+          }
         }
+        
+        if (!bestBlob) {
+           bestBlob = await testCompress(0.2, 0.2);
+        }
+      } else {
+        bestBlob = await testCompress(1.0, initialQuality);
       }
 
       self.postMessage({

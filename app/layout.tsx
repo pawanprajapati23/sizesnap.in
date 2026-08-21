@@ -11,6 +11,10 @@ import SessionDownloadTray from '@/components/SessionDownloadTray'
 import Script from 'next/script'
 
 
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' })
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://sizesnap.in'),
   title: 'SizeSnap — Free Online Image & PDF Tools',
@@ -61,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -134,11 +138,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        
       </head>
-      <body className="bg-gray-50 text-gray-900 min-h-screen">
+      <body className={`bg-gray-50 text-gray-900 min-h-screen font-sans ${inter.variable}`}>
         <div className="flex flex-col min-h-screen">
           <AdminLayoutWrapper 
             header={<Header />}

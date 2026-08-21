@@ -117,23 +117,29 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-600 uppercase tracking-wider">
+          <nav className="hidden md:flex items-center gap-5 text-xs font-bold text-slate-600 uppercase tracking-wider">
             <Link href="/resize-image-to-50kb" className={`hover:text-blue-600 transition-colors ${pathname === '/resize-image-to-50kb' ? 'text-blue-600' : ''}`}>Resize Image</Link>
             <Link href="/compress-pdf-to-100kb" className={`hover:text-blue-600 transition-colors ${pathname === '/compress-pdf-to-100kb' ? 'text-blue-600' : ''}`}>Compress PDF</Link>
             <Link href="/change-photo-background-to-white" className={`hover:text-blue-600 transition-colors ${pathname === '/change-photo-background-to-white' ? 'text-blue-600' : ''}`}>Background Changer</Link>
+            
+            <div id="google_translate_element" className="scale-90 transform origin-right"></div>
+            
             <Link href="/#all-tools" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-xs text-center lowercase first-letter:uppercase tracking-normal font-semibold">
               All Tools
             </Link>
           </nav>
 
           {/* Mobile Menu Toggle Button */}
-          <button
-            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open navigation menu"
-          >
-            <Menu className="w-5.5 h-5.5" />
-          </button>
+          <div className="flex md:hidden items-center gap-3">
+            <div id="google_translate_element_mobile" className="scale-75 transform origin-right overflow-hidden h-8 w-24"></div>
+            <button
+              className="p-2 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open navigation menu"
+            >
+              <Menu className="w-5.5 h-5.5" />
+            </button>
+          </div>
         </header>
       </div>
 

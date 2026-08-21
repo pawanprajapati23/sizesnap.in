@@ -60,8 +60,12 @@ export default function AboutPage() {
 
         {/* Founder Bio Card */}
         <div id="founder" className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-8 items-start mb-12">
-          <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-3xl flex-shrink-0">
-            PP
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-100 flex-shrink-0 shadow-sm">
+            <img 
+              src="/pawan.jpeg" 
+              alt="Pawan Prajapati" 
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Who is the owner of SizeSnap?</h2>

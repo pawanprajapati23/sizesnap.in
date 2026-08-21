@@ -314,6 +314,17 @@ export const tools: Tool[] = [
     ]
   },
   {
+    slug: 'smart-aadhar-print',
+    name: 'Smart Aadhar/PAN Print Maker',
+    shortName: 'ID Print Maker',
+    category: 'image',
+    description: 'Perfectly align Front & Back sides of Aadhar/PAN cards on an A4 sheet for easy PVC Card printing at Cyber Cafes.',
+    icon: '🖨️',
+    variants: [
+      { slug: 'aadhar-pan-card-print-maker', label: 'Aadhar/PAN Print Maker', metaTitle: 'Smart Aadhar & PAN Card Print Maker (A4 PDF) | SizeSnap', metaDescription: 'Upload Front and Back sides of any ID card (Aadhar/PAN/Voter ID) and automatically generate a print-ready A4 PDF with perfect PVC card dimensions (85x54mm).', h1: 'Smart Aadhar & PAN Card Print Maker', introParagraph: 'Specially designed for Cyber Cafes and print shops. Upload the Front and Back photos of an Aadhar, PAN, or Voter ID. We will automatically resize them to standard PVC Card dimensions (85.6mm x 54.0mm) and generate a print-ready A4 PDF.', config: {} }
+    ]
+  },
+  {
     slug: 'document-scanner',
     name: 'Document Scanner (B&W Filter)',
     shortName: 'Doc Scanner',

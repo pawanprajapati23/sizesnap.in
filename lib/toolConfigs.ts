@@ -325,6 +325,17 @@ export const tools: Tool[] = [
     ]
   },
   {
+    slug: 'formal-passport-suit-maker',
+    name: 'Formal Passport Suit Maker',
+    shortName: 'Suit Maker',
+    category: 'image',
+    description: 'Upload a casual selfie and automatically add a professional formal suit (coat & tie) to it for your CV or ID cards.',
+    icon: '👔',
+    variants: [
+      { slug: 'add-suit', label: 'Add Suit to Photo', metaTitle: 'Add Formal Suit to Photo Online Free | Passport Suit Maker', metaDescription: 'Easily add a professional men\'s formal suit (coat and tie) to your photo online without Photoshop. Perfect for CV, Resume, and job applications.', h1: 'Formal Passport Suit Maker', introParagraph: 'Need a professional photo for your CV or job application but don\'t have a suit? Upload any clear front-facing photo and seamlessly add a formal suit and tie over it.', config: {} }
+    ]
+  },
+  {
     slug: 'document-scanner',
     name: 'Document Scanner (B&W Filter)',
     shortName: 'Doc Scanner',

@@ -20,6 +20,7 @@ const WatermarkImageTool = dynamic(() => import('@/components/tools/WatermarkIma
 const WhatsAppDpTool = dynamic(() => import('@/components/tools/WhatsAppDpTool'), { ssr: false })
 const WordToPdfTool = dynamic(() => import('@/components/tools/WordToPdfTool'), { ssr: false })
 const SmartAadharPrintTool = dynamic(() => import('@/components/tools/SmartAadharPrintTool'), { ssr: false })
+const PassportSuitTool = dynamic(() => import('@/components/tools/PassportSuitTool'), { ssr: false })
 const DpiConverterTool = dynamic(() => import('@/components/tools/DpiConverterTool'), { ssr: false })
 const CardJoinerTool = dynamic(() => import('@/components/tools/CardJoinerTool'), { ssr: false })
 const DocumentEnhancerTool = dynamic(() => import('@/components/tools/DocumentEnhancerTool'), { ssr: false })
@@ -154,6 +155,8 @@ export default function ToolWrapper({ toolSlug, config }: { toolSlug: string; co
     toolComponent = <LiveDocumentScannerTool config={config} />
   } else if (toolSlug === 'smart-aadhar-print' || toolSlug === 'aadhar-pan-card-print-maker') {
     toolComponent = <SmartAadharPrintTool config={config} />
+  } else if (toolSlug === 'formal-passport-suit-maker') {
+    toolComponent = <PassportSuitTool config={config} />
   }
 
   if (!toolComponent) return null

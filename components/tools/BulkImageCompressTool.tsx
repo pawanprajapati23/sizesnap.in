@@ -51,7 +51,7 @@ export default function BulkImageCompressTool({ config }: Props) {
       if (!file.type.startsWith('image/')) continue
 
       items.push({
-        id: Math.random().toString(36).substr(2, 9),
+        id: crypto.randomUUID(),
         file,
         previewUrl: URL.createObjectURL(file),
         originalSize: file.size

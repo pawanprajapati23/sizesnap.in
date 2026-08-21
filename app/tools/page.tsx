@@ -150,21 +150,21 @@ export default function AllToolsPage() {
 
         {/* SEO Text Content */}
         <section className="bg-slate-50 border border-slate-200 rounded-2xl p-8 md:p-12 space-y-6">
-          <h2 className="text-3xl font-bold text-gray-900">Why Use SizeSnap's Tools Collection?</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Why Use SizeSnap&apos;s Tools Collection?</h2>
           <div className="prose prose-blue max-w-none text-gray-600 leading-loose">
             <p>
-              In today's digital age, dealing with strict file size limitations and exact dimension requirements for online portals is a daily hassle. Whether you are a student applying for competitive exams like SSC CGL, RRB NTPC, or UPSC, a professional managing document workflows, or a cyber cafe owner providing services to dozens of customers daily, you need a toolkit that is reliable and fast.
+              In today&apos;s digital age, dealing with strict file size limitations and exact dimension requirements for online portals is a daily hassle. Whether you are a student applying for competitive exams like SSC CGL, RRB NTPC, or UPSC, a professional managing document workflows, or a cyber cafe owner providing services to dozens of customers daily, you need a toolkit that is reliable and fast.
             </p>
             <p>
               <strong>SizeSnap</strong> was built with a singular mission: to provide a comprehensive, 100% free suite of image and PDF tools that operate entirely within your browser. 
             </p>
             <h3>1. The Privacy First Approach</h3>
             <p>
-              Most online compression tools require you to upload your highly sensitive documents (like Aadhar cards, PAN cards, Passports, and Signatures) to their remote servers. This poses a massive privacy risk. We have engineered all our tools using modern WebAssembly (WASM) and HTML5 Canvas API. This means when you click "Compress" or "Resize", the math and processing happen directly on your own device's CPU. Your files are never uploaded to the internet, guaranteeing complete data privacy.
+              Most online compression tools require you to upload your highly sensitive documents (like Aadhar cards, PAN cards, Passports, and Signatures) to their remote servers. This poses a massive privacy risk. We have engineered all our tools using modern WebAssembly (WASM) and HTML5 Canvas API. This means when you click &quot;Compress&quot; or &quot;Resize&quot;, the math and processing happen directly on your own device&apos;s CPU. Your files are never uploaded to the internet, guaranteeing complete data privacy.
             </p>
             <h3>2. Specialized Tools for Cyber Cafes and Students</h3>
             <p>
-              Beyond generic resizers, we've developed highly specialized utilities based on real-world Indian use cases. Tools like the <strong>Smart Aadhar Print Maker</strong> allow cyber cafes to perfectly align ID cards on A4 sheets for PVC printing. The <strong>Formal Passport Suit Maker</strong> uses AI-prepared assets to help job seekers instantly professionalize their CV photos. 
+              Beyond generic resizers, we&apos;ve developed highly specialized utilities based on real-world Indian use cases. Tools like the <strong>Smart Aadhar Print Maker</strong> allow cyber cafes to perfectly align ID cards on A4 sheets for PVC printing. The <strong>Formal Passport Suit Maker</strong> uses AI-prepared assets to help job seekers instantly professionalize their CV photos. 
             </p>
           </div>
         </section>

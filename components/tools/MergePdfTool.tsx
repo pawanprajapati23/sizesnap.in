@@ -58,7 +58,7 @@ export default function MergePdfTool({ config }: Props) {
         }
         const { pageCount } = await readPdfDetails(file)
         list.push({
-          id: Math.random().toString(36).substr(2, 9),
+          id: crypto.randomUUID(),
           file,
           sizeBytes: file.size,
           pageCount

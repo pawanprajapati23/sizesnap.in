@@ -77,7 +77,7 @@ export default function LiveDocumentScannerTool({ config }: Props) {
     const dataUrl = canvas.toDataURL('image/jpeg', 0.95)
     
     const newPage: Page = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: crypto.randomUUID(),
       originalDataUrl: dataUrl,
       filteredDataUrl: dataUrl, // will be updated
       filter: 'magic'

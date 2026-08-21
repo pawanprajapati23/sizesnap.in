@@ -68,7 +68,7 @@ export default function ImageToPdfTool({ config }: Props) {
         }
         const { width, height } = await loadImageDetails(file)
         list.push({
-          id: Math.random().toString(36).substr(2, 9),
+          id: crypto.randomUUID(),
           file,
           previewUrl: URL.createObjectURL(file),
           width,

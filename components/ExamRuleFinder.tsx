@@ -370,10 +370,10 @@ export default function ExamRuleFinder() {
         {filteredExams.length === 0 && (
           <div className="col-span-2 p-8 text-center bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700">
             <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
-              No exam matching "{query}" found in quick search.
+              No exam matching &quot;{query}&quot; found in quick search.
             </p>
             <p className="text-xs text-slate-500 mt-1">
-              Try searching "SSC", "NEET", "UPSC", or use our custom dimension resizer tool.
+              Try searching &quot;SSC&quot;, &quot;NEET&quot;, &quot;UPSC&quot;, or use our custom dimension resizer tool.
             </p>
             <Link
               href="/resize-image-in-cm-and-mm"

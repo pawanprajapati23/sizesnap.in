@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { Upload, Download, Printer, Grid, Scissors, CheckCircle, RefreshCw, ZoomIn, Image as ImageIcon } from 'lucide-react'
+import { Upload, Download, Printer, Grid, Scissors, CheckCircle, RefreshCw, ZoomIn, Image as ImageIcon, AlertCircle } from 'lucide-react'
 import { PDFDocument } from 'pdf-lib'
 
 interface Props {

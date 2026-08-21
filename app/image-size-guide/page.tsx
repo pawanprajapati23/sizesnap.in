@@ -98,7 +98,7 @@ export default function ImageSizeGuide() {
           1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Sarkari Exam</span> Photo Formatter
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Don't let your application get rejected due to incorrect photo sizes. Select your exam below and our AI will automatically resize your photo and signature to the exact official requirements.
+          Don&apos;t let your application get rejected due to incorrect photo sizes. Select your exam below and our AI will automatically resize your photo and signature to the exact official requirements.
         </p>
       </section>
 

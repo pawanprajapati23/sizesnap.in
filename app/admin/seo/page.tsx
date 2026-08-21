@@ -16,7 +16,7 @@ export default function SEOManagement() {
     fetchData()
   }, [timeRange])
 
-  const fetchData = async () => {
+  async function fetchData() {
     try {
       setLoading(true)
       const res = await fetch(`/api/admin/seo?timeRange=${timeRange}`)
@@ -226,7 +226,7 @@ export default function SEOManagement() {
                         </div>
                         <div>
                            <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">Improve: {opp.page}</h3>
-                           <p className="text-sm text-zinc-500">Query: "{opp.query}"</p>
+                           <p className="text-sm text-zinc-500">Query: &quot;{opp.query}&quot;</p>
                         </div>
                         <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 border border-zinc-100 dark:border-zinc-800/50">
                            <span className="font-semibold block mb-1">Why this matters:</span>

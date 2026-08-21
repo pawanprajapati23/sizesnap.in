@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { auth } from '@/lib/firebase'
-import { TrendingUp, Download, AlertTriangle } from 'lucide-react'
+import { TrendingUp, Download, AlertTriangle, Search, FileText, Calendar } from 'lucide-react'
 
 export default function SEOGrowthCenter() {
   const [data, setData] = useState<any>(null)
@@ -39,50 +39,13 @@ export default function SEOGrowthCenter() {
      
      // Generate markdown content
      const date = new Date().toISOString().split('T')[0]
-     let md = `You are modifying the existing SizeSnap production codebase.
-
-First inspect the current implementation.
-Do not rebuild existing systems.
-Use the following verified Search Console evidence.
-
-# WEEKLY SEO REPORT
-Period: ${timeRange}
-Generated: ${date}
-
-## PERFORMANCE
-Clicks: ${data.overview.clicks}
-Impressions: ${data.overview.impressions}
-CTR: ${data.overview.ctr}%
-Average Position: ${data.overview.position}
-
-## HIGH PRIORITY OPPORTUNITIES
-`
+     let md = `You are modifying the existing SizeSnap production codebase.\n\nFirst inspect the current implementation.\nDo not rebuild existing systems.\nUse the following verified Search Console evidence.\n\n# WEEKLY SEO REPORT\nPeriod: ${timeRange}\nGenerated: ${date}\n\n## PERFORMANCE\nClicks: ${data.overview.clicks}\nImpressions: ${data.overview.impressions}\nCTR: ${data.overview.ctr}%\nAverage Position: ${data.overview.position}\n\n## HIGH PRIORITY OPPORTUNITIES\n`
      
      data.opportunities.forEach((opp: any) => {
-        md += `
-PAGE: ${opp.page}
-QUERY: ${opp.query}
-IMPRESSIONS: ${opp.impressions}
-CLICKS: ${opp.clicks}
-CTR: ${opp.ctr}%
-POSITION: ${opp.position}
-RECOMMENDATION: ${opp.recommendation}
-`
+        md += `\nPAGE: ${opp.page}\nQUERY: ${opp.query}\nIMPRESSIONS: ${opp.impressions}\nCLICKS: ${opp.clicks}\nCTR: ${opp.ctr}%\nPOSITION: ${opp.position}\nRECOMMENDATION: ${opp.recommendation}\n`
      })
      
-     md += `
-## SAFETY RULES
-- Do not delete pages.
-- Do not create duplicate pages.
-- Do not change URLs unnecessarily.
-- Do not change canonical URLs without strong evidence.
-- Do not modify robots.txt automatically.
-- Do not invent facts.
-- Do not keyword stuff.
-- Prefer improving existing pages.
-- Preserve existing working tools.
-- Run build/tests before finalizing changes.
-`
+     md += `\n## SAFETY RULES\n- Do not delete pages.\n- Do not create duplicate pages.\n- Do not change URLs unnecessarily.\n- Do not change canonical URLs without strong evidence.\n- Do not modify robots.txt automatically.\n- Do not invent facts.\n- Do not keyword stuff.\n- Prefer improving existing pages.\n- Preserve existing working tools.\n- Run build/tests before finalizing changes.\n`
      
      // Download file
      const blob = new Blob([md], { type: 'text/markdown' })
@@ -133,12 +96,15 @@ RECOMMENDATION: ${opp.recommendation}
           </div>
           <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">GSC Not Connected</h2>
           <p className="text-zinc-500 dark:text-zinc-400 max-w-md mx-auto mb-8">
-            Connect your Google Search Console account via OAuth or Service Account to view real organic search metrics and discover actionable SEO opportunities.
+            Connect your Google Search Console account via OAuth to view real organic search metrics and discover actionable SEO opportunities.
           </p>
-          <button className="px-5 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-black text-sm font-medium rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm">
+          <button 
+            onClick={() => window.location.href = '/api/admin/oauth/start'}
+            className="px-5 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-black text-sm font-medium rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"
+          >
             Connect Google Search Console
           </button>
-          <p className="mt-4 text-[10px] text-zinc-400 max-w-sm">Requires read-only permissions (https://www.googleapis.com/auth/webmasters.readonly). Credentials must be configured securely in your environment variables.</p>
+          {data?.error && <p className="mt-4 text-xs text-red-500">{data.error}</p>}
         </div>
       ) : (
         <div className="space-y-6">
@@ -159,16 +125,103 @@ RECOMMENDATION: ${opp.recommendation}
              </button>
           </div>
 
-          {/* Opportunities Section Placeholder */}
-          <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
+          {/* Actionable Opportunities */}
+          <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden mb-6">
              <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
                 <h3 className="text-sm font-semibold flex items-center gap-2">
                    <AlertTriangle className="w-4 h-4 text-amber-500" /> Actionable Opportunities
                 </h3>
              </div>
-             <div className="p-5 text-sm text-zinc-600 dark:text-zinc-400">
-                <p>Opportunities will appear here once GSC data is fully synced and processed.</p>
+             <div className="p-0 text-sm text-zinc-600 dark:text-zinc-400">
+                {data.opportunities?.length > 0 ? (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
+                        <tr>
+                          <th className="px-5 py-3">Query</th>
+                          <th className="px-5 py-3 text-right">Imp.</th>
+                          <th className="px-5 py-3 text-right">Clicks</th>
+                          <th className="px-5 py-3 text-right">Pos.</th>
+                          <th className="px-5 py-3">Recommendation</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                        {data.opportunities.map((opp: any, idx: number) => (
+                          <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
+                            <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100">{opp.query}</td>
+                            <td className="px-5 py-3 text-right">{opp.impressions}</td>
+                            <td className="px-5 py-3 text-right">{opp.clicks}</td>
+                            <td className="px-5 py-3 text-right">{opp.position}</td>
+                            <td className="px-5 py-3 text-zinc-500">{opp.recommendation}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="p-5">No opportunities found for the selected period.</div>
+                )}
              </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Top Queries */}
+            <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
+               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
+                  <h3 className="text-sm font-semibold flex items-center gap-2">
+                     <Search className="w-4 h-4 text-blue-500" /> Top Queries
+                  </h3>
+               </div>
+               <div className="overflow-x-auto">
+                 <table className="w-full text-left text-sm">
+                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
+                     <tr>
+                       <th className="px-5 py-3">Query</th>
+                       <th className="px-5 py-3 text-right">Clicks</th>
+                       <th className="px-5 py-3 text-right">Imp.</th>
+                     </tr>
+                   </thead>
+                   <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                     {data.topQueries?.slice(0, 10).map((row: any, idx: number) => (
+                       <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
+                         <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100">{row.query}</td>
+                         <td className="px-5 py-3 text-right">{row.clicks}</td>
+                         <td className="px-5 py-3 text-right">{row.impressions}</td>
+                       </tr>
+                     ))}
+                   </tbody>
+                 </table>
+               </div>
+            </div>
+
+            {/* Top Pages */}
+            <div className="bg-white dark:bg-[#0A0A0A] border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
+               <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
+                  <h3 className="text-sm font-semibold flex items-center gap-2">
+                     <FileText className="w-4 h-4 text-green-500" /> Top Pages
+                  </h3>
+               </div>
+               <div className="overflow-x-auto">
+                 <table className="w-full text-left text-sm">
+                   <thead className="bg-zinc-50 dark:bg-zinc-900/20 text-xs uppercase font-medium">
+                     <tr>
+                       <th className="px-5 py-3">Page</th>
+                       <th className="px-5 py-3 text-right">Clicks</th>
+                       <th className="px-5 py-3 text-right">Imp.</th>
+                     </tr>
+                   </thead>
+                   <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                     {data.topPages?.slice(0, 10).map((row: any, idx: number) => (
+                       <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30">
+                         <td className="px-5 py-3 font-medium text-zinc-900 dark:text-zinc-100 truncate max-w-[200px]" title={row.page}>{row.page.replace('https://sizesnap.in', '') || '/'}</td>
+                         <td className="px-5 py-3 text-right">{row.clicks}</td>
+                         <td className="px-5 py-3 text-right">{row.impressions}</td>
+                       </tr>
+                     ))}
+                   </tbody>
+                 </table>
+               </div>
+            </div>
           </div>
         </div>
       )}

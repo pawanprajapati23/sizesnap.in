@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const staticPages = [
+    { url: `${BASE_URL}/tools`, priority: 0.9 },
     { url: `${BASE_URL}/about-us`, priority: 0.5 },
     { url: `${BASE_URL}/contact`, priority: 0.5 },
     { url: `${BASE_URL}/privacy-policy`, priority: 0.5 },

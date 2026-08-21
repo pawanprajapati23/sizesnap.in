@@ -193,7 +193,7 @@ export default function SmartAadharPrintTool({ config }: Props) {
                 <label className="block text-sm font-semibold text-gray-700">1. Upload Front Side</label>
                 <div 
                   onClick={() => frontInputRef.current?.click()}
-                  className={\`relative aspect-video rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden \${frontUrl ? 'border-blue-400 bg-blue-50/50' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'}\`}
+                  className={`relative aspect-video rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden ${frontUrl ? 'border-blue-400 bg-blue-50/50' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'}`}
                 >
                   {frontUrl ? (
                     <img src={frontUrl} alt="Front" className="absolute inset-0 w-full h-full object-contain p-2" />
@@ -214,7 +214,7 @@ export default function SmartAadharPrintTool({ config }: Props) {
                 <label className="block text-sm font-semibold text-gray-700">2. Upload Back Side</label>
                 <div 
                   onClick={() => backInputRef.current?.click()}
-                  className={\`relative aspect-video rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden \${backUrl ? 'border-blue-400 bg-blue-50/50' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'}\`}
+                  className={`relative aspect-video rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden ${backUrl ? 'border-blue-400 bg-blue-50/50' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'}`}
                 >
                   {backUrl ? (
                     <img src={backUrl} alt="Back" className="absolute inset-0 w-full h-full object-contain p-2" />

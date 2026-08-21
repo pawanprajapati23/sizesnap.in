@@ -169,21 +169,62 @@ export default function PhotoClarifierTool({ config }: { config?: any }) {
         }
       }
 
-      // Convert to blob matching target maxKb
-      let minQ = 0.4
-      let maxQ = 0.98
-      let bestBlob: Blob | null = null
+      // Convert to blob matching target maxKb using exact binary search
+      const testCompress = async (testScale: number, testQuality: number) => {
+         const tW = Math.max(1, Math.round(w * testScale))
+         const tH = Math.max(1, Math.round(h * testScale))
+         const tCanvas = document.createElement('canvas')
+         tCanvas.width = tW
+         tCanvas.height = tH
+         const tCtx = tCanvas.getContext('2d')!
+         tCtx.drawImage(canvas, 0, 0, w, h, 0, 0, tW, tH)
+         return await new Promise<Blob | null>((res) => tCanvas.toBlob(res, 'image/jpeg', testQuality))
+      }
 
-      for (let i = 0; i < 5; i++) {
-        const mid = (minQ + maxQ) / 2
-        const blob = await new Promise<Blob | null>((res) =>
-          canvas.toBlob(res, 'image/jpeg', mid)
-        )
-        if (!blob) break
-        const sizeKb = blob.size / 1024
-        bestBlob = blob
-        if (sizeKb > maxKb) maxQ = mid
-        else minQ = mid
+      let bestBlob: Blob | null = null
+      let bestDiff = Infinity
+
+      // 1. Binary Search Quality
+      let qLow = 0.05, qHigh = 1.0
+      for (let i = 0; i < 7; i++) {
+         const qMid = (qLow + qHigh) / 2
+         const blob = await testCompress(1.0, qMid)
+         if (!blob) break
+         const sizeKb = blob.size / 1024
+         if (sizeKb <= maxKb) {
+            if (maxKb - sizeKb < bestDiff) {
+               bestDiff = maxKb - sizeKb
+               bestBlob = blob
+            }
+            qLow = qMid
+         } else {
+            qHigh = qMid
+         }
+      }
+
+      // 2. Binary Search Scale
+      if (!bestBlob) {
+         let sLow = 0.1, sHigh = 0.95
+         bestDiff = Infinity
+         for (let i = 0; i < 7; i++) {
+            const sMid = (sLow + sHigh) / 2
+            const blob = await testCompress(sMid, 0.6)
+            if (!blob) break
+            const sizeKb = blob.size / 1024
+            if (sizeKb <= maxKb) {
+               if (maxKb - sizeKb < bestDiff) {
+                  bestDiff = maxKb - sizeKb
+                  bestBlob = blob
+               }
+               sLow = sMid
+            } else {
+               sHigh = sMid
+            }
+         }
+      }
+
+      if (!bestBlob) {
+         bestBlob = await testCompress(0.2, 0.2)
       }
 
       if (bestBlob) {

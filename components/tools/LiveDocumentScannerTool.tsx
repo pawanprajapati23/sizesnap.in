@@ -150,7 +150,7 @@ export default function LiveDocumentScannerTool({ config }: Props) {
   const deletePage = (id: string) => {
     setPages(prev => prev.filter(p => p.id !== id))
     if (pages.length === 1) {
-      setMode('idle')
+      startCamera()
     }
   }
 
@@ -283,9 +283,9 @@ export default function LiveDocumentScannerTool({ config }: Props) {
                   </div>
                   <button 
                     onClick={() => deletePage(page.id)}
-                    className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-full flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-2 right-2 w-8 h-8 bg-red-500 shadow-md text-white rounded-full flex items-center justify-center z-10 hover:bg-red-600 transition-colors"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                   
                   <img src={page.filteredDataUrl} alt={`Page ${idx + 1}`} className="w-full aspect-[3/4] object-cover" />

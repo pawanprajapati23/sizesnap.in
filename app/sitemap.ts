@@ -27,6 +27,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }))
 
+  
+  const hindiVariantPages = getAllPaths().map(({ tool, variant }) => ({
+    url: `${BASE_URL}/hi/${tool}/${variant}`,
+    lastModified: SITE_LAST_MODIFIED,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  const hindiToolHubPages = toolHubPages.map(page => ({
+    ...page,
+    url: page.url.replace(BASE_URL, BASE_URL + '/hi'),
+    priority: 0.8,
+  }))
+
   const storyPages = stories.map(story => ({
     url: `${BASE_URL}/stories/${story.slug}`,
     lastModified: new Date(story.date),
@@ -64,6 +78,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPages,
     ...toolHubPages,
     ...variantPages,
+    ...hindiVariantPages,
+    ...hindiToolHubPages,
     ...storyPages,
   ]
 }

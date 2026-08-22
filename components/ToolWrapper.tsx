@@ -26,6 +26,7 @@ const CardJoinerTool = dynamic(() => import('@/components/tools/CardJoinerTool')
 const DocumentEnhancerTool = dynamic(() => import('@/components/tools/DocumentEnhancerTool'), { ssr: false })
 const SplitPdfTool = dynamic(() => import('@/components/tools/SplitPdfTool'), { ssr: false })
 const BackgroundChangerTool = dynamic(() => import('@/components/tools/BackgroundChangerTool'), { ssr: false })
+const AadhaarMaskTool = dynamic(() => import('@/components/tools/AadhaarMaskTool'), { ssr: false })
 
 // Smart AI & New Utilities
 const AiBackgroundRemoverTool = dynamic(() => import('@/components/tools/AiBackgroundRemoverTool'), { ssr: false })

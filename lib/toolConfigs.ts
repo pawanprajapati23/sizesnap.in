@@ -13,6 +13,7 @@ export type ToolVariant = {
     dpi?: number
     targetColor?: string
     aspect?: string
+    presetId?: string
   }
 }
 
@@ -185,6 +186,27 @@ const signatureVariants: ToolVariant[] = [
 ];
 
 export const tools: Tool[] = [
+  {
+
+    slug: "aadhaar-masker",
+
+    name: "Aadhaar Card Masker",
+
+    shortName: "Mask Aadhaar",
+
+    category: "image",
+
+    description: "Securely blur or mask the first 8 digits of your Aadhaar Card online. 100% private, no uploads.",
+
+    icon: "ShieldCheck",
+
+    variants: [
+
+      { slug: "hide-digits", label: "Mask Aadhaar", metaTitle: "Mask Aadhaar Card Online Free (Hide First 8 Digits) | SizeSnap", metaDescription: "Securely blur, mask, or blackout the first 8 digits of your Aadhaar card online for free without uploading your ID.", h1: "Aadhaar Card Masker (Hide Digits)", introParagraph: "Government rules ke anusar kisi bhi private sanstha ko apna pura Aadhaar number dena safe nahi hai. Is free tool se aap apne Aadhaar ke first 8 digits securely blur/hide kar sakte hain.", config: {} }
+
+    ]
+
+  },
   {
     slug: 'resize-image',
     name: 'Resize Image Online',

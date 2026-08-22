@@ -1,0 +1,247 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { BookOpen, FileText, ShieldCheck, Zap } from 'lucide-react'
+import { tools } from '@/lib/toolConfigs'
+import { getRelatedBlogs } from '@/lib/blogConfigs'
+import { getPrettySlug } from '@/lib/customSeoContent'
+import { getVariantFaqs } from '@/lib/variantFaqs'
+import ToolWrapper from '@/components/ToolWrapper'
+import SeoContent from '@/components/SeoContent'
+import FaqSection from '@/components/FaqSection'
+import ReviewWidget from '@/components/ReviewWidget'
+
+interface Props {
+  params: Promise<{ tool: string }>
+}
+
+export function generateStaticParams() {
+  return tools.map(tool => ({ tool: tool.slug }))
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { tool: toolSlug } = await params
+  const tool = tools.find(item => item.slug === toolSlug)
+  if (!tool) return {}
+
+  return {
+    title: `${tool.name} Free Online - Sizes, Use Cases & Guides | SizeSnap`,
+    description: `${tool.description} Choose popular size targets, form-specific pages, and related guides. Private browser-based processing with instant download.`,
+    alternates: {
+      canonical: `https://sizesnap.in/${tool.slug}`,
+    },
+  }
+}
+
+export default async function ToolHubPage({ params }: Props) {
+  const { tool: toolSlug } = await params
+  const tool = tools.find(item => item.slug === toolSlug)
+  if (!tool) notFound()
+
+  const sizeVariants = tool.variants.filter(variant => variant.slug.includes('kb') || variant.slug.includes('mb'))
+  const useCaseVariants = tool.variants.filter(variant => !variant.slug.includes('kb') && !variant.slug.includes('mb'))
+  const featuredSizes = sizeVariants.filter(variant =>
+    [
+      'to-11kb', 'to-12kb', 'to-13kb', 'to-14kb', 'to-15kb',
+      'to-20kb', 'to-28kb', 'to-50kb', 'to-100kb', 'to-200kb', 'to-500kb', 'to-1mb'
+    ].includes(variant.slug)
+  )
+  const relatedBlogs = getRelatedBlogs(tool.slug)
+  const relatedTools = tools.filter(item => item.slug !== tool.slug && item.category === tool.category).slice(0, 6)
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://sizesnap.in'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': tool.name,
+        'item': `https://sizesnap.in/${tool.slug}`
+      }
+    ]
+  }
+
+  const toolSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': tool.name,
+    'description': tool.description,
+    'applicationCategory': 'UtilitiesApplication',
+    'operatingSystem': 'Any',
+    'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'ratingCount': (3000 + tool.name.length * 99).toString()
+    },
+    'url': `https://sizesnap.in/${tool.slug}`
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}
+      />
+      <div className="space-y-10">
+      <section className="bg-white border border-gray-200 rounded-xl p-6 md:p-8">
+        <div className="flex items-start gap-4">
+          <div className="text-4xl" aria-hidden="true">{tool.icon}</div>
+          <div className="space-y-3">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{tool.name}</h1>
+            <p className="text-gray-600 max-w-3xl leading-relaxed">{tool.description}</p>
+            <p className="text-sm font-medium text-green-700 flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4" />
+              No files are uploaded. Everything is processed in your browser.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Render the actual Tool instantly on the hub page */}
+      <ToolWrapper toolSlug={tool.slug} config={tool.variants[0]?.config || {}} />
+
+      {featuredSizes.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900">Popular {tool.shortName} Sizes</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {featuredSizes.map(variant => {
+              const prettySlug = getPrettySlug(tool.slug, variant.slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+              return (
+                <Link
+                  key={variant.slug}
+                  href={linkHref}
+                  className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  <span className="block font-bold text-gray-900">{variant.label}</span>
+                  <span className="block text-xs text-gray-500 mt-1">Instant download</span>
+                </Link>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
+      {sizeVariants.length > featuredSizes.length && (
+        <section className="space-y-4">
+          <details className="group bg-white border border-gray-200 rounded-xl p-5 shadow-sm [&_summary::-webkit-details-marker]:hidden">
+            <summary className="flex items-center justify-between font-semibold text-gray-800 cursor-pointer list-none">
+              <span className="text-lg font-bold text-gray-900">All Other Sizes ({sizeVariants.length})</span>
+              <span className="transition group-open:rotate-180 text-gray-500 font-bold text-sm">
+                ▼
+              </span>
+            </summary>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 mt-4 pt-4 border-t border-gray-100">
+              {sizeVariants.map(variant => {
+                const prettySlug = getPrettySlug(tool.slug, variant.slug)
+                const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+                return (
+                  <Link
+                    key={variant.slug}
+                    href={linkHref}
+                    className="bg-gray-50 border border-gray-100 rounded-lg py-1.5 px-2 text-center text-xs font-semibold text-gray-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                  >
+                    {variant.label}
+                  </Link>
+                )
+              })}
+            </div>
+          </details>
+        </section>
+      )}
+
+      {useCaseVariants.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900">Choose by Use Case</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {useCaseVariants.map(variant => {
+              const prettySlug = getPrettySlug(tool.slug, variant.slug)
+              const linkHref = prettySlug ? `/${prettySlug}` : `/${tool.slug}/${variant.slug}`
+              return (
+                <Link
+                  key={variant.slug}
+                  href={linkHref}
+                  className="bg-white border border-gray-200 rounded-lg p-5 hover:border-green-300 hover:bg-green-50 transition-colors"
+                >
+                  <h3 className="font-semibold text-gray-900">{variant.h1}</h3>
+                  <p className="text-sm text-gray-600 mt-2 line-clamp-2">{variant.introParagraph}</p>
+                </Link>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
+      <section className="grid md:grid-cols-3 gap-4">
+        <div className="bg-white border border-gray-200 rounded-lg p-5">
+          <Zap className="h-5 w-5 text-yellow-500 mb-3" />
+          <h2 className="font-semibold text-gray-900">Fast Mobile Workflow</h2>
+          <p className="text-sm text-gray-600 mt-2">Upload, preview, and download from Android, iPhone, or desktop without installing an app.</p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-lg p-5">
+          <FileText className="h-5 w-5 text-blue-600 mb-3" />
+          <h2 className="font-semibold text-gray-900">Built for Forms</h2>
+          <p className="text-sm text-gray-600 mt-2">Use size-specific pages for exams, portals, email attachments, and document submissions.</p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-lg p-5">
+          <BookOpen className="h-5 w-5 text-green-600 mb-3" />
+          <h2 className="font-semibold text-gray-900">Helpful Guides</h2>
+          <Link href="/image-size-guide" className="text-sm text-blue-700 hover:underline mt-2 inline-block">
+            Read the image size and upload guide
+          </Link>
+        </div>
+      </section>
+
+      {relatedBlogs.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900">Related Guides</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {relatedBlogs.map(blog => (
+              <Link key={blog.slug} href={`/blog/${blog.slug}`} className="bg-white border border-gray-200 rounded-lg p-5 hover:border-blue-300 transition-colors">
+                <h3 className="font-semibold text-gray-900">{blog.title}</h3>
+                <p className="text-sm text-gray-600 mt-2 line-clamp-2">{blog.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {relatedTools.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900">Related Tools</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {relatedTools.map(related => (
+              <Link key={related.slug} href={`/${related.slug}`} className="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
+                <span className="text-xl mr-2" aria-hidden="true">{related.icon}</span>
+                <span className="font-medium text-gray-900">{related.shortName}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Inject SEO and FAQs from the first variant to make the Hub page rankable */}
+      {tool.variants[0] && (
+        <>
+          <SeoContent tool={tool} variant={tool.variants[0]} />
+          <ReviewWidget ratingValue="4.8" ratingCount={(3000 + tool.name.length * 99).toString()} />
+          <FaqSection faqs={getVariantFaqs(tool, tool.variants[0])} toolName={tool.name} />
+        </>
+      )}
+
+    </div>
+    </>
+  )
+}

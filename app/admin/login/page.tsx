@@ -48,7 +48,23 @@ export default function AdminLogin() {
       
       router.push('/admin')
     } catch (err: any) {
-      setError(`${err.code || 'Error'}: ${err.message}.`)
+      let friendlyError = 'An unexpected error occurred during sign in.'
+      switch(err.code) {
+        case 'auth/invalid-credential':
+        case 'auth/wrong-password':
+        case 'auth/user-not-found':
+          friendlyError = 'Invalid email or password. Please check your credentials and try again.'
+          break
+        case 'auth/too-many-requests':
+          friendlyError = 'Too many failed login attempts. Please try again later.'
+          break
+        case 'auth/network-request-failed':
+          friendlyError = 'Network error. Please check your internet connection.'
+          break
+        default:
+          friendlyError = err.message || 'Authentication failed.'
+      }
+      setError(friendlyError)
     } finally {
       setLoading(false)
     }

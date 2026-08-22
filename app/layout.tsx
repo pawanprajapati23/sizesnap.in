@@ -154,8 +154,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* <PwaInstallBanner /> */}
         <SessionDownloadTray />
         {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-EWE73QX6FS');`}
         </Script>
         {/* Google AdSense — Loaded standard for crawler verification during approval phase */}
@@ -163,11 +163,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2945912073877101"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         {/* Google Translate Integration */}
-        <Script id="google-translate-init" strategy="afterInteractive">
+        <Script id="google-translate-init" strategy="lazyOnload">
           {`
             function googleTranslateElementInit() {
               new google.translate.TranslateElement({
@@ -188,7 +188,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <Script
           src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         </div>

@@ -46,14 +46,19 @@ export async function GET(request: Request) {
     if (timeRange === '7days') durationDays = 7
     if (timeRange === '3months') durationDays = 90
     
-    const currentEnd = new Date()
-    const currentStart = new Date()
-    currentStart.setDate(currentEnd.getDate() - durationDays)
+    // GSC data has a delay of 2-3 days. We offset by 3 days to ensure data exists.
+    const currentEnd = new Date();
+    currentEnd.setDate(currentEnd.getDate() - 3);
     
-    const prevEnd = new Date(currentStart)
-    prevEnd.setDate(prevEnd.getDate() - 1)
-    const prevStart = new Date(prevEnd)
-    prevStart.setDate(prevStart.getDate() - durationDays)
+    const currentStart = new Date(currentEnd);
+    // If durationDays is 1 (24hours), start and end should be the same day
+    currentStart.setDate(currentStart.getDate() - durationDays + 1);
+    
+    const prevEnd = new Date(currentStart);
+    prevEnd.setDate(prevEnd.getDate() - 1);
+    
+    const prevStart = new Date(prevEnd);
+    prevStart.setDate(prevStart.getDate() - durationDays + 1);
 
     const start = currentStart.toISOString().split('T')[0]
     const end = currentEnd.toISOString().split('T')[0]

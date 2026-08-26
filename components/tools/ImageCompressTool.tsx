@@ -22,7 +22,7 @@ export default function ImageCompressTool({ config }: Props) {
   const [errorMsg, setErrorMsg] = useState('')
   
   // Compression modes: 'quality' or 'size'
-  const [mode, setMode] = useState<'quality' | 'size'>('quality')
+  const [mode, setMode] = useState<'quality' | 'size'>(config.maxKB ? 'size' : 'quality')
   
   // Controls
   const [compressQuality, setCompressQuality] = useState<number>(75) // Default 75% quality

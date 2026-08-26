@@ -204,8 +204,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         {/* Author Bio Box */}
         <div className="mt-12 bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col md:flex-row gap-6 items-center md:items-start">
-          <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl flex-shrink-0">
-            PP
+          <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
+            <img src="/pawan.jpeg" alt="Pawan Prajapati" className="w-full h-full object-cover" />
           </div>
           <div>
             <h3 className="font-bold text-gray-900 mb-1">Written by Pawan Prajapati</h3>

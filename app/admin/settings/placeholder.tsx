@@ -1,6 +1,6 @@
 'use client'
 
-import { Shield, Zap, Tool, Wrench, BarChart3, Search, Users, Bell, Mail, HardDrive, Lock, Link, MessageSquare, AlertTriangle, FileClock } from 'lucide-react'
+import { Shield, Zap, Wrench, BarChart3, Search, Users, Bell, Mail, HardDrive, Lock, Link, MessageSquare, AlertTriangle, FileClock } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 export default function SettingsPlaceholder() {

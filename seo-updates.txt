@@ -1,0 +1,61 @@
+  'compress-image/to-12kb': {
+    metaTitle: 'Compress Image to 12KB Online | Free JPG/JPEG Size Reducer',
+    metaDescription: 'Instantly compress your photo, signature, or document to exactly 12KB without losing quality. Perfect for online Sarkari form uploads.',
+    h1: 'Compress Photo to 12KB (Without Losing Quality)',
+    introParagraph: 'Looking to compress your image to exactly 12KB? Our free online tool reduces your JPG/JPEG file size instantly. Unlike a standard resizer, this tool strictly compresses the file size to 12KB while retaining the original image dimensions. If you need to change the physical width and height instead, try our <a href="/resize-image/to-12kb" class="text-blue-600 underline">12KB Photo Resizer</a>.',
+    faqs: [
+      { question: 'How do I compress my photo to 12KB?', answer: 'Simply upload your image, and our smart compression engine will instantly reduce its file size strictly below 12KB in JPG format, ready for download.' },
+      { question: 'Is my data safe?', answer: 'Yes, 100%. All processing happens securely inside your browser. Your images are never uploaded to our servers.' },
+      { question: 'Will compressing to 12KB blur my photo?', answer: 'We use optimized compression algorithms that retain maximum possible clarity, but shrinking to 12KB inherently reduces some detail. For better results, ensure your original photo is cropped tightly around the subject.' }
+    ]
+  },
+  'resize-image/to-14kb': {
+    metaTitle: 'Resize 14KB Photo Size Online | Free 14 KB Converter',
+    metaDescription: 'Easily resize your photo or signature dimensions to meet the 14KB size requirement for government exams and job applications.',
+    h1: '14KB Photo Size Converter',
+    introParagraph: 'Resize your images to fit the exact 14KB size limit. This tool adjusts both the file dimensions and file size to ensure your upload is perfectly compliant. Need to just shrink the file size without touching dimensions? Use our <a href="/compress-image/to-14kb" class="text-blue-600 underline">14KB Compressor</a> instead.',
+    faqs: [
+      { question: 'How do I get a 14KB photo size?', answer: 'Upload your photo here. The tool will automatically adjust the dimensions and compression to ensure the final output is 14KB or less.' },
+      { question: 'Can I resize my signature to 14KB too?', answer: 'Yes! Upload any signature image and the tool will properly resize it to fit the 14KB limit.' }
+    ]
+  },
+  'compress-image/to-14kb': {
+    metaTitle: 'Compress Photo to 14KB Online (Free & Fast)',
+    metaDescription: 'Compress your image exactly to 14KB while maintaining the best possible quality. Ideal for strict online application requirements.',
+    h1: 'Compress Image to 14KB',
+    introParagraph: 'Quickly compress any JPG or JPEG image down to 14KB. This tool preserves your original image width and height, exclusively compressing the data to hit the 14KB target. If you need to fix the dimensions as well, check out our <a href="/resize-image/to-14kb" class="text-blue-600 underline">14KB Photo Resizer</a>.',
+    faqs: [
+      { question: 'What is the difference between compressing and resizing to 14KB?', answer: 'Compressing to 14KB reduces the file size (bytes) by optimizing the data while keeping the width and height identical. Resizing changes both the file size and the physical dimensions (pixels).' },
+      { question: 'Which image formats are supported?', answer: 'We support JPG, JPEG, PNG, and HEIC inputs. All compressed outputs are in standard JPG format as required by most online portals.' }
+    ]
+  },
+  'resize-image/to-13kb': {
+    metaTitle: 'Resize Image to 13KB Online | Fast Photo Resizer',
+    metaDescription: 'Automatically resize and compress your photo or signature to a precise 13KB size. Free, private, and works completely in your browser.',
+    h1: '13KB Photo Size Resizer',
+    introParagraph: 'Struggling with a strict 13KB size limit? This utility instantly resizes your image dimensions and intelligently compresses the output to ensure the final file is exactly 13KB or below. Want to keep your current dimensions? Try our <a href="/compress-image/to-13kb" class="text-blue-600 underline">13KB Image Compressor</a>.',
+    faqs: [
+      { question: 'Why does my application require a 13KB photo size?', answer: 'Many older government portals and specific exam boards have highly restrictive database limitations, requiring uploads to be under exactly 15KB or 13KB to save storage space.' },
+      { question: 'Will this tool work on mobile?', answer: 'Absolutely. The 13KB photo size resizer works instantly on all Android and iOS devices directly within the browser.' }
+    ]
+  },
+  'compress-image/to-11kb': {
+    metaTitle: 'Compress Image to 11KB | Free Photo & Signature Compressor',
+    metaDescription: 'Instantly reduce the size of your photo or signature to 11KB online. High quality, safe, and perfectly optimized for Sarkari forms.',
+    h1: 'Compress Photo to 11KB',
+    introParagraph: 'Shrink your image file size to exactly 11KB without touching the dimensions. Highly optimized for online portals demanding strict 11KB uploads. If you also need to modify the pixel dimensions, please use the <a href="/resize-image/to-11kb" class="text-blue-600 underline">11KB Photo Resizer</a> instead.',
+    faqs: [
+      { question: 'How can I compress an image to 11KB without losing quality?', answer: 'While heavy compression inherently sacrifices some quality, our advanced browser-side engine carefully balances clarity and file size so your face or signature remains fully visible and legally valid.' },
+      { question: 'Is the output in JPG format?', answer: 'Yes, the final compressed 11KB file will always be in the universally accepted JPG/JPEG format.' }
+    ]
+  },
+  'compress-pdf/to-15kb': {
+    metaTitle: 'Compress PDF to 15KB Online (Exactly & Free)',
+    metaDescription: 'Reduce your PDF file size to exactly 15KB or less. Fast, free, and secure online PDF compressor for strict 15KB limits.',
+    h1: 'Compress PDF to 15KB Online',
+    introParagraph: 'Need your document in PDF format but strictly under 15KB? Our advanced PDF compressor shrinks your file down while keeping text legible. It is 100% free, happens directly on your device, and is fully safe for sensitive documents like Aadhaar or marksheets. Need to convert an image instead? Use our <a href="/image-to-pdf/convert" class="text-blue-600 underline">JPG to PDF converter</a>.',
+    faqs: [
+      { question: 'Can a PDF actually be compressed to 15KB?', answer: 'Yes, but 15KB is a very small limit. The tool will convert your PDF to a highly compressed grayscale or low-DPI format to hit the target. It is best used for simple text documents or single-page IDs.' },
+      { question: 'Are my PDF documents safe?', answer: '100%. Unlike other tools, we do not upload your PDF to a remote server. The 15KB compression happens locally inside your browser.' }
+    ]
+  },

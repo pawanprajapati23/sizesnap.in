@@ -44,7 +44,7 @@ export default function SEOManagement() {
     
     let md = `# SizeSnap SEO Growth Task\n\n`;
     md += `**Project:** SizeSnap\n`;
-    md += `**Period:** ${timeRange === '7days' ? '7 Days' : timeRange === '28days' ? '28 Days' : '3 Months'}\n`;
+    md += `**Period:** ${timeRange === '24hours' ? '24 Hours' : timeRange === '7days' ? '7 Days' : timeRange === '28days' ? '28 Days' : '3 Months'}\n`;
     md += `**Generated:** ${date}\n\n`;
     md += `## 1. Overall Performance Summary\n`;
     md += `- **Total Clicks:** ${current.clicks.toLocaleString()} ${formatChange(changes.clicks)}\n`;
@@ -133,13 +133,13 @@ export default function SEOManagement() {
         
         {data?.connected && (
           <div className="flex bg-zinc-100 dark:bg-zinc-800/50 p-1 rounded-lg border border-zinc-200 dark:border-zinc-800">
-             {['7days', '28days', '3months'].map(tr => (
+             {['24hours', '7days', '28days', '3months'].map(tr => (
                 <button 
                   key={tr}
                   onClick={() => setTimeRange(tr)}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${timeRange === tr ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'}`}
                 >
-                  {tr === '7days' ? '7 Days' : tr === '28days' ? '28 Days' : '3 Months'}
+                  {tr === '24hours' ? '24 Hours' : tr === '7days' ? '7 Days' : tr === '28days' ? '28 Days' : '3 Months'}
                 </button>
              ))}
           </div>

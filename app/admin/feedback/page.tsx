@@ -18,7 +18,7 @@ export default function FeedbackManager() {
       const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout fetching data')), 5000))
       const msgSnap = await Promise.race([getDocs(msgQ), timeout]) as any
       const loadedMsgs: any[] = []
-      msgSnap.forEach(doc => {
+      msgSnap.forEach((doc: any) => {
          loadedMsgs.push({ id: doc.id, ...doc.data() })
       })
       setMessages(loadedMsgs)

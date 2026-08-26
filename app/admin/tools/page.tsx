@@ -28,7 +28,7 @@ export default function ToolManagement() {
     let unsubscribeAuth: any;
     if (auth) {
       import('firebase/auth').then(({ onAuthStateChanged }) => {
-        unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+        unsubscribeAuth = onAuthStateChanged(auth as any, (user) => {
           if (user) fetchStats();
         });
       });

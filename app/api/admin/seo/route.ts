@@ -42,6 +42,7 @@ export async function GET(request: Request) {
     } catch (siteErr) { console.warn("Could not fetch sites list", siteErr) }
 
     let durationDays = 28
+    if (timeRange === '24hours') durationDays = 1
     if (timeRange === '7days') durationDays = 7
     if (timeRange === '3months') durationDays = 90
     
@@ -241,7 +242,7 @@ export async function GET(request: Request) {
 
            if (!hasDedicatedPage) {
                let concept = q.replace(/(free|online|tool|without watermark|fast|best)/g, '').trim();
-               concept = concept.replace(/\b\w/g, l => l.toUpperCase());
+               concept = concept.replace(/\b\w/g, (l: any) => l.toUpperCase());
 
                if (!newToolCandidates[concept]) {
                    newToolCandidates[concept] = {
@@ -326,11 +327,11 @@ export async function GET(request: Request) {
           const rawId = Buffer.from(key).toString('base64');
           opp.id = rawId.replace(/[^a-zA-Z0-9]/g, '').substring(0, 16);
           const existing = existingActions.find(e => e.id === opp.id);
-          opp.status = existing ? existing.status : 'Pending';
-          opp.completedAt = existing?.completedAt;
-          opp.beforeStats = existing?.beforeStats;
+          (opp as any).status = existing ? (existing as any).status : 'Pending';
+          (opp as any).completedAt = (existing as any)?.completedAt;
+          (opp as any).beforeStats = (existing as any)?.beforeStats;
           
-          if (opp.status === 'Done' && opp.beforeStats) {
+          if ((opp as any).status === 'Done' && opp.beforeStats) {
               opp.afterStats = { impressions: opp.impressions, clicks: opp.clicks, ctr: opp.ctr, position: opp.position }
           }
           uniqueOpps.push(opp);

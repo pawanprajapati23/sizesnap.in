@@ -114,7 +114,7 @@ export default function SmartAadharPrintTool({ config }: Props) {
       })
 
       const pdfBytes = await pdfDoc.save()
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
       const newPdfUrl = URL.createObjectURL(blob)
       
       if (pdfUrl) URL.revokeObjectURL(pdfUrl)

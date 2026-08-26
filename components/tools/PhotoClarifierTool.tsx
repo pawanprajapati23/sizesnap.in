@@ -171,13 +171,13 @@ export default function PhotoClarifierTool({ config }: { config?: any }) {
 
       // Convert to blob matching target maxKb using exact binary search
       const testCompress = async (testScale: number, testQuality: number) => {
-         const tW = Math.max(1, Math.round(w * testScale))
-         const tH = Math.max(1, Math.round(h * testScale))
+         const tW = Math.max(1, Math.round(canvas.width * testScale))
+         const tH = Math.max(1, Math.round(canvas.height * testScale))
          const tCanvas = document.createElement('canvas')
          tCanvas.width = tW
          tCanvas.height = tH
          const tCtx = tCanvas.getContext('2d')!
-         tCtx.drawImage(canvas, 0, 0, w, h, 0, 0, tW, tH)
+         tCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, tW, tH)
          return await new Promise<Blob | null>((res) => tCanvas.toBlob(res, 'image/jpeg', testQuality))
       }
 

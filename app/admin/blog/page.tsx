@@ -19,7 +19,7 @@ export default function BlogManager() {
       const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout fetching data')), 5000))
       const snap = await Promise.race([getDocs(q), timeout]) as any
       const data: any[] = []
-      snap.forEach(d => data.push({ id: d.id, ...d.data() }))
+      snap.forEach((d: any) => data.push({ id: d.id, ...d.data() }))
       setPosts(data)
     } catch (err) {
       console.error(err)

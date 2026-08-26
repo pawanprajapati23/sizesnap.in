@@ -41,7 +41,7 @@ export default function AdminDashboard() {
     let unsubscribeAuth: any;
     if (auth) {
       import('firebase/auth').then(({ onAuthStateChanged }) => {
-        unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+        unsubscribeAuth = onAuthStateChanged(auth as any, (user) => {
           if (user) fetchData();
           else window.location.href = '/admin/login';
         });

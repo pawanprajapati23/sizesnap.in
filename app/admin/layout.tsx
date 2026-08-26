@@ -22,7 +22,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     
     let unsubscribeSession: () => void;
 
-    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+    const unsubscribeAuth = onAuthStateChanged(auth as any, (user) => {
       if (user) {
         setUser(user)
         
@@ -35,7 +35,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                  if (data.sessionId && data.sessionId !== currentSession) {
                     console.log('Another device logged in. Logging out...')
                     alert('You have been logged out because this admin account was accessed from another device.')
-                    signOut(auth)
+                    signOut(auth as any)
                  }
               }
            })
@@ -154,7 +154,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
                </a>
                <button 
-                 onClick={() => auth.signOut()}
+                 onClick={() => auth?.signOut()}
                  className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                  title="Sign Out"
                >

@@ -21,11 +21,6 @@ export default function ImageCompressTool({ config }: Props) {
   const [dragOver, setDragOver] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   
-  // Compression modes: 'quality' or 'size'
-  const [mode, setMode] = useState<'quality' | 'size'>(config.maxKB ? 'size' : 'quality')
-  
-  // Controls
-  const [compressQuality, setCompressQuality] = useState<number>(75) // Default 75% quality
   const [targetKB, setTargetKB] = useState<number>(config.maxKB || 100)
   const [loadingStep, setLoadingStep] = useState(0)
 
@@ -41,7 +36,7 @@ export default function ImageCompressTool({ config }: Props) {
   ]
 
   // Local GPU-Accelerated Canvas Compression
-  const compressImage = useCallback(async (file: File, qualityPercent: number, targetSizeKB?: number) => {
+  const compressImage = useCallback(async (file: File, targetSizeKB: number) => {
     return new Promise<Blob>((resolve, reject) => {
       const reader = new FileReader()
       reader.onload = (event) => {
@@ -70,29 +65,50 @@ export default function ImageCompressTool({ config }: Props) {
             canvas.height = height
             ctx.drawImage(img, 0, 0, width, height)
 
-            // Mode 1: Compress to exact KB limit using Binary Search
-            if (mode === 'size' && targetSizeKB) {
-              
-              const testCompress = (testScale: number, testQuality: number): Promise<Blob | null> => {
-                return new Promise((res) => {
-                  canvas.width = Math.max(1, Math.round(width * testScale))
-                  canvas.height = Math.max(1, Math.round(height * testScale))
-                  ctx.clearRect(0, 0, canvas.width, canvas.height)
-                  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-                  canvas.toBlob((b) => res(b), 'image/jpeg', testQuality)
-                })
-              }
+            const testCompress = (testScale: number, testQuality: number): Promise<Blob | null> => {
+              return new Promise((res) => {
+                canvas.width = Math.max(1, Math.round(width * testScale))
+                canvas.height = Math.max(1, Math.round(height * testScale))
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+                canvas.toBlob((b) => res(b), 'image/jpeg', testQuality)
+              })
+            }
 
-              let bestBlob: Blob | null = null
-              let bestDiff = Infinity
+            let bestBlob: Blob | null = null
+            let bestDiff = Infinity
+            
+            // 1. Binary Search on Quality (Scale = 1.0)
+            let qLow = 0.05
+            let qHigh = 1.0
+            
+            for (let i = 0; i < 7; i++) {
+              const qMid = (qLow + qHigh) / 2
+              const blob = await testCompress(1.0, qMid)
+              if (!blob) break
+              const kb = blob.size / 1024
               
-              // 1. Binary Search on Quality (Scale = 1.0)
-              let qLow = 0.05
-              let qHigh = 1.0
+              if (kb <= targetSizeKB) {
+                const diff = targetSizeKB - kb
+                if (diff < bestDiff) {
+                  bestDiff = diff
+                  bestBlob = blob
+                }
+                qLow = qMid // Try higher quality to get closer to target
+              } else {
+                qHigh = qMid // Size too large, lower quality
+              }
+            }
+
+            // 2. If even at q=0.05 it's too big, Binary Search on Scale (Quality = 0.6)
+            if (!bestBlob) {
+              let sLow = 0.1
+              let sHigh = 0.95
+              bestDiff = Infinity
               
-              for (let i = 0; i < 7; i++) {
-                const qMid = (qLow + qHigh) / 2
-                const blob = await testCompress(1.0, qMid)
+              for (let i = 0; i < 8; i++) {
+                const sMid = (sLow + sHigh) / 2
+                const blob = await testCompress(sMid, 0.6)
                 if (!blob) break
                 const kb = blob.size / 1024
                 
@@ -102,60 +118,22 @@ export default function ImageCompressTool({ config }: Props) {
                     bestDiff = diff
                     bestBlob = blob
                   }
-                  qLow = qMid // Try higher quality to get closer to target
+                  sLow = sMid // Try larger scale
                 } else {
-                  qHigh = qMid // Size too large, lower quality
+                  sHigh = sMid // Scale too large
                 }
               }
+            }
 
-              // 2. If even at q=0.05 it's too big, Binary Search on Scale (Quality = 0.6)
-              if (!bestBlob) {
-                let sLow = 0.1
-                let sHigh = 0.95
-                bestDiff = Infinity
-                
-                for (let i = 0; i < 8; i++) {
-                  const sMid = (sLow + sHigh) / 2
-                  const blob = await testCompress(sMid, 0.6)
-                  if (!blob) break
-                  const kb = blob.size / 1024
-                  
-                  if (kb <= targetSizeKB) {
-                    const diff = targetSizeKB - kb
-                    if (diff < bestDiff) {
-                      bestDiff = diff
-                      bestBlob = blob
-                    }
-                    sLow = sMid // Try larger scale
-                  } else {
-                    sHigh = sMid // Scale too large
-                  }
-                }
-              }
-
-              if (bestBlob) {
-                resolve(bestBlob)
-              } else {
-                // Extreme fallback
-                const extremeBlob = await testCompress(0.2, 0.2)
-                if (extremeBlob && (extremeBlob.size / 1024) <= targetSizeKB) {
-                   resolve(extremeBlob)
-                } else {
-                   reject(new Error('Cannot compress this image below target size.'))
-                }
-              }
+            if (bestBlob) {
+              resolve(bestBlob)
             } else {
-              // Mode 2: Simple Quality Compression (instant)
-              try {
-                canvas.toBlob((blob) => {
-                  if (blob) {
-                    resolve(blob)
-                  } else {
-                    reject(new Error('Failed to generate image blob.'))
-                  }
-                }, 'image/jpeg', qualityPercent / 100)
-              } catch (err) {
-                reject(err)
+              // Extreme fallback
+              const extremeBlob = await testCompress(0.2, 0.2)
+              if (extremeBlob && (extremeBlob.size / 1024) <= targetSizeKB) {
+                 resolve(extremeBlob)
+              } else {
+                 reject(new Error('Cannot compress this image below target size.'))
               }
             }
           } catch (error) {
@@ -168,9 +146,9 @@ export default function ImageCompressTool({ config }: Props) {
       reader.onerror = () => reject(new Error('Failed to read image stream.'))
       reader.readAsDataURL(file)
     })
-  }, [mode])
+  }, [])
 
-  const processImage = useCallback(async (file: File, overrideQuality?: number, overrideKB?: number) => {
+  const processImage = useCallback(async (file: File, overrideKB?: number) => {
     if (!file.type.startsWith('image/')) {
       setErrorMsg('Invalid file type. Please upload a JPG, PNG, or WEBP image.')
       setStatus('error')
@@ -184,7 +162,6 @@ export default function ImageCompressTool({ config }: Props) {
     }
 
     setOriginalFile(file)
-    // Clean old original URL if exists
     if (originalUrl) URL.revokeObjectURL(originalUrl)
     setOriginalUrl(URL.createObjectURL(file))
 
@@ -197,11 +174,10 @@ export default function ImageCompressTool({ config }: Props) {
       setLoadingStep(prev => (prev < 5 ? prev + 1 : prev))
     }, 200)
 
-    const q = overrideQuality !== undefined ? overrideQuality : compressQuality
     const kb = overrideKB !== undefined ? overrideKB : targetKB
 
     try {
-      const blob = await compressImage(file, q, kb)
+      const blob = await compressImage(file, kb)
       clearInterval(interval)
       
       if (resultUrl) URL.revokeObjectURL(resultUrl)
@@ -210,7 +186,6 @@ export default function ImageCompressTool({ config }: Props) {
       setResultSize(blob.size)
       setStatus('done')
       
-      // Fire confetti gamification!
       import('canvas-confetti').then((confetti) => {
         confetti.default({
           particleCount: 150,
@@ -224,31 +199,11 @@ export default function ImageCompressTool({ config }: Props) {
       setErrorMsg(err.message || 'Compression failed. Try a different format.')
       setStatus('error')
     }
-  }, [compressQuality, targetKB, compressImage, resultUrl, originalUrl])
-
-  // Triggers processing immediately on control adjustments
-  const handleQualityChange = (val: number) => {
-    setCompressQuality(val)
-    if (originalFile) processImage(originalFile, val, undefined)
-  }
+  }, [targetKB, compressImage, resultUrl, originalUrl])
 
   const handleKBChange = (val: number) => {
     setTargetKB(val)
-    if (originalFile) processImage(originalFile, undefined, val)
-  }
-
-  const handleModeChange = (newMode: 'quality' | 'size') => {
-    setMode(newMode)
-    if (originalFile) {
-      // Re-trigger with temporary updated mode state
-      setTimeout(() => {
-        if (newMode === 'quality') {
-          processImage(originalFile, compressQuality, undefined)
-        } else {
-          processImage(originalFile, undefined, targetKB)
-        }
-      }, 50)
-    }
+    if (originalFile) processImage(originalFile, val)
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -319,100 +274,48 @@ export default function ImageCompressTool({ config }: Props) {
           <p className="text-indigo-100 text-xs mt-1">Shrink image file size locally in your browser.</p>
         </div>
         <div className="bg-white/15 px-3 py-1.5 rounded-lg backdrop-blur-sm border border-white/10 text-xs font-semibold self-start sm:self-auto">
-          Mode: <span className="font-extrabold text-amber-300">{mode === 'quality' ? 'Quality Optimized' : `${targetKB}KB Target`}</span>
+          Target: <span className="font-extrabold text-amber-300">Strictly {targetKB}KB</span>
         </div>
       </div>
 
       <div className="p-6 space-y-6">
-        {/* Toggle Mode */}
+        {/* Controls */}
         {status !== 'processing' && (
           <div className="space-y-4">
-            <div className="flex border-b border-gray-200">
-              <button
-                onClick={() => handleModeChange('quality')}
-                className={`flex-1 pb-3 text-sm font-semibold transition-all ${
-                  mode === 'quality'
-                    ? 'border-b-2 border-indigo-600 text-indigo-600'
-                    : 'text-gray-500 hover:text-gray-800'
-                }`}
-              >
-                Compress by Quality
-              </button>
-              <button
-                onClick={() => handleModeChange('size')}
-                className={`flex-1 pb-3 text-sm font-semibold transition-all ${
-                  mode === 'size'
-                    ? 'border-b-2 border-indigo-600 text-indigo-600'
-                    : 'text-gray-500 hover:text-gray-800'
-                }`}
-              >
-                Compress to Target Size (KB)
-              </button>
-            </div>
-
-            {/* Quality Slider Control */}
-            {mode === 'quality' && (
-              <div className="space-y-2 bg-gray-50/50 border border-gray-100 rounded-xl p-4 animate-fadeIn">
-                <div className="flex items-center justify-between text-sm font-medium text-gray-700">
-                  <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-gray-500">
-                    <Percent className="w-4 h-4 text-indigo-600" />
-                    Quality Level:
-                  </span>
-                  <span className="font-bold text-indigo-700">{compressQuality}%</span>
-                </div>
-                <input
-                  type="range"
-                  min={10}
-                  max={95}
-                  step={5}
-                  value={compressQuality}
-                  onChange={e => handleQualityChange(Number(e.target.value))}
-                  className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
-                />
-                <div className="flex justify-between text-[10px] text-gray-400 font-bold">
-                  <span>SMALL FILE (Low Quality)</span>
-                  <span>BALANCED</span>
-                  <span>BEST QUALITY (High Size)</span>
-                </div>
-              </div>
-            )}
-
             {/* Target Size Slider Control */}
-            {mode === 'size' && (
-              <div className="space-y-2 bg-gray-50/50 border border-gray-100 rounded-xl p-4 animate-fadeIn">
-                <div className="flex items-center justify-between text-sm font-medium text-gray-700">
-                  <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-gray-500">
-                    <Sliders className="w-4 h-4 text-indigo-600" />
-                    Max File Size Budget:
-                  </span>
-                  <div className="flex items-center gap-1.5">
-                    <input
-                      type="number"
-                      value={targetKB}
-                      min={10}
-                      max={2000}
-                      onChange={e => handleKBChange(Math.max(10, Math.min(2000, Number(e.target.value))))}
-                      className="w-20 px-2 py-0.5 border text-center rounded-md text-sm font-bold text-indigo-700"
-                    />
-                    <span className="text-xs text-gray-500 font-semibold">KB</span>
-                  </div>
-                </div>
-                <input
-                  type="range"
-                  min={10}
-                  max={500}
-                  step={5}
-                  value={targetKB <= 500 ? targetKB : 500}
-                  onChange={e => handleKBChange(Number(e.target.value))}
-                  className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
-                />
-                <div className="flex justify-between text-[10px] text-gray-400 font-bold">
-                  <span>10 KB</span>
-                  <span>250 KB</span>
-                  <span>500 KB</span>
+            <div className="space-y-2 bg-gray-50/50 border border-gray-100 rounded-xl p-4 animate-fadeIn">
+              <div className="flex items-center justify-between text-sm font-medium text-gray-700">
+                <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-gray-500">
+                  <Sliders className="w-4 h-4 text-indigo-600" />
+                  Max File Size Budget:
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <input
+                    type="number"
+                    value={targetKB}
+                    min={10}
+                    max={2000}
+                    onChange={e => handleKBChange(Math.max(10, Math.min(2000, Number(e.target.value))))}
+                    className="w-20 px-2 py-0.5 border text-center rounded-md text-sm font-bold text-indigo-700"
+                  />
+                  <span className="text-xs text-gray-500 font-semibold">KB</span>
                 </div>
               </div>
-            )}
+              <input
+                type="range"
+                min={10}
+                max={500}
+                step={5}
+                value={targetKB <= 500 ? targetKB : 500}
+                onChange={e => handleKBChange(Number(e.target.value))}
+                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+              />
+              <div className="flex justify-between text-[10px] text-gray-400 font-bold">
+                <span>10 KB</span>
+                <span>250 KB</span>
+                <span>500 KB</span>
+              </div>
+            </div>
           </div>
         )}
 

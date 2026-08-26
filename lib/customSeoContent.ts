@@ -8,6 +8,26 @@ export type CustomSeoData = {
 }
 
 export const customSeoData: Record<string, CustomSeoData> = {
+  'compress-image/to-14kb': {
+    metaTitle: 'Compress Image to 14KB Online Free (Without Quality Loss) | SizeSnap',
+    metaDescription: 'Need to compress photo or signature to 14KB? Use our free online 14KB image compressor to reduce JPG, PNG files under 14KB instantly. 100% private.',
+    h1: 'Compress Image to 14KB Online Free',
+    introParagraph: 'Kya aapko apna photo, thumb impression ya scanned signature exactly 14KB ke niche compress karna hai? SizeSnap ka 14KB image compressor tool quality loss ke bina file size ko optimize karta hai.',
+    bodyHtml: `
+      <h2>Image ko 14KB Kaise Banayein? (Problem & Solution)</h2>
+      <p>Kai online government forms, SSC, IBPS aur university registration portals me file size ki strict limits hoti hain. Jab candidates ko apna signature ya left thumb impression (LTI) upload karna hota hai, toh mostly max limit 15KB ya usse kam hoti hai, jiske liye exactly 14KB tak file ko compress karna sabse best hota hai. Standard tools se compress karne par image fat (blur ho) jati hai aur upload reject ho jata hai.</p>
+      
+      <p>SizeSnap ka smart compressor is problem ko solve karta hai. Aap easily apni image ko select karein aur ye tool automatically usko 14KB ke andar fit kar dega bina clarity khoye. <strong>Upload your file and compress instantly</strong>.</p>
+      
+      <h2>100% Safe & Private (No Server Uploads)</h2>
+      <p>Aapki privacy humari priority hai. Aapka personal photo, LTI ya signature hamare kisi bhi server par upload nahi hota. Pura compression process aapke mobile ya laptop ke browser (client-side) me secure tarike se execute hota hai.</p>
+    `,
+    faqs: [
+      { question: 'Kya 14KB me compress karne par photo ya signature blur hoga?', answer: 'Nahi, humara advanced algorithm smart scaling aur contrast adjustment apply karta hai, taaki signatures aur text ekdum clear (legible) rahein bina file size badhaye.' },
+      { question: 'Kya ye tool 14KB thumb impression (LTI/RTI) ke liye kaam karta hai?', answer: 'Haan, ye bilkul perfect hai. Aap easily apna scanned left ya right thumb impression 14KB tak reduce karke government exams (SSC, IBPS, NEET) ke form me upload kar sakte hain.' },
+      { question: 'Kaise pata chalega ki compress hui file ka size 14KB se kam hai?', answer: 'Download hone se pehle preview box me aapko final size (jaise 13.8 KB) dikh jayega, aur download ki hui file easily kisi bhi portal me accept ho jayegi.' }
+    ]
+  },
   'live-document-scanner/camscanner-clone': {
     metaTitle: 'Free CamScanner Alternative Online | Live Document Scanner | SizeSnap',
     metaDescription: 'Use your phone camera to scan documents directly in the browser. Apply Magic B&W filters and save as A4 PDF instantly without downloading any app.',

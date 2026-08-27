@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getPendingUgcBlogs, updateUgcBlogStatus } from '@/lib/ugcBlogStore';
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
   try {
@@ -20,6 +21,12 @@ export async function PATCH(req: Request) {
     }
 
     await updateUgcBlogStatus(id, status, updatedData);
+
+    // Trigger revalidation so the new blog appears immediately
+    if (status === 'approved') {
+      revalidatePath('/blog');
+      revalidatePath('/sitemap.xml');
+    }
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

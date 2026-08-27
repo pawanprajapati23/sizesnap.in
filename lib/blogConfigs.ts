@@ -1,5 +1,37 @@
 export const blogs = [
   {
+    slug: 'left-thumb-impression-lti-guidelines-for-exams',
+    title: 'Left Thumb Impression (LTI) Guidelines for SSC, IBPS & UPSC Exams',
+    date: '2026-08-27',
+    excerpt: 'Uploading a blurred Left Thumb Impression leads to direct form rejection. Learn the exact size limits, dimensions, and ink color rules to perfectly format your LTI.',
+    content: `
+      <h2>The Importance of a Clear Left Thumb Impression (LTI)</h2>
+      <p>Almost every major government exam in India—including SSC, IBPS, UPSC, and State PSCs—requires you to upload a scanned image of your Left Thumb Impression (LTI). A blurred or improperly sized thumb impression is one of the top three reasons for application rejection.</p>
+      
+      <h3>1. Standard LTI Specifications</h3>
+      <ul>
+        <li><strong>File Format:</strong> JPEG / JPG</li>
+        <li><strong>File Size Limit:</strong> Usually between 10 KB to 20 KB (or 10 KB to 50 KB depending on the portal).</li>
+        <li><strong>Dimensions:</strong> Approximately 3.0 cm x 3.0 cm or 200 x 230 pixels.</li>
+        <li><strong>Ink Color:</strong> Blue or Black stamp pad ink. Do NOT use regular pen ink to draw the impression!</li>
+      </ul>
+
+      <h3>2. Common Mistakes to Avoid</h3>
+      <p>Many candidates press their thumb too hard on the stamp pad, causing the fingerprint ridges to merge into a dark, unreadable blob. Press lightly on the pad, and press firmly but briefly on a clean white paper. Avoid casting a mobile shadow when clicking the photo.</p>
+
+      <h3>3. How to Compress & Resize Your LTI Without Blurring</h3>
+      <p>If you take a photo of your LTI with your phone, it will likely be over 2MB. Shrinking this to 10-20KB manually can completely destroy the ridge details, making it look like a black spot.</p>
+      
+      <p>Instead of struggling, you can use our exact-size compression tools:</p>
+      <ul>
+        <li>For a strict 14KB limit, use our <a href="/compress-image/to-14kb">Image to 14KB Compressor</a>.</li>
+        <li>For a standard 20KB limit, use the <a href="/resize-image-to-20kb">Resize Image to 20KB Tool</a>.</li>
+        <li>For specific dimensions, you can try our <a href="/thumb-impression-resizer">Thumb Impression Resizer</a>.</li>
+      </ul>
+      <p>Our intelligent AI ensures that the intricate fingerprint ridges stay sharp and visible, even when the file size is reduced drastically. Plus, your privacy is protected since everything is processed locally in your browser.</p>
+    `
+  },
+  {
     slug: 'how-to-remove-shadow-from-aadhar-pan-card-mobile',
     title: 'How to Remove Shadows from Aadhar & PAN Card Photos (Using Mobile)',
     date: '2026-08-21',

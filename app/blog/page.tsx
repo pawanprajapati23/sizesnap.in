@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { blogs } from '@/lib/blogConfigs'
 import { getApprovedUgcBlogs } from '@/lib/ugcBlogStore'
+import { ShareWriteLink } from '@/components/ShareWriteLink'
 
 export const revalidate = 3600 // ISR: Rebuild every hour
 
@@ -43,9 +44,12 @@ export default async function BlogIndex() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Resources & Tutorials</h1>
           <p className="text-gray-600">Detailed guides on fixing image size problems for official applications.</p>
         </div>
-        <Link href="/blog/write" className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 shadow-sm shrink-0 whitespace-nowrap">
-          ✍️ Write a Guest Post
-        </Link>
+        <div className="flex items-center gap-3 shrink-0">
+          <ShareWriteLink />
+          <Link href="/blog/write" className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 shadow-sm whitespace-nowrap">
+            ✍️ Write a Guest Post
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-6">

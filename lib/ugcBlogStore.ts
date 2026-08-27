@@ -30,20 +30,23 @@ export async function getPendingUgcBlogs(): Promise<UgcBlog[]> {
 }
 
 export async function getApprovedUgcBlogs(): Promise<UgcBlog[]> {
-  const snapshot = await adminDb.collection(COLLECTION_NAME).where('status', '==', 'approved').get();
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as UgcBlog));
+  try {
+    const snapshot = await adminDb.collection(COLLECTION_NAME).where('status', '==', 'approved').get();
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as UgcBlog));
+  } catch(e) { console.error(e); return []; }
 }
 
 export async function getApprovedUgcBlogBySlug(slug: string): Promise<UgcBlog | null> {
-  const snapshot = await adminDb.collection(COLLECTION_NAME)
-    .where('status', '==', 'approved')
-    .where('slug', '==', slug)
-    .limit(1)
-    .get();
-  
-  if (snapshot.empty) return null;
-  const doc = snapshot.docs[0];
-  return { id: doc.id, ...doc.data() } as UgcBlog;
+  try {
+    const snapshot = await adminDb.collection(COLLECTION_NAME)
+      .where('status', '==', 'approved')
+      .where('slug', '==', slug)
+      .limit(1)
+      .get();
+    if (snapshot.empty) return null;
+    const doc = snapshot.docs[0];
+    return { id: doc.id, ...doc.data() } as UgcBlog;
+  } catch (e) { console.error(e); return null; }
 }
 
 export async function updateUgcBlogStatus(id: string, status: 'approved' | 'rejected', updatedData?: Partial<UgcBlog>) {

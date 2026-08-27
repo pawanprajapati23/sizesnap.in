@@ -16,21 +16,30 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const resolvedParams = await params
-  const blog = blogs.find(b => b.slug === resolvedParams.slug)
+  const paramSlug = (await params).slug;
+  let blog = blogs.find((b) => b.slug === paramSlug) as any;
+  let isUgc = false;
+  if (!blog) {
+    blog = await getApprovedUgcBlogBySlug(paramSlug);
+    if (blog) {
+      blog = { ...blog, date: blog.approvedAt || blog.submittedAt };
+      isUgc = true;
+    }
+  }
+
   if (!blog) return {}
 
   return {
     title: `${blog.title} | SizeSnap Blog`,
     description: blog.excerpt,
     alternates: {
-      canonical: `https://sizesnap.in/blog/${resolvedParams.slug}`
+      canonical: `https://sizesnap.in/blog/${paramSlug}`
     },
     openGraph: {
       title: `${blog.title} | SizeSnap Blog`,
       description: blog.excerpt,
       type: 'article',
-      url: `https://sizesnap.in/blog/${resolvedParams.slug}`,
+      url: `https://sizesnap.in/blog/${paramSlug}`,
       publishedTime: blog.date,
       images: [
         {
@@ -46,7 +55,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params
-  const blog = blogs.find(b => b.slug === resolvedParams.slug)
+  let blog = blogs.find(b => b.slug === resolvedParams.slug) as any
+  let isUgc = false
+
+  if (!blog) {
+    blog = await getApprovedUgcBlogBySlug(resolvedParams.slug)
+    if (blog) {
+      blog = { ...blog, date: blog.approvedAt || blog.submittedAt }
+      isUgc = true
+    }
+  }
 
   if (!blog) notFound()
 

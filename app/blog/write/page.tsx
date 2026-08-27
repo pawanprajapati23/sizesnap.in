@@ -49,8 +49,8 @@ export default function WriteBlogPage() {
 
       {status === 'success' ? (
         <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl p-8 text-center">
-          <h3 className="text-xl font-bold mb-2">Submitted Successfully! 🎉</h3>
-          <p>Thank you for contributing. Our team will review your post shortly.</p>
+          <h3 className="text-xl font-bold mb-2">Successfully sent for review! 🎉</h3>
+          <p>Thank you for contributing. Your post will be published once approved by our team.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-5">
@@ -100,7 +100,7 @@ export default function WriteBlogPage() {
             disabled={status === 'submitting'}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-colors disabled:opacity-50"
           >
-            {status === 'submitting' ? 'Submitting...' : 'Submit for Review'}
+            {status === 'submitting' ? 'Publishing...' : 'Publish'}
           </button>
         </form>
       )}

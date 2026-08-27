@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { BookOpen, FileText } from 'lucide-react'
+import { UgcBlogApprover } from '@/components/admin/UgcBlogApprover'
 
 export default function ContentManager() {
   return (
@@ -30,6 +31,8 @@ export default function ContentManager() {
           </div>
         </Link>
       </div>
+
+      <UgcBlogApprover />
     </div>
   )
 }

@@ -80,7 +80,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: 'SEO', href: '/admin/seo', icon: PieChart },
     { name: 'Feedback', href: '/admin/feedback', icon: MessageSquare },
     { name: 'Content', href: '/admin/content', icon: BookOpen },
-    { name: 'Settings', href: '/admin/settings', icon: Settings },
   ]
 
   return (

@@ -2,12 +2,17 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { blogs } from '@/lib/blogConfigs'
+import { getApprovedUgcBlogBySlug, getApprovedUgcBlogs } from '@/lib/ugcBlogStore'
 import { getRelatedStories } from '@/lib/storyConfigs'
 
-export function generateStaticParams() {
-  return blogs.map((blog) => ({
-    slug: blog.slug,
-  }))
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  // Pre-render static blogs
+  const staticSlugs = blogs.map((blog) => ({ slug: blog.slug }));
+  // Wait, UGC blogs might not be fully known at build time, so we just return static ones.
+  // ISR will handle generating dynamic ones on the fly.
+  return staticSlugs;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -108,7 +113,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     'dateModified': blog.date,
     'author': {
       '@type': 'Person',
-      'name': 'Pawan Prajapati',
+      'name': isUgc ? blog.authorName : 'Pawan Prajapati',
       'url': 'https://sizesnap.in/about-us#founder'
     },
     'image': 'https://sizesnap.in/logo.png',
@@ -208,8 +213,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <img src="/pawan.jpeg" alt="Pawan Prajapati" className="w-full h-full object-cover" />
           </div>
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">Written by Pawan Prajapati</h3>
-            <p className="text-sm text-gray-600 mb-2">Founder & Developer at SizeSnap</p>
+            <h3 className="font-bold text-gray-900 mb-1">Written by {isUgc ? blog.authorName : 'Pawan Prajapati'}</h3>
+            <p className="text-sm text-gray-600 mb-2">{isUgc ? 'Guest Author & Contributor' : 'Founder & Developer at SizeSnap'}</p>
             <p className="text-xs text-gray-500">
               Last updated on {new Date(blog.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
             </p>

@@ -7,6 +7,7 @@ import CookieConsent from '@/components/CookieConsent'
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
 import PwaInstallBanner from '@/components/PwaInstallBanner'
 import SessionDownloadTray from '@/components/SessionDownloadTray'
+import PresenceTrackerWrapper from '@/components/PresenceTrackerWrapper'
 
 import Script from 'next/script'
 
@@ -153,6 +154,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* <ServiceWorkerRegister /> */}
         {/* <PwaInstallBanner /> */}
         <SessionDownloadTray />
+        <PresenceTrackerWrapper />
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EWE73QX6FS" strategy="lazyOnload" />
         <Script id="google-analytics" strategy="lazyOnload">

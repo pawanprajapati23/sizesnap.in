@@ -9,9 +9,9 @@ export type CustomSeoData = {
 
 export const customSeoData: Record<string, CustomSeoData> = {
   'compress-image/to-14kb': {
-    metaTitle: 'Compress Image to 14KB Online Free (Without Quality Loss) | SizeSnap',
-    metaDescription: 'Need to compress photo or signature to 14KB? Use our free online 14KB image compressor to reduce JPG, PNG files under 14KB instantly. 100% private.',
-    h1: 'Compress Image to 14KB Online Free',
+    metaTitle: '14 KB Photo Size: Compress Image to 14KB Online Free',
+    metaDescription: 'Get exact 14 KB photo size for your uploads. Compress image to 14KB online free without losing quality. Perfect for signatures and Sarkari forms.',
+    h1: '14 KB Photo Size: Compress Image to 14KB',
     introParagraph: 'Kya aapko apna photo, thumb impression ya scanned signature exactly 14KB ke niche compress karna hai? SizeSnap ka 14KB image compressor tool quality loss ke bina file size ko optimize karta hai.',
     bodyHtml: `
       <h2>Image ko 14KB Kaise Banayein? (Problem & Solution)</h2>
@@ -396,9 +396,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'resize-image/to-11kb': {
-    metaTitle: '11KB Converter Online Free (No Quality Loss) | SizeSnap',
-    metaDescription: 'Need to resize photo or signature to 11KB? Use our free online 11KB converter to compress JPG, PNG files under 11KB instantly. 100% private.',
-    h1: '11KB Image Converter & Resizer Online Free',
+    metaTitle: '11KB Photo Size Resizer: Resize Image to 11KB Online',
+    metaDescription: 'Easily get 11KB photo size. Resize image to 11KB online for forms. Fast, free and private photo resizing tool.',
+    h1: '11KB Photo Size Resizer',
     introParagraph: 'Kya aapko passport photo ya scanned signature ka size exactly 11KB ke niche compress karna hai? SizeSnap ka 11KB resizer tool quality loss ke bina file resolution optimize karta hai.',
     bodyHtml: `
       <h2>Image aur Signature Ko 11KB Kaise Karein? (Problem & Solution)</h2>
@@ -1511,9 +1511,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'compress-image/to-12kb': {
-    metaTitle: 'Compress Image to 12KB Online | Free JPG/JPEG Size Reducer',
-    metaDescription: 'Instantly compress your photo, signature, or document to exactly 12KB without losing quality. Perfect for online Sarkari form uploads.',
-    h1: 'Compress Photo to 12KB (Without Losing Quality)',
+    metaTitle: '12KB Photo Size: Compress Image to 12KB Online Free',
+    metaDescription: 'Get exactly 12KB photo size instantly. Compress image to 12KB online free. Fast, private, and perfect for government form uploads and signatures.',
+    h1: '12KB Photo Size: Compress Image to 12KB',
     introParagraph: 'Looking to compress your image to exactly 12KB? Our free online tool reduces your JPG/JPEG file size instantly. Unlike a standard resizer, this tool strictly compresses the file size to 12KB while retaining the original image dimensions. If you need to change the physical width and height instead, try our <a href="/resize-image/to-12kb" class="text-blue-600 underline">12KB Photo Resizer</a>.',
     bodyHtml: '',
     faqs: [
@@ -1523,9 +1523,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'resize-image/to-14kb': {
-    metaTitle: 'Resize 14KB Photo Size Online | Free 14 KB Converter',
-    metaDescription: 'Easily resize your photo or signature dimensions to meet the 14KB size requirement for government exams and job applications.',
-    h1: '14KB Photo Size Converter',
+    metaTitle: '14 KB Photo Size Resizer: Resize Image to 14KB Online',
+    metaDescription: 'Need a 14 KB photo size? Easily resize image to 14KB online. Adjust dimensions and get exactly 14KB photo or signature for forms.',
+    h1: '14 KB Photo Size Resizer',
     introParagraph: 'Resize your images to fit the exact 14KB size limit. This tool adjusts both the file dimensions and file size to ensure your upload is perfectly compliant. Need to just shrink the file size without touching dimensions? Use our <a href="/compress-image/to-14kb" class="text-blue-600 underline">14KB Compressor</a> instead.',
     bodyHtml: '',
     faqs: [
@@ -1534,9 +1534,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'compress-image/to-14kb': {
-    metaTitle: 'Compress Photo to 14KB Online (Free & Fast)',
-    metaDescription: 'Compress your image exactly to 14KB while maintaining the best possible quality. Ideal for strict online application requirements.',
-    h1: 'Compress Image to 14KB',
+    metaTitle: '14 KB Photo Size: Compress Image to 14KB Online Free',
+    metaDescription: 'Get exact 14 KB photo size for your uploads. Compress image to 14KB online free without losing quality. Perfect for signatures and Sarkari forms.',
+    h1: '14 KB Photo Size: Compress Image to 14KB',
     introParagraph: 'Quickly compress any JPG or JPEG image down to 14KB. This tool preserves your original image width and height, exclusively compressing the data to hit the 14KB target. If you need to fix the dimensions as well, check out our <a href="/resize-image/to-14kb" class="text-blue-600 underline">14KB Photo Resizer</a>.',
     bodyHtml: '',
     faqs: [
@@ -1545,9 +1545,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'resize-image/to-13kb': {
-    metaTitle: 'Resize Image to 13KB Online | Fast Photo Resizer',
-    metaDescription: 'Automatically resize and compress your photo or signature to a precise 13KB size. Free, private, and works completely in your browser.',
-    h1: '13KB Photo Size Resizer',
+    metaTitle: '13 KB Photo Size Resizer: Resize Image to 13KB Online',
+    metaDescription: 'Create the perfect 13 KB photo size. Resize image to 13KB online and adjust both file size and dimensions easily.',
+    h1: '13 KB Photo Size Resizer',
     introParagraph: 'Struggling with a strict 13KB size limit? This utility instantly resizes your image dimensions and intelligently compresses the output to ensure the final file is exactly 13KB or below. Want to keep your current dimensions? Try our <a href="/compress-image/to-13kb" class="text-blue-600 underline">13KB Image Compressor</a>.',
     bodyHtml: '',
     faqs: [
@@ -1556,9 +1556,9 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   'compress-image/to-11kb': {
-    metaTitle: 'Compress Image to 11KB | Free Photo & Signature Compressor',
-    metaDescription: 'Instantly reduce the size of your photo or signature to 11KB online. High quality, safe, and perfectly optimized for Sarkari forms.',
-    h1: 'Compress Photo to 11KB',
+    metaTitle: '11KB Photo Size: Compress Image to 11KB Online Free',
+    metaDescription: 'Get an exact 11KB photo size. Free online tool to compress image to 11KB without losing quality. Perfect for strict 11 compress requirements.',
+    h1: '11KB Photo Size: Compress Image to 11KB',
     introParagraph: 'Shrink your image file size to exactly 11KB without touching the dimensions. Highly optimized for online portals demanding strict 11KB uploads. If you also need to modify the pixel dimensions, please use the <a href="/resize-image/to-11kb" class="text-blue-600 underline">11KB Photo Resizer</a> instead.',
     bodyHtml: '',
     faqs: [
@@ -1567,6 +1567,28 @@ export const customSeoData: Record<string, CustomSeoData> = {
     ]
   },
   
+
+
+  'resize-image/to-12kb': {
+    metaTitle: '12KB Photo Size Resizer: Resize Image to 12KB Online',
+    metaDescription: 'Make your image exactly 12KB photo size. Free online tool to resize image to 12KB and adjust pixels for strict form requirements.',
+    h1: '12KB Photo Size Resizer',
+    introParagraph: 'Resize your images and signatures to exactly 12KB. Adjust dimensions and file size simultaneously to meet tight form constraints. If you just want to compress without resizing, try our <a href="/compress-image/to-12kb" class="text-blue-600 underline">12KB Photo Compressor</a>.',
+    bodyHtml: '',
+    faqs: [
+      { question: 'How do I resize an image to 12KB?', answer: 'Upload your photo, and our client-side engine will dynamically resize and compress it to fit precisely under 12KB.' }
+    ]
+  },
+  'compress-image/to-13kb': {
+    metaTitle: '13 KB Photo Size: Compress Image to 13KB Online Free',
+    metaDescription: 'Need exactly 13 KB photo size? Compress image to 13KB online free. Fast and private photo and signature size reducer.',
+    h1: '13 KB Photo Size: Compress Image to 13KB',
+    introParagraph: 'Compress any JPG/JPEG down to exactly 13KB without altering its physical dimensions. Fast, secure, and fully browser-based.',
+    bodyHtml: '',
+    faqs: [
+      { question: 'Is the 13KB photo compression free?', answer: 'Yes, 100% free and it works completely locally in your browser.' }
+    ]
+  },
 
 }
 

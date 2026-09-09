@@ -6,6 +6,7 @@ import { auth, db } from '@/lib/firebase'
 import { onAuthStateChanged, User, signOut } from 'firebase/auth'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { LayoutDashboard, LogOut, MessageSquare, Activity, Settings, BookOpen, FileText, PieChart } from 'lucide-react'
+import RealtimeCounter from '@/components/RealtimeCounter'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -178,8 +179,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               {pathname === '/admin' ? 'Overview' : pathname.split('/').pop()?.replace('-', ' ')}
             </h1>
           </div>
-          <div className="flex items-center">
-             <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 px-2 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-[#FAFAFA] dark:bg-black">
+          <div className="flex items-center gap-3">
+             <RealtimeCounter />
+             <div className="hidden sm:flex items-center gap-2 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 px-2 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-[#FAFAFA] dark:bg-black">
                <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
                Production
              </div>

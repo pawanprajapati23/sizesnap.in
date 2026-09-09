@@ -68,10 +68,10 @@ export default async function BlogIndex() {
                 <span>📅 {new Date(blog.dateStr).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                 <span className="h-1 w-1 rounded-full bg-gray-300" />
                 <span>⏱️ {readTime} min read</span>
-                {blog.author && (
+                {('author' in blog && blog.author) && (
                   <>
                     <span className="h-1 w-1 rounded-full bg-gray-300" />
-                    <span className="font-medium text-gray-700">By {blog.author}</span>
+                    <span className="font-medium text-gray-700">By {(blog as any).author}</span>
                   </>
                 )}
               </div>

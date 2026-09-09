@@ -6,16 +6,18 @@ import { ref, onValue, set, onDisconnect, push } from 'firebase/database';
 
 export default function PresenceTracker() {
   useEffect(() => {
-    if (!rtdb) return;
+    // Narrowing type for TS
+    const db = rtdb;
+    if (!db) return;
 
     // A special reference provided by Firebase to check client's connection state
-    const connectedRef = ref(rtdb, '.info/connected');
+    const connectedRef = ref(db, '.info/connected');
     
     const unsubscribe = onValue(connectedRef, (snap) => {
       if (snap.val() === true) {
         // We're connected (or reconnected)!
         // Create a reference to the active_users node
-        const activeUsersRef = ref(rtdb, 'active_users');
+        const activeUsersRef = ref(db, 'active_users');
         // Push a new session node for this user
         const myConnectionsRef = push(activeUsersRef);
 

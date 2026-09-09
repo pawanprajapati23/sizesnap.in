@@ -9,8 +9,9 @@ export default function RealtimeCounter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!rtdb) return;
-    const activeUsersRef = ref(rtdb, 'active_users');
+    const db = rtdb;
+    if (!db) return;
+    const activeUsersRef = ref(db, 'active_users');
     const unsubscribe = onValue(activeUsersRef, (snap) => {
       if (snap.exists()) {
         setCount(Object.keys(snap.val()).length);

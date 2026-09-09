@@ -1533,7 +1533,7 @@ export const customSeoData: Record<string, CustomSeoData> = {
       { question: 'Can I resize my signature to 14KB too?', answer: 'Yes! Upload any signature image and the tool will properly resize it to fit the 14KB limit.' }
     ]
   },
-  'compress-image/to-14kb': {
+  '_duplicate_compress_image_to_14kb': {
     metaTitle: '14 KB Photo Size: Compress Image to 14KB Online Free',
     metaDescription: 'Get exact 14 KB photo size for your uploads. Compress image to 14KB online free without losing quality. Perfect for signatures and Sarkari forms.',
     h1: '14 KB Photo Size: Compress Image to 14KB',

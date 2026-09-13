@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://sizesnap.in'),
   title: 'SizeSnap — Free Online Image & PDF Tools',
   description: 'Free online tools to resize images, compress PDFs, and more. No signup, no watermark, works on mobile. Visit sizesnap.in',
-  keywords: 'image resizer, pdf compressor, compress image, resize photo online free, sizesnap',
+  keywords: 'image resizer, pdf compressor, compress image, resize photo online free, sizesnap, sarkari form photo resize, 14kb photo size, 12kb photo size',
   openGraph: {
     type: 'website',
     siteName: 'SizeSnap',
@@ -56,6 +56,14 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://sizesnap.in',
+    languages: {
+      'en': 'https://sizesnap.in',
+      'hi': 'https://sizesnap.in/hi',
+      'x-default': 'https://sizesnap.in',
     },
   },
 }

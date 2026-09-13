@@ -7,7 +7,8 @@ import { stories } from '@/lib/storyConfigs'
 import { getPrettySlug } from '@/lib/customSeoContent'
 
 const BASE_URL = 'https://sizesnap.in'
-const SITE_LAST_MODIFIED = new Date('2026-06-18')
+const TODAY = new Date()
+const SITE_LAST_MODIFIED = new Date('2026-09-14') // Updated: homepage redesign + SEO upgrade
 
 export const revalidate = 3600;
 
@@ -85,7 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   return [
-    { url: BASE_URL, lastModified: SITE_LAST_MODIFIED, changeFrequency: 'weekly', priority: 1.0 },
+    { url: BASE_URL, lastModified: TODAY, changeFrequency: 'weekly', priority: 1.0 },
     ...staticPages,
     ...blogPages,
     ...ugcBlogPages,

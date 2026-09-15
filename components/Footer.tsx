@@ -108,6 +108,7 @@ export default function Footer() {
 
       <div className="border-t border-gray-800 px-4 py-6 text-center text-xs flex flex-col gap-3">
         <div className="flex justify-center gap-4 flex-wrap">
+          <Link href="/sarkarinaukari" className="hover:text-white transition-colors text-blue-400 font-semibold">Sarkari Naukri Updates</Link>
           <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
           <Link href="/about-us" className="hover:text-white transition-colors">About Us</Link>

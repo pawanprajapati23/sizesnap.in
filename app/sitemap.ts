@@ -85,11 +85,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'monthly' as const,
   }))
 
+  const { getAllSarkariJobs } = await import('@/lib/sarkariJobs')
+  const jobs = getAllSarkariJobs()
+  const sarkariNaukriPages = [
+    { url: `${BASE_URL}/sarkarinaukari`, lastModified: TODAY, changeFrequency: 'daily' as const, priority: 0.9 },
+    ...jobs.map(job => ({
+      url: `${BASE_URL}/sarkarinaukari/${job.slug}`,
+      lastModified: new Date(job.publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
+  ]
+
   return [
     { url: BASE_URL, lastModified: TODAY, changeFrequency: 'weekly', priority: 1.0 },
     ...staticPages,
     ...blogPages,
     ...ugcBlogPages,
+    ...sarkariNaukriPages,
     ...toolHubPages,
     ...variantPages,
     ...hindiVariantPages,

@@ -33,13 +33,13 @@ export default function ContactPage() {
 
     try {
       if (db) {
-        await addDoc(collection(db, 'contact_messages'), {
+        await addDoc(collection(db, 'user_feedback'), {
           name: formData.name,
           email: formData.email,
           subject: formData.subject || 'General Query',
           message: formData.message,
-          submittedAt: serverTimestamp(),
-          status: 'unread',
+          timestamp: serverTimestamp(),
+          read: false,
           source: 'sizesnap.in/contact'
         })
       }

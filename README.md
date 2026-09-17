@@ -1,64 +1,89 @@
-# SizeSnap.in
+# SizeSnap 🚀
 
-SizeSnap is a lightning-fast, entirely client-side web application designed to help users quickly process, compress, and resize their images and PDFs directly within their browser. The primary focus of this application is unparalleled privacy and speed—no files are ever uploaded or processed on a remote server.
+[![Next.js](https://img.shields.io/badge/Next.js-15+-black?style=flat&logo=next.js)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](#)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=flat&logo=tailwind-css)](#)
+[![Gemini AI](https://img.shields.io/badge/Google_Gemini-AI-orange?style=flat)](#)
+[![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=flat&logo=github-actions)](#)
 
-## Features
+SizeSnap is a modern, privacy-first **Next.js web application** equipped with client-side WebAssembly (WASM) image/PDF compression tools and a fully autonomous **AI-driven Job Portal**. Built with a focus on performance, automation, and technical excellence, SizeSnap solves real-world problems for students and job seekers.
 
-- **Blazing Fast & Serverless:** 100% of processing happens locally in the user's browser via Canvas APIs, WebAssembly, and `pdf-lib`.
-- **Absolute Privacy:** User files never leave their device. Nothing is uploaded, stored, or indexed on external servers.
-- **Image Resizing & Compression:** Resize images to exact pixel dimensions, exact kilobytes (KB) limits, and handle bulk compressions perfectly.
-- **PDF Manipulation:** Compress PDFs to custom KB sizes or convert PDF pages to separate JPGs in an instant.
-- **Utility Tools for Students:** Specialized workflows to quickly create cropped and padded passport photos, and resize scanned signatures to strict exam/university portal spec.
-- **No-Crop DP Maker & Document Scanner:** Instantly format vertical/horizontal shots into perfect squares for WhatsApp, and add a black & white filter to scanned documents to improve contrast.
-- **Watermark Photos:** Automatically add Candidate Names and Dates of Photo at the bottom of pictures, as requested by multiple government portals.
-- **SEO & Ad-Ready:** Built-in slots for Google AdSense with strict layout-shift prevention, Cookie Consent Banners for GDPR/global compliance, and structured JSON-LD schemas for high CTR rich snippets in Google Search.
+🔗 **Live Website:** [sizesnap.in](https://sizesnap.in)
 
-## Tech Stack
+---
 
-- **Framework:** [Next.js 15+ (App Router)](https://nextjs.org/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **PDF Processing:** `pdf-lib` (running in browser)
-- **Image Processing:** HTML5 Canvas API
-- **Language:** TypeScript 
+## 🌟 Key Features & Architecture
 
-## Getting Started
+### 1. 🤖 Fully Autonomous AI Auto-Blogger (CI/CD Pipeline)
+An autonomous backend script integrated with **GitHub Actions** that curates daily job postings without any human intervention.
+- **RSS Parsing:** Automatically fetches the latest government job (Sarkari Naukri) notifications from Google News RSS.
+- **Generative AI (Google Gemini):** Utilizes `gemini-3.6-flash` via `@google/genai` to read news headlines and generate highly engaging, SEO-optimized articles formatted in JSON.
+- **Resilient AI Pipeline:** Implements robust Error Handling, exponential backoff, and model fallback arrays to bypass API quotas (`429`) and server overloads (`503`).
+- **Automated CI/CD:** A scheduled cron job (`06:00 AM IST`) automatically runs the AI script, pulls remote changes, rebases, and pushes the newly generated JSON articles directly into the `main` branch. 
+- **Dynamic Routing & Sitemap:** Next.js dynamically reads the generated JSON files to render job pages instantly. The `sitemap.ts` file automatically detects new jobs and updates the XML sitemap for instantaneous Google Indexing.
 
-1. Clone the repository:
+### 2. ⚡ 100% Client-Side Processing (Zero-Server Architecture)
+Unparalleled privacy and speed—no user files are ever uploaded or processed on a remote server.
+- **Image Resizing & Compression:** Uses HTML5 Canvas APIs and Web Workers to resize images to exact pixel dimensions and strictly compress files to target kilobyte (KB) limits.
+- **PDF Manipulation:** Integrates `pdf-lib` to compress PDFs and extract PDF pages to JPGs natively within the browser.
+- **Utility Tools:** Specialized workflows for creating cropped passport photos, resizing signatures to strict exam portal specifications, and adding watermarks (Candidate Name / Date).
+
+### 3. 🎯 SEO & Performance Optimization
+- **Next.js App Router:** Built using the latest React Server Components for optimal TTFB (Time to First Byte) and zero client-side JavaScript overhead where possible.
+- **Rich Snippets & JSON-LD:** Structured schema markup for high CTR in Google Search results.
+- **Fully Responsive:** Styled with **Tailwind CSS v4** for a seamless mobile-first experience.
+
+---
+
+## 💻 Tech Stack
+
+- **Frontend:** Next.js 15+ (App Router), React, TypeScript
+- **Styling:** Tailwind CSS v4, Lucide React (Icons)
+- **AI Integration:** Google Gemini API (`@google/genai`)
+- **CI/CD & Automation:** GitHub Actions, Node.js (`rss-parser`, `dotenv`)
+- **Browser Processing:** HTML5 Canvas API, `pdf-lib`
+- **Deployment:** Vercel
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/sizesnap.git
-   cd sizesnap
+   git clone https://github.com/pawanprajapati23/sizesnap.in.git
+   cd sizesnap.in
    ```
 
-2. Install dependencies:
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. Run the development server:
+3. **Set up Environment Variables:**
+   Create a `.env.local` file in the root directory and add your Google Gemini API Key:
+   ```env
+   GEMINI_API_KEY=your_google_gemini_api_key
+   ```
+
+4. **Run the development server:**
    ```bash
    npm run dev
    ```
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application running.
+5. **Test the AI Auto-Blogger locally:**
+   ```bash
+   node scripts/fetch-jobs.mjs
+   ```
 
-## Production Build
+---
 
-To build the application for optimal performance and static generation:
+## 👨‍💻 Note for Recruiters
+This repository demonstrates full-stack proficiency, encompassing:
+1. **Frontend Development:** Modern Next.js patterns, responsive UI/UX, and complex client-side state management for image processing.
+2. **Backend/DevOps Automation:** Writing autonomous Node.js scripts, managing CI/CD pipelines via GitHub Actions, and handling Git rebasing programmatically.
+3. **AI Engineering:** Integrating LLMs (Large Language Models) effectively, crafting structured prompts for consistent JSON output, and building resilient error-handling logic for API rate limits.
+4. **SEO & Architecture:** Building products designed to rank organically and scale without backend server costs.
 
-```bash
-npm run build
-npm start
-``` 
-
-## Built With Intent
-
-This project is built to answer the repetitive, painful problem millions face when applying for jobs and university slots: strict file size uploads. By keeping everything client-side, SizeSnap drastically reduces infrastructure overhead (serverless) while providing users a completely private and highly performant experience.
-
-## Contributing
-
-Pull requests are always welcome! If you spot an optimization for image quality or PDF compression ratios in WASM, feel free to submit a PR or open an issue.
-
-## License
-
+## 📄 License
 This project is open-source and available under the [MIT License](LICENSE).

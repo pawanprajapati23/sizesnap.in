@@ -1,4 +1,5 @@
 @import "tailwindcss";
+/* Cache buster: Force CSS rebuild on Vercel */
 
 :root {
   --color-primary: #2563eb;

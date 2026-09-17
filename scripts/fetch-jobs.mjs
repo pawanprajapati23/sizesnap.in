@@ -38,7 +38,7 @@ async function fetchLatestJob() {
 
       console.log(`Found new job: ${title}`);
       
-      console.log('Generating SEO-optimized article with Google Gemini API (gemini-2.5-flash)...');
+      console.log('Generating SEO-optimized article with Google Gemini API (gemini-3.6-flash)...');
       
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
@@ -64,7 +64,7 @@ async function fetchLatestJob() {
 
       try {
         const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3.6-flash',
             contents: prompt,
             config: {
                 temperature: 0.7,

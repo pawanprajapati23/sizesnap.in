@@ -11,10 +11,6 @@ export function UgcBlogApprover() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editForm, setEditForm] = useState({ title: '', excerpt: '', content: '' })
 
-  useEffect(() => {
-    fetchBlogs()
-  }, [])
-
   const fetchBlogs = async () => {
     try {
       const res = await fetch('/api/admin/ugc-blogs')
@@ -26,6 +22,10 @@ export function UgcBlogApprover() {
     }
     setLoading(false)
   }
+
+  useEffect(() => {
+    fetchBlogs()
+  }, [])
 
   const handleAction = async (id: string, action: 'approved' | 'rejected' | 'pending', updatedData?: any) => {
     if (action === 'rejected' && !confirm('Are you sure you want to delete this blog?')) return;

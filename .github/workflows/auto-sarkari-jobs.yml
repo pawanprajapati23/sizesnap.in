@@ -2,9 +2,8 @@ name: Daily Sarkari Jobs Auto-Blogger
 
 on:
   schedule:
-    # Runs at 1:00 AM IST every day (which is 19:30 UTC)
     - cron: '30 19 * * *'
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 concurrency:
   group: daily-sarkari-jobs-main
@@ -32,6 +31,7 @@ jobs:
       - name: Run AI Auto-Blogger Script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-2.5-flash
         run: node scripts/fetch-jobs.mjs
 
       - name: Commit and Push Changes

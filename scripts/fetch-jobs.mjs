@@ -44,7 +44,11 @@ async function fetchLatestJob() {
       let activeModel = "meta/llama-3.1-70b-instruct";
       try {
         const modelsList = await openai.models.list();
-        const llamaModels = modelsList.data.filter(m => m.id.toLowerCase().includes("llama"));
+        const llamaModels = modelsList.data.filter(m => 
+          m.id.toLowerCase().includes("llama") && 
+          !m.id.toLowerCase().includes("code") && 
+          m.id.toLowerCase().includes("instruct")
+        );
         if (llamaModels.length > 0) {
            const preferred = llamaModels.find(m => m.id.includes("70b"));
            activeModel = preferred ? preferred.id : llamaModels[0].id;

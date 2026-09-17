@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: daily-sarkari-jobs
+  cancel-in-progress: false
+
 jobs:
   fetch-and-publish:
     runs-on: ubuntu-latest
@@ -36,11 +40,35 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
           git add data/sarkari-jobs/
-          if ! git diff --staged --quiet; then
-            git commit -m "auto: publish new sarkari job post"
-            git pull --rebase origin main
-            git push origin main
+
+          if git diff --staged --quiet; then
+            echo "No changes to publish"
+            exit 0
           fi
+
+          git commit -m "auto: publish new sarkari job post"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+
+            if ! git rebase origin/main; then
+              git rebase --abort
+              echo "Rebase conflict: generated files overlap with new changes on main"
+              exit 1
+            fi
+
+            if git push origin HEAD:main; then
+              echo "Changes pushed successfully"
+              exit 0
+            fi
+
+            echo "Push failed on attempt $attempt; retrying..."
+            sleep 5
+          done
+
+          echo "Unable to push after 3 attempts"
+          exit 1

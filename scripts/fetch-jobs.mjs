@@ -62,33 +62,49 @@ async function fetchLatestJob() {
       }
       `;
 
+      let jsonStr = "";
+      let attempts = 0;
+      const maxAttempts = 3;
+      
+      while (attempts < maxAttempts) {
+        try {
+          const response = await ai.models.generateContent({
+              model: 'gemini-3.6-flash',
+              contents: prompt,
+              config: {
+                  temperature: 0.7,
+                  responseMimeType: "application/json"
+              }
+          });
+
+          const rawContent = response.text;
+          
+          jsonStr = rawContent.trim();
+          if (jsonStr.startsWith('```json')) jsonStr = jsonStr.slice(7);
+          if (jsonStr.startsWith('```')) jsonStr = jsonStr.slice(3);
+          if (jsonStr.endsWith('```')) jsonStr = jsonStr.slice(0, -3);
+          jsonStr = jsonStr.trim();
+          
+          break; // Success, exit loop
+        } catch (apiError) {
+          attempts++;
+          console.error(`Gemini API Error (Attempt ${attempts}/${maxAttempts}):`, apiError.message);
+          if (attempts >= maxAttempts) {
+            console.error("Max retries reached. Exiting.");
+            process.exit(1);
+          }
+          console.log("Waiting 5 seconds before retrying...");
+          await new Promise(res => setTimeout(res, 5000));
+        }
+      }
+
       try {
-        const response = await ai.models.generateContent({
-            model: 'gemini-3.6-flash',
-            contents: prompt,
-            config: {
-                temperature: 0.7,
-                responseMimeType: "application/json"
-            }
-        });
-
-        const rawContent = response.text;
-        
-        let jsonStr = rawContent.trim();
-        if (jsonStr.startsWith('```json')) jsonStr = jsonStr.slice(7);
-        if (jsonStr.startsWith('```')) jsonStr = jsonStr.slice(3);
-        if (jsonStr.endsWith('```')) jsonStr = jsonStr.slice(0, -3);
-        jsonStr = jsonStr.trim();
-
         const jobData = JSON.parse(jsonStr);
-
         fs.writeFileSync(filePath, JSON.stringify(jobData, null, 2));
         console.log(`Successfully generated and saved: ${filePath}`);
-        
         break;
-
-      } catch (apiError) {
-        console.error("Gemini API or Parsing Error:", apiError);
+      } catch (parseError) {
+        console.error("JSON Parsing Error:", parseError);
         process.exit(1);
       }
     }

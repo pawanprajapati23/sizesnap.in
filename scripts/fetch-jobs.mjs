@@ -14,7 +14,10 @@ const parser = new Parser({
   }
 });
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const ai = new GoogleGenAI({ 
+  apiKey: process.env.GEMINI_API_KEY,
+  httpOptions: { timeout: 60000 } // 60 seconds timeout to prevent HeadersTimeoutError hanging
+});
 
 const jobsDir = path.join(process.cwd(), 'data/sarkari-jobs');
 fs.mkdirSync(jobsDir, { recursive: true });

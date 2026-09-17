@@ -50,17 +50,18 @@
     @apply inline-flex items-center justify-center font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none;
   }
   .btn-primary {
-    @apply btn bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md hover:shadow-blue-600/20 focus-visible:ring-blue-500 px-5 py-2.5 text-sm;
+    @apply inline-flex items-center justify-center font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md hover:shadow-blue-600/20 focus-visible:ring-blue-500 px-5 py-2.5 text-sm;
   }
   .btn-secondary {
-    @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300 shadow-sm focus-visible:ring-slate-500 px-5 py-2.5 text-sm;
+    @apply inline-flex items-center justify-center font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300 shadow-sm focus-visible:ring-slate-500 px-5 py-2.5 text-sm;
   }
   .btn-ghost {
-    @apply btn bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-slate-500 px-4 py-2 text-sm;
+    @apply inline-flex items-center justify-center font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-slate-500 px-4 py-2 text-sm;
   }
   .btn-danger {
-    @apply btn bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 focus-visible:ring-red-500 px-5 py-2.5 text-sm font-semibold;
+    @apply inline-flex items-center justify-center font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 focus-visible:ring-red-500 px-5 py-2.5 text-sm font-semibold;
   }
+
 
   /* Inputs */
   .input-field {

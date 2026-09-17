@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +41,6 @@ jobs:
           git add data/sarkari-jobs/
           if ! git diff --staged --quiet; then
             git commit -m "auto: publish new sarkari job post"
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            git pull --rebase origin main
+            git push origin main
           fi

@@ -57,7 +57,9 @@ async function fetchLatestJob() {
            activeModel = preferred ? preferred.id : llamaModels[0].id;
         }
       } catch (e) {
-        console.error("Warning: Could not fetch models list, trying default.");
+        console.error("Warning: Could not fetch models list, using safe fallback.");
+        // If fetch fails, use a model that is likely to be active instead of 3.1
+        activeModel = "nvidia/llama-3.1-nemotron-70b-instruct";
       }
       
       console.log('Generating SEO-optimized article with NVIDIA API (' + activeModel + ')...');

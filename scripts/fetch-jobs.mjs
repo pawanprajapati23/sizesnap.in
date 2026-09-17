@@ -87,10 +87,15 @@ async function fetchLatestJob() {
 
       let jsonStr = "";
       let attempts = 0;
-      const maxAttempts = 3;
+      const maxAttempts = 4; // Increased to 4 to give models more chances
       
-      // List of fallback models to try if 3.6-flash is overloaded or unavailable (avoids 503 and 404 errors)
-      const modelsToTry = ['gemini-3.6-flash', 'gemini-1.5-flash', 'gemini-2.5-pro'];
+      // Using exactly the models Google suggested in their 2026 API responses
+      const modelsToTry = [
+        'gemini-3.1-pro-preview', // Try the pro preview first since flash is heavily overloaded
+        'gemini-3.6-flash',
+        'gemini-3.1-pro-preview', // Retry 
+        'gemini-3.6-flash'        // Retry
+      ];
       
       while (attempts < maxAttempts) {
         const currentModel = modelsToTry[attempts % modelsToTry.length];

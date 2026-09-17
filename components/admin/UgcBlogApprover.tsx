@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Check, X, Edit, Save, Trash2, ArrowLeft } from 'lucide-react'
+import DOMPurify from 'isomorphic-dompurify'
 
 export function UgcBlogApprover() {
   const [pendingBlogs, setPendingBlogs] = useState<any[]>([])
@@ -163,7 +164,7 @@ export function UgcBlogApprover() {
           </div>
         ) : (
           <div className="text-sm text-zinc-700 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-md border border-zinc-100 dark:border-zinc-800/50 overflow-y-auto max-h-48 prose prose-sm dark:prose-invert" 
-               dangerouslySetInnerHTML={{ __html: blog.content }} 
+               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }}
           />
         )}
       </div>

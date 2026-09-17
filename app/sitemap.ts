@@ -8,7 +8,7 @@ import { getPrettySlug } from '@/lib/customSeoContent'
 
 const BASE_URL = 'https://sizesnap.in'
 const TODAY = new Date()
-const SITE_LAST_MODIFIED = new Date('2026-09-14') // Updated: homepage redesign + SEO upgrade
+const SITE_LAST_MODIFIED = new Date('2026-09-18') // Updated: Phase 4 tool pages redesign
 
 export const revalidate = 3600;
 

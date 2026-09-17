@@ -15,16 +15,6 @@ export default function ServiceWorkerRegister() {
         .register('/sw.js')
         .then((reg) => {
           // Check for worker updates
-          reg.onupdatefound = () => {
-            const installingWorker = reg.installing
-            if (installingWorker) {
-              installingWorker.onstatechange = () => {
-                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  console.log('SizeSnap: New version available. Refresh to update.')
-                }
-              }
-            }
-          }
         })
         .catch((err) => {
           console.warn('SizeSnap ServiceWorker registration error:', err)

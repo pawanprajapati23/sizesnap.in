@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getPendingUgcBlogs, getApprovedUgcBlogs, updateUgcBlogStatus } from '@/lib/ugcBlogStore';
 import { revalidatePath } from 'next/cache';
+import { adminAuth } from '@/lib/firebase-admin';
 
 export async function GET() {
   try {
@@ -18,6 +19,17 @@ export async function GET() {
 
 export async function PATCH(req: Request) {
   try {
+    const authHeader = req.headers.get('authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const token = authHeader.split('Bearer ')[1];
+    try {
+      await adminAuth.verifyIdToken(token);
+    } catch (e) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id, status, updatedData } = await req.json();
     
     if (!id || !status || !['approved', 'rejected', 'pending'].includes(status)) {

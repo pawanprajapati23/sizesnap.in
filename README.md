@@ -79,11 +79,51 @@ Unparalleled privacy and speed—no user files are ever uploaded or processed on
 ---
 
 ## 👨‍💻 Note for Recruiters
-This repository demonstrates full-stack proficiency, encompassing:
-1. **Frontend Development:** Modern Next.js patterns, responsive UI/UX, and complex client-side state management for image processing.
-2. **Backend/DevOps Automation:** Writing autonomous Node.js scripts, managing CI/CD pipelines via GitHub Actions, and handling Git rebasing programmatically.
-3. **AI Engineering:** Integrating LLMs (Large Language Models) effectively, crafting structured prompts for consistent JSON output, and building resilient error-handling logic for API rate limits.
-4. **SEO & Architecture:** Building products designed to rank organically and scale without backend server costs.
+
+This repository demonstrates production-grade, end-to-end full-stack engineering proficiency across five key domains:
+
+### 1. Frontend Architecture & Design Systems
+- Implemented a **complete Design System from scratch** — CSS custom properties (design tokens), reusable component classes (`.btn-primary`, `.card`, `.upload-dropzone`, `.state-*`) in Tailwind CSS v4
+- Redesigned the entire **Homepage, Tools Directory, and 1058 individual tool pages** without breaking a single existing public URL or SEO signal
+- Built reusable **Server and Client Component architecture** — metadata/SEO in Server Components, interactive UI in Client Components
+
+### 2. Performance Engineering
+- All 45+ processing tools are lazy-loaded via `next/dynamic({ ssr: false })` — zero server-side JavaScript overhead for heavy WASM/Canvas modules
+- Analytics and AdSense scripts load with `strategy="lazyOnload"` — non-blocking
+- **1058 pages statically generated** at build time (`generateStaticParams`) — instant response time for all tool pages
+
+### 3. SEO Architecture at Scale
+- Maintained **108+ pretty-URL mappings** (e.g. `/resize-image-to-50kb` → `/resize-image/to-50kb`) via `next.config.ts` rewrites/redirects
+- Injected **HowTo, BreadcrumbList, WebApplication, FAQPage** JSON-LD schemas programmatically across all tool pages
+- Dynamic sitemap covering all variants, blogs, stories, and sarkari job pages — auto-revalidates hourly
+
+### 4. DevOps & Production Reliability
+- Fully autonomous **AI-driven CI/CD pipeline** (GitHub Actions) for daily job content generation via Google Gemini API
+- **Zero-downtime deploys** — all changes validated with production build (`npm run build`) before push
+- Conducted formal **Phase-gated QA** — each of the 5 phases had a verified production build before proceeding
+
+### 5. Code Quality & Maintainability
+- Identified and fixed **5 broken internal navigation links** that had been silently present
+- Maintained **full backward compatibility** — no existing URL, SEO page, or tool processing logic was modified
+- All tool pages share a single reusable shell — adding a new tool requires only a config entry, zero UI code
+
+---
+
+## 📅 Recent Changelog
+
+### `2026-09-18` — Full Frontend Redesign (Phase 1–5)
+
+| Phase | Scope | Key Change |
+|---|---|---|
+| **Phase 1** | Global Design System | CSS variables, reusable component classes, ESLint fix |
+| **Phase 2** | Homepage | Modern hero, Quick Tasks, Categories, Privacy Trust, How It Works, FAQ |
+| **Phase 3** | Tools Directory | Live search + category filters as interactive Client Component |
+| **Phase 4** | Tool Pages | Breadcrumb nav, centered H1, How It Works steps, HowTo schema |
+| **Phase 5** | QA & Production | 5 broken links fixed, unused imports removed, sitemap updated |
+
+**Result:** `1058 pages` | `0 errors` | `Exit code 0` ✅
+
+---
 
 ## 📄 License
 This project is open-source and available under the [MIT License](LICENSE).

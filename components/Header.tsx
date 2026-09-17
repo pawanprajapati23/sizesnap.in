@@ -24,8 +24,8 @@ const CATEGORIES: CategoryGroup[] = [
       { label: 'Self Attested Document Maker', path: '/self-attested-document-maker-online', icon: FileCheck },
       { label: 'Thumb Impression Resizer (LTI/RTI)', path: '/thumb-impression-resizer-for-ssc-and-neet', icon: Fingerprint },
       { label: 'Photo & Signature Joint Maker', path: '/combine-photo-and-signature-for-exam', icon: Layers },
-      { label: 'Marksheet & ID 1-Page A4 Merger', path: '/merge-marksheet-and-aadhaar-card-pdf', icon: FileText },
-      { label: 'Add Name & Date (DOP) on Photo', path: '/add-name-and-date-on-photo-for-ssc', icon: ImageIcon },
+      { label: 'Marksheet & ID 1-Page A4 Merger', path: '/marksheet-id-merger', icon: FileText },
+      { label: 'Add Name & Date (DOP) on Photo', path: '/add-name-and-date-on-photo-online', icon: ImageIcon },
       { label: 'Signature Ink Converter & BG Remover', path: '/make-signature-transparent-and-convert-ink', icon: Sparkles },
       { label: 'Sarkari Exam Age Calculator', path: '/sarkari-exam-age-calculator', icon: Shield },
       { label: '4x6 / A4 Print Sheet Maker', path: '/passport-photo-print-sheet-maker', icon: Printer }
@@ -117,14 +117,14 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-5 text-xs font-bold text-slate-600 uppercase tracking-wider">
-            <Link href="/resize-image-to-50kb" className={`hover:text-blue-600 transition-colors ${pathname === '/resize-image-to-50kb' ? 'text-blue-600' : ''}`}>Resize Image</Link>
-            <Link href="/compress-pdf-to-100kb" className={`hover:text-blue-600 transition-colors ${pathname === '/compress-pdf-to-100kb' ? 'text-blue-600' : ''}`}>Compress PDF</Link>
-            <Link href="/change-photo-background-to-white" className={`hover:text-blue-600 transition-colors ${pathname === '/change-photo-background-to-white' ? 'text-blue-600' : ''}`}>Background Changer</Link>
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+            <Link href="/resize-image-to-50kb" className={`hover:text-blue-600 transition-colors ${pathname === '/resize-image-to-50kb' ? 'text-blue-600 font-semibold' : ''}`}>Resize Image</Link>
+            <Link href="/compress-pdf-to-100kb" className={`hover:text-blue-600 transition-colors ${pathname === '/compress-pdf-to-100kb' ? 'text-blue-600 font-semibold' : ''}`}>Compress PDF</Link>
+            <Link href="/change-photo-background-to-white" className={`hover:text-blue-600 transition-colors ${pathname === '/change-photo-background-to-white' ? 'text-blue-600 font-semibold' : ''}`}>Background Changer</Link>
             
             <div id="google_translate_element" className="scale-90 transform origin-right"></div>
             
-            <Link href="/#all-tools" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-xs text-center lowercase first-letter:uppercase tracking-normal font-semibold">
+            <Link href="/tools" className="btn-primary">
               All Tools
             </Link>
           </nav>

@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 concurrency:
-  group: daily-sarkari-jobs-publisher
+  group: daily-sarkari-jobs-main
   cancel-in-progress: false
 
 jobs:
@@ -35,13 +35,17 @@ jobs:
         run: node scripts/fetch-jobs.mjs
 
       - name: Commit and Push Changes
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
           git add data/sarkari-jobs/
 
           if git diff --staged --quiet; then
+            echo "No changes to publish."
             exit 0
           fi
 
@@ -49,17 +53,4 @@ jobs:
 
           git fetch origin main
           git rebase origin/main
-
-          for attempt in 1 2 3 4 5; do
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-
-            echo "Push failed; retrying after rebasing... (attempt $attempt/5)"
-            git fetch origin main
-            git rebase origin/main
-            sleep $((attempt * 2))
-          done
-
-          echo "Unable to push after multiple attempts"
-          exit 1
+          git push origin HEAD:main

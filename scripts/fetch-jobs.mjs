@@ -48,8 +48,19 @@ async function fetchLatestJob() {
 
       console.log(`Found new job: ${title}`);
       
-      // Call NVIDIA API to write the article
-      console.log('Generating SEO-optimized article with NVIDIA API (Llama-3.3-70b-instruct)...');
+      let activeModel = "meta/llama-3.1-70b-instruct";
+      try {
+        const modelsList = await openai.models.list();
+        const llamaModels = modelsList.data.filter(m => m.id.toLowerCase().includes("llama"));
+        if (llamaModels.length > 0) {
+           const preferred = llamaModels.find(m => m.id.includes("70b"));
+           activeModel = preferred ? preferred.id : llamaModels[0].id;
+        }
+      } catch (e) {
+        console.error("Warning: Could not fetch models list, trying default.");
+      }
+      
+      console.log('Generating SEO-optimized article with NVIDIA API (' + activeModel + ')...');
       
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
@@ -75,7 +86,7 @@ async function fetchLatestJob() {
 
       try {
         const response = await openai.chat.completions.create({
-          model: "meta/llama-3.3-70b-instruct",
+          model: activeModel,
           messages: [{ role: "user", content: prompt }],
           temperature: 0.7,
           max_tokens: 1500,

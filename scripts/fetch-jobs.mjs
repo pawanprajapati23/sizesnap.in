@@ -35,15 +35,12 @@ function sleep(ms) {
 }
 
 async function fetchLatestJob() {
-  console.log('Fetching latest Sarkari Naukri from Google News RSS...');
-
   try {
     const feed = await parser.parseURL(
       'https://news.google.com/rss/search?q=sarkari+job+notification&hl=en-IN&gl=IN&ceid=IN:en'
     );
 
     if (!feed.items || feed.items.length === 0) {
-      console.log('No RSS items found.');
       return;
     }
 
@@ -57,12 +54,9 @@ async function fetchLatestJob() {
       const filePath = path.join(jobsDir, `${slug}.json`);
 
       if (fs.existsSync(filePath)) {
-        console.log(`Job already exists: ${slug}`);
         continue;
       }
 
-      console.log(`Found new job: ${title}`);
-      
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
       Write a highly engaging, SEO-optimized job notification article for the following job headline:
@@ -98,7 +92,6 @@ async function fetchLatestJob() {
       while (attempts < maxAttempts) {
         const currentModel = modelsToTry[attempts % modelsToTry.length];
         try {
-          console.log(`Attempting to generate with model: ${currentModel}...`);
           const response = await ai.models.generateContent({
               model: currentModel,
               contents: prompt,
@@ -124,7 +117,6 @@ async function fetchLatestJob() {
             console.error("Max retries reached on all fallback models. Exiting.");
             process.exit(1);
           }
-          console.log("Waiting 20 seconds before trying again (Google server is overloaded)...");
           await sleep(20000);
         }
       }
@@ -132,7 +124,6 @@ async function fetchLatestJob() {
       try {
         const jobData = JSON.parse(jsonStr);
         fs.writeFileSync(filePath, JSON.stringify(jobData, null, 2));
-        console.log(`Successfully generated and saved: ${filePath}`);
         break; // Only do one job at a time
       } catch (parseError) {
         console.error("JSON Parsing Error:", parseError);

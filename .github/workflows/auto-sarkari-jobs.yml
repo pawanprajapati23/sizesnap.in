@@ -38,6 +38,7 @@ jobs:
           git add data/sarkari-jobs/
           if ! git diff --staged --quiet; then
             git commit -m "auto: publish new sarkari job post"
-            git pull --rebase origin main
-            git push
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi

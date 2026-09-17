@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Parser from 'rss-parser';
-import OpenAI from 'openai';
+import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -11,10 +11,7 @@ const parser = new Parser({
   headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
 });
 
-const openai = new OpenAI({
-  apiKey: process.env.NVIDIA_API_KEY,
-  baseURL: 'https://integrate.api.nvidia.com/v1',
-});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const jobsDir = path.join(process.cwd(), 'data/sarkari-jobs');
 
@@ -41,24 +38,7 @@ async function fetchLatestJob() {
 
       console.log(`Found new job: ${title}`);
       
-      let activeModel = "meta/llama-3.1-70b-instruct";
-      try {
-        const modelsList = await openai.models.list();
-        const llamaModels = modelsList.data.filter(m => 
-          m.id.toLowerCase().includes("llama") && 
-          !m.id.toLowerCase().includes("code") && 
-          m.id.toLowerCase().includes("instruct")
-        );
-        if (llamaModels.length > 0) {
-           const preferred = llamaModels.find(m => m.id.includes("70b"));
-           activeModel = preferred ? preferred.id : llamaModels[0].id;
-        }
-      } catch (e) {
-        console.error("Warning: Could not fetch models list, using safe fallback.");
-        activeModel = "nvidia/llama-3.1-nemotron-70b-instruct";
-      }
-      
-      console.log('Generating SEO-optimized article with NVIDIA API (' + activeModel + ')...');
+      console.log('Generating SEO-optimized article with Google Gemini API (gemini-2.5-flash)...');
       
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
@@ -83,14 +63,16 @@ async function fetchLatestJob() {
       `;
 
       try {
-        const response = await openai.chat.completions.create({
-          model: activeModel,
-          messages: [{ role: "user", content: prompt }],
-          temperature: 0.7,
-          max_tokens: 1500,
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: prompt,
+            config: {
+                temperature: 0.7,
+                responseMimeType: "application/json"
+            }
         });
 
-        const rawContent = response.choices[0]?.message?.content;
+        const rawContent = response.text;
         
         let jsonStr = rawContent.trim();
         if (jsonStr.startsWith('```json')) jsonStr = jsonStr.slice(7);
@@ -106,7 +88,7 @@ async function fetchLatestJob() {
         break;
 
       } catch (apiError) {
-        console.error("NVIDIA API or Parsing Error:", apiError);
+        console.error("Gemini API or Parsing Error:", apiError);
         process.exit(1);
       }
     }

@@ -25,7 +25,7 @@ jobs:
 
       - name: Run AI Auto-Blogger Script
         env:
-          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/fetch-jobs.mjs
 
       - name: Commit and Push Changes

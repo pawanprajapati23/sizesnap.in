@@ -19,9 +19,6 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const jobsDir = path.join(process.cwd(), 'data/sarkari-jobs');
 fs.mkdirSync(jobsDir, { recursive: true });
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
-const MAX_GEMINI_ATTEMPTS = 5;
-
 function generateSlug(title) {
   return title
     .toLowerCase()
@@ -32,59 +29,6 @@ function generateSlug(title) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function isRetryableGeminiError(error) {
-  const status = Number(error?.status || error?.code);
-  const message = String(error?.message || error);
-
-  return (
-    status === 429 ||
-    status === 500 ||
-    status === 502 ||
-    status === 503 ||
-    status === 504 ||
-    message.includes('UNAVAILABLE') ||
-    message.includes('high demand') ||
-    message.includes('overloaded') ||
-    message.includes('temporarily')
-  );
-}
-
-async function generateGeminiContent(prompt) {
-  for (let attempt = 1; attempt <= MAX_GEMINI_ATTEMPTS; attempt++) {
-    try {
-      console.log(
-        `Generating article with Gemini (${GEMINI_MODEL}), attempt ${attempt}/${MAX_GEMINI_ATTEMPTS}...`
-      );
-
-      return await ai.models.generateContent({
-        model: GEMINI_MODEL,
-        contents: prompt,
-        config: {
-          temperature: 0.7,
-          responseMimeType: 'application/json'
-        }
-      });
-    } catch (error) {
-      const retryable = isRetryableGeminiError(error);
-
-      if (!retryable || attempt === MAX_GEMINI_ATTEMPTS) {
-        throw error;
-      }
-
-      const delayMs =
-        Math.min(30_000, 2 ** (attempt - 1) * 5_000) +
-        Math.floor(Math.random() * 1000);
-
-      console.warn(
-        `Gemini request failed temporarily. Retrying in ${delayMs} ms...`
-      );
-      await sleep(delayMs);
-    }
-  }
-
-  throw new Error('Gemini request failed after all retry attempts');
 }
 
 async function fetchLatestJob() {
@@ -115,8 +59,7 @@ async function fetchLatestJob() {
       }
 
       console.log(`Found new job: ${title}`);
-      console.log('Generating SEO-optimized article with Gemini...');
-
+      
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
       Write a highly engaging, SEO-optimized job notification article for the following job headline:
@@ -139,24 +82,54 @@ async function fetchLatestJob() {
       }
       `;
 
+      let jsonStr = "";
+      let attempts = 0;
+      const maxAttempts = 3;
+      
+      // List of fallback models to try if 3.6-flash is overloaded or unavailable (avoids 503 and 404 errors)
+      const modelsToTry = ['gemini-3.6-flash', 'gemini-1.5-flash', 'gemini-2.5-pro'];
+      
+      while (attempts < maxAttempts) {
+        const currentModel = modelsToTry[attempts % modelsToTry.length];
+        try {
+          console.log(`Attempting to generate with model: ${currentModel}...`);
+          const response = await ai.models.generateContent({
+              model: currentModel,
+              contents: prompt,
+              config: {
+                  temperature: 0.7,
+                  responseMimeType: "application/json"
+              }
+          });
+
+          const rawContent = response.text || '';
+          
+          jsonStr = rawContent.trim();
+          if (jsonStr.startsWith('```json')) jsonStr = jsonStr.slice(7);
+          if (jsonStr.startsWith('```')) jsonStr = jsonStr.slice(3);
+          if (jsonStr.endsWith('```')) jsonStr = jsonStr.slice(0, -3);
+          jsonStr = jsonStr.trim();
+          
+          break; // Success, exit loop
+        } catch (apiError) {
+          attempts++;
+          console.error(`Gemini API Error with ${currentModel} (Attempt ${attempts}/${maxAttempts}):`, apiError.message);
+          if (attempts >= maxAttempts) {
+            console.error("Max retries reached on all fallback models. Exiting.");
+            process.exit(1);
+          }
+          console.log("Waiting 5 seconds before trying the next fallback model...");
+          await sleep(5000);
+        }
+      }
+
       try {
-        const response = await generateGeminiContent(prompt);
-        const rawContent = response.text || '';
-
-        let jsonStr = rawContent.trim();
-        if (jsonStr.startsWith('```json')) jsonStr = jsonStr.slice(7);
-        if (jsonStr.startsWith('```')) jsonStr = jsonStr.slice(3);
-        if (jsonStr.endsWith('```')) jsonStr = jsonStr.slice(0, -3);
-        jsonStr = jsonStr.trim();
-
         const jobData = JSON.parse(jsonStr);
-
         fs.writeFileSync(filePath, JSON.stringify(jobData, null, 2));
         console.log(`Successfully generated and saved: ${filePath}`);
-
-        break;
-      } catch (apiError) {
-        console.error('Gemini API or parsing failed after retries:', apiError);
+        break; // Only do one job at a time
+      } catch (parseError) {
+        console.error("JSON Parsing Error:", parseError);
         process.exit(1);
       }
     }

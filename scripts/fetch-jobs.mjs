@@ -40,8 +40,8 @@ async function fetchLatestJob() {
     const jobLinks = await page.evaluate(() => {
       return Array.from(document.querySelectorAll('a'))
         .filter(a => a.href.includes('/2026/') || a.href.includes('/2027/') || a.href.includes('/latestjob/'))
-        .filter(a => a.innerText.trim().length > 15)
-        .map(a => ({ title: a.innerText.trim(), url: a.href }))
+        .filter(a => a.textContent && a.textContent.trim().length > 15)
+        .map(a => ({ title: a.textContent.trim(), url: a.href }))
         .slice(0, 5); // Get top 5
     });
 
@@ -60,7 +60,7 @@ async function fetchLatestJob() {
       
       // Navigate to the job page to scrape its text
       await page.goto(job.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      const jobText = await page.evaluate(() => document.body.innerText.substring(0, 4000));
+      const jobText = await page.evaluate(() => document.body.textContent.substring(0, 4000));
 
       let activeModel = "meta/llama-3.1-70b-instruct";
       try {

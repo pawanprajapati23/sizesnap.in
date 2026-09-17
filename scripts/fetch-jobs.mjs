@@ -1,13 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import puppeteer from 'puppeteer';
+import Parser from 'rss-parser';
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
 
-// Load .env.local if running locally
 dotenv.config({ path: '.env.local' });
 
-// NVIDIA NIM setup using OpenAI SDK
+const parser = new Parser();
 const openai = new OpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
@@ -16,39 +15,20 @@ const openai = new OpenAI({
 const jobsDir = path.join(process.cwd(), 'data/sarkari-jobs');
 
 function generateSlug(title) {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)+/g, '')
-    .substring(0, 50);
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '').substring(0, 50);
 }
 
 async function fetchLatestJob() {
-  console.log('Fetching latest Sarkari Naukri from SarkariResult.com using Puppeteer...');
-  
-  let browser;
+  console.log('Fetching latest Sarkari Naukri from SarkariResult RSS Feed...');
   try {
-    browser = await puppeteer.launch({ 
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-      headless: true
-    });
-    const page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
-    await page.goto('https://www.sarkariresult.com/', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    const feed = await parser.parseURL('https://www.sarkariresult.com/feed/');
+    
+    for (let i = 0; i < Math.min(5, feed.items.length); i++) {
+      const item = feed.items[i];
+      const title = item.title;
+      const url = item.link;
 
-    // Scrape top job links
-    const jobLinks = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll('a'))
-        .filter(a => a.href.includes('/2026/') || a.href.includes('/2027/') || a.href.includes('/latestjob/'))
-        .filter(a => a.textContent && a.textContent.trim().length > 15)
-        .map(a => ({ title: a.textContent.trim(), url: a.href }))
-        .slice(0, 5); // Get top 5
-    });
-
-    console.log(`Found ${jobLinks.length} job links.`);
-
-    for (const job of jobLinks) {
-      const slug = generateSlug(job.title);
+      const slug = generateSlug(title);
       const filePath = path.join(jobsDir, `${slug}.json`);
 
       if (fs.existsSync(filePath)) {
@@ -56,11 +36,13 @@ async function fetchLatestJob() {
         continue;
       }
 
-      console.log(`Processing new job: ${job.title}`);
+      console.log(`Processing new job: ${title}`);
       
-      // Navigate to the job page to scrape its text
-      await page.goto(job.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      const jobText = await page.evaluate(() => document.body.textContent.substring(0, 4000));
+      // Fetch job page content safely
+      const html = await fetch(url).then(r => r.text());
+      const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+      const bodyHtml = bodyMatch ? bodyMatch[1] : html;
+      const jobText = bodyHtml.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').substring(0, 4000);
 
       let activeModel = "meta/llama-3.1-70b-instruct";
       try {
@@ -120,7 +102,6 @@ async function fetchLatestJob() {
         fs.writeFileSync(filePath, JSON.stringify(jobData, null, 2));
         console.log(`Successfully generated and saved: ${filePath}`);
         
-        // Process only 1 new job per run to avoid spamming the API/site
         break;
 
       } catch (apiError) {
@@ -129,10 +110,8 @@ async function fetchLatestJob() {
       }
     }
   } catch (err) {
-    console.error('Error in Puppeteer script:', err);
+    console.error('Error fetching data:', err);
     process.exit(1);
-  } finally {
-    if (browser) await browser.close();
   }
 }
 

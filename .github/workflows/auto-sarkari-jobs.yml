@@ -2,12 +2,17 @@ name: Daily Sarkari Jobs Auto-Blogger
 
 on:
   schedule:
+    # Runs at 1:00 AM IST every day (19:30 UTC)
     - cron: '30 19 * * *'
   workflow_dispatch:
 
+# Prevent multiple workflow runs from pushing to main simultaneously.
 concurrency:
   group: daily-sarkari-jobs-main
   cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   fetch-and-publish:
@@ -18,12 +23,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm'
+          cache: npm
 
       - name: Install Dependencies
         run: npm ci
@@ -37,20 +43,41 @@ jobs:
       - name: Commit and Push Changes
         shell: bash
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add data/sarkari-jobs/
 
-          if git diff --staged --quiet; then
+          if git diff --cached --quiet; then
             echo "No changes to publish."
             exit 0
           fi
 
           git commit -m "auto: publish new sarkari job post"
 
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          # Try up to three times in case main changes while pushing.
+          for attempt in 1 2 3; do
+            echo "Push attempt ${attempt}/3"
+
+            git fetch origin main
+
+            # Rebase the generated commit onto the latest remote main.
+            git rebase origin/main || {
+              echo "Rebase failed. Aborting rebase."
+              git rebase --abort || true
+              exit 1
+            }
+
+            if git push origin HEAD:main; then
+              echo "Changes pushed successfully."
+              exit 0
+            fi
+
+            echo "Push was rejected. Retrying..."
+            sleep 5
+          done
+
+          echo "Failed to push changes after three attempts."
+          exit 1

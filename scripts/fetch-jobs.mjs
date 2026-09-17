@@ -49,7 +49,7 @@ async function fetchLatestJob() {
       console.log(`Found new job: ${title}`);
       
       // Call NVIDIA API to write the article
-      console.log('Generating SEO-optimized article with NVIDIA API (Llama-3.1-70b-instruct)...');
+      console.log('Generating SEO-optimized article with NVIDIA API (Llama-3.3-70b-instruct)...');
       
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
@@ -75,7 +75,7 @@ async function fetchLatestJob() {
 
       try {
         const response = await openai.chat.completions.create({
-          model: "meta/llama-3.1-70b-instruct",
+          model: "meta/llama-3.3-70b-instruct",
           messages: [{ role: "user", content: prompt }],
           temperature: 0.7,
           max_tokens: 1500,

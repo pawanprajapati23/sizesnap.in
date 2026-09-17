@@ -2,8 +2,8 @@ name: Daily Sarkari Jobs Auto-Blogger
 
 on:
   schedule:
-    # Runs at 11:00 PM IST every day (which is 17:30 UTC)
-    - cron: '30 17 * * *'
+    # Runs at 1:00 AM IST every day (which is 19:30 UTC)
+    - cron: '30 19 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:

@@ -34,7 +34,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                  const data = docSnap.data()
                  const currentSession = localStorage.getItem('sizesnap_admin_session')
                  if (data.sessionId && data.sessionId !== currentSession) {
-                    console.log('Another device logged in. Logging out...')
                     alert('You have been logged out because this admin account was accessed from another device.')
                     signOut(auth as any)
                  }

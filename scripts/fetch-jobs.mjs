@@ -101,6 +101,7 @@ async function fetchLatestJob() {
 
       } catch (apiError) {
         console.error("NVIDIA API or Parsing Error:", apiError);
+        process.exit(1);
       }
     }
   } catch (err) {

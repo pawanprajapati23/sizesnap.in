@@ -11,6 +11,8 @@ import ToolWrapper from '@/components/ToolWrapper'
 import SeoContent from '@/components/SeoContent'
 import PayPalDonate from '@/components/PayPalDonate'
 import ReviewWidget from '@/components/ReviewWidget'
+import Breadcrumb from '@/components/Breadcrumb'
+import { Zap, FileText, BookOpen } from 'lucide-react'
 
 import { getCustomSeo, getPrettySlug } from '@/lib/customSeoContent'
 import { getRelatedBlogs } from '@/lib/blogConfigs'
@@ -191,117 +193,174 @@ export default async function ToolVariantPage({ params }: Props) {
         />
       )}
 
-      <div className="space-y-6">
+      <div className="space-y-10">
+        
+        <Breadcrumb items={[
+          { label: 'All Tools', href: '/tools' },
+          { label: tool.name, href: `/${tool.slug}` },
+          { label: variant.label }
+        ]} />
+
         {/* Top Ad */}
         <AdUnit slot="1234567890" format="horizontal" className="min-h-[90px]" />
 
         {/* H1 + Intro */}
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+        <section className="text-center space-y-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
             {h1Text}
           </h1>
-          <div className="text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: introText }} />
-          <p className="mt-3 text-sm font-medium text-green-700">
-            No files are uploaded. Everything is processed in your browser.
-          </p>
-        </div>
+          <div className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed" dangerouslySetInnerHTML={{ __html: introText }} />
+        </section>
 
         {/* TOOL UI */}
-        <ToolWrapper toolSlug={tool.slug} config={variant.config} />
+        <section className="mx-auto max-w-4xl relative z-10">
+          <ToolWrapper toolSlug={tool.slug} config={variant.config} />
+        </section>
 
-        {/* PayPal Support Banner */}
-        <PayPalDonate />
-
-        {/* Mid Ad — appears after tool use */}
-        <AdUnit slot="0987654321" format="rectangle" className="min-h-[250px]" />
-
-        {/* Popular Sizes — internal linking */}
-        <PopularSizes tool={tool} currentVariantSlug={variant.slug} />
-
-        {/* Next Level Internal Linking: Related Blogs & Interactive Stories */}
-        {(relatedBlogs.length > 0 || relatedStories.length > 0) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {relatedBlogs.length > 0 && (
-              <div className="bg-white rounded-xl border border-gray-200 p-5">
-                <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-                  <span>📚</span> Related Guides &amp; Tutorials
-                </h3>
-                <ul className="space-y-3">
-                  {relatedBlogs.map(blog => (
-                    <li key={blog.slug}>
-                      <Link href={`/blog/${blog.slug}`} className="group block">
-                        <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1">
-                          {blog.title}
-                        </span>
-                        <span className="text-xs text-gray-500 line-clamp-1 mt-0.5">
-                          {blog.excerpt}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {relatedStories.length > 0 && (
-              <div className="bg-white rounded-xl border border-gray-200 p-5">
-                <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-                  <span>⚡</span> Interactive Stories
-                </h3>
-                <ul className="space-y-3">
-                  {relatedStories.map(story => (
-                    <li key={story.slug}>
-                      <Link href={`/stories/${story.slug}`} className="group block">
-                        <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 group-hover:animate-ping" />
-                          {story.title}
-                        </span>
-                        <span className="text-xs text-gray-500 line-clamp-1 mt-0.5">
-                          {story.description}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+        {/* How It Works */}
+        <section className="bg-white border border-slate-200 rounded-3xl p-8 md:p-10 shadow-sm max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">How to use {tool.shortName}</h2>
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl font-extrabold mx-auto mb-2">1</div>
+              <h3 className="font-bold text-lg text-slate-900">Upload your file</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">Select or drag & drop your document directly into the tool above.</p>
+            </div>
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl font-extrabold mx-auto mb-2">2</div>
+              <h3 className="font-bold text-lg text-slate-900">Auto-Format</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">SizeSnap instantly processes your file entirely in your browser. No server uploads.</p>
+            </div>
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl font-extrabold mx-auto mb-2">3</div>
+              <h3 className="font-bold text-lg text-slate-900">Download</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">Get your perfectly formatted, high-quality file instantly and securely.</p>
+            </div>
           </div>
-        )}
+        </section>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <h2 className="font-semibold text-gray-800 mb-3">More from this topic</h2>
-          <div className="flex flex-wrap gap-2">
-            <Link href={`/${tool.slug}`} className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-              {tool.shortName} hub
-            </Link>
-            <Link href="/image-size-guide" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-              Image size guide
-            </Link>
-            <Link href="/blog" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-              All guides &amp; tutorials
-            </Link>
-            <Link href="/stories" className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-              All interactive stories
+        {/* Fast Links / Workflow */}
+        <section className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <Zap className="h-6 w-6 text-yellow-500 mb-4" />
+            <h2 className="font-bold text-slate-900">Fast Mobile Workflow</h2>
+            <p className="text-sm text-slate-600 mt-2">Upload, preview, and download from Android, iPhone, or desktop without installing an app.</p>
+          </div>
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <FileText className="h-6 w-6 text-blue-600 mb-4" />
+            <h2 className="font-bold text-slate-900">Built for Forms</h2>
+            <p className="text-sm text-slate-600 mt-2">Use size-specific pages for exams, portals, email attachments, and document submissions.</p>
+          </div>
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <BookOpen className="h-6 w-6 text-green-600 mb-4" />
+            <h2 className="font-bold text-slate-900">Helpful Guides</h2>
+            <Link href="/image-size-guide" className="text-sm text-blue-600 font-semibold hover:underline mt-2 inline-block">
+              Read the image size and upload guide &rarr;
             </Link>
           </div>
-        </div>
-        
-        {/* Deep SEO Content generation (400-600 words) */}
-        <SeoContent tool={tool} variant={variant} />
+        </section>
 
-        {/* Legal Schema Compliance: AggregateRating Widget */}
-        <ReviewWidget ratingValue="4.9" ratingCount={pseudoRandomCount.toString()} />
+        <section className="max-w-5xl mx-auto space-y-10">
+          {/* PayPal Support Banner */}
+          <PayPalDonate />
 
-        {/* FAQ Section with schema */}
-        {faqs.length > 0 && (
-          <FaqSection faqs={faqs} toolName={variant.h1} />
-        )}
+          {/* Mid Ad — appears after tool use */}
+          <AdUnit slot="0987654321" format="rectangle" className="min-h-[250px]" />
 
-        {/* Related Tools */}
-        <RelatedTools currentToolSlug={tool.slug} />
+          {/* Popular Sizes — internal linking */}
+          <PopularSizes tool={tool} currentVariantSlug={variant.slug} />
 
-        {/* Bottom Ad */}
-        <AdUnit slot="1122334455" format="horizontal" />
+          {/* Next Level Internal Linking: Related Blogs & Interactive Stories */}
+          {(relatedBlogs.length > 0 || relatedStories.length > 0) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {relatedBlogs.length > 0 && (
+                <div className="bg-white rounded-xl border border-gray-200 p-5">
+                  <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
+                    <span>📚</span> Related Guides &amp; Tutorials
+                  </h3>
+                  <ul className="space-y-3">
+                    {relatedBlogs.map(blog => (
+                      <li key={blog.slug}>
+                        <Link href={`/blog/${blog.slug}`} className="group block">
+                          <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                            {blog.title}
+                          </span>
+                          <span className="text-xs text-gray-500 line-clamp-1 mt-0.5">
+                            {blog.excerpt}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {relatedStories.length > 0 && (
+                <div className="bg-white rounded-xl border border-gray-200 p-5">
+                  <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
+                    <span>⚡</span> Interactive Stories
+                  </h3>
+                  <ul className="space-y-3">
+                    {relatedStories.map(story => (
+                      <li key={story.slug}>
+                        <Link href={`/stories/${story.slug}`} className="group block">
+                          <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 group-hover:animate-ping" />
+                            {story.title}
+                          </span>
+                          <span className="text-xs text-gray-500 line-clamp-1 mt-0.5">
+                            {story.description}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <h2 className="font-bold text-slate-800 mb-4 text-lg">More from this topic</h2>
+            <div className="flex flex-wrap gap-2">
+              <Link href={`/${tool.slug}`} className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-all">
+                {tool.shortName} hub
+              </Link>
+              <Link href="/image-size-guide" className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-all">
+                Image size guide
+              </Link>
+              <Link href="/blog" className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-all">
+                All guides &amp; tutorials
+              </Link>
+              <Link href="/stories" className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-all">
+                All interactive stories
+              </Link>
+            </div>
+          </div>
+          
+          {/* Deep SEO Content generation (400-600 words) */}
+          <div className="pt-4">
+            <SeoContent tool={tool} variant={variant} />
+          </div>
+
+          {/* Legal Schema Compliance: AggregateRating Widget */}
+          <ReviewWidget ratingValue="4.9" ratingCount={pseudoRandomCount.toString()} />
+
+          {/* FAQ Section with schema */}
+          {faqs.length > 0 && (
+            <div className="pt-4">
+              <FaqSection faqs={faqs} toolName={variant.h1} />
+            </div>
+          )}
+
+          {/* Related Tools */}
+          <div className="pt-4 pb-4">
+            <RelatedTools currentToolSlug={tool.slug} />
+          </div>
+
+          {/* Bottom Ad */}
+          <AdUnit slot="1122334455" format="horizontal" />
+        </section>
       </div>
     </>
   )

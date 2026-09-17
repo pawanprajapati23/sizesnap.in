@@ -149,7 +149,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         
       </head>
-      <body className={`bg-gray-50 text-gray-900 min-h-screen font-sans ${inter.variable}`}>
+      <body className={`min-h-screen font-sans ${inter.variable}`}>
         <div className="flex flex-col min-h-screen">
           <AdminLayoutWrapper 
             header={<Header />}

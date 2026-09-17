@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { submitUgcBlog } from '@/lib/ugcBlogStore';
+import DOMPurify from 'isomorphic-dompurify';
 
 export async function POST(req: Request) {
   try {
@@ -13,11 +14,16 @@ export async function POST(req: Request) {
     // Auto-generate slug from title
     const slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Math.floor(Math.random() * 1000);
 
+    const sanitizedTitle = DOMPurify.sanitize(data.title);
+    const sanitizedAuthorName = DOMPurify.sanitize(data.authorName);
+    const sanitizedContent = DOMPurify.sanitize(data.content);
+    const sanitizedExcerpt = DOMPurify.sanitize(data.excerpt || data.content.substring(0, 150) + '...');
+
     const docId = await submitUgcBlog({
-      title: data.title,
-      authorName: data.authorName,
-      content: data.content,
-      excerpt: data.excerpt || data.content.substring(0, 150) + '...',
+      title: sanitizedTitle,
+      authorName: sanitizedAuthorName,
+      content: sanitizedContent,
+      excerpt: sanitizedExcerpt,
       slug,
     });
 

@@ -1,14 +1,26 @@
 import { NextResponse } from 'next/server'
 import { google } from 'googleapis'
 import { adminDb } from '@/lib/firebase-admin'
+import { cookies } from 'next/headers'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const code = searchParams.get('code')
+  const state = searchParams.get('state')
 
   if (!code) {
     return NextResponse.json({ error: 'No authorization code found.' }, { status: 400 })
   }
+
+  const cookieStore = await cookies()
+  const storedState = cookieStore.get('oauth_state')?.value
+
+  if (!state || !storedState || state !== storedState) {
+    return NextResponse.json({ error: 'Invalid state parameter.' }, { status: 403 })
+  }
+
+  // Clear the state cookie after verification
+  cookieStore.delete('oauth_state')
 
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
   const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET

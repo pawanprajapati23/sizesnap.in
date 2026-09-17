@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Image as ImageIcon, ShieldCheck, Cpu, Sliders, Share2, Zap } from 'lucide-react'
 import CompareSlider from '@/components/CompareSlider'
@@ -418,9 +419,9 @@ export default function ImageResizeTool({ config }: Props) {
                 <h4 className="text-sm font-bold text-blue-900 dark:text-blue-300">Struggling with Exam Forms? 🏛️</h4>
                 <p className="text-xs text-blue-700 dark:text-blue-400 mt-1">Get your Photo & Signature perfectly sized for SSC/UPSC automatically.</p>
               </div>
-              <a href="/sarkari-exam-pack-generator" className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 whitespace-nowrap shadow-sm">
+              <Link href="/sarkari-exam-pack-generator" className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 whitespace-nowrap shadow-sm">
                 Try Exam Pack Maker &rarr;
-              </a>
+              </Link>
             </div>
           </div>
         )}

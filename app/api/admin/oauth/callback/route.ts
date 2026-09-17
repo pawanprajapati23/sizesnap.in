@@ -34,7 +34,7 @@ export async function GET(request: Request) {
     })
 
     // Redirect back to SEO dashboard
-    return NextResponse.redirect(new URL('/admin/seo', request.url))
+    return NextResponse.redirect(new URL('/admin/dashboard', request.url))
   } catch (error: any) {
     console.error('Error fetching OAuth tokens:', error)
     return NextResponse.json({ error: error.message }, { status: 500 })

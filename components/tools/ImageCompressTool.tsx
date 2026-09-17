@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Upload, Download, RefreshCw, CheckCircle, AlertCircle, Sliders, ShieldCheck, Cpu, Percent, Share2 } from 'lucide-react'
 import CompareSlider from '@/components/CompareSlider'
@@ -485,9 +486,9 @@ export default function ImageCompressTool({ config }: Props) {
                 <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">Applying for Sarkari Exams? 🏛️</h4>
                 <p className="text-xs text-indigo-700 dark:text-indigo-400 mt-1">Generate your complete SSC/UPSC Photo & Signature pack in 1 click.</p>
               </div>
-              <a href="/sarkari-exam-pack-generator" className="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-lg hover:bg-indigo-700 whitespace-nowrap shadow-sm">
+              <Link href="/sarkari-exam-pack-generator" className="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-lg hover:bg-indigo-700 whitespace-nowrap shadow-sm">
                 Try Exam Pack Maker &rarr;
-              </a>
+              </Link>
             </div>
           </div>
         )}

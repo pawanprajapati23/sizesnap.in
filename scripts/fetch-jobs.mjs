@@ -87,14 +87,12 @@ async function fetchLatestJob() {
 
       let jsonStr = "";
       let attempts = 0;
-      const maxAttempts = 4; // Increased to 4 to give models more chances
+      const maxAttempts = 6; // 6 attempts since Google is very overloaded
       
-      // Using exactly the models Google suggested in their 2026 API responses
+      // gemini-3.1-pro is paid-only (limit 0). 
+      // gemini-3.6-flash is the only free tier model allowed for new users.
       const modelsToTry = [
-        'gemini-3.1-pro-preview', // Try the pro preview first since flash is heavily overloaded
-        'gemini-3.6-flash',
-        'gemini-3.1-pro-preview', // Retry 
-        'gemini-3.6-flash'        // Retry
+        'gemini-3.6-flash'
       ];
       
       while (attempts < maxAttempts) {
@@ -126,8 +124,8 @@ async function fetchLatestJob() {
             console.error("Max retries reached on all fallback models. Exiting.");
             process.exit(1);
           }
-          console.log("Waiting 5 seconds before trying the next fallback model...");
-          await sleep(5000);
+          console.log("Waiting 20 seconds before trying again (Google server is overloaded)...");
+          await sleep(20000);
         }
       }
 

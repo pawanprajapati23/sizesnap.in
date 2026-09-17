@@ -15,15 +15,16 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { id, status } = body
+    const { id, status, actionData } = body
 
     if (!id || !status) {
       return NextResponse.json({ success: false, error: 'Missing id or status' }, { status: 400 })
     }
 
-    await adminDb.collection('user_feedback').doc(id).update({ 
-       status, 
-       updatedAt: new Date().toISOString() 
+    await adminDb.collection('seo_action').doc(id).update({
+       status,
+       actionData,
+       updatedAt: new Date().toISOString()
     })
 
     return NextResponse.json({ success: true })

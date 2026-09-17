@@ -6,7 +6,11 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
 
-const parser = new Parser();
+// Add User-Agent to avoid Google News 503 errors
+const parser = new Parser({
+  headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+});
+
 const openai = new OpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
@@ -19,15 +23,14 @@ function generateSlug(title) {
 }
 
 async function fetchLatestJob() {
-  console.log('Fetching latest Sarkari Naukri from SarkariResult RSS Feed...');
+  console.log('Fetching latest Sarkari Naukri from Google News RSS...');
   try {
-    const feed = await parser.parseURL('https://www.sarkariresult.com/feed/');
+    const feed = await parser.parseURL('https://news.google.com/rss/search?q=sarkari+job+notification&hl=en-IN&gl=IN&ceid=IN:en');
     
-    for (let i = 0; i < Math.min(5, feed.items.length); i++) {
+    // Get top 3 items
+    for (let i = 0; i < Math.min(3, feed.items.length); i++) {
       const item = feed.items[i];
-      const title = item.title;
-      const url = item.link;
-
+      const title = item.title.split(' - ')[0]; // Remove publisher name
       const slug = generateSlug(title);
       const filePath = path.join(jobsDir, `${slug}.json`);
 
@@ -36,14 +39,8 @@ async function fetchLatestJob() {
         continue;
       }
 
-      console.log(`Processing new job: ${title}`);
+      console.log(`Found new job: ${title}`);
       
-      // Fetch job page content safely
-      const html = await fetch(url).then(r => r.text());
-      const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-      const bodyHtml = bodyMatch ? bodyMatch[1] : html;
-      const jobText = bodyHtml.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').substring(0, 4000);
-
       let activeModel = "meta/llama-3.1-70b-instruct";
       try {
         const modelsList = await openai.models.list();
@@ -57,12 +54,12 @@ async function fetchLatestJob() {
         activeModel = "nvidia/llama-3.1-nemotron-70b-instruct";
       }
       
-      console.log(`Generating article with NVIDIA API (${activeModel})...`);
+      console.log('Generating SEO-optimized article with NVIDIA API (' + activeModel + ')...');
       
       const prompt = `
       You are an expert Sarkari Naukri (Government Job) content writer for an Indian audience.
-      Write a highly engaging, SEO-optimized job notification article based on this scraped text from SarkariResult:
-      "${jobText}"
+      Write a highly engaging, SEO-optimized job notification article for the following job headline:
+      "${title}"
       
       Important Instructions:
       - Write in Hinglish (a mix of Hindi and English, written in English script).
@@ -72,12 +69,12 @@ async function fetchLatestJob() {
         "title": "Exciting click-bait style title for the job (max 70 chars)",
         "slug": "${slug}",
         "publishedAt": "${new Date().toISOString()}",
-        "examName": "Full name of the exam/job",
+        "examName": "Full name of the exam/job based on the headline",
         "shortDescription": "2-3 lines of summary in Hinglish.",
-        "content": "Full detailed article in HTML format. Use <h2> tags for headings (like Important Dates, Eligibility, Age Limit, Application Fee). Include bullet points. IMPORTANT: Add an H2 heading 'Photo & Signature Upload Rules'. Extract the photo/signature dimensions and sizes from the text if available. Then ADD HTML links encouraging users to use sizesnap.in: e.g. <a href='https://sizesnap.in/compress-image' target='_blank'>Click here to compress your photo to exact size for this form</a> and <a href='https://sizesnap.in/resize-image' target='_blank'>Click here to resize your signature</a>.",
-        "photoSize": "Extract required photo size (e.g. 20KB-50KB) or leave empty",
-        "signatureSize": "Extract required signature size (e.g. 10KB-20KB) or leave empty",
-        "applyLink": "Extract the Official Apply Online link from the text if possible, or leave empty"
+        "content": "Full detailed article in HTML format. Use <h2> tags for headings (like Important Dates, Eligibility, Age Limit, Application Fee). Include bullet points. At the end, add an H2 heading 'Photo & Signature Upload Rules' and mention that users must upload 20KB-50KB photo and 10KB-20KB signature without glasses/cap. Add a call to action encouraging them to use sizesnap.in to compress their photos.",
+        "photoSize": "20KB to 50KB",
+        "signatureSize": "10KB to 20KB",
+        "applyLink": "Official website link (guess it based on the job, e.g. ssc.gov.in, upsc.gov.in) or leave empty string"
       }
       `;
 
@@ -86,7 +83,7 @@ async function fetchLatestJob() {
           model: activeModel,
           messages: [{ role: "user", content: prompt }],
           temperature: 0.7,
-          max_tokens: 2000,
+          max_tokens: 1500,
         });
 
         const rawContent = response.choices[0]?.message?.content;
@@ -110,7 +107,7 @@ async function fetchLatestJob() {
       }
     }
   } catch (err) {
-    console.error('Error fetching data:', err);
+    console.error('Error fetching RSS:', err);
     process.exit(1);
   }
 }

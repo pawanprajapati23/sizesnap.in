@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { fetchAllFeedback, FeedbackData } from '@/lib/firebase';
+import { fetchAllFeedback, deleteFeedback, FeedbackData } from '@/lib/firebase';
 
 type FeedbackWithId = FeedbackData & { id: string };
 
@@ -8,6 +8,7 @@ export default function InboxPage() {
   const [messages, setMessages] = useState<FeedbackWithId[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -19,6 +20,18 @@ export default function InboxPage() {
     load();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this message?')) return;
+    
+    setDeletingId(id);
+    try {
+      await deleteFeedback(id);
+      setMessages(prev => prev.filter(m => m.id !== id));
+    } catch (err) {
+      alert("Failed to delete message. Please try again.");
+    }
+    setDeletingId(null);
+  };
   const filteredMessages = messages.filter(m => filter === 'all' || m.type === filter);
 
   const getBadgeColor = (type: string) => {
@@ -69,7 +82,7 @@ export default function InboxPage() {
           <div className="divide-y divide-gray-200">
             {filteredMessages.map((msg) => (
               <div key={msg.id} className="p-5 hover:bg-gray-50 transition-colors">
-                <div className="flex items-start justify-between gap-4 mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-2">
                   <div className="flex items-center gap-3">
                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border uppercase tracking-wider ${getBadgeColor(msg.type)}`}>
                       {msg.type}
@@ -78,15 +91,29 @@ export default function InboxPage() {
                       {new Date(msg.timestamp).toLocaleString()}
                     </span>
                   </div>
-                  <a 
-                    href={msg.url} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="text-xs text-[#414FA8] hover:underline flex items-center gap-1"
-                  >
-                    View Source Page
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  </a>
+                  <div className="flex items-center gap-4">
+                    <a 
+                      href={msg.url} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="text-xs text-[#414FA8] hover:underline flex items-center gap-1 font-medium"
+                    >
+                      View Source Page
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </a>
+                    <button
+                      onClick={() => handleDelete(msg.id)}
+                      disabled={deletingId === msg.id}
+                      className="text-xs text-red-600 hover:text-red-800 hover:underline flex items-center gap-1 font-medium disabled:opacity-50"
+                    >
+                      {deletingId === msg.id ? 'Deleting...' : (
+                        <>
+                          Delete
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-800 whitespace-pre-wrap">{msg.message}</p>
                 <div className="mt-3 text-xs text-gray-400 font-mono truncate">

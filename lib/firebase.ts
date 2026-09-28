@@ -104,3 +104,13 @@ export const fetchAllFeedback = async (): Promise<(FeedbackData & { id: string }
     return [];
   }
 };
+
+export const deleteFeedback = async (id: string) => {
+  try {
+    const feedbackRef = ref(db, `feedback/${id}`);
+    await set(feedbackRef, null); // Setting to null deletes the node
+  } catch (err) {
+    console.error("Failed to delete feedback:", err);
+    throw err;
+  }
+};

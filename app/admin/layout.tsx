@@ -1,5 +1,5 @@
 // app/admin/layout.tsx
-import '@/styles/globals.css';
+import '@/app/globals.css';
 import { Navbar } from '@/components/Navbar';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

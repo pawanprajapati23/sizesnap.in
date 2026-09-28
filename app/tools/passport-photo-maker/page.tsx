@@ -193,14 +193,14 @@ export default function PassportPhotoMakerPage() {
                 Key Features of SizeSnap Passport Photo Maker
               </h2>
               <ul className="list-disc pl-5 mb-6 space-y-2 text-sm">
-                <li><strong>100% Privacy Preserved:</strong> Unlike other tools, your biometric face data is never uploaded to the cloud. Everything processes securely within your browser's memory using HTML5.</li>
+                <li><strong>100% Privacy Preserved:</strong> Unlike other tools, your biometric face data is never uploaded to the cloud. Everything processes securely within your browser&apos;s memory using HTML5.</li>
                 <li><strong>Auto-Generated Print Sheets:</strong> Preparing for a physical form submission? Generate an A4 print-ready layout containing up to 30 well-spaced copies with precision cut-lines.</li>
                 <li><strong>Zero Loss of Quality:</strong> We use advanced local WASM algorithms to maintain high-resolution DPI suitable for studio-quality color printing.</li>
                 <li><strong>Global Standard Sizes:</strong> Supports multi-country dimensions including India, USA, UK, Canada, and Custom ID formats.</li>
               </ul>
               
               <p className="text-sm leading-relaxed">
-                Whether you are an Indian student applying for competitive exams, a cyber cafe owner looking for quick multi-print grids, or just someone needing an instant US visa photo, SizeSnap's Passport Size Photo Maker is the only utility you will ever need. Experience the convenience of generating compliant ID photos effortlessly while ensuring top-tier accuracy and total data security.
+                Whether you are an Indian student applying for competitive exams, a cyber cafe owner looking for quick multi-print grids, or just someone needing an instant US visa photo, SizeSnap&apos;s Passport Size Photo Maker is the only utility you will ever need. Experience the convenience of generating compliant ID photos effortlessly while ensuring top-tier accuracy and total data security.
               </p>
             </article>
 

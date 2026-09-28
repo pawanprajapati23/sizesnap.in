@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ArrowLeft, ServerOff, Zap, Lock } from 'lucide-react';
@@ -53,11 +54,12 @@ export default function AboutPage() {
           </p>
 
           <div id="founder" className="bg-[#FAFAFC] border border-gray-200 rounded-md p-6 flex flex-col md:flex-row gap-6 items-start mb-8">
-            <div className="w-24 h-24 rounded-full overflow-hidden border border-gray-300 flex-shrink-0">
-              <img 
+            <div className="w-24 h-24 rounded-full overflow-hidden border border-gray-300 flex-shrink-0 relative">
+              <Image 
                 src="/pawan.jpeg" 
                 alt="Pawan Prajapati" 
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
             <div>

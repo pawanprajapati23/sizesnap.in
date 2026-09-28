@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, set, increment } from "firebase/database";
+import { getDatabase, ref, get, set, increment, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -60,5 +60,47 @@ export const trackDownload = async () => {
     await set(downloadRef, increment(1));
   } catch (err) {
     console.error("Failed to track download:", err);
+  }
+};
+
+// ---- FEEDBACK LOGIC ----
+
+export interface FeedbackData {
+  type: string;
+  message: string;
+  url: string;
+  timestamp: number;
+}
+
+export const submitFeedback = async (data: Omit<FeedbackData, 'timestamp'>) => {
+  try {
+    const feedbackRef = ref(db, 'feedback');
+    const newFeedbackRef = push(feedbackRef);
+    await set(newFeedbackRef, {
+      ...data,
+      timestamp: Date.now()
+    });
+  } catch (err) {
+    console.error("Failed to submit feedback:", err);
+    throw err;
+  }
+};
+
+export const fetchAllFeedback = async (): Promise<(FeedbackData & { id: string })[]> => {
+  try {
+    const snapshot = await get(ref(db, 'feedback'));
+    if (!snapshot.exists()) return [];
+    
+    const data = snapshot.val();
+    const list = Object.keys(data).map(key => ({
+      id: key,
+      ...data[key]
+    }));
+    
+    // Sort newest first
+    return list.sort((a, b) => b.timestamp - a.timestamp);
+  } catch (err) {
+    console.error("Failed to fetch feedback:", err);
+    return [];
   }
 };

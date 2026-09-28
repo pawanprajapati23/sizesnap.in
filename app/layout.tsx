@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
+import FeedbackWidget from '@/components/FeedbackWidget';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -108,6 +109,7 @@ export default function RootLayout({
           />
         )}
         <AnalyticsTracker />
+        <FeedbackWidget />
         {children}
       </body>
     </html>

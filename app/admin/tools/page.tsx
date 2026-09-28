@@ -34,7 +34,7 @@ export default function ToolsUsage() {
         const records = (allRecords[t.slug] ?? {}) as unknown as Record<string, number>;
         return {
           slug: t.slug,
-          name: t.title ?? t.slug,
+          name: t.name ?? t.slug,
           count: aggregateWithin(records, ms),
         };
       }).sort((a, b) => b.count - a.count);

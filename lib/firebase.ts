@@ -1,7 +1,5 @@
-// lib/firebase.ts
-// Firebase client initialization for admin panel usage tracking
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, get, set, increment } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -18,23 +16,13 @@ const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 export const auth = getAuth(app);
 
-/**
- * Helper to fetch usage data for a given path.
- * Returns a plain object where keys are timestamps (ms) and values are counts.
- */
 export async function fetchUsage(path: string): Promise<Record<string, number>> {
   const snapshot = await get(ref(db, path));
   if (!snapshot.exists()) return {};
-  // Assume data is stored as { <timestamp>: count }
   const data = snapshot.val();
   return typeof data === "object" ? data : {};
 }
 
-/**
- * Utility to aggregate counts within a time window.
- * `records` is a map of timestamp (ms) -> count.
- * `ms` is the window size in milliseconds.
- */
 export function aggregateWithin(records: Record<string, number>, ms: number): number {
   const now = Date.now();
   let total = 0;
@@ -44,3 +32,33 @@ export function aggregateWithin(records: Record<string, number>, ms: number): nu
   }
   return total;
 }
+
+// ---- NEW TRACKING LOGIC ----
+
+// Utility to get start of current hour timestamp (ms) to group data
+const getCurrentHourTimestamp = () => {
+  const now = new Date();
+  now.setMinutes(0, 0, 0);
+  return now.getTime().toString();
+};
+
+export const trackToolUsage = async (slug: string) => {
+  try {
+    const timestamp = getCurrentHourTimestamp();
+    const usageRef = ref(db, `toolUsage/${slug}/${timestamp}`);
+    // Using increment from firebase/database to safely increment the counter
+    await set(usageRef, increment(1));
+  } catch (err) {
+    console.error("Failed to track tool usage:", err);
+  }
+};
+
+export const trackDownload = async () => {
+  try {
+    const timestamp = getCurrentHourTimestamp();
+    const downloadRef = ref(db, `downloads/${timestamp}`);
+    await set(downloadRef, increment(1));
+  } catch (err) {
+    console.error("Failed to track download:", err);
+  }
+};

@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Choose SizeSnap 2.0?</h2>
           <p className="text-gray-700 mb-6 leading-relaxed">
-            Welcome to SizeSnap, India's most trusted suite of free online utilities for students, professionals, and general web users. 
+            Welcome to SizeSnap, India&apos;s most trusted suite of free online utilities for students, professionals, and general web users.
             Whether you are applying for SSC, UPSC, NEET, or local government exams, getting your photos and signatures to the exact requested size (like 20KB or 50KB) is crucial. 
             Unlike other platforms, SizeSnap operates 100% locally in your browser. This means your sensitive documents, government IDs, and biometric signatures are never uploaded to any cloud server, guaranteeing absolute privacy and security.
           </p>

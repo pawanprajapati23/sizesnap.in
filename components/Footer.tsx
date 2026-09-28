@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   ShieldCheck, 
   Zap, 
@@ -97,8 +98,7 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1 space-y-3">
             <Link href="/" className="flex items-center gap-2 group">
               <div className="relative flex h-8 w-8 items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/logo.png"
                   alt="SizeSnap Logo"
                   width={30}

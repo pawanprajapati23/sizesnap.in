@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { PDFDocument, rgb } from 'pdf-lib';
 import { formatBytes } from '@/lib/format-utils';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -208,6 +207,7 @@ export function CompressPdfTool() {
 
     try {
       if (engine === 'structural') {
+        const { PDFDocument } = await import('pdf-lib');
         // 1. Structural / Metadata stream optimization with pdf-lib
         setProgressText('Optimizing document structure & streams...');
         await new Promise((r) => setTimeout(r, 60));
@@ -264,6 +264,7 @@ export function CompressPdfTool() {
       const loadedPdf = await loadingTask.promise;
       const totalPages = loadedPdf.numPages;
 
+      const { PDFDocument } = await import('pdf-lib');
       const outputPdf = await PDFDocument.create();
 
       // Effective scale from 72 pt basis

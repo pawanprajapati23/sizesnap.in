@@ -1,0 +1,6 @@
+{
+  "name": "SizeSnap - Free Image Compressor & PDF Tools",
+  "description": "Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

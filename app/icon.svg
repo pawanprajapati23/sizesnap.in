@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Top Blue Gradient -->
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="90%" y2="85%">
+      <stop offset="0%" stop-color="#0088FF" />
+      <stop offset="50%" stop-color="#0066FF" />
+      <stop offset="100%" stop-color="#004AE0" />
+    </linearGradient>
+
+    <!-- Top-Left Paper Curl Flap -->
+    <linearGradient id="flapGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38B6FF" />
+      <stop offset="60%" stop-color="#0094FF" />
+      <stop offset="100%" stop-color="#0077FF" />
+    </linearGradient>
+
+    <!-- Bottom Ribbon Gradient: Warm Gold -> Tangerine -> Vivid Red-Orange -->
+    <linearGradient id="orangeGradient" x1="20%" y1="15%" x2="80%" y2="85%">
+      <stop offset="0%" stop-color="#FFA800" />
+      <stop offset="28%" stop-color="#FF8800" />
+      <stop offset="62%" stop-color="#FF4D00" />
+      <stop offset="88%" stop-color="#FF2A00" />
+      <stop offset="100%" stop-color="#E51400" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow under Fold Flap -->
+    <filter id="foldShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="-2" dy="3" stdDeviation="3.5" flood-color="#001844" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <g shape-rendering="geometricPrecision">
+    <!-- 1. Top Blue Section of 'S' -->
+    <path d="M 140 74
+             L 336 74
+             L 336 124
+             L 364 124
+             L 364 186
+             C 364 186, 255 186, 175 186
+             C 140 186, 140 186, 140 186
+             L 140 74 Z"
+          fill="url(#blueGradient)" />
+
+    <!-- Blue Curved Loop Body -->
+    <path d="M 140 74
+             C 80 74, 24 124, 24 202
+             C 24 274, 76 310, 150 310
+             C 218 310, 278 284, 278 238
+             C 278 198, 222 186, 160 186
+             L 140 186
+             L 140 74 Z"
+          fill="url(#blueGradient)" />
+
+    <!-- Top Left Folded Page Flap (Dog-Ear Curl) -->
+    <path d="M 140 74
+             C 98 80, 48 120, 24 200
+             L 140 194
+             Z"
+          fill="url(#flapGradient)"
+          filter="url(#foldShadow)" />
+
+    <!-- Dispersing Digital Pixels (Top-Right) -->
+    <!-- Blue Pixel Top -->
+    <rect x="417" y="34" width="29" height="29" rx="2.5" fill="#0066FF" />
+    <!-- Blue Pixel Middle -->
+    <rect x="352" y="74" width="48" height="42" rx="3" fill="#007BFF" />
+
+    <!-- Orange Pixel Large -->
+    <rect x="380" y="128" width="43" height="43" rx="3" fill="#FFA000" />
+    <!-- Orange Pixel Medium -->
+    <rect x="428" y="76" width="32" height="32" rx="2.5" fill="#FF8C00" />
+    <!-- Yellow-Orange Pixel Top-Right Corner -->
+    <rect x="462" y="16" width="38" height="38" rx="3" fill="#FFB703" />
+
+    <!-- 2. Bottom Orange-to-Red Dynamic Swoosh of 'S' -->
+    <path d="M 215 232
+             C 265 232, 335 252, 384 296
+             C 434 342, 418 416, 362 448
+             C 305 480, 195 452, 125 452
+             C 85 452, 45 448, 36 450
+             C 42 432, 65 372, 150 345
+             C 232 318, 282 296, 278 266
+             C 275 244, 245 232, 215 232 Z"
+          fill="url(#orangeGradient)" />
+  </g>
+</svg>

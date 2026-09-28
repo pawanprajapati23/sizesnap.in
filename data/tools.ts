@@ -833,6 +833,18 @@ export const NAV_MENUS: NavMenu[] = [
     ],
   },
   {
+    label: 'Student Calculators',
+    href: '/student-calculators',
+    items: [
+      { name: 'Percentage Calculator', slug: 'percentage-calculator', href: '/percentage-calculator' },
+      { name: 'CGPA to Percentage', slug: 'cgpa-to-percentage', href: '/cgpa-to-percentage' },
+      { name: 'SGPA to Percentage', slug: 'sgpa-to-percentage', href: '/sgpa-to-percentage' },
+      { name: 'Attendance Calculator', slug: 'attendance-calculator', href: '/attendance-calculator' },
+      { name: 'Study Hours Calculator', slug: 'study-hours-calculator', href: '/study-hours-calculator' },
+      { name: 'View All Calculators', slug: 'all-calculators', href: '/student-calculators' },
+    ],
+  },
+  {
     label: 'All Tools',
     href: '/#directory',
   },

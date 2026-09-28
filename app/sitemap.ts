@@ -99,5 +99,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.95,
   }));
 
-  return [...staticRoutes, ...highPriorityTools, ...examRoutes, ...toolRoutes];
+  // Student Calculators
+  const studentCalculatorRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/student-calculators`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/percentage-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/cgpa-to-percentage`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/sgpa-to-percentage`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/marks-percentage-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/attendance-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/age-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/cgpa-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/required-marks-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/exam-percentage-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/study-hours-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
+  ];
+
+  return [...staticRoutes, ...highPriorityTools, ...examRoutes, ...toolRoutes, ...studentCalculatorRoutes];
 }

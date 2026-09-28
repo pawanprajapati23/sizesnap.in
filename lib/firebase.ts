@@ -1,7 +1,8 @@
 // lib/firebase.ts
 // Firebase client initialization for admin panel usage tracking
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, child } from "firebase/database";
+import { getDatabase, ref, get } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBayDRzocfhvlcwQpK1BEVdfBfTbuP1KNs",
@@ -13,10 +14,9 @@ const firebaseConfig = {
   appId: "1:350460574294:web:3f788a1f3a84748bf4d9f7",
 };
 
-// Initialize Firebase app (singleton)
 const app = initializeApp(firebaseConfig);
-// Export Realtime Database instance
 export const db = getDatabase(app);
+export const auth = getAuth(app);
 
 /**
  * Helper to fetch usage data for a given path.

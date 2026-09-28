@@ -1,9 +1,9 @@
-// app/admin/page.tsx
 'use client';
 import { useEffect, useState } from 'react';
 import FilterTabs, { TimeRange } from '@/app/admin/components/FilterTabs';
 import StatCard from '@/app/admin/components/StatCard';
 import { fetchUsage, aggregateWithin } from '@/lib/firebase';
+import { ALL_TOOLS } from '@/data/tools';
 
 const rangeToMs = (range: TimeRange) => {
   switch (range) {
@@ -24,38 +24,60 @@ export default function AdminDashboard() {
   const [totalToolUses, setTotalToolUses] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  // Tools count from local config
+  const totalAvailableTools = ALL_TOOLS.length;
+
   useEffect(() => {
     async function load() {
       setLoading(true);
-      const dlRecords = await fetchUsage('downloads');
-      const toolRecords = await fetchUsage('toolUsage');
+      try {
+        const dlRecords = await fetchUsage('downloads');
+        const toolRecords = await fetchUsage('toolUsage');
 
-      const ms = rangeToMs(activeRange);
-      setTotalDownloads(aggregateWithin(dlRecords, ms));
+        const ms = rangeToMs(activeRange);
+        setTotalDownloads(aggregateWithin(dlRecords, ms));
 
-      let total = 0;
-      for (const slug of Object.keys(toolRecords)) {
-        const rec = toolRecords[slug] as unknown as Record<string, number>;
-        total += aggregateWithin(rec, ms);
+        let total = 0;
+        for (const slug of Object.keys(toolRecords)) {
+          const rec = toolRecords[slug] as unknown as Record<string, number>;
+          total += aggregateWithin(rec, ms);
+        }
+        setTotalToolUses(total);
+      } catch (err) {
+        console.error("Failed to fetch from Firebase:", err);
+        // Fallback to 0 if firebase isn't working
+        setTotalDownloads(0);
+        setTotalToolUses(0);
       }
-      setTotalToolUses(total);
       setLoading(false);
     }
     load();
   }, [activeRange]);
 
   return (
-    <section className="max-w-4xl mx-auto py-6">
-      <h1 className="text-2xl font-bold mb-4">📊 Admin Dashboard</h1>
-      <FilterTabs active={activeRange} setActive={setActiveRange} />
-      {loading ? (
-        <p className="text-gray-600">Loading data…</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <StatCard title="Total Downloads" value={totalDownloads} />
-          <StatCard title="Total Tool Uses" value={totalToolUses} />
-        </div>
-      )}
+    <section className="max-w-5xl mx-auto">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">📊 Admin Dashboard</h1>
+        <FilterTabs active={activeRange} setActive={setActiveRange} />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <StatCard title="Total Available Tools" value={totalAvailableTools} />
+        <StatCard title="Total Tool Uses" value={loading ? '...' : totalToolUses} />
+        <StatCard title="Total Downloads" value={loading ? '...' : totalDownloads} />
+      </div>
+
+      <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+        <h2 className="text-lg font-bold text-gray-800 mb-4">Welcome to SizeSnap Admin</h2>
+        <p className="text-gray-600">
+          This dashboard shows your platform&apos;s real-time analytics. Usage data is aggregated from Firebase based on user activity.
+        </p>
+        {(totalDownloads === 0 && totalToolUses === 0 && !loading) && (
+          <div className="mt-4 p-4 bg-amber-50 text-amber-800 border border-amber-200 rounded-md text-sm">
+            <strong>Note:</strong> No usage data found for the selected time range. This could mean either no users have used tools recently, or Firebase is not fully configured/tracking correctly yet.
+          </div>
+        )}
+      </div>
     </section>
   );
 }

@@ -43,7 +43,7 @@ export default function FeedbackWidget() {
   };
 
   return (
-    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
+    <div className="fixed bottom-0 right-4 z-50 flex flex-col items-end">
       {/* Modal */}
       {isOpen && (
         <div className="bg-white border border-gray-200 shadow-xl rounded-lg p-5 w-80 mb-0 animate-in slide-in-from-bottom-5 translate-y-1">

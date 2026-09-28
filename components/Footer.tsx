@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, ShieldCheck, Zap, Lock } from 'lucide-react';
+import { ShieldCheck, Zap, Lock } from 'lucide-react';
 
 const KB_TAGS = [
   { label: '10 KB', href: '/tools/reduce-image-size-in-kb?target=10' },
@@ -48,7 +48,7 @@ export function Footer() {
 
       {/* 2. Main Footer Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           
           {/* Brand & Description (Takes up 2 cols on lg) */}
           <div className="lg:col-span-2 space-y-5">
@@ -86,17 +86,6 @@ export function Footer() {
               <li><Link href="/#directory" className="hover:text-[#6366F1] transition-colors font-medium">All Tools &rarr;</Link></li>
             </ul>
           </div>
-
-          {/* Legal */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-bold text-gray-100 tracking-wide">SizeSnap & Legal</h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><Link href="/about" className="hover:text-[#6366F1] transition-colors">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-[#6366F1] transition-colors">Contact Support</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-[#6366F1] transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-[#6366F1] transition-colors">Terms of Service</Link></li>
-            </ul>
-          </div>
         </div>
 
         {/* Popular Tags */}
@@ -119,12 +108,13 @@ export function Footer() {
       {/* 5. Copyright Bar (Pi7 style) */}
       <div className="bg-[#06090F] border-t border-gray-800 pb-8 sm:pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <p>&copy; {new Date().getFullYear()} SizeSnap.in. All rights reserved.</p>
-            <div className="flex items-center gap-1.5 font-medium tracking-wide">
-              <span>Made with</span>
-              <Heart className="h-3.5 w-3.5 text-red-500 fill-current" />
-              <span>in India</span>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+            <p>&copy; 2026 SizeSnap.in. All rights reserved.</p>
+            <div className="flex items-center flex-wrap gap-4 font-medium tracking-wide">
+              <Link href="/about" className="hover:text-gray-300 transition-colors">About Us</Link>
+              <Link href="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
+              <Link href="/privacy-policy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms</Link>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { HeroQuickDropzone } from '@/components/HeroQuickDropzone';
 import { ToolDirectory } from '@/components/ToolDirectory';
 import { Sidebar } from '@/components/Sidebar';
 import { Footer } from '@/components/Footer';
+import FAQSection from '@/components/FAQSection';
 
 export default function HomePage() {
   return (
@@ -56,20 +57,36 @@ export default function HomePage() {
             Unlike other platforms, SizeSnap operates 100% locally in your browser. This means your sensitive documents, government IDs, and biometric signatures are never uploaded to any cloud server, guaranteeing absolute privacy and security.
           </p>
           
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Frequently Asked Questions (FAQ)</h3>
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-800">Is SizeSnap really free to use?</h4>
-              <p className="text-gray-600 text-sm mt-1">Yes! SizeSnap is completely free. There are no hidden charges, no premium subscriptions, and no annoying watermarks added to your exported files.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-800">Are my files uploaded to a server?</h4>
-              <p className="text-gray-600 text-sm mt-1">No. All image compression, resizing, and PDF manipulations happen directly within your device's browser using advanced HTML5 and WebAssembly technologies.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-800">Can I compress images for government exams?</h4>
-              <p className="text-gray-600 text-sm mt-1">Absolutely. We offer dedicated presets and exact KB targeting to help you meet the strict file size limits (e.g., 10KB - 50KB) mandated by various Indian examination portals.</p>
-            </div>
+                      <FAQSection />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                'mainEntity': [
+                  {
+                    '@type': 'Question',
+                    'name': 'Is SizeSnap really free to use?',
+                    'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes! SizeSnap is completely free. No hidden fees, no premium subscriptions, and no watermarks added to your exported files.' }
+                  },
+                  {
+                    '@type': 'Question',
+                    'name': 'Do any files get uploaded to a server?',
+                    'acceptedAnswer': { '@type': 'Answer', 'text': 'No. All processing happens 100% in the browser using WebAssembly and HTML5 APIs. Your files never leave your device.' }
+                  },
+                  {
+                    '@type': 'Question',
+                    'name': 'Can I use SizeSnap for government exam photo requirements?',
+                    'acceptedAnswer': { '@type': 'Answer', 'text': 'Absolutely. We provide exact‑KB presets (10KB‑50KB) to meet the strict size limits required by SSC, UPSC, NEET, and other Indian examination portals.' }
+                  },
+                  {
+                    '@type': 'Question',
+                    'name': 'Is it safe for professional use?',
+                    'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes. The app is client‑side only, contains no tracking pixels, and follows modern security practices. It can be used for business‑critical PDF compression without data leakage.' }
+                  }
+                ]
+              }) }}
+            />
           </div>
         </div>
       </section>

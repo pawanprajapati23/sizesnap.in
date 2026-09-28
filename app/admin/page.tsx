@@ -35,7 +35,7 @@ export default function AdminDashboard() {
 
       let total = 0;
       for (const slug of Object.keys(toolRecords)) {
-        const rec = toolRecords[slug] as Record<string, number>;
+        const rec = toolRecords[slug] as unknown as Record<string, number>;
         total += aggregateWithin(rec, ms);
       }
       setTotalToolUses(total);

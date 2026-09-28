@@ -31,7 +31,7 @@ export default function ToolsUsage() {
       const allRecords = await fetchUsage('toolUsage');
       const ms = rangeToMs(activeRange);
       const newStats: ToolStat[] = ALL_TOOLS.map((t) => {
-        const records = (allRecords[t.slug] ?? {}) as Record<string, number>;
+        const records = (allRecords[t.slug] ?? {}) as unknown as Record<string, number>;
         return {
           slug: t.slug,
           name: t.title ?? t.slug,

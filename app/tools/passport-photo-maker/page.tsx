@@ -167,6 +167,43 @@ export default function PassportPhotoMakerPage() {
               </div>
             )}
 
+            {/* Comprehensive SEO Article Section (Inspired by Pi7) */}
+            <article className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs text-gray-700">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
+                How to Make Passport Size Photos Online
+              </h2>
+              <p className="text-sm mb-5 leading-relaxed">
+                Creating perfect passport-size images for government exams (SSC, UPSC, State PSC), university applications, or official documents is now effortless with the <strong>SizeSnap Passport Photo Maker</strong>. Our client-side tool allows you to crop, frame, and download highly accurate biometric photos instantly without uploading them to any external server.
+              </p>
+              
+              <h3 className="text-base font-bold text-gray-800 mb-3">Step-by-Step Guide:</h3>
+              <ol className="list-decimal pl-5 mb-6 space-y-2 text-sm">
+                <li><strong>Upload Your Photo:</strong> Select a clear, front-facing image taken against a light or plain background.</li>
+                <li><strong>Select Standard Size:</strong> Choose your required dimensions. We offer standard presets like <strong>3.5 × 4.5 cm (Indian Standard)</strong>, 2 × 2 inches (US Visa), or custom stamp sizes.</li>
+                <li><strong>Align with Biometric Guides:</strong> Use our built-in face and shoulder guidelines to frame the photo perfectly according to official standards.</li>
+                <li><strong>Download or Print:</strong> Download the single cropped image for online portal submissions, or generate a high-resolution <strong>A4 Sheet containing multiple copies</strong> ready for home or cyber-cafe printing.</li>
+              </ol>
+
+              <h3 className="text-base font-bold text-gray-800 mb-3">Essential File Size Adjustments</h3>
+              <p className="text-sm mb-6 leading-relaxed">
+                While framing your photo to the exact 3.5cm × 4.5cm dimensions is crucial, most online application portals (like SSC, IBPS, and RRB) also require strict file size limits, usually between <strong>20KB and 50KB</strong>. Once you download your passport photo, you can instantly run it through our <Link href="/tools/reduce-image-size-in-kb?target=50" className="text-[#414FA8] hover:underline font-medium">Compress to 50KB Tool</Link> to ensure it meets exact web upload specifications.
+              </p>
+
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
+                Key Features of SizeSnap Passport Photo Maker
+              </h2>
+              <ul className="list-disc pl-5 mb-6 space-y-2 text-sm">
+                <li><strong>100% Privacy Preserved:</strong> Unlike other tools, your biometric face data is never uploaded to the cloud. Everything processes securely within your browser's memory using HTML5.</li>
+                <li><strong>Auto-Generated Print Sheets:</strong> Preparing for a physical form submission? Generate an A4 print-ready layout containing up to 30 well-spaced copies with precision cut-lines.</li>
+                <li><strong>Zero Loss of Quality:</strong> We use advanced local WASM algorithms to maintain high-resolution DPI suitable for studio-quality color printing.</li>
+                <li><strong>Global Standard Sizes:</strong> Supports multi-country dimensions including India, USA, UK, Canada, and Custom ID formats.</li>
+              </ul>
+              
+              <p className="text-sm leading-relaxed">
+                Whether you are an Indian student applying for competitive exams, a cyber cafe owner looking for quick multi-print grids, or just someone needing an instant US visa photo, SizeSnap's Passport Size Photo Maker is the only utility you will ever need. Experience the convenience of generating compliant ID photos effortlessly while ensuring top-tier accuracy and total data security.
+              </p>
+            </article>
+
             {/* FAQ Section */}
             <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
               <div className="flex items-center gap-2 border-b border-gray-100 pb-2">

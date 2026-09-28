@@ -32,8 +32,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Sidebar - Hidden on Login Page */}
           {!isLoginPage && (
             <aside className="w-64 bg-white border-r border-gray-200 shadow-sm flex flex-col hidden md:flex">
-              <div className="p-4 border-b border-gray-200">
-                <h2 className="text-lg font-bold text-gray-800">Admin Panel</h2>
+              <div className="p-5 border-b border-gray-200 flex flex-col items-center text-center bg-gray-50/50">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm mb-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/pawan.jpeg" alt="Pawan Prajapati" className="w-full h-full object-cover" />
+                </div>
+                <h2 className="text-sm font-bold text-gray-900">Pawan Prajapati</h2>
+                <a href="mailto:diplomawithbtech@gmail.com" className="text-xs text-gray-500 hover:text-[#414FA8] hover:underline mt-0.5">
+                  diplomawithbtech@gmail.com
+                </a>
               </div>
               <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
                 <Link 

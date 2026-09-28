@@ -37,7 +37,7 @@ export function Footer() {
     <footer className="mt-16 bg-white border-t border-gray-200">
       {/* 1. Value Proposition & Trust Badges Strip */}
       <div className="border-b border-gray-200 bg-[#FAFAFC] py-6 sm:py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <div className="flex items-start gap-3.5 p-3 rounded bg-white border border-gray-100 shadow-2xs">
               <div className="flex h-10 w-10 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0">
@@ -91,7 +91,7 @@ export function Footer() {
       </div>
 
       {/* 2. Mega Multi-Column Directory */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Brand Info & Mission */}
           <div className="col-span-2 lg:col-span-1 space-y-3">

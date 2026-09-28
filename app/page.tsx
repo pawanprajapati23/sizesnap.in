@@ -13,7 +13,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
           {/* Main content: ~70% width on desktop, 100% on mobile */}
           <div className="w-full lg:col-span-8 xl:col-span-9">

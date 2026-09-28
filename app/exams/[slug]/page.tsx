@@ -105,7 +105,7 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
 
       <Navbar />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 space-y-6">
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 space-y-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-gray-500" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-[#414FA8] font-medium transition-colors">

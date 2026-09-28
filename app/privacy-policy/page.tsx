@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
 
             <div>
               <h2 className="text-base font-bold text-gray-900 mb-2">2. Absolute Privacy: No File Uploads</h2>
-              <p className="mb-2"><strong>This is the core foundation of our service:</strong> We do not store or upload user files. All file processing happens 100% locally on your device, within your web browser.</p>
+              <p className="mb-2"><strong>This is the core foundation of our service:</strong> We do not store or upload user files. All file processing happens 100% locally on your device, within your web browser. To ensure this, we leverage standard Web APIs such as HTML5 Canvas and WebAssembly. These technologies execute the compression scripts natively in your system&apos;s RAM without transferring data over the internet.</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>No files are uploaded to any server.</strong></li>
                 <li><strong>All processing is done securely in your browser.</strong></li>

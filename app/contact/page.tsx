@@ -21,6 +21,8 @@ export default function ContactPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-3">Contact Us & Support</h1>
           <p className="text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed">
             Have a question, feedback, or feature request? Get in touch with the SizeSnap support team. We respond within 24 to 48 hours.
+            <br /><br />
+            <strong>Bug Reports:</strong> When submitting a bug report via email, please include: your browser version, the specific tool URL you were using, and a description of the error. Since we do not have access to your uploaded files due to our 100% client-side privacy policy, providing details helps us replicate the issue.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

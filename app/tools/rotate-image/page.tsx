@@ -55,11 +55,26 @@ const FAQS = [
 export default function RotateImagePage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
-  return (
-    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
-      <Navbar />
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  };
 
-      <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+        <Navbar />
+
+        <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-[#414FA8] font-medium transition-colors">
             Home
@@ -183,9 +198,10 @@ export default function RotateImagePage() {
             <Sidebar />
           </div>
         </div>
-      </main>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }

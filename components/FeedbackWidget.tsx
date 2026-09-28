@@ -43,10 +43,10 @@ export default function FeedbackWidget() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
       {/* Modal */}
       {isOpen && (
-        <div className="bg-white border border-gray-200 shadow-xl rounded-lg p-5 w-80 mb-3 animate-in slide-in-from-bottom-5">
+        <div className="bg-white border border-gray-200 shadow-xl rounded-lg p-5 w-80 mb-0 animate-in slide-in-from-bottom-5 translate-y-1">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-bold text-gray-900 text-sm">Feedback & Suggestions</h3>
             <button 
@@ -66,7 +66,7 @@ export default function FeedbackWidget() {
               <p className="text-xs text-gray-500 mt-1">Your feedback has been sent to the admin.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3 w-full text-left">
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-1">Feedback Type</label>
                 <select 
@@ -118,15 +118,15 @@ export default function FeedbackWidget() {
         </div>
       )}
 
-      {/* Floating Button */}
+      {/* Floating Tab attached to bottom */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 bg-[#414FA8] hover:bg-[#323d8c] text-white font-medium px-4 py-2.5 rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95"
+        className="flex items-center justify-center gap-1.5 bg-gray-900 hover:bg-black text-white font-medium px-4 py-1.5 rounded-t-md shadow-[0_-2px_10px_rgba(0,0,0,0.1)] text-xs transition-colors border border-gray-700 border-b-0 w-32"
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-3 h-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
         </svg>
-        <span className="text-sm">Feedback</span>
+        <span className="tracking-wide">Feedback</span>
       </button>
     </div>
   );

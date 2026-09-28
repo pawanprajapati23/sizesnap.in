@@ -1,6 +1,6 @@
 <div align="center">
   <img src="public/logo.png" width="100" height="100" alt="SizeSnap Logo" />
-  <h1>SizeSnap 2.0 📸</h1>
+  <h1>SizeSnap 📸</h1>
   <p><strong>India's fastest precision image resizer, compressor, and document scanner tool.</strong></p>
 </div>
 
@@ -16,7 +16,7 @@
 
 ## 🚀 Overview
 
-**SizeSnap 2.0** is a completely revamped, production-ready Next.js application designed to help users compress, resize, and optimize images and PDF documents for strict portal uploads (like SSC, UPSC, and State PSCs). 
+**SizeSnap** is a production-ready Next.js application designed to help users compress, resize, and optimize images and PDF documents for strict portal uploads (like SSC, UPSC, and State PSCs). 
 
 It emphasizes **100% Client-Side Privacy** by running heavy processing inside the browser using HTML5 Canvas and WebAssembly. No user files are ever uploaded to cloud servers.
 
@@ -25,8 +25,8 @@ It emphasizes **100% Client-Side Privacy** by running heavy processing inside th
 - **Blazing Fast Local Processing**: Powered by local browser memory—resizes and compresses images in under 100ms.
 - **Zero Cloud Storage (100% Private)**: Government IDs, photos, and signatures are processed locally. No web server uploads.
 - **Strict Size Targeting**: Compress images to exact sizes (e.g., *12 KB, 20 KB, 50 KB, 100 KB*).
-- **PDF Compression**: Structural and visual PDF compression with multiple presets.
-- **Smart Aspect Ratio Locking**: Resizes without stretching or distorting pixel data.
+- **PDF Manipulation**: Structural and visual PDF compression with multiple presets.
+- **Admin Dashboard**: Real-time Firebase-powered dashboard to track tool usage and file downloads across different time ranges (24h/7d/30d/3m).
 - **SEO Optimized**: Fully integrated with canonical tags, dynamic `sitemap.xml`, Open Graph metadata, and JSON-LD structured FAQs.
 - **Production Analytics**: Pre-configured for Google Analytics (GA4) and Google Search Console (GSC).
 
@@ -35,6 +35,7 @@ It emphasizes **100% Client-Side Privacy** by running heavy processing inside th
 - **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4 + Lucide React Icons
+- **Database & Analytics**: Firebase Realtime Database (for Admin usage tracking)
 - **PDF Manipulation**: `pdf-lib` and `pdfjs-dist`
 - **Animations**: `framer-motion`
 - **Linting & Formatting**: ESLint
@@ -49,8 +50,8 @@ Ensure you have **Node.js** (v18+) and **npm** installed.
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/sizesnap2.0.git
-cd sizesnap2.0
+git clone https://github.com/pawanprajapati23/sizesnap.in.git
+cd sizesnap.in
 
 # Install dependencies
 npm install
@@ -70,7 +71,7 @@ Update your `.env` file with your specific tracking and domain details (see *Env
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view the app, or [http://localhost:3000/admin](http://localhost:3000/admin) to view the Admin Dashboard.
 
 ## 🔐 Environment Variables
 
@@ -86,6 +87,7 @@ NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
 # Google Search Console (If using HTML tag verification instead of DNS)
 NEXT_PUBLIC_GSC_VERIFICATION="your-verification-code-here"
 ```
+*(Note: Firebase initialization keys are configured directly in `lib/firebase.ts`.)*
 
 ## 📈 SEO & Tracking
 

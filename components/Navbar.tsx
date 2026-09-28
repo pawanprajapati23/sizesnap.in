@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { NAV_MENUS } from '@/data/tools';
 
@@ -53,8 +54,7 @@ export function Navbar() {
           aria-label="SizeSnap Homepage"
         >
           <div className="relative flex h-8 w-8 shrink-0 items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/logo.png"
               alt="SizeSnap Logo"
               width={32}

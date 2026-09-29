@@ -99,6 +99,7 @@ const DEDICATED_TOOL_SLUGS = [
   'image-framer',
   'image-upscaler',
   'image-watermark',
+  'text-to-handwriting',
 ];
 
 export async function generateStaticParams() {

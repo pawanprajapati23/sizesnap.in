@@ -100,6 +100,7 @@ const DEDICATED_TOOL_SLUGS = [
   'image-upscaler',
   'image-watermark',
   'text-to-handwriting',
+  'image-to-text-ocr',
 ];
 
 export async function generateStaticParams() {

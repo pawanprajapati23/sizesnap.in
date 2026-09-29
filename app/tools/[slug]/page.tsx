@@ -39,6 +39,31 @@ const TOOL_REDIRECT_MAP: Record<string, string> = {
   'remove-metadata': '/tools/image-metadata-viewer',
   'resize-image-by-pixel': '/tools/resize-image-pixel',
   'pan-card': '/tools/passport-photo-maker',
+  'grayscale-image': '/tools/image-filters?mode=grayscale',
+  'black-and-white': '/tools/image-filters?mode=bw',
+  'blur-image': '/tools/image-filters?mode=blur',
+  'unblur-image': '/tools/image-filters?mode=sharpen',
+  'motion-blur': '/tools/image-filters?mode=blur',
+  'pixelate-image': '/tools/image-filters?mode=pixelate',
+  'picture-to-pixel-art': '/tools/image-filters?mode=pixelate',
+  'deep-fry-photo': '/tools/image-filters?mode=deepfry',
+  'censor-photo': '/tools/image-filters?mode=pixelate',
+  'blur-face': '/tools/image-filters?mode=blur',
+  'beautify-image': '/tools/image-filters?mode=sepia',
+  'add-border-to-image': '/tools/image-framer?mode=border',
+  'add-white-border-to-image': '/tools/image-framer?mode=border',
+  'round-corners': '/tools/image-framer?mode=round',
+  'change-aspect-ratio': '/tools/crop-image',
+  'increase-image-quality': '/tools/image-upscaler',
+  'convert-dpi-200-300-600': '/tools/image-upscaler',
+  'check-image-dpi': '/tools/image-upscaler',
+  'super-resolution': '/tools/image-upscaler',
+  'upscale-image-with-ai': '/tools/image-upscaler',
+  'a4-size': '/tools/passport-photo-maker',
+  'add-text-to-image': '/tools/image-watermark?type=text',
+  'add-logo-to-image': '/tools/image-watermark?type=logo',
+  'watermark-images': '/tools/image-watermark?type=logo',
+  'add-name-dob-on-photo': '/tools/image-watermark?type=text',
 };
 
 const DEDICATED_TOOL_SLUGS = [
@@ -70,6 +95,10 @@ const DEDICATED_TOOL_SLUGS = [
   'image-color-picker',
   'image-metadata-viewer',
   'favicon-generator',
+  'image-filters',
+  'image-framer',
+  'image-upscaler',
+  'image-watermark',
 ];
 
 export async function generateStaticParams() {

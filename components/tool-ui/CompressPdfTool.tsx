@@ -167,8 +167,9 @@ export function CompressPdfTool() {
 
       // Canvas-based Visual Downsampling Engine
       const pdfjs = await getPdfJs();
+      const freshBuffer = await pdfMeta.file.arrayBuffer();
       const loadingTask = pdfjs.getDocument({
-        data: new Uint8Array(pdfMeta.arrayBuffer),
+        data: new Uint8Array(freshBuffer),
         cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
         cMapPacked: true,
       });

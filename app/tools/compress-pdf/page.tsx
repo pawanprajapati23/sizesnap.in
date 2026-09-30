@@ -206,7 +206,7 @@ export default function CompressPdfPage() {
               <ol className="list-decimal pl-5 mb-6 space-y-2 text-sm">
                 <li><strong>Upload Your PDF:</strong> Click the upload button to select the heavy PDF file you wish to shrink.</li>
                 <li><strong>Enter Target Size:</strong> Simply type in the maximum size you need in KB (e.g., 100, 500, or 1000 for 1MB).</li>
-                <li><strong>Let the Tool Work:</strong> Click "Compress PDF". Our smart algorithm will automatically adjust the internal resolution and image quality to hit your target size.</li>
+                <li><strong>Let the Tool Work:</strong> Click &quot;Compress PDF&quot;. Our smart algorithm will automatically adjust the internal resolution and image quality to hit your target size.</li>
                 <li><strong>Download Optimized File:</strong> Click download to get your newly optimized, lightweight PDF instantly.</li>
               </ol>
 
@@ -215,7 +215,7 @@ export default function CompressPdfPage() {
               </h2>
               <ul className="list-disc pl-5 mb-6 space-y-2 text-sm">
                 <li><strong>100% Client-Side Privacy:</strong> Your files never leave your device. Our JavaScript engine (powered by pdf-lib and pdf.js) does all the heavy lifting locally.</li>
-                <li><strong>Target KB Accuracy:</strong> Stop guessing with "Low/High" quality presets. Just tell us how many KB you want, and we'll do the math.</li>
+                <li><strong>Target KB Accuracy:</strong> Stop guessing with &quot;Low/High&quot; quality presets. Just tell us how many KB you want, and we&apos;ll do the math.</li>
                 <li><strong>No Watermarks:</strong> Completely free to use with zero hidden fees, and we never add annoying watermarks to your documents.</li>
               </ul>
               

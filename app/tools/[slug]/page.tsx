@@ -101,6 +101,8 @@ const DEDICATED_TOOL_SLUGS = [
   'image-watermark',
   'text-to-handwriting',
   'image-to-text-ocr',
+  'increase-image-size-in-kb',
+  'generate-signature',
 ];
 
 export async function generateStaticParams() {

@@ -67,7 +67,7 @@ export function BlurBackgroundTool() {
       cvs.height = orig.naturalHeight || orig.height;
       
       // Draw blurred original for background
-      ctx.filter = \`blur(\${blur}px)\`;
+      ctx.filter = `blur(${blur}px)`;
       ctx.drawImage(orig, 0, 0, cvs.width, cvs.height);
       
       // Draw the crisp masked subject on top

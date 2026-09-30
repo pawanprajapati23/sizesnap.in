@@ -128,7 +128,7 @@ export function CompressPdfTool() {
       if (err.name === 'PasswordException') {
         setErrorMsg('This PDF is password-protected. Please unlock it before compressing.');
       } else {
-        setErrorMsg('Failed to open PDF. The file may be damaged, corrupted, or unsupported.');
+        console.error(err); setErrorMsg(`Failed to open PDF: ${err.message || err.toString()}`);
       }
     }
   };

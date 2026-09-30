@@ -451,23 +451,8 @@ export function CompressPdfTool() {
                     </div>
                   </div>
 
-                  {targetKB && pdfMeta && (
-                    <div className="mt-3 text-[11px] px-3 py-2 rounded bg-blue-50/50 border border-blue-100 text-blue-700 flex items-start gap-2">
-                      <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
-                      <div>
-                        {Number(targetKB) * 1024 > pdfMeta.size ? (
-                          <span className="text-amber-600 font-medium">Target size is larger than original file! (Original is ${(pdfMeta.size/1024).toFixed(0)}KB)</span>
-                        ) : (
-                          <span>
-                            Targeting <strong>${Math.round((1 - (Number(targetKB) * 1024) / pdfMeta.size) * 100)}% reduction</strong>. 
-                            {Number(targetKB) / pdfMeta.totalPages < 40 && " Warning: Less than 40KB per page might result in blurry text."}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  )}
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {[100, 300, 500, 1000].map((preset) => (
+                    {[20, 50, 100, 300, 500, 1000].map((preset) => (
                       <button
                         key={preset}
                         onClick={() => setTargetKB(preset)}

@@ -66,14 +66,14 @@ export default function IncreaseImageSizePage() {
             How to Increase Photo Size in KB Online (Target KB)
             </h2>
             <p className="text-sm mb-5 leading-relaxed">
-            Sometimes your scanned passport photo or signature is too small. Government job portals like SSC, UPSC, and IBPS often have strict minimum size limits (for example, "Image size must be between 20KB and 50KB"). If your photo is just 12KB, the system will throw an error. SizeSnap's <strong>Increase Image Size</strong> tool allows you to safely enlarge your photo to hit the exact target KB without installing heavy software like Photoshop.
+            Sometimes your scanned passport photo or signature is too small. Government job portals like SSC, UPSC, and IBPS often have strict minimum size limits (for example, &quot;Image size must be between 20KB and 50KB&quot;). If your photo is just 12KB, the system will throw an error. SizeSnap&apos;s <strong>Increase Image Size</strong> tool allows you to safely enlarge your photo to hit the exact target KB without installing heavy software like Photoshop.
             </p>
             
             <h3 className="text-base font-bold text-gray-800 mb-3">Step-by-Step Guide to Enlarge Image Size:</h3>
             <ol className="list-decimal pl-5 mb-6 space-y-2 text-sm">
             <li><strong>Upload Your Image:</strong> Click to browse and upload the small JPG/PNG file you want to increase.</li>
             <li><strong>Enter Target Size:</strong> Type the desired size in KB (e.g., 50, 100, or 200).</li>
-            <li><strong>Upscale & Expand:</strong> Click the button. Our tool will optimize the image dimensions and quality to smoothly reach your requested size.</li>
+            <li><strong>Upscale &amp; Expand:</strong> Click the button. Our tool will optimize the image dimensions and quality to smoothly reach your requested size.</li>
             <li><strong>Download:</strong> Your newly enlarged, portal-ready image will be downloaded instantly.</li>
             </ol>
 
@@ -81,7 +81,7 @@ export default function IncreaseImageSizePage() {
             Why Do You Need to Increase KB?
             </h2>
             <p className="text-sm leading-relaxed">
-            Most forms use automated scripts to verify uploads. If an image is too small (e.g., under 10KB), the script assumes it's low quality or corrupted. By organically increasing the DPI (Dots Per Inch), scaling up the dimensions, and maximizing the JPEG quality factor, SizeSnap ensures your application form accepts the document on the first try.
+            Most forms use automated scripts to verify uploads. If an image is too small (e.g., under 10KB), the script assumes it&apos;s low quality or corrupted. By organically increasing the DPI (Dots Per Inch), scaling up the dimensions, and maximizing the JPEG quality factor, SizeSnap ensures your application form accepts the document on the first try.
             </p>
         </article>
 

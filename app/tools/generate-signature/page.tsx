@@ -66,7 +66,7 @@ export default function GenerateSignaturePage() {
             How to Create a Digital Signature Online Free
             </h2>
             <p className="text-sm mb-5 leading-relaxed">
-            Signing physical documents and scanning them is a hassle. SizeSnap's <strong>Digital Signature Maker</strong> lets you draw your e-signature smoothly using your device's touchscreen or mouse. Whether you need a transparent signature to stamp onto a PDF invoice, or a crisp black-ink signature on a white background for government forms (like SSC or UPSC), our tool gets the job done securely.
+            Signing physical documents and scanning them is a hassle. SizeSnap&apos;s <strong>Digital Signature Maker</strong> lets you draw your e-signature smoothly using your device&apos;s touchscreen or mouse. Whether you need a transparent signature to stamp onto a PDF invoice, or a crisp black-ink signature on a white background for government forms (like SSC or UPSC), our tool gets the job done securely.
             </p>
             
             <h3 className="text-base font-bold text-gray-800 mb-3">Step-by-Step Guide to Draw Signature:</h3>
@@ -74,14 +74,14 @@ export default function GenerateSignaturePage() {
             <li><strong>Draw on the Canvas:</strong> Use your mouse or finger to draw your signature in the blank white box provided.</li>
             <li><strong>Choose Ink Color:</strong> Click on Blue, Black, or Red ink to match official requirements.</li>
             <li><strong>Adjust Pen Thickness:</strong> Use the slider to make the stroke thinner or thicker depending on your preference.</li>
-            <li><strong>Download Format:</strong> Select "Transparent PNG" if you plan to overlay it on a document, or "White Background JPG" if you need to upload it directly to an application portal.</li>
+            <li><strong>Download Format:</strong> Select &quot;Transparent PNG&quot; if you plan to overlay it on a document, or &quot;White Background JPG&quot; if you need to upload it directly to an application portal.</li>
             </ol>
 
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
-            Why Use SizeSnap's E-Signature Tool?
+            Why Use SizeSnap&apos;s E-Signature Tool?
             </h2>
             <p className="text-sm leading-relaxed">
-            Unlike many other tools, we use high-fidelity HTML5 Canvas rendering for smooth, natural curves that look exactly like a real pen. Plus, for absolute privacy, the signature is rendered entirely within your browser. You don't have to worry about your signature being stolen because it is never transmitted over the internet to any server.
+            Unlike many other tools, we use high-fidelity HTML5 Canvas rendering for smooth, natural curves that look exactly like a real pen. Plus, for absolute privacy, the signature is rendered entirely within your browser. You don&apos;t have to worry about your signature being stolen because it is never transmitted over the internet to any server.
             </p>
         </article>
 

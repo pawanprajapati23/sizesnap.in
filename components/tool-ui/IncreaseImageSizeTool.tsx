@@ -258,7 +258,7 @@ export function IncreaseImageSizeTool() {
                 ) : (
                     <div className="text-gray-400 text-sm flex flex-col items-center gap-2">
                         <Maximize className="w-8 h-8 opacity-20" />
-                        <p>Click "Increase Size" to see results here.</p>
+                        <p>Click &quot;Increase Size&quot; to see results here.</p>
                     </div>
                 )}
             </div>

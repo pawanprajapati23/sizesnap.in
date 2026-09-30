@@ -142,30 +142,9 @@ export function CompressPdfTool() {
 
     try {
       const targetBytes = Number(targetKB) * 1024;
-      const compressionRatio = targetBytes / pdfMeta.size;
-
-      // Smart calculation for DPI and JPEG Quality based on requested ratio
-      let dpi = 150;
-      let quality = 85;
-
-      if (compressionRatio < 0.15) {
-          dpi = 72;
-          quality = 30;
-      } else if (compressionRatio < 0.3) {
-          dpi = 96;
-          quality = 50;
-      } else if (compressionRatio < 0.6) {
-          dpi = 120;
-          quality = 65;
-      } else if (compressionRatio < 0.9) {
-          dpi = 150;
-          quality = 75;
-      } else {
-          dpi = 200;
-          quality = 85;
-      }
-
-      // Canvas-based Visual Downsampling Engine
+      // Reserve some KB for PDF overhead (at least 2%)
+      const safeTargetBytes = Math.max(1024, targetBytes - Math.max(5120, targetBytes * 0.02));
+      
       const pdfjs = await getPdfJs();
       const freshBuffer = await pdfMeta.file.arrayBuffer();
       const loadingTask = pdfjs.getDocument({
@@ -176,12 +155,10 @@ export function CompressPdfTool() {
 
       const loadedPdf = await loadingTask.promise;
       const totalPages = loadedPdf.numPages;
+      const targetBytesPerPage = safeTargetBytes / totalPages;
 
       const { PDFDocument } = await import('pdf-lib');
       const outputPdf = await PDFDocument.create();
-
-      const scale = dpi / 72;
-      const jpegQuality = quality / 100;
 
       for (let i = 1; i <= totalPages; i++) {
         const pct = Math.round(((i - 1) / totalPages) * 100);
@@ -189,50 +166,89 @@ export function CompressPdfTool() {
         setProgressText(`Compressing page ${i} of ${totalPages}... (${pct}%)`);
 
         const page = await loadedPdf.getPage(i);
-        const viewport = page.getViewport({ scale });
-
         const originalViewport = page.getViewport({ scale: 1.0 });
         const pageWidthPt = originalViewport.width;
         const pageHeightPt = originalViewport.height;
 
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.floor(viewport.width);
-        canvas.height = Math.floor(viewport.height);
-
-        const ctx = canvas.getContext('2d', { alpha: false });
-        if (!ctx) throw new Error('Canvas 2D context unavailable.');
-
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        const renderContext = {
-          canvasContext: ctx,
+        // Base render at high quality
+        const baseScale = 2.0;
+        const viewport = page.getViewport({ scale: baseScale });
+        const baseCanvas = document.createElement('canvas');
+        baseCanvas.width = Math.floor(viewport.width);
+        baseCanvas.height = Math.floor(viewport.height);
+        
+        const baseCtx = baseCanvas.getContext('2d', { alpha: false });
+        if (!baseCtx) throw new Error('Canvas 2D unavailable');
+        
+        baseCtx.fillStyle = '#FFFFFF';
+        baseCtx.fillRect(0, 0, baseCanvas.width, baseCanvas.height);
+        
+        await page.render({
+          canvasContext: baseCtx,
           viewport: viewport,
-          background: 'rgb(255,255,255)',
-        };
+          background: 'rgb(255,255,255)'
+        }).promise;
 
-        await page.render(renderContext).promise;
+        const scalesToTry = [2.0, 1.5, 1.0, 0.75, 0.5, 0.35];
+        let bestBytes = null;
+        let smallestBytesEver = null;
 
-        const dataUrl = canvas.toDataURL('image/jpeg', jpegQuality);
-        const base64 = dataUrl.split(',')[1];
-        const binaryStr = atob(base64);
-        const len = binaryStr.length;
-        const bytes = new Uint8Array(len);
-        for (let j = 0; j < len; j++) {
-          bytes[j] = binaryStr.charCodeAt(j);
+        for (const testScale of scalesToTry) {
+          const tempCanvas = document.createElement('canvas');
+          tempCanvas.width = Math.floor(originalViewport.width * testScale);
+          tempCanvas.height = Math.floor(originalViewport.height * testScale);
+          const tempCtx = tempCanvas.getContext('2d', { alpha: false });
+          if (!tempCtx) continue;
+          
+          tempCtx.fillStyle = '#FFFFFF';
+          tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+          tempCtx.imageSmoothingEnabled = true;
+          tempCtx.imageSmoothingQuality = 'high';
+          tempCtx.drawImage(baseCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
+
+          let lowQ = 0.05;
+          let highQ = 0.95;
+          let scaleBestBytes = null;
+
+          for (let iter = 0; iter < 5; iter++) {
+            const midQ = (lowQ + highQ) / 2;
+            const dataUrl = tempCanvas.toDataURL('image/jpeg', midQ);
+            const base64 = dataUrl.split(',')[1];
+            const binaryStr = atob(base64);
+            const len = binaryStr.length;
+            const bytes = new Uint8Array(len);
+            for (let j = 0; j < len; j++) bytes[j] = binaryStr.charCodeAt(j);
+
+            if (!smallestBytesEver || len < smallestBytesEver.length) {
+              smallestBytesEver = bytes;
+            }
+
+            if (len <= targetBytesPerPage) {
+              scaleBestBytes = bytes;
+              lowQ = midQ; 
+            } else {
+              highQ = midQ; 
+            }
+          }
+
+          tempCanvas.width = 0;
+          tempCanvas.height = 0;
+
+          if (scaleBestBytes) {
+            bestBytes = scaleBestBytes;
+            break;
+          }
         }
 
-        const embeddedImg = await outputPdf.embedJpg(bytes.buffer as ArrayBuffer);
-        const newPage = outputPdf.addPage([pageWidthPt, pageHeightPt]);
-        newPage.drawImage(embeddedImg, {
-          x: 0,
-          y: 0,
-          width: pageWidthPt,
-          height: pageHeightPt,
-        });
+        const finalBytes = bestBytes || smallestBytesEver;
+        if (!finalBytes) throw new Error('Compression failed');
 
-        canvas.width = 0;
-        canvas.height = 0;
+        const embeddedImg = await outputPdf.embedJpg(finalBytes.buffer);
+        const newPage = outputPdf.addPage([pageWidthPt, pageHeightPt]);
+        newPage.drawImage(embeddedImg, { x: 0, y: 0, width: pageWidthPt, height: pageHeightPt });
+
+        baseCanvas.width = 0;
+        baseCanvas.height = 0;
       }
 
       setProgressPercent(95);

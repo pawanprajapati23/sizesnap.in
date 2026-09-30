@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Loader2 } from 'lucide-react';
-import removeBackground from '@imgly/background-removal';
+import { removeBackground } from '@imgly/background-removal';
 
 export function RemoveBackgroundTool() {
   const [image, setImage] = useState<string | null>(null);

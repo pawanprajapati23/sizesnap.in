@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import confetti from 'canvas-confetti';
 import {
   Upload,
   File,
@@ -47,6 +48,25 @@ export function CompressPdfTool() {
   const [isLoadingPdf, setIsLoadingPdf] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const [isDragging, setIsDragging] = useState(false);
+  
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
+  };
+
 
   // Settings
   const [targetKB, setTargetKB] = useState<number | ''>(500);
@@ -264,6 +284,13 @@ export function CompressPdfTool() {
       const saved = pdfMeta.size - compressedBlob.size;
       const pct = ((compressedBlob.size - pdfMeta.size) / pdfMeta.size) * 100;
 
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#414FA8', '#10B981', '#3B82F6']
+      });
+
       setResult({
         blob: compressedBlob,
         url: compressedUrl,
@@ -313,7 +340,12 @@ export function CompressPdfTool() {
     <div className="w-full">
       {/* 1. Upload View */}
       {!pdfMeta && (
-        <div className="border-2 border-dashed border-[#9AA3C8] rounded-md p-6 sm:p-10 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
+        <div 
+          onDragOver={handleDragOver} 
+          onDragLeave={handleDragLeave} 
+          onDrop={handleDrop}
+          className={`border-2 border-dashed rounded-md p-6 sm:p-10 text-center transition-all duration-200 ${isDragging ? 'border-[#414FA8] bg-[#EEF1FB] scale-[1.01]' : 'border-[#9AA3C8] bg-[#FAFAFC] hover:bg-white'}`}
+        >
           <div className="max-w-md mx-auto flex flex-col items-center">
             <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">
               <Upload className="h-6 w-6" />
@@ -419,6 +451,21 @@ export function CompressPdfTool() {
                     </div>
                   </div>
 
+                  {targetKB && pdfMeta && (
+                    <div className="mt-3 text-[11px] px-3 py-2 rounded bg-blue-50/50 border border-blue-100 text-blue-700 flex items-start gap-2">
+                      <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+                      <div>
+                        {Number(targetKB) * 1024 > pdfMeta.size ? (
+                          <span className="text-amber-600 font-medium">Target size is larger than original file! (Original is ${(pdfMeta.size/1024).toFixed(0)}KB)</span>
+                        ) : (
+                          <span>
+                            Targeting <strong>${Math.round((1 - (Number(targetKB) * 1024) / pdfMeta.size) * 100)}% reduction</strong>. 
+                            {Number(targetKB) / pdfMeta.totalPages < 40 && " Warning: Less than 40KB per page might result in blurry text."}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
                   <div className="flex flex-wrap gap-2 mt-3">
                     {[100, 300, 500, 1000].map((preset) => (
                       <button

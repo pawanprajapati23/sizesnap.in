@@ -163,8 +163,8 @@ export default function CompressPdfPage() {
                   <Zap className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold block text-gray-800">3 Presets + Custom</span>
-                  <span className="text-[11px] text-gray-500">Low, Recommended, and High</span>
+                  <span className="font-semibold block text-gray-800">Target Size in KB</span>
+                  <span className="text-[11px] text-gray-500">Enter exactly how many KB you want</span>
                 </div>
               </div>
 
@@ -205,9 +205,9 @@ export default function CompressPdfPage() {
               <h3 className="text-base font-bold text-gray-800 mb-3">Step-by-Step Compression Guide:</h3>
               <ol className="list-decimal pl-5 mb-6 space-y-2 text-sm">
                 <li><strong>Upload Your PDF:</strong> Click the upload button to select the heavy PDF file you wish to shrink.</li>
-                <li><strong>Choose Compression Mode:</strong> Select <em>Visual Downsampling</em> for scanned image-heavy PDFs (which often take up the most space) or <em>Structural Stream Optimizer</em> for text-based documents.</li>
-                <li><strong>Set Compression Level:</strong> Pick from our presets: <strong>Low</strong> (high quality, minimal compression), <strong>Recommended</strong> (balanced), or <strong>High</strong> (maximum compression, perfect for strict 100KB/500KB portal limits).</li>
-                <li><strong>Download Optimized File:</strong> Our engine will crunch the file size in seconds. Click download to get your newly optimized, lightweight PDF.</li>
+                <li><strong>Enter Target Size:</strong> Simply type in the maximum size you need in KB (e.g., 100, 500, or 1000 for 1MB).</li>
+                <li><strong>Let the Tool Work:</strong> Click "Compress PDF". Our smart algorithm will automatically adjust the internal resolution and image quality to hit your target size.</li>
+                <li><strong>Download Optimized File:</strong> Click download to get your newly optimized, lightweight PDF instantly.</li>
               </ol>
 
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
@@ -215,12 +215,12 @@ export default function CompressPdfPage() {
               </h2>
               <ul className="list-disc pl-5 mb-6 space-y-2 text-sm">
                 <li><strong>100% Client-Side Privacy:</strong> Your files never leave your device. Our JavaScript engine (powered by pdf-lib and pdf.js) does all the heavy lifting locally.</li>
-                <li><strong>Dual-Engine Technology:</strong> We uniquely offer two compression methods. Structural optimization removes redundant metadata streams, while Visual downsampling actually recompresses embedded heavy images to lower DPIs (96, 120, or 150).</li>
+                <li><strong>Target KB Accuracy:</strong> Stop guessing with "Low/High" quality presets. Just tell us how many KB you want, and we'll do the math.</li>
                 <li><strong>No Watermarks:</strong> Completely free to use with zero hidden fees, and we never add annoying watermarks to your documents.</li>
               </ul>
               
               <p className="text-sm leading-relaxed">
-                If your PDF is still too large after compression, it might be because the original document contains extremely high-resolution images. In such cases, use our <em>High Compression</em> preset and slide the Image Quality down to 30%. SizeSnap remains the fastest, most private way to optimize your PDFs for web upload and fast email transmission.
+                If your original PDF is massive (like 20MB) and you try to compress it to 100KB, the algorithm will heavily reduce the image quality to achieve the target size. For best readability, we recommend setting realistic targets (like 500KB to 1MB) for multi-page scanned documents.
               </p>
             </article>
 

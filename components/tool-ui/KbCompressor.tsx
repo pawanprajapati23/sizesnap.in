@@ -32,14 +32,15 @@ interface KbCompressResult {
   reachedTarget: boolean;
 }
 
-export function KbCompressor() {
+export function KbCompressor({ initialTargetKb }: { initialTargetKb?: number }) {
   const searchParams = useSearchParams();
   const queryTarget = searchParams?.get('target') || searchParams?.get('kb') || searchParams?.get('size');
-  const initialTarget = queryTarget ? parseInt(queryTarget, 10) : 50;
+  const parsedQueryTarget = queryTarget ? parseInt(queryTarget, 10) : NaN;
+  const initialTarget = initialTargetKb ?? (!isNaN(parsedQueryTarget) ? parsedQueryTarget : 50);
 
   const [selectedImage, setSelectedImage] = useState<ImageMetadata | null>(null);
   const [customKb, setCustomKb] = useState<number | null>(null);
-  const targetKb = customKb ?? (!isNaN(initialTarget) && initialTarget > 0 ? initialTarget : 50);
+  const targetKb = customKb ?? (initialTarget > 0 ? initialTarget : 50);
   const setTargetKb = (val: number) => setCustomKb(val);
 
   const [outputFormat, setOutputFormat] = useState<'auto' | 'image/jpeg' | 'image/webp' | 'image/png'>('auto');

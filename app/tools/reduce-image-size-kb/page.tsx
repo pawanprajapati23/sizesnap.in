@@ -159,6 +159,37 @@ export default function ReduceImageSizeKbPage() {
               </div>
             )}
 
+            {/* Comprehensive SEO Article Section */}
+            <article className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs text-gray-700">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
+                How to Reduce Image Size in KB Online (20KB, 50KB, 100KB)
+              </h2>
+              <p className="text-sm mb-5 leading-relaxed">
+                Applying for government jobs (SSC, UPSC, IBPS, NTA), university admissions, or creating a PAN card online often comes with a strict photo size limit. Usually, you are asked to upload a photo and signature under <strong>20KB</strong>, <strong>50KB</strong>, or <strong>100KB</strong>. SizeSnap&apos;s KB Reducer tool is specifically designed to hit these exact target file sizes without making your images blurry or unreadable. 
+              </p>
+              
+              <h3 className="text-base font-bold text-gray-800 mb-3">Step-by-Step Guide to Compress Image to Specific KB:</h3>
+              <ol className="list-decimal pl-5 mb-6 space-y-2 text-sm">
+                <li><strong>Upload Photo or Signature:</strong> Click to browse and select the JPG or PNG file from your phone or PC.</li>
+                <li><strong>Enter Target Size (KB):</strong> Use our quick presets like <strong>20 KB</strong>, <strong>50 KB</strong>, or type any custom number you need.</li>
+                <li><strong>Let the Algorithm Work:</strong> Click &quot;Reduce Image&quot;. Our smart compression engine uses a binary search algorithm to instantly find the perfect balance between quality and file size.</li>
+                <li><strong>Download Ready File:</strong> Check the new size in the preview. Click download and upload it straight to your exam portal.</li>
+              </ol>
+
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
+                Why Choose SizeSnap Over Other Compressors?
+              </h2>
+              <ul className="list-disc pl-5 mb-6 space-y-2 text-sm">
+                <li><strong>No Guesswork:</strong> Most tools ask you to adjust &quot;quality&quot; percentages, which forces you to download and check the file size repeatedly. We let you enter the exact KB, and we do the math.</li>
+                <li><strong>100% Private &amp; Secure:</strong> Your identity documents, passport photos, and signatures never leave your browser. We don&apos;t use external servers, making this the safest way to resize sensitive documents.</li>
+                <li><strong>Maintains Aspect Ratio:</strong> We ensure your face isn&apos;t stretched or squeezed. It remains perfectly proportioned for official applications.</li>
+              </ul>
+              
+              <p className="text-sm leading-relaxed">
+                If your original image is massive (like a 5MB smartphone photo) and you try to compress it to 20KB, the algorithm may have to shrink the physical dimensions (width/height) slightly to achieve the target size while avoiding pixelation. For best results, crop out unnecessary background space before reducing the KB.
+              </p>
+            </article>
+
             {/* FAQ Section */}
             <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
               <div className="flex items-center gap-2 border-b border-gray-100 pb-2">

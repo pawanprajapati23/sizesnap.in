@@ -25,6 +25,7 @@ export default function SocialMediaToolsPage() {
       breadcrumbs={breadcrumbs}
       category="Social"
       customSlugs={[
+        'social-media-resizer',
         'resize-image-pixel',
         'crop-image',
         'image-framer',

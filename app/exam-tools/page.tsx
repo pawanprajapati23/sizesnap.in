@@ -26,7 +26,7 @@ export default function ExamToolsPage() {
       category="Exam"
       customSlugs={[
         'passport-photo-maker',
-        'resize-signature',
+        'generate-signature',
         'resize-image-pixel',
         'compress-image-to-10kb',
         'compress-image-to-20kb',

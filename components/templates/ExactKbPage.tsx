@@ -7,6 +7,7 @@ import { KbCompressor } from '@/components/tool-ui/KbCompressor';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, Lock, Zap, Shield, HelpCircle } from 'lucide-react';
+import { RelatedTools } from '@/components/RelatedTools';
 
 interface FaqItem {
   q: string;
@@ -47,26 +48,14 @@ export function ExactKbPage({
     })),
   };
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((crumb, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      name: crumb.name,
-      item: crumb.url,
-    })),
-  };
-
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-
       <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
         <Navbar />
 
         <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+          {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={idx}>
@@ -84,6 +73,8 @@ export function ExactKbPage({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
             <div className="w-full lg:col-span-8 xl:col-span-9 space-y-6">
+
+              {/* Header section */}
               <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
                 <h1 className="text-xl sm:text-2xl font-bold text-[#333333] tracking-tight mb-1.5">
                   {title}
@@ -91,47 +82,38 @@ export function ExactKbPage({
                 <p className="text-xs sm:text-sm text-gray-600 leading-normal">
                   {description}
                 </p>
-              </div>
 
-              <React.Suspense fallback={<div className="p-8 text-center text-sm text-gray-500">Loading SizeSnap Compressor...</div>}>
-                <KbCompressor initialTargetKb={targetKb} />
-              </React.Suspense>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-[4px] border border-gray-200 text-xs text-gray-700">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0"><Lock className="h-3.5 w-3.5" /></div>
-                  <div><span className="font-semibold block text-gray-800">100% Secure</span><span className="text-[11px] text-gray-500">Files stay on device</span></div>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0"><Zap className="h-3.5 w-3.5" /></div>
-                  <div><span className="font-semibold block text-gray-800">Fast Process</span><span className="text-[11px] text-gray-500">WASM accelerated</span></div>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0"><Shield className="h-3.5 w-3.5" /></div>
-                  <div><span className="font-semibold block text-gray-800">Exam Ready</span><span className="text-[11px] text-gray-500">Fits SSC/UPSC specs</span></div>
-                </div>
-              </div>
-
-              {relatedTools.length > 0 && (
-                <div className="bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs">
-                  <h2 className="text-xs sm:text-sm font-bold text-gray-800 uppercase tracking-wider mb-3 border-b border-gray-100 pb-2">
-                    Related Tools
-                  </h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
-                    {relatedTools.map((relTool) => <ToolButton key={relTool.id} tool={relTool} />)}
+                <div className="flex flex-wrap gap-3 mt-4">
+                  <div className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
+                    <Lock className="h-3 w-3" /> 100% Secure
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-medium text-blue-700 bg-blue-50 px-2 py-1 rounded">
+                    <Zap className="h-3 w-3" /> Local Processing
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-medium text-purple-700 bg-purple-50 px-2 py-1 rounded">
+                    <Shield className="h-3 w-3" /> No Watermark
                   </div>
                 </div>
-              )}
+              </div>
 
+              {/* Tool core */}
+              <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
+                <React.Suspense fallback={<div className="p-8 text-center text-gray-500">Loading tool...</div>}>
+                  <KbCompressor initialTargetKb={targetKb} />
+                </React.Suspense>
+              </div>
+
+              {/* Dynamic Article Section */}
               {articleHtml && (
-                <article className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs text-gray-700">
+                <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-[#414FA8]">
                   {articleHtml}
-                </article>
+                </div>
               )}
 
+              {/* FAQ Section */}
               {faqs && faqs.length > 0 && (
-                <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
-                  <div className="flex items-center gap-2 border-b border-gray-100 pb-2">
+                <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
+                  <div className="flex items-center gap-2 mb-4">
                     <HelpCircle className="h-4 w-4 text-[#414FA8]" />
                     <h2 className="text-sm sm:text-base font-bold text-gray-900">FAQs</h2>
                   </div>
@@ -145,6 +127,8 @@ export function ExactKbPage({
                   </div>
                 </div>
               )}
+
+              <RelatedTools category="Compress" currentSlug={`compress-image-to-${targetKb}kb`} />
             </div>
 
             <div className="w-full lg:col-span-4 xl:col-span-3">

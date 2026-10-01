@@ -1,0 +1,10 @@
+1. We need to create a new `components/tool-ui/ShippingLabelThermalTool.tsx`. This tool will use `pdf-lib` to resize pages to a selected thermal size.
+2. We need to create `app/tools/shipping-label-thermal/page.tsx`.
+3. We need to create a simple manual PDF cropper `components/tool-ui/ShippingLabelCropperTool.tsx` using `pdf-lib` margin inputs (since full canvas is too complex for this phase, the prompt states: "If automatic label detection cannot be made reliable: Provide a clear manual crop workflow...").
+4. We need to create `app/tools/shipping-label-cropper/page.tsx`.
+5. We need to create `app/tools/shipping-label-splitter/page.tsx` that reuses `SplitPdfTool`.
+6. We need to create `app/tools/shipping-label-organizer/page.tsx` that reuses `ExtractPdfPagesTool` (or a dedicated copy if we need specific branding, but reusing the component is cleaner).
+7. We need to upgrade `ShippingLabelToA4Tool.tsx` to handle Thermal AND A4 logic to fulfill the "Today's Dispatch" prominent workflow. OR we can just build `TodaysDispatchTool.tsx` and map `/tools/todays-dispatch` to it, and leave `meesho-shipping-label-to-a4` alone. The prompt says "Create a prominent workflow: Today's Dispatch... Possible output types: A4, Thermal. Only show options that are genuinely implemented."
+8. Update `data/tools.ts`.
+9. Update `app/ecommerce-tools/page.tsx` cards.
+10. Test and submit.

@@ -32,7 +32,7 @@ interface KbCompressResult {
   reachedTarget: boolean;
 }
 
-export function KbCompressor({ initialTargetKb }: { initialTargetKb?: number }) {
+export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initialTargetKb?: number, title?: string, showSeoContent?: boolean }) {
   const searchParams = useSearchParams();
   const queryTarget = searchParams?.get('target') || searchParams?.get('kb') || searchParams?.get('size');
   const parsedQueryTarget = queryTarget ? parseInt(queryTarget, 10) : NaN;

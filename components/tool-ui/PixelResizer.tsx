@@ -36,7 +36,7 @@ const PRESETS = [
   { label: '1920 × 1080', width: 1920, height: 1080, desc: 'Full HD 1080p' },
 ];
 
-export function PixelResizer() {
+export function PixelResizer({ customTitle, showSeoContent }: { customTitle?: string, showSeoContent?: boolean }) {
   const [selectedImage, setSelectedImage] = useState<ImageMetadata | null>(null);
   const [targetWidth, setTargetWidth] = useState<number>(800);
   const [targetHeight, setTargetHeight] = useState<number>(600);

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { formatBytes, sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { trackToolError } from '@/lib/firebase';
 import {
   Download,
   AlertCircle,
@@ -166,6 +167,7 @@ export function SocialMediaResizer() {
       console.error(err);
       setErrorMsg('An error occurred during resizing.');
       setIsProcessing(false);
+      trackToolError('social-media-resizer', 'processing_failed', err instanceof Error ? err.message : '');
     }
   };
 

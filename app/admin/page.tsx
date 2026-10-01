@@ -22,6 +22,8 @@ export default function AdminDashboard() {
   const [activeRange, setActiveRange] = useState<TimeRange>('24h');
   const [totalDownloads, setTotalDownloads] = useState(0);
   const [totalToolUses, setTotalToolUses] = useState(0);
+  const [totalErrors, setTotalErrors] = useState(0);
+  const [topTools, setTopTools] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Tools count from local config
@@ -33,26 +35,57 @@ export default function AdminDashboard() {
       try {
         const dlRecords = await fetchUsage('downloads');
         const toolRecords = await fetchUsage('toolUsage');
+        const errRecords = await fetchUsage('toolErrors');
 
         const ms = rangeToMs(activeRange);
-        setTotalDownloads(aggregateWithin(dlRecords, ms));
 
-        let total = 0;
-        for (const slug of Object.keys(toolRecords)) {
-          const rec = toolRecords[slug] as unknown as Record<string, number>;
-          total += aggregateWithin(rec, ms);
-        }
-        setTotalToolUses(total);
+        const downloads = aggregateWithin(dlRecords, ms);
+        setTotalDownloads(downloads);
+
+        let totalUses = 0;
+        let tErrors = 0;
+
+        const toolsData = ALL_TOOLS.map(t => {
+          const rec = (toolRecords[t.slug] ?? {}) as unknown as Record<string, number>;
+          const errs = (errRecords[t.slug] ?? {}) as unknown as Record<string, number>;
+
+          const uses = aggregateWithin(rec, ms);
+          const errors = aggregateWithin(errs, ms);
+
+          totalUses += uses;
+          tErrors += errors;
+
+          return {
+            ...t,
+            uses,
+            errors,
+            // Assuming generic download distribution for demo in Top Tools if not tracked per-tool,
+            // but requirements say "Download Rate" for tools. Since tracking only has global 'downloads',
+            // we skip per-tool downloads unless explicitly needed or simulate 0.
+            downloads: 0
+          };
+        });
+
+        setTotalToolUses(totalUses);
+        setTotalErrors(tErrors);
+
+        // Sort top 10
+        const sorted = toolsData.sort((a, b) => b.uses - a.uses).slice(0, 10);
+        setTopTools(sorted);
+
       } catch (err) {
         console.error("Failed to fetch from Firebase:", err);
-        // Fallback to 0 if firebase isn't working
         setTotalDownloads(0);
         setTotalToolUses(0);
+        setTotalErrors(0);
       }
       setLoading(false);
     }
     load();
   }, [activeRange]);
+
+  const errorRate = totalToolUses > 0 ? ((totalErrors / totalToolUses) * 100).toFixed(2) + '%' : 'N/A';
+  const downloadRate = totalToolUses > 0 ? ((totalDownloads / totalToolUses) * 100).toFixed(2) + '%' : 'N/A';
 
   return (
     <section className="max-w-5xl mx-auto">
@@ -61,20 +94,46 @@ export default function AdminDashboard() {
         <FilterTabs active={activeRange} setActive={setActiveRange} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <StatCard title="Total Available Tools" value={totalAvailableTools} />
-        <StatCard title="Total Tool Uses" value={loading ? '...' : totalToolUses} />
-        <StatCard title="Total Downloads" value={loading ? '...' : totalDownloads} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+        <StatCard title="Active Tools" value={totalAvailableTools} />
+        <StatCard title="Tool Uses" value={loading ? '...' : totalToolUses} />
+        <StatCard title="Downloads" value={loading ? '...' : totalDownloads} />
+        <StatCard title="Download Rate" value={loading ? '...' : downloadRate} />
+        <StatCard title="Tool Errors" value={loading ? '...' : totalErrors} />
+        <StatCard title="Error Rate" value={loading ? '...' : errorRate} />
       </div>
 
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Welcome to SizeSnap Admin</h2>
-        <p className="text-gray-600">
-          This dashboard shows your platform&apos;s real-time analytics. Usage data is aggregated from Firebase based on user activity.
-        </p>
-        {(totalDownloads === 0 && totalToolUses === 0 && !loading) && (
-          <div className="mt-4 p-4 bg-amber-50 text-amber-800 border border-amber-200 rounded-md text-sm">
-            <strong>Note:</strong> No usage data found for the selected time range. This could mean either no users have used tools recently, or Firebase is not fully configured/tracking correctly yet.
+        <h2 className="text-lg font-bold text-gray-800 mb-4">Top Performing Tools</h2>
+
+        {loading ? (
+          <div className="text-center p-8 text-gray-500">Loading metrics...</div>
+        ) : topTools.length === 0 || topTools[0].uses === 0 ? (
+          <div className="text-center p-8 text-gray-500 bg-gray-50 rounded border border-gray-100">
+            Not enough data for the selected period.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead className="bg-[#EEF1FB] border-b border-gray-200">
+                <tr>
+                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Tool</th>
+                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Category</th>
+                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Uses</th>
+                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Errors</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {topTools.map(t => (
+                  <tr key={t.slug} className="hover:bg-gray-50">
+                    <td className="p-4 text-sm font-medium text-gray-900">{t.name}</td>
+                    <td className="p-4 text-sm text-gray-500">{t.categoryTitle}</td>
+                    <td className="p-4 text-sm text-gray-900 font-semibold text-right">{t.uses}</td>
+                    <td className="p-4 text-sm text-gray-500 text-right">{t.errors}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

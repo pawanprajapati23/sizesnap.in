@@ -63,6 +63,40 @@ export const trackDownload = async () => {
   }
 };
 
+const recentErrors = new Map<string, number>();
+
+export const trackToolError = async (slug: string, errorType: string, message?: string) => {
+  try {
+    const now = Date.now();
+    const errorKey = `${slug}:${errorType}`;
+    const lastReported = recentErrors.get(errorKey) || 0;
+
+    // Throttle duplicate identical errors to once every 5 minutes per client session
+    if (now - lastReported < 5 * 60 * 1000) {
+      return;
+    }
+    recentErrors.set(errorKey, now);
+
+    const timestamp = getCurrentHourTimestamp();
+
+    // Aggregated counter for dashboard
+    const errorAggRef = ref(db, `toolErrors/${slug}/${timestamp}`);
+    await set(errorAggRef, increment(1));
+
+    // Store detailed log
+    const errorLogRef = ref(db, `errorLogs/${slug}`);
+    await set(push(errorLogRef), {
+      errorType,
+      message: message || "Unknown error",
+      timestamp: now,
+      userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server'
+    });
+
+  } catch (err) {
+    console.error("Failed to track tool error:", err);
+  }
+};
+
 // ---- FEEDBACK LOGIC ----
 
 export interface FeedbackData {

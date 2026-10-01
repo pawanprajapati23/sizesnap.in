@@ -98,7 +98,9 @@ export function ExactKbPage({
 
               {/* Tool core */}
               <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
-                <KbCompressor initialTargetKb={targetKb} />
+                <React.Suspense fallback={<div className="p-8 text-center text-gray-500">Loading tool...</div>}>
+                  <KbCompressor initialTargetKb={targetKb} />
+                </React.Suspense>
               </div>
 
               {/* Dynamic Article Section */}

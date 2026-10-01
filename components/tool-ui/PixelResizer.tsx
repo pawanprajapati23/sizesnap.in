@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { formatBytes, sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { trackToolError } from '@/lib/firebase';
 import {
   Maximize2,
   Lock,
@@ -248,6 +249,7 @@ export function PixelResizer() {
     } catch (err) {
       setIsProcessing(false);
       setErrorMsg(err instanceof Error ? err.message : 'An unexpected error occurred during resizing.');
+      trackToolError('resize-image-pixel', 'processing_failed', err instanceof Error ? err.message : '');
     }
   };
 

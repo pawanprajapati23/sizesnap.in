@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { PDFDocument, PageSizes } from 'pdf-lib';
+import React, { useState, useRef, DragEvent } from 'react';
+import { RelatedTools } from "@/components/RelatedTools";
 import {
   Upload,
   Download,
@@ -34,12 +34,12 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
   const [totalLabels, setTotalLabels] = useState<number>(0);
   const [totalPagesGenerated, setTotalPagesGenerated] = useState<number>(0);
   const [resultPdfUrl, setResultPdfUrl] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isLoadingPdf, setIsLoadingPdf] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0];
-    if (!uploadedFile) return;
+  const handleFile = async (uploadedFile: File) => {
 
     if (uploadedFile.type !== 'application/pdf') {
       setError('Please upload a valid PDF file.');
@@ -49,9 +49,11 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
     setFile(uploadedFile);
     setError(null);
     setResultPdfUrl(null);
+    setIsLoadingPdf(true);
 
     // Quick parse to count labels
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const arrayBuffer = await uploadedFile.arrayBuffer();
       const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       setTotalLabels(pdfDoc.getPageCount());
@@ -59,7 +61,31 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
       console.error(err);
       setError('Could not read PDF. It might be corrupted or password-protected.');
       setFile(null);
+    } finally {
+      setIsLoadingPdf(false);
     }
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = event.target.files?.[0];
+    if (uploadedFile) handleFile(uploadedFile);
+  };
+
+  const onDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const onDragLeave = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const onDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const uploadedFile = e.dataTransfer.files?.[0];
+    if (uploadedFile) handleFile(uploadedFile);
   };
 
   const processPdf = async () => {
@@ -67,13 +93,16 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
 
     setIsProcessing(true);
     setError(null);
-    setProgressText('Loading PDF...');
+    setProgressText('Loading PDF engine...');
 
     try {
+      const { PDFDocument, PageSizes, rgb } = await import('pdf-lib');
+      setProgressText('Reading original PDF...');
       const sourceBuffer = await file.arrayBuffer();
       const sourceDoc = await PDFDocument.load(sourceBuffer);
       const totalPages = sourceDoc.getPageCount();
 
+      setProgressText('Creating A4 document...');
       const targetDoc = await PDFDocument.create();
 
       const a4Width = orientation === 'portrait' ? PageSizes.A4[0] : PageSizes.A4[1];
@@ -109,7 +138,6 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
       const drawCutGuides = (page: any, x: number, y: number, w: number, h: number) => {
          if (!showCutGuides) return;
          const guideLength = 10;
-         const { rgb } = require('pdf-lib');
          const color = rgb(0.8, 0.8, 0.8);
 
          // Top left
@@ -213,8 +241,15 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
 
           {!file && (
             <div
-              className="border-2 border-dashed border-gray-300 rounded-2xl p-10 text-center hover:bg-gray-50 hover:border-[#414FA8] transition-colors cursor-pointer bg-gray-50/30"
+              className={`border-2 border-dashed rounded-2xl p-10 text-center transition-colors cursor-pointer ${
+                isDragging
+                  ? 'border-[#414FA8] bg-blue-50/50'
+                  : 'border-gray-300 bg-gray-50/30 hover:bg-gray-50 hover:border-[#414FA8]'
+              }`}
               onClick={() => fileInputRef.current?.click()}
+              onDragOver={onDragOver}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
             >
               <input
                 type="file"
@@ -228,7 +263,7 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Upload Shipping Label PDF</h3>
               <p className="text-sm text-gray-500 max-w-sm mx-auto mb-6">
-                Select a PDF containing multiple individual labels. Processed locally in your browser.
+                Drag and drop your PDF here, or click to browse. Processed locally in your browser.
               </p>
               <button className="px-6 py-2.5 bg-[#414FA8] text-white font-medium rounded-lg hover:bg-[#344190] transition-colors">
                 Select PDF File
@@ -236,7 +271,14 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
             </div>
           )}
 
-          {file && !resultPdfUrl && (
+          {isLoadingPdf && !resultPdfUrl && (
+            <div className="text-center p-10 bg-gray-50 rounded-2xl border border-gray-200">
+              <Loader2 className="h-8 w-8 animate-spin text-[#414FA8] mx-auto mb-4" />
+              <p className="text-sm font-medium text-gray-700">Reading PDF...</p>
+            </div>
+          )}
+
+          {file && !isLoadingPdf && !resultPdfUrl && (
             <div className="space-y-8">
               <div className="flex items-center justify-between p-4 bg-gray-50 border border-gray-200 rounded-xl">
                 <div className="flex items-center gap-3 truncate">
@@ -377,25 +419,29 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
                     Start Again
                   </button>
                 </div>
-              </div>
+                </div>
 
               <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 flex gap-3">
                 <AlertCircle className="h-5 w-5 text-yellow-600 shrink-0 mt-0.5" />
                 <div className="text-sm text-yellow-800">
                   <p className="font-semibold mb-1">Important Print Instructions:</p>
-                  <p>When printing the downloaded PDF, make sure to select <strong>"Actual Size"</strong> or <strong>"Scale: 100%"</strong> in your printer settings. Avoid using "Fit to Page" as it might distort the label sizes and affect barcode scanning.</p>
+                  <p>When printing the downloaded PDF, make sure to select <strong>&quot;Actual Size&quot;</strong> or <strong>&quot;Scale: 100%&quot;</strong> in your printer settings. Avoid using &quot;Fit to Page&quot; as it might distort the label sizes and affect barcode scanning.</p>
+                </div>
                 </div>
               </div>
-            </div>
           )}
         </div>
-      </div>
+        </div>
 
       {/* Privacy Note */}
-      <div className="text-center text-xs text-gray-500 flex items-center justify-center gap-2">
+      <div className="text-center text-xs text-gray-500 flex items-center justify-center gap-2 mb-10 mt-6">
         <ShieldCheck className="h-4 w-4 text-green-500" />
         All processing happens locally in your browser. No files are uploaded to our servers.
       </div>
-    </div>
+
+      <div className="max-w-4xl mx-auto px-4 mt-8 pb-12">
+        <RelatedTools category="PDF" currentSlug={isMeesho ? 'meesho-shipping-label-to-a4' : 'shipping-label-to-a4'} />
+      </div>
+      </div>
   );
 }

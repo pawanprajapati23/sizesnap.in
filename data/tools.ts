@@ -1,4 +1,4 @@
-export type ToolCategoryId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+export type ToolCategoryId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
 
 export interface ToolCategory {
   id: ToolCategoryId;

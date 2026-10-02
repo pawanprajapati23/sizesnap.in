@@ -52,7 +52,7 @@ export function Footer() {
           
           {/* Brand & Description (Takes up 2 cols on lg) */}
           <div className="lg:col-span-2 space-y-5">
-            <Link href="/" className="inline-block group">
+            <Link prefetch={false} href="/" className="inline-block group">
               <div className="flex items-center gap-2.5">
                 <Image src="/logo.png" alt="SizeSnap Logo" width={32} height={32} className="w-8 h-8 opacity-90 group-hover:opacity-100 transition-opacity" />
                 <span className="text-xl font-bold text-white tracking-tight">Size<span className="text-[#6366F1]">Snap</span></span>
@@ -67,11 +67,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Image Resizer</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><Link href="/tools/reduce-image-size-in-kb?target=20" className="hover:text-[#6366F1] transition-colors">Resize to 20 KB</Link></li>
-              <li><Link href="/tools/reduce-image-size-in-kb?target=50" className="hover:text-[#6366F1] transition-colors">Resize to 50 KB</Link></li>
-              <li><Link href="/tools/reduce-image-size-in-kb?target=100" className="hover:text-[#6366F1] transition-colors">Resize to 100 KB</Link></li>
-              <li><Link href="/tools/compress-image" className="hover:text-[#6366F1] transition-colors">Advanced Compressor</Link></li>
-              <li><Link href="/tools/crop-image" className="hover:text-[#6366F1] transition-colors">Smart Cropper</Link></li>
+              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb?target=20" className="hover:text-[#6366F1] transition-colors">Resize to 20 KB</Link></li>
+              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb?target=50" className="hover:text-[#6366F1] transition-colors">Resize to 50 KB</Link></li>
+              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb?target=100" className="hover:text-[#6366F1] transition-colors">Resize to 100 KB</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-image" className="hover:text-[#6366F1] transition-colors">Advanced Compressor</Link></li>
+              <li><Link prefetch={false} href="/tools/crop-image" className="hover:text-[#6366F1] transition-colors">Smart Cropper</Link></li>
             </ul>
           </div>
 
@@ -79,11 +79,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Top Utilities</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><Link href="/tools/passport-photo-maker" className="hover:text-[#6366F1] transition-colors">Passport Photo Maker</Link></li>
-              <li><Link href="/tools/compress-pdf" className="hover:text-[#6366F1] transition-colors">PDF Compressor</Link></li>
-              <li><Link href="/student-calculators" className="hover:text-[#6366F1] transition-colors">Student Calculators</Link></li>
-              <li><Link href="/tools/image-to-pdf" className="hover:text-[#6366F1] transition-colors">JPG to PDF</Link></li>
-              <li><Link href="/#directory" className="hover:text-[#6366F1] transition-colors font-medium">All Tools &rarr;</Link></li>
+              <li><Link prefetch={false} href="/tools/passport-photo-maker" className="hover:text-[#6366F1] transition-colors">Passport Photo Maker</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-pdf" className="hover:text-[#6366F1] transition-colors">PDF Compressor</Link></li>
+              <li><Link prefetch={false} href="/student-calculators" className="hover:text-[#6366F1] transition-colors">Student Calculators</Link></li>
+              <li><Link prefetch={false} href="/tools/image-to-pdf" className="hover:text-[#6366F1] transition-colors">JPG to PDF</Link></li>
+              <li><Link prefetch={false} href="/#directory" className="hover:text-[#6366F1] transition-colors font-medium">All Tools &rarr;</Link></li>
             </ul>
           </div>
         </div>
@@ -93,7 +93,7 @@ export function Footer() {
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-xs text-gray-500 uppercase tracking-wider mr-2">Quick Tags:</span>
             {KB_TAGS.map((tag) => (
-              <Link
+              <Link prefetch={false}
                 key={tag.label}
                 href={tag.href}
                 className="text-xs px-3 py-1.5 rounded bg-gray-800/50 hover:bg-[#6366F1] hover:text-white border border-gray-700/50 text-gray-400 transition-all font-medium"
@@ -111,10 +111,10 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
             <p>&copy; 2026 SizeSnap.in. All rights reserved.</p>
             <div className="flex items-center flex-wrap gap-4 font-medium tracking-wide">
-              <Link href="/about" className="hover:text-gray-300 transition-colors">About Us</Link>
-              <Link href="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
-              <Link href="/privacy-policy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms</Link>
+              <Link prefetch={false} href="/about" className="hover:text-gray-300 transition-colors">About Us</Link>
+              <Link prefetch={false} href="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
+              <Link prefetch={false} href="/privacy-policy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
+              <Link prefetch={false} href="/terms" className="hover:text-gray-300 transition-colors">Terms</Link>
             </div>
           </div>
         </div>

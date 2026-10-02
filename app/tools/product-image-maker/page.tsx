@@ -1,10 +1,15 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { ProductImageMakerTool } from '@/components/tool-ui/ProductImageMakerTool';
+import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+
+const ProductImageMakerTool = dynamic(
+  () => import('@/components/tool-ui/ProductImageMakerTool').then((mod) => mod.ProductImageMakerTool),
+  { loading: () => <div className="p-12 text-center">Loading editor...</div> }
+);
 
 export const metadata: Metadata = {
   title: 'Product Image Maker & Editor | E-commerce Seller Tools | SizeSnap',

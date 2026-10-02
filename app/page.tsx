@@ -27,13 +27,13 @@ export default function HomePage() {
             <section className="my-8">
               <h2 className="text-lg font-bold text-gray-800 mb-4">Popular Tools</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <Link href="/tools/compress-image" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
+                <Link prefetch={false} href="/tools/compress-image" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
                   Compress Image
                 </Link>
-                <Link href="/tools/compress-pdf" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
+                <Link prefetch={false} href="/tools/compress-pdf" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
                   Compress PDF
                 </Link>
-                <Link href="/tools/resize-image-pixel" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
+                <Link prefetch={false} href="/tools/resize-image-pixel" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
                   Resize Image (Pixel)
                 </Link>
               </div>

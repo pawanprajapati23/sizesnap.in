@@ -1,7 +1,6 @@
 'use client';
 import { ImageMetadata } from './ImagePreviewCard';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import JSZip from 'jszip';
 import { formatBytes, sanitizeFilename } from '@/lib/format-utils';
 import { trackToolError } from '@/lib/firebase';
 import { RelatedTools } from "@/components/RelatedTools";
@@ -258,6 +257,7 @@ export function ProductImageMakerTool() {
     if (successCount > 1) {
       setProgressMsg('Generating ZIP archive...');
       try {
+        const JSZip = (await import('jszip')).default;
         const zip = new JSZip();
         updatedImages.forEach((img, idx) => {
           if (img.status === 'done' && img.blob) {

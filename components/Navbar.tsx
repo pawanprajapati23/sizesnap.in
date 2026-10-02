@@ -59,7 +59,7 @@ export function Navbar() {
               alt="SizeSnap Logo"
               width={32}
               height={32}
-              className="h-full w-full object-contain group-hover:scale-105 transition-transform"
+              priority className="h-full w-full object-contain group-hover:scale-105 transition-transform"
             />
           </div>
           <span className="text-[21px] font-extrabold tracking-tight text-gray-900 select-none">

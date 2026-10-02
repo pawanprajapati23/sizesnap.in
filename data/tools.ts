@@ -1,4 +1,4 @@
-export type ToolCategoryId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
+export type ToolCategoryId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'ECOM';
 
 export interface ToolCategory {
   id: ToolCategoryId;
@@ -55,6 +55,13 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
 ];
 
 export const ALL_TOOLS: ToolItem[] = [
+  {
+    id: 'product-image-maker',
+    name: 'Product Image Maker',
+    slug: 'product-image-maker',
+    categoryId: 'ECOM',
+    categoryTitle: 'E-commerce Seller Tools',
+  },
   // SECTION A: Most Used Tools
   {
     id: 'passport-photo-maker',

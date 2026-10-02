@@ -17,7 +17,7 @@ export function Sidebar() {
         {/* 2-column compact grid of quick links */}
         <div className="grid grid-cols-2 gap-2">
           {SIDEBAR_QUICK_LINKS.map((link) => (
-            <Link
+            <Link prefetch={false}
               key={link.title}
               href={`/tools/${link.slug}`}
               className="flex items-center justify-center text-center p-2 rounded-[4px] border border-[#9AA3C8] bg-white hover:border-[#414FA8] hover:bg-[#F2F4FC] hover:text-[#414FA8] text-[#333333] transition-colors duration-150 min-h-[46px] group"

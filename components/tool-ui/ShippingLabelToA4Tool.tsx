@@ -383,7 +383,7 @@ export function ShippingLabelToA4Tool({ isMeesho = false }: Props) {
                 <AlertCircle className="h-5 w-5 text-yellow-600 shrink-0 mt-0.5" />
                 <div className="text-sm text-yellow-800">
                   <p className="font-semibold mb-1">Important Print Instructions:</p>
-                  <p>When printing the downloaded PDF, make sure to select <strong>"Actual Size"</strong> or <strong>"Scale: 100%"</strong> in your printer settings. Avoid using "Fit to Page" as it might distort the label sizes and affect barcode scanning.</p>
+                  <p>When printing the downloaded PDF, make sure to select <strong>&quot;Actual Size&quot;</strong> or <strong>&quot;Scale: 100%&quot;</strong> in your printer settings. Avoid using &quot;Fit to Page&quot; as it might distort the label sizes and affect barcode scanning.</p>
                 </div>
               </div>
             </div>

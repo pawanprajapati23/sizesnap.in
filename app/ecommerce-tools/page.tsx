@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { ChevronRight, ArrowRight, Package, FileText, SplitSquareHorizontal, Smartphone, Zap, Shield } from 'lucide-react';
+import { ChevronRight, ArrowRight, Package, FileText, SplitSquareHorizontal, Smartphone, Zap, Shield, Image } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'SizeSnap Seller Workbench | E-commerce Shipping & Packing Tools',
@@ -172,6 +172,37 @@ export default function EcommerceToolsPage() {
                  Open Tool <ChevronRight className="h-4 w-4 ml-1" />
                </Link>
             </div>
+          </div>
+        </section>
+
+        {/* Product Image Factory Section */}
+        <section id="product-images" className="scroll-mt-8">
+           <div className="mb-8 flex items-center gap-3">
+             <div className="p-2.5 bg-purple-100 rounded-lg text-purple-600">
+                <Image className="h-6 w-6" aria-hidden="true" />
+             </div>
+             <div>
+               <h2 className="text-2xl font-bold text-gray-900">Product Image Factory</h2>
+               <p className="text-sm text-gray-600 mt-1">Resize, crop and prepare product images for different selling platforms.</p>
+             </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+             {[
+               { title: 'Product Image Maker', desc: 'Bulk resize, pad, and format for marketplaces', slug: 'product-image-maker' },
+               { title: 'Image Compressor', desc: 'Reduce product photo file sizes', slug: 'compress-image' },
+               { title: 'Image Resizer', desc: 'Resize product images by pixel', slug: 'resize-image-pixel' },
+               { title: 'Image Converter', desc: 'Convert JPG to PNG/WebP', slug: 'jpg-to-png' }
+             ].map(tool => (
+               <Link
+                 key={tool.slug}
+                 href={`/tools/${tool.slug}`}
+                 className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#414FA8]/30 transition-all group"
+               >
+                 <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-[#414FA8] transition-colors">{tool.title}</h3>
+                 <p className="text-xs text-gray-500">{tool.desc}</p>
+               </Link>
+             ))}
           </div>
         </section>
 

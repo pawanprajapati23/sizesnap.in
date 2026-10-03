@@ -23,7 +23,7 @@ export default function PdfToolsPage() {
       title="PDF Tools"
       description="Easily compress, merge, split and modify PDF documents completely locally and privately."
       breadcrumbs={breadcrumbs}
-      category="PDF"
+      category="pdf"
       customSlugs={[
         'compress-pdf',
         'merge-pdf',

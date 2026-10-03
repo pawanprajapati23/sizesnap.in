@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function ImageWatermarkPage() {
-  const relatedTools = ALL_TOOLS.filter((t) => t.categoryId === 'C').slice(0, 6); // Or 'A'/'B' based on tool categorization, 'C' works fine for effects
+  const relatedTools = ALL_TOOLS.filter((t) => t.categoryId === 'image').slice(0, 6); // Or 'A'/'B' based on tool categorization, 'C' works fine for effects
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">

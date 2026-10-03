@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
 
   return {
     title: `${tool.name} - Free Online Tool | SizeSnap`,
-    description: `Use SizeSnap ${tool.name} online for free. Fast, high-quality, privacy-focused image and document processing without watermark.`,
+    description: tool.shortDescription || `Use SizeSnap ${tool.name} online for free. Fast, high-quality, privacy-focused image and document processing without watermark.`,
     alternates: {
       canonical: `https://sizesnap.in/tools/${tool.slug}`,
     },
@@ -149,8 +149,35 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     (t) => t.categoryId === tool.categoryId && t.slug !== tool.slug
   ).slice(0, 6);
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://sizesnap.in/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: tool.categoryTitle,
+        item: `https://sizesnap.in/${tool.categoryId}-tools`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: tool.name,
+        item: `https://sizesnap.in/tools/${tool.slug}`,
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
 
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
@@ -176,7 +203,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
                 {tool.name}
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 mt-1">
-                Fast, secure and free online tool for {tool.name.toLowerCase()}.
+                {tool.shortDescription || `Fast, secure and free online tool for ${tool.name.toLowerCase()}.`}
               </p>
             </div>
             <Link
@@ -243,6 +270,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
       </main>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

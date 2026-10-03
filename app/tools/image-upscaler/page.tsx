@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function ImageUpscalerPage() {
-  const relatedTools = ALL_TOOLS.filter((t) => t.categoryId === 'D').slice(0, 6);
+  const relatedTools = ALL_TOOLS.filter((t) => t.categoryId === 'image').slice(0, 6);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">

@@ -12,12 +12,12 @@ export function RelatedTools({ category, currentSlug }: RelatedToolsProps) {
   const relatedTools = ALL_TOOLS.filter((t) => {
     if (currentSlug && t.slug === currentSlug) return false;
 
-    if (category === 'Image') return t.categoryTitle.includes('Image') || t.categoryId === 'F' || t.categoryId === 'G';
-    if (category === 'PDF') return t.categoryId === 'D';
+    if (category === 'Image') return t.categoryTitle.includes('Image') || t.categoryId === 'exam' || t.categoryId === 'pdf';
+    if (category === 'PDF') return t.categoryId === 'image';
     if (category === 'Compress') return t.slug.includes('compress') || t.slug.includes('reduce');
-    if (category === 'Resize') return t.slug.includes('resize') || t.slug.includes('crop') || t.categoryId === 'E';
-    if (category === 'Social') return t.categoryId === 'E';
-    if (category === 'Exam') return t.categoryId === 'G';
+    if (category === 'Resize') return t.slug.includes('resize') || t.slug.includes('crop') || t.categoryId === 'calculator';
+    if (category === 'Social') return t.categoryId === 'calculator';
+    if (category === 'Exam') return t.categoryId === 'pdf';
     return false;
   }).slice(0, 4);
 

@@ -89,41 +89,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // High‑traffic tool routes – boosted priority
-  const highPriorityTools: MetadataRoute.Sitemap = [
-    {
-      url: `${BASE_URL}/tools/compress-image`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/tools/compress-pdf`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/tools/resize-image-pixel`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.95,
-    },
-  ];
 
-  // Unique tool routes (excluding the high‑priority ones)
-  const uniqueSlugs = Array.from(new Set(ALL_TOOLS.map((t) => t.slug)));
-  const filteredSlugs = uniqueSlugs.filter((slug) => !
-    ['compress-image', 'compress-pdf', 'resize-image-pixel'].includes(slug)
-  );
-  const toolRoutes: MetadataRoute.Sitemap = filteredSlugs.map((slug) => {
-    const tool = ALL_TOOLS.find((t) => t.slug === slug);
-    const isPopular = tool?.popular;
+  // Production tool routes
+  const productionTools = ALL_TOOLS.filter(t => t.status === 'production');
+
+  const toolRoutes: MetadataRoute.Sitemap = productionTools.map((tool) => {
+    let priority = 0.8;
+    if (tool.seoPriority === 'High') priority = 1.0;
+    else if (tool.seoPriority === 'Medium') priority = 0.9;
+
     return {
-      url: `${BASE_URL}/tools/${slug}`,
+      url: `${BASE_URL}/tools/${tool.slug}`,
       lastModified: currentDate,
-      changeFrequency: isPopular ? 'weekly' : 'monthly',
-      priority: isPopular ? 0.9 : 0.8,
+      changeFrequency: priority >= 0.9 ? 'weekly' : 'monthly',
+      priority,
     };
   });
 
@@ -150,5 +129,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/study-hours-calculator`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.85 },
   ];
 
-  return [...staticRoutes, ...highPriorityTools, ...examRoutes, ...toolRoutes, ...studentCalculatorRoutes];
+  return [...staticRoutes, ...examRoutes, ...toolRoutes, ...studentCalculatorRoutes];
 }

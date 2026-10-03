@@ -23,7 +23,7 @@ export default function ExamToolsPage() {
       title="Exam Photo & Signature Tools"
       description="Strict requirements for SSC, UPSC, and State PSC forms? Use these secure offline tools to resize and compress your passport photos and signatures exactly to spec."
       breadcrumbs={breadcrumbs}
-      category="Exam"
+      category="exam"
       customSlugs={[
         'passport-photo-maker',
         'generate-signature',

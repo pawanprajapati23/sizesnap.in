@@ -27,14 +27,12 @@ export function CategoryHubPage({
 
   if (customSlugs && customSlugs.length > 0) {
     tools = ALL_TOOLS.filter(t => customSlugs.includes(t.slug));
-  } else if (category === 'Image') {
-    tools = ALL_TOOLS.filter(t => t.categoryTitle.includes('Image') || (t.categoryId === 'F' || t.categoryId === 'G'));
-  } else if (category === 'PDF') {
-    tools = ALL_TOOLS.filter(t => t.categoryId === 'D');
   } else if (category === 'Compress') {
     tools = ALL_TOOLS.filter(t => t.slug.includes('compress') || t.slug.includes('reduce'));
   } else if (category === 'Resize') {
     tools = ALL_TOOLS.filter(t => t.slug.includes('resize') || t.slug.includes('crop'));
+  } else {
+    tools = ALL_TOOLS.filter(t => t.categoryId === category);
   }
 
   const breadcrumbSchema = {

@@ -1,4 +1,4 @@
-export type ToolCategoryId = 'image' | 'pdf' | 'ecommerce' | 'exam' | 'student' | 'calculator' | 'text' | 'social' | 'seo' | 'developer';
+export type ToolCategoryId = 'image' | 'pdf' | 'ecommerce' | 'exam' | 'student' | 'calculator' | 'text' | 'social' | 'seo' | 'developer' | 'writing';
 
 export interface ToolCategory {
   id: ToolCategoryId;
@@ -27,6 +27,7 @@ export interface ToolItem {
 }
 
 export const TOOL_CATEGORIES: ToolCategory[] = [
+  { id: 'writing', title: 'Writing Tools', description: 'Tools to prepare, structure, format, and check written content' },
   { id: 'text', title: 'Text Tools', description: 'Essential formatting, counting, and string manipulation utilities' },
   { id: 'image', title: 'Image Tools', description: 'Frequently accessed image resizing, compression, and photo utilities' },
   { id: 'pdf', title: 'PDF Tools', description: 'Essential PDF manipulation, compression, and conversion tools' },
@@ -36,6 +37,167 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
 ];
 
 export const ALL_TOOLS: ToolItem[] = [
+
+  {
+    id: 'text-formatter',
+    name: 'Text Formatter',
+    slug: 'text-formatter',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Format and normalize text online. Trim spaces, collapse blank lines, and fix formatting instantly.',
+    keywords: ['text formatter', 'format text', 'normalize text', 'text formatting tool'],
+    aliases: ['format text online', 'text formatter tool'],
+    searchIntent: 'Utility',
+    relatedTools: ['text-cleaner', 'paragraph-formatter', 'remove-extra-spaces'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'text-formatter'
+  },
+  {
+    id: 'paragraph-formatter',
+    name: 'Paragraph Formatter',
+    slug: 'paragraph-formatter',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Clean and format messy paragraphs. Switch between single, double, and indented spacing easily.',
+    keywords: ['paragraph formatter', 'format paragraphs', 'paragraph spacing'],
+    aliases: ['clean paragraphs', 'paragraph tool'],
+    searchIntent: 'Utility',
+    relatedTools: ['remove-line-breaks', 'word-counter', 'text-formatter'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'paragraph-formatter'
+  },
+  {
+    id: 'remove-line-breaks',
+    name: 'Remove Line Breaks',
+    slug: 'remove-line-breaks',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Remove unwanted line breaks from text while preserving paragraphs. Join messy text blocks online.',
+    keywords: ['remove line breaks', 'delete line breaks', 'join text lines'],
+    aliases: ['remove line breaks online', 'join lines', 'strip line breaks'],
+    searchIntent: 'Utility',
+    relatedTools: ['paragraph-formatter', 'remove-empty-lines', 'text-cleaner'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'remove-line-breaks'
+  },
+  {
+    id: 'remove-extra-spaces',
+    name: 'Remove Extra Spaces',
+    slug: 'remove-extra-spaces',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Remove double spaces, trailing whitespace, and fix tabs online instantly.',
+    keywords: ['remove extra spaces', 'delete double spaces', 'trim whitespace'],
+    aliases: ['remove double spaces', 'trim trailing spaces', 'whitespace remover'],
+    searchIntent: 'Utility',
+    relatedTools: ['text-cleaner', 'text-formatter', 'remove-empty-lines'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'remove-extra-spaces'
+  },
+  {
+    id: 'list-formatter',
+    name: 'List Formatter',
+    slug: 'list-formatter',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Format text lists online. Add prefixes, suffixes, quotes, or convert to comma-separated lists.',
+    keywords: ['list formatter', 'format list', 'comma separated list'],
+    aliases: ['list formatting tool', 'convert list to comma separated', 'add quotes to list'],
+    searchIntent: 'Utility',
+    relatedTools: ['sort-lines', 'remove-duplicate-lines', 'bullet-point-generator'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'list-formatter'
+  },
+  {
+    id: 'bullet-point-generator',
+    name: 'Bullet Point Generator',
+    slug: 'bullet-point-generator',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Convert plain text lines into clean bullet point lists online automatically.',
+    keywords: ['bullet point generator', 'add bullet points', 'bullet list generator'],
+    aliases: ['bullet maker', 'convert text to bullets', 'bullet formatting tool'],
+    searchIntent: 'Utility',
+    relatedTools: ['list-formatter', 'numbered-list-generator', 'sort-lines'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'bullet-point-generator'
+  },
+  {
+    id: 'numbered-list-generator',
+    name: 'Numbered List Generator',
+    slug: 'numbered-list-generator',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Convert unformatted text lines into a numbered list automatically.',
+    keywords: ['numbered list generator', 'add numbering', 'numbered list tool'],
+    aliases: ['auto numbering tool', 'create numbered list'],
+    searchIntent: 'Utility',
+    relatedTools: ['bullet-point-generator', 'list-formatter', 'sort-lines'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'numbered-list-generator'
+  },
+  {
+    id: 'lorem-ipsum-generator',
+    name: 'Lorem Ipsum Generator',
+    slug: 'lorem-ipsum-generator',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Generate dummy text for layouts and designs. Fast Lorem Ipsum paragraph generator.',
+    keywords: ['lorem ipsum generator', 'dummy text', 'placeholder text'],
+    aliases: ['lorem ipsum', 'placeholder text generator', 'dummy text generator'],
+    searchIntent: 'Utility',
+    relatedTools: ['random-paragraph-generator', 'word-counter'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'High',
+    analyticsIdentifier: 'lorem-ipsum-generator'
+  },
+  {
+    id: 'random-paragraph-generator',
+    name: 'Random Paragraph Generator',
+    slug: 'random-paragraph-generator',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Generate random paragraphs of readable placeholder text instantly.',
+    keywords: ['random paragraph generator', 'random text generator', 'placeholder paragraphs'],
+    aliases: ['generate random paragraph', 'random sentences'],
+    searchIntent: 'Utility',
+    relatedTools: ['lorem-ipsum-generator', 'word-counter'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'random-paragraph-generator'
+  },
+  {
+    id: 'email-text-formatter',
+    name: 'Email Text Formatter',
+    slug: 'email-text-formatter',
+    categoryId: 'writing',
+    categoryTitle: 'Writing Tools',
+    shortDescription: 'Clean up messy email threads by removing quotes, excessive spaces, and formatting artifacts.',
+    keywords: ['email text formatter', 'clean email text', 'remove email quotes'],
+    aliases: ['email cleaner tool', 'format email thread', 'remove chevron replies'],
+    searchIntent: 'Utility',
+    relatedTools: ['text-cleaner', 'remove-extra-spaces', 'word-counter'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'Medium',
+    analyticsIdentifier: 'email-text-formatter'
+  },
 
   {
     id: 'character-frequency-counter',

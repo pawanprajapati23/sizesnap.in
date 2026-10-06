@@ -6,6 +6,17 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ALL_TOOLS, getToolBySlug, type ToolItem } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
+import { TextFormatterTool } from '@/components/tool-ui/writing/TextFormatterTool';
+import { ParagraphFormatterTool } from '@/components/tool-ui/writing/ParagraphFormatterTool';
+import { RemoveLineBreaksTool } from '@/components/tool-ui/writing/RemoveLineBreaksTool';
+import { RemoveExtraSpacesTool } from '@/components/tool-ui/writing/RemoveExtraSpacesTool';
+import { ListFormatterTool } from '@/components/tool-ui/writing/ListFormatterTool';
+import { BulletPointGeneratorTool } from '@/components/tool-ui/writing/BulletPointGeneratorTool';
+import { NumberedListGeneratorTool } from '@/components/tool-ui/writing/NumberedListGeneratorTool';
+import { LoremIpsumGeneratorTool } from '@/components/tool-ui/writing/LoremIpsumGeneratorTool';
+import { RandomParagraphGeneratorTool } from '@/components/tool-ui/writing/RandomParagraphGeneratorTool';
+import { EmailTextFormatterTool } from '@/components/tool-ui/writing/EmailTextFormatterTool';
+
 import { WordCounterTool } from '@/components/tool-ui/text/WordCounterTool';
 import { CharacterCounterTool } from '@/components/tool-ui/text/CharacterCounterTool';
 import { SentenceCounterTool } from '@/components/tool-ui/text/SentenceCounterTool';
@@ -245,8 +256,19 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             {tool.slug === 'text-reverse' && <TextReverseTool />}
             {tool.slug === 'character-frequency-counter' && <CharacterFrequencyCounterTool />}
             {tool.slug === 'line-counter' && <LineCounterTool />}
+            {tool.slug === 'text-formatter' && <TextFormatterTool />}
+            {tool.slug === 'paragraph-formatter' && <ParagraphFormatterTool />}
+            {tool.slug === 'remove-line-breaks' && <RemoveLineBreaksTool />}
+            {tool.slug === 'remove-extra-spaces' && <RemoveExtraSpacesTool />}
+            {tool.slug === 'list-formatter' && <ListFormatterTool />}
+            {tool.slug === 'bullet-point-generator' && <BulletPointGeneratorTool />}
+            {tool.slug === 'numbered-list-generator' && <NumberedListGeneratorTool />}
+            {tool.slug === 'lorem-ipsum-generator' && <LoremIpsumGeneratorTool />}
+            {tool.slug === 'random-paragraph-generator' && <RandomParagraphGeneratorTool />}
+            {tool.slug === 'email-text-formatter' && <EmailTextFormatterTool />}
 
-            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse', 'character-frequency-counter', 'line-counter'].includes(tool.slug) && (
+
+            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse', 'character-frequency-counter', 'line-counter'].concat(['text-formatter', 'paragraph-formatter', 'remove-line-breaks', 'remove-extra-spaces', 'list-formatter', 'bullet-point-generator', 'numbered-list-generator', 'lorem-ipsum-generator', 'random-paragraph-generator', 'email-text-formatter']).includes(tool.slug) && (
               <div className="border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
                 <div className="max-w-md mx-auto flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">

@@ -18,6 +18,8 @@ import { RemoveEmptyLinesTool } from '@/components/tool-ui/text/RemoveEmptyLines
 import { TextCleanerTool } from '@/components/tool-ui/text/TextCleanerTool';
 import { FindAndReplaceTool } from '@/components/tool-ui/text/FindAndReplaceTool';
 import { TextReverseTool } from '@/components/tool-ui/text/TextReverseTool';
+import { CharacterFrequencyCounterTool } from '@/components/tool-ui/text/CharacterFrequencyCounterTool';
+import { LineCounterTool } from '@/components/tool-ui/text/LineCounterTool';
 
 import { ArrowLeft, Upload, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
@@ -241,8 +243,10 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             {tool.slug === 'text-cleaner' && <TextCleanerTool />}
             {tool.slug === 'find-and-replace' && <FindAndReplaceTool />}
             {tool.slug === 'text-reverse' && <TextReverseTool />}
+            {tool.slug === 'character-frequency-counter' && <CharacterFrequencyCounterTool />}
+            {tool.slug === 'line-counter' && <LineCounterTool />}
 
-            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse'].includes(tool.slug) && (
+            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse', 'character-frequency-counter', 'line-counter'].includes(tool.slug) && (
               <div className="border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
                 <div className="max-w-md mx-auto flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">

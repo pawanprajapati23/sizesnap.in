@@ -16,6 +16,27 @@ import { NumberedListGeneratorTool } from '@/components/tool-ui/writing/Numbered
 import { LoremIpsumGeneratorTool } from '@/components/tool-ui/writing/LoremIpsumGeneratorTool';
 import { RandomParagraphGeneratorTool } from '@/components/tool-ui/writing/RandomParagraphGeneratorTool';
 import { EmailTextFormatterTool } from '@/components/tool-ui/writing/EmailTextFormatterTool';
+import { JsonFormatterTool } from '@/components/tool-ui/developer/JsonFormatterTool';
+import { JsonValidatorTool } from '@/components/tool-ui/developer/JsonValidatorTool';
+import { JsonMinifierTool } from '@/components/tool-ui/developer/JsonMinifierTool';
+import { JsonViewerTool } from '@/components/tool-ui/developer/JsonViewerTool';
+import { JsonToCsvTool } from '@/components/tool-ui/developer/JsonToCsvTool';
+import { CsvToJsonTool } from '@/components/tool-ui/developer/CsvToJsonTool';
+import { Base64EncoderTool } from '@/components/tool-ui/developer/Base64EncoderTool';
+import { Base64DecoderTool } from '@/components/tool-ui/developer/Base64DecoderTool';
+import { UrlEncoderTool } from '@/components/tool-ui/developer/UrlEncoderTool';
+import { UrlDecoderTool } from '@/components/tool-ui/developer/UrlDecoderTool';
+import { UuidGeneratorTool } from '@/components/tool-ui/developer/UuidGeneratorTool';
+import { UnixTimestampConverterTool } from '@/components/tool-ui/developer/UnixTimestampConverterTool';
+import { JwtDecoderTool } from '@/components/tool-ui/developer/JwtDecoderTool';
+import { RegexTesterTool } from '@/components/tool-ui/developer/RegexTesterTool';
+import { HashGeneratorTool } from '@/components/tool-ui/developer/HashGeneratorTool';
+import { HtmlFormatterTool } from '@/components/tool-ui/developer/HtmlFormatterTool';
+import { CssFormatterTool } from '@/components/tool-ui/developer/CssFormatterTool';
+import { JavascriptFormatterTool } from '@/components/tool-ui/developer/JavascriptFormatterTool';
+import { SqlFormatterTool } from '@/components/tool-ui/developer/SqlFormatterTool';
+import { XmlFormatterTool } from '@/components/tool-ui/developer/XmlFormatterTool';
+
 
 import { WordCounterTool } from '@/components/tool-ui/text/WordCounterTool';
 import { CharacterCounterTool } from '@/components/tool-ui/text/CharacterCounterTool';
@@ -266,6 +287,27 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             {tool.slug === 'lorem-ipsum-generator' && <LoremIpsumGeneratorTool />}
             {tool.slug === 'random-paragraph-generator' && <RandomParagraphGeneratorTool />}
             {tool.slug === 'email-text-formatter' && <EmailTextFormatterTool />}
+            {tool.slug === 'json-formatter' && <JsonFormatterTool />}
+            {tool.slug === 'json-validator' && <JsonValidatorTool />}
+            {tool.slug === 'json-minifier' && <JsonMinifierTool />}
+            {tool.slug === 'json-viewer' && <JsonViewerTool />}
+            {tool.slug === 'json-to-csv' && <JsonToCsvTool />}
+            {tool.slug === 'csv-to-json' && <CsvToJsonTool />}
+            {tool.slug === 'base64-encoder' && <Base64EncoderTool />}
+            {tool.slug === 'base64-decoder' && <Base64DecoderTool />}
+            {tool.slug === 'url-encoder' && <UrlEncoderTool />}
+            {tool.slug === 'url-decoder' && <UrlDecoderTool />}
+            {tool.slug === 'uuid-generator' && <UuidGeneratorTool />}
+            {tool.slug === 'unix-timestamp-converter' && <UnixTimestampConverterTool />}
+            {tool.slug === 'jwt-decoder' && <JwtDecoderTool />}
+            {tool.slug === 'regex-tester' && <RegexTesterTool />}
+            {tool.slug === 'hash-generator' && <HashGeneratorTool />}
+            {tool.slug === 'html-formatter' && <HtmlFormatterTool />}
+            {tool.slug === 'css-formatter' && <CssFormatterTool />}
+            {tool.slug === 'javascript-formatter' && <JavascriptFormatterTool />}
+            {tool.slug === 'sql-formatter' && <SqlFormatterTool />}
+            {tool.slug === 'xml-formatter' && <XmlFormatterTool />}
+
 
 
             {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse', 'character-frequency-counter', 'line-counter'].concat(['text-formatter', 'paragraph-formatter', 'remove-line-breaks', 'remove-extra-spaces', 'list-formatter', 'bullet-point-generator', 'numbered-list-generator', 'lorem-ipsum-generator', 'random-paragraph-generator', 'email-text-formatter']).includes(tool.slug) && (

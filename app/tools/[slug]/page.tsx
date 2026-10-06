@@ -57,6 +57,26 @@ const NumberToWordsTool = dynamic(() => import('@/components/tool-ui/calculator/
 const RandomNumberGeneratorTool = dynamic(() => import('@/components/tool-ui/calculator/RandomNumberGeneratorTool').then(mod => mod.RandomNumberGeneratorTool));
 const TimeZoneConverterTool = dynamic(() => import('@/components/tool-ui/calculator/TimeZoneConverterTool').then(mod => mod.TimeZoneConverterTool));
 
+const MetaTagGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/MetaTagGeneratorTool').then(mod => mod.MetaTagGeneratorTool));
+const MetaDescriptionGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/MetaDescriptionGeneratorTool').then(mod => mod.MetaDescriptionGeneratorTool));
+const OpenGraphGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/OpenGraphGeneratorTool').then(mod => mod.OpenGraphGeneratorTool));
+const TwitterCardGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/TwitterCardGeneratorTool').then(mod => mod.TwitterCardGeneratorTool));
+const RobotsTxtGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/RobotsTxtGeneratorTool').then(mod => mod.RobotsTxtGeneratorTool));
+const SitemapGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/SitemapGeneratorTool').then(mod => mod.SitemapGeneratorTool));
+const SitemapValidatorTool = dynamic(() => import('@/components/tool-ui/seo/SitemapValidatorTool').then(mod => mod.SitemapValidatorTool));
+const CanonicalUrlGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/CanonicalUrlGeneratorTool').then(mod => mod.CanonicalUrlGeneratorTool));
+const SlugGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/SlugGeneratorTool').then(mod => mod.SlugGeneratorTool));
+const SerpSnippetPreviewTool = dynamic(() => import('@/components/tool-ui/seo/SerpSnippetPreviewTool').then(mod => mod.SerpSnippetPreviewTool));
+const SchemaMarkupGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/SchemaMarkupGeneratorTool').then(mod => mod.SchemaMarkupGeneratorTool));
+const FaqSchemaGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/FaqSchemaGeneratorTool').then(mod => mod.FaqSchemaGeneratorTool));
+const BreadcrumbSchemaGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/BreadcrumbSchemaGeneratorTool').then(mod => mod.BreadcrumbSchemaGeneratorTool));
+const KeywordDensityCheckerTool = dynamic(() => import('@/components/tool-ui/seo/KeywordDensityCheckerTool').then(mod => mod.KeywordDensityCheckerTool));
+const HeadingCheckerTool = dynamic(() => import('@/components/tool-ui/seo/HeadingCheckerTool').then(mod => mod.HeadingCheckerTool));
+const SeoContentAnalyzerTool = dynamic(() => import('@/components/tool-ui/seo/SeoContentAnalyzerTool').then(mod => mod.SeoContentAnalyzerTool));
+const HreflangGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/HreflangGeneratorTool').then(mod => mod.HreflangGeneratorTool));
+const HtaccessRedirectGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/HtaccessRedirectGeneratorTool').then(mod => mod.HtaccessRedirectGeneratorTool));
+
+
 
 
 import dynamic from 'next/dynamic';
@@ -349,6 +369,25 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             {tool.slug === 'number-to-words' && <NumberToWordsTool />}
             {tool.slug === 'random-number-generator' && <RandomNumberGeneratorTool />}
             {tool.slug === 'time-zone-converter' && <TimeZoneConverterTool />}
+            {tool.slug === 'meta-tag-generator' && <MetaTagGeneratorTool />}
+            {tool.slug === 'meta-description-generator' && <MetaDescriptionGeneratorTool />}
+            {tool.slug === 'open-graph-generator' && <OpenGraphGeneratorTool />}
+            {tool.slug === 'twitter-card-generator' && <TwitterCardGeneratorTool />}
+            {tool.slug === 'robots-txt-generator' && <RobotsTxtGeneratorTool />}
+            {tool.slug === 'sitemap-generator' && <SitemapGeneratorTool />}
+            {tool.slug === 'sitemap-validator' && <SitemapValidatorTool />}
+            {tool.slug === 'canonical-url-generator' && <CanonicalUrlGeneratorTool />}
+            {tool.slug === 'slug-generator' && <SlugGeneratorTool />}
+            {tool.slug === 'serp-snippet-preview' && <SerpSnippetPreviewTool />}
+            {tool.slug === 'schema-markup-generator' && <SchemaMarkupGeneratorTool />}
+            {tool.slug === 'faq-schema-generator' && <FaqSchemaGeneratorTool />}
+            {tool.slug === 'breadcrumb-schema-generator' && <BreadcrumbSchemaGeneratorTool />}
+            {tool.slug === 'keyword-density-checker' && <KeywordDensityCheckerTool />}
+            {tool.slug === 'heading-checker' && <HeadingCheckerTool />}
+            {tool.slug === 'seo-content-analyzer' && <SeoContentAnalyzerTool />}
+            {tool.slug === 'hreflang-generator' && <HreflangGeneratorTool />}
+            {tool.slug === 'htaccess-redirect-generator' && <HtaccessRedirectGeneratorTool />}
+
 
 
 

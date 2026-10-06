@@ -6,6 +6,19 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ALL_TOOLS, getToolBySlug, type ToolItem } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
+import { WordCounterTool } from '@/components/tool-ui/text/WordCounterTool';
+import { CharacterCounterTool } from '@/components/tool-ui/text/CharacterCounterTool';
+import { SentenceCounterTool } from '@/components/tool-ui/text/SentenceCounterTool';
+import { ReadingTimeCalculatorTool } from '@/components/tool-ui/text/ReadingTimeCalculatorTool';
+import { CaseConverterTool } from '@/components/tool-ui/text/CaseConverterTool';
+import { TextRepeaterTool } from '@/components/tool-ui/text/TextRepeaterTool';
+import { RemoveDuplicateLinesTool } from '@/components/tool-ui/text/RemoveDuplicateLinesTool';
+import { SortLinesTool } from '@/components/tool-ui/text/SortLinesTool';
+import { RemoveEmptyLinesTool } from '@/components/tool-ui/text/RemoveEmptyLinesTool';
+import { TextCleanerTool } from '@/components/tool-ui/text/TextCleanerTool';
+import { FindAndReplaceTool } from '@/components/tool-ui/text/FindAndReplaceTool';
+import { TextReverseTool } from '@/components/tool-ui/text/TextReverseTool';
+
 import { ArrowLeft, Upload, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
 interface ToolPageProps {
@@ -214,27 +227,44 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </Link>
           </div>
 
-          {/* Interactive Workspace Shell Placeholder */}
-          <div className="mt-4 border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
-            <div className="max-w-md mx-auto flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">
-                <Upload className="h-6 w-6" />
+                    {/* Interactive Workspace Shell Placeholder */}
+          <div className="mt-4">
+            {tool.slug === 'word-counter' && <WordCounterTool />}
+            {tool.slug === 'character-counter' && <CharacterCounterTool />}
+            {tool.slug === 'sentence-counter' && <SentenceCounterTool />}
+            {tool.slug === 'reading-time-calculator' && <ReadingTimeCalculatorTool />}
+            {tool.slug === 'case-converter' && <CaseConverterTool />}
+            {tool.slug === 'text-repeater' && <TextRepeaterTool />}
+            {tool.slug === 'remove-duplicate-lines' && <RemoveDuplicateLinesTool />}
+            {tool.slug === 'sort-lines' && <SortLinesTool />}
+            {tool.slug === 'remove-empty-lines' && <RemoveEmptyLinesTool />}
+            {tool.slug === 'text-cleaner' && <TextCleanerTool />}
+            {tool.slug === 'find-and-replace' && <FindAndReplaceTool />}
+            {tool.slug === 'text-reverse' && <TextReverseTool />}
+
+            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse'].includes(tool.slug) && (
+              <div className="border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
+                <div className="max-w-md mx-auto flex flex-col items-center">
+                  <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">
+                    <Upload className="h-6 w-6" />
+                  </div>
+                  <h2 className="text-base font-bold text-gray-800 mb-1">
+                    Select your image or file to begin
+                  </h2>
+                  <p className="text-xs text-gray-500 mb-5">
+                    Drag and drop files here, or click to choose from your computer or phone.
+                  </p>
+                  <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-[#414FA8] text-white text-xs sm:text-sm font-semibold rounded shadow-sm hover:bg-[#343f88] active:scale-[0.98] transition-all">
+                    <Upload className="h-4 w-4" />
+                    <span>Choose File</span>
+                    <input type="file" className="sr-only" />
+                  </label>
+                  <p className="text-[11px] text-gray-400 mt-3">
+                    Supports JPG, PNG, WEBP, GIF, PDF (Max 25MB). No account needed.
+                  </p>
+                </div>
               </div>
-              <h2 className="text-base font-bold text-gray-800 mb-1">
-                Select your image or file to begin
-              </h2>
-              <p className="text-xs text-gray-500 mb-5">
-                Drag and drop files here, or click to choose from your computer or phone.
-              </p>
-              <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-[#414FA8] text-white text-xs sm:text-sm font-semibold rounded shadow-sm hover:bg-[#343f88] active:scale-[0.98] transition-all">
-                <Upload className="h-4 w-4" />
-                <span>Choose File</span>
-                <input type="file" className="sr-only" />
-              </label>
-              <p className="text-[11px] text-gray-400 mt-3">
-                Supports JPG, PNG, WEBP, GIF, PDF (Max 25MB). No account needed.
-              </p>
-            </div>
+            )}
           </div>
 
           {/* Feature Highlights */}

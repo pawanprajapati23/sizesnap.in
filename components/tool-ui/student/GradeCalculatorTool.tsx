@@ -150,7 +150,7 @@ export function GradeCalculatorTool() {
             <CalculatorResult
               label="Overall Current Grade"
               value={`${result.overallGrade.toFixed(2)}%`}
-              subtext={`Estimated Letter Grade: ${result.letterGrade}`}
+              subValue={`Estimated Letter Grade: ${result.letterGrade}`}
             />
           </div>
         )}

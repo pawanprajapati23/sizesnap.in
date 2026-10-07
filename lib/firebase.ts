@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set, increment, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBayDRzocfhvlcwQpK1BEVdfBfTbuP1KNs",
@@ -15,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
 
 export async function fetchUsage(path: string): Promise<Record<string, number>> {
   const snapshot = await get(ref(db, path));
@@ -171,4 +173,33 @@ export const fetchAdPerformance = async () => {
     return {};
   }
 };
+
+export interface CustomAdConfig {
+  imageUrl: string;
+  targetUrl: string;
+  isActive: boolean;
+}
+
+export const getCustomAdConfig = async (): Promise<CustomAdConfig | null> => {
+  try {
+    const snapshot = await get(ref(db, 'customAdConfig'));
+    if (snapshot.exists()) {
+      return snapshot.val() as CustomAdConfig;
+    }
+    return null;
+  } catch (err) {
+    console.error("Failed to fetch custom ad config:", err);
+    return null;
+  }
+};
+
+export const saveCustomAdConfig = async (config: CustomAdConfig) => {
+  try {
+    await set(ref(db, 'customAdConfig'), config);
+  } catch (err) {
+    console.error("Failed to save custom ad config:", err);
+    throw err;
+  }
+};
+
 

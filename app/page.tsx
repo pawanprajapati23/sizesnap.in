@@ -6,6 +6,8 @@ import { Sidebar } from '@/components/Sidebar';
 import { Footer } from '@/components/Footer';
 import FAQSection from '@/components/FAQSection';
 
+import CustomAdBanner from '@/components/CustomAdBanner';
+
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
@@ -19,21 +21,8 @@ export default function HomePage() {
           <div className="w-full lg:col-span-8 xl:col-span-9">
             <ToolDirectory />
           
-            {/* Popular Tools Section */}
-            <section className="my-8">
-              <h2 className="text-lg font-bold text-gray-800 mb-4">Popular Tools</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <Link prefetch={false} href="/tools/compress-image" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
-                  Compress Image
-                </Link>
-                <Link prefetch={false} href="/tools/compress-pdf" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
-                  Compress PDF
-                </Link>
-                <Link prefetch={false} href="/tools/resize-image-pixel" className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
-                  Resize Image (Pixel)
-                </Link>
-              </div>
-            </section>
+            {/* Custom Ad Banner */}
+            <CustomAdBanner />
           </div>
 
           {/* Right sidebar: ~30% width on desktop, hidden on mobile */}

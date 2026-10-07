@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { NAV_MENUS } from '@/data/tools';
+import AdsterraAd from '@/components/AdsterraAd';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

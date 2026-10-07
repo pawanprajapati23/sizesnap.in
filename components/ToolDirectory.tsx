@@ -8,6 +8,11 @@ import { ToolButton } from '@/components/ToolButton';
 import AdsterraAd from '@/components/AdsterraAd';
 export function ToolDirectory() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Filter tools client-side dynamically
   const filteredTools = useMemo(() => {
@@ -172,13 +177,18 @@ export function ToolDirectory() {
       ) : (
         /* Categorized Directory: Sections A to G in exact order */
         <div className="space-y-5">
-          {categorizedTools.map(({ category, tools }) => (
-            <section
-              key={category.id}
-              className="bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs"
-              aria-labelledby={`category-heading-${category.id}`}
-              style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}
-            >
+          {categorizedTools.map(({ category, tools }, index) => {
+            // Only render the first category during SSR and initial paint to drastically improve LCP/FCP
+            // Render the rest only after the component has mounted (client-side)
+            if (!mounted && index > 0) return null;
+            
+            return (
+              <section
+                key={category.id}
+                className="bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs"
+                aria-labelledby={`category-heading-${category.id}`}
+                style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}
+              >
               {/* Category Header */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 mb-3.5">
                 <div className="flex items-center gap-2">
@@ -204,7 +214,8 @@ export function ToolDirectory() {
                 ))}
               </div>
             </section>
-          ))}
+          );
+        })}
         </div>
       )}
     </div>

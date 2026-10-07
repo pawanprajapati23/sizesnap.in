@@ -45,6 +45,20 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
   // Group tools by category for normal browsing view
   // Only keep requested curated categories
   const curatedCategoryIds = ['image', 'pdf', 'text', 'developer', 'student', 'exam', 'seo', 'social', 'ecommerce'];
+
+  const getCategoryRoute = (categoryId: string) => {
+    const routeMap: Record<string, string> = {
+      image: '/image-tools',
+      pdf: '/pdf-tools',
+      developer: '/developer-tools',
+      student: '/student-tools',
+      exam: '/exam-tools',
+      seo: '/seo-tools',
+      social: '/social-media-tools',
+      ecommerce: '/ecommerce-tools',
+    };
+    return routeMap[categoryId] || `/tools?category=${categoryId}`;
+  };
   const categorizedTools = useMemo(() => {
     return TOOL_CATEGORIES
       .filter(c => curatedCategoryIds.includes(c.id))
@@ -260,7 +274,7 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 ))}
               </div>
               <div className="mt-3 text-right">
-                <Link href="/tools" className="text-xs font-semibold text-[#414FA8] hover:underline">
+                <Link href={getCategoryRoute(category.id)} className="text-xs font-semibold text-[#414FA8] hover:underline">
                   View All {category.title} →
                 </Link>
               </div>

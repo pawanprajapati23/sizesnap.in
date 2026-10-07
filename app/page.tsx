@@ -13,20 +13,24 @@ export const revalidate = 3600; // Cache for 1 hour to prevent heavy firebase qu
 export default async function HomePage() {
   let topTools: string[] = [];
   try {
+    // In a real production system, a Cloud Function should pre-calculate this into a 'topTools' node.
+    // For now, we fetch the usage and compute it, heavily cached by Next.js ISR (revalidate = 3600).
     const toolRecords = await fetchUsage('toolUsage');
     const ms = 30 * 24 * 60 * 60 * 1000; // 30 days
     const usageCounts: Record<string, number> = {};
 
-    for (const [slug, records] of Object.entries(toolRecords)) {
-      if (typeof records === 'object' && records !== null) {
-        usageCounts[slug] = aggregateWithin(records as Record<string, number>, ms);
+    if (toolRecords && typeof toolRecords === 'object') {
+      for (const [slug, records] of Object.entries(toolRecords)) {
+        if (typeof records === 'object' && records !== null) {
+          usageCounts[slug] = aggregateWithin(records as Record<string, number>, ms);
+        }
       }
-    }
 
-    topTools = Object.entries(usageCounts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 10)
-      .map(([slug]) => slug);
+      topTools = Object.entries(usageCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10)
+        .map(([slug]) => slug);
+    }
   } catch (error) {
     console.error('Failed to fetch top tools for homepage:', error);
   }

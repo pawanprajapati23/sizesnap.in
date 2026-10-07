@@ -148,3 +148,27 @@ export const deleteFeedback = async (id: string) => {
     throw err;
   }
 };
+
+// ---- AD TRACKING LOGIC ----
+
+export const trackAdImpression = async (slotId: string) => {
+  try {
+    const timestamp = getCurrentHourTimestamp();
+    const adRef = ref(db, `adPerformance/${slotId}/impressions/${timestamp}`);
+    await set(adRef, increment(1));
+  } catch (err) {
+    console.error("Failed to track ad impression:", err);
+  }
+};
+
+export const fetchAdPerformance = async () => {
+  try {
+    const snapshot = await get(ref(db, 'adPerformance'));
+    if (!snapshot.exists()) return {};
+    return snapshot.val();
+  } catch (err) {
+    console.error("Failed to fetch ad performance:", err);
+    return {};
+  }
+};
+

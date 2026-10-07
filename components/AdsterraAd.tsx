@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { trackAdImpression } from '@/lib/firebase';
 
 interface AdsterraAdProps {
   dataKey: string;
@@ -10,10 +11,28 @@ interface AdsterraAdProps {
 
 export default function AdsterraAd({ dataKey, width, height, className = '' }: AdsterraAdProps) {
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackedRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!mounted || !containerRef.current) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !trackedRef.current) {
+        trackedRef.current = true;
+        trackAdImpression(dataKey).catch(console.error);
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [mounted, dataKey]);
 
   const srcDoc = `
 <!DOCTYPE html>
@@ -59,7 +78,7 @@ export default function AdsterraAd({ dataKey, width, height, className = '' }: A
   }
 
   return (
-    <div className={`flex justify-center items-center overflow-hidden ${className}`}>
+    <div ref={containerRef} className={`flex justify-center items-center overflow-hidden ${className}`}>
       <iframe
         srcDoc={srcDoc}
         width={width}

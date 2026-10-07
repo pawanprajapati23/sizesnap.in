@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { getCustomAdConfig, CustomAdConfig } from '@/lib/firebase';
-import Link from 'next/link';
 import Image from 'next/image';
 
 export default function CustomAdBanner() {
@@ -21,17 +20,23 @@ export default function CustomAdBanner() {
     return null;
   }
 
+  // Ensure absolute URL
+  let targetUrl = adConfig.targetUrl?.trim();
+  if (targetUrl && !/^https?:\/\//i.test(targetUrl)) {
+    targetUrl = 'https://' + targetUrl;
+  }
+
   const BannerContent = (
-    <div className="relative w-full overflow-hidden rounded-xl shadow-sm border border-gray-200 transition-transform hover:scale-[1.01] bg-gray-50 flex items-center justify-center min-h-[150px] sm:min-h-[200px]">
+    <div className="relative w-full overflow-hidden rounded-xl shadow-sm border border-gray-200 transition-transform hover:scale-[1.01] bg-gray-50 flex items-center justify-center">
       <Image
         src={adConfig.imageUrl}
         alt="Advertisement"
         width={1200}
         height={300}
-        className="w-full h-auto object-cover max-h-[300px]"
-        unoptimized // Allow external firebase storage URLs without configuring domains in next.config.js
+        className="w-full h-auto object-contain max-h-[300px]"
+        unoptimized // Allow external/Base64 URLs
       />
-      <span className="absolute top-2 right-2 bg-black/40 text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider backdrop-blur-sm z-10">
+      <span className="absolute top-2 right-2 bg-black/40 text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider backdrop-blur-sm z-10 shadow-sm pointer-events-none">
         Ad
       </span>
     </div>
@@ -39,8 +44,8 @@ export default function CustomAdBanner() {
 
   return (
     <section className="my-8">
-      {adConfig.targetUrl ? (
-        <a href={adConfig.targetUrl} target="_blank" rel="noopener noreferrer" className="block w-full">
+      {targetUrl ? (
+        <a href={targetUrl} target="_blank" rel="noopener noreferrer" className="block w-full">
           {BannerContent}
         </a>
       ) : (

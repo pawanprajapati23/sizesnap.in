@@ -6,7 +6,7 @@ import { Search, X, Sparkles } from 'lucide-react';
 import { ALL_TOOLS, TOOL_CATEGORIES, type ToolItem } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import AdsterraAd from '@/components/AdsterraAd';
-export function ToolDirectory() {
+export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [mounted, setMounted] = useState(false);
 
@@ -25,11 +25,34 @@ export function ToolDirectory() {
   }, [searchQuery]);
 
   // Group tools by category for normal browsing view
+  // Map the topTools strings to full ToolItems in order
+  const popularTools = useMemo(() => {
+    let validTools = topTools
+      .map(slug => ALL_TOOLS.find(t => t.slug === slug))
+      .filter((t): t is ToolItem => t !== undefined && t.status !== 'draft' && t.status !== 'deprecated');
+
+    // Fallback if no real popular tools exist yet
+    if (validTools.length === 0) {
+      const fallbackSlugs = ['compress-image', 'image-to-pdf', 'compress-image-to-50kb', 'resize-image-pixel'];
+      validTools = fallbackSlugs
+        .map(slug => ALL_TOOLS.find(t => t.slug === slug))
+        .filter((t): t is ToolItem => t !== undefined && t.status !== 'draft');
+    }
+
+    return validTools.slice(0, 10);
+  }, [topTools]);
+
+  // Group tools by category for normal browsing view
+  // Only keep requested curated categories
+  const curatedCategoryIds = ['image', 'pdf', 'text', 'developer', 'student', 'exam', 'seo', 'social', 'ecommerce'];
   const categorizedTools = useMemo(() => {
-    return TOOL_CATEGORIES.map((category) => ({
-      category,
-      tools: ALL_TOOLS.filter((t) => t.categoryId === category.id),
-    }));
+    return TOOL_CATEGORIES
+      .filter(c => curatedCategoryIds.includes(c.id))
+      .map((category) => ({
+        category,
+        // Take at most 6 curated tools per category to keep the homepage manageable
+        tools: ALL_TOOLS.filter((t) => t.categoryId === category.id).slice(0, 6),
+      }));
   }, []);
 
   const handleClear = () => {
@@ -177,6 +200,29 @@ export function ToolDirectory() {
       ) : (
         /* Categorized Directory: Sections A to G in exact order */
         <div className="space-y-5">
+          {/* ⭐ Popular Tools / Featured Tools Section */}
+          <section
+            className="bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs"
+            aria-labelledby="category-heading-popular"
+          >
+            <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 mb-3.5">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-amber-500 shrink-0" />
+                <h2
+                  id="category-heading-popular"
+                  className="text-sm sm:text-base font-bold text-[#333333] tracking-tight"
+                >
+                  {topTools.length > 0 ? '⭐ Popular Tools' : 'Featured Tools'}
+                </h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+              {popularTools.map((tool) => (
+                <ToolButton key={tool.id} tool={tool} />
+              ))}
+            </div>
+          </section>
+
           {categorizedTools.map(({ category, tools }, index) => {
             // Only render the first category during SSR and initial paint to drastically improve LCP/FCP
             // Render the rest only after the component has mounted (client-side)
@@ -212,6 +258,11 @@ export function ToolDirectory() {
                 {tools.map((tool) => (
                   <ToolButton key={tool.id} tool={tool} />
                 ))}
+              </div>
+              <div className="mt-3 text-right">
+                <Link href="/tools" className="text-xs font-semibold text-[#414FA8] hover:underline">
+                  View All {category.title} →
+                </Link>
               </div>
             </section>
           );

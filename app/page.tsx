@@ -5,9 +5,32 @@ import { ToolDirectory } from '@/components/ToolDirectory';
 import { Sidebar } from '@/components/Sidebar';
 import { Footer } from '@/components/Footer';
 import FAQSection from '@/components/FAQSection';
+import { fetchUsage, aggregateWithin } from '@/lib/firebase';
 
 
-export default function HomePage() {
+export const revalidate = 3600; // Cache for 1 hour to prevent heavy firebase queries
+
+export default async function HomePage() {
+  let topTools: string[] = [];
+  try {
+    const toolRecords = await fetchUsage('toolUsage');
+    const ms = 30 * 24 * 60 * 60 * 1000; // 30 days
+    const usageCounts: Record<string, number> = {};
+
+    for (const [slug, records] of Object.entries(toolRecords)) {
+      if (typeof records === 'object' && records !== null) {
+        usageCounts[slug] = aggregateWithin(records as Record<string, number>, ms);
+      }
+    }
+
+    topTools = Object.entries(usageCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([slug]) => slug);
+  } catch (error) {
+    console.error('Failed to fetch top tools for homepage:', error);
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       {/* Full-width blue navbar */}
@@ -18,7 +41,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
           {/* Main content: ~70% width on desktop, 100% on mobile */}
           <div className="w-full lg:col-span-8 xl:col-span-9">
-            <ToolDirectory />
+            <ToolDirectory topTools={topTools} />
           </div>
 
           {/* Right sidebar: ~30% width on desktop, hidden on mobile */}

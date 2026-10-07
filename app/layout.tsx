@@ -111,12 +111,6 @@ export default function RootLayout({
             crossOrigin="anonymous"
             strategy="lazyOnload"
           />
-        )}
-        {/* Monetag Vignette Banner */}
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(s){s.dataset.zone='11970631',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
-        }} />
-
         <AnalyticsTracker />
         <FeedbackWidget />
         {children}

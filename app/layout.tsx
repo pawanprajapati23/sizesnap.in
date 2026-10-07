@@ -5,8 +5,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import dynamic from 'next/dynamic';
 import AdsterraAd from '@/components/AdsterraAd';
 
-const FeedbackWidget = dynamic(() => import('@/components/FeedbackWidget'), { ssr: false });
-const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'), { ssr: false });
+const FeedbackWidget = dynamic(() => import('@/components/FeedbackWidget'));
+const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'));
 
 import './globals.css';
 

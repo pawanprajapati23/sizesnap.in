@@ -28,7 +28,18 @@ export default function AdsAdminPage() {
   let dataRows: any[] = [];
   
   if (stats && !stats.error && stats.data) {
-    const rawItems = Array.isArray(stats.data.items) ? stats.data.items : (Array.isArray(stats.data) ? stats.data : []);
+    let rawItems: any[] = [];
+    if (Array.isArray(stats.data)) {
+      rawItems = stats.data;
+    } else if (stats.data.items && Array.isArray(stats.data.items)) {
+      rawItems = stats.data.items;
+    } else {
+      // Find the first array property in the object just in case Adsterra uses another key
+      const arrayKey = Object.keys(stats.data).find(key => Array.isArray(stats.data[key]));
+      if (arrayKey) {
+        rawItems = stats.data[arrayKey];
+      }
+    }
     
     if (rawItems.length > 0) {
       dataRows = rawItems;

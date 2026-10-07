@@ -11,7 +11,8 @@ export async function fetchAdsterraStats() {
     const finishDate = new Date().toISOString().split('T')[0];
     const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     
-    const url = `https://api3.adsterratools.com/publisher/stats.json?start_date=${startDate}&finish_date=${finishDate}`;
+    // Pass group_by=date to ensure we get a daily breakdown
+    const url = `https://api3.adsterratools.com/publisher/stats.json?start_date=${startDate}&finish_date=${finishDate}&group_by=date`;
     
     const res = await fetch(url, {
       headers: {

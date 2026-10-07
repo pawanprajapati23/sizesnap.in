@@ -177,6 +177,7 @@ export function ToolDirectory() {
               key={category.id}
               className="bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs"
               aria-labelledby={`category-heading-${category.id}`}
+              style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}
             >
               {/* Category Header */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 mb-3.5">

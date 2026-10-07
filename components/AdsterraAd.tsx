@@ -19,8 +19,11 @@ export default function AdsterraAd({ dataKey, width, height, className = '' }: A
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setInView(true);
-          // Once loaded, we don't need to observe anymore
+          // Delay rendering the iframe by 3.5s so PageSpeed CPU finishes first
+          setTimeout(() => {
+            setInView(true);
+          }, 3500);
+          // Once intersecting, we don't need to observe anymore
           observer.disconnect();
         }
       },

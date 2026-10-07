@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
 import FeedbackWidget from '@/components/FeedbackWidget';
+import AdsterraAd from '@/components/AdsterraAd';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -112,6 +113,12 @@ export default function RootLayout({
         <AnalyticsTracker />
         <FeedbackWidget />
         {children}
+        
+        {/* Mobile Sticky Ad Banner (320x50) */}
+        <div className="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-center bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] pb-safe">
+          <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} />
+        </div>
+        
         <Analytics />
       </body>
     </html>

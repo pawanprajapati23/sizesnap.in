@@ -44,6 +44,7 @@ export function Navbar() {
   };
 
   return (
+    <>
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200/90 shadow-[0_1px_3px_0_rgba(0,0,0,0.04)] select-none" ref={navRef}>
       <div className="mx-auto flex h-[64px] max-w-full items-center justify-between px-3 sm:px-6 lg:px-8">
         {/* Brand Logo */}
@@ -215,5 +216,10 @@ export function Navbar() {
         </div>
       )}
     </header>
+    {/* Global Desktop Ad Banner (728x90) */}
+    <div className="hidden lg:flex w-full justify-center py-4 bg-[#F5F5F7] border-b border-gray-200/50">
+      <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} />
+    </div>
+    </>
   );
 }

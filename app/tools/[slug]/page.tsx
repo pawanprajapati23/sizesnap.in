@@ -220,6 +220,22 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
   };
 }
 
+
+const CgpaCalculatorTool = dynamic(() => import('@/components/tool-ui/student/CgpaCalculatorTool').then(mod => mod.CgpaCalculatorTool));
+const GpaCalculatorTool = dynamic(() => import('@/components/tool-ui/student/GpaCalculatorTool').then(mod => mod.GpaCalculatorTool));
+const SgpaCalculatorTool = dynamic(() => import('@/components/tool-ui/student/SgpaCalculatorTool').then(mod => mod.SgpaCalculatorTool));
+const MarksPercentageCalculatorTool = dynamic(() => import('@/components/tool-ui/student/MarksPercentageCalculatorTool').then(mod => mod.MarksPercentageCalculatorTool));
+const AttendanceCalculatorTool = dynamic(() => import('@/components/tool-ui/student/AttendanceCalculatorTool').then(mod => mod.AttendanceCalculatorTool));
+const RequiredAttendanceCalculatorTool = dynamic(() => import('@/components/tool-ui/student/RequiredAttendanceCalculatorTool').then(mod => mod.RequiredAttendanceCalculatorTool));
+const StudyHoursCalculatorTool = dynamic(() => import('@/components/tool-ui/student/StudyHoursCalculatorTool').then(mod => mod.StudyHoursCalculatorTool));
+const PomodoroTimerTool = dynamic(() => import('@/components/tool-ui/student/PomodoroTimerTool').then(mod => mod.PomodoroTimerTool));
+const ExamCountdownTool = dynamic(() => import('@/components/tool-ui/student/ExamCountdownTool').then(mod => mod.ExamCountdownTool));
+const StudySessionTimerTool = dynamic(() => import('@/components/tool-ui/student/StudySessionTimerTool').then(mod => mod.StudySessionTimerTool));
+const GradeCalculatorTool = dynamic(() => import('@/components/tool-ui/student/GradeCalculatorTool').then(mod => mod.GradeCalculatorTool));
+const MarksRequiredCalculatorTool = dynamic(() => import('@/components/tool-ui/student/MarksRequiredCalculatorTool').then(mod => mod.MarksRequiredCalculatorTool));
+const WeightedGradeCalculatorTool = dynamic(() => import('@/components/tool-ui/student/WeightedGradeCalculatorTool').then(mod => mod.WeightedGradeCalculatorTool));
+const PdfPageCounterTool = dynamic(() => import('@/components/tool-ui/exam/PdfPageCounterTool').then(mod => mod.PdfPageCounterTool));
+
 export default async function ToolDetailPage({ params }: ToolPageProps) {
   const { slug } = await params;
 

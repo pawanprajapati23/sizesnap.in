@@ -1,39 +1,23 @@
-import React from 'react';
-import type { Metadata } from 'next';
 import { CategoryHubPage } from '@/components/templates/CategoryHubPage';
+import { ALL_TOOLS } from '@/data/tools';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Exam Photo & Signature Tools | Online Resizer | SizeSnap',
-  description:
-    'Free online tools to resize passport photos and signatures to exact dimensions and KB sizes required by Indian Government exams (SSC, UPSC, State PSCs).',
+  title: 'Free Exam Tools & Timers | SizeSnap',
+  description: 'Free online exam tools, including exam countdown timers, target grade calculators, and PDF utilities.',
   alternates: {
     canonical: 'https://sizesnap.in/exam-tools',
   },
 };
 
 export default function ExamToolsPage() {
-  const breadcrumbs = [
-    { name: 'Home', url: '/' },
-    { name: 'Tools', url: '/tools' },
-    { name: 'Exam Tools', url: '/exam-tools' },
-  ];
+  const tools = ALL_TOOLS.filter((t) => t.category === 'exam-tools');
 
   return (
     <CategoryHubPage
-      title="Exam Photo & Signature Tools"
-      description="Strict requirements for SSC, UPSC, and State PSC forms? Use these secure offline tools to resize and compress your passport photos and signatures exactly to spec."
-      breadcrumbs={breadcrumbs}
-      category="exam"
-      customSlugs={[
-        'passport-photo-maker',
-        'generate-signature',
-        'resize-image-pixel',
-        'compress-image-to-10kb',
-        'compress-image-to-20kb',
-        'compress-image-to-30kb',
-        'compress-image-to-40kb',
-        'compress-image-to-50kb',
-      ]}
+      title="Exam Tools"
+      description="Prepare for your exams effectively with our collection of online tools designed to track deadlines, calculate targets, and review study materials."
+      tools={tools}
     />
   );
 }

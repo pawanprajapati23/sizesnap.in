@@ -20,10 +20,9 @@ const rangeToMs = (range: TimeRange) => {
 };
 
 const AD_SLOTS = [
-  { id: '85ed548f0bf183422998f8047970a2a4', name: 'Desktop Top (728x90)' },
-  { id: 'ca152145b204618e473e042be63e3d3f', name: 'Sidebar 1 (300x250)' },
-  { id: '659f8c8577a79eebec41bc223cf58238', name: 'Sidebar 2 (300x250)' },
-  { id: 'ca0f9b6cdfb1c50e263ab26bb94c1f93', name: 'Mobile Sticky (320x50)' },
+  { id: '3bd154ece61c60859c2b8242ae85b927', name: 'Desktop Top (728x90)' },
+  { id: '08144582290ea67fb8c9eff4bb34d5f9', name: 'Sidebar (300x250)' }, // Used twice
+  { id: 'f509bd7d24a58ce7a176067713ca61df', name: 'Mobile Sticky (320x50)' },
 ];
 
 export default function AdsDashboardPage() {
@@ -78,9 +77,9 @@ export default function AdsDashboardPage() {
     try {
       await saveCustomAdConfig(customAdConfig);
       alert('Custom ad settings saved successfully!');
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert('Failed to save settings.');
+      alert('Failed to save settings: ' + error.message);
     } finally {
       setIsSaving(false);
     }
@@ -90,26 +89,30 @@ export default function AdsDashboardPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const storageRef = ref(storage, `customAds/${Date.now()}_${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    try {
+      const storageRef = ref(storage, `customAds/${Date.now()}_${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadProgress(progress);
-      },
-      (error) => {
-        console.error("Upload failed", error);
-        alert('Upload failed: ' + error.message);
-        setUploadProgress(0);
-      },
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        setCustomAdConfig(prev => ({ ...prev, imageUrl: downloadURL }));
-        setUploadProgress(0);
-      }
-    );
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress);
+        },
+        (error) => {
+          console.error("Upload failed", error);
+          alert('Upload failed. Note: Firebase Storage might not be enabled or rules are blocking it. You can manually paste an Image URL instead. Error: ' + error.message);
+          setUploadProgress(0);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setCustomAdConfig(prev => ({ ...prev, imageUrl: downloadURL }));
+          setUploadProgress(0);
+        }
+      );
+    } catch (err: any) {
+      alert('Storage error: ' + err.message + '. Please use a direct image URL.');
+    }
   };
 
   return (
@@ -218,7 +221,7 @@ export default function AdsDashboardPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Ad Image</label>
               <div className="flex items-start gap-4">
-                <div className="flex-1">
+                <div className="flex-1 space-y-4">
                   <div className="flex items-center justify-center w-full">
                     <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -239,10 +242,23 @@ export default function AdsDashboardPage() {
                     </label>
                   </div>
                   {uploadProgress > 0 && uploadProgress < 100 && (
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5">
                       <div className="bg-[#414FA8] h-2.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
                     </div>
                   )}
+
+                  {/* Manual Image URL Input */}
+                  <div>
+                    <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">Or Paste Image URL Directly</label>
+                    <input
+                      type="url"
+                      id="imageUrl"
+                      value={customAdConfig.imageUrl}
+                      onChange={(e) => setCustomAdConfig(prev => ({ ...prev, imageUrl: e.target.value }))}
+                      placeholder="https://example.com/my-ad.png"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#414FA8] focus:border-[#414FA8] sm:text-sm"
+                    />
+                  </div>
                 </div>
                 {customAdConfig.imageUrl && (
                   <div className="w-48 h-32 relative rounded-lg overflow-hidden border border-gray-200 shadow-sm flex-shrink-0 bg-gray-100 flex items-center justify-center">
@@ -251,11 +267,6 @@ export default function AdsDashboardPage() {
                   </div>
                 )}
               </div>
-              {customAdConfig.imageUrl && (
-                <div className="mt-2 text-xs text-gray-500 break-all">
-                  <strong>Current Image URL:</strong> {customAdConfig.imageUrl}
-                </div>
-              )}
             </div>
 
             {/* Target URL */}

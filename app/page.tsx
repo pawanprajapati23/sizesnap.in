@@ -6,7 +6,6 @@ import { Sidebar } from '@/components/Sidebar';
 import { Footer } from '@/components/Footer';
 import FAQSection from '@/components/FAQSection';
 
-import CustomAdBanner from '@/components/CustomAdBanner';
 
 export default function HomePage() {
   return (
@@ -20,9 +19,6 @@ export default function HomePage() {
           {/* Main content: ~70% width on desktop, 100% on mobile */}
           <div className="w-full lg:col-span-8 xl:col-span-9">
             <ToolDirectory />
-          
-            {/* Custom Ad Banner */}
-            <CustomAdBanner />
           </div>
 
           {/* Right sidebar: ~30% width on desktop, hidden on mobile */}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Search, X, Sparkles } from 'lucide-react';
 import { ALL_TOOLS, TOOL_CATEGORIES, type ToolItem } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
-import AdsterraAd from '@/components/AdsterraAd';
+
 
 export function ToolDirectory() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,9 +16,7 @@ export function ToolDirectory() {
     if (!query) return ALL_TOOLS;
     return ALL_TOOLS.filter((tool) =>
       tool.name.toLowerCase().includes(query) ||
-      tool.categoryTitle.toLowerCase().includes(query) ||
-      (tool.keywords || []).some(k => k.toLowerCase().includes(query)) ||
-      (tool.aliases || []).some(a => a.toLowerCase().includes(query))
+      tool.categoryTitle.toLowerCase().includes(query)
     );
   }, [searchQuery]);
 
@@ -123,10 +121,6 @@ export function ToolDirectory() {
         </div>
       </div>
 
-      {/* Global Desktop Ad Banner (728x90) - Placed below header card, above tools */}
-      <div className="hidden lg:flex w-full justify-center py-2">
-        <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} />
-      </div>
 
       {/* Search Results View */}
       {isSearching ? (
@@ -184,7 +178,7 @@ export function ToolDirectory() {
               {/* Category Header */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 mb-3.5">
                 <div className="flex items-center gap-2">
-                  {category.id === 'image' && (
+                  {category.id === 'A' && (
                     <Sparkles className="h-4 w-4 text-amber-500 shrink-0" />
                   )}
                   <h2

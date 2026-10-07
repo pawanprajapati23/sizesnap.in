@@ -36,14 +36,11 @@ export function SchemaMarkupGeneratorTool() {
     schema['@type'] = 'Article';
     if (name) schema.headline = name;
     if (description) schema.description = description;
-    if (image) schema.image = image;
-    if (author) schema.author = { '@type': 'Person', name: author };
     if (publisher) schema.publisher = { '@type': 'Organization', name: publisher };
   } else if (type === 'Product') {
     schema['@type'] = 'Product';
     if (name) schema.name = name;
     if (description) schema.description = description;
-    if (image) schema.image = image;
   }
 
   // Common UI states missing from generic

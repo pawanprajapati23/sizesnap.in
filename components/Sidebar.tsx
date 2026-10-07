@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { SIDEBAR_QUICK_LINKS } from '@/data/tools';
-
+import AdsterraAd from '@/components/AdsterraAd';
 
 export function Sidebar() {
   return (
@@ -32,6 +32,47 @@ export function Sidebar() {
         </div>
       </div>
 
+      {/* Reserved Advertisement Placeholder 1 */}
+      <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs flex flex-col items-center">
+        <div className="text-center mb-2 w-full">
+          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+            Advertisement
+          </span>
+        </div>
+        <AdsterraAd 
+          dataKey="08144582290ea67fb8c9eff4bb34d5f9" 
+          width={300} 
+          height={250} 
+        />
+      </div>
+
+      {/* Reserved Advertisement Placeholder 2 */}
+      <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs flex flex-col items-center">
+        <div className="text-center mb-2 w-full">
+          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+            Advertisement
+          </span>
+        </div>
+        <AdsterraAd 
+          dataKey="08144582290ea67fb8c9eff4bb34d5f9" 
+          width={300} 
+          height={250} 
+        />
+      </div>
+      
+      {/* Reserved Advertisement Placeholder 3 */}
+      <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs flex flex-col items-center">
+        <div className="text-center mb-2 w-full">
+          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+            Advertisement
+          </span>
+        </div>
+        <AdsterraAd 
+          dataKey="08144582290ea67fb8c9eff4bb34d5f9" 
+          width={300} 
+          height={250} 
+        />
+      </div>
 
       {/* Fast Utility Tip Box */}
       <div className="bg-[#EEF1FB] p-3.5 rounded-[4px] border border-[#9AA3C8]/40">

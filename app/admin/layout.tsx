@@ -85,13 +85,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
                   User Inbox
                 </Link>
-                <Link 
-                  href="/admin/ads" 
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/ads' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
-                  Ads
-                </Link>
                 <div className="pt-4 mt-4 border-t border-gray-200">
                   <button 
                     onClick={handleLogout}

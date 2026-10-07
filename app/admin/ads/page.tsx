@@ -90,28 +90,40 @@ export default function AdsDashboardPage() {
     if (!file) return;
 
     try {
-      const storageRef = ref(storage, `customAds/${Date.now()}_${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
-        },
-        (error) => {
-          console.error("Upload failed", error);
-          alert('Upload failed. Note: Firebase Storage might not be enabled or rules are blocking it. You can manually paste an Image URL instead. Error: ' + error.message);
-          setUploadProgress(0);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setCustomAdConfig(prev => ({ ...prev, imageUrl: downloadURL }));
-          setUploadProgress(0);
-        }
-      );
+      setUploadProgress(10);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new window.Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          setUploadProgress(50);
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          
+          // Max width for ad banner to save DB space
+          const MAX_WIDTH = 1200;
+          if (width > MAX_WIDTH) {
+            height = Math.round((height * MAX_WIDTH) / width);
+            width = MAX_WIDTH;
+          }
+          
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+          
+          // Compress to JPEG 80% quality
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+          setCustomAdConfig(prev => ({ ...prev, imageUrl: dataUrl }));
+          setUploadProgress(100);
+          setTimeout(() => setUploadProgress(0), 1000);
+        };
+      };
     } catch (err: any) {
-      alert('Storage error: ' + err.message + '. Please use a direct image URL.');
+      alert('Image processing error: ' + err.message);
+      setUploadProgress(0);
     }
   };
 

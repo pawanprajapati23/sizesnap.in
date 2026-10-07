@@ -163,6 +163,16 @@ export const trackAdImpression = async (slotId: string) => {
   }
 };
 
+export const trackAdClick = async (slotId: string) => {
+  try {
+    const timestamp = getCurrentHourTimestamp();
+    const adRef = ref(db, `adPerformance/${slotId}/clicks/${timestamp}`);
+    await set(adRef, increment(1));
+  } catch (err) {
+    console.error("Failed to track ad click:", err);
+  }
+};
+
 export const fetchAdPerformance = async () => {
   try {
     const snapshot = await get(ref(db, 'adPerformance'));

@@ -8,6 +8,7 @@ type AdStat = {
   slotId: string;
   name: string;
   impressions: number;
+  clicks: number;
 };
 
 const rangeToMs = (range: TimeRange) => {
@@ -20,6 +21,7 @@ const rangeToMs = (range: TimeRange) => {
 };
 
 const AD_SLOTS = [
+  { id: 'custom_homepage_ad', name: 'Custom Homepage Ad (Banner)' },
   { id: '3bd154ece61c60859c2b8242ae85b927', name: 'Desktop Top (728x90)' },
   { id: '08144582290ea67fb8c9eff4bb34d5f9', name: 'Sidebar (300x250)' }, // Used twice
   { id: 'f509bd7d24a58ce7a176067713ca61df', name: 'Mobile Sticky (320x50)' },
@@ -53,11 +55,13 @@ export default function AdsDashboardPage() {
 
         const newStats: AdStat[] = AD_SLOTS.map((slot) => {
           const impressionsMap = (adRecords[slot.id]?.impressions ?? {}) as unknown as Record<string, number>;
+          const clicksMap = (adRecords[slot.id]?.clicks ?? {}) as unknown as Record<string, number>;
 
           return {
             slotId: slot.id,
             name: slot.name,
             impressions: aggregateWithin(impressionsMap, ms),
+            clicks: aggregateWithin(clicksMap, ms),
           };
         }).sort((a, b) => b.impressions - a.impressions);
 
@@ -178,6 +182,8 @@ export default function AdsDashboardPage() {
                     <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Ad Placement</th>
                     <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Slot ID</th>
                     <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Impressions</th>
+                    <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Clicks</th>
+                    <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">CTR</th>
                     <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">% of Total</th>
                   </tr>
                 </thead>
@@ -186,6 +192,12 @@ export default function AdsDashboardPage() {
                     const percentage = totalImpressions > 0 
                       ? ((s.impressions / totalImpressions) * 100).toFixed(1) + '%' 
                       : '0%';
+                      
+                    const ctr = s.impressions > 0 
+                      ? ((s.clicks / s.impressions) * 100).toFixed(2) + '%' 
+                      : '0%';
+                    
+                    const isCustom = s.slotId === 'custom_homepage_ad';
                       
                     return (
                       <tr key={s.slotId} className="hover:bg-gray-50 transition-colors group">
@@ -197,6 +209,12 @@ export default function AdsDashboardPage() {
                         </td>
                         <td className="p-4 text-sm text-gray-600 font-semibold text-right whitespace-nowrap">
                           {s.impressions.toLocaleString()}
+                        </td>
+                        <td className="p-4 text-sm text-gray-600 font-semibold text-right whitespace-nowrap">
+                          {isCustom ? s.clicks.toLocaleString() : <span className="text-gray-400 text-xs font-normal">N/A</span>}
+                        </td>
+                        <td className="p-4 text-sm text-gray-600 font-semibold text-right whitespace-nowrap">
+                          {isCustom ? ctr : <span className="text-gray-400 text-xs font-normal">-</span>}
                         </td>
                         <td className="p-4 text-sm text-gray-500 text-right whitespace-nowrap">
                           <div className="flex items-center justify-end gap-2">

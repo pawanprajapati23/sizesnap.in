@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import AnalyticsTracker from '@/components/AnalyticsTracker';
-import FeedbackWidget from '@/components/FeedbackWidget';
+import dynamic from 'next/dynamic';
 import AdsterraAd from '@/components/AdsterraAd';
+
+const FeedbackWidget = dynamic(() => import('@/components/FeedbackWidget'), { ssr: false });
+const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'), { ssr: false });
 
 import './globals.css';
 
@@ -86,9 +88,9 @@ export default function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}

@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import { ExactKbPage } from '@/components/templates/ExactKbPage';
 
 export const metadata: Metadata = {
-  title: 'Compress Image to 20KB Online Free | SizeSnap',
+  title: 'Compress Image to 20KB Online Free for SSC UPSC | SizeSnap 2026',
   description:
-    'Reduce photo or signature size to exactly 20KB for SSC, UPSC, and PAN card applications. 100% secure, offline client-side compression without losing quality.',
+    'Compress photo to 20kb and reduce image size to 20kb online free. 100% private image compressor for SSC, UPSC, and government exams. Exact KB resizer without losing quality.',
   alternates: {
     canonical: 'https://sizesnap.in/tools/compress-image-to-20kb',
   },

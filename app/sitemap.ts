@@ -92,6 +92,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // High‑traffic tool routes – boosted priority
   const highPriorityTools: MetadataRoute.Sitemap = [
     {
+      url: `${BASE_URL}/tools/compress-image-to-20kb`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/tools/compress-image-to-50kb`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/tools/passport-photo-maker`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
       url: `${BASE_URL}/tools/compress-image`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -114,7 +132,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Unique tool routes (excluding the high‑priority ones)
   const uniqueSlugs = Array.from(new Set(ALL_TOOLS.map((t) => t.slug)));
   const filteredSlugs = uniqueSlugs.filter((slug) => !
-    ['compress-image', 'compress-pdf', 'resize-image-pixel'].includes(slug)
+    ['compress-image', 'compress-pdf', 'resize-image-pixel', 'compress-image-to-20kb', 'compress-image-to-50kb', 'passport-photo-maker'].includes(slug)
   );
   const toolRoutes: MetadataRoute.Sitemap = filteredSlugs.map((slug) => {
     const tool = ALL_TOOLS.find((t) => t.slug === slug);

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ExactKbPage } from '@/components/templates/ExactKbPage';
 
 export const metadata: Metadata = {
-  title: 'Compress Image to 50KB Online Free | SizeSnap',
+  title: 'Compress Image to 50KB Online Free for Govt Exams | SizeSnap 2026',
   description:
     'Reduce passport photo size to exactly 50KB for government job applications, admission forms, and university portals. Fast, secure, and 100% offline.',
   alternates: {

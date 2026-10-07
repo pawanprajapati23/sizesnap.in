@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
 import FeedbackWidget from '@/components/FeedbackWidget';
 import AdsterraAd from '@/components/AdsterraAd';
@@ -121,6 +122,7 @@ export default function RootLayout({
         </div>
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

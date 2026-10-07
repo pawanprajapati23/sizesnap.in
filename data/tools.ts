@@ -3658,123 +3658,7 @@ export const ALL_TOOLS: ToolItem[] = [
     "seoPriority": "Medium",
     "analyticsIdentifier": "study-hours-calculator",
     "popular": false
-  }
-];
-
-// Sidebar quick links specified by the user
-export interface SidebarLink {
-  title: string;
-  slug: string;
-}
-
-export const SIDEBAR_QUICK_LINKS: SidebarLink[] = [
-  { title: 'Increase Image Size in KB', slug: 'increase-image-size-in-kb' },
-  { title: 'PDF To Images', slug: 'pdf-to-images' },
-  { title: 'Remove Background', slug: 'remove-background' },
-  { title: 'SizeSnap PDF Tools', slug: 'compress-pdf' },
-  { title: 'Images To PDF', slug: 'image-to-pdf' },
-  { title: 'Signature Maker', slug: 'generate-signature' },
-  { title: 'Blur Background', slug: 'blur-background' },
-  { title: 'Increase Image Quality', slug: 'increase-image-quality' },
-];
-
-// Navigation menu configuration
-export interface NavDropdownItem {
-  name: string;
-  slug: string;
-  href?: string;
-}
-
-export interface NavMenu {
-  label: string;
-  href?: string;
-  items?: NavDropdownItem[];
-}
-
-export const NAV_MENUS: NavMenu[] = [
-  {
-    label: 'Image Tools',
-    items: [
-      { name: 'Passport Photo Maker', slug: 'passport-photo-maker' },
-      { name: 'Remove Background', slug: 'remove-background' },
-      { name: 'Blur Background', slug: 'blur-background' },
-      { name: 'Circle Crop', slug: 'circle-crop' },
-      { name: 'Watermark Images', slug: 'watermark-images' },
-      { name: 'AI Photo Enhancer', slug: 'ai-photo-enhancer' },
-      { name: 'Photo Collage Maker', slug: 'photo-collage-maker' },
-    ],
   },
-  {
-    label: 'Resize Image',
-    items: [
-      { name: 'Resize Image Pixel', slug: 'resize-image-pixel' },
-      { name: 'Resize in Centimeters', slug: 'resize-in-centimeters' },
-      { name: 'Resize in Millimeters', slug: 'resize-in-millimeters' },
-      { name: 'Resize in Inches', slug: 'resize-in-inches' },
-      { name: 'Resize (3.5cm x 4.5cm)', slug: 'resize-image-3-5cm-4-5cm' },
-      { name: 'SSC Photo Resize', slug: 'ssc-photo-resize' },
-      { name: 'PAN Card Photo', slug: 'pan-card' },
-    ],
-  },
-  {
-    label: 'Compress Image',
-    items: [
-      { name: 'Compress Image (Auto)', slug: 'compress-image' },
-      { name: 'Reduce Image Size in KB', slug: 'reduce-image-size-in-kb' },
-      { name: 'Compress to 20KB', slug: 'compress-image-to-20kb' },
-      { name: 'Compress to 50KB', slug: 'compress-image-to-50kb' },
-      { name: 'Compress to 100KB', slug: 'compress-image-to-100kb' },
-      { name: 'Increase Image Size in KB', slug: 'increase-image-size-in-kb' },
-    ],
-  },
-  {
-    label: 'PDF Tools',
-    items: [
-      { name: 'Image to PDF', slug: 'image-to-pdf' },
-      { name: 'PDF to Images', slug: 'pdf-to-images' },
-      { name: 'Compress PDF', slug: 'compress-pdf' },
-      { name: 'Merge PDFs', slug: 'merge-pdfs' },
-      { name: 'Split PDF', slug: 'split-pdf' },
-    ],
-  },
-  {
-    label: 'Convert Image',
-    items: [
-      { name: 'JPG to PNG', slug: 'jpg-to-png' },
-      { name: 'PNG to JPG', slug: 'png-to-jpg' },
-      { name: 'WebP to JPG', slug: 'webp-to-jpg' },
-      { name: 'JPG to WebP', slug: 'jpg-to-webp' },
-    ],
-  },
-  {
-    label: 'Govt Exams',
-    href: '/exams',
-    items: [
-      { name: 'All Govt Exam Presets', slug: 'exams-hub', href: '/exams' },
-      { name: 'SSC (CGL, CHSL, GD, MTS)', slug: 'ssc-photo-signature-resizer', href: '/exams/ssc-photo-signature-resizer' },
-      { name: 'UPSC (CSE, NDA, OTR)', slug: 'upsc-photo-signature-resizer', href: '/exams/upsc-photo-signature-resizer' },
-      { name: 'Delhi Police Constable', slug: 'delhi-police-photo-resizer', href: '/exams/delhi-police-photo-resizer' },
-      { name: 'UP Police Bharti (20-50KB)', slug: 'up-police-photo-resizer', href: '/exams/up-police-photo-resizer' },
-      { name: 'IBPS / SBI Bank 4-in-1', slug: 'ibps-bank-photo-signature-resizer', href: '/exams/ibps-bank-photo-signature-resizer' },
-    ],
-  },
-  {
-    label: 'Student Calculators',
-    href: '/student-calculators',
-    items: [
-      { name: 'Percentage Calculator', slug: 'percentage-calculator', href: '/percentage-calculator' },
-      { name: 'CGPA to Percentage', slug: 'cgpa-to-percentage', href: '/cgpa-to-percentage' },
-      { name: 'SGPA to Percentage', slug: 'sgpa-to-percentage', href: '/sgpa-to-percentage' },
-      { name: 'Attendance Calculator', slug: 'attendance-calculator', href: '/attendance-calculator' },
-      { name: 'Study Hours Calculator', slug: 'study-hours-calculator', href: '/study-hours-calculator' },
-      { name: 'View All Calculators', slug: 'all-calculators', href: '/student-calculators' },
-    ],
-  },
-  {
-    label: 'All Tools',
-    href: '/#directory',
-  },
-
   // ==========================================
   // PHASE 7: STUDENT & EXAM TOOLS
   // ==========================================
@@ -3988,6 +3872,122 @@ export const NAV_MENUS: NavMenu[] = [
     seoPriority: 'Medium',
     analyticsIdentifier: 'pdf_page_counter'
   },
+];
+
+// Sidebar quick links specified by the user
+export interface SidebarLink {
+  title: string;
+  slug: string;
+}
+
+export const SIDEBAR_QUICK_LINKS: SidebarLink[] = [
+  { title: 'Increase Image Size in KB', slug: 'increase-image-size-in-kb' },
+  { title: 'PDF To Images', slug: 'pdf-to-images' },
+  { title: 'Remove Background', slug: 'remove-background' },
+  { title: 'SizeSnap PDF Tools', slug: 'compress-pdf' },
+  { title: 'Images To PDF', slug: 'image-to-pdf' },
+  { title: 'Signature Maker', slug: 'generate-signature' },
+  { title: 'Blur Background', slug: 'blur-background' },
+  { title: 'Increase Image Quality', slug: 'increase-image-quality' },
+];
+
+// Navigation menu configuration
+export interface NavDropdownItem {
+  name: string;
+  slug: string;
+  href?: string;
+}
+
+export interface NavMenu {
+  label: string;
+  href?: string;
+  items?: NavDropdownItem[];
+}
+
+export const NAV_MENUS: NavMenu[] = [
+  {
+    label: 'Image Tools',
+    items: [
+      { name: 'Passport Photo Maker', slug: 'passport-photo-maker' },
+      { name: 'Remove Background', slug: 'remove-background' },
+      { name: 'Blur Background', slug: 'blur-background' },
+      { name: 'Circle Crop', slug: 'circle-crop' },
+      { name: 'Watermark Images', slug: 'watermark-images' },
+      { name: 'AI Photo Enhancer', slug: 'ai-photo-enhancer' },
+      { name: 'Photo Collage Maker', slug: 'photo-collage-maker' },
+    ],
+  },
+  {
+    label: 'Resize Image',
+    items: [
+      { name: 'Resize Image Pixel', slug: 'resize-image-pixel' },
+      { name: 'Resize in Centimeters', slug: 'resize-in-centimeters' },
+      { name: 'Resize in Millimeters', slug: 'resize-in-millimeters' },
+      { name: 'Resize in Inches', slug: 'resize-in-inches' },
+      { name: 'Resize (3.5cm x 4.5cm)', slug: 'resize-image-3-5cm-4-5cm' },
+      { name: 'SSC Photo Resize', slug: 'ssc-photo-resize' },
+      { name: 'PAN Card Photo', slug: 'pan-card' },
+    ],
+  },
+  {
+    label: 'Compress Image',
+    items: [
+      { name: 'Compress Image (Auto)', slug: 'compress-image' },
+      { name: 'Reduce Image Size in KB', slug: 'reduce-image-size-in-kb' },
+      { name: 'Compress to 20KB', slug: 'compress-image-to-20kb' },
+      { name: 'Compress to 50KB', slug: 'compress-image-to-50kb' },
+      { name: 'Compress to 100KB', slug: 'compress-image-to-100kb' },
+      { name: 'Increase Image Size in KB', slug: 'increase-image-size-in-kb' },
+    ],
+  },
+  {
+    label: 'PDF Tools',
+    items: [
+      { name: 'Image to PDF', slug: 'image-to-pdf' },
+      { name: 'PDF to Images', slug: 'pdf-to-images' },
+      { name: 'Compress PDF', slug: 'compress-pdf' },
+      { name: 'Merge PDFs', slug: 'merge-pdfs' },
+      { name: 'Split PDF', slug: 'split-pdf' },
+    ],
+  },
+  {
+    label: 'Convert Image',
+    items: [
+      { name: 'JPG to PNG', slug: 'jpg-to-png' },
+      { name: 'PNG to JPG', slug: 'png-to-jpg' },
+      { name: 'WebP to JPG', slug: 'webp-to-jpg' },
+      { name: 'JPG to WebP', slug: 'jpg-to-webp' },
+    ],
+  },
+  {
+    label: 'Govt Exams',
+    href: '/exams',
+    items: [
+      { name: 'All Govt Exam Presets', slug: 'exams-hub', href: '/exams' },
+      { name: 'SSC (CGL, CHSL, GD, MTS)', slug: 'ssc-photo-signature-resizer', href: '/exams/ssc-photo-signature-resizer' },
+      { name: 'UPSC (CSE, NDA, OTR)', slug: 'upsc-photo-signature-resizer', href: '/exams/upsc-photo-signature-resizer' },
+      { name: 'Delhi Police Constable', slug: 'delhi-police-photo-resizer', href: '/exams/delhi-police-photo-resizer' },
+      { name: 'UP Police Bharti (20-50KB)', slug: 'up-police-photo-resizer', href: '/exams/up-police-photo-resizer' },
+      { name: 'IBPS / SBI Bank 4-in-1', slug: 'ibps-bank-photo-signature-resizer', href: '/exams/ibps-bank-photo-signature-resizer' },
+    ],
+  },
+  {
+    label: 'Student Calculators',
+    href: '/student-calculators',
+    items: [
+      { name: 'Percentage Calculator', slug: 'percentage-calculator', href: '/percentage-calculator' },
+      { name: 'CGPA to Percentage', slug: 'cgpa-to-percentage', href: '/cgpa-to-percentage' },
+      { name: 'SGPA to Percentage', slug: 'sgpa-to-percentage', href: '/sgpa-to-percentage' },
+      { name: 'Attendance Calculator', slug: 'attendance-calculator', href: '/attendance-calculator' },
+      { name: 'Study Hours Calculator', slug: 'study-hours-calculator', href: '/study-hours-calculator' },
+      { name: 'View All Calculators', slug: 'all-calculators', href: '/student-calculators' },
+    ],
+  },
+  {
+    label: 'All Tools',
+    href: '/#directory',
+  },
+
 ];
 
 export function getToolBySlug(slug: string): ToolItem | undefined {

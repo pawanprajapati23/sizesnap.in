@@ -5,9 +5,9 @@ import { CalculatorInput } from '../calculator/CalculatorInput';
 import { CalculatorResult } from '../calculator/CalculatorResult';
 
 export function MarksRequiredCalculatorTool() {
-  const [currentGrade, setCurrentGrade] = useState('');
-  const [targetGrade, setTargetGrade] = useState('');
-  const [finalWeight, setFinalWeight] = useState('');
+  const [currentGrade, setCurrentGrade] = useState<number | ''>('');
+  const [targetGrade, setTargetGrade] = useState<number | ''>('');
+  const [finalWeight, setFinalWeight] = useState<number | ''>('');
   const [result, setResult] = useState<number | null>(null);
   const [error, setError] = useState('');
 
@@ -15,9 +15,9 @@ export function MarksRequiredCalculatorTool() {
     setError('');
     setResult(null);
 
-    const current = parseFloat(currentGrade);
-    const target = parseFloat(targetGrade);
-    const weight = parseFloat(finalWeight);
+    const current = Number(currentGrade);
+    const target = Number(targetGrade);
+    const weight = Number(finalWeight);
 
     if (isNaN(current) || isNaN(target) || isNaN(weight)) {
       setError('Please enter valid numbers in all fields.');
@@ -74,7 +74,7 @@ export function MarksRequiredCalculatorTool() {
             <CalculatorResult
               label="Marks Required on Final Exam"
               value={`${result.toFixed(2)}%`}
-              subtext={result > 100 ? "Note: This is over 100%, meaning it might be impossible unless there is extra credit." : result <= 0 ? "You've already secured your target grade!" : "You can do it! Focus on your study plan."}
+              subValue={result > 100 ? "Note: This is over 100%, meaning it might be impossible unless there is extra credit." : result <= 0 ? "You've already secured your target grade!" : "You can do it! Focus on your study plan."}
             />
           </div>
         )}

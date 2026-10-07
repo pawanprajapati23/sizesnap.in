@@ -1,12 +1,23 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/api/', '/test/'],
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+      },
+    ],
     sitemap: 'https://sizesnap.in/sitemap.xml',
+    host: 'https://sizesnap.in',
   };
 }

@@ -1,7 +1,10 @@
+node_modules/
+.next/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+tsconfig.tsbuildinfo
 node_modules
 .next
-.env*
-.DS_Store
-coverage
-build
-dist

@@ -67,11 +67,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Image Resizer</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb?target=20" className="hover:text-[#6366F1] transition-colors">Resize to 20 KB</Link></li>
-              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb?target=50" className="hover:text-[#6366F1] transition-colors">Resize to 50 KB</Link></li>
-              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb?target=100" className="hover:text-[#6366F1] transition-colors">Resize to 100 KB</Link></li>
-              <li><Link prefetch={false} href="/tools/compress-image" className="hover:text-[#6366F1] transition-colors">Advanced Compressor</Link></li>
-              <li><Link prefetch={false} href="/tools/crop-image" className="hover:text-[#6366F1] transition-colors">Smart Cropper</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-image-to-20kb" className="hover:text-[#6366F1] transition-colors">Compress image to 20kb</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-image-to-50kb" className="hover:text-[#6366F1] transition-colors">Compress image to 50kb</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-image-to-100kb" className="hover:text-[#6366F1] transition-colors">Compress image to 100kb</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-image" className="hover:text-[#6366F1] transition-colors">Free image compressor</Link></li>
+              <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb" className="hover:text-[#6366F1] transition-colors">Reduce image size in kb</Link></li>
             </ul>
           </div>
 
@@ -79,9 +79,9 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Top Utilities</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><Link prefetch={false} href="/tools/passport-photo-maker" className="hover:text-[#6366F1] transition-colors">Passport Photo Maker</Link></li>
-              <li><Link prefetch={false} href="/tools/compress-pdf" className="hover:text-[#6366F1] transition-colors">PDF Compressor</Link></li>
-              <li><Link prefetch={false} href="/student-calculators" className="hover:text-[#6366F1] transition-colors">Student Calculators</Link></li>
+              <li><Link prefetch={false} href="/tools/passport-photo-maker" className="hover:text-[#6366F1] transition-colors">Passport photo maker online</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-pdf" className="hover:text-[#6366F1] transition-colors">Compress pdf to 100kb online free</Link></li>
+              <li><Link prefetch={false} href="/exams" className="hover:text-[#6366F1] transition-colors">Photo size for SSC & UPSC</Link></li>
               <li><Link prefetch={false} href="/tools/image-to-pdf" className="hover:text-[#6366F1] transition-colors">JPG to PDF</Link></li>
               <li><Link prefetch={false} href="/#directory" className="hover:text-[#6366F1] transition-colors font-medium">All Tools &rarr;</Link></li>
             </ul>

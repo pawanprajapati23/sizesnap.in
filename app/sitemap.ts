@@ -38,14 +38,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Tools routes
   ALL_TOOLS.forEach((tool) => {
-    if (tool.status === 'published' || tool.status === 'production') {
+    if (tool.status === 'production') {
       let priority = 0.6;
       if (tool.seoPriority === 'High') priority = 0.8;
       if (tool.seoPriority === 'Medium') priority = 0.6;
       if (tool.seoPriority === 'Low') priority = 0.4;
 
+      // Make absolutely sure we pull from slug dynamically and avoid tool.route type issues that code review warned about
       sitemapData.push({
-        url: `${baseUrl}${`/tools/${tool.slug}`}`,
+        url: `${baseUrl}/tools/${tool.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: priority,

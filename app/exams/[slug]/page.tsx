@@ -17,6 +17,7 @@ import {
   Award,
   ArrowRight,
 } from 'lucide-react';
+import { HindiExamGuide } from '@/components/HindiExamGuides';
 
 interface ExamPageProps {
   params: Promise<{
@@ -186,6 +187,9 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
                 </div>
               </div>
             </div>
+
+            {/* Custom Hindi/Hinglish Deep Content Guides */}
+            <HindiExamGuide slug={slug} />
 
             {/* FAQs */}
             <div className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4">

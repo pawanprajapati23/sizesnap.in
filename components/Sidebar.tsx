@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { SIDEBAR_QUICK_LINKS } from '@/data/tools';
+import AdsterraAd from '@/components/AdsterraAd';
 
 export function Sidebar() {
   return (
@@ -31,23 +32,32 @@ export function Sidebar() {
         </div>
       </div>
 
-      {/* Reserved Advertisement Placeholder */}
-      <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs">
-        <div className="text-center mb-2">
+      {/* Reserved Advertisement Placeholder 1 */}
+      <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs flex flex-col items-center">
+        <div className="text-center mb-2 w-full">
           <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
             Advertisement
           </span>
         </div>
-        <div
-          className="w-full min-h-[280px] bg-[#F9FAFB] border border-dashed border-gray-300 rounded-[4px] flex flex-col items-center justify-center p-4 text-center select-none"
-          aria-label="Reserved Advertisement Slot"
-        >
-          <div className="w-10 h-10 rounded-full bg-gray-200/70 flex items-center justify-center text-gray-400 mb-2">
-            <span className="text-xs font-mono">AD</span>
-          </div>
-          <p className="text-xs text-gray-400 font-medium">Responsive Ad Space</p>
-          <p className="text-[11px] text-gray-400 mt-1">300 × 250 / 300 × 600 Slot</p>
+        <AdsterraAd
+          dataKey="08144582290ea67fb8c9eff4bb34d5f9"
+          width={300}
+          height={250}
+        />
+      </div>
+
+      {/* Reserved Advertisement Placeholder 2 */}
+      <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs flex flex-col items-center">
+        <div className="text-center mb-2 w-full">
+          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+            Advertisement
+          </span>
         </div>
+        <AdsterraAd
+          dataKey="08144582290ea67fb8c9eff4bb34d5f9"
+          width={300}
+          height={250}
+        />
       </div>
 
       {/* Fast Utility Tip Box */}

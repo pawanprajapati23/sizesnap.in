@@ -10,14 +10,14 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Passport Photo Maker Online - Free 3.5x4.5cm & 2x2 Inch | SizeSnap',
+  title: 'Passport Photo Maker Online (3.5 x 4.5 cm) for Govt Exams | SizeSnap 2026',
   description:
     'Free online passport photo maker. Crop and resize photos to official 3.5×4.5 cm, 2×2 inches (US Visa), and stamp sizes with custom DPI and printable A4 sheets.',
   alternates: {
     canonical: 'https://sizesnap.in/tools/passport-photo-maker',
   },
   openGraph: {
-    title: 'Passport Photo Maker Online - Free 3.5x4.5cm & 2x2 Inch | SizeSnap',
+    title: 'Passport Photo Maker Online (3.5 x 4.5 cm) for Govt Exams | SizeSnap 2026',
     description:
       'Create passport and visa photos online. Export single copies or full A4 printable photo sheets for free.',
     url: 'https://sizesnap.in/tools/passport-photo-maker',

@@ -236,23 +236,6 @@ const MarksRequiredCalculatorTool = dynamic(() => import('@/components/tool-ui/s
 const WeightedGradeCalculatorTool = dynamic(() => import('@/components/tool-ui/student/WeightedGradeCalculatorTool').then(mod => mod.WeightedGradeCalculatorTool));
 const PdfPageCounterTool = dynamic(() => import('@/components/tool-ui/exam/PdfPageCounterTool').then(mod => mod.PdfPageCounterTool));
 
-
-// Phase 8 Imports
-const InstagramResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.InstagramResizerTool));
-const YouTubeResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.YouTubeResizerTool));
-const LinkedInResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.LinkedInResizerTool));
-const FacebookResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.FacebookResizerTool));
-const WhatsAppResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.WhatsAppResizerTool));
-const TwitterResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.TwitterResizerTool));
-const PinterestResizerTool = dynamic(() => import('@/components/tool-ui/social/PlatformResizerWrappers').then(mod => mod.PinterestResizerTool));
-
-const PdfLabelCropTool = dynamic(() => import('@/components/tool-ui/ecommerce/PdfLabelCropTool').then(mod => mod.PdfLabelCropTool));
-const ProductImageComplianceTool = dynamic(() => import('@/components/tool-ui/ecommerce/ProductImageComplianceTool').then(mod => mod.ProductImageComplianceTool));
-const ProfitCalculatorTool = dynamic(() => import('@/components/tool-ui/ecommerce/ProfitCalculatorTool').then(mod => mod.ProfitCalculatorTool));
-const SkuGeneratorTool = dynamic(() => import('@/components/tool-ui/ecommerce/SkuGeneratorTool').then(mod => mod.SkuGeneratorTool));
-const BarcodeGeneratorTool = dynamic(() => import('@/components/tool-ui/ecommerce/BarcodeGeneratorTool').then(mod => mod.BarcodeGeneratorTool));
-const PackingSlipGeneratorTool = dynamic(() => import('@/components/tool-ui/ecommerce/PackingSlipGeneratorTool').then(mod => mod.PackingSlipGeneratorTool));
-
 export default async function ToolDetailPage({ params }: ToolPageProps) {
   const { slug } = await params;
 

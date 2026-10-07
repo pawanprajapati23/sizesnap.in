@@ -9,11 +9,29 @@ interface AdsterraAdProps {
 }
 
 export default function AdsterraAd({ dataKey, width, height, className = '' }: AdsterraAdProps) {
-  const [mounted, setMounted] = useState(false);
+  const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
+    // Only set up observer on client
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          // Once loaded, we don't need to observe anymore
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Start loading 200px before it comes into view
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const srcDoc = `
@@ -47,28 +65,25 @@ export default function AdsterraAd({ dataKey, width, height, className = '' }: A
 </html>
   `;
 
-  if (!mounted) {
-    // Render a placeholder while SSR to avoid hydration mismatch
-    return (
-      <div 
-        className={`bg-gray-50 flex flex-col items-center justify-center border border-gray-200 rounded-sm ${className}`}
-        style={{ width: width, height: height }}
-      >
-        <span className="text-xs text-gray-400">Advertisement</span>
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} className={`flex justify-center items-center overflow-hidden ${className}`}>
-      <iframe
-        srcDoc={srcDoc}
-        width={width}
-        height={height}
-        style={{ border: 'none', overflow: 'hidden' }}
-        scrolling="no"
-        title="Advertisement"
-      />
+    <div 
+      ref={containerRef} 
+      className={`flex justify-center items-center overflow-hidden bg-gray-50 border border-gray-100 rounded-sm ${className}`}
+      style={{ width: width, height: height }}
+    >
+      {!inView ? (
+        <span className="text-xs text-gray-400">Advertisement</span>
+      ) : (
+        <iframe
+          srcDoc={srcDoc}
+          width={width}
+          height={height}
+          style={{ border: 'none', overflow: 'hidden' }}
+          scrolling="no"
+          title="Advertisement"
+          loading="lazy"
+        />
+      )}
     </div>
   );
 }

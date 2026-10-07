@@ -37,6 +37,9 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || '', // e.g., 'your-verification-code'
   },
+  other: {
+    monetag: '3cf94a87bf9b08669987d91757430656',
+  },
 };
 
 export default function RootLayout({

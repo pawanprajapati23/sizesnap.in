@@ -12,10 +12,10 @@ async function getAdsterraStats() {
 
   try {
     // Add date range for the last 7 days as default query
-    const endDate = new Date().toISOString().split('T')[0];
+    const finishDate = new Date().toISOString().split('T')[0];
     const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     
-    const url = `https://api3.adsterratools.com/publisher/stats.json?start_date=${startDate}&end_date=${endDate}`;
+    const url = `https://api3.adsterratools.com/publisher/stats.json?start_date=${startDate}&finish_date=${finishDate}`;
     
     const res = await fetch(url, {
       headers: {
@@ -27,7 +27,12 @@ async function getAdsterraStats() {
     });
 
     if (!res.ok) {
-      return { error: `Failed to fetch from Adsterra API: ${res.status} ${res.statusText}` };
+      let errorMsg = `${res.status} ${res.statusText}`;
+      try {
+        const errData = await res.json();
+        errorMsg += ` - ${JSON.stringify(errData)}`;
+      } catch(e) {}
+      return { error: `Failed to fetch from Adsterra API: ${errorMsg}` };
     }
 
     const data = await res.json();

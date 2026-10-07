@@ -43,7 +43,7 @@ function formatBytes(bytes: number, decimals = 2) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 }
 
-export function CompressPdfTool() {
+export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: number }) {
   const [pdfMeta, setPdfMeta] = useState<PdfMeta | null>(null);
   const [isLoadingPdf, setIsLoadingPdf] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
@@ -69,7 +69,7 @@ export function CompressPdfTool() {
 
 
   // Settings
-  const [targetKB, setTargetKB] = useState<number | ''>(500);
+  const [targetKB, setTargetKB] = useState<number | ''>(initialTargetKB);
 
   // Progress & Results
   const [progressPercent, setProgressPercent] = useState(0);

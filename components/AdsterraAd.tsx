@@ -50,7 +50,7 @@ export default function AdsterraAd({ dataKey, width, height, className = '' }: A
     // Render a placeholder while SSR to avoid hydration mismatch
     return (
       <div 
-        className={\`bg-gray-50 flex flex-col items-center justify-center border border-gray-200 rounded-sm \${className}\`}
+        className={`bg-gray-50 flex flex-col items-center justify-center border border-gray-200 rounded-sm ${className}`}
         style={{ width: width, height: height }}
       >
         <span className="text-xs text-gray-400">Advertisement</span>
@@ -59,7 +59,7 @@ export default function AdsterraAd({ dataKey, width, height, className = '' }: A
   }
 
   return (
-    <div className={\`flex justify-center items-center overflow-hidden \${className}\`}>
+    <div className={`flex justify-center items-center overflow-hidden ${className}`}>
       <iframe
         srcDoc={srcDoc}
         width={width}

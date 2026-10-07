@@ -46,11 +46,6 @@ export function ToolDirectory() {
           Free online tools to compress, resize, convert and edit images and PDF files.
         </p>
 
-        {/* Global Desktop Ad Banner (728x90) */}
-        <div className="hidden lg:flex w-full justify-center py-2 mb-4">
-          <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} />
-        </div>
-
         {/* Search Bar */}
         <div className="relative w-full max-w-2xl">
           <label htmlFor="tool-search" className="sr-only">
@@ -124,6 +119,11 @@ export function ToolDirectory() {
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Global Desktop Ad Banner (728x90) - Placed below header card, above tools */}
+      <div className="hidden lg:flex w-full justify-center py-2">
+        <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} />
       </div>
 
       {/* Search Results View */}

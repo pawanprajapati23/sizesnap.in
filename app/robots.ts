@@ -6,15 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/'],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: '/',
+        disallow: ['/admin/', '/api/', '/*?*'],
       },
     ],
     sitemap: 'https://sizesnap.in/sitemap.xml',

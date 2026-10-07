@@ -212,7 +212,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
   }
 
   return {
-    title: `${tool.name} - Free Online Tool | SizeSnap`,
+    title: `${tool.name} Online Free | SizeSnap`,
     description: tool.shortDescription || `Use SizeSnap ${tool.name} online for free. Fast, high-quality, privacy-focused image and document processing without watermark.`,
     alternates: {
       canonical: `https://sizesnap.in/tools/${tool.slug}`,
@@ -280,9 +280,40 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     ],
   };
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Is the ${tool.name} tool free to use?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, the ${tool.name} tool provided by SizeSnap is 100% free to use. There are no hidden fees, premium subscriptions, or watermarks.`
+        }
+      },
+      tool.processingType === 'client' ? {
+        '@type': 'Question',
+        name: `Are my files safe when using ${tool.name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Absolutely. SizeSnap prioritizes your privacy. All processing for the ${tool.name} tool happens directly in your browser. Your files are never uploaded to our servers.`
+        }
+      } : {
+        '@type': 'Question',
+        name: `Are my files safe when using ${tool.name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `SizeSnap takes your privacy seriously. Your files are processed securely and are never shared or stored longer than necessary.`
+        }
+      }
+    ]
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
 
@@ -463,6 +494,21 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </div>
           </div>
         )}
+
+        {/* FAQ Section */}
+        <div className="bg-white p-5 mt-6 rounded-[4px] border border-gray-200 shadow-xs">
+          <h2 className="text-sm font-bold text-gray-800 mb-3 border-b border-gray-100 pb-2">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {faqSchema.mainEntity.map((faq, idx) => (
+              <div key={idx} className="border-b border-gray-50 pb-3 last:border-b-0 last:pb-0">
+                <h3 className="text-xs font-bold text-gray-800 mb-1">{faq.name}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
 
       <Footer />

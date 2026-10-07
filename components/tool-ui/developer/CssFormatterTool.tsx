@@ -1,0 +1,70 @@
+'use client';
+
+import React, { useState } from 'react';
+import { CodeEditor } from './CodeEditor';
+import { CodeOutput } from './CodeOutput';
+import { Settings2 } from 'lucide-react';
+
+export function CssFormatterTool() {
+  const [input, setInput] = useState('');
+  const [indent, setIndent] = useState(2);
+
+  let output = '';
+  let error = null;
+
+  if (input.trim()) {
+    try {
+      // Basic CSS formatting without AST parser
+      let formatted = input;
+      // Remove all line breaks and multiple spaces
+      formatted = formatted.replace(/\n/g, '').replace(/\s{2,}/g, ' ');
+      // Format braces and semicolons
+      formatted = formatted.replace(/\{/g, ' {\n');
+      formatted = formatted.replace(/\}/g, '\n}\n');
+      formatted = formatted.replace(/;/g, ';\n');
+
+      const lines = formatted.split('\n');
+      let pad = 0;
+      const res = [];
+
+      for(let line of lines) {
+        line = line.trim();
+        if (!line) continue;
+
+        if (line.includes('}')) pad = Math.max(0, pad - 1);
+        res.push(' '.repeat(pad * indent) + line);
+        if (line.includes('{')) pad++;
+      }
+
+      output = res.join('\n');
+    } catch (e: any) {
+      error = 'Error formatting CSS.';
+    }
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center gap-4 bg-white p-4 rounded border border-gray-200 shadow-sm">
+        <div className="flex items-center gap-2">
+          <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+            <Settings2 className="w-3.5 h-3.5" /> Indentation
+          </label>
+          <select
+            value={indent}
+            onChange={(e) => setIndent(Number(e.target.value))}
+            className="bg-gray-50 border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-[#414FA8]"
+          >
+            <option value={2}>2 Spaces</option>
+            <option value={4}>4 Spaces</option>
+            <option value={8}>8 Spaces</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <CodeEditor value={input} onChange={setInput} placeholder="Paste minified CSS here..." label="Raw CSS" />
+        <CodeOutput value={output} error={error} label="Formatted CSS" filename="formatted.css" />
+      </div>
+    </div>
+  );
+}

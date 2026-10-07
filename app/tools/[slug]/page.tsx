@@ -6,6 +6,96 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ALL_TOOLS, getToolBySlug, type ToolItem } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
+const TextFormatterTool = dynamic(() => import('@/components/tool-ui/writing/TextFormatterTool').then(mod => mod.TextFormatterTool));
+const ParagraphFormatterTool = dynamic(() => import('@/components/tool-ui/writing/ParagraphFormatterTool').then(mod => mod.ParagraphFormatterTool));
+const RemoveLineBreaksTool = dynamic(() => import('@/components/tool-ui/writing/RemoveLineBreaksTool').then(mod => mod.RemoveLineBreaksTool));
+const RemoveExtraSpacesTool = dynamic(() => import('@/components/tool-ui/writing/RemoveExtraSpacesTool').then(mod => mod.RemoveExtraSpacesTool));
+const ListFormatterTool = dynamic(() => import('@/components/tool-ui/writing/ListFormatterTool').then(mod => mod.ListFormatterTool));
+const BulletPointGeneratorTool = dynamic(() => import('@/components/tool-ui/writing/BulletPointGeneratorTool').then(mod => mod.BulletPointGeneratorTool));
+const NumberedListGeneratorTool = dynamic(() => import('@/components/tool-ui/writing/NumberedListGeneratorTool').then(mod => mod.NumberedListGeneratorTool));
+const LoremIpsumGeneratorTool = dynamic(() => import('@/components/tool-ui/writing/LoremIpsumGeneratorTool').then(mod => mod.LoremIpsumGeneratorTool));
+const RandomParagraphGeneratorTool = dynamic(() => import('@/components/tool-ui/writing/RandomParagraphGeneratorTool').then(mod => mod.RandomParagraphGeneratorTool));
+const EmailTextFormatterTool = dynamic(() => import('@/components/tool-ui/writing/EmailTextFormatterTool').then(mod => mod.EmailTextFormatterTool));
+const JsonFormatterTool = dynamic(() => import('@/components/tool-ui/developer/JsonFormatterTool').then(mod => mod.JsonFormatterTool));
+const JsonValidatorTool = dynamic(() => import('@/components/tool-ui/developer/JsonValidatorTool').then(mod => mod.JsonValidatorTool));
+const JsonMinifierTool = dynamic(() => import('@/components/tool-ui/developer/JsonMinifierTool').then(mod => mod.JsonMinifierTool));
+const JsonViewerTool = dynamic(() => import('@/components/tool-ui/developer/JsonViewerTool').then(mod => mod.JsonViewerTool));
+const JsonToCsvTool = dynamic(() => import('@/components/tool-ui/developer/JsonToCsvTool').then(mod => mod.JsonToCsvTool));
+const CsvToJsonTool = dynamic(() => import('@/components/tool-ui/developer/CsvToJsonTool').then(mod => mod.CsvToJsonTool));
+const Base64EncoderTool = dynamic(() => import('@/components/tool-ui/developer/Base64EncoderTool').then(mod => mod.Base64EncoderTool));
+const Base64DecoderTool = dynamic(() => import('@/components/tool-ui/developer/Base64DecoderTool').then(mod => mod.Base64DecoderTool));
+const UrlEncoderTool = dynamic(() => import('@/components/tool-ui/developer/UrlEncoderTool').then(mod => mod.UrlEncoderTool));
+const UrlDecoderTool = dynamic(() => import('@/components/tool-ui/developer/UrlDecoderTool').then(mod => mod.UrlDecoderTool));
+const UuidGeneratorTool = dynamic(() => import('@/components/tool-ui/developer/UuidGeneratorTool').then(mod => mod.UuidGeneratorTool));
+const UnixTimestampConverterTool = dynamic(() => import('@/components/tool-ui/developer/UnixTimestampConverterTool').then(mod => mod.UnixTimestampConverterTool));
+const JwtDecoderTool = dynamic(() => import('@/components/tool-ui/developer/JwtDecoderTool').then(mod => mod.JwtDecoderTool));
+const RegexTesterTool = dynamic(() => import('@/components/tool-ui/developer/RegexTesterTool').then(mod => mod.RegexTesterTool));
+const HashGeneratorTool = dynamic(() => import('@/components/tool-ui/developer/HashGeneratorTool').then(mod => mod.HashGeneratorTool));
+const HtmlFormatterTool = dynamic(() => import('@/components/tool-ui/developer/HtmlFormatterTool').then(mod => mod.HtmlFormatterTool));
+const CssFormatterTool = dynamic(() => import('@/components/tool-ui/developer/CssFormatterTool').then(mod => mod.CssFormatterTool));
+const JavascriptFormatterTool = dynamic(() => import('@/components/tool-ui/developer/JavascriptFormatterTool').then(mod => mod.JavascriptFormatterTool));
+const SqlFormatterTool = dynamic(() => import('@/components/tool-ui/developer/SqlFormatterTool').then(mod => mod.SqlFormatterTool));
+const XmlFormatterTool = dynamic(() => import('@/components/tool-ui/developer/XmlFormatterTool').then(mod => mod.XmlFormatterTool));
+
+const PercentageCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/PercentageCalculatorTool').then(mod => mod.PercentageCalculatorTool));
+const PercentageIncreaseCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/PercentageIncreaseCalculatorTool').then(mod => mod.PercentageIncreaseCalculatorTool));
+const PercentageDifferenceCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/PercentageDifferenceCalculatorTool').then(mod => mod.PercentageDifferenceCalculatorTool));
+const AgeCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/AgeCalculatorTool').then(mod => mod.AgeCalculatorTool));
+const DateDifferenceCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/DateDifferenceCalculatorTool').then(mod => mod.DateDifferenceCalculatorTool));
+const TimeDurationCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/TimeDurationCalculatorTool').then(mod => mod.TimeDurationCalculatorTool));
+const UnitConverterTool = dynamic(() => import('@/components/tool-ui/calculator/UnitConverterTool').then(mod => mod.UnitConverterTool));
+const DiscountCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/DiscountCalculatorTool').then(mod => mod.DiscountCalculatorTool));
+const ProfitMarginCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/ProfitMarginCalculatorTool').then(mod => mod.ProfitMarginCalculatorTool));
+const MarkupCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/MarkupCalculatorTool').then(mod => mod.MarkupCalculatorTool));
+const GstCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/GstCalculatorTool').then(mod => mod.GstCalculatorTool));
+const EmiCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/EmiCalculatorTool').then(mod => mod.EmiCalculatorTool));
+const SimpleInterestCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/SimpleInterestCalculatorTool').then(mod => mod.SimpleInterestCalculatorTool));
+const CompoundInterestCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/CompoundInterestCalculatorTool').then(mod => mod.CompoundInterestCalculatorTool));
+const AverageCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/AverageCalculatorTool').then(mod => mod.AverageCalculatorTool));
+const RatioCalculatorTool = dynamic(() => import('@/components/tool-ui/calculator/RatioCalculatorTool').then(mod => mod.RatioCalculatorTool));
+const NumberToWordsTool = dynamic(() => import('@/components/tool-ui/calculator/NumberToWordsTool').then(mod => mod.NumberToWordsTool));
+const RandomNumberGeneratorTool = dynamic(() => import('@/components/tool-ui/calculator/RandomNumberGeneratorTool').then(mod => mod.RandomNumberGeneratorTool));
+const TimeZoneConverterTool = dynamic(() => import('@/components/tool-ui/calculator/TimeZoneConverterTool').then(mod => mod.TimeZoneConverterTool));
+
+const MetaTagGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/MetaTagGeneratorTool').then(mod => mod.MetaTagGeneratorTool));
+const MetaDescriptionGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/MetaDescriptionGeneratorTool').then(mod => mod.MetaDescriptionGeneratorTool));
+const OpenGraphGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/OpenGraphGeneratorTool').then(mod => mod.OpenGraphGeneratorTool));
+const TwitterCardGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/TwitterCardGeneratorTool').then(mod => mod.TwitterCardGeneratorTool));
+const RobotsTxtGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/RobotsTxtGeneratorTool').then(mod => mod.RobotsTxtGeneratorTool));
+const SitemapGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/SitemapGeneratorTool').then(mod => mod.SitemapGeneratorTool));
+const SitemapValidatorTool = dynamic(() => import('@/components/tool-ui/seo/SitemapValidatorTool').then(mod => mod.SitemapValidatorTool));
+const CanonicalUrlGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/CanonicalUrlGeneratorTool').then(mod => mod.CanonicalUrlGeneratorTool));
+const SlugGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/SlugGeneratorTool').then(mod => mod.SlugGeneratorTool));
+const SerpSnippetPreviewTool = dynamic(() => import('@/components/tool-ui/seo/SerpSnippetPreviewTool').then(mod => mod.SerpSnippetPreviewTool));
+const SchemaMarkupGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/SchemaMarkupGeneratorTool').then(mod => mod.SchemaMarkupGeneratorTool));
+const FaqSchemaGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/FaqSchemaGeneratorTool').then(mod => mod.FaqSchemaGeneratorTool));
+const BreadcrumbSchemaGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/BreadcrumbSchemaGeneratorTool').then(mod => mod.BreadcrumbSchemaGeneratorTool));
+const KeywordDensityCheckerTool = dynamic(() => import('@/components/tool-ui/seo/KeywordDensityCheckerTool').then(mod => mod.KeywordDensityCheckerTool));
+const HeadingCheckerTool = dynamic(() => import('@/components/tool-ui/seo/HeadingCheckerTool').then(mod => mod.HeadingCheckerTool));
+const SeoContentAnalyzerTool = dynamic(() => import('@/components/tool-ui/seo/SeoContentAnalyzerTool').then(mod => mod.SeoContentAnalyzerTool));
+const HreflangGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/HreflangGeneratorTool').then(mod => mod.HreflangGeneratorTool));
+const HtaccessRedirectGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/HtaccessRedirectGeneratorTool').then(mod => mod.HtaccessRedirectGeneratorTool));
+
+
+
+
+import dynamic from 'next/dynamic';
+
+const WordCounterTool = dynamic(() => import('@/components/tool-ui/text/WordCounterTool').then(mod => mod.WordCounterTool));
+const CharacterCounterTool = dynamic(() => import('@/components/tool-ui/text/CharacterCounterTool').then(mod => mod.CharacterCounterTool));
+const SentenceCounterTool = dynamic(() => import('@/components/tool-ui/text/SentenceCounterTool').then(mod => mod.SentenceCounterTool));
+const ReadingTimeCalculatorTool = dynamic(() => import('@/components/tool-ui/text/ReadingTimeCalculatorTool').then(mod => mod.ReadingTimeCalculatorTool));
+const CaseConverterTool = dynamic(() => import('@/components/tool-ui/text/CaseConverterTool').then(mod => mod.CaseConverterTool));
+const TextRepeaterTool = dynamic(() => import('@/components/tool-ui/text/TextRepeaterTool').then(mod => mod.TextRepeaterTool));
+const RemoveDuplicateLinesTool = dynamic(() => import('@/components/tool-ui/text/RemoveDuplicateLinesTool').then(mod => mod.RemoveDuplicateLinesTool));
+const SortLinesTool = dynamic(() => import('@/components/tool-ui/text/SortLinesTool').then(mod => mod.SortLinesTool));
+const RemoveEmptyLinesTool = dynamic(() => import('@/components/tool-ui/text/RemoveEmptyLinesTool').then(mod => mod.RemoveEmptyLinesTool));
+const TextCleanerTool = dynamic(() => import('@/components/tool-ui/text/TextCleanerTool').then(mod => mod.TextCleanerTool));
+const FindAndReplaceTool = dynamic(() => import('@/components/tool-ui/text/FindAndReplaceTool').then(mod => mod.FindAndReplaceTool));
+const TextReverseTool = dynamic(() => import('@/components/tool-ui/text/TextReverseTool').then(mod => mod.TextReverseTool));
+const CharacterFrequencyCounterTool = dynamic(() => import('@/components/tool-ui/text/CharacterFrequencyCounterTool').then(mod => mod.CharacterFrequencyCounterTool));
+const LineCounterTool = dynamic(() => import('@/components/tool-ui/text/LineCounterTool').then(mod => mod.LineCounterTool));
+
 import { ArrowLeft, Upload, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
 interface ToolPageProps {
@@ -123,12 +213,28 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
 
   return {
     title: `${tool.name} - Free Online Tool | SizeSnap`,
-    description: `Use SizeSnap ${tool.name} online for free. Fast, high-quality, privacy-focused image and document processing without watermark.`,
+    description: tool.shortDescription || `Use SizeSnap ${tool.name} online for free. Fast, high-quality, privacy-focused image and document processing without watermark.`,
     alternates: {
       canonical: `https://sizesnap.in/tools/${tool.slug}`,
     },
   };
 }
+
+
+const CgpaCalculatorTool = dynamic(() => import('@/components/tool-ui/student/CgpaCalculatorTool').then(mod => mod.CgpaCalculatorTool));
+const GpaCalculatorTool = dynamic(() => import('@/components/tool-ui/student/GpaCalculatorTool').then(mod => mod.GpaCalculatorTool));
+const SgpaCalculatorTool = dynamic(() => import('@/components/tool-ui/student/SgpaCalculatorTool').then(mod => mod.SgpaCalculatorTool));
+const MarksPercentageCalculatorTool = dynamic(() => import('@/components/tool-ui/student/MarksPercentageCalculatorTool').then(mod => mod.MarksPercentageCalculatorTool));
+const AttendanceCalculatorTool = dynamic(() => import('@/components/tool-ui/student/AttendanceCalculatorTool').then(mod => mod.AttendanceCalculatorTool));
+const RequiredAttendanceCalculatorTool = dynamic(() => import('@/components/tool-ui/student/RequiredAttendanceCalculatorTool').then(mod => mod.RequiredAttendanceCalculatorTool));
+const StudyHoursCalculatorTool = dynamic(() => import('@/components/tool-ui/student/StudyHoursCalculatorTool').then(mod => mod.StudyHoursCalculatorTool));
+const PomodoroTimerTool = dynamic(() => import('@/components/tool-ui/student/PomodoroTimerTool').then(mod => mod.PomodoroTimerTool));
+const ExamCountdownTool = dynamic(() => import('@/components/tool-ui/student/ExamCountdownTool').then(mod => mod.ExamCountdownTool));
+const StudySessionTimerTool = dynamic(() => import('@/components/tool-ui/student/StudySessionTimerTool').then(mod => mod.StudySessionTimerTool));
+const GradeCalculatorTool = dynamic(() => import('@/components/tool-ui/student/GradeCalculatorTool').then(mod => mod.GradeCalculatorTool));
+const MarksRequiredCalculatorTool = dynamic(() => import('@/components/tool-ui/student/MarksRequiredCalculatorTool').then(mod => mod.MarksRequiredCalculatorTool));
+const WeightedGradeCalculatorTool = dynamic(() => import('@/components/tool-ui/student/WeightedGradeCalculatorTool').then(mod => mod.WeightedGradeCalculatorTool));
+const PdfPageCounterTool = dynamic(() => import('@/components/tool-ui/exam/PdfPageCounterTool').then(mod => mod.PdfPageCounterTool));
 
 export default async function ToolDetailPage({ params }: ToolPageProps) {
   const { slug } = await params;
@@ -149,8 +255,35 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     (t) => t.categoryId === tool.categoryId && t.slug !== tool.slug
   ).slice(0, 6);
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://sizesnap.in/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: tool.categoryTitle,
+        item: `https://sizesnap.in/${tool.categoryId}-tools`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: tool.name,
+        item: `https://sizesnap.in/tools/${tool.slug}`,
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
 
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
@@ -176,7 +309,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
                 {tool.name}
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 mt-1">
-                Fast, secure and free online tool for {tool.name.toLowerCase()}.
+                {tool.shortDescription || `Fast, secure and free online tool for ${tool.name.toLowerCase()}.`}
               </p>
             </div>
             <Link
@@ -187,27 +320,117 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </Link>
           </div>
 
-          {/* Interactive Workspace Shell Placeholder */}
-          <div className="mt-4 border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
-            <div className="max-w-md mx-auto flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">
-                <Upload className="h-6 w-6" />
+                    {/* Interactive Workspace Shell Placeholder */}
+          <div className="mt-4">
+            {tool.slug === 'word-counter' && <WordCounterTool />}
+            {tool.slug === 'character-counter' && <CharacterCounterTool />}
+            {tool.slug === 'sentence-counter' && <SentenceCounterTool />}
+            {tool.slug === 'reading-time-calculator' && <ReadingTimeCalculatorTool />}
+            {tool.slug === 'case-converter' && <CaseConverterTool />}
+            {tool.slug === 'text-repeater' && <TextRepeaterTool />}
+            {tool.slug === 'remove-duplicate-lines' && <RemoveDuplicateLinesTool />}
+            {tool.slug === 'sort-lines' && <SortLinesTool />}
+            {tool.slug === 'remove-empty-lines' && <RemoveEmptyLinesTool />}
+            {tool.slug === 'text-cleaner' && <TextCleanerTool />}
+            {tool.slug === 'find-and-replace' && <FindAndReplaceTool />}
+            {tool.slug === 'text-reverse' && <TextReverseTool />}
+            {tool.slug === 'character-frequency-counter' && <CharacterFrequencyCounterTool />}
+            {tool.slug === 'line-counter' && <LineCounterTool />}
+            {tool.slug === 'text-formatter' && <TextFormatterTool />}
+            {tool.slug === 'paragraph-formatter' && <ParagraphFormatterTool />}
+            {tool.slug === 'remove-line-breaks' && <RemoveLineBreaksTool />}
+            {tool.slug === 'remove-extra-spaces' && <RemoveExtraSpacesTool />}
+            {tool.slug === 'list-formatter' && <ListFormatterTool />}
+            {tool.slug === 'bullet-point-generator' && <BulletPointGeneratorTool />}
+            {tool.slug === 'numbered-list-generator' && <NumberedListGeneratorTool />}
+            {tool.slug === 'lorem-ipsum-generator' && <LoremIpsumGeneratorTool />}
+            {tool.slug === 'random-paragraph-generator' && <RandomParagraphGeneratorTool />}
+            {tool.slug === 'email-text-formatter' && <EmailTextFormatterTool />}
+            {tool.slug === 'json-formatter' && <JsonFormatterTool />}
+            {tool.slug === 'json-validator' && <JsonValidatorTool />}
+            {tool.slug === 'json-minifier' && <JsonMinifierTool />}
+            {tool.slug === 'json-viewer' && <JsonViewerTool />}
+            {tool.slug === 'json-to-csv' && <JsonToCsvTool />}
+            {tool.slug === 'csv-to-json' && <CsvToJsonTool />}
+            {tool.slug === 'base64-encoder' && <Base64EncoderTool />}
+            {tool.slug === 'base64-decoder' && <Base64DecoderTool />}
+            {tool.slug === 'url-encoder' && <UrlEncoderTool />}
+            {tool.slug === 'url-decoder' && <UrlDecoderTool />}
+            {tool.slug === 'uuid-generator' && <UuidGeneratorTool />}
+            {tool.slug === 'unix-timestamp-converter' && <UnixTimestampConverterTool />}
+            {tool.slug === 'jwt-decoder' && <JwtDecoderTool />}
+            {tool.slug === 'regex-tester' && <RegexTesterTool />}
+            {tool.slug === 'hash-generator' && <HashGeneratorTool />}
+            {tool.slug === 'html-formatter' && <HtmlFormatterTool />}
+            {tool.slug === 'css-formatter' && <CssFormatterTool />}
+            {tool.slug === 'javascript-formatter' && <JavascriptFormatterTool />}
+            {tool.slug === 'sql-formatter' && <SqlFormatterTool />}
+            {tool.slug === 'xml-formatter' && <XmlFormatterTool />}
+            {tool.slug === 'percentage-calculator' && <PercentageCalculatorTool />}
+            {tool.slug === 'percentage-increase-calculator' && <PercentageIncreaseCalculatorTool />}
+            {tool.slug === 'percentage-difference-calculator' && <PercentageDifferenceCalculatorTool />}
+            {tool.slug === 'age-calculator' && <AgeCalculatorTool />}
+            {tool.slug === 'date-difference-calculator' && <DateDifferenceCalculatorTool />}
+            {tool.slug === 'time-duration-calculator' && <TimeDurationCalculatorTool />}
+            {tool.slug === 'unit-converter' && <UnitConverterTool />}
+            {tool.slug === 'discount-calculator' && <DiscountCalculatorTool />}
+            {tool.slug === 'profit-margin-calculator' && <ProfitMarginCalculatorTool />}
+            {tool.slug === 'markup-calculator' && <MarkupCalculatorTool />}
+            {tool.slug === 'gst-calculator' && <GstCalculatorTool />}
+            {tool.slug === 'emi-calculator' && <EmiCalculatorTool />}
+            {tool.slug === 'simple-interest-calculator' && <SimpleInterestCalculatorTool />}
+            {tool.slug === 'compound-interest-calculator' && <CompoundInterestCalculatorTool />}
+            {tool.slug === 'average-calculator' && <AverageCalculatorTool />}
+            {tool.slug === 'ratio-calculator' && <RatioCalculatorTool />}
+            {tool.slug === 'number-to-words' && <NumberToWordsTool />}
+            {tool.slug === 'random-number-generator' && <RandomNumberGeneratorTool />}
+            {tool.slug === 'time-zone-converter' && <TimeZoneConverterTool />}
+            {tool.slug === 'meta-tag-generator' && <MetaTagGeneratorTool />}
+            {tool.slug === 'meta-description-generator' && <MetaDescriptionGeneratorTool />}
+            {tool.slug === 'open-graph-generator' && <OpenGraphGeneratorTool />}
+            {tool.slug === 'twitter-card-generator' && <TwitterCardGeneratorTool />}
+            {tool.slug === 'robots-txt-generator' && <RobotsTxtGeneratorTool />}
+            {tool.slug === 'sitemap-generator' && <SitemapGeneratorTool />}
+            {tool.slug === 'sitemap-validator' && <SitemapValidatorTool />}
+            {tool.slug === 'canonical-url-generator' && <CanonicalUrlGeneratorTool />}
+            {tool.slug === 'slug-generator' && <SlugGeneratorTool />}
+            {tool.slug === 'serp-snippet-preview' && <SerpSnippetPreviewTool />}
+            {tool.slug === 'schema-markup-generator' && <SchemaMarkupGeneratorTool />}
+            {tool.slug === 'faq-schema-generator' && <FaqSchemaGeneratorTool />}
+            {tool.slug === 'breadcrumb-schema-generator' && <BreadcrumbSchemaGeneratorTool />}
+            {tool.slug === 'keyword-density-checker' && <KeywordDensityCheckerTool />}
+            {tool.slug === 'heading-checker' && <HeadingCheckerTool />}
+            {tool.slug === 'seo-content-analyzer' && <SeoContentAnalyzerTool />}
+            {tool.slug === 'hreflang-generator' && <HreflangGeneratorTool />}
+            {tool.slug === 'htaccess-redirect-generator' && <HtaccessRedirectGeneratorTool />}
+
+
+
+
+
+            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse', 'character-frequency-counter', 'line-counter'].concat(['text-formatter', 'paragraph-formatter', 'remove-line-breaks', 'remove-extra-spaces', 'list-formatter', 'bullet-point-generator', 'numbered-list-generator', 'lorem-ipsum-generator', 'random-paragraph-generator', 'email-text-formatter']).includes(tool.slug) && (
+              <div className="border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
+                <div className="max-w-md mx-auto flex flex-col items-center">
+                  <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">
+                    <Upload className="h-6 w-6" />
+                  </div>
+                  <h2 className="text-base font-bold text-gray-800 mb-1">
+                    Select your image or file to begin
+                  </h2>
+                  <p className="text-xs text-gray-500 mb-5">
+                    Drag and drop files here, or click to choose from your computer or phone.
+                  </p>
+                  <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-[#414FA8] text-white text-xs sm:text-sm font-semibold rounded shadow-sm hover:bg-[#343f88] active:scale-[0.98] transition-all">
+                    <Upload className="h-4 w-4" />
+                    <span>Choose File</span>
+                    <input type="file" className="sr-only" />
+                  </label>
+                  <p className="text-[11px] text-gray-400 mt-3">
+                    Supports JPG, PNG, WEBP, GIF, PDF (Max 25MB). No account needed.
+                  </p>
+                </div>
               </div>
-              <h2 className="text-base font-bold text-gray-800 mb-1">
-                Select your image or file to begin
-              </h2>
-              <p className="text-xs text-gray-500 mb-5">
-                Drag and drop files here, or click to choose from your computer or phone.
-              </p>
-              <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-[#414FA8] text-white text-xs sm:text-sm font-semibold rounded shadow-sm hover:bg-[#343f88] active:scale-[0.98] transition-all">
-                <Upload className="h-4 w-4" />
-                <span>Choose File</span>
-                <input type="file" className="sr-only" />
-              </label>
-              <p className="text-[11px] text-gray-400 mt-3">
-                Supports JPG, PNG, WEBP, GIF, PDF (Max 25MB). No account needed.
-              </p>
-            </div>
+            )}
           </div>
 
           {/* Feature Highlights */}
@@ -243,6 +466,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
       </main>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

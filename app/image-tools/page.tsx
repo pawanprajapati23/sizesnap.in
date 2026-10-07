@@ -23,7 +23,7 @@ export default function ImageToolsPage() {
       title="Image Tools"
       description="All your essential image processing needs in one place. Fast, local, and private."
       breadcrumbs={breadcrumbs}
-      category="Image"
+      category="image"
       customSlugs={[
         'compress-image',
         'resize-image-pixel',

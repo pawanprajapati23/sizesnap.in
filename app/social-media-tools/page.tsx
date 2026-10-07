@@ -23,7 +23,7 @@ export default function SocialMediaToolsPage() {
       title="Social Media Image Tools"
       description="Resize, compress, and convert images perfectly tailored for platforms like Instagram, WhatsApp, YouTube, and LinkedIn. 100% offline."
       breadcrumbs={breadcrumbs}
-      category="Social"
+      category="social"
       customSlugs={[
         'social-media-resizer',
         'resize-image-pixel',

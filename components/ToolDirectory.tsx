@@ -178,7 +178,7 @@ export function ToolDirectory() {
               {/* Category Header */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 mb-3.5">
                 <div className="flex items-center gap-2">
-                  {category.id === 'A' && (
+                  {category.id === 'image' && (
                     <Sparkles className="h-4 w-4 text-amber-500 shrink-0" />
                   )}
                   <h2

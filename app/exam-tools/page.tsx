@@ -1,5 +1,4 @@
 import { CategoryHubPage } from '@/components/templates/CategoryHubPage';
-import { ALL_TOOLS } from '@/data/tools';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,13 +10,18 @@ export const metadata: Metadata = {
 };
 
 export default function ExamToolsPage() {
-  const tools = ALL_TOOLS.filter((t) => t.category === 'exam-tools');
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Tools', url: '/tools' },
+    { name: 'Exam Tools', url: '/exam-tools' },
+  ];
 
   return (
     <CategoryHubPage
       title="Exam Tools"
       description="Prepare for your exams effectively with our collection of online tools designed to track deadlines, calculate targets, and review study materials."
-      tools={tools}
+      breadcrumbs={breadcrumbs}
+      category="exam-tools"
     />
   );
 }

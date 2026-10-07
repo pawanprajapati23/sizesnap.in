@@ -1,5 +1,4 @@
 import { CategoryHubPage } from '@/components/templates/CategoryHubPage';
-import { ALL_TOOLS } from '@/data/tools';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,13 +10,18 @@ export const metadata: Metadata = {
 };
 
 export default function StudentToolsPage() {
-  const tools = ALL_TOOLS.filter((t) => t.category === 'student-tools');
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Tools', url: '/tools' },
+    { name: 'Student Tools', url: '/student-tools' },
+  ];
 
   return (
     <CategoryHubPage
       title="Student Tools"
       description="Manage your academics with our free collection of online tools designed for students. Calculate GPA, track attendance, and optimize your study sessions."
-      tools={tools}
+      breadcrumbs={breadcrumbs}
+      category="student-tools"
     />
   );
 }

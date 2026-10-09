@@ -30,7 +30,7 @@ export function KeywordDensityCheckerTool() {
     <div className="space-y-6">
       <div className="bg-amber-50 border border-amber-200 text-amber-800 p-3 rounded flex items-start gap-2 text-sm shadow-sm">
         <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-        <p><strong>Note:</strong> There is no "perfect" keyword density. Modern search engines use semantic analysis rather than strict frequency counts. Use this tool to spot unnatural keyword stuffing or ensure your primary topics are mentioned, but always prioritize natural reading.</p>
+        <p><strong>Note:</strong> There is no &quot;perfect&quot; keyword density. Modern search engines use semantic analysis rather than strict frequency counts. Use this tool to spot unnatural keyword stuffing or ensure your primary topics are mentioned, but always prioritize natural reading.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

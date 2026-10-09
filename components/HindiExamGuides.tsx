@@ -29,7 +29,7 @@ export function HindiExamGuide({ slug }: { slug: string }) {
 
           <h3 className="text-base font-semibold text-gray-800 mt-4 mb-2">30 Seconds Me Photo/Sign Kaise Resize Karein?</h3>
           <p>
-            SizeSnap par humne SSC ke liye special <strong>One-Click Preset</strong> banaya hai. Bas apni photo select karein, "SSC" preset par click karein, aur humara AI tool apne aap dimension aur size (e.g., 35KB for photo, 15KB for sign) fix kar dega bina quality loss kiye. Ye 100% private hai!
+            SizeSnap par humne SSC ke liye special <strong>One-Click Preset</strong> banaya hai. Bas apni photo select karein, &quot;SSC&quot; preset par click karein, aur humara AI tool apne aap dimension aur size (e.g., 35KB for photo, 15KB for sign) fix kar dega bina quality loss kiye. Ye 100% private hai!
           </p>
         </div>
       </div>

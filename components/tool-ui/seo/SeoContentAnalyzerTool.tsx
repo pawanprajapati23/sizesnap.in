@@ -74,7 +74,7 @@ export function SeoContentAnalyzerTool() {
     <div className="space-y-6">
       <div className="bg-amber-50 border border-amber-200 text-amber-800 p-3 rounded flex items-start gap-2 text-sm shadow-sm">
         <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-        <p><strong>Disclaimer:</strong> This tool provides SizeSnap's custom heuristic analysis of HTML content. It does <strong>not</strong> produce a "Google Score". Good SEO depends on user intent, topic authority, and readability, not just keyword placement.</p>
+        <p><strong>Disclaimer:</strong> This tool provides SizeSnap&apos;s custom heuristic analysis of HTML content. It does <strong>not</strong> produce a &quot;Google Score&quot;. Good SEO depends on user intent, topic authority, and readability, not just keyword placement.</p>
       </div>
 
       <div className="flex flex-col gap-1.5 bg-white p-4 rounded border border-gray-200 shadow-sm max-w-sm">

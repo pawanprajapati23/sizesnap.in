@@ -32,14 +32,14 @@ export default function HowToCompressImageGuide() {
             The first step to effective compression is choosing the right format:
           </p>
           <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-2">
-            <li><strong>JPEG (JPG):</strong> Best for photographs. It uses "lossy" compression, meaning it removes some data to reduce size. A quality setting of 70-80% often provides massive file size savings with unnoticeable visual differences.</li>
-            <li><strong>PNG:</strong> Best for graphics, logos, and images requiring transparency. PNG uses "lossless" compression, preserving every pixel exactly, but resulting in larger file sizes.</li>
+            <li><strong>JPEG (JPG):</strong> Best for photographs. It uses &quot;lossy&quot; compression, meaning it removes some data to reduce size. A quality setting of 70-80% often provides massive file size savings with unnoticeable visual differences.</li>
+            <li><strong>PNG:</strong> Best for graphics, logos, and images requiring transparency. PNG uses &quot;lossless&quot; compression, preserving every pixel exactly, but resulting in larger file sizes.</li>
             <li><strong>WebP:</strong> A modern format that provides superior lossy and lossless compression. If you want the smallest file sizes with great quality, try converting to WebP.</li>
           </ul>
 
           <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">2. Use the Right Tool</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            You don't need expensive software like Photoshop. You can use our free, privacy-focused online tool to compress images instantly in your browser:
+            You don&apos;t need expensive software like Photoshop. You can use our free, privacy-focused online tool to compress images instantly in your browser:
           </p>
           <div className="bg-blue-50 border-l-4 border-[#414FA8] p-4 my-6">
             <Link href="/tools/compress-image" className="text-[#414FA8] font-bold text-lg hover:underline">
@@ -58,7 +58,7 @@ export default function HowToCompressImageGuide() {
 
           <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">4. Compressing to a Specific File Size</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Sometimes, you don't just want a smaller image; you need an image that is <em>exactly</em> under a certain size limit, like 50KB for a passport photo upload.
+            Sometimes, you don&apos;t just want a smaller image; you need an image that is <em>exactly</em> under a certain size limit, like 50KB for a passport photo upload.
           </p>
           <p className="text-gray-700 leading-relaxed mb-6">
             In these cases, standard compression sliders involve too much guesswork. Instead, use a tool designed for exact target sizes:
@@ -72,7 +72,7 @@ export default function HowToCompressImageGuide() {
 
           <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Conclusion</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Compressing images without losing noticeable quality is entirely possible with the right format and tools. By aiming for the "sweet spot" in lossy compression or targeting an exact file size with SizeSnap's specialized tools, you can optimize your images perfectly.
+            Compressing images without losing noticeable quality is entirely possible with the right format and tools. By aiming for the &quot;sweet spot&quot; in lossy compression or targeting an exact file size with SizeSnap&apos;s specialized tools, you can optimize your images perfectly.
           </p>
         </article>
       </main>

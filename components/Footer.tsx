@@ -81,6 +81,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm text-gray-400">
               <li><Link prefetch={false} href="/tools/passport-photo-maker" className="hover:text-[#6366F1] transition-colors">Passport photo maker online</Link></li>
               <li><Link prefetch={false} href="/tools/compress-pdf" className="hover:text-[#6366F1] transition-colors">Compress pdf to 100kb online free</Link></li>
+              <li><Link prefetch={false} href="/blog" className="hover:text-[#6366F1] transition-colors">Blog</Link></li>
               <li><Link prefetch={false} href="/exams" className="hover:text-[#6366F1] transition-colors">Photo size for SSC & UPSC</Link></li>
               <li><Link prefetch={false} href="/tools/image-to-pdf" className="hover:text-[#6366F1] transition-colors">JPG to PDF</Link></li>
               <li><Link prefetch={false} href="/#directory" className="hover:text-[#6366F1] transition-colors font-medium">All Tools &rarr;</Link></li>

@@ -3922,6 +3922,10 @@ export interface NavMenu {
 
 export const NAV_MENUS: NavMenu[] = [
   {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
     label: 'Image Tools',
     items: [
       { name: 'Passport Photo Maker', slug: 'passport-photo-maker' },

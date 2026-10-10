@@ -33,6 +33,9 @@ export default function AdminBlogDashboard() {
       try {
         await deleteArticle(id);
         setArticles(articles.filter(a => a.id !== id));
+        // Trigger cache revalidation
+        const { revalidateBlogCache } = await import('@/lib/actions');
+        await revalidateBlogCache();
       } catch (error) {
         console.error("Failed to delete article:", error);
         alert('Failed to delete article');

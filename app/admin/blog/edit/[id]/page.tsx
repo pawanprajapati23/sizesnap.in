@@ -138,6 +138,9 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
       } else {
         await updateArticle(resolvedParams.id, formData);
       }
+      // Trigger cache revalidation
+      const { revalidateBlogCache } = await import('@/lib/actions');
+      await revalidateBlogCache();
       router.push('/admin/blog');
     } catch (error) {
       console.error("Save failed:", error);

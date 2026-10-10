@@ -23,6 +23,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!article) return {};
 
+  const isBase64 = (str?: string) => str?.startsWith('data:');
+  const ogImages = [];
+  
+  if (article.ogImage) {
+    ogImages.push(article.ogImage);
+  } else if (article.coverImage && !isBase64(article.coverImage)) {
+    ogImages.push(article.coverImage);
+  }
+
   return {
     title: article.seoTitle || `${article.title} - SizeSnap Blog`,
     description: article.seoDescription || article.excerpt,
@@ -36,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined,
       modifiedTime: article.updatedAt ? new Date(article.updatedAt).toISOString() : undefined,
       authors: [article.author.name],
-      images: article.ogImage || article.coverImage ? [article.ogImage || article.coverImage as string] : undefined,
+      images: ogImages.length > 0 ? ogImages : undefined,
     },
     robots: article.noIndex ? { index: false, follow: false } : { index: true, follow: true },
   };
@@ -63,12 +72,15 @@ export default async function ArticlePage({ params }: Props) {
     }
   });
 
+  const isBase64 = (str?: string) => str?.startsWith('data:');
+  const jsonLdImage = article.ogImage || (article.coverImage && !isBase64(article.coverImage) ? article.coverImage : null) || 'https://sizesnap.in/logo.png';
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: article.title,
     description: article.excerpt,
-    image: article.coverImage || article.ogImage || 'https://sizesnap.in/logo.png',
+    image: jsonLdImage,
     datePublished: article.publishedAt ? new Date(article.publishedAt).toISOString() : '',
     dateModified: article.updatedAt ? new Date(article.updatedAt).toISOString() : '',
     author: {

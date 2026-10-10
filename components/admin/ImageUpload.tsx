@@ -34,24 +34,59 @@ export default function ImageUpload({ value, onChange, folder = 'blog-covers' }:
     setProgress(50); // Just a visual indicator
 
     try {
-      const reader = new FileReader();
+      // Compress the image before converting to base64 to avoid Huge Payloads (Vercel 4.5MB limit)
+      const img = new globalThis.Image();
+      const objectUrl = URL.createObjectURL(file);
       
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        onChange(base64String);
-        setUploading(false);
-        setProgress(100);
-        setTimeout(() => setProgress(0), 500);
-        if (fileInputRef.current) fileInputRef.current.value = '';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        
+        // Max dimensions
+        const MAX_WIDTH = 1200;
+        const MAX_HEIGHT = 675;
+        
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height = Math.round((height * MAX_WIDTH) / width);
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width = Math.round((width * MAX_HEIGHT) / height);
+            height = MAX_HEIGHT;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          // Compress as WebP with 0.7 quality
+          const compressedBase64 = canvas.toDataURL('image/webp', 0.7);
+          
+          onChange(compressedBase64);
+          setUploading(false);
+          setProgress(100);
+          setTimeout(() => setProgress(0), 500);
+          if (fileInputRef.current) fileInputRef.current.value = '';
+        } else {
+          throw new Error('Failed to get canvas context');
+        }
+        URL.revokeObjectURL(objectUrl);
       };
       
-      reader.onerror = () => {
-        setError('Failed to read file');
+      img.onerror = () => {
+        setError('Failed to read image file');
         setUploading(false);
         setProgress(0);
+        URL.revokeObjectURL(objectUrl);
       };
-
-      reader.readAsDataURL(file);
+      
+      img.src = objectUrl;
     } catch (err) {
       console.error(err);
       setError('An unexpected error occurred');

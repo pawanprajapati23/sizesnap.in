@@ -1,3 +1,4 @@
+export const revalidate = 3600;
 import { MetadataRoute } from 'next';
 import { ALL_TOOLS } from '@/data/tools';
 import { getPublishedArticles } from '@/lib/blog';

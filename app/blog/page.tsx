@@ -4,6 +4,7 @@ import { getPublishedArticles, getFeaturedArticle, getArticlesByCategory } from 
 import { BLOG_CATEGORIES } from '@/data/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import BlogSearch from '@/components/blog/BlogSearch';
+import NewsletterForm from '@/components/blog/NewsletterForm';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -159,20 +160,7 @@ export default async function BlogPage() {
             <p className="text-[#EEF1FB] mb-8 text-lg opacity-90">
               Get the latest exam updates, document requirements, and tech tips delivered directly to your inbox. No spam, ever.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email address" 
-                className="flex-1 px-6 py-4 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/20 bg-white"
-                required
-              />
-              <button 
-                type="submit" 
-                className="px-8 py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-800 transition-colors whitespace-nowrap shadow-lg"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </section>
       </div>

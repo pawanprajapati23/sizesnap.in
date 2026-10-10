@@ -32,7 +32,7 @@ export default function NewsletterForm() {
       <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 max-w-lg mx-auto">
         <h3 className="text-xl font-bold text-white mb-2">🎉 Thank you for subscribing!</h3>
         <p className="text-[#EEF1FB] opacity-90">
-          You'll be the first to know about new tools, exam updates, and tech tips.
+          You&apos;ll be the first to know about new tools, exam updates, and tech tips.
         </p>
         <button 
           onClick={() => setStatus('idle')}

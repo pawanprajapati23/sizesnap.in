@@ -95,8 +95,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
 
     setSaving(true);
     
-    // Force status to PUBLISHED as requested by user (no drafts)
-    const finalData = { ...formData, status: 'PUBLISHED' as const };
+    const finalData = { ...formData };
     
     try {
       if (isNew) {
@@ -227,7 +226,21 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
           <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-4">
             <h3 className="font-bold text-gray-900">Publishing</h3>
 
-              {/* Status field removed as requested. It defaults to PUBLISHED. */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
+              <select
+                name="status"
+                value={formData.status || 'PUBLISHED'}
+                onChange={handleChange}
+                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#414FA8]/20 focus:border-[#414FA8] transition-colors"
+              >
+                <option value="DRAFT">Draft</option>
+                <option value="REVIEW">Review</option>
+                <option value="SCHEDULED">Scheduled</option>
+                <option value="PUBLISHED">Published</option>
+                <option value="ARCHIVED">Archived</option>
+              </select>
+            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Category (Custom)</label>

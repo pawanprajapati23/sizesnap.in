@@ -56,7 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   });
 
-  // Blog Categories
+  // Blog Categories (Default)
   BLOG_CATEGORIES.forEach((category) => {
     sitemapData.push({
       url: `${baseUrl}/blog/category/${category.slug}`,
@@ -67,15 +67,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   try {
-    // Blog Articles
+    // Blog Articles and Custom Categories
     const articles = await getPublishedArticles();
+    
+    const uniqueCategories = new Set<string>();
+    
     articles.forEach((article) => {
+      if (article.category) {
+        uniqueCategories.add(article.category);
+      }
       if (!article.noIndex) {
         sitemapData.push({
           url: `${baseUrl}/blog/${article.slug}`,
           lastModified: article.updatedAt ? new Date(article.updatedAt) : (article.publishedAt ? new Date(article.publishedAt) : new Date()),
           changeFrequency: 'weekly', // Articles might be updated
           priority: 0.8,
+        });
+      }
+    });
+
+    // Add custom categories to sitemap
+    uniqueCategories.forEach(categorySlug => {
+      if (!BLOG_CATEGORIES.find(c => c.slug === categorySlug)) {
+        sitemapData.push({
+          url: `${baseUrl}/blog/category/${categorySlug}`,
+          lastModified: new Date(),
+          changeFrequency: 'weekly',
+          priority: 0.7,
         });
       }
     });

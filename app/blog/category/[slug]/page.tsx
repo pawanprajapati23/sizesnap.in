@@ -14,9 +14,19 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  const category = BLOG_CATEGORIES.find(c => c.slug === resolvedParams.slug);
+  let category = BLOG_CATEGORIES.find(c => c.slug === resolvedParams.slug);
 
-  if (!category) return {};
+  if (!category) {
+    const generatedTitle = resolvedParams.slug
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    category = {
+      slug: resolvedParams.slug,
+      title: generatedTitle,
+      description: `Browse all articles related to ${generatedTitle} on SizeSnap.`
+    };
+  }
 
   return {
     title: `${category.title} - SizeSnap Blog`,
@@ -29,10 +39,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const resolvedParams = await params;
-  const category = BLOG_CATEGORIES.find(c => c.slug === resolvedParams.slug);
+  let category = BLOG_CATEGORIES.find(c => c.slug === resolvedParams.slug);
 
+  // If it's a custom category, create a temporary object
   if (!category) {
-    notFound();
+    // Convert 'tech-updates' to 'Tech Updates'
+    const generatedTitle = resolvedParams.slug
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+      
+    category = {
+      slug: resolvedParams.slug,
+      title: generatedTitle,
+      description: `Browse all articles related to ${generatedTitle} on SizeSnap.`
+    };
   }
 
   const articles = await getArticlesByCategory(resolvedParams.slug);

@@ -270,17 +270,16 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
               {/* Status field removed as requested. It defaults to PUBLISHED. */}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Category</label>
-              <select
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Category (Custom)</label>
+              <input
+                type="text"
                 name="category"
-                value={formData.category}
+                value={formData.category || ''}
                 onChange={handleChange}
+                placeholder="e.g. tech-updates or seo-tips"
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#414FA8]/20 focus:border-[#414FA8] transition-colors"
-              >
-                {BLOG_CATEGORIES.map(c => (
-                  <option key={c.slug} value={c.slug}>{c.title}</option>
-                ))}
-              </select>
+              />
+              <p className="text-xs text-gray-500 mt-1">Type any category slug you want. No spaces.</p>
             </div>
 
             <label className="flex items-center gap-2 cursor-pointer">

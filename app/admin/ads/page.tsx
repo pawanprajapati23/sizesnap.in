@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { DollarSign, Eye, MousePointerClick, TrendingUp, Calendar, AlertCircle, RefreshCw } from 'lucide-react';
+import { DollarSign, IndianRupee, Eye, MousePointerClick, TrendingUp, Calendar, AlertCircle, RefreshCw } from 'lucide-react';
 import { fetchAdsterraStats } from './actions';
 
 export default function AdsAdminPage() {
@@ -46,7 +46,7 @@ export default function AdsAdminPage() {
       
       rawItems.forEach((row: any) => {
         const rev = parseFloat(row.revenue || row.money || 0);
-        const imp = parseInt(row.impressions || row.views || 0, 10);
+        const imp = parseInt(row.impressions || row.views || row.shows || 0, 10);
         const clk = parseInt(row.clicks || 0, 10);
         
         if (!isNaN(rev)) totalRevenue += rev;
@@ -142,8 +142,11 @@ export default function AdsAdminPage() {
                 </div>
                 <h3 className="text-sm font-medium text-gray-600">Total Revenue</h3>
               </div>
-              <p className="text-3xl font-bold text-gray-900 mt-2">
+              <p className="text-3xl font-bold text-gray-900 mt-2 flex items-center gap-2">
                 ${totalRevenue.toFixed(2)}
+                <span className="text-lg font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded flex items-center">
+                  ₹{(totalRevenue * 83.5).toFixed(2)}
+                </span>
               </p>
               <div className="mt-2 text-xs text-green-600 font-medium bg-green-50 w-fit px-2 py-1 rounded">
                 + Earnings (7d)

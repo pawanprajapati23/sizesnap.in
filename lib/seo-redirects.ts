@@ -14,6 +14,8 @@ export const SYSTEM_ROUTES = new Set([
   'terms',
   'tools',
   'exams',
+  'blog',
+  'admin',
   'api',
   '_next',
   'favicon.ico',
@@ -206,7 +208,7 @@ export function getSeoRedirect(pathname: string): string | null {
   }
 
   // 10. Historical blogs & stories
-  if (cleanPath.startsWith('/blog') || cleanPath.startsWith('/stories') || cleanPath === '/image-size-guide') {
+  if (cleanPath.startsWith('/stories') || cleanPath === '/image-size-guide') {
     return '/#all-tools';
   }
 

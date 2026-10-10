@@ -98,13 +98,13 @@ export function BlurBackgroundTool() {
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <div className="w-full max-w-sm rounded border shadow-sm bg-gray-50 overflow-hidden relative">
               <span className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Original</span>
-              <img src={image} className="w-full h-auto" />
+              <img src={image} alt="Original photo" className="w-full h-auto" />
             </div>
             
             {result && (
                <div className="w-full max-w-sm rounded border shadow-sm bg-gray-50 overflow-hidden relative">
                  <span className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Blurred Background</span>
-                 <img src={result} className="w-full h-auto" />
+                 <img src={result} alt="Blurred Background photo" className="w-full h-auto" />
                </div>
             )}
           </div>

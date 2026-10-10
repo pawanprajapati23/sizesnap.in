@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { ChevronRight, ArrowRight, Package, FileText, SplitSquareHorizontal, Smartphone, Zap, Shield, Image } from 'lucide-react';
+import { ChevronRight, ArrowRight, Package, FileText, SplitSquareHorizontal, Smartphone, Zap, Shield, Image as ImageIcon } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'SizeSnap Seller Workbench | E-commerce Shipping & Packing Tools',
@@ -179,7 +179,7 @@ export default function EcommerceToolsPage() {
         <section id="product-images" className="scroll-mt-8">
            <div className="mb-8 flex items-center gap-3">
              <div className="p-2.5 bg-purple-100 rounded-lg text-purple-600">
-                <Image className="h-6 w-6" aria-hidden="true" />
+                <ImageIcon className="h-6 w-6" aria-hidden="true" />
              </div>
              <div>
                <h2 className="text-2xl font-bold text-gray-900">Product Image Factory</h2>

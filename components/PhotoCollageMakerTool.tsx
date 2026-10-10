@@ -103,7 +103,7 @@ export function PhotoCollageMakerTool() {
           <div className="flex gap-2 flex-wrap">
              {images.map((img, i) => (
                 <div key={i} className="relative w-16 h-16 rounded overflow-hidden shadow">
-                   <img src={img.url} className="w-full h-full object-cover" />
+                   <img src={img.url} alt={`Collage image ${i + 1}`} className="w-full h-full object-cover" />
                    <button onClick={() => removeImg(i)} className="absolute top-0 right-0 bg-red-500 text-white rounded-bl p-0.5"><X className="h-3 w-3" /></button>
                 </div>
              ))}

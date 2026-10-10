@@ -45,8 +45,8 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
 
   // Group tools by category for normal browsing view
   // Only keep requested curated categories
-  const curatedCategoryIds = ['image', 'pdf', 'text', 'developer', 'student', 'exam', 'seo', 'social', 'ecommerce'];
   const categorizedTools = useMemo(() => {
+    const curatedCategoryIds = ['image', 'pdf', 'text', 'developer', 'student', 'exam', 'seo', 'social', 'ecommerce'];
     return TOOL_CATEGORIES
       .filter(c => curatedCategoryIds.includes(c.id))
       .map((category) => ({

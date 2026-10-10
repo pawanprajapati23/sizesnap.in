@@ -48,13 +48,13 @@ export function RemoveBackgroundTool() {
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <div className="w-full max-w-sm rounded border shadow-sm bg-gray-50 overflow-hidden relative">
               <span className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Original</span>
-              <img src={image} className="w-full h-auto" />
+              <img src={image} alt="Original photo" className="w-full h-auto" />
             </div>
             
             {result && (
                <div className="w-full max-w-sm rounded border shadow-sm pattern-checkerboard overflow-hidden relative" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), repeating-linear-gradient(45deg, #ccc 25%, #eee 25%, #eee 75%, #ccc 75%, #ccc)', backgroundPosition: '0 0, 10px 10px', backgroundSize: '20px 20px' }}>
                  <span className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded z-10">Removed Background</span>
-                 <img src={result} className="w-full h-auto relative z-0" />
+                 <img src={result} alt="Removed Background photo" className="w-full h-auto relative z-0" />
                </div>
             )}
           </div>

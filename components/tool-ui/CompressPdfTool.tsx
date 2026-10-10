@@ -205,6 +205,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
         
         await page.render({
           canvasContext: baseCtx,
+          canvas: baseCanvas,
           viewport: viewport,
           background: 'rgb(255,255,255)'
         }).promise;

@@ -273,6 +273,7 @@ export function PdfToImagesConverter() {
         // Render PDF page into canvas
         const renderTask = page.render({
           canvasContext: ctx,
+          canvas: canvas as unknown as HTMLCanvasElement,
           viewport,
         });
 

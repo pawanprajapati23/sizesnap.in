@@ -4,8 +4,7 @@ import { getPublishedArticleBySlug } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
+import sanitizeHtml from 'sanitize-html';
 import AuthorBox from '@/components/blog/AuthorBox';
 import ShareButtons from '@/components/blog/ShareButtons';
 import TableOfContents from '@/components/blog/TableOfContents';
@@ -53,9 +52,16 @@ export default async function ArticlePage({ params }: Props) {
 
   const category = BLOG_CATEGORIES.find(c => c.slug === article.category);
 
-  const window = new JSDOM('').window;
-  const purify = DOMPurify(window);
-  const cleanContent = purify.sanitize(article.content);
+  const cleanContent = sanitizeHtml(article.content, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'iframe']),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      '*': ['class', 'id', 'style'],
+      'img': ['src', 'alt', 'width', 'height'],
+      'iframe': ['src', 'width', 'height', 'allow', 'allowfullscreen', 'frameborder'],
+      'a': ['href', 'name', 'target', 'rel']
+    }
+  });
 
   const jsonLd = {
     '@context': 'https://schema.org',

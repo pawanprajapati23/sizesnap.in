@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { use } from 'react';
 import { Article, BLOG_CATEGORIES, ArticleStatus } from '@/data/blog';
-import { ALL_TOOLS } from '@/data/tools';
 import { getArticleBySlug, getArticles, createArticle, updateArticle, generateId } from '@/lib/blog';
 import Link from 'next/link';
-import { ArrowLeft, Save, Eye, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Save, Eye } from 'lucide-react';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import ImageUpload from '@/components/admin/ImageUpload';
 
@@ -75,35 +74,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
     setFormData(prev => ({ ...prev, [name]: checked }));
   };
 
-  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tags = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
-    setFormData(prev => ({ ...prev, tags }));
-  };
 
-  const handleSourceChange = (index: number, field: 'name' | 'url', value: string) => {
-    const newSources = [...(formData.officialSources || [])];
-    if (!newSources[index]) newSources[index] = { name: '', url: '' };
-    newSources[index][field] = value;
-    setFormData(prev => ({ ...prev, officialSources: newSources }));
-  };
-
-  const addSource = () => {
-    setFormData(prev => ({
-      ...prev,
-      officialSources: [...(prev.officialSources || []), { name: '', url: '' }]
-    }));
-  };
-
-  const removeSource = (index: number) => {
-    const newSources = [...(formData.officialSources || [])];
-    newSources.splice(index, 1);
-    setFormData(prev => ({ ...prev, officialSources: newSources }));
-  };
-
-  const handleMultiSelect = (e: React.ChangeEvent<HTMLSelectElement>, field: 'relatedTools' | 'relatedArticles') => {
-    const values = Array.from(e.target.selectedOptions, option => option.value);
-    setFormData(prev => ({ ...prev, [field]: values }));
-  };
 
   const validate = (): string[] => {
     const errors: string[] = [];
@@ -112,17 +83,6 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
     if (!formData.excerpt?.trim()) errors.push("Excerpt is required");
     if (!formData.content?.trim()) errors.push("Content is required");
     if (!formData.category) errors.push("Category is required");
-
-    // Exam specific validations
-    if (formData.category === 'exam-guides' || formData.category === 'exam-updates') {
-      if (!formData.officialSources || formData.officialSources.length === 0 || !formData.officialSources[0].url) {
-        errors.push("Exam guides should have at least one official source URL");
-      }
-      if (!formData.lastVerifiedAt) {
-        errors.push("Exam guides must have a 'Last Verified' date");
-      }
-    }
-
     return errors;
   };
 
@@ -335,98 +295,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
             </div>
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-4">
-            <h3 className="font-bold text-gray-900">Relations</h3>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Tags (Comma separated)</label>
-              <input
-                type="text"
-                value={(formData.tags || []).join(', ')}
-                onChange={handleTagsChange}
-                placeholder="SSC, Exam, Resize..."
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Related Tools</label>
-              <select
-                multiple
-                value={formData.relatedTools || []}
-                onChange={(e) => handleMultiSelect(e, 'relatedTools')}
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm h-32"
-              >
-                {ALL_TOOLS.map(t => (
-                  <option key={t.id} value={t.slug}>{t.name}</option>
-                ))}
-              </select>
-              <p className="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple</p>
-            </div>
-          </div>
-
-          <div className="bg-amber-50 rounded-xl border border-amber-200 shadow-sm p-6 space-y-4">
-            <h3 className="font-bold text-amber-900 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5" />
-              Verification (For Exams)
-            </h3>
-
-            <div>
-              <label className="block text-sm font-medium text-amber-800 mb-1.5">Exam Name</label>
-              <input
-                type="text"
-                name="examName"
-                value={formData.examName || ''}
-                onChange={handleChange}
-                placeholder="e.g. SSC CGL"
-                className="w-full px-3 py-2 bg-white border border-amber-200 rounded-lg text-sm"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-amber-800 mb-1.5">Last Verified Date</label>
-              <input
-                type="date"
-                value={formData.lastVerifiedAt ? new Date(formData.lastVerifiedAt).toISOString().split('T')[0] : ''}
-                onChange={(e) => {
-                  const d = new Date(e.target.value);
-                  if (!isNaN(d.getTime())) setFormData(prev => ({ ...prev, lastVerifiedAt: d.getTime() }));
-                }}
-                className="w-full px-3 py-2 bg-white border border-amber-200 rounded-lg text-sm"
-              />
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-sm font-medium text-amber-800">Official Sources</label>
-                <button type="button" onClick={addSource} className="text-xs font-semibold text-amber-700 hover:underline">+ Add</button>
-              </div>
-
-              <div className="space-y-2">
-                {(formData.officialSources || []).map((source, idx) => (
-                  <div key={idx} className="flex gap-2 items-start">
-                    <div className="flex-1 space-y-2">
-                      <input
-                        type="text"
-                        placeholder="Source Name"
-                        value={source.name}
-                        onChange={(e) => handleSourceChange(idx, 'name', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white border border-amber-200 rounded text-xs"
-                      />
-                      <input
-                        type="url"
-                        placeholder="https://..."
-                        value={source.url}
-                        onChange={(e) => handleSourceChange(idx, 'url', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white border border-amber-200 rounded text-xs"
-                      />
-                    </div>
-                    <button type="button" onClick={() => removeSource(idx)} className="text-red-500 hover:text-red-700 p-1">&times;</button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>

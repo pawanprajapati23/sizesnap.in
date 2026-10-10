@@ -43,7 +43,7 @@ export function FaqSchemaGeneratorTool() {
     <div className="space-y-6">
       <div className="bg-red-50 border border-red-200 text-red-800 p-3 rounded flex items-start gap-2 text-sm shadow-sm">
         <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-        <p><strong>Strict Warning:</strong> You must <strong>only</strong> use FAQ structured data for questions and answers that are visibly displayed on the page. Adding hidden FAQs is a violation of Google's spam policies.</p>
+        <p><strong>Strict Warning:</strong> You must <strong>only</strong> use FAQ structured data for questions and answers that are visibly displayed on the page. Adding hidden FAQs is a violation of Google&apos;s spam policies.</p>
       </div>
 
       <div className="bg-white p-6 rounded border border-gray-200 shadow-sm flex flex-col gap-6">

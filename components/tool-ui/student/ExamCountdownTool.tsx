@@ -13,6 +13,7 @@ export function ExamCountdownTool() {
 
   useEffect(() => {
     if (!examDate) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDays(0); setHours(0); setMinutes(0); setIsPast(false);
       return;
     }

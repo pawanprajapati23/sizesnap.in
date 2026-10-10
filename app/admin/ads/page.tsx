@@ -95,7 +95,7 @@ export default function AdsAdminPage() {
           </div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">No Data Loaded Yet</h3>
           <p className="text-gray-500 max-w-md">
-            Click the "Fetch Data" button above to pull the latest performance statistics directly from Adsterra API.
+            Click the &quot;Fetch Data&quot; button above to pull the latest performance statistics directly from Adsterra API.
           </p>
         </div>
       )}
@@ -271,7 +271,7 @@ export default function AdsAdminPage() {
                   </div>
                   <h3 className="text-lg font-medium text-gray-900">No Data Available</h3>
                   <p className="mt-1 text-sm text-gray-500 max-w-sm mx-auto">
-                    We couldn't find any statistics for the selected date range. Please ensure your ad placements are active.
+                    We couldn&apos;t find any statistics for the selected date range. Please ensure your ad placements are active.
                   </p>
                   
                   {/* Raw Fallback if items was empty but data wasn't an array */}

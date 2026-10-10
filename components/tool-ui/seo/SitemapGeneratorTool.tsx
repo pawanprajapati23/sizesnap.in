@@ -60,7 +60,7 @@ export function SitemapGeneratorTool() {
             onChange={(e) => setLastMod(e.target.checked)}
             className="w-4 h-4 text-[#414FA8] rounded border-gray-300 focus:ring-[#414FA8]"
           />
-          Include &lt;lastmod&gt; tag (Today's Date)
+          Include &lt;lastmod&gt; tag (Today&apos;s Date)
         </label>
         {count > 0 && <span className="ml-auto text-sm font-semibold text-[#414FA8]">{count} URLs found</span>}
       </div>

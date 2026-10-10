@@ -236,13 +236,15 @@ export default async function ArticlePage({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: cleanContent }}
           />
 
-          <div className="mt-12 pt-8 border-t border-gray-200 flex flex-wrap gap-2">
-            {article.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full font-medium">
-                #{tag}
-              </span>
-            ))}
-          </div>
+          {article.tags && article.tags.length > 0 && (
+            <div className="mt-12 pt-8 border-t border-gray-200 flex flex-wrap gap-2">
+              {article.tags.map(tag => (
+                <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full font-medium">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
 
           {/* Mobile Share */}
           <div className="lg:hidden mt-8 pt-8 border-t border-gray-200">

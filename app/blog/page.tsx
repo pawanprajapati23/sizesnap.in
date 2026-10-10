@@ -28,83 +28,103 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[#F5F5F7]">
-      {/* Blog Hero section */}
-      <section className="bg-white border-b border-gray-200 pt-16 pb-12 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
-            SizeSnap Blog
-          </h1>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Practical guides, exam document requirements, student tools, image and PDF tips, and useful resources to help you get your documents ready.
-          </p>
-          <div className="max-w-xl mx-auto mb-10">
-            <BlogSearch />
-          </div>
+      {/* Blog Hero section with Theme Gradient */}
+      <section className="relative overflow-hidden bg-white border-b border-gray-200">
+        {/* Abstract Background Shapes */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#414FA8]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 -left-24 w-72 h-72 bg-[#414FA8]/10 rounded-full blur-3xl"></div>
+        </div>
 
-          <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
-            {BLOG_CATEGORIES.map(category => (
-              <Link
-                key={category.slug}
-                href={`/blog/category/${category.slug}`}
-                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-full transition-colors"
-              >
-                {category.title}
-              </Link>
-            ))}
+        <div className="relative z-10 pt-20 pb-16 px-4">
+          <div className="max-w-5xl mx-auto text-center">
+            <span className="inline-block py-1 px-3 rounded-full bg-[#414FA8]/10 text-[#414FA8] text-sm font-semibold mb-4 border border-[#414FA8]/20">
+              Welcome to the Knowledge Base
+            </span>
+            <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">
+              SizeSnap <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#414FA8] to-[#6b79d6]">Blog</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Practical guides, exam document requirements, student tools, image tips, and useful resources to help you get your documents ready flawlessly.
+            </p>
+            <div className="max-w-2xl mx-auto mb-10 shadow-xl shadow-[#414FA8]/5 rounded-full">
+              <BlogSearch />
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto mt-8">
+              {BLOG_CATEGORIES.map(category => (
+                <Link
+                  key={category.slug}
+                  href={`/blog/category/${category.slug}`}
+                  className="px-4 py-2 bg-white border border-gray-200 hover:border-[#414FA8]/30 hover:bg-[#414FA8]/5 text-gray-700 hover:text-[#414FA8] text-sm font-medium rounded-full transition-all duration-300 shadow-sm hover:shadow"
+                >
+                  {category.title}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-16">
         {/* Featured Article */}
         {featuredArticle && (
-          <section className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <span className="w-2 h-6 bg-[#414FA8] rounded-full inline-block"></span>
-              Featured
-            </h2>
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-shadow">
+          <section className="mb-20">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-2.5 h-8 bg-gradient-to-b from-[#414FA8] to-[#7181ea] rounded-full"></div>
+              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
+                Featured Story
+              </h2>
+            </div>
+            
+            <div className="bg-white rounded-3xl shadow-md shadow-gray-200/50 border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-300">
               <Link href={`/blog/${featuredArticle.slug}`} className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 relative h-64 md:h-auto bg-gray-100">
+                <div className="md:w-[55%] relative h-72 md:h-auto bg-gray-100 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={featuredArticle.coverImage || 'https://picsum.photos/800/400'}
                     alt={featuredArticle.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-[#414FA8]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent md:hidden"></div>
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold tracking-wide text-[#414FA8] shadow-sm">
                     {BLOG_CATEGORIES.find(c => c.slug === featuredArticle.category)?.title || featuredArticle.category}
                   </div>
                 </div>
-                <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 text-xs text-gray-500 mb-4">
+                <div className="md:w-[45%] p-8 md:p-12 flex flex-col justify-center bg-white relative">
+                  <div className="flex items-center gap-3 text-sm text-gray-500 mb-5 font-medium">
                     {featuredArticle.publishedAt && (
                       <span>{new Date(featuredArticle.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                     )}
-                    <span>•</span>
-                    <span>{featuredArticle.readingTime || 5} min read</span>
+                    <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                    <span className="flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      {featuredArticle.readingTime || 5} min read
+                    </span>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-[#414FA8] transition-colors">
+                  <h3 className="text-2xl md:text-4xl font-extrabold text-gray-900 mb-5 group-hover:text-[#414FA8] transition-colors leading-tight">
                     {featuredArticle.title}
                   </h3>
-                  <p className="text-gray-600 mb-6 line-clamp-3">
+                  <p className="text-gray-600 mb-8 text-lg line-clamp-3 leading-relaxed">
                     {featuredArticle.excerpt}
                   </p>
-                  <div className="flex items-center justify-between mt-auto">
+                  <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-100">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+                      <div className="w-10 h-10 rounded-full bg-gray-100 border-2 border-white shadow-sm overflow-hidden">
                         {featuredArticle.author.profileImage ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img src={featuredArticle.author.profileImage} alt={featuredArticle.author.name} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-[#414FA8] text-white font-bold text-xs">
+                          <div className="w-full h-full flex items-center justify-center bg-[#414FA8] text-white font-bold text-sm">
                             {featuredArticle.author.name.charAt(0)}
                           </div>
                         )}
                       </div>
-                      <span className="text-sm font-medium text-gray-900">{featuredArticle.author.name}</span>
+                      <span className="text-sm font-bold text-gray-900">{featuredArticle.author.name}</span>
                     </div>
-                    <span className="text-[#414FA8] font-semibold text-sm group-hover:underline">Read Article →</span>
+                    <span className="bg-[#414FA8]/10 text-[#414FA8] px-4 py-2 rounded-lg font-semibold text-sm group-hover:bg-[#414FA8] group-hover:text-white transition-colors">
+                      Read Story
+                    </span>
                   </div>
                 </div>
               </Link>
@@ -114,11 +134,11 @@ export default async function BlogPage() {
 
         {/* Popular / Latest Guides */}
         {popularArticles.length > 0 && (
-          <section className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <span className="w-2 h-6 bg-[#414FA8] rounded-full inline-block"></span>
-                Latest Guides
+          <section className="mb-20">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-2.5 h-8 bg-gradient-to-b from-[#414FA8] to-[#7181ea] rounded-full"></div>
+              <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
+                Latest Guides & Tips
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -128,6 +148,33 @@ export default async function BlogPage() {
             </div>
           </section>
         )}
+
+        {/* Newsletter Section */}
+        <section className="mt-12 bg-gradient-to-br from-[#414FA8] to-[#2B3575] rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-[#414FA8]/20">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+          
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay updated with SizeSnap</h2>
+            <p className="text-[#EEF1FB] mb-8 text-lg opacity-90">
+              Get the latest exam updates, document requirements, and tech tips delivered directly to your inbox. No spam, ever.
+            </p>
+            <form className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+              <input 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="flex-1 px-6 py-4 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/20 bg-white"
+                required
+              />
+              <button 
+                type="submit" 
+                className="px-8 py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-800 transition-colors whitespace-nowrap shadow-lg"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
       </div>
     </div>
   );

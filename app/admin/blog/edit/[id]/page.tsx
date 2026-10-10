@@ -8,6 +8,8 @@ import { ALL_TOOLS } from '@/data/tools';
 import { getArticleBySlug, getArticles, createArticle, updateArticle, generateId } from '@/lib/blog';
 import Link from 'next/link';
 import { ArrowLeft, Save, Eye, AlertTriangle } from 'lucide-react';
+import RichTextEditor from '@/components/admin/RichTextEditor';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 export default function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
@@ -25,7 +27,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
     content: '',
     category: BLOG_CATEGORIES[0].slug,
     tags: [],
-    status: 'DRAFT',
+    status: 'PUBLISHED',
     featured: false,
     priority: 0,
     author: {
@@ -116,8 +118,8 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
       if (!formData.officialSources || formData.officialSources.length === 0 || !formData.officialSources[0].url) {
         errors.push("Exam guides should have at least one official source URL");
       }
-      if (formData.status === 'PUBLISHED' && !formData.lastVerifiedAt) {
-        errors.push("Published exam guides must have a 'Last Verified' date");
+      if (!formData.lastVerifiedAt) {
+        errors.push("Exam guides must have a 'Last Verified' date");
       }
     }
 
@@ -132,11 +134,15 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
     }
 
     setSaving(true);
+    
+    // Force status to PUBLISHED as requested by user (no drafts)
+    const finalData = { ...formData, status: 'PUBLISHED' as const };
+    
     try {
       if (isNew) {
-        await createArticle(formData as Omit<Article, 'id' | 'createdAt'>);
+        await createArticle(finalData as Omit<Article, 'id' | 'createdAt'>);
       } else {
-        await updateArticle(resolvedParams.id, formData);
+        await updateArticle(resolvedParams.id, finalData);
       }
       // Trigger cache revalidation
       const { revalidateBlogCache } = await import('@/lib/actions');
@@ -185,15 +191,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
                 type="text"
                 name="title"
                 value={formData.title}
-                onChange={(e) => {
-                  handleChange(e);
-                  if (isNew) {
-                    setFormData(prev => ({
-                      ...prev,
-                      slug: e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
-                    }));
-                  }
-                }}
+                onChange={handleChange}
                 className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#414FA8]/20 focus:border-[#414FA8] transition-colors text-lg font-medium"
                 placeholder="Article title..."
               />
@@ -227,17 +225,13 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-sm font-semibold text-gray-900">Content (HTML or Markdown)</label>
+                <label className="block text-sm font-semibold text-gray-900">Content (Rich Text)</label>
               </div>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleChange}
-                rows={20}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#414FA8]/20 focus:border-[#414FA8] transition-colors font-mono text-sm"
-                placeholder="<h2>Introduction</h2>..."
+              <RichTextEditor
+                content={formData.content || ''}
+                onChange={(val) => setFormData(prev => ({ ...prev, content: val }))}
               />
-              <p className="text-xs text-gray-500 mt-2">Wrap headings in &lt;h2&gt; or &lt;h3&gt; for automatic Table of Contents.</p>
+              <p className="text-xs text-gray-500 mt-2">Wrap headings in Heading 2 or Heading 3 for automatic Table of Contents.</p>
             </div>
           </div>
 
@@ -273,21 +267,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
           <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-4">
             <h3 className="font-bold text-gray-900">Publishing</h3>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
-              <select
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#414FA8]/20 focus:border-[#414FA8] transition-colors font-medium"
-              >
-                <option value="DRAFT">Draft</option>
-                <option value="REVIEW">Needs Review</option>
-                <option value="SCHEDULED">Scheduled</option>
-                <option value="PUBLISHED">Published</option>
-                <option value="ARCHIVED">Archived</option>
-              </select>
-            </div>
+              {/* Status field removed as requested. It defaults to PUBLISHED. */}
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Category</label>
@@ -347,21 +327,12 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
             <h3 className="font-bold text-gray-900">Media</h3>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Cover Image URL</label>
-              <input
-                type="text"
-                name="coverImage"
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Cover Image</label>
+              <ImageUpload
                 value={formData.coverImage || ''}
-                onChange={handleChange}
-                placeholder="https://..."
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                onChange={(url) => setFormData(prev => ({ ...prev, coverImage: url }))}
+                folder="blog-covers"
               />
-              {formData.coverImage && (
-                <div className="mt-2 relative aspect-video rounded-lg overflow-hidden border border-gray-200">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={formData.coverImage} alt="Cover Preview" className="w-full h-full object-cover" />
-                </div>
-              )}
             </div>
           </div>
 

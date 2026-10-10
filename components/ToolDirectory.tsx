@@ -261,7 +261,7 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 ))}
               </div>
               <div className="mt-3 text-right">
-                <Link href="/tools" className="text-xs font-semibold text-[#414FA8] hover:underline">
+                <Link href={`/${category.id}-tools`} className="text-xs font-semibold text-[#414FA8] hover:underline">
                   View All {category.title} →
                 </Link>
               </div>

@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { storage } from '@/lib/firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { Upload, Loader2, Image as ImageIcon, X } from 'lucide-react';
 
 interface ImageUploadProps {
@@ -33,38 +31,32 @@ export default function ImageUpload({ value, onChange, folder = 'blog-covers' }:
 
     setUploading(true);
     setError('');
+    setProgress(50); // Just a visual indicator
 
     try {
-      // Create a unique filename
-      const ext = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${ext}`;
-      const storageRef = ref(storage, `${folder}/${fileName}`);
+      const reader = new FileReader();
+      
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        onChange(base64String);
+        setUploading(false);
+        setProgress(100);
+        setTimeout(() => setProgress(0), 500);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      };
+      
+      reader.onerror = () => {
+        setError('Failed to read file');
+        setUploading(false);
+        setProgress(0);
+      };
 
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const p = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setProgress(p);
-        },
-        (error) => {
-          console.error('Upload failed:', error);
-          setError('Upload failed. Please try again.');
-          setUploading(false);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          onChange(downloadURL);
-          setUploading(false);
-          setProgress(0);
-          if (fileInputRef.current) fileInputRef.current.value = '';
-        }
-      );
+      reader.readAsDataURL(file);
     } catch (err) {
       console.error(err);
       setError('An unexpected error occurred');
       setUploading(false);
+      setProgress(0);
     }
   };
 

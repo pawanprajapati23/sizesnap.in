@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next';
 import { ALL_TOOLS } from '@/data/tools';
+import { getPublishedArticles } from '@/lib/blog';
+import { BLOG_CATEGORIES } from '@/data/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://sizesnap.in';
 
   // Base routes
@@ -27,13 +29,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy',
     '/terms',
     '/contact',
+    '/blog',
   ];
 
   const sitemapData: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
-    priority: route === '' ? 1.0 : (route.includes('-tools') ? 0.9 : 0.8),
+    priority: route === '' ? 1.0 : (route === '/blog' ? 0.9 : (route.includes('-tools') ? 0.9 : 0.8)),
   }));
 
   // Tools routes
@@ -44,7 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       if (tool.seoPriority === 'Medium') priority = 0.6;
       if (tool.seoPriority === 'Low') priority = 0.4;
 
-      // Make absolutely sure we pull from slug dynamically and avoid tool.route type issues that code review warned about
       sitemapData.push({
         url: `${baseUrl}/tools/${tool.slug}`,
         lastModified: new Date(),
@@ -53,6 +55,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
   });
+
+  // Blog Categories
+  BLOG_CATEGORIES.forEach((category) => {
+    sitemapData.push({
+      url: `${baseUrl}/blog/category/${category.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
+  });
+
+  try {
+    // Blog Articles
+    const articles = await getPublishedArticles();
+    articles.forEach((article) => {
+      if (!article.noIndex) {
+        sitemapData.push({
+          url: `${baseUrl}/blog/${article.slug}`,
+          lastModified: article.updatedAt ? new Date(article.updatedAt) : (article.publishedAt ? new Date(article.publishedAt) : new Date()),
+          changeFrequency: 'weekly', // Articles might be updated
+          priority: 0.8,
+        });
+      }
+    });
+  } catch (error) {
+    console.error("Error generating sitemap for blog articles:", error);
+  }
 
   return sitemapData;
 }

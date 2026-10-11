@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { formatBytes, sanitizeFilename } from '@/lib/format-utils';
@@ -22,6 +23,10 @@ import {
   FileText,
   User,
   Sliders,
+  Calendar,
+  Type,
+  Zap,
+  ArrowRight,
 } from 'lucide-react';
 
 interface PresetSize {
@@ -40,7 +45,15 @@ const PRESET_SIZES: PresetSize[] = [
     width: 3.5,
     height: 4.5,
     unit: 'cm',
-    description: 'Indian Passport, Visa, SSC, UPSC, PAN Card',
+    description: 'Indian Passport, SSC, UPSC, Police & Govt Exams',
+  },
+  {
+    id: 'pan-card',
+    name: '2.5 × 3.5 cm',
+    width: 2.5,
+    height: 3.5,
+    unit: 'cm',
+    description: 'PAN Card (NSDL / UTI Application Portal)',
   },
   {
     id: 'us-visa',
@@ -56,7 +69,15 @@ const PRESET_SIZES: PresetSize[] = [
     width: 3.5,
     height: 3.5,
     unit: 'cm',
-    description: 'Stamp Size / Bank Account / Indian Admit Card',
+    description: 'Stamp Size / Bank Account / Admit Card',
+  },
+  {
+    id: 'schengen',
+    name: '3.5 × 4.5 cm (Europe)',
+    width: 3.5,
+    height: 4.5,
+    unit: 'cm',
+    description: 'Schengen, UK, Canada, Australia Visa',
   },
   {
     id: 'small-icon',
@@ -90,6 +111,17 @@ export function PassportPhotoMaker() {
   const [rotation, setRotation] = useState<number>(0);
   const [showFaceGuide, setShowFaceGuide] = useState<boolean>(true);
 
+  // Name & Date on Photo (SSC / Railway / Govt Exam strip)
+  const [addNameDate, setAddNameDate] = useState<boolean>(false);
+  const [candidateName, setCandidateName] = useState<string>('');
+  const [photoDate, setPhotoDate] = useState<string>(() => {
+    const d = new Date();
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const yyyy = d.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
+  });
+
   // Dragging interaction state
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const dragStartRef = useRef<{ x: number; y: number; initialPanX: number; initialPanY: number }>({
@@ -103,7 +135,7 @@ export function PassportPhotoMaker() {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Single photo result
+  // Single photo result (HQ)
   const [singleResult, setSingleResult] = useState<{
     url: string;
     blob: Blob;
@@ -113,7 +145,16 @@ export function PassportPhotoMaker() {
     filename: string;
   } | null>(null);
 
-  // A4 sheet result
+  // Govt Portal Compressed Result (20KB - 50KB guaranteed)
+  const [portalResult, setPortalResult] = useState<{
+    url: string;
+    blob: Blob;
+    size: number;
+    filename: string;
+  } | null>(null);
+
+  // Print sheet result
+  const [sheetType, setSheetType] = useState<'a4' | '4x6'>('a4');
   const [isGeneratingSheet, setIsGeneratingSheet] = useState<boolean>(false);
   const [sheetResult, setSheetResult] = useState<{
     url: string;
@@ -121,6 +162,7 @@ export function PassportPhotoMaker() {
     copiesCount: number;
     size: number;
     filename: string;
+    sheetName: string;
   } | null>(null);
 
   // Memory management
@@ -353,48 +395,124 @@ export function PassportPhotoMaker() {
       ctx.drawImage(img, -drawnW / 2, -drawnH / 2, drawnW, drawnH);
       ctx.restore();
 
-      canvas.toBlob(
-        (blob) => {
-          setIsProcessing(false);
-          if (!blob) {
-            setErrorMsg('Failed to generate passport photo blob.');
-            return;
+      // Render Name & Date strip at the bottom if enabled
+      if (addNameDate && (candidateName.trim() || photoDate.trim())) {
+        const stripHeight = Math.round(heightPx * 0.17);
+        const stripY = heightPx - stripHeight;
+
+        // Clean white background strip
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, stripY, widthPx, stripHeight);
+
+        // Thin separating border line
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = Math.max(1, Math.round(widthPx / 350));
+        ctx.strokeRect(0, stripY, widthPx, stripHeight);
+
+        // Text formatting
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        const nameText = candidateName.trim().toUpperCase();
+        let formattedDate = photoDate.trim();
+        if (formattedDate.includes('-')) {
+          const parts = formattedDate.split('-');
+          if (parts.length === 3 && parts[0].length === 4) {
+            formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
           }
+        }
 
-          const url = registerUrl(URL.createObjectURL(blob));
-          const cleanName = selectedImage.name.replace(/\.[^.]+$/, '');
-          const filename = sanitizeFilename(
-            `passport_${cleanName}_${activeWidth}x${activeHeight}${activeUnit}_${dpi}dpi`,
-            'jpg'
-          );
+        if (nameText && formattedDate) {
+          const nameFontSize = Math.max(11, Math.round(stripHeight * 0.36));
+          const dateFontSize = Math.max(10, Math.round(stripHeight * 0.30));
 
-          setSingleResult({
-            url,
-            blob,
-            widthPx,
-            heightPx,
-            size: blob.size,
-            filename,
+          ctx.font = `bold ${nameFontSize}px sans-serif`;
+          ctx.fillText(nameText, widthPx / 2, stripY + stripHeight * 0.32);
+
+          ctx.font = `600 ${dateFontSize}px sans-serif`;
+          ctx.fillText(`DOP: ${formattedDate}`, widthPx / 2, stripY + stripHeight * 0.72);
+        } else if (nameText) {
+          const nameFontSize = Math.max(12, Math.round(stripHeight * 0.5));
+          ctx.font = `bold ${nameFontSize}px sans-serif`;
+          ctx.fillText(nameText, widthPx / 2, stripY + stripHeight * 0.5);
+        } else if (formattedDate) {
+          const dateFontSize = Math.max(12, Math.round(stripHeight * 0.5));
+          ctx.font = `bold ${dateFontSize}px sans-serif`;
+          ctx.fillText(`DOP: ${formattedDate}`, widthPx / 2, stripY + stripHeight * 0.5);
+        }
+      }
+
+      const getBlobAtQuality = (q: number): Promise<Blob | null> => {
+        return new Promise((res) => canvas.toBlob(res, 'image/jpeg', q));
+      };
+
+      // 1. Generate Studio Quality (HQ)
+      const hqBlob = await getBlobAtQuality(0.95);
+      if (!hqBlob) {
+        setIsProcessing(false);
+        setErrorMsg('Failed to generate passport photo blob.');
+        return;
+      }
+
+      const cleanName = selectedImage.name.replace(/\.[^.]+$/, '');
+      const baseFilename = `passport_${cleanName}_${activeWidth}x${activeHeight}${activeUnit}`;
+      const hqUrl = registerUrl(URL.createObjectURL(hqBlob));
+
+      setSingleResult({
+        url: hqUrl,
+        blob: hqBlob,
+        widthPx,
+        heightPx,
+        size: hqBlob.size,
+        filename: sanitizeFilename(`${baseFilename}_${dpi}dpi`, 'jpg'),
+      });
+
+      // 2. Generate Govt Portal Ready (20KB - 50KB) version
+      try {
+        let portalBlob: Blob | null = null;
+        // Test qualities from 0.75 down to 0.25 to hit under 50KB (ideally between 25KB and 48KB)
+        const testQualities = [0.72, 0.60, 0.48, 0.38, 0.28];
+        for (const q of testQualities) {
+          const b = await getBlobAtQuality(q);
+          if (b) {
+            portalBlob = b;
+            if (b.size <= 50000) {
+              break;
+            }
+          }
+        }
+
+        if (portalBlob) {
+          const portalUrl = registerUrl(URL.createObjectURL(portalBlob));
+          setPortalResult({
+            url: portalUrl,
+            blob: portalBlob,
+            size: portalBlob.size,
+            filename: sanitizeFilename(`${baseFilename}_govt_portal_${Math.round(portalBlob.size / 1024)}KB`, 'jpg'),
           });
-        },
-        'image/jpeg',
-        0.95
-      );
+        }
+      } catch (err) {
+        console.error('Portal auto-compression failed:', err);
+      }
+
+      setIsProcessing(false);
     } catch (err) {
       setIsProcessing(false);
       setErrorMsg(err instanceof Error ? err.message : 'Error generating passport photo.');
     }
   };
 
-  // Generate A4 Multi-Photo Printable Sheet
-  const handleGenerateA4Sheet = async () => {
+  // Generate Multi-Photo Printable Sheet (A4 or 4x6 Photo Paper)
+  const handleGenerateSheet = async (type: 'a4' | '4x6') => {
     if (!singleResult) return;
 
+    setSheetType(type);
     setIsGeneratingSheet(true);
     await new Promise((r) => setTimeout(r, 60));
 
     try {
-      // Load the generated single passport photo
+      // Load the generated passport photo
       const photoImg = new Image();
       photoImg.src = singleResult.url;
       await new Promise<void>((resolve, reject) => {
@@ -403,16 +521,28 @@ export function PassportPhotoMaker() {
         photoImg.onerror = () => reject(new Error('Failed to load passport photo for sheet.'));
       });
 
-      // A4 dimensions in mm: 210 × 297 mm
-      // In inches: 8.27 × 11.69 inches
-      // Use 300 DPI for standard printable sheet
+      // Sheet dimensions in mm
+      // A4 = 210 × 297 mm
+      // 4x6 inch = 101.6 × 152.4 mm (Postcard photo paper)
+      let sheetW_mm = 210;
+      let sheetH_mm = 297;
+      let sheetTitle = 'A4 Sheet';
+      const margin_mm = type === '4x6' ? 5 : 10;
+      const gap_mm = type === '4x6' ? 2 : 3;
+
+      if (type === '4x6') {
+        sheetW_mm = 101.6;
+        sheetH_mm = 152.4;
+        sheetTitle = '4×6" Photo Paper';
+      }
+
       const sheetDpi = Math.min(300, dpi);
-      const a4WidthPx = Math.round((210 / 25.4) * sheetDpi);
-      const a4HeightPx = Math.round((297 / 25.4) * sheetDpi);
+      const sheetWidthPx = Math.round((sheetW_mm / 25.4) * sheetDpi);
+      const sheetHeightPx = Math.round((sheetH_mm / 25.4) * sheetDpi);
 
       const canvas = document.createElement('canvas');
-      canvas.width = a4WidthPx;
-      canvas.height = a4HeightPx;
+      canvas.width = sheetWidthPx;
+      canvas.height = sheetHeightPx;
       const ctx = canvas.getContext('2d');
       if (!ctx) {
         setIsGeneratingSheet(false);
@@ -421,12 +551,10 @@ export function PassportPhotoMaker() {
 
       // Fill pure white page
       ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, a4WidthPx, a4HeightPx);
+      ctx.fillRect(0, 0, sheetWidthPx, sheetHeightPx);
 
-      // Margins: 10mm (in px)
-      const marginPx = Math.round((10 / 25.4) * sheetDpi);
-      // Spacing between photos: 3mm
-      const gapPx = Math.round((3 / 25.4) * sheetDpi);
+      const marginPx = Math.round((margin_mm / 25.4) * sheetDpi);
+      const gapPx = Math.round((gap_mm / 25.4) * sheetDpi);
 
       // Photo size in px on this sheet
       let photoW_mm = activeWidth;
@@ -442,8 +570,8 @@ export function PassportPhotoMaker() {
       const photoW_px = Math.round((photoW_mm / 25.4) * sheetDpi);
       const photoH_px = Math.round((photoH_mm / 25.4) * sheetDpi);
 
-      const availableW = a4WidthPx - 2 * marginPx;
-      const availableH = a4HeightPx - 2 * marginPx;
+      const availableW = sheetWidthPx - 2 * marginPx;
+      const availableH = sheetHeightPx - 2 * marginPx;
 
       const cols = Math.floor((availableW + gapPx) / (photoW_px + gapPx));
       const rows = Math.floor((availableH + gapPx) / (photoH_px + gapPx));
@@ -468,14 +596,14 @@ export function PassportPhotoMaker() {
         }
       }
 
-      // Add a small footer label
+      // Footer label
       ctx.fillStyle = '#9CA3AF';
-      ctx.font = `${Math.round(sheetDpi * 0.1)}px sans-serif`;
+      ctx.font = `${Math.round(sheetDpi * 0.085)}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.fillText(
-        `SizeSnap.in • A4 Passport Photo Print Sheet (${copiesCount} Copies • ${activeWidth}×${activeHeight} ${activeUnit} • ${sheetDpi} DPI) • Print at 100% Scale`,
-        a4WidthPx / 2,
-        a4HeightPx - Math.round(marginPx / 2)
+        `SizeSnap.in • ${sheetTitle} (${copiesCount} Copies • ${activeWidth}×${activeHeight} ${activeUnit} • ${sheetDpi} DPI) • Print at 100% Scale`,
+        sheetWidthPx / 2,
+        sheetHeightPx - Math.round(marginPx / 3)
       );
 
       canvas.toBlob(
@@ -485,7 +613,7 @@ export function PassportPhotoMaker() {
 
           const sheetUrl = registerUrl(URL.createObjectURL(blob));
           const filename = sanitizeFilename(
-            `passport_A4_print_sheet_${copiesCount}copies_${activeWidth}x${activeHeight}${activeUnit}`,
+            `passport_${type === '4x6' ? '4x6inch' : 'A4'}_sheet_${copiesCount}copies_${activeWidth}x${activeHeight}${activeUnit}`,
             'jpg'
           );
 
@@ -495,6 +623,7 @@ export function PassportPhotoMaker() {
             copiesCount,
             size: blob.size,
             filename,
+            sheetName: sheetTitle,
           });
         },
         'image/jpeg',
@@ -503,6 +632,16 @@ export function PassportPhotoMaker() {
     } catch {
       setIsGeneratingSheet(false);
     }
+  };
+
+  const handleDownloadPortal = () => {
+    if (!portalResult) return;
+    const a = document.createElement('a');
+    a.href = portalResult.url;
+    a.download = portalResult.filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   };
 
   const handleDownloadSingle = () => {
@@ -797,6 +936,21 @@ export function PassportPhotoMaker() {
                     </div>
                   </div>
                 )}
+
+                {/* Realtime Name & Date Strip preview overlay */}
+                {addNameDate && (
+                  <div
+                    className="absolute bottom-0 left-0 right-0 bg-white border-t border-black text-black text-center flex flex-col justify-center items-center pointer-events-none z-10 select-none shadow-sm"
+                    style={{ height: '17%' }}
+                  >
+                    <span className="font-bold text-[10px] sm:text-[11px] leading-tight truncate px-1 text-black">
+                      {candidateName.trim() ? candidateName.toUpperCase() : 'CANDIDATE NAME'}
+                    </span>
+                    <span className="text-[9px] font-semibold text-gray-800 leading-tight">
+                      DOP: {photoDate || 'DD/MM/YYYY'}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Framing Controls: Zoom, Pan Hint, Rotate */}
@@ -845,6 +999,72 @@ export function PassportPhotoMaker() {
               </p>
             </div>
 
+            {/* Candidate Name & Date Strip for SSC/Police Exams */}
+            <div className="pt-3 border-t border-gray-100 space-y-2.5">
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={addNameDate}
+                  onChange={(e) => setAddNameDate(e.target.checked)}
+                  className="h-4 w-4 rounded border-gray-300 text-[#414FA8] focus:ring-[#414FA8] accent-[#414FA8]"
+                />
+                <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
+                  <Type className="h-3.5 w-3.5 text-[#414FA8]" />
+                  Add Name &amp; Date on Photo (Mandatory for SSC, Police &amp; Govt Exams)
+                </span>
+              </label>
+
+              {addNameDate && (
+                <div className="p-3 bg-[#EEF1FB]/70 border border-[#9AA3C8]/40 rounded-[4px] space-y-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div>
+                      <label className="text-[11px] font-semibold text-gray-700 block mb-1">
+                        Candidate Full Name (in CAPITAL):
+                      </label>
+                      <input
+                        type="text"
+                        value={candidateName}
+                        onChange={(e) => setCandidateName(e.target.value)}
+                        placeholder="e.g. AMIT KUMAR"
+                        className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white uppercase font-medium focus:outline-none focus:border-[#414FA8]"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] font-semibold text-gray-700 block mb-1">
+                        Date of Photo (DOP):
+                      </label>
+                      <div className="flex items-center gap-1.5">
+                        <input
+                          type="text"
+                          value={photoDate}
+                          onChange={(e) => setPhotoDate(e.target.value)}
+                          placeholder="DD/MM/YYYY"
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white font-medium focus:outline-none focus:border-[#414FA8]"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const d = new Date();
+                            const dd = String(d.getDate()).padStart(2, '0');
+                            const mm = String(d.getMonth() + 1).padStart(2, '0');
+                            const yyyy = d.getFullYear();
+                            setPhotoDate(`${dd}/${mm}/${yyyy}`);
+                          }}
+                          className="px-2 py-1.5 text-[10px] font-semibold bg-white border border-gray-200 rounded text-gray-600 hover:bg-gray-50 shrink-0"
+                          title="Set Today's Date"
+                        >
+                          Today
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-gray-600 leading-normal">
+                    Prints a clean white strip at the bottom of the photo with candidate name &amp; photo capture date, matching official SSC &amp; government exam rules.
+                  </p>
+                </div>
+              )}
+            </div>
+
             {/* Disclaimer on authority rules */}
             <div className="flex items-start gap-2 p-2.5 bg-amber-50 border border-amber-200 text-amber-900 text-[11px] rounded-[4px] leading-relaxed">
               <Info className="h-4 w-4 shrink-0 text-amber-600 mt-0.5" />
@@ -878,7 +1098,7 @@ export function PassportPhotoMaker() {
         </div>
       )}
 
-      {/* 3. Output & A4 Sheet Generation */}
+      {/* 3. Output & Multi-Sheet Generation */}
       {selectedImage && singleResult && (
         <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
@@ -895,7 +1115,7 @@ export function PassportPhotoMaker() {
             </div>
 
             <span className="self-start sm:self-auto px-2.5 py-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full">
-              {formatBytes(singleResult.size)}
+              HQ: {formatBytes(singleResult.size)}
             </span>
           </div>
 
@@ -914,7 +1134,7 @@ export function PassportPhotoMaker() {
               </span>
             </div>
 
-            {/* Specifications Details */}
+            {/* Specifications Details & Download Buttons */}
             <div className="sm:col-span-8 space-y-3">
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="p-2 bg-gray-50 rounded border border-gray-100">
@@ -935,17 +1155,42 @@ export function PassportPhotoMaker() {
                 </div>
               </div>
 
-              {/* Single Download button */}
-              <button
-                type="button"
-                onClick={handleDownloadSingle}
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-[4px] shadow-xs transition-colors cursor-pointer"
-              >
-                <Download className="h-4 w-4" />
-                <span>Download Single Passport Photo</span>
-              </button>
+              {/* Two Download Options: Studio HQ & Govt Portal (20KB - 50KB) */}
+              <div className="space-y-2 pt-1">
+                {/* Button 1: Govt Portal (20KB - 50KB) */}
+                {portalResult && (
+                  <button
+                    type="button"
+                    onClick={handleDownloadPortal}
+                    className="w-full flex items-center justify-between gap-2 py-2.5 px-4 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2b3470] text-white font-bold text-xs sm:text-sm rounded-[4px] shadow-sm transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-amber-300" />
+                      <span>Download for Govt Exam Portal (20KB – 50KB)</span>
+                    </div>
+                    <span className="bg-white/20 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
+                      {formatBytes(portalResult.size)}
+                    </span>
+                  </button>
+                )}
 
-              <div className="flex gap-2">
+                {/* Button 2: Studio Print (HQ) */}
+                <button
+                  type="button"
+                  onClick={handleDownloadSingle}
+                  className="w-full flex items-center justify-between gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-[4px] shadow-xs transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Download className="h-4 w-4" />
+                    <span>Download Studio High-Quality Photo</span>
+                  </div>
+                  <span className="bg-emerald-700 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
+                    {formatBytes(singleResult.size)}
+                  </span>
+                </button>
+              </div>
+
+              <div className="flex gap-2 pt-1">
                 <button
                   type="button"
                   onClick={() => setSingleResult(null)}
@@ -961,64 +1206,118 @@ export function PassportPhotoMaker() {
                   New Photo
                 </button>
               </div>
+
+              {/* Next Steps for Govt Exam Candidates */}
+              <div className="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[4px] mt-2 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#414FA8]" />
+                    <span>Next Steps for Exam Application Form</span>
+                  </span>
+                  <span className="text-[10px] text-gray-400 font-medium">Free Utilities</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
+                  <Link
+                    href="/tools/generate-signature"
+                    className="p-2.5 bg-white hover:bg-[#EEF1FB] border border-gray-200 hover:border-[#9AA3C8] rounded text-left transition-colors group flex items-center justify-between"
+                  >
+                    <div>
+                      <div className="text-xs font-semibold text-gray-800 group-hover:text-[#414FA8]">
+                        Format Signature (10KB–20KB)
+                      </div>
+                      <div className="text-[10px] text-gray-500">
+                        Official 4.0×2.0 cm running hand crop
+                      </div>
+                    </div>
+                    <ArrowRight className="h-3.5 w-3.5 text-gray-400 group-hover:text-[#414FA8] shrink-0" />
+                  </Link>
+
+                  <Link
+                    href="/tools/reduce-image-size-in-kb"
+                    className="p-2.5 bg-white hover:bg-[#EEF1FB] border border-gray-200 hover:border-[#9AA3C8] rounded text-left transition-colors group flex items-center justify-between"
+                  >
+                    <div>
+                      <div className="text-xs font-semibold text-gray-800 group-hover:text-[#414FA8]">
+                        Compress Marksheet / Thumb
+                      </div>
+                      <div className="text-[10px] text-gray-500">
+                        Exact 100KB, 200KB or 300KB target
+                      </div>
+                    </div>
+                    <ArrowRight className="h-3.5 w-3.5 text-gray-400 group-hover:text-[#414FA8] shrink-0" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Section 6: Printable A4 Sheet Generator */}
+          {/* Section: Printable Multi-Photo Sheet Generator (A4 & 4x6 Photo Paper) */}
           <div className="pt-4 border-t border-gray-200 space-y-3">
             <div className="flex items-center gap-2">
               <Printer className="h-4 w-4 text-[#414FA8]" />
               <h4 className="text-xs sm:text-sm font-bold text-gray-900">
-                Optional: Printable A4 Photo Sheet (Multi-Copy Grid)
+                Printable Photo Sheet (Ready for Printing on Photo Paper)
               </h4>
             </div>
             <p className="text-xs text-gray-600">
-              Fit multiple passport photos on a standard A4 page with cutting guides. Ready to print on glossy photo paper at any local cyber cafe or home printer.
+              Arrange multiple copies with precision cut guides. Choose standard <strong>A4 Sheet (up to 30 copies)</strong> or <strong>4×6 Inch Photo Paper (6–8 copies)</strong> for local studio/cyber cafe printers.
             </p>
 
-            {!sheetResult ? (
+            {/* Sheet format selector buttons */}
+            <div className="flex flex-wrap gap-2.5 pt-1">
               <button
                 type="button"
-                onClick={handleGenerateA4Sheet}
+                onClick={() => handleGenerateSheet('a4')}
                 disabled={isGeneratingSheet}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2b3470] disabled:bg-gray-400 text-white text-xs font-semibold rounded-[4px] transition-colors"
+                className="flex items-center gap-2 py-2 px-4 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2b3470] disabled:bg-gray-400 text-white text-xs font-semibold rounded-[4px] transition-colors cursor-pointer"
               >
-                {isGeneratingSheet ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin text-white" />
-                    <span>Calculating &amp; Arranging A4 Grid...</span>
-                  </>
+                {isGeneratingSheet && sheetType === 'a4' ? (
+                  <Loader2 className="h-4 w-4 animate-spin text-white" />
                 ) : (
-                  <>
-                    <FileText className="h-4 w-4" />
-                    <span>Generate A4 Multi-Photo Sheet</span>
-                  </>
+                  <FileText className="h-4 w-4" />
                 )}
+                <span>Generate A4 Sheet (30 Copies)</span>
               </button>
-            ) : (
-              <div className="bg-gray-50 p-4 rounded-[4px] border border-gray-200 space-y-3">
+
+              <button
+                type="button"
+                onClick={() => handleGenerateSheet('4x6')}
+                disabled={isGeneratingSheet}
+                className="flex items-center gap-2 py-2 px-4 bg-[#EEF1FB] hover:bg-[#E2E7F8] border border-[#9AA3C8] text-[#414FA8] text-xs font-bold rounded-[4px] transition-colors cursor-pointer"
+              >
+                {isGeneratingSheet && sheetType === '4x6' ? (
+                  <Loader2 className="h-4 w-4 animate-spin text-[#414FA8]" />
+                ) : (
+                  <Printer className="h-4 w-4" />
+                )}
+                <span>Generate 4×6&quot; Photo Paper Sheet</span>
+              </button>
+            </div>
+
+            {sheetResult && (
+              <div className="bg-gray-50 p-4 rounded-[4px] border border-gray-200 space-y-3 mt-3 animate-fadeIn">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                   <div>
                     <span className="text-xs font-bold text-gray-800 block">
-                      A4 Sheet Generated ({sheetResult.copiesCount} Copies)
+                      {sheetResult.sheetName} Ready ({sheetResult.copiesCount} Copies)
                     </span>
                     <span className="text-[11px] text-gray-500">
-                      Standard A4 (210 × 297 mm) • File size: {formatBytes(sheetResult.size)}
+                      File size: {formatBytes(sheetResult.size)} • 300 DPI high resolution
                     </span>
                   </div>
 
                   <button
                     type="button"
                     onClick={handleDownloadSheet}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-[4px] shadow-xs transition-colors"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-[4px] shadow-xs transition-colors cursor-pointer"
                   >
                     <Download className="h-4 w-4" />
-                    <span>Download A4 Sheet ({sheetResult.copiesCount} Photos)</span>
+                    <span>Download {sheetResult.sheetName} ({sheetResult.copiesCount} Photos)</span>
                   </button>
                 </div>
 
                 <div className="p-2.5 bg-blue-50 border border-blue-200 text-blue-800 text-[11px] rounded leading-relaxed">
-                  <strong>Printing Tip:</strong> When printing this sheet, select <strong>Actual Size</strong> or <strong>100% Scale</strong> in printer settings (do NOT choose &ldquo;Fit to page&rdquo;) to ensure exact {activeWidth} × {activeHeight} {activeUnit} dimensions on paper.
+                  <strong>Printing Tip:</strong> In your printer dialogue, select <strong>Actual Size</strong> or <strong>100% Scale</strong> (never &ldquo;Fit to page&rdquo;) to ensure exact {activeWidth} × {activeHeight} {activeUnit} millimeter accuracy on physical photo paper.
                 </div>
               </div>
             )}

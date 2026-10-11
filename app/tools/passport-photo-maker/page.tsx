@@ -8,19 +8,33 @@ import { PassportPhotoMaker } from '@/components/tool-ui/PassportPhotoMaker';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
+import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
+import AdsterraAd from '@/components/AdsterraAd';
 
 export const metadata: Metadata = {
-  title: 'Passport Photo Maker Online (3.5 x 4.5 cm) for Govt Exams | SizeSnap 2026',
+  title: 'Passport Photo Maker Online (3.5 x 4.5 cm) - SSC, UPSC, Govt Exams (20KB - 50KB) | SizeSnap',
   description:
-    'Free online passport photo maker. Crop and resize photos to official 3.5×4.5 cm, 2×2 inches (US Visa), and stamp sizes with custom DPI and printable A4 sheets.',
+    'Free online passport size photo maker. Resize & crop photos to official 3.5×4.5 cm, 2×2 inches (US Visa), stamp size, 20KB-50KB for SSC CGL, UPSC, PAN Card, admit cards with printable A4 sheets.',
+  keywords: [
+    'passport photo maker online',
+    'passport size photo maker 3.5 x 4.5 cm',
+    'ssc cgl photo resizer 20kb to 50kb',
+    'passport photo with name and date',
+    'upsc photo resizer online',
+    'indian passport photo size in cm',
+    'passport photo 20kb to 50kb online',
+    'printable a4 passport photo sheet',
+    'us visa photo maker 2x2 inches',
+  ],
   alternates: {
     canonical: 'https://sizesnap.in/tools/passport-photo-maker',
   },
   openGraph: {
-    title: 'Passport Photo Maker Online (3.5 x 4.5 cm) for Govt Exams | SizeSnap 2026',
+    title: 'Passport Photo Maker Online (3.5 x 4.5 cm) for SSC, UPSC, Govt Exams | SizeSnap',
     description:
-      'Create passport and visa photos online. Export single copies or full A4 printable photo sheets for free.',
+      'Crop & resize photos to official 3.5×4.5 cm, 2×2 inch and 20KB to 50KB for SSC CGL, UPSC, Govt exams. Free printable A4 sheet.',
     url: 'https://sizesnap.in/tools/passport-photo-maker',
+    type: 'website',
   },
 };
 
@@ -39,6 +53,14 @@ const FAQS = [
     a: 'The standard Indian passport photo dimension is 3.5 cm × 4.5 cm (35 mm × 45 mm). At 300 DPI print quality, this equals 413 × 531 pixels. The face should occupy 70% to 80% of the photograph with a clear view of both ears and shoulders.',
   },
   {
+    q: 'How do I resize a passport photo to 20KB – 50KB for SSC CGL & Govt exam portals?',
+    a: 'Government exam portals like SSC (CGL, CHSL, MTS, GD), UPSC, and State PSC require photographs strictly between 20 KB and 50 KB. Once you crop your 3.5 × 4.5 cm photo here, use our "Reduce Image Size in KB" tool to compress it instantly to under 50KB without losing face clarity.',
+  },
+  {
+    q: 'Can I use this for SSC, UPSC, Railway, and State PSC application forms?',
+    a: 'Yes. Most government exams specify 3.5 × 4.5 cm dimensions and file sizes between 20KB and 50KB. SizeSnap applies precise biometric face guides and ensures the correct pixel resolution for error-free online portal submission.',
+  },
+  {
     q: 'What are the dimensions for US Visa and OCI card photos?',
     a: 'US Visa and OCI cards require a square 2 × 2 inches (51 mm × 51 mm) photograph. At 300 DPI, the digital dimensions are exactly 600 × 600 pixels against a plain white or off-white background.',
   },
@@ -47,12 +69,8 @@ const FAQS = [
     a: 'After framing your photo, click "Generate A4 Multi-Photo Sheet". SizeSnap arranges up to 30 copies on a standard A4 page with cutting guides. When printing, select "Actual Size" or "100% Scale" in your printer dialogue (never choose "Fit to page") to ensure accurate centimeter dimensions on paper.',
   },
   {
-    q: 'Does SizeSnap remove complex background clutter automatically?',
-    a: 'SizeSnap allows filling white or light blue backgrounds on transparent images. For real photos with complex room backgrounds, we recommend taking a picture against a plain white or light-colored wall with even lighting.',
-  },
-  {
-    q: 'Can I use this for SSC, UPSC, and State PSC application forms?',
-    a: 'Yes. Most government exams specify 3.5 × 4.5 cm dimensions and file sizes between 20KB and 50KB. You can frame your photo here and then use our "Reduce Image Size in KB" tool to meet exact portal constraints.',
+    q: 'Does SizeSnap upload or store my biometric photo on servers?',
+    a: 'No. SizeSnap works 100% client-side inside your browser using HTML5 Canvas. Your personal photographs and biometric face data never leave your device and are never uploaded to any remote server.',
   },
 ];
 
@@ -61,6 +79,14 @@ export default function PassportPhotoMakerPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+      {/* Structured Data for Google Rich Snippets */}
+      <FAQSchema faqs={FAQS} />
+      <SoftwareAppSchema
+        name="SizeSnap Passport Photo Maker"
+        description="Free online passport photo maker. Crop & resize photos to official 3.5x4.5 cm, 2x2 inches, and generate printable A4 sheets for SSC, UPSC, and visa forms."
+        url="https://sizesnap.in/tools/passport-photo-maker"
+      />
+
       <Navbar />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
@@ -83,15 +109,21 @@ export default function PassportPhotoMakerPage() {
             {/* Header Box */}
             <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
               <h1 className="text-xl sm:text-2xl font-bold text-[#333333] tracking-tight mb-1.5">
-                Passport Photo Maker Online
+                Passport Photo Maker Online (3.5 × 4.5 cm)
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 leading-normal">
-                Crop and format photos to official 3.5 × 4.5 cm, 2 × 2 inches (US Visa), and stamp sizes. Adjust zoom, center your face with biometric guides, and generate printable A4 sheets.
+                Crop and format photos for SSC, UPSC, Govt Exams, PAN Card &amp; Visas. Add Name &amp; Date of photo (DOP), compress to 20KB–50KB, and export printable A4 or 4×6 photo paper sheets.
               </p>
             </div>
 
             {/* Interactive Passport Photo Maker Engine */}
             <PassportPhotoMaker />
+
+            {/* In-Content Responsive Adsterra Banner */}
+            <div className="overflow-hidden rounded-[4px] border border-gray-100 bg-white p-2 shadow-xs flex justify-center">
+              <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
+              <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
+            </div>
 
             {/* Internal Sister Tool Links */}
             <div className="bg-white p-4 rounded-[4px] border border-gray-200">
@@ -121,34 +153,44 @@ export default function PassportPhotoMakerPage() {
             </div>
 
             {/* Feature Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-[4px] border border-gray-200 text-xs text-gray-700">
-              <div className="flex items-center gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-white p-4 rounded-[4px] border border-gray-200 text-xs text-gray-700">
+              <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0">
                   <Lock className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold block text-gray-800">Biometric Guidelines</span>
-                  <span className="text-[11px] text-gray-500">Built-in head and shoulder framing</span>
+                  <span className="font-semibold block text-gray-800 text-[11px] sm:text-xs">Name &amp; Date Strip</span>
+                  <span className="text-[10px] text-gray-500">SSC &amp; Govt exam format</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0">
                   <Zap className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold block text-gray-800">Printable A4 Sheet</span>
-                  <span className="text-[11px] text-gray-500">Auto-grid with subtle cut lines</span>
+                  <span className="font-semibold block text-gray-800 text-[11px] sm:text-xs">20KB – 50KB Ready</span>
+                  <span className="text-[10px] text-gray-500">Auto portal compressor</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0">
+                  <Lock className="h-3.5 w-3.5" />
+                </div>
+                <div>
+                  <span className="font-semibold block text-gray-800 text-[11px] sm:text-xs">A4 &amp; 4×6 Sheets</span>
+                  <span className="text-[10px] text-gray-500">Cut-guides for printing</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded bg-[#EEF1FB] text-[#414FA8] shrink-0">
                   <Shield className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold block text-gray-800">100% Client-Side</span>
-                  <span className="text-[11px] text-gray-500">Your personal photos stay on your device</span>
+                  <span className="font-semibold block text-gray-800 text-[11px] sm:text-xs">100% Client-Side</span>
+                  <span className="text-[10px] text-gray-500">Photos stay on your device</span>
                 </div>
               </div>
             </div>

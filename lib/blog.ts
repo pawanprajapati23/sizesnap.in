@@ -1,6 +1,6 @@
 import { db } from './firebase';
 import { ref, get, set, remove, push } from 'firebase/database';
-import { Article } from '@/data/blog';
+import { Article, BUILTIN_ARTICLES } from '@/data/blog';
 
 // Generate a random slug-friendly ID if not using a push ID
 export const generateId = () => {
@@ -9,15 +9,29 @@ export const generateId = () => {
 
 // Fetch all articles
 export const getArticles = async (): Promise<Article[]> => {
-  const articlesRef = ref(db, 'blog/articles');
-  const snapshot = await get(articlesRef);
-  if (!snapshot.exists()) return [];
+  try {
+    const articlesRef = ref(db, 'blog/articles');
+    const snapshot = await get(articlesRef);
+    let dbArticles: Article[] = [];
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      dbArticles = Object.keys(data).map(key => ({
+        id: key,
+        ...data[key]
+      }));
+    }
 
-  const data = snapshot.val();
-  return Object.keys(data).map(key => ({
-    id: key,
-    ...data[key]
-  })).sort((a: Article, b: Article) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt));
+    const dbSlugs = new Set(dbArticles.map(a => a.slug));
+    const mergedArticles = [
+      ...dbArticles,
+      ...BUILTIN_ARTICLES.filter(b => !dbSlugs.has(b.slug))
+    ];
+
+    return mergedArticles.sort((a: Article, b: Article) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt));
+  } catch (error) {
+    console.error('Error fetching articles from Firebase:', error);
+    return BUILTIN_ARTICLES;
+  }
 };
 
 // Fetch published articles only

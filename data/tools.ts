@@ -2386,7 +2386,7 @@ export const ALL_TOOLS: ToolItem[] = [
     "relatedTools": [],
     "supportedFormats": [],
     "processingType": "client",
-    "status": "production",
+    "status": "draft",
     "seoPriority": "Medium",
     "analyticsIdentifier": "ai-face-generator",
     "popular": false
@@ -2922,20 +2922,32 @@ export const ALL_TOOLS: ToolItem[] = [
     "slug": "compress-image-to-40kb",
     "categoryId": "image",
     "categoryTitle": "Image Tools",
-    "shortDescription": "Free online tool for compress image to 40kb.",
+    "shortDescription": "Free online tool to resize and compress photos and signatures to exactly 40KB for UPSSSC, Railway RRB, SSC, and govt exam forms.",
     "keywords": [
       "compress image to 40kb",
-      "compress & convert"
+      "resize image to 40kb",
+      "40kb photo resizer",
+      "compress photo to 40kb online",
+      "photo size 40 kb",
+      "upsssc photo 40kb",
+      "railway signature 40kb",
+      "image compressor 40kb"
     ],
-    "aliases": [],
+    "aliases": ["resize image to 40kb", "photo size 40 kb", "40kb photo maker"],
     "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
+    "relatedTools": [
+      "passport-photo-maker",
+      "generate-signature",
+      "reduce-image-size-in-kb",
+      "compress-image-to-20kb",
+      "compress-image-to-50kb"
+    ],
+    "supportedFormats": ["jpg", "jpeg", "png", "webp"],
     "processingType": "client",
     "status": "production",
-    "seoPriority": "Medium",
+    "seoPriority": "High",
     "analyticsIdentifier": "compress-image-to-40kb",
-    "popular": false
+    "popular": true
   },
   {
     "id": "compress-image-to-200kb",

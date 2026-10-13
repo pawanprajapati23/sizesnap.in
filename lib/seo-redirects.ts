@@ -6,6 +6,13 @@ import { ALL_TOOLS } from '@/data/tools';
 
 const TOOL_SLUG_SET = new Set(ALL_TOOLS.map((t) => t.slug));
 
+// Dedicated standalone tool pages that exist in app/tools/
+const KNOWN_EXTRA_TOOLS = new Set([
+  '14kb-photo-size',
+  'compress-pdf-12kb',
+  'compress-pdf-140kb',
+]);
+
 // Reserved system routes that should never be treated as tool redirects
 export const SYSTEM_ROUTES = new Set([
   'about',
@@ -134,7 +141,12 @@ export function getSeoRedirect(pathname: string): string | null {
   // 6. PDF Compression with exact KB/MB (Top ranking on GSC: to-12kb, to-10kb, to-140kb, etc.)
   const pdfKbMatch = cleanPath.match(/compress-pdf.*?(?:to-)?(\d+)(?:-)?kb/);
   if (pdfKbMatch) {
-    return `/tools/compress-pdf?target=${pdfKbMatch[1]}`;
+    const targetKb = pdfKbMatch[1];
+    const exactPdfSlug = `compress-pdf-${targetKb}kb`;
+    if (TOOL_SLUG_SET.has(exactPdfSlug) || KNOWN_EXTRA_TOOLS.has(exactPdfSlug)) {
+      return `/tools/${exactPdfSlug}`;
+    }
+    return `/tools/compress-pdf?target=${targetKb}`;
   }
 
   const pdfMbMatch = cleanPath.match(/compress-pdf.*?(?:to-)?(\d+)(?:-)?mb/);
@@ -154,12 +166,20 @@ export function getSeoRedirect(pathname: string): string | null {
       : '/tools/compress-pdf';
   }
 
-  // 7. Image Compression & Resizing with exact KB (e.g. /compress-image/to-12kb, /resize-image/to-14kb)
+  // 7. Image Compression & Resizing with exact KB (e.g. /compress-image/to-12kb, /resize-image/to-14kb, /resize-image/to-40kb)
   const imageKbMatch = cleanPath.match(
     /(?:compress-image|resize-image|compress-to|to)-?(?:to-)?(\d+)(?:-)?kb/
   );
   if (imageKbMatch) {
-    return `/tools/reduce-image-size-in-kb?target=${imageKbMatch[1]}`;
+    const targetKb = imageKbMatch[1];
+    const exactToolSlug = `compress-image-to-${targetKb}kb`;
+    if (TOOL_SLUG_SET.has(exactToolSlug) || KNOWN_EXTRA_TOOLS.has(exactToolSlug)) {
+      return `/tools/${exactToolSlug}`;
+    }
+    if (targetKb === '14' && (TOOL_SLUG_SET.has('14kb-photo-size') || KNOWN_EXTRA_TOOLS.has('14kb-photo-size'))) {
+      return '/tools/14kb-photo-size';
+    }
+    return `/tools/reduce-image-size-in-kb?target=${targetKb}`;
   }
 
   const imageMbMatch = cleanPath.match(

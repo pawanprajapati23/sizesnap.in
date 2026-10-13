@@ -154,6 +154,15 @@ const TOOL_REDIRECT_MAP: Record<string, string> = {
   'add-logo-to-image': '/tools/image-watermark?type=logo',
   'watermark-images': '/tools/image-watermark?type=logo',
   'add-name-dob-on-photo': '/tools/image-watermark?type=text',
+  'join-multiple-images': '/tools/photo-collage-maker',
+  'merge-photo-signature': '/exams/ssc-photo-signature-resizer',
+  'unblur-face': '/tools/image-filters?mode=sharpen',
+  'pixelate-face': '/tools/image-filters?mode=pixelate',
+  'blemishes-remover': '/tools/ai-photo-enhancer',
+  'retouch-image': '/tools/ai-photo-enhancer',
+  'ai-face-generator': '/tools/ai-photo-enhancer',
+  'remove-object-from-photo': '/tools/remove-background',
+  'split-image': '/tools/crop-image',
 };
 
 const DEDICATED_TOOL_SLUGS = [
@@ -434,34 +443,20 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             {tool.slug === 'seo-content-analyzer' && <SeoContentAnalyzerTool />}
             {tool.slug === 'hreflang-generator' && <HreflangGeneratorTool />}
             {tool.slug === 'htaccess-redirect-generator' && <HtaccessRedirectGeneratorTool />}
-
-
-
-
-
-            {!['word-counter', 'character-counter', 'sentence-counter', 'reading-time-calculator', 'case-converter', 'text-repeater', 'remove-duplicate-lines', 'sort-lines', 'remove-empty-lines', 'text-cleaner', 'find-and-replace', 'text-reverse', 'character-frequency-counter', 'line-counter'].concat(['text-formatter', 'paragraph-formatter', 'remove-line-breaks', 'remove-extra-spaces', 'list-formatter', 'bullet-point-generator', 'numbered-list-generator', 'lorem-ipsum-generator', 'random-paragraph-generator', 'email-text-formatter']).includes(tool.slug) && (
-              <div className="border-2 border-dashed border-[#9AA3C8] rounded-md p-8 sm:p-12 text-center bg-[#FAFAFC] hover:bg-white transition-colors">
-                <div className="max-w-md mx-auto flex flex-col items-center">
-                  <div className="w-14 h-14 rounded-full bg-[#EEF1FB] text-[#414FA8] flex items-center justify-center mb-4 shadow-xs">
-                    <Upload className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-base font-bold text-gray-800 mb-1">
-                    Select your image or file to begin
-                  </h2>
-                  <p className="text-xs text-gray-500 mb-5">
-                    Drag and drop files here, or click to choose from your computer or phone.
-                  </p>
-                  <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-[#414FA8] text-white text-xs sm:text-sm font-semibold rounded shadow-sm hover:bg-[#343f88] active:scale-[0.98] transition-all">
-                    <Upload className="h-4 w-4" />
-                    <span>Choose File</span>
-                    <input type="file" className="sr-only" />
-                  </label>
-                  <p className="text-[11px] text-gray-400 mt-3">
-                    Supports JPG, PNG, WEBP, GIF, PDF (Max 25MB). No account needed.
-                  </p>
-                </div>
-              </div>
-            )}
+            {tool.slug === 'cgpa-calculator' && <CgpaCalculatorTool />}
+            {tool.slug === 'gpa-calculator' && <GpaCalculatorTool />}
+            {tool.slug === 'sgpa-calculator' && <SgpaCalculatorTool />}
+            {tool.slug === 'marks-percentage-calculator' && <MarksPercentageCalculatorTool />}
+            {tool.slug === 'attendance-calculator' && <AttendanceCalculatorTool />}
+            {tool.slug === 'required-attendance-calculator' && <RequiredAttendanceCalculatorTool />}
+            {tool.slug === 'study-hours-calculator' && <StudyHoursCalculatorTool />}
+            {tool.slug === 'pomodoro-timer' && <PomodoroTimerTool />}
+            {tool.slug === 'exam-countdown' && <ExamCountdownTool />}
+            {tool.slug === 'study-session-timer' && <StudySessionTimerTool />}
+            {tool.slug === 'grade-calculator' && <GradeCalculatorTool />}
+            {tool.slug === 'marks-required-calculator' && <MarksRequiredCalculatorTool />}
+            {tool.slug === 'weighted-grade-calculator' && <WeightedGradeCalculatorTool />}
+            {tool.slug === 'pdf-page-counter' && <PdfPageCounterTool />}
           </div>
 
           {/* Feature Highlights */}

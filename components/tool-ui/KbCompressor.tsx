@@ -18,7 +18,7 @@ import {
   Target,
 } from 'lucide-react';
 
-const BASE_PRESET_KB = [20, 50, 100, 200];
+const BASE_PRESET_KB = [20, 40, 50, 100, 200];
 
 interface KbCompressResult {
   blob: Blob;
@@ -269,16 +269,20 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
     document.body.removeChild(a);
   };
 
-  // Compute preset list including any custom URL query target (e.g. 12kb, 14kb, 28kb)
+  // Compute preset list including any initialTargetKb or URL query target (e.g. 10kb, 14kb, 30kb, 40kb)
   const activePresets = React.useMemo(() => {
+    const set = new Set(BASE_PRESET_KB);
+    if (initialTargetKb && initialTargetKb > 0) {
+      set.add(initialTargetKb);
+    }
     if (queryTarget) {
       const val = parseInt(queryTarget, 10);
-      if (!isNaN(val) && val > 0 && !BASE_PRESET_KB.includes(val)) {
-        return [val, ...BASE_PRESET_KB].sort((a, b) => a - b);
+      if (!isNaN(val) && val > 0) {
+        set.add(val);
       }
     }
-    return BASE_PRESET_KB;
-  }, [queryTarget]);
+    return Array.from(set).sort((a, b) => a - b);
+  }, [initialTargetKb, queryTarget]);
 
   return (
     <div className="space-y-4">
@@ -355,6 +359,8 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
                           ? 'Search Preset'
                           : kb === 20
                           ? 'Govt / SSC exam'
+                          : kb === 40
+                          ? 'UPSSSC / RRB Portal'
                           : kb === 50
                           ? 'Forms & Passports'
                           : kb === 100

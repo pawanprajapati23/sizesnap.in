@@ -19,6 +19,15 @@ const nextConfig: NextConfig = {
   },
   output: 'standalone',
   transpilePackages: ['motion'],
+  async redirects() {
+    return [
+      {
+        source: '/privacy',
+        destination: '/privacy-policy',
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config, {dev}) => {
     config.resolve.alias.canvas = false;
     // HMR is disabled in AI Studio via DISABLE_HMR env var.

@@ -25,8 +25,8 @@ export default async function BlogPage() {
   // Filter out featured from the rest
   const remainingArticles = allArticles.filter(a => a.id !== featuredArticle?.id);
 
-  // Popular could just be prioritized or latest
-  const popularArticles = remainingArticles.slice(0, 6);
+  // Display all published articles in the feed
+  const popularArticles = remainingArticles;
 
   return (
     <div className="min-h-screen bg-[#F5F5F7]">

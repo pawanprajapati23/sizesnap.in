@@ -6,13 +6,13 @@ import Image from 'next/image';
 import { ShieldCheck, Zap, Lock } from 'lucide-react';
 
 const KB_TAGS = [
-  { label: '10 KB', href: '/tools/reduce-image-size-in-kb?target=10' },
-  { label: '20 KB (Govt)', href: '/tools/reduce-image-size-in-kb?target=20' },
-  { label: '30 KB (Sign)', href: '/tools/reduce-image-size-in-kb?target=30' },
-  { label: '50 KB', href: '/tools/reduce-image-size-in-kb?target=50' },
-  { label: '100 KB', href: '/tools/reduce-image-size-in-kb?target=100' },
-  { label: '300 KB (UPSC)', href: '/tools/reduce-image-size-in-kb?target=300' },
-  { label: 'PDF 100 KB', href: '/tools/compress-pdf?target=100' },
+  { label: '10 KB', href: '/tools/compress-image-to-10kb' },
+  { label: '20 KB (Govt)', href: '/tools/compress-image-to-20kb' },
+  { label: '30 KB (Sign)', href: '/tools/compress-image-to-30kb' },
+  { label: '50 KB', href: '/tools/compress-image-to-50kb' },
+  { label: '100 KB', href: '/tools/compress-image-to-100kb' },
+  { label: '300 KB (UPSC)', href: '/tools/compress-image-to-300kb' },
+  { label: 'PDF 100 KB', href: '/tools/compress-pdf' },
 ];
 
 export function Footer() {

@@ -51,9 +51,18 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div>
-              <h2 className="text-base font-bold text-gray-900 mb-2">4. Cookies & Third-Party Services</h2>
+              <h2 className="text-base font-bold text-gray-900 mb-2">4. Cookies & Third-Party Advertising (Google AdSense)</h2>
+              <p className="mb-2">
+                SizeSnap displays advertisements provided by third-party advertising networks, including <strong>Google AdSense</strong>, to support and keep our utilities 100% free for everyone.
+              </p>
+              <ul className="list-disc pl-5 space-y-1 mb-2">
+                <li>Third-party vendors, including Google, use cookies (such as the DoubleClick cookie) to serve ads based on a user&apos;s prior visits to this website or other websites across the internet.</li>
+                <li>Google&apos;s use of advertising cookies enables it and its partners to serve personalized ads to users based on their browsing activity.</li>
+                <li>Users may opt out of personalized advertising at any time by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-[#414FA8] underline">Google Ads Settings</a> or through <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-[#414FA8] underline">aboutads.info</a>.</li>
+                <li>We also employ privacy-respecting analytics (Google Analytics 4) to monitor aggregated traffic patterns and optimize web performance.</li>
+              </ul>
               <p>
-                We may utilize standard non-identifying telemetry or ad network cookies (like Google AdSense) to measure page load speeds and sustain the free services. You can disable cookies at any time in your browser settings.
+                You may choose to disable or selectively turn off our cookies or third-party cookies in your browser settings at any time.
               </p>
             </div>
             

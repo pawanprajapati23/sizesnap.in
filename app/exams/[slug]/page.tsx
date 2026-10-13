@@ -16,8 +16,32 @@ import {
   AlertTriangle,
   Award,
   ArrowRight,
+  BookOpen,
 } from 'lucide-react';
 import { HindiExamGuide } from '@/components/HindiExamGuides';
+
+const EXAM_BLOG_GUIDES: Record<string, { title: string; href: string }> = {
+  ssc: {
+    title: 'SSC CGL 2026: Photo Size, Name & Date Guidelines',
+    href: '/blog/ssc-cgl-photo-size-name-date-guidelines-2026',
+  },
+  upsc: {
+    title: 'UPSC CSE & OTR 2026: Photo and Signature Size Guide',
+    href: '/blog/upsc-photo-signature-size-otr-guidelines-2026',
+  },
+  'ibps-bank': {
+    title: 'IBPS & SBI Upload: Photo, Signature, Thumb & Declaration',
+    href: '/blog/ibps-sbi-photo-signature-thumb-declaration-guidelines',
+  },
+  'up-police': {
+    title: 'UP Police Constable & SI 2026 Photo & Signature Guide',
+    href: '/blog/up-police-photo-signature-size-guidelines-2026',
+  },
+  'delhi-police': {
+    title: 'Delhi Police Constable 2026: Photo & Signature Guide',
+    href: '/blog/delhi-police-photo-signature-size-guidelines-2026',
+  },
+};
 
 interface ExamPageProps {
   params: Promise<{
@@ -229,6 +253,26 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
                 </div>
               </div>
             </div>
+
+            {/* Official Notification Guide Link */}
+            {EXAM_BLOG_GUIDES[exam.id] && (
+              <div className="bg-[#EEF1FB] p-4 rounded-[4px] border border-[#414FA8]/20 space-y-2">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#414FA8]">
+                  <BookOpen className="h-4 w-4" />
+                  <span>Official Guide & Instructions</span>
+                </div>
+                <p className="text-[11px] text-gray-600 leading-relaxed">
+                  Read our full breakdown of notification rules, Name &amp; Date guidelines, and rejection fixes.
+                </p>
+                <Link
+                  href={EXAM_BLOG_GUIDES[exam.id].href}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-[#414FA8] hover:underline"
+                >
+                  <span>{EXAM_BLOG_GUIDES[exam.id].title}</span>
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
+            )}
 
             {/* Other Exams Links */}
             <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs space-y-3">

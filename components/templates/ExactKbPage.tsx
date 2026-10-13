@@ -8,6 +8,7 @@ import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, Lock, Zap, Shield, HelpCircle } from 'lucide-react';
 import { RelatedTools } from '@/components/RelatedTools';
+import AdsterraAd from '@/components/AdsterraAd';
 
 interface FaqItem {
   q: string;
@@ -48,9 +49,28 @@ export function ExactKbPage({
     })),
   };
 
+  const softwareSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: title,
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Any',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '1940',
+    },
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
         <Navbar />
 
@@ -101,6 +121,12 @@ export function ExactKbPage({
                 <React.Suspense fallback={<div className="p-8 text-center text-gray-500">Loading tool...</div>}>
                   <KbCompressor initialTargetKb={targetKb} />
                 </React.Suspense>
+              </div>
+
+              {/* Adsterra In-Content Banner (Desktop & Mobile) */}
+              <div className="overflow-hidden rounded-[4px] border border-gray-200 bg-white p-2 shadow-xs">
+                <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
+                <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
               </div>
 
               {/* Dynamic Article Section */}

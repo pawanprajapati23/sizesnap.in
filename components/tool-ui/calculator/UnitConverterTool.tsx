@@ -48,25 +48,27 @@ export function UnitConverterTool() {
     if (category === 'Temperature') {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setUnit1('Celsius');
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setUnit2('Fahrenheit');
     } else {
       const keys = Object.keys((UNITS as any)[category].rates);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setUnit1(keys[0]);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setUnit2(keys[1] || keys[0]);
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     setVal1('');
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     setVal2('');
   }, [category]);
 
   const handleVal1Change = (v: number) => {
     setVal1(v);
-    if (isNaN(v)) { // eslint-disable-next-line react-hooks/set-state-in-effect
-    setVal2(''); return; }
+    if (isNaN(v)) {
+      setVal2('');
+      return;
+    }
 
     if (category === 'Temperature') {
       let c = 0;
@@ -89,8 +91,10 @@ export function UnitConverterTool() {
 
   const handleVal2Change = (v: number) => {
     setVal2(v);
-    if (isNaN(v)) { // eslint-disable-next-line react-hooks/set-state-in-effect
-    setVal1(''); return; }
+    if (isNaN(v)) {
+      setVal1('');
+      return;
+    }
 
     if (category === 'Temperature') {
       let c = 0;

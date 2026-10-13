@@ -81,6 +81,14 @@ export default function FeedbackWidget() {
     };
   }, []);
 
+
+  const closeDownloadModal = () => {
+    setShowDownloadModal(false);
+    try {
+      sessionStorage.setItem('sizesnap_feedback_dismissed', String(Date.now()));
+    } catch {}
+  };
+
   // Close modals on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -92,13 +100,6 @@ export default function FeedbackWidget() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showDownloadModal, isOpen]);
-
-  const closeDownloadModal = () => {
-    setShowDownloadModal(false);
-    try {
-      sessionStorage.setItem('sizesnap_feedback_dismissed', String(Date.now()));
-    } catch {}
-  };
 
   // Hide widget entirely if user is in admin panel
   if (pathname?.startsWith('/admin')) {

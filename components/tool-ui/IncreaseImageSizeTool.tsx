@@ -181,7 +181,8 @@ export function IncreaseImageSizeTool() {
           {/* Left: Original Preview & Settings */}
           <div className="space-y-4">
             <div className="bg-gray-100 border border-gray-200 rounded p-2 flex items-center justify-center h-[300px] relative overflow-hidden">
-                <img src={imageSrc} alt="Original Preview" className="max-w-full max-h-full object-contain" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+<img src={imageSrc} alt="Original Preview" className="max-w-full max-h-full object-contain" />
             </div>
             
             <div className="bg-gray-50 p-4 rounded border border-gray-200 space-y-4">
@@ -239,7 +240,8 @@ export function IncreaseImageSizeTool() {
                 {resultUrl ? (
                     <div className="w-full h-full flex flex-col items-center space-y-4 animate-in fade-in zoom-in-95 duration-300">
                         <div className="flex-1 w-full bg-gray-100 border border-gray-200 rounded p-2 flex items-center justify-center">
-                            <img src={resultUrl} alt="Result Preview" className="max-w-full max-h-[220px] object-contain shadow-sm" />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+<img src={resultUrl} alt="Result Preview" className="max-w-full max-h-[220px] object-contain shadow-sm" />
                         </div>
                         
                         <div className="w-full bg-emerald-50 border border-emerald-200 p-3 rounded text-center">

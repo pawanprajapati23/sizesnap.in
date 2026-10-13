@@ -278,7 +278,7 @@ export default function FeedbackWidget() {
             ) : (
               <form onSubmit={handleDownloadSubmit} className="pt-3 space-y-3">
                 <p className="text-xs sm:text-sm font-medium text-gray-800 leading-snug">
-                  Iss website me aapko use krte time koi problem aa rhi ho to please bataye:
+                  Website me koi problem lag rhi hai to please hame bataye
                 </p>
 
                 <textarea

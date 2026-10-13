@@ -1667,4 +1667,643 @@ You must attend the next <strong>25 classes in a row</strong> to climb back to 7
 `,
   },
 
+  {
+    id: 'rrb-ntpc-photo-signature-certificate-size-guidelines-2026',
+    title: "RRB NTPC 2026 Photo, Signature & SC/ST Certificate Size: Online Form Upload Guidelines",
+    slug: 'rrb-ntpc-photo-signature-certificate-size-guidelines-2026',
+    excerpt: "Applying for RRB NTPC Graduate Level or 10+2 UG Posts 2026? Learn exact photo dimensions (35x45mm, 30KB-70KB), signature rules (30KB-70KB in running hand), and SC/ST travel pass PDF limits to avoid rejection.",
+    category: 'exam-guides',
+    tags: ["RRB NTPC","Railway Exam","Photo Resizer","Signature Upload","Railway Form 2026"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 9,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 7,
+    publishedAt: 1773400000000,
+    createdAt: 1773400000000,
+    seoTitle: "RRB NTPC 2026 Photo and Signature Size in KB | Railway Form Upload Guide",
+    seoDescription: "Official photo size (30KB-70KB, 35x45mm) and signature size (30KB-70KB) for RRB NTPC 2026 Graduate & 10+2 posts. Learn background color, SC/ST certificate PDF rules, and resize online free.",
+    canonicalUrl: 'https://sizesnap.in/blog/rrb-ntpc-photo-signature-certificate-size-guidelines-2026',
+    relatedTools: ["compress-image-to-50kb","compress-image-to-30kb","compress-pdf","generate-signature","passport-photo-maker"],
+    relatedArticles: ["rrb-railway-photo-signature-size-guidelines-2026","how-to-resize-signature-to-10kb-20kb-online","how-to-compress-pdf-to-100kb-140kb-for-govt-portals"],
+    content: `
+<h2>RRB NTPC 2026 Recruitment: Mandatory Document Upload Rules</h2>
+<p>Railway Recruitment Boards (RRBs) have released official recruitment notifications for thousands of <strong>RRB NTPC Graduate Level (Pay Levels 5 &amp; 6)</strong> and <strong>10+2 Undergraduate Level (Pay Levels 2 &amp; 3)</strong> vacancies. During registration on the official regional RRB portals, thousands of candidatures get flagged or rejected during automatic computer scrutiny due to non-compliant photographs and signatures.</p>
+
+<p>Unlike previous recruitment cycles, Indian Railways implements strict automated biometric checks. Scanned photos with colored spectacles, caps, shadows, or incorrect pixel compression are disqualified before the admit card generation stage.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Document</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">File Size (KB)</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Dimensions / Aspect Ratio</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Format &amp; Background</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Passport Photograph</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">30 KB to 70 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">35 mm &times; 45 mm (320 &times; 240 px)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Clear White Background</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Candidate Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">30 KB to 70 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">50 mm &times; 20 mm (140 &times; 60 px)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Black Ink on White Paper</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>SC / ST Free Travel Pass Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 500 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Standard A4 Portrait Page</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only, Clearly Legible Seal</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ Quick Online Resizer for RRB NTPC</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Resize your photo to the exact Railway limit in seconds using our dedicated <a href="/tools/compress-image-to-50kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 50KB Photo Compressor</a>, format signatures with our <a href="/tools/compress-image-to-30kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">30KB Signature Resizer</a>, and compress your reservation pass using our <a href="/tools/compress-pdf" style="color: #414FA8; font-weight: bold; text-decoration: underline;">Free PDF Compressor</a>.</p>
+</div>
+
+<h2>Detailed Photograph Specifications for Railway NTPC</h2>
+<ul>
+  <li><strong>Recency:</strong> The photo must be taken within 3 months of the notification date. It must match your appearance on the CBT exam day.</li>
+  <li><strong>Background:</strong> Plain white or very light off-white background is compulsory. Photos with patterned, outdoor, or dark blue backgrounds are rejected.</li>
+  <li><strong>Head Position &amp; Coverage:</strong> Front-facing, full face centered, covering at least 70% to 80% of the image area. Both ears must be clearly visible.</li>
+  <li><strong>Accessories Prohibition:</strong> Do NOT wear dark sunglasses, polarized spectacles, caps, mufflers, or headphones. If you wear regular power glasses, ensure there is zero flash reflection on the lenses.</li>
+  <li><strong>Selfie Warning:</strong> Selfies or smartphone front-camera photos with angled views are strictly banned. Have someone else photograph you under direct front lighting.</li>
+</ul>
+
+<h2>Signature Upload Rules: How to Avoid Rejection</h2>
+<ol>
+  <li>Draw a box of <strong>50 mm &times; 20 mm</strong> on clean white A4 paper using a black ballpoint or gel pen.</li>
+  <li>Sign strictly in <strong>running handwriting</strong>. Signatures written in ALL CAPITAL (BLOCK) LETTERS are disqualified by RRB rules.</li>
+  <li>Crop closely around the signature box to eliminate unnecessary paper margins.</li>
+  <li>Maintain file size strictly between <strong>30 KB and 70 KB</strong>. If your phone produces a 2 MB picture, compress it to 45 KB using <a href="/tools/compress-image-to-50kb">SizeSnap</a> without losing stroke sharpness.</li>
+</ol>
+
+<h2>SC/ST Free Travel Pass Certificate PDF Requirements</h2>
+<p>Candidates belonging to SC/ST categories who opt for free sleeper-class rail travel authority must upload a clear scanned copy of their community certificate issued by a competent revenue authority (Tehsildar/SDM). The file must be in <strong>PDF format under 500 KB</strong>. If your scanner generates a multi-megabyte PDF, use our client-side <a href="/tools/compress-pdf">SizeSnap PDF Compressor</a> to reduce file size while maintaining stamp and signature legibility.</p>
+
+<h2>Frequently Asked Questions (FAQs)</h2>
+<p><strong>Q1: What should I do if my photo size is 25 KB?</strong><br>
+The RRB NTPC portal will reject files below 30 KB. Use our <a href="/tools/compress-image-to-50kb">SizeSnap 50KB Compressor</a> to output an optimal 45 KB to 55 KB file that falls safely inside the 30KB&ndash;70KB range.</p>
+
+<p><strong>Q2: Can I wear religious headgear in the RRB photo?</strong><br>
+Yes, religious headgear (such as a turban or hijab) is permitted, provided it does not cast shadows across your face, forehead, or chin.</p>
+`,
+  },
+  {
+    id: 'bpsc-tre-4-teacher-photo-signature-guidelines-2026',
+    title: "BPSC TRE 4.0 Teacher 2026 Photo & Signature Guidelines: 33,320 Posts Online Form Rules",
+    slug: 'bpsc-tre-4-teacher-photo-signature-guidelines-2026',
+    excerpt: "Applying for BPSC School Teacher TRE 4.0 (33,320 vacancies)? Master the live webcam photo capture, Hindi & English signature size (10-20KB), and 100KB certificate PDF compression.",
+    category: 'exam-guides',
+    tags: ["BPSC TRE 4.0","Teacher Recruitment","Photo Upload","Signature Size","Bihar Teacher 2026"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 9,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 7,
+    publishedAt: 1773401000000,
+    createdAt: 1773401000000,
+    seoTitle: "BPSC TRE 4.0 Teacher Photo and Signature Size in KB | Online Form Upload Rules",
+    seoDescription: "Complete BPSC TRE 4.0 photo upload rules (250x250 px, max 100KB), separate Hindi & English signature size (10KB-20KB), and 100KB certificate PDF guide. Fast free resizer.",
+    canonicalUrl: 'https://sizesnap.in/blog/bpsc-tre-4-teacher-photo-signature-guidelines-2026',
+    relatedTools: ["compress-image-to-20kb","compress-image-to-10kb","compress-pdf","passport-photo-maker","generate-signature"],
+    relatedArticles: ["ctet-exam-photo-signature-size-guidelines-2026","how-to-resize-signature-to-10kb-20kb-online","how-to-compress-pdf-to-100kb-140kb-for-govt-portals"],
+    content: `
+<h2>BPSC TRE 4.0 Recruitment: Complete Documentation Overview</h2>
+<p>The Bihar Public Service Commission (BPSC) has commenced online registration for <strong>School Teacher TRE 4.0 (Primary, Middle, Secondary, and Higher Secondary Teacher Posts - over 33,320 vacancies)</strong>. The BPSC portal has one of the strictest scrutiny modules among state PSCs in India, requiring both <strong>Live Webcam Photo Capture</strong> and separate <strong>Hindi and English signatures</strong>, alongside multi-document PDF uploads under 100 KB.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Upload Field</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Max File Size</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Pixel Dimensions</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Mandatory Rules</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Live Webcam Photo</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Captured Live via Browser</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Standard Camera Frame</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Plain White Background, Proper Ambient Lighting</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Uploaded Studio Photo</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 100 KB (Recommended 30-50 KB)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">250 &times; 250 px</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPEG/JPG, Recent Studio Passport Photo</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>English Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">220 &times; 100 px</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Black/Blue Ink on White Paper</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Hindi Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">220 &times; 100 px</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Clear Hindi Handwritten Script</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Certificates (CTET / B.Ed / Domicile)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 100 KB each</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">A4 Scanned Page</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only, Clearly Readable Serial Numbers</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #ECFDF5; border-left: 4px solid #10B981; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #065F46;">💡 SizeSnap Instant Tools for BPSC TRE 4.0</p>
+  <p style="margin: 6px 0 0 0; color: #047857;">Resize both Hindi and English signatures to exact 10KB-20KB limits using our <a href="/tools/compress-image-to-20kb" style="color: #065F46; font-weight: bold; text-decoration: underline;">SizeSnap 20KB Signature Resizer</a>, create your passport photo with our <a href="/tools/passport-photo-maker" style="color: #065F46; font-weight: bold; text-decoration: underline;">Passport Photo Maker</a>, and compress CTET/STET marksheets below 100KB using our <a href="/tools/compress-pdf" style="color: #065F46; font-weight: bold; text-decoration: underline;">100KB PDF Compressor</a>.</p>
+</div>
+
+<h2>BPSC Live Photo Capture Checklist</h2>
+<ol>
+  <li><strong>Background:</strong> Sit in front of a flat, light-colored or white wall. Do not sit in front of windows, fans, doors, or furniture.</li>
+  <li><strong>Direct Lighting:</strong> Ensure light falls directly onto your face from the front. If you have backlight, your webcam photo will appear silhouetted and dark, causing portal rejection.</li>
+  <li><strong>Eye Level:</strong> Place your laptop or webcam at eye level. Look directly into the camera lens with neutral facial expression and both eyes open.</li>
+</ol>
+
+<h2>Separate Hindi and English Signature Rules</h2>
+<p>BPSC requires applicants to upload two distinct signature files:</p>
+<ul>
+  <li><strong>English Signature:</strong> Sign in running cursive hand. Do NOT write your name in separate capital letters.</li>
+  <li><strong>Hindi Signature:</strong> Sign in clear Devanagari script (running hand).</li>
+  <li>Both files must strictly weigh between <strong>10 KB and 20 KB</strong>. If your file is 8 KB, the server will error with "File size too small". If it is 22 KB, it will error with "File exceeds 20KB". Use <a href="/tools/compress-image-to-20kb">SizeSnap</a> to hit the exact 15 KB sweet spot.</li>
+</ul>
+
+<h2>100KB PDF Certificate Compression for BPSC</h2>
+<p>BPSC requires candidates to upload multiple certificates: CTET/STET certificate, B.Ed/D.El.Ed marksheet, Bihar Domicile certificate, and Category (EWS/OBC/SC/ST) certificate. Each file must be a <strong>PDF strictly under 100 KB</strong>. Use our <a href="/tools/compress-pdf">SizeSnap PDF Compressor</a> to reduce file weight while preserving certificate serial numbers, QR codes, and officer signatures.</p>
+`,
+  },
+  {
+    id: 'ssc-chsl-photo-signature-size-guidelines-2026',
+    title: "SSC CHSL 10+2 2026 Photo & Signature Size: Online Application Form Upload Guidelines",
+    slug: 'ssc-chsl-photo-signature-size-guidelines-2026',
+    excerpt: "Complete guide to SSC CHSL 10+2 2026 live photo capture and signature upload (10KB-20KB, 4.0x2.0 cm). Avoid instant application rejection on the new SSC portal.",
+    category: 'exam-guides',
+    tags: ["SSC CHSL 2026","SSC Photo Size","Signature 10KB 20KB","SSC New Portal","Govt Exam Photo"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 8,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 6,
+    publishedAt: 1773402000000,
+    createdAt: 1773402000000,
+    seoTitle: "SSC CHSL 2026 Photo and Signature Size in KB | New Portal Guidelines",
+    seoDescription: "Official rules for SSC CHSL 10+2 (2536 Posts) live photo capture and signature size (10KB to 20KB, 140x60 px). Resize online free without blur or rejection on ssc.gov.in.",
+    canonicalUrl: 'https://sizesnap.in/blog/ssc-chsl-photo-signature-size-guidelines-2026',
+    relatedTools: ["compress-image-to-20kb","compress-image-to-10kb","generate-signature","reduce-image-size-in-kb","passport-photo-maker"],
+    relatedArticles: ["ssc-cgl-photo-size-name-date-guidelines-2026","how-to-resize-signature-to-10kb-20kb-online"],
+    content: `
+<h2>SSC CHSL 10+2 2026: New Application & Upload Standards</h2>
+<p>Staff Selection Commission (SSC) conducts the <strong>Combined Higher Secondary (10+2) Level Examination 2026 (CHSL)</strong> for Lower Division Clerk (LDC), Junior Secretariat Assistant (JSA), and Data Entry Operator (DEO) positions. Since the migration to the new official portal (<code>ssc.gov.in</code>), upload guidelines have been revamped with automated computer-vision scrutiny.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Element</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Mandatory Size</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Dimensions / Ratio</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Key Rejection Condition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Live Photo (Webcam / MySSC App)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Live Capture Module</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Full Frontal Face (3.5 &times; 4.5 cm)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Wearing Spectacles/Caps, Poor Light, Angled Face</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Scanned Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">4.0 cm &times; 2.0 cm (140 &times; 60 px)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Blurry Pixels, Capital Letters, Under 10KB or Over 20KB</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">🚀 Instant SSC Signature Resizer</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Resize your signature directly to exact SSC specifications (10KB&ndash;20KB, 4.0&times;2.0 cm) using our dedicated <a href="/exams/ssc-photo-signature-resizer" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SSC Photo &amp; Signature Resizer Tool</a> or compress an existing image with our <a href="/tools/compress-image-to-20kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">20KB Compressor</a>.</p>
+</div>
+
+<h2>Common Reasons SSC Rejects CHSL Applications</h2>
+<ul>
+  <li><strong>Spectacles on Face:</strong> SSC has strictly disallowed all types of spectacles, eyeglasses, and dark glasses in photo captures. Even clear prescription lenses cause flash glare, triggering automatic cancellation.</li>
+  <li><strong>Caps and Coverings:</strong> Head coverings such as caps, beanies, or masks are completely banned.</li>
+  <li><strong>Signature in Block Capitals:</strong> Writing your name in isolated capital letters (e.g., &quot;AMIT KUMAR&quot;) instead of running cursive script will invalidate your candidature.</li>
+  <li><strong>Dark or Grainy Background:</strong> A textured or dim background fails SSC's automated threshold test. Always stand in front of a clean white background.</li>
+</ul>
+
+<h2>Step-by-Step Guide to Prepare SSC Signature Online</h2>
+<ol>
+  <li>Sign with a fresh black ballpoint pen on plain white printer paper.</li>
+  <li>Take a bright photo with your smartphone without casting a shadow over the paper.</li>
+  <li>Open <a href="/exams/ssc-photo-signature-resizer">SizeSnap SSC Resizer</a> and upload the photo.</li>
+  <li>The tool automatically crops the signature to 4.0 &times; 2.0 cm and compresses the file to 15 KB (safely within the 10KB&ndash;20KB window).</li>
+  <li>Download the JPG and upload directly to <code>ssc.gov.in</code>.</li>
+</ol>
+`,
+  },
+  {
+    id: 'india-post-gds-merit-list-document-verification-pdf-guide-2026',
+    title: "India Post GDS 1st Merit List 2026: Document Verification (DV) Checklist & Certificate PDF Size Guide",
+    slug: 'india-post-gds-merit-list-document-verification-pdf-guide-2026',
+    excerpt: "Shortlisted in India Post GDS 1st Merit List 2026? Check the mandatory Document Verification checklist, 10th marksheet & caste certificate upload specs, and how to compress documents below 300KB/500KB.",
+    category: 'exam-guides',
+    tags: ["India Post GDS","GDS Merit List 2026","Document Verification","Compress PDF","Certificate Resize"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 8,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 6,
+    publishedAt: 1773403000000,
+    createdAt: 1773403000000,
+    seoTitle: "India Post GDS Merit List Document Verification 2026 | DV Checklist & PDF Guide",
+    seoDescription: "Complete DV checklist for India Post GDS 1st Merit List 2026. Required documents, medical certificate, passport photos, and how to merge/compress certificates into PDF under 300KB.",
+    canonicalUrl: 'https://sizesnap.in/blog/india-post-gds-merit-list-document-verification-pdf-guide-2026',
+    relatedTools: ["compress-pdf","image-to-pdf","merge-pdf","passport-photo-maker","compress-image-to-50kb"],
+    relatedArticles: ["how-to-compress-pdf-to-100kb-140kb-for-govt-portals","how-to-merge-pdf-files-online-free-guide"],
+    content: `
+<h2>India Post GDS 1st Merit List 2026: Document Verification Stage</h2>
+<p>India Post has officially published the <strong>1st Merit List / Result for Gramin Dak Sevak (GDS - BPM / ABPM / Dak Sevak) Recruitment 2026</strong> across postal circles. Shortlisted candidates receive an SMS and email notification to appear for physical Document Verification (DV) before the designated Divisional Head within 10 to 15 days.</p>
+
+<p>Failing to present original documents along with properly attested copies and digital scanned backups within the prescribed deadline leads to immediate forfeiture of selection.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Document Required</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Original + Copies</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Digital Scan Requirement</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Crucial Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>10th / SSC Marksheet &amp; Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Original + 2 Self-Attested Sets</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF under 300 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">English &amp; Mathematics marks must match online entry</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Community / Caste Certificate (OBC/SC/ST/EWS)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Original + 2 Copies</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF under 300 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Central Government format with valid non-creamy layer date</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Medical Fitness Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Original in Official Annexure</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF under 300 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Issued by Chief Medical Officer (CMO) / Civil Surgeon</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Passport Size Photographs</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">5 Identical Physical Copies</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG 20 KB to 50 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Same as uploaded during online application</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #ECFDF5; border-left: 4px solid #10B981; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #065F46;">📂 Prepare GDS DV Document Dossier Online</p>
+  <p style="margin: 6px 0 0 0; color: #047857;">Convert scanned marksheets into clean PDFs using our <a href="/tools/image-to-pdf" style="color: #065F46; font-weight: bold; text-decoration: underline;">Image to PDF Tool</a>, consolidate all papers into a single dossier with our <a href="/tools/merge-pdf" style="color: #065F46; font-weight: bold; text-decoration: underline;">PDF Merge Tool</a>, and compress the file below 300KB using our <a href="/tools/compress-pdf" style="color: #065F46; font-weight: bold; text-decoration: underline;">SizeSnap PDF Compressor</a>.</p>
+</div>
+
+<h2>Essential Document Checklist for India Post GDS Verification</h2>
+<ol>
+  <li><strong>10th Standard Passing Certificate &amp; Marksheet:</strong> Date of birth, candidate's name, father's name, and mother's name must match your Aadhaar card letter-by-letter.</li>
+  <li><strong>Computer Knowledge Certificate:</strong> 60-day basic computer training certificate from a recognized central/state institute (exempt if computer was studied as a subject in class 10th or 12th).</li>
+  <li><strong>Identity Proof (Aadhaar Card / Voter ID / PAN Card):</strong> Original and Xerox copy.</li>
+  <li><strong>Medical Certificate:</strong> Format specified in GDS notification, signed by a government medical officer.</li>
+</ol>
+`,
+  },
+  {
+    id: 'up-scholarship-document-photo-size-guidelines-2026-27',
+    title: "UP Scholarship 2026-27 Document Size & Photo Upload Rules: Postmatric & Pre-Matric Guide",
+    slug: 'up-scholarship-document-photo-size-guidelines-2026-27',
+    excerpt: "Applying for UP Scholarship 2026-27? Learn exact rules for 20KB student photo upload, income & caste certificate PDF compression under 100KB, fee receipt sizing, and DigiLocker error fixes.",
+    category: 'student-tips',
+    tags: ["UP Scholarship","Scholarship Photo 20KB","Income Certificate PDF","Fee Receipt Resize","Student Guide"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 7,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 6,
+    publishedAt: 1773404000000,
+    createdAt: 1773404000000,
+    seoTitle: "UP Scholarship 2026-27 Photo Size (20KB) & Document Upload Guidelines in PDF",
+    seoDescription: "Complete UP Scholarship document size guidelines: Student photo (under 20KB), income, caste & fee receipt PDF compression (under 100KB). Free online resizer.",
+    canonicalUrl: 'https://sizesnap.in/blog/up-scholarship-document-photo-size-guidelines-2026-27',
+    relatedTools: ["compress-image-to-20kb","compress-pdf","image-to-pdf","passport-photo-maker","reduce-image-size-in-kb"],
+    relatedArticles: ["aktu-cgpa-to-percentage-formula-conversion-guide","college-attendance-calculator-75-percent-rule-guide","how-to-compress-pdf-to-100kb-140kb-for-govt-portals"],
+    content: `
+<h2>UP Scholarship Portal 2026-27: Document Upload Standards</h2>
+<p>The Social Welfare Department of Uttar Pradesh (<code>scholarship.up.gov.in</code>) invites scholarship and fee reimbursement applications annually for <strong>Pre-Matric (Classes 9 &amp; 10)</strong>, <strong>Post-Matric Intermediate (Classes 11 &amp; 12)</strong>, and <strong>Post-Matric Other Than Inter (Graduation, B.Tech, Diploma, ITI, B.Ed, Medical)</strong> students. Because of server load, the portal enforces strict file size ceilings.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Upload Field</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Mandatory Max Size</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">File Format</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Essential Verification Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Student Passport Photo</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Strictly Max 20 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG / JPEG Only</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">White background, face covering 75% frame</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Income Certificate (Aay Praman Patra)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 100 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Application No. &amp; Certificate No. must match e-District database</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Caste Certificate (Jati Praman Patra)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 100 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Compulsory for SC/ST/OBC applicants</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Non-Refundable Fee Receipt</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 100 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Must show official college stamp &amp; transaction ID</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">📱 Fast Resizer for UP Scholarship</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Resize your passport photo strictly under 20KB using our <a href="/tools/compress-image-to-20kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 20KB Photo Compressor</a>, and compress your income/caste certificate scans below 100KB using our <a href="/tools/compress-pdf" style="color: #414FA8; font-weight: bold; text-decoration: underline;">100KB PDF Resizer</a>.</p>
+</div>
+
+<h2>How to Fix Common UP Scholarship Upload Errors</h2>
+<ul>
+  <li><strong>&quot;File size must be less than 20 KB&quot;:</strong> This error occurs when your photo is even 20.2 KB. Use <a href="/tools/compress-image-to-20kb">SizeSnap</a> to target 16 KB to 18 KB for guaranteed server acceptance.</li>
+  <li><strong>&quot;PDF File Size Exceeds 100 KB&quot;:</strong> Scanned PDFs from camscanner apps are typically 1 MB to 2 MB. Use our <a href="/tools/compress-pdf">PDF Compressor</a> to squeeze the file below 95 KB while preserving clear text.</li>
+  <li><strong>DigiLocker Verification Failure:</strong> Ensure your name and father's name on your Aadhaar card exactly match your High School marksheet.</li>
+</ul>
+`,
+  },
+  {
+    id: 'up-police-constable-pet-dv-photo-document-guidelines-2026',
+    title: "UP Police Constable PET 2026 & Document Verification: Admit Card, Photo & Certificate Rules",
+    slug: 'up-police-constable-pet-dv-photo-document-guidelines-2026',
+    excerpt: "Qualified for UP Police Constable PET & DV 2026? Detailed guide on photo copies required at physical center, 20-50KB photo guidelines, thumb impression standards, and self-attested certificate PDF prep.",
+    category: 'exam-guides',
+    tags: ["UP Police Constable","PET Admit Card 2026","Document Verification","UP Police Photo","Physical Test"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 8,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 6,
+    publishedAt: 1773405000000,
+    createdAt: 1773405000000,
+    seoTitle: "UP Police Constable PET Admit Card 2026 & DV Photo Requirements",
+    seoDescription: "Complete documentation & photo requirements for UP Police Constable PET 2026 physical test and document verification. Photo size 20KB-50KB, signature, and certificates.",
+    canonicalUrl: 'https://sizesnap.in/blog/up-police-constable-pet-dv-photo-document-guidelines-2026',
+    relatedTools: ["compress-image-to-50kb","compress-image-to-20kb","compress-image-to-10kb","compress-pdf","passport-photo-maker"],
+    relatedArticles: ["up-police-photo-signature-size-guidelines-2026","how-to-resize-signature-to-10kb-20kb-online"],
+    content: `
+<h2>UP Police Constable 2026: Physical Test (PET) &amp; DV Guidelines</h2>
+<p>The Uttar Pradesh Police Recruitment and Promotion Board (UPPRPB) conducts the <strong>Physical Efficiency Test (PET - 4.8 km run for males / 2.4 km for females)</strong> and <strong>Document Verification (DV / PST)</strong> for thousands of Constable vacancies. At the physical ground and scrutiny desk, officers strictly verify biometric records, original certificates, and physical photo copies.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Item</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Specification</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Copies Required</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Instructions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Admit Card Printout</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Color Laser Printout on A4</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">2 Copies</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Bar code &amp; roll number clearly scanable</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Passport Size Photograph</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">35 mm &times; 45 mm (20 KB to 50 KB)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">4 Identical Physical Copies</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Must match the online application photograph</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>10th &amp; 12th Marksheets</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Original + Self-Attested Photocopy</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">2 Sets</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Name must match admit card exactly</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Domicile &amp; Caste Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Original + Photocopy</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">2 Sets</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Issued before cutoff date specified in notification</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">🚔 UP Police Photo &amp; Signature Resizer</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Generate compliant passport photos (20KB-50KB) and signatures (5KB-20KB) using our dedicated <a href="/exams/up-police-photo-resizer" style="color: #414FA8; font-weight: bold; text-decoration: underline;">UP Police Photo Resizer Tool</a> or compress your documents with our <a href="/tools/compress-pdf" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap PDF Compressor</a>.</p>
+</div>
+
+<h2>Physical Center Rules: Things You Must Carry</h2>
+<ol>
+  <li><strong>Photo ID in Original:</strong> Aadhaar Card (mandatory primary ID), along with Voter ID or Driving License. E-Aadhaar printouts must show a verified digital signature.</li>
+  <li><strong>Thumb Cleanliness:</strong> Keep both your left and right thumbs clean and free from henna (mehendi) or ink stains to avoid biometric scanner rejections during attendance logging.</li>
+  <li><strong>Self-Attestation:</strong> Sign your full running signature and write the date of verification across the lower margin of every Xerox sheet.</li>
+</ol>
+`,
+  },
+  {
+    id: 'dsssb-postcard-photo-signature-thumb-guidelines-2026',
+    title: "DSSSB Online Form 2026: Postcard Photo (5x7), Signature & Left/Right Thumb Impression Size Guide",
+    slug: 'dsssb-postcard-photo-signature-thumb-guidelines-2026',
+    excerpt: "Applying for DSSSB Assistant Teacher, Sweeper, Chowkidar, or Court Posts 2026? Learn how to format 5x7 inch Postcard photo (50-300KB), signature (40KB), and both thumb impressions (40KB).",
+    category: 'exam-guides',
+    tags: ["DSSSB 2026","Postcard Photo 5x7","Thumb Impression 40KB","DSSSB Signature","Delhi Govt Jobs"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 8,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 7,
+    publishedAt: 1773406000000,
+    createdAt: 1773406000000,
+    seoTitle: "DSSSB Postcard Photo Size 5x7 (50KB-300KB), Signature & Thumb Impression Guide",
+    seoDescription: "Complete DSSSB 2026 photo upload specifications: Postcard size (5x7 inch, 50KB to 300KB), signature (40KB), and left & right thumb impressions. Free online tool.",
+    canonicalUrl: 'https://sizesnap.in/blog/dsssb-postcard-photo-signature-thumb-guidelines-2026',
+    relatedTools: ["compress-image-to-50kb","compress-image-to-100kb","generate-signature","passport-photo-maker","reduce-image-size-in-kb"],
+    relatedArticles: ["how-to-resize-signature-to-10kb-20kb-online","how-to-reduce-image-size-in-kb-without-losing-quality"],
+    content: `
+<h2>DSSSB 2026 Examination: Complex Multi-Image Upload Requirements</h2>
+<p>The Delhi Subordinate Services Selection Board (DSSSB - <code>dsssbonline.nic.in</code>) conducts examinations for <strong>Assistant Teacher (Primary/Nursery), Sweeper, Chowkidar, District Court staff, and Municipal positions</strong>. DSSSB requires one of the most distinctive document upload setups in India, demanding a giant <strong>5&times;7 inch Postcard Size Photograph</strong> alongside separate left and right thumb impressions.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Upload Parameter</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">File Size Limit</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Resolution / Dimensions</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Format &amp; Background</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Postcard Size Photograph</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">50 KB to 300 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">5 &times; 7 inches (480 &times; 672 px minimum)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Plain White Background, Upper Body</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Candidate Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 40 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">140 &times; 110 px (Width &times; Height)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Dark Black Pen on White Paper</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Left Thumb Impression (LTI)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 40 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">110 &times; 140 px (Width &times; Height)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Blue or Black Ink Pad</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Right Thumb Impression (RTI)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 40 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">110 &times; 140 px (Width &times; Height)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Blue or Black Ink Pad</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">🖼️ DSSSB Image Sizing in 1-Click</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Resize your DSSSB Postcard photo to exact 50KB-300KB specifications using our <a href="/tools/compress-image-to-100kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 100KB Resizer</a>, generate signature and thumb impression files under 40KB using our <a href="/tools/generate-signature" style="color: #414FA8; font-weight: bold; text-decoration: underline;">Signature Tool</a>, and adjust pixels effortlessly with <a href="/tools/reduce-image-size-in-kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">Reduce Image Size in KB</a>.</p>
+</div>
+
+<h2>What is the DSSSB Postcard Photo (5x7 Inch)?</h2>
+<p>Unlike standard passport photos (3.5 &times; 4.5 cm) that focus solely on the face and neck, a <strong>5&times;7 inch postcard photograph</strong> shows the candidate's upper body including chest and shoulders clearly. DSSSB invigilators match this postcard photograph against the candidate's physical appearance during biometric entry into Delhi examination centers.</p>
+<ul>
+  <li><strong>Posture:</strong> Sit straight with shoulders relaxed, both arms clearly visible, facing forward.</li>
+  <li><strong>Background:</strong> Pure solid white background with clean edges.</li>
+  <li><strong>Clarity:</strong> Resolution should not be pixelated or smudged. Size must stay strictly between 50 KB and 300 KB.</li>
+</ul>
+
+<h2>Thumb Impression Guidelines (Both Left &amp; Right)</h2>
+<p>Most portals only require the Left Thumb Impression, but DSSSB mandates <strong>BOTH Left and Right Thumb Impressions</strong> in separate upload slots. Ensure the ridges of your thumbprint are clearly defined and not smudged with excess ink.</p>
+`,
+  },
+  {
+    id: 'nta-ugc-net-csir-net-photo-signature-guidelines-2026',
+    title: "NTA UGC NET & CSIR NET December 2026: Photo, Signature & Category Certificate Size Guide",
+    slug: 'nta-ugc-net-csir-net-photo-signature-guidelines-2026',
+    excerpt: "Step-by-step documentation guide for NTA UGC NET & CSIR NET December 2026 applications. Master 10KB-200KB photo (80% face coverage), 4KB-30KB signature, and 50KB-300KB category certificate PDF.",
+    category: 'exam-guides',
+    tags: ["UGC NET 2026","CSIR NET","NTA Photo Size","NET Signature 4 to 30 KB","Category Certificate PDF"],
+    status: 'PUBLISHED',
+    featured: false,
+    priority: 8,
+    author: {
+      name: 'SizeSnap Exam Research Team',
+      role: 'Govt Exam Documentation Specialist',
+    },
+    readingTime: 6,
+    publishedAt: 1773407000000,
+    createdAt: 1773407000000,
+    seoTitle: "NTA UGC NET 2026 Photo and Signature Size in KB | CSIR NET Upload Rules",
+    seoDescription: "Official NTA UGC NET December 2026 photo specifications (10KB to 200KB, 80% face coverage), signature (4KB-30KB), and category certificate PDF (50KB-300KB). Free tool.",
+    canonicalUrl: 'https://sizesnap.in/blog/nta-ugc-net-csir-net-photo-signature-guidelines-2026',
+    relatedTools: ["compress-image-to-50kb","compress-image-to-20kb","compress-image-to-10kb","compress-pdf","generate-signature"],
+    relatedArticles: ["how-to-compress-pdf-to-100kb-140kb-for-govt-portals","how-to-resize-signature-to-10kb-20kb-online"],
+    content: `
+<h2>NTA UGC NET &amp; CSIR NET 2026: Application Documentation Standard</h2>
+<p>The National Testing Agency (NTA) conducts the <strong>UGC NET and Joint CSIR UGC NET Examination</strong> for Junior Research Fellowship (JRF) and Assistant Professor eligibility across India. NTA examinations employ automated AI scrutiny during upload, which flags non-compliant photographs with blurred backgrounds or incorrect face ratios.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Upload Field</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">File Size Range</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Dimensions / Coverage</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Mandatory Format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Passport Photograph</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 200 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">80% Face Coverage (ears visible)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Pure White Background</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Candidate Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">4 KB to 30 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">3.5 cm &times; 1.5 cm</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG/JPEG, Black Ballpoint Pen</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Category / PwD Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">50 KB to 300 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Standard A4 Document</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only, Clearly Legible Seal &amp; Authority</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ NTA Documentation Made Effortless</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Resize your NTA photo to 50KB with our <a href="/tools/compress-image-to-50kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 50KB Photo Compressor</a>, adjust your signature to the strict 4KB-30KB limit using our <a href="/tools/compress-image-to-20kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">20KB Signature Resizer</a>, and compress category certificates below 300KB using our <a href="/tools/compress-pdf" style="color: #414FA8; font-weight: bold; text-decoration: underline;">Free PDF Compressor</a>.</p>
+</div>
+
+<h2>What Does &quot;80% Face Coverage&quot; Mean for NTA?</h2>
+<p>NTA guidelines specifically state that <strong>80% of the image frame must consist of the candidate's face</strong> (from the top of the forehead to the bottom of the chin). Long-shot photos where the candidate's torso dominates the frame are flagged by NTA's automated image validator. Both ears must be clearly uncovered and visible under direct, even lighting without flash glare.</p>
+
+<h2>Category Certificate PDF Upload Rules (50KB to 300KB)</h2>
+<p>Candidates claiming reservation under OBC-NCL, SC, ST, Gen-EWS, or PwD categories must upload a scanned copy of their certificate issued on or after the prescribed date in central government format. The file must be in <strong>PDF format between 50 KB and 300 KB</strong>. Use our <a href="/tools/compress-pdf">SizeSnap PDF Compressor</a> to ensure your document fits within this range while remaining 100% legible.</p>
+`,
+  },
 ];

@@ -29,7 +29,14 @@ const FAQS = [
 ];
 
 export default function GenerateSignaturePage() {
-  const relatedTools = ALL_TOOLS.filter((t) => ['reduce-image-size-in-kb', 'passport-photo-maker', 'text-to-handwriting', 'add-watermark-pdf', 'merge-photo-signature'].includes(t.slug));
+  const relatedTools = ALL_TOOLS.filter((t) => [
+    'compress-image-to-10kb',
+    'reduce-image-size-in-kb',
+    'passport-photo-maker',
+    'text-to-handwriting',
+    'add-watermark-pdf',
+    'merge-photo-signature',
+  ].includes(t.slug));
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
@@ -76,6 +83,13 @@ export default function GenerateSignaturePage() {
             <li><strong>Adjust Pen Thickness:</strong> Use the slider to make the stroke thinner or thicker depending on your preference.</li>
             <li><strong>Download Format:</strong> Select &quot;Transparent PNG&quot; if you plan to overlay it on a document, or &quot;White Background JPG&quot; if you need to upload it directly to an application portal.</li>
             </ol>
+
+            <div className="p-3.5 bg-blue-50/80 border border-blue-200/80 rounded text-xs text-blue-900 mb-6">
+              <strong>Need exact file size for SSC, UPSC or State PSC?</strong> Most official portals strictly require signatures between 10KB to 20KB. Resize your signature file to exact dimensions using our dedicated{' '}
+              <Link href="/tools/compress-image-to-10kb" className="font-semibold underline hover:text-[#414FA8]">
+                Compress Image to 10KB (Signature Tool)
+              </Link>.
+            </div>
 
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">
             Why Use SizeSnap&apos;s E-Signature Tool?

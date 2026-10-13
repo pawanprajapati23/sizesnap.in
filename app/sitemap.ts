@@ -3,11 +3,12 @@ import { MetadataRoute } from 'next';
 import { ALL_TOOLS } from '@/data/tools';
 import { getPublishedArticles } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
+import { EXAM_PRESETS } from '@/data/exam-presets';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://sizesnap.in';
 
-  // Base routes
+  // Base routes & Hubs
   const routes = [
     '',
     '/tools',
@@ -24,8 +25,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/ecommerce-tools',
     '/compress-image',
     '/resize-image',
-    '/convert-image',
-    '/compress-pdf',
+    '/student-calculators',
+    '/percentage-calculator',
+    '/cgpa-calculator',
+    '/cgpa-to-percentage',
+    '/sgpa-to-percentage',
+    '/attendance-calculator',
+    '/study-hours-calculator',
+    '/age-calculator',
+    '/exam-percentage-calculator',
+    '/marks-percentage-calculator',
+    '/required-marks-calculator',
+    '/exams',
+    '/exams/exam-application-kit',
+    '/guides',
+    '/guides/how-to-compress-image',
     '/about',
     '/privacy-policy',
     '/terms',
@@ -37,10 +51,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
-    priority: route === '' ? 1.0 : (route === '/blog' ? 0.9 : (route.includes('-tools') ? 0.9 : 0.8)),
+    priority: route === '' ? 1.0 : (route === '/blog' || route === '/exams' ? 0.9 : (route.includes('-tools') || route.includes('-calculator') ? 0.9 : 0.8)),
   }));
 
-  // Tools routes
+  // Tools routes (dynamic & static tools)
   ALL_TOOLS.forEach((tool) => {
     if (tool.status === 'production') {
       let priority = 0.6;
@@ -57,49 +71,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   });
 
-  // Blog Categories (Default)
-  BLOG_CATEGORIES.forEach((category) => {
+  // Exam Preset routes (High intent queries: SSC, UPSC, Police, Bank)
+  EXAM_PRESETS.forEach((exam) => {
     sitemapData.push({
-      url: `${baseUrl}/blog/category/${category.slug}`,
+      url: `${baseUrl}/exams/${exam.slug}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.7,
+      priority: 0.9,
     });
   });
 
   try {
-    // Blog Articles and Custom Categories
+    // Blog Articles and Active Categories
     const articles = await getPublishedArticles();
-    
-    const uniqueCategories = new Set<string>();
-    
+    const activeCategories = new Set<string>();
+
     articles.forEach((article) => {
       if (article.category) {
-        uniqueCategories.add(article.category);
+        activeCategories.add(article.category);
       }
       if (!article.noIndex) {
         sitemapData.push({
           url: `${baseUrl}/blog/${article.slug}`,
           lastModified: article.updatedAt ? new Date(article.updatedAt) : (article.publishedAt ? new Date(article.publishedAt) : new Date()),
-          changeFrequency: 'weekly', // Articles might be updated
+          changeFrequency: 'weekly',
           priority: 0.8,
         });
       }
     });
 
-    // Add custom categories to sitemap
-    uniqueCategories.forEach(categorySlug => {
-      if (!BLOG_CATEGORIES.find(c => c.slug === categorySlug)) {
-        sitemapData.push({
-          url: `${baseUrl}/blog/category/${categorySlug}`,
-          lastModified: new Date(),
-          changeFrequency: 'weekly',
-          priority: 0.7,
-        });
-      }
+    // Only add categories that have at least one published article (prevents Google thin-content / soft-404)
+    activeCategories.forEach((categorySlug) => {
+      sitemapData.push({
+        url: `${baseUrl}/blog/category/${categorySlug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
     });
   } catch (error) {
-    console.error("Error generating sitemap for blog articles:", error);
+    console.error('Error generating sitemap for blog articles:', error);
   }
 
   return sitemapData;

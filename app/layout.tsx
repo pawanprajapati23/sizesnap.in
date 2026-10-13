@@ -40,7 +40,11 @@ export const metadata: Metadata = {
     description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || '', // e.g., 'your-verification-code'
+    google:
+      process.env.NEXT_PUBLIC_GSC_VERIFICATION &&
+      process.env.NEXT_PUBLIC_GSC_VERIFICATION !== 'your-verification-code-here'
+        ? process.env.NEXT_PUBLIC_GSC_VERIFICATION
+        : undefined,
   },
 };
 

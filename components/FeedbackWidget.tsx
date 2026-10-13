@@ -159,8 +159,8 @@ export default function FeedbackWidget() {
 
   return (
     <>
-      {/* 1. MANUAL FEEDBACK TAB (PINNED COMPLETELY TO BOTTOM-RIGHT) */}
-      <div className="fixed bottom-0 right-0 z-50 flex flex-col items-end select-none">
+      {/* 1. MANUAL FEEDBACK TAB (PINNED TO BOTTOM-RIGHT, SITS ABOVE MOBILE STICKY AD) */}
+      <div className="fixed bottom-[52px] lg:bottom-0 right-0 z-50 flex flex-col items-end select-none">
         {isOpen && (
           <div className="bg-white border border-gray-200 shadow-xl rounded-lg p-5 w-80 mb-2 mr-2 animate-in slide-in-from-bottom-2">
             <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-100">

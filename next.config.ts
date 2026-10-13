@@ -26,6 +26,36 @@ const nextConfig: NextConfig = {
         destination: '/privacy-policy',
         permanent: true,
       },
+      {
+        source: '/about-us',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/contact-us',
+        destination: '/contact',
+        permanent: true,
+      },
+      {
+        source: '/terms-and-conditions',
+        destination: '/terms',
+        permanent: true,
+      },
+      {
+        source: '/terms-of-service',
+        destination: '/terms',
+        permanent: true,
+      },
+      {
+        source: '/convert-image',
+        destination: '/image-tools',
+        permanent: true,
+      },
+      {
+        source: '/compress-pdf',
+        destination: '/tools/compress-pdf',
+        permanent: true,
+      },
     ];
   },
   webpack: (config, {dev}) => {

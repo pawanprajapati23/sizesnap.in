@@ -2880,20 +2880,39 @@ export const ALL_TOOLS: ToolItem[] = [
     "slug": "compress-image-to-10kb",
     "categoryId": "image",
     "categoryTitle": "Image Tools",
-    "shortDescription": "Free online tool for compress image to 10kb.",
+    "shortDescription": "Compress photo and signature to exact 10KB online for free without blur. Instant client-side tool for SSC, UPSC & govt exams.",
     "keywords": [
       "compress image to 10kb",
-      "compress & convert"
+      "resize image to 10kb",
+      "compress signature to 10kb",
+      "photo ko 10kb kaise banaye",
+      "reduce image size to 10kb",
+      "convert jpg to 10kb",
+      "signature resize 10kb"
     ],
-    "aliases": [],
+    "aliases": [
+      "10kb-image-compressor",
+      "resize-image-10kb",
+      "compress-signature-10kb"
+    ],
     "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
+    "relatedTools": [
+      "compress-image-to-20kb",
+      "reduce-image-size-in-kb",
+      "generate-signature",
+      "resize-image-pixel"
+    ],
+    "supportedFormats": [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp"
+    ],
     "processingType": "client",
     "status": "production",
-    "seoPriority": "Medium",
+    "seoPriority": "High",
     "analyticsIdentifier": "compress-image-to-10kb",
-    "popular": false
+    "popular": true
   },
   {
     "id": "compress-image-to-30kb",

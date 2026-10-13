@@ -25,10 +25,11 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
-  'compress-image',
-  'resize-image-pixel',
+  'compress-image-to-10kb',
   'compress-image-to-20kb',
   'compress-image-to-50kb',
+  'compress-image',
+  'resize-image-pixel',
   'resize-signature',
   'passport-photo-maker',
 ];
@@ -130,6 +131,12 @@ export default function ReduceImageSizeKbPage() {
                 Need general compression or pixel dimensions?
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
+                <Link
+                  href="/tools/compress-image-to-10kb"
+                  className="px-3 py-1.5 rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#E2E7F8] font-medium border border-[#9AA3C8]/40 transition-colors"
+                >
+                  Compress to 10KB (Signature) →
+                </Link>
                 <Link
                   href="/tools/compress-image"
                   className="px-3 py-1.5 rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#E2E7F8] font-medium border border-[#9AA3C8]/40 transition-colors"

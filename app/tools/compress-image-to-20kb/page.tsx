@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ExactKbPage } from '@/components/templates/ExactKbPage';
 
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
+  'compress-image-to-10kb',
   'reduce-image-size-in-kb',
   'compress-image-to-50kb',
   'compress-image-to-100kb',
@@ -49,6 +51,13 @@ export default function CompressTo20kbPage() {
       <p className="text-sm mb-4 leading-relaxed">
         Many official portals and government exam websites (such as SSC, UPSC, State PSCs) specifically request that signature images and sometimes thumb impressions be kept strictly under 20KB in file size. Uploading a larger file will result in an error on their application forms. Our tool is optimized to shrink your signatures down to 20KB while preserving the legibility of ink marks.
       </p>
+      <div className="p-3 bg-blue-50/70 border border-blue-200/80 rounded text-xs text-blue-900 mb-4">
+        Need your file to be strictly under 10KB for state portals or thumb impressions? Use our dedicated{' '}
+        <Link href="/tools/compress-image-to-10kb" className="font-semibold underline hover:text-[#414FA8]">
+          Compress Image to 10KB (Signature &amp; Photo)
+        </Link>{' '}
+        tool.
+      </div>
       <h3 className="text-base font-bold text-gray-800 mb-2">How we guarantee your privacy</h3>
       <p className="text-sm leading-relaxed">
         Unlike conventional compressor sites that upload your sensitive documents to their servers, SizeSnap executes all image processing natively within your web browser using HTML5 Canvas and WebAssembly. Your files never leave your phone or computer.

@@ -67,10 +67,50 @@ export function ExactKbPage({
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: crumb.name,
+      item: crumb.url.startsWith('http') ? crumb.url : `https://sizesnap.in${crumb.url}`,
+    })),
+  };
+
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Compress Image to ${targetKb}KB Online Free`,
+    description: `Step-by-step guide to compress photo or signature down to ${targetKb}KB without losing clarity.`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Upload Photo or Signature',
+        text: 'Click Browse or drag and drop your JPG or PNG file into the compressor.',
+        position: 1,
+      },
+      {
+        '@type': 'HowToStep',
+        name: `Set Target to ${targetKb}KB`,
+        text: `Verify that target file size is set to ${targetKb}KB.`,
+        position: 2,
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Compress & Download Instantly',
+        text: 'SizeSnap compresses the image in your browser using smart algorithms. Click Download.',
+        position: 3,
+      },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
         <Navbar />
 

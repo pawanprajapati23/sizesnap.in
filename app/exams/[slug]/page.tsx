@@ -296,6 +296,36 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
               </div>
             </div>
 
+            {/* Exact KB Resizers for Exams */}
+            <div className="bg-white p-4 rounded-[4px] border border-gray-200 shadow-xs space-y-3">
+              <h3 className="text-xs font-bold text-gray-900 uppercase tracking-wider text-[#414FA8]">
+                Exact KB Compressors
+              </h3>
+              <div className="space-y-1.5">
+                <Link
+                  href="/tools/compress-image-to-10kb"
+                  className="p-2 rounded bg-gray-50 hover:bg-[#EEF1FB] hover:text-[#414FA8] text-xs font-medium text-gray-700 flex items-center justify-between transition-colors group"
+                >
+                  <span>Compress to 10KB (Sign &amp; Thumb)</span>
+                  <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-[#414FA8] transition-colors" />
+                </Link>
+                <Link
+                  href="/tools/compress-image-to-20kb"
+                  className="p-2 rounded bg-gray-50 hover:bg-[#EEF1FB] hover:text-[#414FA8] text-xs font-medium text-gray-700 flex items-center justify-between transition-colors group"
+                >
+                  <span>Compress to 20KB (Photo &amp; Sign)</span>
+                  <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-[#414FA8] transition-colors" />
+                </Link>
+                <Link
+                  href="/tools/compress-image-to-50kb"
+                  className="p-2 rounded bg-gray-50 hover:bg-[#EEF1FB] hover:text-[#414FA8] text-xs font-medium text-gray-700 flex items-center justify-between transition-colors group"
+                >
+                  <span>Compress to 50KB (Passport Photo)</span>
+                  <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-[#414FA8] transition-colors" />
+                </Link>
+              </div>
+            </div>
+
             {/* Privacy Guarantee */}
             <div className="bg-white p-4 rounded-[4px] border border-gray-200 text-xs text-gray-600 space-y-2">
               <div className="flex items-center gap-1.5 font-bold text-gray-800">

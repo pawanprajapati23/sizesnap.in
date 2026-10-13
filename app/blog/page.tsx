@@ -54,7 +54,7 @@ export default async function BlogPage() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto mt-8">
-              {BLOG_CATEGORIES.map(category => (
+              {BLOG_CATEGORIES.filter(c => allArticles.some(a => a.category === c.slug)).map(category => (
                 <Link
                   key={category.slug}
                   href={`/blog/category/${category.slug}`}

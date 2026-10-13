@@ -16,17 +16,17 @@ export default function AboutPage() {
     '@graph': [
       {
         '@type': 'AboutPage',
-        '@id': 'https://sizesnap.in/about-us',
-        'url': 'https://sizesnap.in/about-us',
+        '@id': 'https://sizesnap.in/about',
+        'url': 'https://sizesnap.in/about',
         'name': 'About SizeSnap',
         'description': 'Learn more about SizeSnap and its founder & owner Pawan Prajapati.'
       },
       {
         '@type': 'Person',
-        '@id': 'https://sizesnap.in/about-us#founder',
+        '@id': 'https://sizesnap.in/about#founder',
         'name': 'Pawan Prajapati',
         'jobTitle': 'Owner, Founder & Developer',
-        'url': 'https://sizesnap.in/about-us#founder',
+        'url': 'https://sizesnap.in/about#founder',
         'knowsAbout': ['Web Development', 'Client-side Image Processing', 'PDF Optimization'],
         'worksFor': {
           '@type': 'Organization',

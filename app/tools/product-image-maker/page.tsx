@@ -14,7 +14,7 @@ const ProductImageMakerTool = dynamic(
 export const metadata: Metadata = {
   title: 'Product Image Maker & Editor | E-commerce Seller Tools | SizeSnap',
   description: 'Resize, pad, and format product photos for Amazon, Flipkart, Meesho, and Shopify. Free client-side bulk product image factory.',
-  alternates: { canonical: 'https://sizesnap.in/tools/product-image-maker' },
+  alternates: { canonical: 'https://www.sizesnap.in/tools/product-image-maker' },
 };
 
 export default function ProductImageMakerPage() {

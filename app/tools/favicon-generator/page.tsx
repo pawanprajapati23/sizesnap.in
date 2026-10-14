@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Generate cross-browser favicon.ico (16x16, 32x32, 48x48), Apple Touch Icon (180x180), Android Chrome icons (192, 512), and site.webmanifest online for free. Download complete favicon package ZIP. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/favicon-generator',
+    canonical: 'https://www.sizesnap.in/tools/favicon-generator',
   },
   openGraph: {
     title: 'Favicon Generator - Generate ICO, PNG & Apple Touch Icons Free | SizeSnap',
     description:
       'Generate cross-browser favicon.ico, Apple Touch Icons, and web app manifest packages in seconds.',
-    url: 'https://sizesnap.in/tools/favicon-generator',
+    url: 'https://www.sizesnap.in/tools/favicon-generator',
   },
 };
 

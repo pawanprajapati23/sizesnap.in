@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free online image tools to compress, resize, format and edit pictures directly in your browser securely.',
   alternates: {
-    canonical: 'https://sizesnap.in/image-tools',
+    canonical: 'https://www.sizesnap.in/image-tools',
   },
 };
 

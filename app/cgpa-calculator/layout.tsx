@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'CGPA Calculator – Subject-Wise Credit Grades | SizeSnap',
   description: 'Calculate your overall Cumulative Grade Point Average (CGPA) from your semester grades, grade points, and credits.',
   alternates: {
-    canonical: 'https://sizesnap.in/cgpa-calculator',
+    canonical: 'https://www.sizesnap.in/cgpa-calculator',
   },
   openGraph: {
     title: 'CGPA Calculator – Subject-Wise Credit Grades | SizeSnap',
     description: 'Calculate your overall Cumulative Grade Point Average (CGPA) from your semester grades, grade points, and credits.',
-    url: 'https://sizesnap.in/cgpa-calculator',
+    url: 'https://www.sizesnap.in/cgpa-calculator',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -26,16 +26,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       'itemListElement': [
-        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://sizesnap.in/' },
-        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://sizesnap.in/student-calculators' },
-        { '@type': 'ListItem', 'position': 3, 'name': 'CGPA Calculator', 'item': 'https://sizesnap.in/cgpa-calculator' }
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.sizesnap.in/' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://www.sizesnap.in/student-calculators' },
+        { '@type': 'ListItem', 'position': 3, 'name': 'CGPA Calculator', 'item': 'https://www.sizesnap.in/cgpa-calculator' }
       ]
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       'name': 'CGPA Calculator',
-      'url': 'https://sizesnap.in/cgpa-calculator',
+      'url': 'https://www.sizesnap.in/cgpa-calculator',
       'description': 'Calculate your overall Cumulative Grade Point Average (CGPA) from your semester grades, grade points, and credits.',
       'applicationCategory': 'EducationalApplication',
       'operatingSystem': 'All',

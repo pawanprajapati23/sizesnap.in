@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Reduce huge 5MB+ photos down to 500KB while keeping perfect quality. Fast, secure, browser-based compression.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-500kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-500kb',
   },
 };
 

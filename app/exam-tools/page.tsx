@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Free Exam Tools & Timers | SizeSnap',
   description: 'Free online exam tools, including exam countdown timers, target grade calculators, and PDF utilities.',
   alternates: {
-    canonical: 'https://sizesnap.in/exam-tools',
+    canonical: 'https://www.sizesnap.in/exam-tools',
   },
 };
 

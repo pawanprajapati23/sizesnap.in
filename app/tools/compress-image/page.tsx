@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   description:
     'Free online tool to compress JPG, PNG, and WebP images client-side without quality loss or uploading to any server. Fast, private, and unlimited.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image',
+    canonical: 'https://www.sizesnap.in/tools/compress-image',
   },
   openGraph: {
     title: 'Compress Image Online - Reduce File Size Free | SizeSnap',
     description:
       'Compress JPG, PNG, and WebP images directly in your browser without watermarks or upload limits.',
-    url: 'https://sizesnap.in/tools/compress-image',
+    url: 'https://www.sizesnap.in/tools/compress-image',
   },
 };
 

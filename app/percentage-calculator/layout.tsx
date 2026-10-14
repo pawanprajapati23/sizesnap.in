@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'Percentage Calculator – Find Marks Percentage | SizeSnap',
   description: 'Calculate your exact percentage from obtained and total marks. Free online percentage calculator for students, exams, and assignments.',
   alternates: {
-    canonical: 'https://sizesnap.in/percentage-calculator',
+    canonical: 'https://www.sizesnap.in/percentage-calculator',
   },
   openGraph: {
     title: 'Percentage Calculator – Find Marks Percentage | SizeSnap',
     description: 'Calculate your exact percentage from obtained and total marks. Free online percentage calculator for students, exams, and assignments.',
-    url: 'https://sizesnap.in/percentage-calculator',
+    url: 'https://www.sizesnap.in/percentage-calculator',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -26,16 +26,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       'itemListElement': [
-        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://sizesnap.in/' },
-        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://sizesnap.in/student-calculators' },
-        { '@type': 'ListItem', 'position': 3, 'name': 'Percentage Calculator', 'item': 'https://sizesnap.in/percentage-calculator' }
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.sizesnap.in/' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://www.sizesnap.in/student-calculators' },
+        { '@type': 'ListItem', 'position': 3, 'name': 'Percentage Calculator', 'item': 'https://www.sizesnap.in/percentage-calculator' }
       ]
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       'name': 'Percentage Calculator',
-      'url': 'https://sizesnap.in/percentage-calculator',
+      'url': 'https://www.sizesnap.in/percentage-calculator',
       'description': 'Calculate your exact percentage from obtained and total marks. Free online percentage calculator for students, exams, and assignments.',
       'applicationCategory': 'EducationalApplication',
       'operatingSystem': 'All',

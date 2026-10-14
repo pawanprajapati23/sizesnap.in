@@ -21,13 +21,13 @@ export const metadata: Metadata = {
   description:
     'Free 1-click photo and signature resizer for all Indian government exams. Exact 20KB-50KB limits, 3.5x4.5cm dimensions, and Name & Date (DOP) stamping for SSC CGL, UPSC OTR, Delhi Police, UP Police, and IBPS.',
   alternates: {
-    canonical: 'https://sizesnap.in/exams',
+    canonical: 'https://www.sizesnap.in/exams',
   },
   openGraph: {
     title: 'Indian Govt Exam Photo & Signature Resizer Hub | SizeSnap',
     description:
       'Official dimension presets for SSC, UPSC, Delhi Police, UP Police, and Banking exams. 100% free, private in browser.',
-    url: 'https://sizesnap.in/exams',
+    url: 'https://www.sizesnap.in/exams',
   },
 };
 

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Rotate JPG, PNG, and WebP images online for free. Rotate 90° clockwise, 90° counter-clockwise, 180°, or use the fine-tuning slider to rotate any custom angle. Batch process and download as ZIP. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/rotate-image',
+    canonical: 'https://www.sizesnap.in/tools/rotate-image',
   },
   openGraph: {
     title: 'Rotate Image - Rotate Photos Online Free by Degrees | SizeSnap',
     description:
       'Rotate photos by 90°, 180°, or any custom angle online with live preview and bulk ZIP download.',
-    url: 'https://sizesnap.in/tools/rotate-image',
+    url: 'https://www.sizesnap.in/tools/rotate-image',
   },
 };
 

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Combine JPG, JPEG, PNG, and WebP images into a single PDF online for free. Custom paper size (A4, Letter), margins, orientation, and reorderable pages. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/image-to-pdf',
+    canonical: 'https://www.sizesnap.in/tools/image-to-pdf',
   },
   openGraph: {
     title: 'Image to PDF Converter - Convert JPG & PNG to PDF Free | SizeSnap',
     description:
       'Merge multiple pictures into one clean PDF document without limits, watermarks, or server uploads.',
-    url: 'https://sizesnap.in/tools/image-to-pdf',
+    url: 'https://www.sizesnap.in/tools/image-to-pdf',
   },
 };
 

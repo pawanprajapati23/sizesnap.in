@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Free online tool to resize photos for Instagram, Facebook, YouTube, LinkedIn, and WhatsApp. Exact presets for posts, stories, profile pics, and covers.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/social-media-resizer',
+    canonical: 'https://www.sizesnap.in/tools/social-media-resizer',
   },
 };
 

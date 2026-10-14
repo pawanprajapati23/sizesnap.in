@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Flip JPG, PNG, and WebP images online for free. Mirror selfie photos horizontally or flip pictures vertically upside-down. Batch flip multiple images and download as ZIP. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/flip-image',
+    canonical: 'https://www.sizesnap.in/tools/flip-image',
   },
   openGraph: {
     title: 'Flip Image - Flip Photos Horizontally & Vertically Online Free | SizeSnap',
     description:
       'Mirror photos horizontally or flip vertically with instant live preview and bulk ZIP download.',
-    url: 'https://sizesnap.in/tools/flip-image',
+    url: 'https://www.sizesnap.in/tools/flip-image',
   },
 };
 

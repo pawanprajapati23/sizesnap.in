@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Guides & Tutorials - SizeSnap',
   description: 'Learn how to compress images, resize photos, and edit PDFs with SizeSnap guides.',
   alternates: {
-    canonical: 'https://sizesnap.in/guides',
+    canonical: 'https://www.sizesnap.in/guides',
   },
 };
 

@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'Study Hours Calculator – Plan Exam Schedule | SizeSnap',
   description: 'Plan your study schedule and find out how many hours you need to study each day to finish your syllabus before the exam.',
   alternates: {
-    canonical: 'https://sizesnap.in/study-hours-calculator',
+    canonical: 'https://www.sizesnap.in/study-hours-calculator',
   },
   openGraph: {
     title: 'Study Hours Calculator – Plan Exam Schedule | SizeSnap',
     description: 'Plan your study schedule and find out how many hours you need to study each day to finish your syllabus before the exam.',
-    url: 'https://sizesnap.in/study-hours-calculator',
+    url: 'https://www.sizesnap.in/study-hours-calculator',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -26,16 +26,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       'itemListElement': [
-        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://sizesnap.in/' },
-        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://sizesnap.in/student-calculators' },
-        { '@type': 'ListItem', 'position': 3, 'name': 'Study Hours Calculator', 'item': 'https://sizesnap.in/study-hours-calculator' }
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.sizesnap.in/' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://www.sizesnap.in/student-calculators' },
+        { '@type': 'ListItem', 'position': 3, 'name': 'Study Hours Calculator', 'item': 'https://www.sizesnap.in/study-hours-calculator' }
       ]
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       'name': 'Study Hours Calculator',
-      'url': 'https://sizesnap.in/study-hours-calculator',
+      'url': 'https://www.sizesnap.in/study-hours-calculator',
       'description': 'Plan your study schedule and find out how many hours you need to study each day to finish your syllabus before the exam.',
       'applicationCategory': 'EducationalApplication',
       'operatingSystem': 'All',

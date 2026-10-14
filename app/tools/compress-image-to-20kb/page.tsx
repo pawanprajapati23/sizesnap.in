@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Compress photo to 20kb and reduce image size to 20kb online free. 100% private image compressor for SSC, UPSC, and government exams. Exact KB resizer without losing quality.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-20kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-20kb',
   },
 };
 

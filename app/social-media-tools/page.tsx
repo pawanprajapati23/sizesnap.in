@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free tools to perfectly resize, crop, and compress images for Instagram, WhatsApp, YouTube, Facebook, and LinkedIn. Keep high quality without exceeding limits.',
   alternates: {
-    canonical: 'https://sizesnap.in/social-media-tools',
+    canonical: 'https://www.sizesnap.in/social-media-tools',
   },
 };
 

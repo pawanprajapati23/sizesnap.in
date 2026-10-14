@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'CGPA to Percentage Calculator | Convert Grades | SizeSnap',
   description: 'Convert your CGPA to percentage using standard university multipliers (like 9.5). Fast and accurate CGPA conversion tool.',
   alternates: {
-    canonical: 'https://sizesnap.in/cgpa-to-percentage',
+    canonical: 'https://www.sizesnap.in/cgpa-to-percentage',
   },
   openGraph: {
     title: 'CGPA to Percentage Calculator | Convert Grades | SizeSnap',
     description: 'Convert your CGPA to percentage using standard university multipliers (like 9.5). Fast and accurate CGPA conversion tool.',
-    url: 'https://sizesnap.in/cgpa-to-percentage',
+    url: 'https://www.sizesnap.in/cgpa-to-percentage',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -26,16 +26,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       'itemListElement': [
-        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://sizesnap.in/' },
-        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://sizesnap.in/student-calculators' },
-        { '@type': 'ListItem', 'position': 3, 'name': 'CGPA to Percentage Calculator', 'item': 'https://sizesnap.in/cgpa-to-percentage' }
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.sizesnap.in/' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://www.sizesnap.in/student-calculators' },
+        { '@type': 'ListItem', 'position': 3, 'name': 'CGPA to Percentage Calculator', 'item': 'https://www.sizesnap.in/cgpa-to-percentage' }
       ]
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       'name': 'CGPA to Percentage Calculator',
-      'url': 'https://sizesnap.in/cgpa-to-percentage',
+      'url': 'https://www.sizesnap.in/cgpa-to-percentage',
       'description': 'Convert your CGPA to percentage using standard university multipliers (like 9.5). Fast and accurate CGPA conversion tool.',
       'applicationCategory': 'EducationalApplication',
       'operatingSystem': 'All',

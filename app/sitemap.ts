@@ -1,12 +1,14 @@
 export const revalidate = 3600;
 import { MetadataRoute } from 'next';
 import { ALL_TOOLS } from '@/data/tools';
+import { TOOL_REDIRECT_MAP } from '@/data/tool-redirects';
+import { SITE_URL } from '@/lib/site';
 import { getPublishedArticles } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import { EXAM_PRESETS } from '@/data/exam-presets';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://sizesnap.in';
+  const baseUrl = SITE_URL;
 
   // Base routes & Hubs
   const routes = [
@@ -54,9 +56,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1.0 : (route === '/blog' || route === '/exams' ? 0.9 : (route.includes('-tools') || route.includes('-calculator') ? 0.9 : 0.8)),
   }));
 
-  // Tools routes (dynamic & static tools)
+  // Tools routes (dynamic & static tools) - ONLY direct 200 OK canonical tools, NO redirects!
   ALL_TOOLS.forEach((tool) => {
-    if (tool.status === 'production') {
+    if (tool.status === 'production' && !TOOL_REDIRECT_MAP[tool.slug]) {
       let priority = 0.6;
       if (tool.seoPriority === 'High') priority = 0.8;
       if (tool.seoPriority === 'Medium') priority = 0.6;

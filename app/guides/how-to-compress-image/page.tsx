@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'How to Compress an Image Without Losing Quality | SizeSnap',
   description: 'Learn how to compress JPG and PNG images without losing quality using SizeSnap. A complete guide on image compression.',
   alternates: {
-    canonical: 'https://sizesnap.in/guides/how-to-compress-image',
+    canonical: 'https://www.sizesnap.in/guides/how-to-compress-image',
   },
 };
 

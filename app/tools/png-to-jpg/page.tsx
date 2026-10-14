@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Convert PNG and WebP images to lightweight JPG format online. Custom background fill for transparency, adjustable quality slider, batch conversion, and 1-click ZIP download. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/png-to-jpg',
+    canonical: 'https://www.sizesnap.in/tools/png-to-jpg',
   },
   openGraph: {
     title: 'PNG to JPG Converter - Convert PNG to JPG Online Free | SizeSnap',
     description:
       'Fast client-side PNG to JPG conversion with transparency background fill controls and bulk ZIP download.',
-    url: 'https://sizesnap.in/tools/png-to-jpg',
+    url: 'https://www.sizesnap.in/tools/png-to-jpg',
   },
 };
 

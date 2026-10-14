@@ -78,7 +78,7 @@ The application expects the following variables in production. You do not need t
 
 ```env
 # URL Configuration
-APP_URL="https://sizesnap.in"
+APP_URL="https://www.sizesnap.in"
 
 # Google Analytics & AdSense
 NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"

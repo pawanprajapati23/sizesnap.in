@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Free Student Tools & Calculators | SizeSnap',
   description: 'A suite of free online tools for students, including GPA calculators, attendance trackers, study timers, and grade calculators.',
   alternates: {
-    canonical: 'https://sizesnap.in/student-tools',
+    canonical: 'https://www.sizesnap.in/student-tools',
   },
 };
 

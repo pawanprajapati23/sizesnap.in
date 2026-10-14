@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Add page numbers to PDF documents online for free. Custom positions (bottom center, top right), page number formatting ("Page 1 of N"), starting number, and cover page skipping. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/add-page-numbers-pdf',
+    canonical: 'https://www.sizesnap.in/tools/add-page-numbers-pdf',
   },
   openGraph: {
     title: 'Add Page Numbers to PDF - Insert Page Numbers Online Free | SizeSnap',
     description:
       'Insert clean header or footer page numbers into your PDF documents in seconds without server uploads.',
-    url: 'https://sizesnap.in/tools/add-page-numbers-pdf',
+    url: 'https://www.sizesnap.in/tools/add-page-numbers-pdf',
   },
 };
 

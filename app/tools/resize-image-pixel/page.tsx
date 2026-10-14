@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   description:
     'Free online pixel resizer tool. Change image width and height in pixels with aspect ratio lock, resolution presets (720p, 1080p, 4K), and high-quality canvas scaling.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/resize-image-pixel',
+    canonical: 'https://www.sizesnap.in/tools/resize-image-pixel',
   },
   openGraph: {
     title: 'Resize Image Pixel - Change Width & Height in Pixels Free | SizeSnap',
     description:
       'Resize JPG, PNG, and WebP images to exact pixel dimensions directly in your browser without quality loss.',
-    url: 'https://sizesnap.in/tools/resize-image-pixel',
+    url: 'https://www.sizesnap.in/tools/resize-image-pixel',
   },
 };
 

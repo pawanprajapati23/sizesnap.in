@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Free online PDF to image converter. Convert PDF pages to JPG or PNG with selectable DPI (72, 150, 200, 300), page range selection, and bulk ZIP download. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/pdf-to-images',
+    canonical: 'https://www.sizesnap.in/tools/pdf-to-images',
   },
   openGraph: {
     title: 'PDF to Images Converter - Extract High-Quality JPG & PNG | SizeSnap',
     description:
       'Convert multi-page PDFs to crisp JPG or PNG images directly in your browser with selectable DPI and ZIP download.',
-    url: 'https://sizesnap.in/tools/pdf-to-images',
+    url: 'https://www.sizesnap.in/tools/pdf-to-images',
   },
 };
 

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Decode Base64 strings and Data URIs into downloadable image files (PNG, JPG, WebP, SVG) online for free. Auto-detect format, preview dimensions, and save with custom filename. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/base64-to-image',
+    canonical: 'https://www.sizesnap.in/tools/base64-to-image',
   },
   openGraph: {
     title: 'Base64 to Image - Decode Base64 String to JPG & PNG Online Free | SizeSnap',
     description:
       'Convert Base64 strings to downloadable PNG and JPEG images safely in your browser.',
-    url: 'https://sizesnap.in/tools/base64-to-image',
+    url: 'https://www.sizesnap.in/tools/base64-to-image',
   },
 };
 

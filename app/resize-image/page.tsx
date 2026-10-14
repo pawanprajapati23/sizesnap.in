@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free online tool to resize images in pixels, cm, mm, and inches. Easily resize photos for exams, social media and web without losing quality.',
   alternates: {
-    canonical: 'https://sizesnap.in/resize-image',
+    canonical: 'https://www.sizesnap.in/resize-image',
   },
 };
 

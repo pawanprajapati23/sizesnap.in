@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: 'SizeSnap Seller Workbench | E-commerce Shipping & Packing Tools',
   description: 'Free tools for shipping, packing and everyday e-commerce tasks. Format Meesho labels to A4, organize seller PDFs, and streamline your dispatch workflow.',
   alternates: {
-    canonical: 'https://sizesnap.in/ecommerce-tools',
+    canonical: 'https://www.sizesnap.in/ecommerce-tools',
   },
   openGraph: {
     title: 'SizeSnap Seller Workbench | E-commerce Shipping & Packing Tools',
     description: 'Free tools for shipping, packing and everyday e-commerce tasks. Format Meesho labels to A4, organize seller PDFs, and streamline your dispatch workflow.',
-    url: 'https://sizesnap.in/ecommerce-tools',
+    url: 'https://www.sizesnap.in/ecommerce-tools',
     siteName: 'SizeSnap',
     type: 'website',
   },

@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     'resize signature 140x60 10kb',
   ],
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-10kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-10kb',
   },
   openGraph: {
     title: 'Compress Image to 10KB Online Free (Photo & Signature) | SizeSnap',
     description:
       'Free online tool to compress image and signature to exact 10KB or under without losing quality. Ideal for SSC, UPSC, and State PSC applications.',
-    url: 'https://sizesnap.in/tools/compress-image-to-10kb',
+    url: 'https://www.sizesnap.in/tools/compress-image-to-10kb',
     type: 'website',
   },
 };

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Reduce passport photo size to exactly 50KB for government job applications, admission forms, and university portals. Fast, secure, and 100% offline.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-50kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-50kb',
   },
 };
 

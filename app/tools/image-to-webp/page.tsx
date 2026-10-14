@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Convert JPG, PNG, and other images to next-gen WebP format online for free. Reduce file size up to 70% with high visual fidelity. Batch convert multiple files and download as a single ZIP archive.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/image-to-webp',
+    canonical: 'https://www.sizesnap.in/tools/image-to-webp',
   },
   openGraph: {
     title: 'Convert Image to WebP - Convert JPG & PNG to WebP Online Free | SizeSnap',
     description:
       'Next-generation WebP image conversion online with quality control and bulk ZIP export.',
-    url: 'https://sizesnap.in/tools/image-to-webp',
+    url: 'https://www.sizesnap.in/tools/image-to-webp',
   },
 };
 

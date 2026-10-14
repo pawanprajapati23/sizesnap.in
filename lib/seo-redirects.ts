@@ -43,6 +43,17 @@ export function getSeoRedirect(pathname: string): string | null {
     cleanPath = cleanPath.slice(0, -1);
   }
 
+  // Legacy blog redirects
+  if (cleanPath.includes('how-to-compress-pdf-for-government-exams')) {
+    return '/blog/how-to-compress-pdf-to-100kb-140kb-for-govt-portals';
+  }
+  if (cleanPath.includes('how-to-resize-image-to-20kb')) {
+    return '/blog/how-to-reduce-image-size-in-kb-without-losing-quality';
+  }
+  if (cleanPath.includes('document-scanner-app-alternative')) {
+    return '/tools/ai-photo-enhancer';
+  }
+
   // Skip system routes
   const firstSegment = cleanPath.split('/')[1];
   if (SYSTEM_ROUTES.has(firstSegment)) {
@@ -211,15 +222,15 @@ export function getSeoRedirect(pathname: string): string | null {
   }
 
   const imageMbMatch = cleanPath.match(
-    /(?:compress-image|resize-image)-?(?:to-)?(\d+)(?:-)?mb/
+    /(?:compress-image|resize-image)[\/-]?(?:to[\/-])?(\d+(?:\.\d+)?)[\/-]?mb/
   );
   if (imageMbMatch) {
-    const kbVal = parseInt(imageMbMatch[1], 10) * 1024;
+    const kbVal = Math.round(parseFloat(imageMbMatch[1]) * 1024);
     return `/tools/reduce-image-size-in-kb?target=${kbVal}`;
   }
 
   // 8. General govt form / email presets
-  if (cleanPath.includes('/resize-image/for-govt-form') || cleanPath.includes('ssc-photo-rejection')) {
+  if (cleanPath.includes('for-govt-form') || cleanPath.includes('ssc-photo-rejection')) {
     return '/tools/passport-photo-maker';
   }
   if (cleanPath.includes('/resize-image/for-email') || cleanPath.includes('/compress-image/for-email')) {
@@ -262,6 +273,12 @@ export function getSeoRedirect(pathname: string): string | null {
     cleanPath.includes('protect-pdf')
   ) {
     return '/pdf-tools';
+  }
+  if (cleanPath.includes('password-generator')) {
+    return '/developer-tools';
+  }
+  if (cleanPath === '/file-sharing') {
+    return '/';
   }
   if (
     cleanPath.startsWith('/merge-pdf') ||

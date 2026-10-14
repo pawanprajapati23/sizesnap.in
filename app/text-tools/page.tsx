@@ -5,7 +5,7 @@ import { CategoryHubPage } from '@/components/templates/CategoryHubPage';
 export const metadata: Metadata = {
   title: 'Free Text Tools | Formatting, Counting & Analyzers | SizeSnap',
   description: 'Free online text tools for formatting, counting, and string manipulation directly in your browser. 100% secure.',
-  alternates: { canonical: 'https://sizesnap.in/text-tools' },
+  alternates: { canonical: 'https://www.sizesnap.in/text-tools' },
 };
 
 export default function TextToolsPage() {

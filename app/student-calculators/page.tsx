@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: 'Student Calculators – Percentage, CGPA, SGPA & More | SizeSnap',
   description: 'Calculate percentages, CGPA, SGPA, attendance, exam marks and study hours with free online student calculators. Fast, simple and mobile-friendly tools.',
   alternates: {
-    canonical: 'https://sizesnap.in/student-calculators',
+    canonical: 'https://www.sizesnap.in/student-calculators',
   },
   openGraph: {
     title: 'Student Calculators – Percentage, CGPA, SGPA & More | SizeSnap',
     description: 'Calculate percentages, CGPA, SGPA, attendance, exam marks and study hours with free online student calculators. Fast, simple and mobile-friendly tools.',
-    url: 'https://sizesnap.in/student-calculators',
+    url: 'https://www.sizesnap.in/student-calculators',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -36,8 +36,8 @@ export default function StudentCalculatorsPage() {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             'itemListElement': [
-              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://sizesnap.in/' },
-              { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://sizesnap.in/student-calculators' }
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.sizesnap.in/' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://www.sizesnap.in/student-calculators' }
             ]
           })
         }}

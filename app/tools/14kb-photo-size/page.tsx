@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Make your photo size exactly 14KB for online forms and exam portals. Reduce image size to 14KB without losing quality. Fast, free, and secure.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/14kb-photo-size',
+    canonical: 'https://www.sizesnap.in/tools/14kb-photo-size',
   },
 };
 

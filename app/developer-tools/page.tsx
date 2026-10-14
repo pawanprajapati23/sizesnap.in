@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free online developer tools to format JSON, test Regex, decode JWTs, convert Unix timestamps, and generate hashes securely in your browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/developer-tools',
+    canonical: 'https://www.sizesnap.in/developer-tools',
   },
 };
 

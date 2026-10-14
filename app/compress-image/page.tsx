@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free online tool to compress image size in KB without losing quality. Easy fast and secure offline compressor for JPEG, PNG, WEBP.',
   alternates: {
-    canonical: 'https://sizesnap.in/compress-image',
+    canonical: 'https://www.sizesnap.in/compress-image',
   },
 };
 

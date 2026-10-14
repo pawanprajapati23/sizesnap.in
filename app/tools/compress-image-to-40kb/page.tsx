@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'reduce image size to 40kb',
   ],
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-40kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-40kb',
   },
   openGraph: {
     title: 'Compress Image to 40KB Online Free (Resize Photo to 40KB) | SizeSnap',
     description:
       'Instantly compress image or photo to exactly 40KB online for UPSSSC, Railway RRB, SSC, and govt exam portals without losing quality.',
-    url: 'https://sizesnap.in/tools/compress-image-to-40kb',
+    url: 'https://www.sizesnap.in/tools/compress-image-to-40kb',
     type: 'website',
   },
 };

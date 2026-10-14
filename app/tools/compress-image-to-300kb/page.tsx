@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Reduce large photos and scanned PDF images to exactly 300KB. Perfect for retaining high quality while saving space.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-300kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-300kb',
   },
 };
 

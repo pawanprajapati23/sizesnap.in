@@ -141,6 +141,47 @@ const nextConfig: NextConfig = {
         destination: '/tools/merge-pdf',
         permanent: true,
       },
+      {
+        source: '/tools/password-generator',
+        destination: '/developer-tools',
+        permanent: true,
+      },
+      {
+        source: '/tools/reduce-image-size-kb',
+        destination: '/tools/reduce-image-size-in-kb',
+        permanent: true,
+      },
+      {
+        source: '/file-sharing',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/blog/how-to-compress-pdf-for-government-exams',
+        destination: '/blog/how-to-compress-pdf-to-100kb-140kb-for-govt-portals',
+        permanent: true,
+      },
+      {
+        source: '/blog/how-to-resize-image-to-20kb',
+        destination: '/blog/how-to-reduce-image-size-in-kb-without-losing-quality',
+        permanent: true,
+      },
+      {
+        source: '/blog/document-scanner-app-alternative',
+        destination: '/tools/ai-photo-enhancer',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'jaldibhejo.sizesnap.in',
+          },
+        ],
+        destination: 'https://www.sizesnap.in/:path*',
+        permanent: true,
+      },
     ];
   },
   webpack: (config, {dev}) => {

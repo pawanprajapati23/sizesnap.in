@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Add custom text watermarks (CONFIDENTIAL, DRAFT, DO NOT COPY) to PDF documents online for free. Diagonal or horizontal angle, adjustable opacity, colors, and cover page exclusion. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/add-watermark-pdf',
+    canonical: 'https://www.sizesnap.in/tools/add-watermark-pdf',
   },
   openGraph: {
     title: 'Add Watermark to PDF - Stamp PDF Online Free | SizeSnap',
     description:
       'Protect confidential PDF documents with custom translucent text watermarks safely in your browser.',
-    url: 'https://sizesnap.in/tools/add-watermark-pdf',
+    url: 'https://www.sizesnap.in/tools/add-watermark-pdf',
   },
 };
 

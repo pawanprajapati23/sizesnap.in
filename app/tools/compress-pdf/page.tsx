@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   description:
     'Compress and reduce PDF file size online for free. Choose Low, Recommended, or High compression presets. Ideal for government portals (SSC, UPSC) and email attachments. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-pdf',
+    canonical: 'https://www.sizesnap.in/tools/compress-pdf',
   },
   openGraph: {
     title: 'Compress PDF Online - Reduce PDF File Size Free | SizeSnap',
     description:
       'Reduce PDF file size quickly without watermarks, signup, or server uploads. Secure browser-based compression.',
-    url: 'https://sizesnap.in/tools/compress-pdf',
+    url: 'https://www.sizesnap.in/tools/compress-pdf',
   },
 };
 

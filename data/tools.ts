@@ -3174,8 +3174,52 @@ export const ALL_TOOLS: ToolItem[] = [
     "supportedFormats": [],
     "processingType": "client",
     "status": "production",
-    "seoPriority": "Medium",
+    "seoPriority": "High",
     "analyticsIdentifier": "compress-pdf",
+    "popular": true
+  },
+  {
+    "id": "compress-pdf-140kb",
+    "name": "Compress PDF to 140KB",
+    "slug": "compress-pdf-140kb",
+    "categoryId": "pdf",
+    "categoryTitle": "PDF Tools",
+    "shortDescription": "Compress PDF to 140KB online for free. Ideal for SSC, UPSC, and state government exam portal uploads.",
+    "keywords": [
+      "compress pdf to 140kb",
+      "reduce pdf to 140kb",
+      "compress pdf under 150kb",
+      "ssc pdf 140kb"
+    ],
+    "aliases": [],
+    "searchIntent": "Utility",
+    "relatedTools": ["compress-pdf", "merge-pdf", "image-to-pdf"],
+    "supportedFormats": ["pdf"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-pdf-140kb",
+    "popular": true
+  },
+  {
+    "id": "compress-pdf-12kb",
+    "name": "Compress PDF to 12KB",
+    "slug": "compress-pdf-12kb",
+    "categoryId": "pdf",
+    "categoryTitle": "PDF Tools",
+    "shortDescription": "Compress PDF to 12KB online for free. Ideal for strict government exam signature and thumb uploads.",
+    "keywords": [
+      "compress pdf to 12kb",
+      "reduce pdf to 12kb"
+    ],
+    "aliases": [],
+    "searchIntent": "Utility",
+    "relatedTools": ["compress-pdf", "merge-pdf", "image-to-pdf"],
+    "supportedFormats": ["pdf"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "Medium",
+    "analyticsIdentifier": "compress-pdf-12kb",
     "popular": false
   },
   {

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Inspect EXIF photo metadata, camera make and model, ISO, shutter speed, aperture, focal length, image dimensions, and megapixels online for free. Export metadata as JSON. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/image-metadata-viewer',
+    canonical: 'https://www.sizesnap.in/tools/image-metadata-viewer',
   },
   openGraph: {
     title: 'Image Metadata Viewer - View EXIF, Camera & Image Info Online Free | SizeSnap',
     description:
       'Extract EXIF shooting data, camera specs, and image dimensions safely in your browser.',
-    url: 'https://sizesnap.in/tools/image-metadata-viewer',
+    url: 'https://www.sizesnap.in/tools/image-metadata-viewer',
   },
 };
 

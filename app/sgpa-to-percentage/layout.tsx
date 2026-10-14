@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: 'SGPA to Percentage Calculator | University Grades | SizeSnap',
   description: 'Easily convert your semester SGPA to an overall percentage score. Supports custom university formulas and multipliers.',
   alternates: {
-    canonical: 'https://sizesnap.in/sgpa-to-percentage',
+    canonical: 'https://www.sizesnap.in/sgpa-to-percentage',
   },
   openGraph: {
     title: 'SGPA to Percentage Calculator | University Grades | SizeSnap',
     description: 'Easily convert your semester SGPA to an overall percentage score. Supports custom university formulas and multipliers.',
-    url: 'https://sizesnap.in/sgpa-to-percentage',
+    url: 'https://www.sizesnap.in/sgpa-to-percentage',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -26,16 +26,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       'itemListElement': [
-        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://sizesnap.in/' },
-        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://sizesnap.in/student-calculators' },
-        { '@type': 'ListItem', 'position': 3, 'name': 'SGPA to Percentage Calculator', 'item': 'https://sizesnap.in/sgpa-to-percentage' }
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.sizesnap.in/' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Student Calculators', 'item': 'https://www.sizesnap.in/student-calculators' },
+        { '@type': 'ListItem', 'position': 3, 'name': 'SGPA to Percentage Calculator', 'item': 'https://www.sizesnap.in/sgpa-to-percentage' }
       ]
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       'name': 'SGPA to Percentage Calculator',
-      'url': 'https://sizesnap.in/sgpa-to-percentage',
+      'url': 'https://www.sizesnap.in/sgpa-to-percentage',
       'description': 'Easily convert your semester SGPA to an overall percentage score. Supports custom university formulas and multipliers.',
       'applicationCategory': 'EducationalApplication',
       'operatingSystem': 'All',

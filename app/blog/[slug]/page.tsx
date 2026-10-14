@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.seoTitle || `${article.title} - SizeSnap Blog`,
     description: article.seoDescription || article.excerpt,
     alternates: {
-      canonical: article.canonicalUrl || `https://sizesnap.in/blog/${article.slug}`,
+      canonical: article.canonicalUrl || `https://www.sizesnap.in/blog/${article.slug}`,
     },
     openGraph: {
       title: article.seoTitle || article.title,
@@ -74,7 +74,7 @@ export default async function ArticlePage({ params }: Props) {
   });
 
   const isBase64 = (str?: string) => str?.startsWith('data:');
-  const jsonLdImage = article.ogImage || (article.coverImage && !isBase64(article.coverImage) ? article.coverImage : null) || 'https://sizesnap.in/logo.png';
+  const jsonLdImage = article.ogImage || (article.coverImage && !isBase64(article.coverImage) ? article.coverImage : null) || 'https://www.sizesnap.in/logo.png';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -87,19 +87,19 @@ export default async function ArticlePage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: article.author.name,
-      url: article.author.socialLinks?.website || `https://sizesnap.in/blog`,
+      url: article.author.socialLinks?.website || `https://www.sizesnap.in/blog`,
     },
     publisher: {
       '@type': 'Organization',
       name: 'SizeSnap',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://sizesnap.in/logo.png',
+        url: 'https://www.sizesnap.in/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://sizesnap.in/blog/${article.slug}`,
+      '@id': `https://www.sizesnap.in/blog/${article.slug}`,
     },
   };
 
@@ -220,7 +220,7 @@ export default async function ArticlePage({ params }: Props) {
         {/* Left Sidebar (Desktop) */}
         <div className="hidden lg:block w-64 flex-shrink-0">
           <div className="sticky top-24">
-            <ShareButtons url={`https://sizesnap.in/blog/${article.slug}`} title={article.title} />
+            <ShareButtons url={`https://www.sizesnap.in/blog/${article.slug}`} title={article.title} />
             <TableOfContents htmlContent={cleanContent} />
           </div>
         </div>
@@ -255,7 +255,7 @@ export default async function ArticlePage({ params }: Props) {
           {/* Mobile Share */}
           <div className="lg:hidden mt-8 pt-8 border-t border-gray-200">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Share this article</h3>
-            <ShareButtons url={`https://sizesnap.in/blog/${article.slug}`} title={article.title} horizontal={true} />
+            <ShareButtons url={`https://www.sizesnap.in/blog/${article.slug}`} title={article.title} horizontal={true} />
           </div>
 
           <div className="mt-12 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     'Easily compress PDF to 12KB online for free. Ideal for strict government exams, signature uploads, and fast file sharing. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-pdf-12kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-pdf-12kb',
   },
 };
 

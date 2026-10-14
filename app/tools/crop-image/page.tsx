@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Crop JPG, PNG, and WebP images online for free. Drag-to-crop rectangle, aspect ratio presets (1:1 square, 16:9 widescreen, 4:3, passport size 3.5:4.5), exact pixel preview, and high-quality export.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/crop-image',
+    canonical: 'https://www.sizesnap.in/tools/crop-image',
   },
   openGraph: {
     title: 'Crop Image - Crop Photos Online Free with Aspect Ratios | SizeSnap',
     description:
       'Fast, intuitive image cropping with aspect ratio presets and instant browser download without quality loss.',
-    url: 'https://sizesnap.in/tools/crop-image',
+    url: 'https://www.sizesnap.in/tools/crop-image',
   },
 };
 

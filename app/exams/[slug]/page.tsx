@@ -69,12 +69,12 @@ export async function generateMetadata({ params }: ExamPageProps): Promise<Metad
     title: exam.metaTitle,
     description: exam.metaDescription,
     alternates: {
-      canonical: `https://sizesnap.in/exams/${exam.slug}`,
+      canonical: `https://www.sizesnap.in/exams/${exam.slug}`,
     },
     openGraph: {
       title: exam.metaTitle,
       description: exam.metaDescription,
-      url: `https://sizesnap.in/exams/${exam.slug}`,
+      url: `https://www.sizesnap.in/exams/${exam.slug}`,
       type: 'website',
     },
   };

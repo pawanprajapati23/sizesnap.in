@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     'us visa photo maker 2x2 inches',
   ],
   alternates: {
-    canonical: 'https://sizesnap.in/tools/passport-photo-maker',
+    canonical: 'https://www.sizesnap.in/tools/passport-photo-maker',
   },
   openGraph: {
     title: 'Passport Photo Maker Online (3.5 x 4.5 cm) for SSC, UPSC, Govt Exams | SizeSnap',
     description:
       'Crop & resize photos to official 3.5×4.5 cm, 2×2 inch and 20KB to 50KB for SSC CGL, UPSC, Govt exams. Free printable A4 sheet.',
-    url: 'https://sizesnap.in/tools/passport-photo-maker',
+    url: 'https://www.sizesnap.in/tools/passport-photo-maker',
     type: 'website',
   },
 };
@@ -84,7 +84,7 @@ export default function PassportPhotoMakerPage() {
       <SoftwareAppSchema
         name="SizeSnap Passport Photo Maker"
         description="Free online passport photo maker. Crop & resize photos to official 3.5x4.5 cm, 2x2 inches, and generate printable A4 sheets for SSC, UPSC, and visa forms."
-        url="https://sizesnap.in/tools/passport-photo-maker"
+        url="https://www.sizesnap.in/tools/passport-photo-maker"
       />
 
       <Navbar />

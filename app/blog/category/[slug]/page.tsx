@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${category.title} - SizeSnap Blog`,
     description: category.description,
     alternates: {
-      canonical: `https://sizesnap.in/blog/category/${resolvedParams.slug}`,
+      canonical: `https://www.sizesnap.in/blog/category/${resolvedParams.slug}`,
     },
   };
 }

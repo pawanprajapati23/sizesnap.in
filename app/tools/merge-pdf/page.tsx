@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Merge multiple PDF documents into one single PDF file online. Reorder pages and files with simple arrow buttons, preserve bookmarks and fonts, and download instantly. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/merge-pdf',
+    canonical: 'https://www.sizesnap.in/tools/merge-pdf',
   },
   openGraph: {
     title: 'Merge PDF - Combine PDF Files Online Free | SizeSnap',
     description:
       'Combine multiple PDF files into one clean document without size limits or server uploads.',
-    url: 'https://sizesnap.in/tools/merge-pdf',
+    url: 'https://www.sizesnap.in/tools/merge-pdf',
   },
 };
 

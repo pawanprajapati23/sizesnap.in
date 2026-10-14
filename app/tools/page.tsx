@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     'Browse our complete collection of free, client-side tools for compressing, resizing, and converting images and PDFs. 100% secure with no file uploads.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools',
+    canonical: 'https://www.sizesnap.in/tools',
   },
 };
 
@@ -20,8 +20,8 @@ export default function ToolsDirectoryPage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://sizesnap.in/' },
-      { '@type': 'ListItem', position: 2, name: 'All Tools', item: 'https://sizesnap.in/tools' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.sizesnap.in/' },
+      { '@type': 'ListItem', position: 2, name: 'All Tools', item: 'https://www.sizesnap.in/tools' },
     ],
   };
 

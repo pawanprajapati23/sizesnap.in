@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Convert JPG, PNG, WebP, SVG, and GIF images to Base64 online for free. Instant Data URI, Raw Base64 string, HTML <img> tag, and CSS background snippets. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/image-to-base64',
+    canonical: 'https://www.sizesnap.in/tools/image-to-base64',
   },
   openGraph: {
     title: 'Image to Base64 - Convert Images to Base64 String Online Free | SizeSnap',
     description:
       'Convert photos into Base64 Data URIs, HTML image tags, and CSS snippets safely in your browser.',
-    url: 'https://sizesnap.in/tools/image-to-base64',
+    url: 'https://www.sizesnap.in/tools/image-to-base64',
   },
 };
 

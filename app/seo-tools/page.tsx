@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free online SEO tools for website owners and developers. Generate meta tags, schemas, open graph cards, robots.txt, and analyze keyword density directly in your browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/seo-tools',
+    canonical: 'https://www.sizesnap.in/seo-tools',
   },
 };
 

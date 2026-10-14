@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Reduce photo and signature size to exactly 30KB for SSC, UPSC, and State PSC applications. Secure and private offline compression without losing quality.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/compress-image-to-30kb',
+    canonical: 'https://www.sizesnap.in/tools/compress-image-to-30kb',
   },
 };
 

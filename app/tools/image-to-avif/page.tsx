@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Convert JPG, PNG, and WebP images to modern AVIF format online for free. AVIF delivers up to 50% smaller sizes than WebP and 80% smaller than JPEG with superior color and HDR preservation. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/image-to-avif',
+    canonical: 'https://www.sizesnap.in/tools/image-to-avif',
   },
   openGraph: {
     title: 'Convert Image to AVIF - Convert JPG & PNG to AVIF Online Free | SizeSnap',
     description:
       'Ultra-efficient AVIF image conversion online with quality control and bulk ZIP export.',
-    url: 'https://sizesnap.in/tools/image-to-avif',
+    url: 'https://www.sizesnap.in/tools/image-to-avif',
   },
 };
 

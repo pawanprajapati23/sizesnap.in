@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Split PDF documents online into individual pages or custom page ranges (e.g. 1-3, 5). Extract specific pages, save each page as a separate PDF, and download as a single ZIP archive. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/split-pdf',
+    canonical: 'https://www.sizesnap.in/tools/split-pdf',
   },
   openGraph: {
     title: 'Split PDF - Separate PDF Pages Online Free | SizeSnap',
     description:
       'Extract page ranges or separate all PDF pages into individual documents safely in your browser.',
-    url: 'https://sizesnap.in/tools/split-pdf',
+    url: 'https://www.sizesnap.in/tools/split-pdf',
   },
 };
 

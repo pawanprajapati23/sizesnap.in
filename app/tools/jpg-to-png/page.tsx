@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Convert JPG, JPEG, and WebP images to high-quality PNG format online. Batch convert multiple files, download individual PNGs or as a single ZIP archive. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/jpg-to-png',
+    canonical: 'https://www.sizesnap.in/tools/jpg-to-png',
   },
   openGraph: {
     title: 'JPG to PNG Converter - Convert JPG to Lossless PNG Online Free | SizeSnap',
     description:
       'Fast, free, and batch client-side conversion from JPG to PNG without quality degradation.',
-    url: 'https://sizesnap.in/tools/jpg-to-png',
+    url: 'https://www.sizesnap.in/tools/jpg-to-png',
   },
 };
 

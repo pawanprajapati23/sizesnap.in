@@ -11,16 +11,16 @@ const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'));
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sizesnap.in'),
+  metadataBase: new URL('https://www.sizesnap.in'),
   title: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
   description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
   alternates: {
-    canonical: 'https://sizesnap.in/',
+    canonical: 'https://www.sizesnap.in/',
   },
   openGraph: {
     title: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
     description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
-    url: 'https://sizesnap.in/',
+    url: 'https://www.sizesnap.in/',
     siteName: 'SizeSnap',
     type: 'website',
   },
@@ -58,15 +58,15 @@ export default function RootLayout({
     '@graph': [
       {
         '@type': 'WebSite',
-        '@id': 'https://sizesnap.in/#website',
-        url: 'https://sizesnap.in/',
+        '@id': 'https://www.sizesnap.in/#website',
+        url: 'https://www.sizesnap.in/',
         name: 'SizeSnap',
         description: 'Free Online Image Compressor, Resizer, Converter & PDF Tools',
       },
       {
         '@type': 'WebApplication',
         name: 'SizeSnap Image & PDF Utilities',
-        url: 'https://sizesnap.in/',
+        url: 'https://www.sizesnap.in/',
         applicationCategory: 'UtilitiesApplication',
         operatingSystem: 'All',
         browserRequirements: 'Requires JavaScript. Requires HTML5.',

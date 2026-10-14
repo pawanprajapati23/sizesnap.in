@@ -5,7 +5,7 @@ import { CategoryHubPage } from '@/components/templates/CategoryHubPage';
 export const metadata: Metadata = {
   title: 'Free Calculator Tools | CGPA, Percentage & Attendance | SizeSnap',
   description: 'Free online calculator tools for students. Calculate CGPA, percentages, and attendance directly in your browser.',
-  alternates: { canonical: 'https://sizesnap.in/calculator-tools' },
+  alternates: { canonical: 'https://www.sizesnap.in/calculator-tools' },
 };
 
 export default function CalculatorToolsPage() {

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Extract HEX, RGB, HSL, and CMYK color codes from any image online for free. Click or hover on any pixel, extract dominant color palettes, and copy codes with 1-click. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/image-color-picker',
+    canonical: 'https://www.sizesnap.in/tools/image-color-picker',
   },
   openGraph: {
     title: 'Image Color Picker - Extract HEX, RGB & HSL from Image Online Free | SizeSnap',
     description:
       'Extract color codes from images with crosshair pipette precision, dominant palettes, and 1-click clipboard copy.',
-    url: 'https://sizesnap.in/tools/image-color-picker',
+    url: 'https://www.sizesnap.in/tools/image-color-picker',
   },
 };
 

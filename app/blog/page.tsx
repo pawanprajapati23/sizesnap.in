@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'SizeSnap Blog - Guides, Tips & Requirements for Exams',
   description: 'Practical guides, exam document requirements, student tools, image and PDF tips, and useful resources to help you get your documents ready.',
   alternates: {
-    canonical: 'https://sizesnap.in/blog',
+    canonical: 'https://www.sizesnap.in/blog',
   },
 };
 

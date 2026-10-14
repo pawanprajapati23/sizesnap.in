@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Free tool to reduce image file size to exact target KB (20KB, 50KB, 100KB, 200KB) for SSC, UPSC, PAN cards, and exam portals without server uploads.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/reduce-image-size-kb',
+    canonical: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
   },
   openGraph: {
     title: 'Reduce Image Size in KB Online (20KB, 50KB, 100KB) | SizeSnap',
     description:
       'Compress photos and signatures to exact 20KB, 50KB, or 100KB online for free with SizeSnap.',
-    url: 'https://sizesnap.in/tools/reduce-image-size-kb',
+    url: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
   },
 };
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Free online PDF tools to compress, merge, split, rotate, and manage PDF documents directly in your browser. 100% private and secure.',
   alternates: {
-    canonical: 'https://sizesnap.in/pdf-tools',
+    canonical: 'https://www.sizesnap.in/pdf-tools',
   },
 };
 
@@ -26,6 +26,8 @@ export default function PdfToolsPage() {
       category="pdf"
       customSlugs={[
         'compress-pdf',
+        'compress-pdf-140kb',
+        'compress-pdf-12kb',
         'merge-pdf',
         'split-pdf',
         'rotate-pdf',

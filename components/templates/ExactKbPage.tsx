@@ -74,7 +74,7 @@ export function ExactKbPage({
       '@type': 'ListItem',
       position: idx + 1,
       name: crumb.name,
-      item: crumb.url.startsWith('http') ? crumb.url : `https://sizesnap.in${crumb.url}`,
+      item: crumb.url.startsWith('http') ? crumb.url : `https://www.sizesnap.in${crumb.url}`,
     })),
   };
 

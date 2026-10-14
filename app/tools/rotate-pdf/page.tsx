@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Rotate PDF documents or individual pages online for free. Rotate 90°, 180°, or 270° clockwise or counter-clockwise. Permanently fix orientation in your browser. 100% private.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/rotate-pdf',
+    canonical: 'https://www.sizesnap.in/tools/rotate-pdf',
   },
   openGraph: {
     title: 'Rotate PDF - Rotate PDF Pages Permanently Online Free | SizeSnap',
     description:
       'Rotate specific pages or entire PDF files by 90 or 180 degrees permanently without uploading files to a server.',
-    url: 'https://sizesnap.in/tools/rotate-pdf',
+    url: 'https://www.sizesnap.in/tools/rotate-pdf',
   },
 };
 

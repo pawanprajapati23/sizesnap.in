@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Extract specific pages or page ranges from any PDF document into a new PDF or download each page separately in a ZIP archive. Fast, free, 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/extract-pdf-pages',
+    canonical: 'https://www.sizesnap.in/tools/extract-pdf-pages',
   },
   openGraph: {
     title: 'Extract PDF Pages - Save PDF Pages Online Free | SizeSnap',
     description:
       'Save selected pages from a PDF document into a separate PDF file or ZIP archive without server uploads.',
-    url: 'https://sizesnap.in/tools/extract-pdf-pages',
+    url: 'https://www.sizesnap.in/tools/extract-pdf-pages',
   },
 };
 

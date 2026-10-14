@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Resize hundreds of JPG, PNG, and WebP images simultaneously. Custom dimensions, aspect ratio lock, percentage scaling, bounding box limits, and 1-click ZIP download. 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/bulk-image-resizer',
+    canonical: 'https://www.sizesnap.in/tools/bulk-image-resizer',
   },
   openGraph: {
     title: 'Bulk Image Resizer - Resize Multiple Images Online Free | SizeSnap',
     description:
       'Batch resize multiple photos in pixels or percentage with aspect ratio protection and instant ZIP export.',
-    url: 'https://sizesnap.in/tools/bulk-image-resizer',
+    url: 'https://www.sizesnap.in/tools/bulk-image-resizer',
   },
 };
 

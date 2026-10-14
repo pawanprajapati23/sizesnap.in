@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     'Delete unwanted, blank, or duplicate pages from any PDF document online for free. Click to select pages or enter page ranges (e.g. 2, 4-6). Fast, 100% private in browser.',
   alternates: {
-    canonical: 'https://sizesnap.in/tools/delete-pdf-pages',
+    canonical: 'https://www.sizesnap.in/tools/delete-pdf-pages',
   },
   openGraph: {
     title: 'Delete PDF Pages - Remove Pages from PDF Online Free | SizeSnap',
     description:
       'Remove specific pages from your PDF file without uploading documents to external servers.',
-    url: 'https://sizesnap.in/tools/delete-pdf-pages',
+    url: 'https://www.sizesnap.in/tools/delete-pdf-pages',
   },
 };
 

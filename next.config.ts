@@ -56,6 +56,31 @@ const nextConfig: NextConfig = {
         destination: '/tools/compress-pdf',
         permanent: true,
       },
+      {
+        source: '/passport-photo/delhi-police-photo',
+        destination: '/exams/delhi-police-photo-resizer',
+        permanent: true,
+      },
+      {
+        source: '/resize-image/without-losing-quality',
+        destination: '/tools/reduce-image-size-in-kb',
+        permanent: true,
+      },
+      {
+        source: '/watermark-image/add-text',
+        destination: '/tools/image-watermark',
+        permanent: true,
+      },
+      {
+        source: '/compress-pdf/to-200kb',
+        destination: '/tools/compress-pdf',
+        permanent: true,
+      },
+      {
+        source: '/stories/passport-photo-fix',
+        destination: '/tools/passport-photo-maker',
+        permanent: true,
+      },
     ];
   },
   webpack: (config, {dev}) => {

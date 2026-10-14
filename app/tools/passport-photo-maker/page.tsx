@@ -228,7 +228,7 @@ export default function PassportPhotoMakerPage() {
 
               <h3 className="text-base font-bold text-gray-800 mb-3">Essential File Size Adjustments</h3>
               <p className="text-sm mb-6 leading-relaxed">
-                While framing your photo to the exact 3.5cm × 4.5cm dimensions is crucial, most online application portals (like SSC, IBPS, and RRB) also require strict file size limits, usually between <strong>20KB and 50KB</strong>. Once you download your passport photo, you can instantly run it through our <Link href="/tools/reduce-image-size-in-kb?target=50" className="text-[#414FA8] hover:underline font-medium">Compress to 50KB Tool</Link> to ensure it meets exact web upload specifications.
+                While framing your photo to the exact 3.5cm × 4.5cm dimensions is crucial, most online application portals (like SSC, IBPS, and RRB) also require strict file size limits, usually between <strong>20KB and 50KB</strong>. Once you download your passport photo, you can instantly run it through our <Link href="/tools/compress-image-to-50kb" className="text-[#414FA8] hover:underline font-medium">Compress to 50KB Tool</Link> to ensure it meets exact web upload specifications.
               </p>
 
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">

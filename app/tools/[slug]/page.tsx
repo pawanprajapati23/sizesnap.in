@@ -105,9 +105,9 @@ interface ToolPageProps {
 }
 
 const TOOL_REDIRECT_MAP: Record<string, string> = {
-  'compress-image-to-20kb': '/tools/reduce-image-size-in-kb?target=20',
-  'compress-image-to-50kb': '/tools/reduce-image-size-in-kb?target=50',
-  'compress-image-to-100kb': '/tools/reduce-image-size-in-kb?target=100',
+  'compress-image-to-20kb': '/tools/compress-image-to-20kb',
+  'compress-image-to-50kb': '/tools/compress-image-to-50kb',
+  'compress-image-to-100kb': '/tools/compress-image-to-100kb',
   'ssc-photo-resize': '/exams/ssc-photo-signature-resizer',
   'upsc-photo': '/exams/upsc-photo-signature-resizer',
   'psc-photo': '/exams/ssc-photo-signature-resizer',

@@ -62,11 +62,6 @@ export default function RootLayout({
         url: 'https://sizesnap.in/',
         name: 'SizeSnap',
         description: 'Free Online Image Compressor, Resizer, Converter & PDF Tools',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://sizesnap.in/?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
-        },
       },
       {
         '@type': 'WebApplication',

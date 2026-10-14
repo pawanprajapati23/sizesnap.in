@@ -55,14 +55,14 @@ const POPULAR_PRESETS: PresetItem[] = [
     id: 'kb-20',
     name: 'Compress to 20 KB',
     shortDesc: 'Exact KB target',
-    url: '/tools/reduce-image-size-in-kb?target=20',
+    url: '/tools/compress-image-to-20kb',
     targetKb: 20,
   },
   {
     id: 'kb-50',
     name: 'Compress to 50 KB',
     shortDesc: 'Standard Govt limit',
-    url: '/tools/reduce-image-size-in-kb?target=50',
+    url: '/tools/compress-image-to-50kb',
     targetKb: 50,
   },
   {

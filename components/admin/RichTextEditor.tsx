@@ -6,6 +6,7 @@ import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import { Bold, Italic, Strikethrough, Heading2, Heading3, List, ListOrdered, Quote, Undo, Redo, Link as LinkIcon, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 export default function RichTextEditor({ content, onChange }: { content: string, onChange: (val: string) => void }) {
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -82,7 +83,8 @@ export default function RichTextEditor({ content, onChange }: { content: string,
         }
 
         const data = await res.json();
-        editor.chain().focus().setImage({ src: data.secure_url }).run();
+        const optimizedUrl = getOptimizedCloudinaryUrl(data.secure_url, { width: 1200, crop: 'limit' });
+        editor.chain().focus().setImage({ src: optimizedUrl }).run();
       } else {
         const url = window.prompt('Enter Image URL:');
         if (url) {

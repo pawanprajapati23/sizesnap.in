@@ -11,6 +11,7 @@ import TableOfContents from '@/components/blog/TableOfContents';
 import RelatedToolsCTA from '@/components/blog/RelatedToolsCTA';
 import RelatedArticles from '@/components/blog/RelatedArticles';
 import AdsterraAd from '@/components/AdsterraAd';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 export const revalidate = 3600;
 
@@ -28,9 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogImages = [];
   
   if (article.ogImage) {
-    ogImages.push(article.ogImage);
+    ogImages.push(getOptimizedCloudinaryUrl(article.ogImage, { width: 1200, height: 630, crop: 'fill' }));
   } else if (article.coverImage && !isBase64(article.coverImage)) {
-    ogImages.push(article.coverImage);
+    ogImages.push(getOptimizedCloudinaryUrl(article.coverImage, { width: 1200, height: 630, crop: 'fill' }));
   }
 
   return {
@@ -74,7 +75,8 @@ export default async function ArticlePage({ params }: Props) {
   });
 
   const isBase64 = (str?: string) => str?.startsWith('data:');
-  const jsonLdImage = article.ogImage || (article.coverImage && !isBase64(article.coverImage) ? article.coverImage : null) || 'https://www.sizesnap.in/logo.png';
+  const optimizedCover = article.coverImage && !isBase64(article.coverImage) ? getOptimizedCloudinaryUrl(article.coverImage, { width: 1200, height: 630, crop: 'fill' }) : null;
+  const jsonLdImage = (article.ogImage ? getOptimizedCloudinaryUrl(article.ogImage, { width: 1200, height: 630, crop: 'fill' }) : null) || optimizedCover || 'https://www.sizesnap.in/logo.png';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -171,7 +173,11 @@ export default async function ArticlePage({ params }: Props) {
         <div className="max-w-5xl mx-auto px-4 -mt-6 relative z-10">
           <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white aspect-video md:aspect-[21/9]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={article.coverImage} alt={article.title} className="w-full h-full object-cover" />
+            <img 
+              src={getOptimizedCloudinaryUrl(article.coverImage, { width: 1200, crop: 'limit' })} 
+              alt={article.title} 
+              className="w-full h-full object-cover" 
+            />
           </div>
         </div>
       )}

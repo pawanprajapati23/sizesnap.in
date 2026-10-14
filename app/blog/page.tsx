@@ -7,6 +7,7 @@ import BlogCard from '@/components/blog/BlogCard';
 import BlogSearch from '@/components/blog/BlogSearch';
 import NewsletterForm from '@/components/blog/NewsletterForm';
 import { Metadata } from 'next';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 export const metadata: Metadata = {
   title: 'SizeSnap Blog - Guides, Tips & Requirements for Exams',
@@ -84,7 +85,7 @@ export default async function BlogPage() {
                 <div className="md:w-[55%] relative h-72 md:h-auto bg-gray-100 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={featuredArticle.coverImage || 'https://picsum.photos/800/400'}
+                    src={getOptimizedCloudinaryUrl(featuredArticle.coverImage, { width: 1000, height: 500, crop: 'fill' }) || 'https://picsum.photos/800/400'}
                     alt={featuredArticle.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />

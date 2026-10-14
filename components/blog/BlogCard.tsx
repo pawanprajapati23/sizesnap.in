@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Article, BLOG_CATEGORIES } from '@/data/blog';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 export default function BlogCard({ article }: { article: Article }) {
   const category = BLOG_CATEGORIES.find(c => c.slug === article.category);
@@ -10,7 +11,7 @@ export default function BlogCard({ article }: { article: Article }) {
       <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={article.coverImage || 'https://picsum.photos/400/225'}
+          src={getOptimizedCloudinaryUrl(article.coverImage, { width: 600, height: 338, crop: 'fill' }) || 'https://picsum.photos/400/225'}
           alt={article.title}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

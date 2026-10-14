@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Upload, Loader2, Image as ImageIcon, X } from 'lucide-react';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 interface ImageUploadProps {
   value: string;
@@ -56,7 +57,8 @@ export default function ImageUpload({ value, onChange, folder = 'blog-covers' }:
         }
 
         const data = await res.json();
-        onChange(data.secure_url);
+        const optimizedUrl = getOptimizedCloudinaryUrl(data.secure_url);
+        onChange(optimizedUrl);
         setUploading(false);
         setProgress(100);
         setTimeout(() => setProgress(0), 500);

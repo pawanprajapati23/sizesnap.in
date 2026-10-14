@@ -19,6 +19,7 @@ import {
   Eye,
   FileCheck,
   Info,
+  Loader2,
 } from 'lucide-react';
 
 interface ExamPhotoResizerProps {
@@ -83,6 +84,12 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
   const [result, setResult] = useState<ProcessedExamImage | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // White Background AI State
+  const [useWhiteBg, setUseWhiteBg] = useState<boolean>(false);
+  const [cutoutUrl, setCutoutUrl] = useState<string | null>(null);
+  const [isRemovingBg, setIsRemovingBg] = useState<boolean>(false);
+  const [bgRemovalProgress, setBgRemovalProgress] = useState<number>(0);
+
   // Object URL cleanup tracking
   const urlsRef = useRef<string[]>([]);
   const registerUrl = useCallback((url: string) => {
@@ -107,6 +114,39 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Apply pure white background via client-side AI background cutout
+  const handleApplyWhiteBg = async () => {
+    if (!sourceImage) return;
+    if (cutoutUrl) {
+      setUseWhiteBg(true);
+      return;
+    }
+
+    setIsRemovingBg(true);
+    setBgRemovalProgress(10);
+    setErrorMsg(null);
+
+    try {
+      const { removeBackground } = await import('@imgly/background-removal');
+      const blob = await removeBackground(sourceImage.url, {
+        progress: (key, current, total) => {
+          if (total > 0) {
+            setBgRemovalProgress(Math.min(95, Math.round((current / total) * 100)));
+          }
+        },
+      });
+      const newUrl = registerUrl(URL.createObjectURL(blob));
+      setCutoutUrl(newUrl);
+      setUseWhiteBg(true);
+    } catch (err) {
+      console.error('Failed to remove background:', err);
+      setErrorMsg('Could not automatically remove background. Please make sure your browser is up to date.');
+    } finally {
+      setIsRemovingBg(false);
+      setBgRemovalProgress(0);
+    }
+  };
+
   // Handle file select
   const handleFileSelect = (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -116,6 +156,8 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
 
     setErrorMsg(null);
     setResult(null);
+    setCutoutUrl(null);
+    setUseWhiteBg(false);
 
     const url = registerUrl(URL.createObjectURL(file));
     const img = new Image();
@@ -146,10 +188,11 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
       const img = new Image();
       img.crossOrigin = 'anonymous';
 
+      const imageToDrawUrl = useWhiteBg && cutoutUrl ? cutoutUrl : sourceImage.url;
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
         img.onerror = () => reject(new Error('Failed to load image for canvas render'));
-        img.src = sourceImage.url;
+        img.src = imageToDrawUrl;
       });
 
       const canvas = document.createElement('canvas');
@@ -296,6 +339,8 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
     dateOfPhoto,
     defaultDateStr,
     targetKb,
+    useWhiteBg,
+    cutoutUrl,
     exam.id,
     registerUrl,
   ]);
@@ -325,6 +370,9 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
     setSourceImage(null);
     setResult(null);
     setErrorMsg(null);
+    setCutoutUrl(null);
+    setUseWhiteBg(false);
+    setIsRemovingBg(false);
   };
 
   return (
@@ -540,6 +588,76 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
                           *UPSC Rule: Date must not be older than 10 days from notification.
                         </p>
                       </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* White Background (AI) Option */}
+              {activeDoc.id === 'photo' && (
+                <div className="pt-2 border-t border-gray-100 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-gray-800 flex items-center gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5 text-[#414FA8]" />
+                      <span>Background Color:</span>
+                      <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.2 rounded">
+                        White Required
+                      </span>
+                    </span>
+                    {cutoutUrl && (
+                      <button
+                        type="button"
+                        onClick={() => setUseWhiteBg(!useWhiteBg)}
+                        className={`text-[11px] font-semibold px-2 py-0.5 rounded border transition-colors ${
+                          useWhiteBg
+                            ? 'bg-[#EEF1FB] border-[#414FA8] text-[#414FA8]'
+                            : 'bg-gray-100 border-gray-300 text-gray-600'
+                        }`}
+                      >
+                        {useWhiteBg ? '✓ Pure White' : 'Original'}
+                      </button>
+                    )}
+                  </div>
+
+                  {!cutoutUrl ? (
+                    <div className="bg-gradient-to-r from-blue-50/70 to-indigo-50/50 border border-blue-200/80 rounded p-2.5 text-xs space-y-2">
+                      <p className="text-[11px] text-gray-700 leading-snug">
+                        {exam.shortTitle} strictly mandates a <strong>solid white background</strong>. Did you take your photo against a colored wall or room?
+                      </p>
+                      <button
+                        type="button"
+                        disabled={isRemovingBg}
+                        onClick={handleApplyWhiteBg}
+                        className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2e3778] text-white font-semibold text-xs rounded transition-all shadow-xs disabled:opacity-60 cursor-pointer"
+                      >
+                        {isRemovingBg ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>AI Removing Background ({bgRemovalProgress}%)...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="w-3.5 h-3.5" />
+                            <span>Make Background White (AI 1-Click)</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between p-2.5 bg-emerald-50 border border-emerald-200 rounded text-xs text-emerald-900">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                        <span className="font-medium text-[11.5px]">
+                          {useWhiteBg ? 'Pure White Background Active' : 'Showing Original Background'}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setUseWhiteBg(!useWhiteBg)}
+                        className="text-xs text-[#414FA8] font-bold hover:underline"
+                      >
+                        {useWhiteBg ? 'Revert to Original' : 'Apply White'}
+                      </button>
                     </div>
                   )}
                 </div>

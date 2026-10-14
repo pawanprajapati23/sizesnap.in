@@ -135,6 +135,55 @@ export function PassportPhotoMaker() {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // AI Background Removal state
+  const [isRemovingBg, setIsRemovingBg] = useState<boolean>(false);
+  const [bgRemovalProgress, setBgRemovalProgress] = useState<number>(0);
+  const [originalPreviewUrl, setOriginalPreviewUrl] = useState<string | null>(null);
+
+  const handleAiRemoveBg = async () => {
+    if (!selectedImage) return;
+    setIsRemovingBg(true);
+    setBgRemovalProgress(10);
+    setErrorMsg(null);
+
+    try {
+      const { removeBackground } = await import('@imgly/background-removal');
+      const blob = await removeBackground(selectedImage.previewUrl, {
+        progress: (key, current, total) => {
+          if (total > 0) {
+            setBgRemovalProgress(Math.min(95, Math.round((current / total) * 100)));
+          }
+        },
+      });
+      const newUrl = registerUrl(URL.createObjectURL(blob));
+      if (!originalPreviewUrl) {
+        setOriginalPreviewUrl(selectedImage.previewUrl);
+      }
+      setSelectedImage({
+        ...selectedImage,
+        previewUrl: newUrl,
+      });
+      setBgChoice('white');
+    } catch (err) {
+      console.error('Failed to remove background:', err);
+      setErrorMsg('Could not automatically remove background. Please make sure your browser supports WebAssembly.');
+    } finally {
+      setIsRemovingBg(false);
+      setBgRemovalProgress(0);
+    }
+  };
+
+  const handleRevertBg = () => {
+    if (originalPreviewUrl && selectedImage) {
+      setSelectedImage({
+        ...selectedImage,
+        previewUrl: originalPreviewUrl,
+      });
+      setOriginalPreviewUrl(null);
+      setBgChoice('original');
+    }
+  };
+
   // Single photo result (HQ)
   const [singleResult, setSingleResult] = useState<{
     url: string;
@@ -278,6 +327,9 @@ export function PassportPhotoMaker() {
     setPanX(0);
     setPanY(0);
     setRotation(0);
+    setOriginalPreviewUrl(null);
+    setIsRemovingBg(false);
+    setBgChoice('original');
   };
 
   // Touch and Mouse dragging logic
@@ -847,9 +899,44 @@ export function PassportPhotoMaker() {
                     </button>
                   ))}
                 </div>
-                <span className="text-[10px] text-gray-400 mt-1 block">
-                  Color fills transparent pixels. (Automatic AI background removal is not supported yet).
-                </span>
+                {!originalPreviewUrl ? (
+                  <div className="mt-2.5 pt-2 border-t border-gray-100">
+                    <button
+                      type="button"
+                      onClick={handleAiRemoveBg}
+                      disabled={isRemovingBg}
+                      className="w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-3 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2e3778] text-white text-xs font-semibold rounded shadow-xs transition-colors disabled:opacity-60 cursor-pointer"
+                    >
+                      {isRemovingBg ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>AI Removing Background ({bgRemovalProgress}%)...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>Make Background Pure White / Light Blue (AI 1-Click)</span>
+                        </>
+                      )}
+                    </button>
+                    <span className="text-[10px] text-gray-500 mt-1 block text-center">
+                      Cuts out your photo subject and replaces the background with pure studio white or blue.
+                    </span>
+                  </div>
+                ) : (
+                  <div className="mt-2.5 pt-2 border-t border-gray-100 flex items-center justify-between bg-emerald-50 border border-emerald-200 rounded p-2 text-xs">
+                    <span className="text-emerald-800 font-medium flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Subject Cut Out Active
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleRevertBg}
+                      className="text-xs text-[#414FA8] font-bold hover:underline"
+                    >
+                      Revert to Original
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 

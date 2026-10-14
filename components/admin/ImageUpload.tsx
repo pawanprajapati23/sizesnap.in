@@ -117,9 +117,9 @@ export default function ImageUpload({ value, onChange, folder = 'blog-covers' }:
       };
       
       img.src = objectUrl;
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError('An unexpected error occurred');
+      setError(err?.message || 'An unexpected error occurred');
       setUploading(false);
       setProgress(0);
     }

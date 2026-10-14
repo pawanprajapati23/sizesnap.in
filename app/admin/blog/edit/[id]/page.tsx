@@ -107,9 +107,9 @@ export default function EditArticlePage({ params }: { params: Promise<{ id: stri
       const { revalidateBlogCache } = await import('@/lib/actions');
       await revalidateBlogCache();
       router.push('/admin/blog');
-    } catch (error) {
+    } catch (error: any) {
       console.error("Save failed:", error);
-      alert("Failed to save article. Check console for details.");
+      alert(`Failed to save article: ${error?.message || 'Check console for details.'}`);
     } finally {
       setSaving(false);
     }

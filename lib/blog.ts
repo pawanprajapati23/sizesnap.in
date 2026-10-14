@@ -2,6 +2,11 @@ import { db } from './firebase';
 import { ref, get, set, remove, push } from 'firebase/database';
 import { Article, BUILTIN_ARTICLES } from '@/data/blog';
 
+// Helper to remove any undefined properties so Firebase Realtime Database set() doesn't throw
+const sanitizeForFirebase = <T>(obj: T): T => {
+  return JSON.parse(JSON.stringify(obj));
+};
+
 // Generate a random slug-friendly ID if not using a push ID
 export const generateId = () => {
   return Math.random().toString(36).substring(2, 15);
@@ -12,7 +17,7 @@ export const getArticles = async (): Promise<Article[]> => {
   try {
     const articlesRef = ref(db, 'blog/articles');
     const snapshot = await get(articlesRef);
-    let dbArticles: Article[] = [];
+    let dbArticles: (Article & { isDeleted?: boolean })[] = [];
     if (snapshot.exists()) {
       const data = snapshot.val();
       dbArticles = Object.keys(data).map(key => ({
@@ -21,10 +26,17 @@ export const getArticles = async (): Promise<Article[]> => {
       }));
     }
 
+    const deletedSlugs = new Set(
+      dbArticles.filter(a => a.isDeleted).map(a => a.slug || a.id)
+    );
     const dbSlugs = new Set(dbArticles.map(a => a.slug));
+    const dbIds = new Set(dbArticles.map(a => a.id));
+
+    const activeDbArticles = dbArticles.filter(a => !a.isDeleted);
+
     const mergedArticles = [
-      ...dbArticles,
-      ...BUILTIN_ARTICLES.filter(b => !dbSlugs.has(b.slug))
+      ...activeDbArticles,
+      ...BUILTIN_ARTICLES.filter(b => !dbSlugs.has(b.slug) && !dbIds.has(b.id) && !deletedSlugs.has(b.slug) && !deletedSlugs.has(b.id))
     ];
 
     return mergedArticles.sort((a: Article, b: Article) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt));
@@ -76,7 +88,8 @@ export const createArticle = async (articleData: Omit<Article, 'id' | 'createdAt
     createdAt: Date.now(),
   };
 
-  await set(newArticleRef, article);
+  const sanitized = sanitizeForFirebase(article);
+  await set(newArticleRef, sanitized);
   return id;
 };
 
@@ -84,20 +97,50 @@ export const createArticle = async (articleData: Omit<Article, 'id' | 'createdAt
 export const updateArticle = async (id: string, updates: Partial<Omit<Article, 'id'>>): Promise<void> => {
   const articleRef = ref(db, `blog/articles/${id}`);
   const snapshot = await get(articleRef);
-  if (!snapshot.exists()) throw new Error('Article not found');
 
-  const currentData = snapshot.val();
-  await set(articleRef, {
+  let currentData: any = null;
+  if (snapshot.exists()) {
+    currentData = snapshot.val();
+  } else {
+    // If it's a built-in article being edited for the first time, load its default data
+    const builtin = BUILTIN_ARTICLES.find(b => b.id === id || b.slug === id);
+    if (builtin) {
+      currentData = { ...builtin };
+    } else {
+      throw new Error(`Article "${id}" not found`);
+    }
+  }
+
+  const merged = {
     ...currentData,
     ...updates,
+    id: currentData.id || id,
+    isDeleted: false,
     updatedAt: Date.now()
-  });
+  };
+
+  const sanitized = sanitizeForFirebase(merged);
+  await set(articleRef, sanitized);
 };
 
 // Delete an article
 export const deleteArticle = async (id: string): Promise<void> => {
   const articleRef = ref(db, `blog/articles/${id}`);
-  await remove(articleRef);
+  const snapshot = await get(articleRef);
+  if (snapshot.exists()) {
+    await remove(articleRef);
+  } else {
+    // If it's a built-in article, mark isDeleted: true in DB so it doesn't show up again
+    const builtin = BUILTIN_ARTICLES.find(b => b.id === id || b.slug === id);
+    if (builtin) {
+      await set(articleRef, {
+        ...builtin,
+        id,
+        isDeleted: true,
+        updatedAt: Date.now()
+      });
+    }
+  }
 };
 
 // Search articles

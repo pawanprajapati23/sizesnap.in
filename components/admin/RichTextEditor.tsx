@@ -77,7 +77,8 @@ export default function RichTextEditor({ content, onChange }: { content: string,
         });
 
         if (!res.ok) {
-          throw new Error('Failed to upload image to Cloudinary');
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData?.error?.message || 'Failed to upload image to Cloudinary');
         }
 
         const data = await res.json();

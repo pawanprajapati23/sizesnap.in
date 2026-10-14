@@ -81,6 +81,66 @@ const nextConfig: NextConfig = {
         destination: '/tools/passport-photo-maker',
         permanent: true,
       },
+      {
+        source: '/document-enhancer',
+        destination: '/tools/ai-photo-enhancer',
+        permanent: true,
+      },
+      {
+        source: '/exam-pack-generator',
+        destination: '/exams/exam-application-kit',
+        permanent: true,
+      },
+      {
+        source: '/$',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/rotate-and-reorder-pdf-pages',
+        destination: '/tools/rotate-pdf',
+        permanent: true,
+      },
+      {
+        source: '/add-page-numbers-to-pdf-online',
+        destination: '/tools/add-page-numbers-pdf',
+        permanent: true,
+      },
+      {
+        source: '/combine-photo-and-signature-for-exam',
+        destination: '/exams/exam-application-kit',
+        permanent: true,
+      },
+      {
+        source: '/crop-image-to-square',
+        destination: '/tools/crop-image',
+        permanent: true,
+      },
+      {
+        source: '/password-protect-pdf',
+        destination: '/pdf-tools',
+        permanent: true,
+      },
+      {
+        source: '/make-signature-transparent-and-convert-ink',
+        destination: '/tools/generate-signature',
+        permanent: true,
+      },
+      {
+        source: '/&',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/hi',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/merge-marksheet-and-aadhaar-card-pdf',
+        destination: '/tools/merge-pdf',
+        permanent: true,
+      },
     ];
   },
   webpack: (config, {dev}) => {

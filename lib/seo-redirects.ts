@@ -49,11 +49,19 @@ export function getSeoRedirect(pathname: string): string | null {
     return null;
   }
 
-  // Handle /hi/ localized URLs
+  // Handle /hi/ localized URLs, /$, /&
   if (cleanPath.startsWith('/hi/')) {
     cleanPath = cleanPath.replace('/hi', '');
-  } else if (cleanPath === '/hi') {
+  } else if (cleanPath === '/hi' || cleanPath === '/$' || cleanPath === '/&') {
     return '/';
+  }
+
+  // 0. Exam Application Pack & Combos
+  if (
+    cleanPath.includes('exam-pack') ||
+    cleanPath.includes('combine-photo-and-signature')
+  ) {
+    return '/exams/exam-application-kit';
   }
 
   // 1. Dedicated Government Exam Presets (High search volume)
@@ -95,19 +103,31 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/exams/ibps-bank-photo-signature-resizer';
   }
 
-  // 2. Document scanner & shadow removal (High traffic from GSC!)
+  // 2. Document scanner, enhancer & shadow removal
+  if (
+    cleanPath.includes('document-enhancer') ||
+    cleanPath.includes('enhance-document')
+  ) {
+    return '/tools/ai-photo-enhancer';
+  }
+
   if (
     cleanPath.includes('document-scanner') ||
     cleanPath.includes('remove-shadow') ||
     cleanPath.includes('online-document-shadow-removal') ||
     cleanPath.includes('shadow-removal')
   ) {
-    return '/tools/black-and-white';
+    return '/tools/image-filters?mode=bw';
   }
 
-  // 3. WhatsApp DP & social crops
-  if (cleanPath.includes('whatsapp-dp') || cleanPath.includes('whatsapp-crop')) {
-    return '/tools/square-crop';
+  // 3. WhatsApp DP, square crop & social crops
+  if (
+    cleanPath.includes('whatsapp-dp') ||
+    cleanPath.includes('whatsapp-crop') ||
+    cleanPath.includes('crop-image-to-square') ||
+    cleanPath.includes('crop-to-square')
+  ) {
+    return '/tools/crop-image';
   }
 
   // 4. Background change / remove
@@ -129,13 +149,21 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/tools/passport-photo-maker';
   }
 
-  // 5. Signature resizing variants
+  // 5. Signature resizing & digital signature variants
+  if (
+    cleanPath.includes('signature-transparent') ||
+    cleanPath.includes('transparent-and-convert-ink') ||
+    cleanPath.includes('convert-ink')
+  ) {
+    return '/tools/generate-signature';
+  }
+
   if (cleanPath.startsWith('/signature-resize')) {
     const kbMatch = cleanPath.match(/(\d+)kb/);
     if (kbMatch) {
       return `/tools/reduce-image-size-in-kb?target=${kbMatch[1]}`;
     }
-    return '/tools/resize-signature';
+    return '/tools/generate-signature';
   }
 
   // 6. PDF Compression with exact KB/MB (Top ranking on GSC: to-12kb, to-10kb, to-140kb, etc.)
@@ -198,7 +226,7 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/tools/reduce-image-size-in-kb?target=50';
   }
   if (cleanPath.includes('/resize-image/for-instagram')) {
-    return '/tools/square-crop';
+    return '/tools/crop-image';
   }
   if (cleanPath.includes('/resize-image/without-losing-quality')) {
     return '/tools/compress-image';
@@ -217,11 +245,35 @@ export function getSeoRedirect(pathname: string): string | null {
   if (cleanPath.startsWith('/pdf-to-jpg') || cleanPath.startsWith('/pdf-to-images')) {
     return '/tools/pdf-to-images';
   }
-  if (cleanPath.startsWith('/merge-pdf') || cleanPath === '/merge-pdfs' || cleanPath.includes('/merge-pdf/combine')) {
+  if (
+    cleanPath.includes('rotate-and-reorder') ||
+    cleanPath.includes('rotate-pdf')
+  ) {
+    return '/tools/rotate-pdf';
+  }
+  if (
+    cleanPath.includes('add-page-numbers') ||
+    cleanPath.includes('page-numbers-to-pdf')
+  ) {
+    return '/tools/add-page-numbers-pdf';
+  }
+  if (
+    cleanPath.includes('password-protect-pdf') ||
+    cleanPath.includes('protect-pdf')
+  ) {
+    return '/pdf-tools';
+  }
+  if (
+    cleanPath.startsWith('/merge-pdf') ||
+    cleanPath === '/merge-pdfs' ||
+    cleanPath.includes('/merge-pdf/combine') ||
+    cleanPath.includes('merge-marksheet') ||
+    cleanPath.includes('merge-aadhaar')
+  ) {
     return '/tools/merge-pdf';
   }
   if (cleanPath.startsWith('/watermark-image')) {
-    return '/tools/watermark-images';
+    return '/tools/image-watermark';
   }
   if (cleanPath.startsWith('/dimension-resizer')) {
     return '/tools/resize-image-pixel';

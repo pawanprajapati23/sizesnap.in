@@ -69,10 +69,10 @@ export function TimeZoneConverterTool() {
         timeZoneName: 'long'
       });
 
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setConverted(formatter.format(realUtcDate));
     } catch (e: any) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setError('Error converting timezone.');
     }
   }, [date, time, sourceZone, targetZone]);

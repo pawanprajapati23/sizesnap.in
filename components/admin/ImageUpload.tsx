@@ -31,10 +31,40 @@ export default function ImageUpload({ value, onChange, folder = 'blog-covers' }:
 
     setUploading(true);
     setError('');
-    setProgress(50); // Just a visual indicator
+    setProgress(30);
 
     try {
-      // Compress the image before converting to base64 to avoid Huge Payloads (Vercel 4.5MB limit)
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+      // 1. Direct Cloudinary Upload (Zero Vercel server load)
+      if (cloudName && uploadPreset) {
+        setProgress(50);
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+        if (folder) formData.append('folder', folder);
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData?.error?.message || 'Failed to upload image to Cloudinary');
+        }
+
+        const data = await res.json();
+        onChange(data.secure_url);
+        setUploading(false);
+        setProgress(100);
+        setTimeout(() => setProgress(0), 500);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      // 2. Fallback: Compress locally as optimized WebP if Cloudinary env vars not set
       const img = new globalThis.Image();
       const objectUrl = URL.createObjectURL(file);
       

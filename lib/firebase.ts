@@ -1,14 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set, increment, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
-import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBayDRzocfhvlcwQpK1BEVdfBfTbuP1KNs",
   authDomain: "sizesnapji.firebaseapp.com",
   databaseURL: "https://sizesnapji-default-rtdb.firebaseio.com",
   projectId: "sizesnapji",
-  storageBucket: "sizesnapji.firebasestorage.app",
   messagingSenderId: "350460574294",
   appId: "1:350460574294:web:3f788a1f3a84748bf4d9f7",
 };
@@ -16,7 +14,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 export const auth = getAuth(app);
-export const storage = getStorage(app);
 
 export async function fetchUsage(path: string): Promise<Record<string, number>> {
   const snapshot = await get(ref(db, path));

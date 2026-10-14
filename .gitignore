@@ -8,3 +8,6 @@ coverage/
 tsconfig.tsbuildinfo
 node_modules
 .next
+.aistudio/
+AGENTS.md
+

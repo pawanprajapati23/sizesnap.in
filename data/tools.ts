@@ -3974,6 +3974,38 @@ export const ALL_TOOLS: ToolItem[] = [
     seoPriority: 'Medium',
     analyticsIdentifier: 'pdf_page_counter'
   },
+  {
+    id: 'document-scanner',
+    name: 'Document Scanner',
+    slug: 'document-scanner',
+    categoryId: 'image',
+    categoryTitle: 'Image Tools',
+    shortDescription: 'Scan documents with your camera, auto-detect edges, flatten perspective, add multiple pages, and export as PDF – 100% client-side.',
+    keywords: [
+      'document scanner',
+      'scan to pdf',
+      'camera scanner',
+      'camscanner online',
+      'camscanner alternative',
+      'auto crop document',
+      'edge detection',
+      'perspective correction',
+      'scan document online',
+      'phone camera scanner',
+      'mobile document scanner',
+      'free document scanner no watermark',
+      'scan paper to pdf',
+      'multi page document scanner',
+    ],
+    aliases: ['doc scanner', 'cam scanner', 'camscanner', 'pdf scanner', 'document scan', 'camera scan to pdf'],
+    searchIntent: 'Scan paper documents using phone camera and save as PDF',
+    relatedTools: ['crop-image', 'image-to-pdf', 'compress-pdf', 'remove-background'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'High',
+    analyticsIdentifier: 'document-scanner',
+    popular: true,
+  },
 ];
 
 // Sidebar quick links specified by the user
@@ -4014,6 +4046,7 @@ export const NAV_MENUS: NavMenu[] = [
   {
     label: 'Image Tools',
     items: [
+      { name: 'Document Scanner', slug: 'document-scanner' },
       { name: 'Passport Photo Maker', slug: 'passport-photo-maker' },
       { name: 'Remove Background', slug: 'remove-background' },
       { name: 'Blur Background', slug: 'blur-background' },

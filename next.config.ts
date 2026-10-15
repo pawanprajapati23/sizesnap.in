@@ -177,17 +177,6 @@ const nextConfig: NextConfig = {
         destination: '/tools/ai-photo-enhancer',
         permanent: true,
       },
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'jaldibhejo.sizesnap.in',
-          },
-        ],
-        destination: 'https://www.sizesnap.in/:path*',
-        permanent: true,
-      },
     ];
   },
   webpack: (config, {dev}) => {

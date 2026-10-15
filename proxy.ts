@@ -3,24 +3,6 @@ import type { NextRequest } from 'next/server';
 import { getSeoRedirect } from '@/lib/seo-redirects';
 
 export function proxy(request: NextRequest) {
-  const host = request.headers.get('host') || '';
-
-  // 1. Permanently redirect and remove jaldibhejo subdomain
-  if (host.includes('jaldibhejo')) {
-    const destinationPath = request.nextUrl.pathname === '/file-sharing' ? '/' : request.nextUrl.pathname;
-    const redirectUrl = new URL(destinationPath, 'https://www.sizesnap.in');
-    request.nextUrl.searchParams.forEach((value, key) => {
-      redirectUrl.searchParams.set(key, value);
-    });
-
-    return NextResponse.redirect(redirectUrl, {
-      status: 301,
-      headers: {
-        'Cache-Control': 'public, max-age=31536000, immutable',
-      },
-    });
-  }
-
   const { pathname } = request.nextUrl;
 
   // Check if pathname matches any old SizeSnap URL pattern

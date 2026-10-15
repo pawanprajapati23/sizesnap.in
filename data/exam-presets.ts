@@ -420,6 +420,82 @@ export const EXAM_PRESETS: ExamPreset[] = [
       },
     ],
   },
+  {
+    id: 'rrb-railway',
+    slug: 'rrb-railway-photo-signature-resizer',
+    name: 'Railway RRB Photo & Signature Resizer',
+    shortTitle: 'RRB NTPC / ALP / Technician / Group D',
+    authority: 'Railway Recruitment Boards (RRBs)',
+    badge: 'Trending Exam',
+    metaTitle: 'Railway RRB Photo and Signature Resizer Online (30KB - 70KB) | SizeSnap',
+    metaDescription:
+      'Free online photo and signature resizer for Railway RRB NTPC, ALP, Technician, and Group D recruitment forms. Resize to exact 30KB-70KB photo (35x45mm) and signature without blur or rejection.',
+    summary:
+      'Indian Railways RRB mandates exact 30KB to 70KB JPEG photo (35mm x 45mm, approx 350x450px) and 30KB to 70KB signature on plain white paper. Applications with wrong dimensions, dark backgrounds, or caps/spectacles get rejected during automated computer scrutiny.',
+    popularFor: ['RRB NTPC (Graduate & 10+2)', 'RRB ALP (Assistant Loco Pilot)', 'RRB Technician', 'RRB Group D (Level 1)', 'RRB JE (Junior Engineer)', 'RPF Constable & SI'],
+    documents: [
+      {
+        id: 'photo',
+        title: 'Color Passport Photo',
+        minKb: 30,
+        maxKb: 70,
+        recommendedKb: 50,
+        widthPx: 350,
+        heightPx: 450,
+        widthCm: 3.5,
+        heightCm: 4.5,
+        aspectRatioLabel: '35 mm x 45 mm (350 x 450 px)',
+        allowedFormats: ['image/jpeg', 'image/jpg'],
+        requiresNameDate: false,
+        backgroundRequirement: 'Plain white or light-colored background',
+        instructions: [
+          'Color photograph taken against a plain light/white background within the last 6 months.',
+          'Full face view with neutral expression, open eyes, and both ears clearly visible.',
+          'Caps, dark sunglasses, or colored goggles are strictly prohibited.',
+          'File size must strictly be between 30 KB and 70 KB in JPG/JPEG format.',
+        ],
+      },
+      {
+        id: 'signature',
+        title: 'Candidate Signature',
+        minKb: 30,
+        maxKb: 70,
+        recommendedKb: 50,
+        widthPx: 280,
+        heightPx: 120,
+        widthCm: 5.0,
+        heightCm: 2.0,
+        aspectRatioLabel: '50 mm x 20 mm (5:2 ratio)',
+        allowedFormats: ['image/jpeg', 'image/jpg'],
+        requiresNameDate: false,
+        backgroundRequirement: 'Clean unruled white paper with black or blue ballpoint pen',
+        instructions: [
+          'Signature must be in running handwriting, NOT in block or capital letters.',
+          'Sign clearly on clean white paper without shadows or smudges.',
+          'File size must be strictly between 30 KB and 70 KB in JPG format.',
+        ],
+      },
+    ],
+    generalGuidelines: [
+      'RRB uses automated image verification software. Blurry, low-resolution snapshots will cause rejection.',
+      'Ensure the same photograph is kept for Document Verification (DV) and Medical stages.',
+      'Do not upload photos wearing religious headwear that obscures facial visibility from forehead to chin.',
+    ],
+    faqs: [
+      {
+        q: 'What is the exact photo size for Railway RRB NTPC & ALP in KB?',
+        a: 'The photograph must be in JPG/JPEG format with a file size between 30 KB and 70 KB. Recommended dimensions are 35 mm x 45 mm (approx. 350 x 450 pixels).',
+      },
+      {
+        q: 'What is the signature size for Railway RRB exams?',
+        a: 'The candidate signature must be between 30 KB and 70 KB in JPG format. Dimensions should be 50 mm (width) x 20 mm (height). Signatures in capital letters will be rejected.',
+      },
+      {
+        q: 'Can I upload a selfie or phone snapshot for Railway RRB?',
+        a: 'Selfies are strictly rejected. Take a proper front-facing passport photo in good daylight against a plain white wall or background, then use SizeSnap to crop and resize it to exact 30KB-70KB specifications.',
+      },
+    ],
+  },
 ];
 
 export function getExamBySlug(slug: string): ExamPreset | undefined {

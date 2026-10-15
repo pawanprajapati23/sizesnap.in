@@ -8,9 +8,15 @@ const TOOL_SLUG_SET = new Set(ALL_TOOLS.map((t) => t.slug));
 
 // Dedicated standalone tool pages that exist in app/tools/
 const KNOWN_EXTRA_TOOLS = new Set([
+  '11kb-photo-size',
+  'compress-image-to-11kb',
   '12kb-photo-size',
   'compress-image-to-12kb',
+  '13kb-photo-size',
+  'compress-image-to-13kb',
   '14kb-photo-size',
+  '28kb-photo-size',
+  'compress-image-to-28kb',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
 ]);
@@ -114,6 +120,15 @@ export function getSeoRedirect(pathname: string): string | null {
     cleanPath.includes('sbi-photo')
   ) {
     return '/exams/ibps-bank-photo-signature-resizer';
+  }
+
+  if (
+    cleanPath.includes('rrb') ||
+    cleanPath.includes('railway-photo') ||
+    cleanPath.includes('railway-signature') ||
+    cleanPath.includes('rrb-ntpc')
+  ) {
+    return '/exams/rrb-railway-photo-signature-resizer';
   }
 
   // 2. Document scanner, enhancer & shadow removal
@@ -319,8 +334,11 @@ export function getSeoRedirect(pathname: string): string | null {
     'bulk-image-resizer': 'bulk-image-resizer',
     'crop-png': 'crop-image',
     'merge-pdfs': 'merge-pdf',
+    '11kb-photo-size': 'compress-image-to-11kb',
     '12kb-photo-size': 'compress-image-to-12kb',
+    '13kb-photo-size': 'compress-image-to-13kb',
     '14kb-photo-size': '14kb-photo-size',
+    '28kb-photo-size': 'compress-image-to-28kb',
   };
 
   if (ALIAS_MAP[slug]) {

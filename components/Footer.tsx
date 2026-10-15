@@ -7,14 +7,16 @@ import { ShieldCheck, Zap, Lock } from 'lucide-react';
 
 const KB_TAGS = [
   { label: '10 KB', href: '/tools/compress-image-to-10kb' },
+  { label: '11 KB Photo', href: '/tools/compress-image-to-11kb' },
   { label: '12 KB Photo', href: '/tools/compress-image-to-12kb' },
+  { label: '13 KB Photo', href: '/tools/compress-image-to-13kb' },
   { label: '14 KB Size', href: '/tools/14kb-photo-size' },
   { label: '20 KB (Govt)', href: '/tools/compress-image-to-20kb' },
+  { label: '28 KB', href: '/tools/compress-image-to-28kb' },
   { label: '30 KB (Sign)', href: '/tools/compress-image-to-30kb' },
   { label: '40 KB', href: '/tools/compress-image-to-40kb' },
   { label: '50 KB', href: '/tools/compress-image-to-50kb' },
   { label: '100 KB', href: '/tools/compress-image-to-100kb' },
-  { label: '300 KB (UPSC)', href: '/tools/compress-image-to-300kb' },
   { label: 'PDF 12 KB', href: '/tools/compress-pdf-12kb' },
   { label: 'PDF 140 KB', href: '/tools/compress-pdf-140kb' },
   { label: 'Doc Scanner', href: '/tools/document-scanner' },

@@ -41,6 +41,10 @@ const EXAM_BLOG_GUIDES: Record<string, { title: string; href: string }> = {
     title: 'Delhi Police Constable 2026: Photo & Signature Guide',
     href: '/blog/delhi-police-photo-signature-size-guidelines-2026',
   },
+  'rrb-railway': {
+    title: 'RRB Railway 2026: Photo & Signature Size Guidelines',
+    href: '/blog/rrb-railway-photo-signature-size-guidelines-2026',
+  },
 };
 
 interface ExamPageProps {

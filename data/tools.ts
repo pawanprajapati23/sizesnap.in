@@ -2915,6 +2915,45 @@ export const ALL_TOOLS: ToolItem[] = [
     "popular": true
   },
   {
+    "id": "compress-image-to-11kb",
+    "name": "Compress Image to 11KB",
+    "slug": "compress-image-to-11kb",
+    "categoryId": "image",
+    "categoryTitle": "Image Tools",
+    "shortDescription": "Resize photo and signature to exact 11KB online for free without blur. Instant client-side tool for online form uploads.",
+    "keywords": [
+      "11 kb photo size",
+      "11kb photo size",
+      "compress image to 11kb",
+      "image compressor to 11kb",
+      "11 kb converter",
+      "resize image to 11kb",
+      "photo ko 11kb kaise banaye",
+      "signature resize 11kb",
+      "compress photo to 11kb online",
+      "11 kb photo size jpg"
+    ],
+    "aliases": [
+      "11kb-photo-size",
+      "11kb-image-compressor",
+      "resize-image-11kb",
+      "compress-signature-11kb"
+    ],
+    "searchIntent": "Utility",
+    "relatedTools": [
+      "compress-image-to-10kb",
+      "compress-image-to-12kb",
+      "reduce-image-size-in-kb",
+      "generate-signature"
+    ],
+    "supportedFormats": ["jpg", "jpeg", "png", "webp"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-image-to-11kb",
+    "popular": true
+  },
+  {
     "id": "compress-image-to-12kb",
     "name": "Compress Image to 12KB",
     "slug": "compress-image-to-12kb",
@@ -2957,6 +2996,85 @@ export const ALL_TOOLS: ToolItem[] = [
     "status": "production",
     "seoPriority": "High",
     "analyticsIdentifier": "compress-image-to-12kb",
+    "popular": true
+  },
+  {
+    "id": "compress-image-to-13kb",
+    "name": "Compress Image to 13KB",
+    "slug": "compress-image-to-13kb",
+    "categoryId": "image",
+    "categoryTitle": "Image Tools",
+    "shortDescription": "Resize photo and signature to exact 13KB online for free without blur. Instant client-side tool for SSC, UPSC & online exam uploads.",
+    "keywords": [
+      "13 kb photo size",
+      "13kb photo size",
+      "compress image to 13kb",
+      "image compressor to 13kb",
+      "13 kb converter",
+      "resize image to 13kb",
+      "photo ko 13kb kaise banaye",
+      "signature resize 13kb",
+      "compress photo to 13kb online",
+      "13 kb photo size jpg"
+    ],
+    "aliases": [
+      "13kb-photo-size",
+      "13kb-image-compressor",
+      "resize-image-13kb",
+      "compress-signature-13kb"
+    ],
+    "searchIntent": "Utility",
+    "relatedTools": [
+      "compress-image-to-10kb",
+      "compress-image-to-12kb",
+      "14kb-photo-size",
+      "compress-image-to-20kb",
+      "reduce-image-size-in-kb"
+    ],
+    "supportedFormats": ["jpg", "jpeg", "png", "webp"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-image-to-13kb",
+    "popular": true
+  },
+  {
+    "id": "compress-image-to-28kb",
+    "name": "Compress Image to 28KB",
+    "slug": "compress-image-to-28kb",
+    "categoryId": "image",
+    "categoryTitle": "Image Tools",
+    "shortDescription": "Resize photo and signature to exact 28KB online for free without blur. Perfect for state police & exam form uploads.",
+    "keywords": [
+      "28 kb photo size",
+      "28kb photo size",
+      "compress image to 28kb",
+      "image compressor to 28kb",
+      "28 kb converter",
+      "resize image to 28kb",
+      "photo ko 28kb kaise banaye",
+      "signature resize 28kb",
+      "compress photo to 28kb online",
+      "28 kb photo size jpg"
+    ],
+    "aliases": [
+      "28kb-photo-size",
+      "28kb-image-compressor",
+      "resize-image-28kb",
+      "compress-signature-28kb"
+    ],
+    "searchIntent": "Utility",
+    "relatedTools": [
+      "compress-image-to-20kb",
+      "compress-image-to-30kb",
+      "compress-image-to-40kb",
+      "reduce-image-size-in-kb"
+    ],
+    "supportedFormats": ["jpg", "jpeg", "png", "webp"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-image-to-28kb",
     "popular": true
   },
   {

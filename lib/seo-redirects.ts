@@ -8,6 +8,8 @@ const TOOL_SLUG_SET = new Set(ALL_TOOLS.map((t) => t.slug));
 
 // Dedicated standalone tool pages that exist in app/tools/
 const KNOWN_EXTRA_TOOLS = new Set([
+  '12kb-photo-size',
+  'compress-image-to-12kb',
   '14kb-photo-size',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
@@ -124,11 +126,12 @@ export function getSeoRedirect(pathname: string): string | null {
 
   if (
     cleanPath.includes('document-scanner') ||
+    cleanPath.includes('scanner-black-and-white') ||
     cleanPath.includes('remove-shadow') ||
     cleanPath.includes('online-document-shadow-removal') ||
     cleanPath.includes('shadow-removal')
   ) {
-    return '/tools/image-filters?mode=bw';
+    return '/tools/document-scanner';
   }
 
   // 3. WhatsApp DP, square crop & social crops
@@ -316,6 +319,8 @@ export function getSeoRedirect(pathname: string): string | null {
     'bulk-image-resizer': 'bulk-image-resizer',
     'crop-png': 'crop-image',
     'merge-pdfs': 'merge-pdf',
+    '12kb-photo-size': 'compress-image-to-12kb',
+    '14kb-photo-size': '14kb-photo-size',
   };
 
   if (ALIAS_MAP[slug]) {

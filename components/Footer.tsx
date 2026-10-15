@@ -7,12 +7,17 @@ import { ShieldCheck, Zap, Lock } from 'lucide-react';
 
 const KB_TAGS = [
   { label: '10 KB', href: '/tools/compress-image-to-10kb' },
+  { label: '12 KB Photo', href: '/tools/compress-image-to-12kb' },
+  { label: '14 KB Size', href: '/tools/14kb-photo-size' },
   { label: '20 KB (Govt)', href: '/tools/compress-image-to-20kb' },
   { label: '30 KB (Sign)', href: '/tools/compress-image-to-30kb' },
+  { label: '40 KB', href: '/tools/compress-image-to-40kb' },
   { label: '50 KB', href: '/tools/compress-image-to-50kb' },
   { label: '100 KB', href: '/tools/compress-image-to-100kb' },
   { label: '300 KB (UPSC)', href: '/tools/compress-image-to-300kb' },
-  { label: 'PDF 100 KB', href: '/tools/compress-pdf' },
+  { label: 'PDF 12 KB', href: '/tools/compress-pdf-12kb' },
+  { label: 'PDF 140 KB', href: '/tools/compress-pdf-140kb' },
+  { label: 'Doc Scanner', href: '/tools/document-scanner' },
 ];
 
 export function Footer() {
@@ -67,10 +72,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Image Resizer</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link prefetch={false} href="/tools/compress-image-to-12kb" className="hover:text-[#6366F1] transition-colors">Compress image to 12kb</Link></li>
+              <li><Link prefetch={false} href="/tools/14kb-photo-size" className="hover:text-[#6366F1] transition-colors">14kb photo size resizer</Link></li>
               <li><Link prefetch={false} href="/tools/compress-image-to-20kb" className="hover:text-[#6366F1] transition-colors">Compress image to 20kb</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-image-to-40kb" className="hover:text-[#6366F1] transition-colors">Resize image to 40kb</Link></li>
               <li><Link prefetch={false} href="/tools/compress-image-to-50kb" className="hover:text-[#6366F1] transition-colors">Compress image to 50kb</Link></li>
-              <li><Link prefetch={false} href="/tools/compress-image-to-100kb" className="hover:text-[#6366F1] transition-colors">Compress image to 100kb</Link></li>
-              <li><Link prefetch={false} href="/tools/compress-image" className="hover:text-[#6366F1] transition-colors">Free image compressor</Link></li>
               <li><Link prefetch={false} href="/tools/reduce-image-size-in-kb" className="hover:text-[#6366F1] transition-colors">Reduce image size in kb</Link></li>
             </ul>
           </div>
@@ -79,11 +85,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Top Utilities</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link prefetch={false} href="/tools/document-scanner" className="hover:text-[#6366F1] transition-colors">Document scanner (B&amp;W filter)</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-pdf-140kb" className="hover:text-[#6366F1] transition-colors">Compress PDF to 140kb</Link></li>
+              <li><Link prefetch={false} href="/tools/compress-pdf-12kb" className="hover:text-[#6366F1] transition-colors">Compress PDF to 12kb</Link></li>
               <li><Link prefetch={false} href="/tools/passport-photo-maker" className="hover:text-[#6366F1] transition-colors">Passport photo maker online</Link></li>
-              <li><Link prefetch={false} href="/tools/compress-pdf" className="hover:text-[#6366F1] transition-colors">Compress pdf to 100kb online free</Link></li>
-              <li><Link prefetch={false} href="/blog" className="hover:text-[#6366F1] transition-colors">Blog</Link></li>
-              <li><Link prefetch={false} href="/exams" className="hover:text-[#6366F1] transition-colors">Photo size for SSC & UPSC</Link></li>
-              <li><Link prefetch={false} href="/tools/image-to-pdf" className="hover:text-[#6366F1] transition-colors">JPG to PDF</Link></li>
+              <li><Link prefetch={false} href="/exams" className="hover:text-[#6366F1] transition-colors">Photo size for SSC &amp; UPSC</Link></li>
               <li><Link prefetch={false} href="/#directory" className="hover:text-[#6366F1] transition-colors font-medium">All Tools &rarr;</Link></li>
             </ul>
           </div>

@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     'Free online document scanner with mobile camera auto-crop & edge detection. Scan multiple paper pages, flatten perspective, remove shadow background, and export to clean multi-page PDF. 100% private, no signup, no watermark.',
   keywords: [
     'document scanner online',
+    'scanner black and white',
+    'remove shadow from document',
+    'document scanner bw filter',
     'mobile camera document scanner',
     'camscanner online free',
     'scan document to pdf with camera',

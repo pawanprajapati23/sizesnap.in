@@ -2915,6 +2915,51 @@ export const ALL_TOOLS: ToolItem[] = [
     "popular": true
   },
   {
+    "id": "compress-image-to-12kb",
+    "name": "Compress Image to 12KB",
+    "slug": "compress-image-to-12kb",
+    "categoryId": "image",
+    "categoryTitle": "Image Tools",
+    "shortDescription": "Resize photo and signature to exact 12KB online for free without blur. Instant client-side tool for SSC, UPSC & online form uploads.",
+    "keywords": [
+      "12 kb photo size",
+      "12kb photo size",
+      "compress image to 12kb",
+      "image compressor to 12kb",
+      "12 kb converter",
+      "resize image to 12kb",
+      "photo ko 12kb kaise banaye",
+      "signature resize 12kb",
+      "compress photo to 12kb online",
+      "12 kb photo size jpg"
+    ],
+    "aliases": [
+      "12kb-photo-size",
+      "12kb-image-compressor",
+      "resize-image-12kb",
+      "compress-signature-12kb"
+    ],
+    "searchIntent": "Utility",
+    "relatedTools": [
+      "compress-image-to-10kb",
+      "compress-image-to-20kb",
+      "reduce-image-size-in-kb",
+      "generate-signature",
+      "compress-pdf-12kb"
+    ],
+    "supportedFormats": [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp"
+    ],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-image-to-12kb",
+    "popular": true
+  },
+  {
     "id": "compress-image-to-30kb",
     "name": "Compress Image to 30KB",
     "slug": "compress-image-to-30kb",
@@ -4259,6 +4304,7 @@ export const NAV_MENUS: NavMenu[] = [
     items: [
       { name: 'Compress Image (Auto)', slug: 'compress-image' },
       { name: 'Reduce Image Size in KB', slug: 'reduce-image-size-in-kb' },
+      { name: 'Compress to 12KB', slug: 'compress-image-to-12kb' },
       { name: 'Compress to 20KB', slug: 'compress-image-to-20kb' },
       { name: 'Compress to 50KB', slug: 'compress-image-to-50kb' },
       { name: 'Compress to 100KB', slug: 'compress-image-to-100kb' },

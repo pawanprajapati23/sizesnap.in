@@ -5,17 +5,20 @@ import { ExactKbPage } from '@/components/templates/ExactKbPage';
 import { ArrowRight, CheckCircle2, ShieldCheck, FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Compress Image to 40KB Online Free (Resize Photo to 40KB) | SizeSnap',
+  title: 'Resize Image to 40KB Online Free - 40KB Photo & Signature Maker | SizeSnap',
   description:
-    'Free online tool to compress and resize photos, signatures, and documents to exactly 40KB for UPSSSC, Railway RRB, SSC, state exam portals, and job applications without losing clarity.',
+    'Free online tool to resize photo, signature, and documents to exact 40KB for UPSSSC, Railway RRB, SSC, and job portals without blur. 100% private & instant.',
   keywords: [
-    'compress image to 40kb',
     'resize image to 40kb',
+    '40 kb photo size',
+    '40kb photo size',
+    'compress image to 40kb',
     '40kb photo resizer',
     'compress photo to 40kb online',
     'photo size 40 kb',
     'upsssc photo 40kb',
     'resize photo 40 kb online',
+    '40 kb photo size converter',
     'railway signature 40kb',
     'reduce image size to 40kb',
   ],

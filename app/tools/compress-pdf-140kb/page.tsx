@@ -22,19 +22,21 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Compress PDF to 140KB Online Free - Exact Size for Govt Exams | SizeSnap',
+  title: 'Compress PDF to 140KB Online Free (Resize PDF to 140 KB) | SizeSnap',
   description:
-    'Compress PDF to 140KB online for free without quality loss. Perfect for SSC, UPSC, State PSC, Police recruitment, Aadhaar & marksheet uploads. 100% private, client-side, instant download.',
+    'Compress and resize PDF to exact 140KB online for free without quality loss. Perfect for SSC, UPSC, State PSC, Police recruitment, and marksheet uploads. 100% private.',
   keywords: [
     'compress pdf to 140kb',
+    'pdf resize 140 kb',
+    '140kb pdf',
+    '140 kb pdf',
+    'pdf 140 kb',
+    'pdf compressor to 140kb',
     'reduce pdf to 140kb',
-    'compress pdf under 150kb',
-    'ssc pdf 140kb resizer',
-    'upsc marksheet pdf 140kb',
-    'compress pdf 140kb online free',
+    'compress pdf 140 kb online free',
     'reduce pdf size to 140 kb',
-    'aadhaar card pdf compress 140kb',
-    'state psc certificate pdf 140kb',
+    '140kb pdf converter',
+    'pdf under 140 kb',
   ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/compress-pdf-140kb',

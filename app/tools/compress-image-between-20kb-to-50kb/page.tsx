@@ -84,7 +84,7 @@ export default function CompressImageBetween20KbTo50KbPage() {
           </h2>
           <p>
             Nearly 80% of recruitment boards in India enforce an identical photograph specification:
-            <strong className="text-blue-700">"Uploaded photo must be in JPG format, between 20 KB and 50 KB"</strong>.
+            <strong className="text-blue-700">&quot;Uploaded photo must be in JPG format, between 20 KB and 50 KB&quot;</strong>.
           </p>
           <p>
             Candidates taking photos with modern smartphones end up with 3 MB to 8 MB JPEGs. SizeSnap solves

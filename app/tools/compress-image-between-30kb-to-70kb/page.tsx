@@ -78,7 +78,7 @@ export default function CompressImageBetween30KbTo70KbPage() {
           </h2>
           <p>
             Unlike SSC or UPSC which use a 20KB–50KB bracket, Indian Railways RRB specifies:
-            <strong className="text-blue-700">"Color photograph and signature must be in JPEG format between 30 KB and 70 KB"</strong>.
+            <strong className="text-blue-700">&quot;Color photograph and signature must be in JPEG format between 30 KB and 70 KB&quot;</strong>.
           </p>
           <p>
             RRB utilizes automated computer vision to pre-screen candidate photos. Uploads below 30 KB or above 70 KB

@@ -68,10 +68,12 @@ export function DeadPixelTestTool() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    setScreenWidth(window.screen.width);
-    setScreenHeight(window.screen.height);
-    setColorDepth(window.screen.colorDepth || 24);
-    setPixelRatio(window.devicePixelRatio || 1);
+    requestAnimationFrame(() => {
+      setScreenWidth(window.screen.width);
+      setScreenHeight(window.screen.height);
+      setColorDepth(window.screen.colorDepth || 24);
+      setPixelRatio(window.devicePixelRatio || 1);
+    });
 
     let frameCount = 0;
     let startTime = performance.now();
@@ -117,6 +119,15 @@ export function DeadPixelTestTool() {
       if (autoCycleTimerRef.current) clearInterval(autoCycleTimerRef.current);
     };
   }, [isAutoCycling, isFullscreenMode, cycleIntervalSec, nextColor]);
+
+  /* ─── Auto-hide HUD controls after 3 seconds of inactivity ─── */
+  const resetHideControlsTimer = () => {
+    setShowControlsInFullscreen(true);
+    if (hideControlsTimerRef.current) clearTimeout(hideControlsTimerRef.current);
+    hideControlsTimerRef.current = setTimeout(() => {
+      setShowControlsInFullscreen(false);
+    }, 3000);
+  };
 
   /* ─── Fullscreen Handlers ─── */
   const enterFullscreen = () => {
@@ -170,15 +181,6 @@ export function DeadPixelTestTool() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFullscreenMode, nextColor, prevColor]);
-
-  /* ─── Auto-hide HUD controls after 3 seconds of inactivity ─── */
-  const resetHideControlsTimer = () => {
-    setShowControlsInFullscreen(true);
-    if (hideControlsTimerRef.current) clearTimeout(hideControlsTimerRef.current);
-    hideControlsTimerRef.current = setTimeout(() => {
-      setShowControlsInFullscreen(false);
-    }, 3000);
-  };
 
   const activeColor = TEST_COLORS[currentColorIdx];
 

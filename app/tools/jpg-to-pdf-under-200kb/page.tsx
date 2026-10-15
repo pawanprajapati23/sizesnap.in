@@ -91,8 +91,8 @@ export default function JpgToPdfUnder200KbPage() {
           <p>
             When filling online application forms on Indian government and educational portals, candidates
             frequently encounter strict file upload validation errors like{' '}
-            <strong className="text-red-600">"File size exceeds 200 KB"</strong> or{' '}
-            <strong className="text-red-600">"Document must be in PDF format between 50 KB and 200 KB"</strong>.
+            <strong className="text-red-600">&quot;File size exceeds 200 KB&quot;</strong> or{' '}
+            <strong className="text-red-600">&quot;Document must be in PDF format between 50 KB and 200 KB&quot;</strong>.
           </p>
           <p>
             Standard smartphone camera photos taken on modern phones produce JPEG images ranging between
@@ -129,8 +129,8 @@ export default function JpgToPdfUnder200KbPage() {
             <li>Select or drag your JPG / JPEG / PNG file into the converter box above.</li>
             <li>Verify the target file size is set to <strong>Under 200 KB</strong> (preset by default).</li>
             <li>Choose your preferred page orientation (Auto, Portrait, or Landscape) and page margins.</li>
-            <li>Click <strong>"Convert to PDF"</strong>. Your document compiles in under 1 second.</li>
-            <li>Click <strong>"Download"</strong> to obtain your official PDF ready for upload.</li>
+            <li>Click <strong>&quot;Convert to PDF&quot;</strong>. Your document compiles in under 1 second.</li>
+            <li>Click <strong>&quot;Download&quot;</strong> to obtain your official PDF ready for upload.</li>
           </ol>
         </div>
       }

@@ -95,9 +95,9 @@ export default function JpgToPdfUnder500KbPage() {
             When scanning 3 or 4 pages with modern scanners or mobile scanning apps, the uncompressed PDF often swells
             to 10 MB – 25 MB. Attempting to upload triggers validation failures like{' '}
             <span className="font-mono text-xs bg-red-50 text-red-600 px-1 py-0.5 rounded border border-red-200">
-              "Uploaded document exceeds the allowable limit of 500 KB"
+              &quot;Uploaded document exceeds the allowable limit of 500 KB&quot;
             </span>.
-            SizeSnap rebalances the document's internal image compression matrices to keep all pages crisp, legible, and safely under 500 KB.
+            SizeSnap rebalances the document&apos;s internal image compression matrices to keep all pages crisp, legible, and safely under 500 KB.
           </p>
 
           <h3 className="text-sm font-bold text-gray-900 pt-2">

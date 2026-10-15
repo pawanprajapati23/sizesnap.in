@@ -100,6 +100,8 @@ export function WebcamTestTool() {
   }, []);
 
   /* ─── Measure FPS Real-Time ─── */
+  const measureFpsRef = useRef<() => void>(() => {});
+
   const measureFps = useCallback(() => {
     const now = performance.now();
     fpsFrameCountRef.current++;
@@ -113,8 +115,12 @@ export function WebcamTestTool() {
       fpsLastTimeRef.current = now;
     }
 
-    fpsAnimIdRef.current = requestAnimationFrame(measureFps);
+    fpsAnimIdRef.current = requestAnimationFrame(() => measureFpsRef.current());
   }, []);
+
+  useEffect(() => {
+    measureFpsRef.current = measureFps;
+  }, [measureFps]);
 
   /* ─── Start Camera Stream ─── */
   const startCamera = useCallback(
@@ -196,8 +202,11 @@ export function WebcamTestTool() {
 
   /* ─── Auto-detect on mount ─── */
   useEffect(() => {
-    enumerateVideoDevices();
+    const timer = setTimeout(() => {
+      enumerateVideoDevices();
+    }, 0);
     return () => {
+      clearTimeout(timer);
       stopCamera();
     };
   }, [enumerateVideoDevices, stopCamera]);

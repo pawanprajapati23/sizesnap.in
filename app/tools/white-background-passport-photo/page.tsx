@@ -150,7 +150,7 @@ export default function WhiteBackgroundPassportPhotoPage() {
                   When photographs have textured walls, colored backdrops, or poor indoor lighting, automated
                   face scanning systems frequently reject the application with errors like{' '}
                   <span className="font-mono text-xs bg-red-50 text-red-600 px-1 py-0.5 rounded border border-red-200">
-                    "Unacceptable background contrast"
+                    &quot;Unacceptable background contrast&quot;
                   </span>.
                 </p>
                 <p>

@@ -90,11 +90,11 @@ export default function JpgToPdfUnder100KbPage() {
           <p>
             When applying for higher education scholarships (such as the Central Sector Scheme on the National Scholarship Portal,
             State E-Kalyan, or Pre/Post-Matric scholarships), candidate attachments must comply with strict server limits:
-            typically <strong className="text-red-600">"Uploaded PDF must be less than 100 KB"</strong>.
+            typically <strong className="text-red-600">&quot;Uploaded PDF must be less than 100 KB&quot;</strong>.
           </p>
           <p>
             Scanned marksheets or mobile camera snapshots often occupy 2 MB to 5 MB. Converting them without proper size control
-            leads to server rejection messages like <span className="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"File size exceeds permitted 100KB"</span>.
+            leads to server rejection messages like <span className="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">&quot;File size exceeds permitted 100KB&quot;</span>.
             SizeSnap automatically calculates the exact compression ratio required to deliver high readability within an 80 KB – 98 KB footprint.
           </p>
 
@@ -117,7 +117,7 @@ export default function JpgToPdfUnder100KbPage() {
           </ul>
 
           <h3 className="text-sm font-bold text-gray-900 pt-2">
-            Why Use SizeSnap's Under 100 KB PDF Converter?
+            Why Use SizeSnap&apos;s Under 100 KB PDF Converter?
           </h3>
           <ul className="list-disc pl-5 space-y-1.5 text-xs">
             <li><strong>Guaranteed File Size:</strong> The PDF output never crosses 100 KB.</li>

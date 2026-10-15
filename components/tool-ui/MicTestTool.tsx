@@ -104,6 +104,8 @@ export function MicTestTool() {
   }, []);
 
   /* ─── Real-Time Audio Visualizer & Level Meter ─── */
+  const drawWaveformRef = useRef<() => void>(() => {});
+
   const drawWaveform = useCallback(() => {
     if (!analyserRef.current || !canvasRef.current) return;
 
@@ -174,8 +176,12 @@ export function MicTestTool() {
     ctx.lineTo(width, height / 2);
     ctx.stroke();
 
-    animFrameIdRef.current = requestAnimationFrame(drawWaveform);
+    animFrameIdRef.current = requestAnimationFrame(() => drawWaveformRef.current());
   }, []);
+
+  useEffect(() => {
+    drawWaveformRef.current = drawWaveform;
+  }, [drawWaveform]);
 
   /* ─── Start Microphone ─── */
   const startMicrophone = useCallback(
@@ -246,8 +252,11 @@ export function MicTestTool() {
   );
 
   useEffect(() => {
-    enumerateAudioDevices();
+    const timer = setTimeout(() => {
+      enumerateAudioDevices();
+    }, 0);
     return () => {
+      clearTimeout(timer);
       stopMicrophone();
     };
   }, [enumerateAudioDevices, stopMicrophone]);

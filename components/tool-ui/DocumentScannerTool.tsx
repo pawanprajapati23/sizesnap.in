@@ -409,15 +409,17 @@ export function DocumentScannerTool() {
   }, [stopCamera]);
 
   /* ─── Live Edge Detection Overlay on Camera Viewfinder ─── */
+  const runLiveDetectionRef = useRef<() => void>(() => {});
+
   const runLiveDetection = useCallback(() => {
     if (!videoRef.current || !overlayCanvasRef.current || !cvRef.current) {
-      detectionFrameRef.current = requestAnimationFrame(runLiveDetection);
+      detectionFrameRef.current = requestAnimationFrame(() => runLiveDetectionRef.current());
       return;
     }
 
     const now = performance.now();
     if (now - lastDetectTimeRef.current < 200) {
-      detectionFrameRef.current = requestAnimationFrame(runLiveDetection);
+      detectionFrameRef.current = requestAnimationFrame(() => runLiveDetectionRef.current());
       return;
     }
     lastDetectTimeRef.current = now;
@@ -426,7 +428,7 @@ export function DocumentScannerTool() {
     const canvas = overlayCanvasRef.current;
     const ctx = canvas.getContext('2d');
     if (!ctx || video.videoWidth === 0) {
-      detectionFrameRef.current = requestAnimationFrame(runLiveDetection);
+      detectionFrameRef.current = requestAnimationFrame(() => runLiveDetectionRef.current());
       return;
     }
 
@@ -520,15 +522,19 @@ export function DocumentScannerTool() {
       // Ignore detection errors during live preview
     }
 
-    detectionFrameRef.current = requestAnimationFrame(runLiveDetection);
+    detectionFrameRef.current = requestAnimationFrame(() => runLiveDetectionRef.current());
   }, []);
 
   useEffect(() => {
+    runLiveDetectionRef.current = runLiveDetection;
+  }, [runLiveDetection]);
+
+  useEffect(() => {
     if (mode === 'camera' && cvReady) {
-      detectionFrameRef.current = requestAnimationFrame(runLiveDetection);
+      detectionFrameRef.current = requestAnimationFrame(() => runLiveDetectionRef.current());
     }
     return () => cancelAnimationFrame(detectionFrameRef.current);
-  }, [mode, cvReady, runLiveDetection]);
+  }, [mode, cvReady]);
 
   /* ─── Corner Detection on Static Image ─── */
   const detectCornersOnImage = (dataUrl: string, w: number, h: number) => {

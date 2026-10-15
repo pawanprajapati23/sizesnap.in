@@ -79,7 +79,7 @@ export default function CompressImageBetween10KbTo20KbPage() {
           </h2>
           <p>
             When applying for government recruitment examinations, candidate signatures are subject to strict automated validation:
-            <strong className="text-blue-700">"Uploaded signature must be between 10 KB and 20 KB in JPEG format"</strong>.
+            <strong className="text-blue-700">&quot;Uploaded signature must be between 10 KB and 20 KB in JPEG format&quot;</strong>.
           </p>
           <p>
             Phone cameras capture high-resolution photos that are 2 MB to 5 MB. Cropping a signature and converting

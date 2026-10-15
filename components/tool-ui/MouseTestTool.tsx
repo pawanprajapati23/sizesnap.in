@@ -119,19 +119,16 @@ export function MouseTestTool() {
         if (timeLeft <= 0) {
           clearInterval(cpsTimerRef.current);
           setCpsActive(false);
+          setCpsClicks((finalClicks) => {
+            setCpsScore(parseFloat((finalClicks / cpsDuration).toFixed(1)));
+            return finalClicks;
+          });
         }
       }, 1000);
     } else if (cpsActive) {
       setCpsClicks((c) => c + 1);
     }
   };
-
-  useEffect(() => {
-    if (!cpsActive && cpsClicks > 0 && cpsTimeLeft === 0) {
-      const calculatedCps = parseFloat((cpsClicks / cpsDuration).toFixed(1));
-      setCpsScore(calculatedCps);
-    }
-  }, [cpsActive, cpsClicks, cpsDuration, cpsTimeLeft]);
 
   const resetCpsTest = () => {
     if (cpsTimerRef.current) clearInterval(cpsTimerRef.current);

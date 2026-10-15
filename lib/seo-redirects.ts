@@ -31,6 +31,11 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'jpeg-to-pdf-under-500kb',
   'jpg-to-pdf-under-150kb',
   'jpeg-to-pdf-under-150kb',
+  'compress-image-between-20kb-to-50kb',
+  'compress-jpeg-between-20kb-to-50kb',
+  'compress-image-between-10kb-to-20kb',
+  'compress-image-10kb-to-20kb',
+  'compress-image-between-30kb-to-70kb',
 ]);
 
 // Reserved system routes that should never be treated as tool redirects
@@ -143,6 +148,24 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/exams/rrb-railway-photo-signature-resizer';
   }
 
+  if (
+    cleanPath.includes('neet') ||
+    cleanPath.includes('jee-main') ||
+    cleanPath.includes('postcard-photo') ||
+    cleanPath.includes('nta-photo')
+  ) {
+    return '/exams/neet-jee-photo-signature-resizer';
+  }
+
+  if (
+    cleanPath.includes('ctet') ||
+    cleanPath.includes('kvs-photo') ||
+    cleanPath.includes('kvs-signature') ||
+    cleanPath.includes('teacher-exam')
+  ) {
+    return '/exams/ctet-kvs-photo-signature-resizer';
+  }
+
   // 2. Document scanner, enhancer & shadow removal
   if (
     cleanPath.includes('document-enhancer') ||
@@ -233,6 +256,34 @@ export function getSeoRedirect(pathname: string): string | null {
     return underMatch
       ? `/tools/compress-pdf?target=${underMatch[1]}`
       : '/tools/compress-pdf';
+  }
+
+  // 6.5. Range Image Compression (e.g. 20kb-50kb, 10kb-20kb, 30kb-70kb)
+  if (
+    cleanPath.includes('between-20kb-to-50kb') ||
+    cleanPath.includes('20kb-to-50kb') ||
+    cleanPath.includes('20-to-50kb') ||
+    cleanPath.includes('20-50kb')
+  ) {
+    return '/tools/compress-image-between-20kb-to-50kb';
+  }
+
+  if (
+    cleanPath.includes('between-10kb-to-20kb') ||
+    cleanPath.includes('10kb-to-20kb') ||
+    cleanPath.includes('10-to-20kb') ||
+    cleanPath.includes('10-20kb')
+  ) {
+    return '/tools/compress-image-between-10kb-to-20kb';
+  }
+
+  if (
+    cleanPath.includes('between-30kb-to-70kb') ||
+    cleanPath.includes('30kb-to-70kb') ||
+    cleanPath.includes('30-to-70kb') ||
+    cleanPath.includes('30-70kb')
+  ) {
+    return '/tools/compress-image-between-30kb-to-70kb';
   }
 
   // 7. Image Compression & Resizing with exact KB (e.g. /compress-image/to-12kb, /resize-image/to-14kb, /resize-image/to-40kb)

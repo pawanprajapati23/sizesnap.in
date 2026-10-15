@@ -24,6 +24,11 @@ const KB_TAGS = [
   { label: 'PDF Under 500 KB', href: '/tools/jpg-to-pdf-under-500kb' },
   { label: 'PDF 12 KB', href: '/tools/compress-pdf-12kb' },
   { label: 'PDF 140 KB', href: '/tools/compress-pdf-140kb' },
+  { label: '20-50 KB', href: '/tools/compress-image-between-20kb-to-50kb' },
+  { label: '10-20 KB', href: '/tools/compress-image-between-10kb-to-20kb' },
+  { label: '30-70 KB', href: '/tools/compress-image-between-30kb-to-70kb' },
+  { label: 'NEET Exam', href: '/exams/neet-jee-photo-signature-resizer' },
+  { label: 'CTET Exam', href: '/exams/ctet-kvs-photo-signature-resizer' },
   { label: 'Doc Scanner', href: '/tools/document-scanner' },
 ];
 
@@ -79,6 +84,7 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Image Resizer</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link prefetch={false} href="/tools/compress-image-between-20kb-to-50kb" className="hover:text-[#6366F1] transition-colors">Between 20KB to 50KB</Link></li>
               <li><Link prefetch={false} href="/tools/compress-image-to-12kb" className="hover:text-[#6366F1] transition-colors">Compress image to 12kb</Link></li>
               <li><Link prefetch={false} href="/tools/14kb-photo-size" className="hover:text-[#6366F1] transition-colors">14kb photo size resizer</Link></li>
               <li><Link prefetch={false} href="/tools/compress-image-to-20kb" className="hover:text-[#6366F1] transition-colors">Compress image to 20kb</Link></li>

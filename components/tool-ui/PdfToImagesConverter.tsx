@@ -20,6 +20,7 @@ import {
   Sparkles,
   Info,
 } from 'lucide-react';
+import { getPdfJs, getPdfCMapConfig } from '@/lib/pdfjs';
 
 interface ConvertedPage {
   pageNumber: number;
@@ -132,14 +133,6 @@ export function PdfToImagesConverter() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // PDF.js loader helper
-  const getPdfJs = async () => {
-    const pdfjs = await import('pdfjs-dist');
-    // Configure worker
-    pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-    return pdfjs;
-  };
-
   // Handle PDF file selection
   const handleFileSelect = async (file: File) => {
     setErrorMsg(null);
@@ -164,8 +157,7 @@ export function PdfToImagesConverter() {
 
       const loadingTask = pdfjs.getDocument({
         data: new Uint8Array(buffer),
-        cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
-        cMapPacked: true,
+        ...getPdfCMapConfig(),
       });
 
       const pdfDoc = await loadingTask.promise;
@@ -236,8 +228,7 @@ export function PdfToImagesConverter() {
       const freshBuffer = await pdfMeta.file.arrayBuffer();
       const loadingTask = pdfjs.getDocument({
         data: new Uint8Array(freshBuffer),
-        cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
-        cMapPacked: true,
+        ...getPdfCMapConfig(),
       });
       const pdfDoc = await loadingTask.promise;
 

@@ -78,6 +78,102 @@ function dist(a: Corner, b: Corner): number {
   return Math.hypot(b[0] - a[0], b[1] - a[1]);
 }
 
+function warpPerspectiveJS(
+  srcCtx: CanvasRenderingContext2D,
+  srcW: number,
+  srcH: number,
+  corners: Corner[],
+  outW: number,
+  outH: number
+): HTMLCanvasElement {
+  const [p0, p1, p2, p3] = corners;
+  const dx1 = p1[0] - p2[0];
+  const dy1 = p1[1] - p2[1];
+  const dx2 = p3[0] - p2[0];
+  const dy2 = p3[1] - p2[1];
+  const sx = p0[0] - p1[0] + p2[0] - p3[0];
+  const sy = p0[1] - p1[1] + p2[1] - p3[1];
+
+  let g = 0, h = 0;
+  if (sx !== 0 || sy !== 0) {
+    const det = dx1 * dy2 - dx2 * dy1;
+    if (Math.abs(det) > 1e-7) {
+      g = (sx * dy2 - sy * dx2) / det;
+      h = (dx1 * sy - dy1 * sx) / det;
+    }
+  }
+
+  const a = (p1[0] - p0[0]) + g * p1[0];
+  const b = (p3[0] - p0[0]) + h * p3[0];
+  const c0 = p0[0];
+  const d = (p1[1] - p0[1]) + g * p1[1];
+  const e = (p3[1] - p0[1]) + h * p3[1];
+  const f = p0[1];
+
+  const m0 = a / outW;
+  const m1 = b / outH;
+  const m2 = c0;
+  const m3 = d / outW;
+  const m4 = e / outH;
+  const m5 = f;
+  const m6 = g / outW;
+  const m7 = h / outH;
+  const m8 = 1.0;
+
+  const srcImageData = srcCtx.getImageData(0, 0, srcW, srcH);
+  const srcData = srcImageData.data;
+
+  const outCanvas = document.createElement('canvas');
+  outCanvas.width = outW;
+  outCanvas.height = outH;
+  const outCtx = outCanvas.getContext('2d')!;
+  const dstImageData = outCtx.createImageData(outW, outH);
+  const dstData = dstImageData.data;
+
+  for (let y = 0; y < outH; y++) {
+    const yRow = y * outW * 4;
+    for (let x = 0; x < outW; x++) {
+      const w = m6 * x + m7 * y + m8;
+      const u = (m0 * x + m1 * y + m2) / w;
+      const v = (m3 * x + m4 * y + m5) / w;
+
+      const x0 = Math.floor(u);
+      const y0 = Math.floor(v);
+      const x1 = Math.min(x0 + 1, srcW - 1);
+      const y1 = Math.min(y0 + 1, srcH - 1);
+
+      const dstIdx = yRow + (x * 4);
+
+      if (x0 >= 0 && x0 < srcW && y0 >= 0 && y0 < srcH) {
+        const dx = u - x0;
+        const dy = v - y0;
+        const w00 = (1 - dx) * (1 - dy);
+        const w10 = dx * (1 - dy);
+        const w01 = (1 - dx) * dy;
+        const w11 = dx * dy;
+
+        const idx00 = (y0 * srcW + x0) * 4;
+        const idx10 = (y0 * srcW + x1) * 4;
+        const idx01 = (y1 * srcW + x0) * 4;
+        const idx11 = (y1 * srcW + x1) * 4;
+
+        dstData[dstIdx] = (srcData[idx00] * w00 + srcData[idx10] * w10 + srcData[idx01] * w01 + srcData[idx11] * w11) | 0;
+        dstData[dstIdx + 1] = (srcData[idx00 + 1] * w00 + srcData[idx10 + 1] * w10 + srcData[idx01 + 1] * w01 + srcData[idx11 + 1] * w11) | 0;
+        dstData[dstIdx + 2] = (srcData[idx00 + 2] * w00 + srcData[idx10 + 2] * w10 + srcData[idx01 + 2] * w01 + srcData[idx11 + 2] * w11) | 0;
+        dstData[dstIdx + 3] = 255;
+      } else {
+        dstData[dstIdx] = 255;
+        dstData[dstIdx + 1] = 255;
+        dstData[dstIdx + 2] = 255;
+        dstData[dstIdx + 3] = 255;
+      }
+    }
+  }
+
+  outCtx.putImageData(dstImageData, 0, 0);
+  return outCanvas;
+}
+
 /* ─── Main Component ─── */
 export function DocumentScannerTool() {
   /* State */
@@ -118,40 +214,55 @@ export function DocumentScannerTool() {
   const loadOpenCv = useCallback(() => {
     if (cvRef.current || cvLoading) return;
     setCvLoading(true);
-    setError(null);
 
     const script = document.createElement('script');
-    script.src = 'https://docs.opencv.org/4.10.0/opencv.js';
+    script.src = 'https://cdn.jsdelivr.net/npm/@techstark/opencv-js@4.10.0-release.1/dist/opencv.js';
     script.async = true;
 
     script.onload = () => {
+      let attempts = 0;
       const checkReady = () => {
+        attempts++;
         // @ts-ignore
-        if (typeof window.cv !== 'undefined' && window.cv.Mat) {
-          // @ts-ignore
-          cvRef.current = window.cv;
-          setCvReady(true);
-          setCvLoading(false);
-        } else {
-          // @ts-ignore
-          if (typeof window.cv !== 'undefined' && window.cv.onRuntimeInitialized !== undefined) {
-            // @ts-ignore
-            window.cv.onRuntimeInitialized = () => {
+        const cvObj = window.cv;
+        if (cvObj) {
+          if (cvObj.Mat) {
+            cvRef.current = cvObj;
+            setCvReady(true);
+            setCvLoading(false);
+            return;
+          }
+          if (typeof cvObj.then === 'function') {
+            cvObj.then((cvInstance: any) => {
+              cvRef.current = cvInstance;
+              setCvReady(true);
+              setCvLoading(false);
+            }).catch(() => {
+              setCvLoading(false);
+            });
+            return;
+          }
+          if (cvObj.onRuntimeInitialized !== undefined) {
+            cvObj.onRuntimeInitialized = () => {
               // @ts-ignore
               cvRef.current = window.cv;
               setCvReady(true);
               setCvLoading(false);
             };
-          } else {
-            setTimeout(checkReady, 100);
+            return;
           }
+        }
+        if (attempts < 100) {
+          setTimeout(checkReady, 100);
+        } else {
+          setCvLoading(false);
         }
       };
       checkReady();
     };
 
     script.onerror = () => {
-      setError('Failed to load OpenCV. Edge detection will not be available – you can still manually adjust corners.');
+      console.warn('OpenCV CDN unavailable. Using built-in pure JS perspective engine.');
       setCvLoading(false);
     };
 
@@ -555,18 +666,14 @@ export function DocumentScannerTool() {
         src.delete(); srcPts.delete(); dstPts.delete(); M.delete();
         dst.delete(); sharpened.delete(); blurTemp.delete();
       } else {
-        // Fallback: simple canvas crop (no perspective correction)
-        const outCanvas = document.createElement('canvas');
-        outCanvas.width = outW;
-        outCanvas.height = outH;
-        const ctx = outCanvas.getContext('2d')!;
+        // High-precision pure JS bilinear perspective warp engine
+        const srcCanvas = document.createElement('canvas');
+        srcCanvas.width = capturedDims.w;
+        srcCanvas.height = capturedDims.h;
+        const srcCtx = srcCanvas.getContext('2d')!;
+        srcCtx.drawImage(img, 0, 0);
 
-        // Simple rectangle crop from corners bounding box
-        const minX = Math.min(...corners.map((c) => c[0]));
-        const minY = Math.min(...corners.map((c) => c[1]));
-        const maxX = Math.max(...corners.map((c) => c[0]));
-        const maxY = Math.max(...corners.map((c) => c[1]));
-        ctx.drawImage(img, minX, minY, maxX - minX, maxY - minY, 0, 0, outW, outH);
+        const outCanvas = warpPerspectiveJS(srcCtx, capturedDims.w, capturedDims.h, corners, outW, outH);
         resultDataUrl = canvasToDataUrl(outCanvas);
       }
 
@@ -703,7 +810,8 @@ export function DocumentScannerTool() {
     setError(null);
 
     try {
-      const JSZip = (await import('jszip')).default;
+      const JSZipModule = await import('jszip');
+      const JSZip = (JSZipModule as any).default || JSZipModule;
       const zip = new JSZip();
 
       for (const page of pages) {

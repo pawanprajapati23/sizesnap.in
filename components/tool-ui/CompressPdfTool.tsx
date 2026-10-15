@@ -15,6 +15,7 @@ import {
   Info,
   ShieldCheck,
 } from 'lucide-react';
+import { getPdfJs, getPdfCMapConfig } from '@/lib/pdfjs';
 
 interface PdfMeta {
   file: File;
@@ -91,13 +92,6 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Load PDF.js helper
-  const getPdfJs = async () => {
-    const pdfjs = await import('pdfjs-dist');
-    pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
-    return pdfjs;
-  };
-
   // Handle PDF file selection
   const handleFileSelect = async (file: File) => {
     setErrorMsg(null);
@@ -121,8 +115,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
 
       const loadingTask = pdfjs.getDocument({
         data: new Uint8Array(buffer),
-        cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
-        cMapPacked: true,
+        ...getPdfCMapConfig(),
       });
 
       const pdfDoc = await loadingTask.promise;
@@ -169,8 +162,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
       const freshBuffer = await pdfMeta.file.arrayBuffer();
       const loadingTask = pdfjs.getDocument({
         data: new Uint8Array(freshBuffer),
-        cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
-        cMapPacked: true,
+        ...getPdfCMapConfig(),
       });
 
       const loadedPdf = await loadingTask.promise;
@@ -207,7 +199,6 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
           canvasContext: baseCtx,
           canvas: baseCanvas,
           viewport: viewport,
-          background: 'rgb(255,255,255)'
         }).promise;
 
         const scalesToTry = [2.0, 1.5, 1.0, 0.75, 0.5, 0.35];
@@ -264,7 +255,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
         const finalBytes = bestBytes || smallestBytesEver;
         if (!finalBytes) throw new Error('Compression failed');
 
-        const embeddedImg = await outputPdf.embedJpg(finalBytes.buffer);
+        const embeddedImg = await outputPdf.embedJpg(finalBytes);
         const newPage = outputPdf.addPage([pageWidthPt, pageHeightPt]);
         newPage.drawImage(embeddedImg, { x: 0, y: 0, width: pageWidthPt, height: pageHeightPt });
 
@@ -279,7 +270,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
         useObjectStreams: true,
       });
 
-      const compressedBlob = new Blob([outputBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const compressedBlob = new Blob([outputBytes as unknown as BlobPart], { type: 'application/pdf' });
       const compressedUrl = registerUrl(URL.createObjectURL(compressedBlob));
 
       const saved = pdfMeta.size - compressedBlob.size;

@@ -15,8 +15,12 @@ const KNOWN_EXTRA_TOOLS = new Set([
   '13kb-photo-size',
   'compress-image-to-13kb',
   '14kb-photo-size',
+  '15kb-photo-size',
+  'compress-image-to-15kb',
   '28kb-photo-size',
   'compress-image-to-28kb',
+  '150kb-photo-size',
+  'compress-image-to-150kb',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
 ]);
@@ -338,7 +342,11 @@ export function getSeoRedirect(pathname: string): string | null {
     '12kb-photo-size': 'compress-image-to-12kb',
     '13kb-photo-size': 'compress-image-to-13kb',
     '14kb-photo-size': '14kb-photo-size',
+    '15kb-photo-size': 'compress-image-to-15kb',
+    'resize-image-to-15kb': 'compress-image-to-15kb',
     '28kb-photo-size': 'compress-image-to-28kb',
+    '150kb-photo-size': 'compress-image-to-150kb',
+    'resize-image-to-150kb': 'compress-image-to-150kb',
   };
 
   if (ALIAS_MAP[slug]) {

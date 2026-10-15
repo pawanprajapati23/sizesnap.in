@@ -2875,6 +2875,44 @@ export const ALL_TOOLS: ToolItem[] = [
     "popular": false
   },
   {
+    "id": "compress-image-to-150kb",
+    "name": "Compress Image to 150KB",
+    "slug": "compress-image-to-150kb",
+    "categoryId": "image",
+    "categoryTitle": "Image Tools",
+    "shortDescription": "Compress photo, certificate, and document to exact 150KB online for free without blur. Instant tool for exam form uploads.",
+    "keywords": [
+      "compress image to 150kb",
+      "resize image to 150kb",
+      "150 kb photo size",
+      "150kb photo size",
+      "150kb image compressor",
+      "compress photo to 150kb online",
+      "150 kb converter",
+      "reduce image size to 150kb",
+      "150 kb photo size jpg",
+      "photo ko 150kb kaise banaye"
+    ],
+    "aliases": [
+      "150kb-photo-size",
+      "150kb-image-compressor",
+      "resize-image-150kb"
+    ],
+    "searchIntent": "Utility",
+    "relatedTools": [
+      "compress-image-to-100kb",
+      "compress-image-to-200kb",
+      "compress-pdf-140kb",
+      "reduce-image-size-in-kb"
+    ],
+    "supportedFormats": ["jpg", "jpeg", "png", "webp"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-image-to-150kb",
+    "popular": true
+  },
+  {
     "id": "compress-image-to-10kb",
     "name": "Compress Image to 10KB",
     "slug": "compress-image-to-10kb",
@@ -3036,6 +3074,46 @@ export const ALL_TOOLS: ToolItem[] = [
     "status": "production",
     "seoPriority": "High",
     "analyticsIdentifier": "compress-image-to-13kb",
+    "popular": true
+  },
+  {
+    "id": "compress-image-to-15kb",
+    "name": "Compress Image to 15KB",
+    "slug": "compress-image-to-15kb",
+    "categoryId": "image",
+    "categoryTitle": "Image Tools",
+    "shortDescription": "Resize photo and signature to exact 15KB online for free without blur. Golden midpoint resizer for SSC, UPSC & online form uploads.",
+    "keywords": [
+      "15 kb photo size jpg",
+      "15 kb photo size",
+      "15kb photo size",
+      "compress image to 15kb",
+      "resize image to 15kb",
+      "15 kb converter",
+      "photo ko 15kb kaise banaye",
+      "signature resize 15kb",
+      "compress photo to 15kb online",
+      "reduce image size to 15kb"
+    ],
+    "aliases": [
+      "15kb-photo-size",
+      "15kb-image-compressor",
+      "resize-image-15kb",
+      "compress-signature-15kb"
+    ],
+    "searchIntent": "Utility",
+    "relatedTools": [
+      "compress-image-to-10kb",
+      "compress-image-to-12kb",
+      "14kb-photo-size",
+      "compress-image-to-20kb",
+      "reduce-image-size-in-kb"
+    ],
+    "supportedFormats": ["jpg", "jpeg", "png", "webp"],
+    "processingType": "client",
+    "status": "production",
+    "seoPriority": "High",
+    "analyticsIdentifier": "compress-image-to-15kb",
     "popular": true
   },
   {

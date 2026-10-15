@@ -27,8 +27,10 @@ const KB_TAGS = [
   { label: '20-50 KB', href: '/tools/compress-image-between-20kb-to-50kb' },
   { label: '10-20 KB', href: '/tools/compress-image-between-10kb-to-20kb' },
   { label: '30-70 KB', href: '/tools/compress-image-between-30kb-to-70kb' },
-  { label: 'NEET Exam', href: '/exams/neet-jee-photo-signature-resizer' },
-  { label: 'CTET Exam', href: '/exams/ctet-kvs-photo-signature-resizer' },
+  { label: '5 KB Sign', href: '/tools/compress-image-to-5kb' },
+  { label: '3.5x4.5 cm', href: '/tools/resize-image-3-5cm-4-5cm' },
+  { label: 'Name & Date Photo', href: '/tools/add-name-and-date-on-photo' },
+  { label: 'White BG Photo', href: '/tools/white-background-passport-photo' },
   { label: 'Doc Scanner', href: '/tools/document-scanner' },
 ];
 

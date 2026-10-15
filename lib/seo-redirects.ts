@@ -36,6 +36,13 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'compress-image-between-10kb-to-20kb',
   'compress-image-10kb-to-20kb',
   'compress-image-between-30kb-to-70kb',
+  '5kb-photo-size',
+  'compress-image-to-5kb',
+  'resize-image-3-5cm-4-5cm',
+  'resize-image-to-3-5cmx4-5cm',
+  'add-name-and-date-on-photo',
+  'name-and-date-on-photo',
+  'white-background-passport-photo',
 ]);
 
 // Reserved system routes that should never be treated as tool redirects
@@ -100,12 +107,39 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/exams/exam-application-kit';
   }
 
+  // 0.5. Specialized Photo Presets (Name & Date, 3.5x4.5cm, White Background)
+  if (
+    cleanPath.includes('name-and-date-on-photo') ||
+    cleanPath.includes('add-name-and-date') ||
+    cleanPath.includes('dop-photo-maker') ||
+    cleanPath.includes('photo-name-date')
+  ) {
+    return '/tools/add-name-and-date-on-photo';
+  }
+
+  if (
+    cleanPath.includes('3.5cmx4.5cm') ||
+    cleanPath.includes('3-5cm-4-5cm') ||
+    cleanPath.includes('3.5-4.5') ||
+    cleanPath.includes('35mmx45mm') ||
+    cleanPath.includes('35x45mm')
+  ) {
+    return '/tools/resize-image-3-5cm-4-5cm';
+  }
+
+  if (
+    cleanPath.includes('white-background-passport-photo') ||
+    cleanPath.includes('white-background-photo') ||
+    cleanPath.includes('make-photo-white-background')
+  ) {
+    return '/tools/white-background-passport-photo';
+  }
+
   // 1. Dedicated Government Exam Presets (High search volume)
   if (
     cleanPath.includes('ssc-photo') ||
     cleanPath.includes('ssc-signature') ||
-    cleanPath.includes('ssc-photo-rejection') ||
-    cleanPath.includes('name-and-date-on-photo-for-ssc')
+    cleanPath.includes('ssc-photo-rejection')
   ) {
     return '/exams/ssc-photo-signature-resizer';
   }
@@ -113,9 +147,7 @@ export function getSeoRedirect(pathname: string): string | null {
   if (
     cleanPath.includes('upsc-photo') ||
     cleanPath.includes('upsc-signature') ||
-    cleanPath.includes('upsc-otr') ||
-    cleanPath.includes('name-and-date-on-photo') ||
-    cleanPath.includes('dop-photo-maker')
+    cleanPath.includes('upsc-otr')
   ) {
     return '/exams/upsc-photo-signature-resizer';
   }

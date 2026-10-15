@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import AdsterraAd from '@/components/AdsterraAd';
 import { getPublishedArticles, getFeaturedArticle, getArticlesByCategory } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import BlogCard from '@/components/blog/BlogCard';
@@ -135,10 +134,6 @@ export default async function BlogPage() {
           </section>
         )}
 
-        <div className="mb-20 flex justify-center">
-          <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
-          <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
-        </div>
 
         {/* Popular / Latest Guides */}
         {popularArticles.length > 0 && (

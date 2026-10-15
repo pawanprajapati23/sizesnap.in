@@ -8,7 +8,6 @@ import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, Lock, Zap, Shield, HelpCircle } from 'lucide-react';
 import { RelatedTools } from '@/components/RelatedTools';
-import AdsterraAd from '@/components/AdsterraAd';
 
 interface FaqItem {
   q: string;
@@ -158,11 +157,6 @@ export function ExactKbPage({
                 </React.Suspense>
               </div>
 
-              {/* Adsterra In-Content Banner (Desktop & Mobile) */}
-              <div className="overflow-hidden rounded-[4px] border border-gray-200 bg-white p-2 shadow-xs">
-                <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
-                <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
-              </div>
 
               {/* Dynamic Article Section */}
               {articleHtml && (

@@ -10,7 +10,6 @@ import ShareButtons from '@/components/blog/ShareButtons';
 import TableOfContents from '@/components/blog/TableOfContents';
 import RelatedToolsCTA from '@/components/blog/RelatedToolsCTA';
 import RelatedArticles from '@/components/blog/RelatedArticles';
-import AdsterraAd from '@/components/AdsterraAd';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 export const revalidate = 3600;
@@ -238,10 +237,6 @@ export default async function ArticlePage({ params }: Props) {
             <TableOfContents htmlContent={cleanContent} isMobile={true} />
           </div>
 
-          <div className="mb-8 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
-            <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
-            <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
-          </div>
 
           <article
             className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-[#414FA8] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-sm"
@@ -264,10 +259,6 @@ export default async function ArticlePage({ params }: Props) {
             <ShareButtons url={`https://www.sizesnap.in/blog/${article.slug}`} title={article.title} horizontal={true} />
           </div>
 
-          <div className="mt-12 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
-            <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
-            <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
-          </div>
 
           {/* Author Box */}
           <div className="mt-12">

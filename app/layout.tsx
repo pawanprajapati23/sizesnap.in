@@ -3,7 +3,6 @@ import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import dynamic from 'next/dynamic';
-import AdsterraAd from '@/components/AdsterraAd';
 
 const FeedbackWidget = dynamic(() => import('@/components/FeedbackWidget'));
 const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'));
@@ -90,7 +89,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased pb-14 lg:pb-0" suppressHydrationWarning>
+      <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased" suppressHydrationWarning>
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
@@ -122,14 +121,25 @@ export default function RootLayout({
             strategy="lazyOnload"
           />
         )}
+
+        {/* Monetag In-Page Push */}
+        <Script
+          id="monetag-in-page-push"
+          src="https://nap5k.com/tag.min.js"
+          data-zone="12042471"
+          strategy="lazyOnload"
+        />
+
+        {/* Monetag Vignette Banner */}
+        <Script
+          id="monetag-vignette"
+          src="https://n6wxm.com/vignette.min.js"
+          data-zone="11970631"
+          strategy="lazyOnload"
+        />
         <AnalyticsTracker />
         <FeedbackWidget />
         {children}
-        
-        {/* Mobile Sticky Ad Banner (320x50) */}
-        <div className="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-center bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] pb-safe">
-          <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} />
-        </div>
 
         <Analytics />
         <SpeedInsights />

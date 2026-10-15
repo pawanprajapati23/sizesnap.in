@@ -9,7 +9,6 @@ import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield, Calendar, User } from 'lucide-react';
 import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
-import AdsterraAd from '@/components/AdsterraAd';
 
 export const metadata: Metadata = {
   title: 'Add Name and Date on Photo Online Free - SSC, UPSC, Govt Exam DOP Maker | SizeSnap',
@@ -135,11 +134,6 @@ export default function AddNameAndDateOnPhotoPage() {
               {/* Tool Engine */}
               <PassportPhotoMaker />
 
-              {/* In-content Ad */}
-              <div className="overflow-hidden rounded-[4px] border border-gray-100 bg-white p-2 shadow-xs flex justify-center">
-                <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
-                <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
-              </div>
 
               {/* Educational Article Section */}
               <article className="bg-white p-5 sm:p-7 rounded-[4px] border border-gray-200 shadow-xs text-gray-700 text-xs sm:text-sm leading-relaxed space-y-4">

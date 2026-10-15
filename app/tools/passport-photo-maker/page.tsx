@@ -9,7 +9,6 @@ import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
-import AdsterraAd from '@/components/AdsterraAd';
 
 export const metadata: Metadata = {
   title: 'Passport Photo Maker Online (3.5 x 4.5 cm) - SSC, UPSC, Govt Exams (20KB - 50KB) | SizeSnap',
@@ -119,11 +118,6 @@ export default function PassportPhotoMakerPage() {
             {/* Interactive Passport Photo Maker Engine */}
             <PassportPhotoMaker />
 
-            {/* In-Content Responsive Adsterra Banner */}
-            <div className="overflow-hidden rounded-[4px] border border-gray-100 bg-white p-2 shadow-xs flex justify-center">
-              <AdsterraAd dataKey="3bd154ece61c60859c2b8242ae85b927" width={728} height={90} className="w-full hidden md:flex" />
-              <AdsterraAd dataKey="f509bd7d24a58ce7a176067713ca61df" width={320} height={50} className="w-full md:hidden flex" />
-            </div>
 
             {/* Internal Sister Tool Links */}
             <div className="bg-white p-4 rounded-[4px] border border-gray-200">

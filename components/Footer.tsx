@@ -19,6 +19,9 @@ const KB_TAGS = [
   { label: '50 KB', href: '/tools/compress-image-to-50kb' },
   { label: '100 KB', href: '/tools/compress-image-to-100kb' },
   { label: '150 KB', href: '/tools/compress-image-to-150kb' },
+  { label: 'PDF Under 200 KB', href: '/tools/jpg-to-pdf-under-200kb' },
+  { label: 'PDF Under 100 KB', href: '/tools/jpg-to-pdf-under-100kb' },
+  { label: 'PDF Under 500 KB', href: '/tools/jpg-to-pdf-under-500kb' },
   { label: 'PDF 12 KB', href: '/tools/compress-pdf-12kb' },
   { label: 'PDF 140 KB', href: '/tools/compress-pdf-140kb' },
   { label: 'Doc Scanner', href: '/tools/document-scanner' },
@@ -89,6 +92,7 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-gray-100 tracking-wide">Top Utilities</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link prefetch={false} href="/tools/jpg-to-pdf-under-200kb" className="hover:text-[#6366F1] transition-colors">JPG to PDF Under 200kb</Link></li>
               <li><Link prefetch={false} href="/tools/document-scanner" className="hover:text-[#6366F1] transition-colors">Document scanner (B&amp;W filter)</Link></li>
               <li><Link prefetch={false} href="/tools/compress-pdf-140kb" className="hover:text-[#6366F1] transition-colors">Compress PDF to 140kb</Link></li>
               <li><Link prefetch={false} href="/tools/compress-pdf-12kb" className="hover:text-[#6366F1] transition-colors">Compress PDF to 12kb</Link></li>

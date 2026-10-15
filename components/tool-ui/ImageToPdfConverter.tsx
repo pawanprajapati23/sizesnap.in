@@ -50,8 +50,9 @@ const MARGIN_PT: Record<MarginOption, number> = {
   large: 40,
 };
 
-export function ImageToPdfConverter() {
+export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb?: number } = {}) {
   const [images, setImages] = useState<ImageItem[]>([]);
+  const [targetMaxKb, setTargetMaxKb] = useState<number | null>(initialTargetMaxKb ?? null);
   const [pageSize, setPageSize] = useState<PageSizeOption>('a4');
   const [orientation, setOrientation] = useState<OrientationOption>('auto');
   const [margin, setMargin] = useState<MarginOption>('small');
@@ -174,8 +175,111 @@ export function ImageToPdfConverter() {
     setErrorMsg(null);
   };
 
+  // Helper to compress an image so it stays strictly within byte budget for target KB PDF
+  const compressImageToFitBytes = async (previewUrl: string, maxBytes: number): Promise<Uint8Array> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = async () => {
+        try {
+          let width = img.naturalWidth || img.width;
+          let height = img.naturalHeight || img.height;
+
+          // Downscale dimension if budget is tight to ensure small byte footprint and crisp text
+          let maxDim = 1800;
+          if (maxBytes <= 85 * 1024) maxDim = 1400;
+          if (maxBytes <= 45 * 1024) maxDim = 1100;
+          if (maxBytes <= 25 * 1024) maxDim = 900;
+
+          if (width > maxDim || height > maxDim) {
+            const ratio = Math.min(maxDim / width, maxDim / height);
+            width = Math.max(100, Math.round(width * ratio));
+            height = Math.max(100, Math.round(height * ratio));
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Canvas 2D context unavailable');
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Binary search / iterative quality adjustment
+          let minQ = 0.15;
+          let maxQ = 0.92;
+          let bestBytes: Uint8Array | null = null;
+
+          for (let attempt = 0; attempt < 5; attempt++) {
+            const quality = (minQ + maxQ) / 2;
+            const blob: Blob | null = await new Promise((res) =>
+              canvas.toBlob((b) => res(b), 'image/jpeg', quality)
+            );
+            if (!blob) break;
+
+            const buf = await blob.arrayBuffer();
+            const bytes = new Uint8Array(buf);
+
+            if (bytes.length <= maxBytes) {
+              bestBytes = bytes;
+              minQ = quality; // try higher quality
+            } else {
+              maxQ = quality; // try lower quality
+            }
+          }
+
+          // If even lowest quality on full dimension exceeds maxBytes, downscale by 25%
+          if (!bestBytes || bestBytes.length > maxBytes) {
+            const scale = 0.75;
+            const smallCanvas = document.createElement('canvas');
+            smallCanvas.width = Math.max(100, Math.round(width * scale));
+            smallCanvas.height = Math.max(100, Math.round(height * scale));
+            const sCtx = smallCanvas.getContext('2d');
+            if (sCtx) {
+              sCtx.fillStyle = '#FFFFFF';
+              sCtx.fillRect(0, 0, smallCanvas.width, smallCanvas.height);
+              sCtx.drawImage(canvas, 0, 0, smallCanvas.width, smallCanvas.height);
+              const blob: Blob | null = await new Promise((res) =>
+                smallCanvas.toBlob((b) => res(b), 'image/jpeg', 0.6)
+              );
+              if (blob) {
+                const buf = await blob.arrayBuffer();
+                bestBytes = new Uint8Array(buf);
+              }
+            }
+          }
+
+          if (!bestBytes) {
+            const blob: Blob | null = await new Promise((res) =>
+              canvas.toBlob((b) => res(b), 'image/jpeg', 0.5)
+            );
+            const buf = blob ? await blob.arrayBuffer() : new ArrayBuffer(0);
+            bestBytes = new Uint8Array(buf);
+          }
+
+          resolve(bestBytes);
+        } catch (err) {
+          reject(err);
+        }
+      };
+      img.onerror = () => reject(new Error(`Failed to load image for compression: ${previewUrl}`));
+      img.src = previewUrl;
+    });
+  };
+
   // Convert an image file or preview into embedded PDF Image
   const embedImageInPdf = async (pdfDoc: PDFDocument, item: ImageItem) => {
+    // If targetMaxKb is set, compress to fit allocated budget
+    if (targetMaxKb && targetMaxKb > 0) {
+      const totalBudget = targetMaxKb * 1024;
+      // Reserve 12% or at least 4KB for PDF structural overhead
+      const overhead = Math.max(4096, Math.floor(totalBudget * 0.12));
+      const perImageBudget = Math.max(10240, Math.floor((totalBudget - overhead) / images.length));
+      const compressedBytes = await compressImageToFitBytes(item.previewUrl, perImageBudget);
+      return await pdfDoc.embedJpg(compressedBytes);
+    }
+
     // Attempt direct embed for clean JPEGs
     if (item.type === 'image/jpeg' || item.type === 'image/jpg') {
       try {
@@ -356,7 +460,7 @@ export function ImageToPdfConverter() {
     if (!pdfUrl) return;
     const a = document.createElement('a');
     a.href = pdfUrl;
-    a.download = 'sizesnap-images.pdf';
+    a.download = targetMaxKb ? `sizesnap-images-under-${targetMaxKb}kb.pdf` : 'sizesnap-images.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -641,6 +745,52 @@ export function ImageToPdfConverter() {
               </div>
             </div>
 
+            {/* Target File Size (KB Limit) */}
+            <div className="pt-3 border-t border-gray-100">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <label className="text-xs font-semibold text-gray-700 flex items-center gap-1.5">
+                  <Sliders className="h-3.5 w-3.5 text-[#414FA8]" />
+                  <span>Target PDF File Size (Optional Limit):</span>
+                </label>
+                {targetMaxKb && (
+                  <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    Target: Under {targetMaxKb} KB
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { label: 'No Limit (Original)', value: null },
+                  { label: 'Under 100 KB', value: 100 },
+                  { label: 'Under 150 KB', value: 150 },
+                  { label: 'Under 200 KB', value: 200 },
+                  { label: 'Under 500 KB', value: 500 },
+                ].map((preset) => {
+                  const isActive = targetMaxKb === preset.value;
+                  return (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => {
+                        setTargetMaxKb(preset.value);
+                        setPdfUrl(null);
+                      }}
+                      className={`px-2.5 py-1 text-xs font-medium rounded transition-colors ${
+                        isActive
+                          ? 'bg-[#414FA8] text-white shadow-xs font-semibold'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                      }`}
+                    >
+                      {preset.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-[11px] text-gray-500 mt-1.5">
+                Automatically optimizes images to keep the compiled PDF strictly under your chosen KB limit for government and university exam portals.
+              </p>
+            </div>
+
             {/* Action Generate Button */}
             <div className="pt-2">
               <button
@@ -657,7 +807,10 @@ export function ImageToPdfConverter() {
                 ) : (
                   <>
                     <FileText className="h-4 w-4 text-amber-300" />
-                    <span>Convert {images.length} Image{images.length > 1 ? 's' : ''} to PDF</span>
+                    <span>
+                      Convert {images.length} Image{images.length > 1 ? 's' : ''} to PDF
+                      {targetMaxKb ? ` (Under ${targetMaxKb} KB)` : ''}
+                    </span>
                   </>
                 )}
               </button>
@@ -683,6 +836,7 @@ export function ImageToPdfConverter() {
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-1 text-xs font-bold text-[#414FA8] bg-[#EEF1FB] border border-[#9AA3C8]/40 rounded-full">
                     {pdfPageCount} Pages • {formatBytes(pdfBlob.size)}
+                    {targetMaxKb && pdfBlob.size <= targetMaxKb * 1024 ? ` (Under ${targetMaxKb} KB ✓)` : ''}
                   </span>
                 </div>
               </div>
@@ -695,7 +849,9 @@ export function ImageToPdfConverter() {
                   className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-[4px] shadow-xs transition-colors cursor-pointer"
                 >
                   <Download className="h-4 w-4" />
-                  <span>Download sizesnap-images.pdf</span>
+                  <span>
+                    Download {targetMaxKb ? `sizesnap-images-under-${targetMaxKb}kb.pdf` : 'sizesnap-images.pdf'}
+                  </span>
                 </button>
 
                 <button

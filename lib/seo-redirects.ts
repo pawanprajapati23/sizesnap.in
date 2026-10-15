@@ -23,6 +23,14 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'compress-image-to-150kb',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
+  'jpg-to-pdf-under-200kb',
+  'jpeg-to-pdf-under-200kb',
+  'jpg-to-pdf-under-100kb',
+  'jpeg-to-pdf-under-100kb',
+  'jpg-to-pdf-under-500kb',
+  'jpeg-to-pdf-under-500kb',
+  'jpg-to-pdf-under-150kb',
+  'jpeg-to-pdf-under-150kb',
 ]);
 
 // Reserved system routes that should never be treated as tool redirects
@@ -272,6 +280,20 @@ export function getSeoRedirect(pathname: string): string | null {
   if (cleanPath.includes('convert-image/to-webp')) {
     return '/tools/image-to-webp';
   }
+  // Specific JPG to PDF Under [X] KB redirects
+  if (cleanPath.includes('200') && (cleanPath.includes('jpg-to-pdf') || cleanPath.includes('jpeg-to-pdf') || cleanPath.includes('image-to-pdf'))) {
+    return '/tools/jpg-to-pdf-under-200kb';
+  }
+  if (cleanPath.includes('100') && (cleanPath.includes('jpg-to-pdf') || cleanPath.includes('jpeg-to-pdf') || cleanPath.includes('image-to-pdf'))) {
+    return '/tools/jpg-to-pdf-under-100kb';
+  }
+  if (cleanPath.includes('500') && (cleanPath.includes('jpg-to-pdf') || cleanPath.includes('jpeg-to-pdf') || cleanPath.includes('image-to-pdf'))) {
+    return '/tools/jpg-to-pdf-under-500kb';
+  }
+  if (cleanPath.includes('150') && (cleanPath.includes('jpg-to-pdf') || cleanPath.includes('jpeg-to-pdf') || cleanPath.includes('image-to-pdf'))) {
+    return '/tools/jpg-to-pdf-under-150kb';
+  }
+
   if (cleanPath.startsWith('/jpg-to-pdf') || cleanPath.startsWith('/image-to-pdf') || cleanPath === '/word-to-pdf') {
     return '/tools/image-to-pdf';
   }

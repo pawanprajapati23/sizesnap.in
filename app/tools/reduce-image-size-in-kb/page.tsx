@@ -1,1 +1,5 @@
-export { default, metadata } from '../reduce-image-size-kb/page';
+import { permanentRedirect } from "next/navigation";
+
+export default function RedirectPage() {
+  permanentRedirect("/tools/reduce-image-size-kb");
+}

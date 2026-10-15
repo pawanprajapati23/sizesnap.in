@@ -1,1 +1,5 @@
-export { default, metadata } from '../jpg-to-pdf-under-100kb/page';
+import { permanentRedirect } from "next/navigation";
+
+export default function RedirectPage() {
+  permanentRedirect("/tools/jpg-to-pdf-under-100kb");
+}

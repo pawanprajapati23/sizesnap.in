@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, Suspense } from 'react';
 import { Upload, Copy, Check, FileText, Settings2, RefreshCw } from 'lucide-react';
-import Tesseract from 'tesseract.js';
 
 function OcrToolContent() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -33,6 +32,8 @@ function OcrToolContent() {
     setStatusText('Initializing OCR Engine...');
 
     try {
+      const { createWorker } = await import('tesseract.js');
+      const Tesseract = (await import('tesseract.js')).default || await import('tesseract.js');
       const result = await Tesseract.recognize(
         imageSrc,
         language,

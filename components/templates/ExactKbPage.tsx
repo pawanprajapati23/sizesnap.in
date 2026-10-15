@@ -60,11 +60,6 @@ export function ExactKbPage({
       price: '0',
       priceCurrency: 'INR',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '1940',
-    },
   };
 
   const breadcrumbSchema = {

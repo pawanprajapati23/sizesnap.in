@@ -177,6 +177,108 @@ const nextConfig: NextConfig = {
         destination: '/tools/ai-photo-enhancer',
         permanent: true,
       },
+      // Crawl Budget Optimization: 301 Permanent Redirects for duplicate alias routes
+      {
+        source: '/tools/11kb-photo-size',
+        destination: '/tools/compress-image-to-11kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/12kb-photo-size',
+        destination: '/tools/compress-image-to-12kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/13kb-photo-size',
+        destination: '/tools/compress-image-to-13kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/150kb-photo-size',
+        destination: '/tools/compress-image-to-150kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/15kb-photo-size',
+        destination: '/tools/compress-image-to-15kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/28kb-photo-size',
+        destination: '/tools/compress-image-to-28kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/5kb-photo-size',
+        destination: '/tools/compress-image-to-5kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/compress-image-10kb-to-20kb',
+        destination: '/tools/compress-image-between-10kb-to-20kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/compress-jpeg-between-20kb-to-50kb',
+        destination: '/tools/compress-image-between-20kb-to-50kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/jpeg-to-pdf-under-100kb',
+        destination: '/tools/jpg-to-pdf-under-100kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/jpeg-to-pdf-under-150kb',
+        destination: '/tools/jpg-to-pdf-under-150kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/jpeg-to-pdf-under-200kb',
+        destination: '/tools/jpg-to-pdf-under-200kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/jpeg-to-pdf-under-500kb',
+        destination: '/tools/jpg-to-pdf-under-500kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/name-and-date-on-photo',
+        destination: '/tools/add-name-and-date-on-photo',
+        permanent: true,
+      },
+      {
+        source: '/tools/reduce-image-size-in-kb',
+        destination: '/tools/reduce-image-size-kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/resize-image-to-3-5cmx4-5cm',
+        destination: '/tools/resize-image-3-5cm-4-5cm',
+        permanent: true,
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
     ];
   },
   webpack: (config, {dev}) => {

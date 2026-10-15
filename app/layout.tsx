@@ -23,6 +23,14 @@ export const metadata: Metadata = {
     url: 'https://www.sizesnap.in/',
     siteName: 'SizeSnap',
     type: 'website',
+    images: [
+      {
+        url: 'https://www.sizesnap.in/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
+      },
+    ],
   },
   icons: {
     icon: [
@@ -38,6 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
     description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
+    images: ['https://www.sizesnap.in/logo.png'],
   },
   verification: {
     google:
@@ -81,7 +90,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased" suppressHydrationWarning>
+      <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased pb-14 lg:pb-0" suppressHydrationWarning>
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>

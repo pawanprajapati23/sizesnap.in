@@ -4673,6 +4673,32 @@ export const ALL_TOOLS: ToolItem[] = [
     analyticsIdentifier: 'white_bg_photo',
     popular: true,
   },
+  {
+    id: '14kb-photo-size',
+    name: '14KB Photo Size Maker',
+    slug: '14kb-photo-size',
+    categoryId: 'image',
+    categoryTitle: 'Image Tools',
+    shortDescription: 'Compress and resize photos and signatures to exactly 14KB or under for government exam portals.',
+    icon: 'Maximize2',
+    route: '/tools/14kb-photo-size',
+    keywords: [
+      '14kb photo size',
+      'resize image to 14kb',
+      'compress photo to 14kb',
+      'photo size 14kb',
+      'signature resize 14kb',
+      'reduce image size to 14kb',
+    ],
+    aliases: ['14-kb-photo', 'compress-to-14kb', '14kb-resizer'],
+    searchIntent: 'Compress or resize image to exactly 14KB for online application forms',
+    relatedTools: ['compress-image-to-10kb', 'compress-image-to-20kb', 'compress-image-to-15kb', 'reduce-image-size-in-kb'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'High',
+    analyticsIdentifier: '14kb_photo_size',
+    popular: true,
+  },
 ];
 
 // Sidebar quick links specified by the user

@@ -60,11 +60,6 @@ export function JpgToPdfUnderKbPage({
       price: '0',
       priceCurrency: 'INR',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '2860',
-    },
   };
 
   const breadcrumbSchema = {

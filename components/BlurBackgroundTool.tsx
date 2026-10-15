@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Download, Loader2 } from 'lucide-react';
-import { removeBackground } from '@imgly/background-removal';
 
 export function BlurBackgroundTool() {
   const [image, setImage] = useState<string | null>(null);
@@ -28,6 +27,7 @@ export function BlurBackgroundTool() {
     setIsProcessing(true);
     setProgress(10);
     try {
+      const { removeBackground } = await import('@imgly/background-removal');
       const blob = await removeBackground(image, {
         progress: (key, current, total) => {
            setProgress(Math.round((current / total) * 100));

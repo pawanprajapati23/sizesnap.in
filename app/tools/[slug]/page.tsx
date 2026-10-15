@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { notFound, redirect } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -194,9 +194,9 @@ const PdfPageCounterTool = dynamic(() => import('@/components/tool-ui/exam/PdfPa
 export default async function ToolDetailPage({ params }: ToolPageProps) {
   const { slug } = await params;
 
-  // Check smart redirect map first
+  // Check smart redirect map first (301/308 permanent redirect for SEO PageRank preservation)
   if (TOOL_REDIRECT_MAP[slug]) {
-    redirect(TOOL_REDIRECT_MAP[slug]);
+    permanentRedirect(TOOL_REDIRECT_MAP[slug]);
   }
 
   const tool = getToolBySlug(slug);

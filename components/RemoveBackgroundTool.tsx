@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Loader2 } from 'lucide-react';
-import { removeBackground } from '@imgly/background-removal';
 
 export function RemoveBackgroundTool() {
   const [image, setImage] = useState<string | null>(null);
@@ -21,6 +20,7 @@ export function RemoveBackgroundTool() {
     setIsProcessing(true);
     setProgress(10);
     try {
+      const { removeBackground } = await import('@imgly/background-removal');
       const blob = await removeBackground(image, {
         progress: (key, current, total) => {
            setProgress(Math.round((current / total) * 100));

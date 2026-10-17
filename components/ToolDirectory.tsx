@@ -173,6 +173,12 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 NEET &amp; JEE
               </Link>
               <Link
+                href="/tools/photo-and-signature-joiner"
+                className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
+              >
+                Photo &amp; Signature Joiner
+              </Link>
+              <Link
                 href="/exams"
                 className="px-2.5 py-1 rounded bg-[#414FA8] hover:bg-[#343f88] text-white font-semibold shadow-2xs transition-colors"
               >

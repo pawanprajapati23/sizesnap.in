@@ -25,21 +25,47 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
   }, [searchQuery]);
 
   // Group tools by category for normal browsing view
-  // Map the topTools strings to full ToolItems in order
+  // Prioritize core high-intent money tools followed by top trending tools
   const popularTools = useMemo(() => {
-    let validTools = topTools
-      .map(slug => ALL_TOOLS.find(t => t.slug === slug))
-      .filter((t): t is ToolItem => t !== undefined && t.status !== 'draft' && t.status !== 'deprecated');
+    const pinnedSlugs = [
+      'compress-image-to-20kb',
+      'compress-image-to-50kb',
+      'compress-image-to-100kb',
+      '14kb-photo-size',
+      'resize-image-3-5cm-4-5cm',
+      'add-name-and-date-on-photo',
+      'white-background-passport-photo',
+      'jpg-to-pdf-under-200kb',
+      'compress-image-between-20kb-to-50kb',
+      'passport-photo-maker',
+      'compress-pdf',
+      'image-to-pdf',
+    ];
 
-    // Fallback if no real popular tools exist yet
-    if (validTools.length === 0) {
-      const fallbackSlugs = ['compress-image', 'image-to-pdf', 'compress-image-to-50kb', 'resize-image-pixel'];
-      validTools = fallbackSlugs
-        .map(slug => ALL_TOOLS.find(t => t.slug === slug))
-        .filter((t): t is ToolItem => t !== undefined && t.status !== 'draft');
+    const slugSet = new Set<string>();
+    const result: ToolItem[] = [];
+
+    // First add pinned high-intent tools
+    for (const slug of pinnedSlugs) {
+      const tool = ALL_TOOLS.find(t => t.slug === slug);
+      if (tool && !slugSet.has(tool.slug)) {
+        slugSet.add(tool.slug);
+        result.push(tool);
+      }
     }
 
-    return validTools.slice(0, 10);
+    // Then append any extra topTools from Firebase
+    for (const slug of topTools) {
+      if (!slugSet.has(slug)) {
+        const tool = ALL_TOOLS.find(t => t.slug === slug);
+        if (tool && tool.status !== 'draft' && tool.status !== 'deprecated') {
+          slugSet.add(tool.slug);
+          result.push(tool);
+        }
+      }
+    }
+
+    return result.slice(0, 12);
   }, [topTools]);
 
   // Group tools by category for normal browsing view
@@ -103,47 +129,118 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
           )}
         </div>
 
-        {/* Govt Exam Quick Shortcut Bar */}
-        <div className="mt-4 pt-3.5 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
-              Govt Exams 2026
-            </span>
-            <span className="text-xs text-gray-700 font-semibold hidden sm:inline">
-              Official Photo &amp; Signature Presets:
-            </span>
+        {/* Fast-Track SEO & Navigation Bars */}
+        <div className="mt-4 pt-3.5 border-t border-gray-100 space-y-2.5">
+          {/* Row 1: Govt Exam Quick Presets */}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
+                Govt Exams 2026
+              </span>
+              <span className="text-xs text-gray-700 font-semibold hidden sm:inline">
+                Live Recruitment Forms:
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+              <Link
+                href="/exams/ssc-photo-signature-resizer"
+                className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
+              >
+                SSC (GD / CGL)
+              </Link>
+              <Link
+                href="/exams/rrb-railway-photo-signature-resizer"
+                className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
+              >
+                Railway RRB (30-70KB)
+              </Link>
+              <Link
+                href="/exams/upsc-photo-signature-resizer"
+                className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
+              >
+                UPSC (OTR / CSE)
+              </Link>
+              <Link
+                href="/exams/up-police-photo-resizer"
+                className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
+              >
+                UP Police (20-50KB)
+              </Link>
+              <Link
+                href="/exams/neet-jee-photo-signature-resizer"
+                className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
+              >
+                NEET &amp; JEE
+              </Link>
+              <Link
+                href="/exams"
+                className="px-2.5 py-1 rounded bg-[#414FA8] hover:bg-[#343f88] text-white font-semibold shadow-2xs transition-colors"
+              >
+                All Exams →
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <Link
-              href="/exams/ssc-photo-signature-resizer"
-              className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
-            >
-              SSC (CGL/GD)
-            </Link>
-            <Link
-              href="/exams/upsc-photo-signature-resizer"
-              className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
-            >
-              UPSC (Name &amp; Date)
-            </Link>
-            <Link
-              href="/exams/delhi-police-photo-resizer"
-              className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
-            >
-              Delhi Police
-            </Link>
-            <Link
-              href="/exams/up-police-photo-resizer"
-              className="px-2.5 py-1 rounded bg-[#EEF1FB] hover:bg-[#E2E7F8] text-[#414FA8] font-medium border border-[#9AA3C8]/40 transition-colors"
-            >
-              UP Police
-            </Link>
-            <Link
-              href="/exams"
-              className="px-2.5 py-1 rounded bg-[#414FA8] hover:bg-[#343f88] text-white font-semibold shadow-2xs transition-colors"
-            >
-              All Exams →
-            </Link>
+
+          {/* Row 2: Exact KB & Dimensions Quick Strip */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-50">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded">
+                ⚡ Exact KB
+              </span>
+              <span className="text-xs text-gray-700 font-semibold hidden sm:inline">
+                Target Size &amp; Crop:
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+              <Link
+                href="/tools/compress-image-to-20kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                20 KB Photo
+              </Link>
+              <Link
+                href="/tools/compress-image-to-50kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                50 KB Photo
+              </Link>
+              <Link
+                href="/tools/compress-image-to-100kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                100 KB Photo
+              </Link>
+              <Link
+                href="/tools/14kb-photo-size"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                14 KB Signature
+              </Link>
+              <Link
+                href="/tools/resize-image-3-5cm-4-5cm"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                3.5 × 4.5 cm
+              </Link>
+              <Link
+                href="/tools/add-name-and-date-on-photo"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                Name &amp; Date (DOP)
+              </Link>
+              <Link
+                href="/tools/white-background-passport-photo"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                White BG Photo
+              </Link>
+              <Link
+                href="/tools/jpg-to-pdf-under-200kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                PDF Under 200KB
+              </Link>
+            </div>
           </div>
         </div>
       </div>

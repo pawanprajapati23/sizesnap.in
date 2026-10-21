@@ -13,7 +13,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
-export const auth = getAuth(app);
+
+// Lazy Auth instance: Only initializes if code actually uses auth (e.g. in /admin)
+// Prevents downloading the hidden auth iframe on public tool pages
+let _authInstance: ReturnType<typeof getAuth> | null = null;
+export const auth = new Proxy({} as ReturnType<typeof getAuth>, {
+  get(_, prop) {
+    if (!_authInstance) {
+      _authInstance = getAuth(app);
+    }
+    return (_authInstance as any)[prop];
+  },
+});
 
 export async function fetchUsage(path: string): Promise<Record<string, number>> {
   const snapshot = await get(ref(db, path));

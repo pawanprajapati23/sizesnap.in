@@ -50,17 +50,16 @@ function initMonetagInPagePush() {
     window.removeEventListener('touchstart', loadScript);
     window.removeEventListener('mousemove', loadScript);
     window.removeEventListener('keydown', loadScript);
+    window.removeEventListener('click', loadScript);
   };
 
   window.addEventListener('scroll', loadScript, { passive: true, once: true });
   window.addEventListener('touchstart', loadScript, { passive: true, once: true });
   window.addEventListener('mousemove', loadScript, { passive: true, once: true });
   window.addEventListener('keydown', loadScript, { passive: true, once: true });
+  window.addEventListener('click', loadScript, { passive: true, once: true });
 
-  // 4.5s fallback delay for idle visitors
-  const timer = setTimeout(loadScript, 4500);
   return () => {
-    clearTimeout(timer);
     cleanup();
   };
 }

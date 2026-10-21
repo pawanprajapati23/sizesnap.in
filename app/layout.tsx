@@ -122,14 +122,6 @@ export default function RootLayout({
           />
         )}
 
-        {/* Monetag In-Page Push */}
-        <Script
-          id="monetag-in-page-push"
-          src="https://nap5k.com/tag.min.js"
-          data-zone="12042471"
-          strategy="lazyOnload"
-        />
-
         <AnalyticsTracker />
         <FeedbackWidget />
         {children}

@@ -22,6 +22,49 @@ function triggerPostDownloadVignette() {
   }
 }
 
+// Dynamically load Monetag In-Page Push on first user interaction or delay
+// Keeps initial page load and Lighthouse Core Web Vitals at 95+ (0ms TBT impact)
+function initMonetagInPagePush() {
+  if (typeof window === 'undefined') return;
+  if (document.getElementById('monetag-in-page-push')) return;
+
+  let loaded = false;
+  const loadScript = () => {
+    if (loaded || document.getElementById('monetag-in-page-push')) return;
+    loaded = true;
+    try {
+      const script = document.createElement('script');
+      script.id = 'monetag-in-page-push';
+      script.src = 'https://nap5k.com/tag.min.js';
+      script.setAttribute('data-zone', '12042471');
+      script.async = true;
+      document.body.appendChild(script);
+    } catch (err) {
+      console.error('Failed to load in-page sponsor ad:', err);
+    }
+    cleanup();
+  };
+
+  const cleanup = () => {
+    window.removeEventListener('scroll', loadScript);
+    window.removeEventListener('touchstart', loadScript);
+    window.removeEventListener('mousemove', loadScript);
+    window.removeEventListener('keydown', loadScript);
+  };
+
+  window.addEventListener('scroll', loadScript, { passive: true, once: true });
+  window.addEventListener('touchstart', loadScript, { passive: true, once: true });
+  window.addEventListener('mousemove', loadScript, { passive: true, once: true });
+  window.addEventListener('keydown', loadScript, { passive: true, once: true });
+
+  // 4.5s fallback delay for idle visitors
+  const timer = setTimeout(loadScript, 4500);
+  return () => {
+    clearTimeout(timer);
+    cleanup();
+  };
+}
+
 export default function AnalyticsTracker() {
   const pathname = usePathname();
 
@@ -69,8 +112,14 @@ export default function AnalyticsTracker() {
       }
     };
 
+    // Initialize In-Page Push on first user interaction or delay (Zero CWV penalty)
+    const cleanupAd = initMonetagInPagePush();
+
     document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+      if (cleanupAd) cleanupAd();
+    };
   }, []);
 
   return null; // This component doesn't render anything

@@ -5,13 +5,13 @@ import { ExactKbPage } from '@/components/templates/ExactKbPage';
 import { ArrowRight, CheckCircle2, ShieldCheck, FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Resize Image to 40KB Online Free - 40KB Photo & Signature Maker | SizeSnap',
+  title: '40KB Photo Size - Resize Image to 40KB Online Free | SizeSnap',
   description:
-    'Free online tool to resize photo, signature, and documents to exact 40KB for UPSSSC, Railway RRB, SSC, and job portals without blur. 100% private & instant.',
+    'Compress and resize photo, signature, or document to exact 40KB online for free. Ideal for UPSSSC, Railway RRB, and exam forms without blur. 100% private.',
   keywords: [
-    'resize image to 40kb',
     '40 kb photo size',
     '40kb photo size',
+    'resize image to 40kb',
     'compress image to 40kb',
     '40kb photo resizer',
     'compress photo to 40kb online',
@@ -26,10 +26,11 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/compress-image-to-40kb',
   },
   openGraph: {
-    title: 'Compress Image to 40KB Online Free (Resize Photo to 40KB) | SizeSnap',
+    title: '40KB Photo Size - Resize Image to 40KB Online Free | SizeSnap',
     description:
       'Instantly compress image or photo to exactly 40KB online for UPSSSC, Railway RRB, SSC, and govt exam portals without losing quality.',
     url: 'https://www.sizesnap.in/tools/compress-image-to-40kb',
+    siteName: 'SizeSnap',
     type: 'website',
   },
 };

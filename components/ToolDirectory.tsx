@@ -241,6 +241,24 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 White BG Photo
               </Link>
               <Link
+                href="/tools/compress-pdf-140kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                140 KB PDF
+              </Link>
+              <Link
+                href="/tools/110kb-photo-size"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                110 KB Photo
+              </Link>
+              <Link
+                href="/tools/reduce-image-size-in-kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                Reduce in KB
+              </Link>
+              <Link
                 href="/tools/jpg-to-pdf-under-200kb"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >

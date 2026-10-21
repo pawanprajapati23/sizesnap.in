@@ -21,6 +21,7 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'compress-image-to-28kb',
   '150kb-photo-size',
   'compress-image-to-150kb',
+  '110kb-photo-size',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
   'jpg-to-pdf-under-200kb',
@@ -330,6 +331,9 @@ export function getSeoRedirect(pathname: string): string | null {
     }
     if (targetKb === '14' && (TOOL_SLUG_SET.has('14kb-photo-size') || KNOWN_EXTRA_TOOLS.has('14kb-photo-size'))) {
       return '/tools/14kb-photo-size';
+    }
+    if (targetKb === '110' && (TOOL_SLUG_SET.has('110kb-photo-size') || KNOWN_EXTRA_TOOLS.has('110kb-photo-size'))) {
+      return '/tools/110kb-photo-size';
     }
     return `/tools/reduce-image-size-in-kb?target=${targetKb}`;
   }

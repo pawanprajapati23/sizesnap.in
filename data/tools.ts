@@ -4729,6 +4729,32 @@ export const ALL_TOOLS: ToolItem[] = [
     analyticsIdentifier: 'photo_and_signature_joiner',
     popular: true,
   },
+  {
+    id: '110kb-photo-size',
+    name: '110KB Photo Size',
+    slug: '110kb-photo-size',
+    categoryId: 'image',
+    categoryTitle: 'Image Tools',
+    shortDescription: 'Compress and resize photos and documents to exactly 110KB for banking and recruitment applications.',
+    icon: 'Maximize2',
+    route: '/tools/110kb-photo-size',
+    keywords: [
+      '110kb photo size',
+      '110 kb photo size',
+      'resize image to 110kb',
+      'compress photo to 110kb',
+      'reduce image size to 110kb',
+      '110kb photo resizer',
+    ],
+    aliases: ['110-kb-photo', 'compress-to-110kb', '110kb-resizer'],
+    searchIntent: 'Compress or resize image to exactly 110KB for recruitment application forms',
+    relatedTools: ['compress-image-to-100kb', 'reduce-image-size-in-kb', 'compress-image-to-50kb'],
+    processingType: 'client',
+    status: 'production',
+    seoPriority: 'High',
+    analyticsIdentifier: '110kb_photo_size',
+    popular: true,
+  },
 ];
 
 // Sidebar quick links specified by the user

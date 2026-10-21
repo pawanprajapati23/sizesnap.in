@@ -5,9 +5,9 @@ import { ExactKbPage } from '@/components/templates/ExactKbPage';
 import { ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Resize Image to 12KB Online Free - 12KB Photo & Signature Maker | SizeSnap',
+  title: '12KB Photo Size - Resize Image to 12KB Online Free | SizeSnap',
   description:
-    'Compress photo and signature to exact 12KB online for free. Ideal 12KB JPG resizer for SSC, UPSC OTR, State PSC, Police & exam portals without blur. 100% private.',
+    'Compress and resize photo or signature to exact 12KB online for free. Perfect 12KB JPG resizer for SSC, UPSC OTR, and online application forms without blur. 100% private.',
   keywords: [
     '12 kb photo size',
     '12kb photo size',
@@ -26,10 +26,11 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/compress-image-to-12kb',
   },
   openGraph: {
-    title: 'Resize Image to 12KB Online Free - 12KB Photo & Signature Maker | SizeSnap',
+    title: '12KB Photo Size - Resize Image to 12KB Online Free | SizeSnap',
     description:
       'Free online tool to compress image and signature to exact 12KB or under without losing quality. Perfect for SSC, UPSC OTR, and competitive exams.',
     url: 'https://www.sizesnap.in/tools/compress-image-to-12kb',
+    siteName: 'SizeSnap',
     type: 'website',
   },
 };

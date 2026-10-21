@@ -249,11 +249,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/tools/reduce-image-size-in-kb',
-        destination: '/tools/reduce-image-size-kb',
-        permanent: true,
-      },
-      {
         source: '/tools/resize-image-to-3-5cmx4-5cm',
         destination: '/tools/resize-image-3-5cm-4-5cm',
         permanent: true,

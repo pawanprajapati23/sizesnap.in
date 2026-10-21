@@ -4,6 +4,24 @@ import { usePathname } from 'next/navigation';
 import { trackToolUsage, trackDownload } from '@/lib/firebase';
 import { ALL_TOOLS } from '@/data/tools';
 
+// Dynamically trigger Monetag Vignette only after the user clicks Download
+function triggerPostDownloadVignette() {
+  if (typeof window === 'undefined') return;
+  // If already loaded in this session, do not duplicate
+  if (document.getElementById('monetag-vignette')) return;
+
+  try {
+    const script = document.createElement('script');
+    script.id = 'monetag-vignette';
+    script.src = 'https://n6wxm.com/vignette.min.js';
+    script.setAttribute('data-zone', '11970631');
+    script.async = true;
+    document.body.appendChild(script);
+  } catch (err) {
+    console.error('Failed to load post-download sponsor ad:', err);
+  }
+}
+
 export default function AnalyticsTracker() {
   const pathname = usePathname();
 
@@ -11,7 +29,6 @@ export default function AnalyticsTracker() {
     // Track tool usage based on page view
     if (pathname) {
       // Find if the current path matches any tool slug
-      // Our slugs usually match the last segment of the path
       const segments = pathname.split('/');
       const lastSegment = segments[segments.length - 1];
       
@@ -44,6 +61,8 @@ export default function AnalyticsTracker() {
 
         if (hasDownloadAttr || isDownloadButton || isDownloadLink) {
           trackDownload();
+          // Post-download sponsor ad: Triggers only AFTER user completes their task
+          triggerPostDownloadVignette();
           break; // Stop climbing the DOM tree once we matched
         }
         target = target.parentElement;

@@ -130,13 +130,6 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
 
-        {/* Monetag Vignette Banner */}
-        <Script
-          id="monetag-vignette"
-          src="https://n6wxm.com/vignette.min.js"
-          data-zone="11970631"
-          strategy="lazyOnload"
-        />
         <AnalyticsTracker />
         <FeedbackWidget />
         {children}

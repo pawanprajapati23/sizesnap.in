@@ -253,6 +253,12 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 110 KB Photo
               </Link>
               <Link
+                href="/tools/remove-shadow-from-document"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                Remove Shadow
+              </Link>
+              <Link
                 href="/tools/reduce-image-size-in-kb"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >

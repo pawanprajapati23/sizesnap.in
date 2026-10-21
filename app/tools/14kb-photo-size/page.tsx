@@ -3,11 +3,30 @@ import type { Metadata } from 'next';
 import { ExactKbPage } from '@/components/templates/ExactKbPage';
 
 export const metadata: Metadata = {
-  title: 'Resize Image to 14KB Online Free - 14KB Photo Size Maker | SizeSnap',
+  title: '14KB Photo Size - Resize Image to 14KB Online Free | SizeSnap',
   description:
-    'Make your photo size exactly 14KB for online forms and exam portals. Reduce image size to 14KB without losing quality. Fast, free, and secure.',
+    'Resize and compress your photo or signature to exact 14KB online free without losing quality. Ideal for SSC, UPSC, and government job portals. 100% private.',
+  keywords: [
+    '14kb photo size',
+    '14 kb photo size',
+    'resize image to 14kb',
+    '14 kb photo size jpg',
+    'compress image to 14kb',
+    'photo resize 14 kb',
+    'jpg 14 kb',
+    'signature resize 14kb',
+    'reduce image size to 14kb',
+  ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/14kb-photo-size',
+  },
+  openGraph: {
+    title: '14KB Photo Size - Resize Image to 14KB Online Free | SizeSnap',
+    description:
+      'Resize and compress your photo or signature to exact 14KB online free. Ideal for government exam applications.',
+    url: 'https://www.sizesnap.in/tools/14kb-photo-size',
+    siteName: 'SizeSnap',
+    type: 'website',
   },
 };
 

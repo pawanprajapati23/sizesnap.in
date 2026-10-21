@@ -417,7 +417,7 @@ export const BUILTIN_ARTICLES: Article[] = [
     seoTitle: 'Compress PDF to 100KB - 140KB Online for Govt Portals | Clear Text Guide',
     seoDescription: 'Learn how to compress PDF to 100KB or 140KB for government job and exam portals. Maintain clear certificate text, optimize DPI, and protect privacy with client-side compression.',
     canonicalUrl: 'https://www.sizesnap.in/blog/how-to-compress-pdf-to-100kb-140kb-for-govt-portals',
-    relatedTools: ['compress-pdf', 'reduce-image-size-in-kb', 'passport-photo-maker'],
+    relatedTools: ['compress-pdf-140kb', 'compress-pdf', 'reduce-image-size-in-kb', 'passport-photo-maker'],
     relatedArticles: ['ssc-cgl-photo-size-name-date-guidelines-2026', 'how-to-reduce-image-size-in-kb-without-losing-quality'],
     content: `
 <h2>The 100KB – 140KB PDF Challenge in Indian Online Applications</h2>
@@ -1627,7 +1627,7 @@ You must attend the next <strong>25 classes in a row</strong> to climb back to 7
     seoTitle: 'How to Merge PDF Files Online for Free | Combine Documents Securely',
     seoDescription: 'Learn how to merge multiple PDF files into one document for job applications. 100% private, client-side processing, no file limits, and instant free download.',
     canonicalUrl: 'https://www.sizesnap.in/blog/how-to-merge-pdf-files-online-free-guide',
-    relatedTools: ['compress-pdf', 'reduce-image-size-in-kb', 'passport-photo-maker'],
+    relatedTools: ['compress-pdf-140kb', 'compress-pdf', 'reduce-image-size-in-kb', 'passport-photo-maker'],
     relatedArticles: ['how-to-compress-pdf-to-100kb-140kb-for-govt-portals'],
     content: `
 <h2>Why Government & Job Portals Require a Single Consolidated PDF</h2>

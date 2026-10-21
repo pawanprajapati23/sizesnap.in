@@ -5,7 +5,7 @@ import { ExactKbPage } from '@/components/templates/ExactKbPage';
 import { ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Resize Image to 11KB Online Free - 11KB Photo & Signature Maker | SizeSnap',
+  title: '11KB Photo Size - Resize Image to 11KB Online Free | SizeSnap',
   description:
     'Compress photo and signature to exact 11KB online for free. Ideal 11KB JPG resizer for strict 10KB-12KB portal requirements without blur. 100% private.',
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/compress-image-to-11kb',
   },
   openGraph: {
-    title: 'Resize Image to 11KB Online Free - 11KB Photo & Signature Maker | SizeSnap',
+    title: '11KB Photo Size - Resize Image to 11KB Online Free | SizeSnap',
     description:
       'Free online tool to compress image and signature to exact 11KB or under without losing quality. Ideal for strict online form limits.',
     url: 'https://www.sizesnap.in/tools/compress-image-to-11kb',

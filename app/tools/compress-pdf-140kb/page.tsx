@@ -161,6 +161,39 @@ export default function CompressPdf140kbPage() {
           },
         })),
       },
+      {
+        '@type': 'HowTo',
+        name: 'How to Compress PDF to 140KB Online Free',
+        description:
+          'Step-by-step instructions to compress your scanned certificate or marksheet PDF to exactly under 140KB for government job applications.',
+        totalTime: 'PT10S',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Upload Scanned PDF',
+            text: 'Select or drag & drop your PDF marksheet, Aadhaar, or certificate into the 140KB compressor box.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Verify 140KB Target Size',
+            text: 'SizeSnap is pre-configured with a 140KB target slider so your document passes portal upload limits.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Click Compress PDF',
+            text: 'Click Compress PDF to run the vector-preservation engine locally inside your browser without uploading to any server.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 4,
+            name: 'Download 140KB File',
+            text: 'Download your optimized PDF immediately with clear marks, crisp text, and guaranteed portal acceptance.',
+          },
+        ],
+      },
     ],
   };
 

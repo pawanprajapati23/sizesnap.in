@@ -44,6 +44,7 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'add-name-and-date-on-photo',
   'name-and-date-on-photo',
   'white-background-passport-photo',
+  'remove-shadow-from-document',
 ]);
 
 // Reserved system routes that should never be treated as tool redirects
@@ -208,12 +209,16 @@ export function getSeoRedirect(pathname: string): string | null {
   }
 
   if (
-    cleanPath.includes('document-scanner') ||
     cleanPath.includes('scanner-black-and-white') ||
     cleanPath.includes('remove-shadow') ||
     cleanPath.includes('online-document-shadow-removal') ||
-    cleanPath.includes('shadow-removal')
+    cleanPath.includes('shadow-removal') ||
+    cleanPath.includes('bw-filter')
   ) {
+    return '/tools/remove-shadow-from-document';
+  }
+
+  if (cleanPath.includes('document-scanner')) {
     return '/tools/document-scanner';
   }
 

@@ -22,6 +22,7 @@ import {
   RotateCw,
   Maximize2,
   SwitchCamera,
+  Sparkles,
 } from 'lucide-react';
 
 /* ─── Types ─── */
@@ -29,6 +30,8 @@ interface ScannedPage {
   id: string;
   pageNumber: number;
   imageDataUrl: string; // full-res JPEG data URL
+  originalImageDataUrl?: string;
+  filterMode?: 'color' | 'bw';
   thumbnail: string;    // small preview data URL
   width: number;
   height: number;
@@ -918,6 +921,86 @@ export function DocumentScannerTool() {
     }
   };
 
+  /* ─── Toggle Clean B&W / Remove Shadow Filter ─── */
+  const toggleShadowRemoval = async (pageId: string) => {
+    const page = pages.find((p) => p.id === pageId);
+    if (!page) return;
+
+    try {
+      if (page.filterMode === 'bw' && page.originalImageDataUrl) {
+        // Revert to original scan
+        const thumb = await createThumbnail(page.originalImageDataUrl);
+        setPages((prev) =>
+          prev.map((p) =>
+            p.id === pageId
+              ? {
+                  ...p,
+                  imageDataUrl: p.originalImageDataUrl!,
+                  thumbnail: thumb,
+                  filterMode: 'color',
+                }
+              : p
+          )
+        );
+        return;
+      }
+
+      // Apply shadow removal & white paper contrast boost
+      const originalUrl = page.originalImageDataUrl || page.imageDataUrl;
+      const img = new window.Image();
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error('Failed to load image for filter'));
+        img.src = originalUrl;
+      });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = page.width;
+      canvas.height = page.height;
+      const ctx = canvas.getContext('2d')!;
+      ctx.drawImage(img, 0, 0);
+
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const d = imgData.data;
+
+      // Smart shadow removal and adaptive paper whitening
+      for (let i = 0; i < d.length; i += 4) {
+        const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+        let val: number;
+        if (gray > 175) {
+          val = 255; // Whitens grayish background/shadows into clean paper
+        } else if (gray < 90) {
+          val = Math.max(0, gray * 0.7); // Darkens ink/signatures
+        } else {
+          val = ((gray - 90) / 85) * 255;
+        }
+        d[i] = Math.min(255, Math.max(0, val));
+        d[i + 1] = Math.min(255, Math.max(0, val));
+        d[i + 2] = Math.min(255, Math.max(0, val));
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      const bwDataUrl = canvasToDataUrl(canvas);
+      const thumb = await createThumbnail(bwDataUrl);
+
+      setPages((prev) =>
+        prev.map((p) =>
+          p.id === pageId
+            ? {
+                ...p,
+                originalImageDataUrl: originalUrl,
+                imageDataUrl: bwDataUrl,
+                thumbnail: thumb,
+                filterMode: 'bw',
+              }
+            : p
+        )
+      );
+    } catch {
+      setError('Failed to apply shadow removal filter.');
+    }
+  };
+
   /* ─── Page Management ─── */
   const deletePage = (id: string) => {
     setPages((prev) => {
@@ -1579,6 +1662,23 @@ export function DocumentScannerTool() {
                   >
                     <RotateCw className="h-3.5 w-3.5 text-[#414FA8]" />
                     <span>Rotate 90°</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => toggleShadowRemoval(pages[currentPageIdx].id)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] border text-xs font-medium transition-colors ${
+                      pages[currentPageIdx].filterMode === 'bw'
+                        ? 'bg-[#EEF1FB] border-[#414FA8] text-[#414FA8] font-semibold'
+                        : 'border-gray-200 hover:bg-[#EEF1FB] hover:text-[#414FA8] text-gray-700'
+                    }`}
+                    title="Remove shadow, enhance contrast & whiten document paper"
+                  >
+                    <Sparkles className="h-3.5 w-3.5 text-[#414FA8]" />
+                    <span>
+                      {pages[currentPageIdx].filterMode === 'bw'
+                        ? 'Shadow Removed (B&W)'
+                        : 'Remove Shadow (B&W)'}
+                    </span>
                   </button>
                   <button
                     type="button"

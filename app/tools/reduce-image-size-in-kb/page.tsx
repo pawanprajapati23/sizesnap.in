@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   keywords: [
     'reduce image size in kb',
     'reduce image size',
+    'photo compressor in kb',
+    'size reducer in kb',
+    'photo resizer in kb',
+    'image compressor in kb',
     'reduce photo size in kb',
     'image size reducer in kb',
     'compress image to exact kb',
@@ -23,6 +27,7 @@ export const metadata: Metadata = {
     'reduce image size to 50kb',
     'reduce image size to 100kb',
     'photo size reducer online free',
+    'kb photo reducer',
   ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',

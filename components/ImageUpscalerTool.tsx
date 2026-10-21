@@ -3,13 +3,13 @@
 import React, { useState, useRef, useEffect, Suspense } from 'react';
 import { Upload, Download, Maximize, Printer } from 'lucide-react';
 
-function UpscalerToolContent() {
+function UpscalerToolContent({ initialDpi = 300 }: { initialDpi?: number }) {
     const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [originalDim, setOriginalDim] = useState<{w: number, h: number} | null>(null);
   
   // Settings
   const [scale, setScale] = useState<number>(2);
-  const [targetDPI, setTargetDPI] = useState<number>(300);
+  const [targetDPI, setTargetDPI] = useState<number>(initialDpi);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originalImageRef = useRef<HTMLImageElement | null>(null);
@@ -204,10 +204,10 @@ function UpscalerToolContent() {
   );
 }
 
-export function ImageUpscalerTool() {
+export function ImageUpscalerTool({ initialDpi = 300 }: { initialDpi?: number } = {}) {
     return (
         <Suspense fallback={<div className="h-40 flex items-center justify-center">Loading...</div>}>
-            <UpscalerToolContent />
+            <UpscalerToolContent initialDpi={initialDpi} />
         </Suspense>
     );
 }

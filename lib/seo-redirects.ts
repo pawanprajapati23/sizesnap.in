@@ -24,6 +24,10 @@ const KNOWN_EXTRA_TOOLS = new Set([
   '110kb-photo-size',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
+  'compress-pdf-200kb',
+  'compress-pdf-100kb',
+  'compress-pdf-500kb',
+  'compress-pdf-50kb',
   'jpg-to-pdf-under-200kb',
   'jpeg-to-pdf-under-200kb',
   'jpg-to-pdf-under-100kb',
@@ -45,6 +49,11 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'name-and-date-on-photo',
   'white-background-passport-photo',
   'remove-shadow-from-document',
+  'pan-card-photo-resizer',
+  'ssc-photo-and-signature-resizer',
+  'passport-size-photo-3.5x4.5cm',
+  '60kb-photo-size',
+  '200-dpi-converter',
 ]);
 
 // Reserved system routes that should never be treated as tool redirects
@@ -137,6 +146,16 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/tools/white-background-passport-photo';
   }
 
+  // PAN Card photo and signature resizer (NSDL & UTIITSL)
+  if (
+    cleanPath.includes('pan-card') ||
+    cleanPath.includes('nsdl-photo') ||
+    cleanPath.includes('uti-photo') ||
+    cleanPath.includes('213x213')
+  ) {
+    return '/tools/pan-card-photo-resizer';
+  }
+
   // 1. Dedicated Government Exam Presets (High search volume)
   if (
     cleanPath.includes('ssc-photo') ||
@@ -220,6 +239,16 @@ export function getSeoRedirect(pathname: string): string | null {
 
   if (cleanPath.includes('document-scanner')) {
     return '/tools/document-scanner';
+  }
+
+  // 2.5. 200 DPI Scan Converter (UPSC / SSC)
+  if (
+    cleanPath.includes('200-dpi') ||
+    cleanPath.includes('dpi-200') ||
+    cleanPath.includes('dpi200') ||
+    cleanPath.includes('200dpi')
+  ) {
+    return '/tools/200-dpi-converter';
   }
 
   // 3. WhatsApp DP, square crop & social crops
@@ -339,6 +368,9 @@ export function getSeoRedirect(pathname: string): string | null {
     }
     if (targetKb === '110' && (TOOL_SLUG_SET.has('110kb-photo-size') || KNOWN_EXTRA_TOOLS.has('110kb-photo-size'))) {
       return '/tools/110kb-photo-size';
+    }
+    if (targetKb === '60' && (TOOL_SLUG_SET.has('60kb-photo-size') || KNOWN_EXTRA_TOOLS.has('60kb-photo-size'))) {
+      return '/tools/60kb-photo-size';
     }
     return `/tools/reduce-image-size-in-kb?target=${targetKb}`;
   }

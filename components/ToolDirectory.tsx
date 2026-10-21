@@ -241,16 +241,46 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 White BG Photo
               </Link>
               <Link
+                href="/tools/pan-card-photo-resizer"
+                className="px-2.5 py-1 rounded bg-indigo-50/70 hover:bg-indigo-100/80 text-[#414FA8] font-bold border border-[#414FA8]/30 transition-colors"
+              >
+                PAN Card (213×213)
+              </Link>
+              <Link
+                href="/tools/compress-pdf-100kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                100 KB PDF
+              </Link>
+              <Link
                 href="/tools/compress-pdf-140kb"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
                 140 KB PDF
               </Link>
               <Link
+                href="/tools/compress-pdf-200kb"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                200 KB PDF
+              </Link>
+              <Link
                 href="/tools/110kb-photo-size"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
                 110 KB Photo
+              </Link>
+              <Link
+                href="/tools/60kb-photo-size"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                60 KB Photo
+              </Link>
+              <Link
+                href="/tools/200-dpi-converter"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                200 DPI Scan
               </Link>
               <Link
                 href="/tools/remove-shadow-from-document"

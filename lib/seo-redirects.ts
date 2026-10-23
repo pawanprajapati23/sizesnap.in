@@ -54,6 +54,10 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'passport-size-photo-3.5x4.5cm',
   '60kb-photo-size',
   '200-dpi-converter',
+  '20kb-photo-size',
+  '50kb-photo-size',
+  '30kb-photo-size',
+  '100kb-photo-size',
 ]);
 
 // Reserved system routes that should never be treated as tool redirects
@@ -351,6 +355,16 @@ export function getSeoRedirect(pathname: string): string | null {
     cleanPath.includes('30-70kb')
   ) {
     return '/tools/compress-image-between-30kb-to-70kb';
+  }
+
+  // 6.5. Exact Photo Size Queries (e.g. /20kb-photo-size, /50kb-photo-size, /jpg20kb, /photo-size-20kb)
+  const photoKbMatch = cleanPath.match(/(?:^|\/)(?:jpg)?(\d+)(?:-)?kb(?:-photo|-photo-size|-size)?/);
+  if (photoKbMatch) {
+    const kb = photoKbMatch[1];
+    const candidateSlug = `${kb}kb-photo-size`;
+    if (TOOL_SLUG_SET.has(candidateSlug) || KNOWN_EXTRA_TOOLS.has(candidateSlug)) {
+      return `/tools/${candidateSlug}`;
+    }
   }
 
   // 7. Image Compression & Resizing with exact KB (e.g. /compress-image/to-12kb, /resize-image/to-14kb, /resize-image/to-40kb)

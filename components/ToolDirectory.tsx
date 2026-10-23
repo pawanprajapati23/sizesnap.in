@@ -217,6 +217,18 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 100 KB Photo
               </Link>
               <Link
+                href="/tools/20kb-photo-size"
+                className="px-2.5 py-1 rounded bg-indigo-50/70 hover:bg-indigo-100/80 text-[#414FA8] font-bold border border-[#414FA8]/30 transition-colors"
+              >
+                20 KB Photo
+              </Link>
+              <Link
+                href="/tools/50kb-photo-size"
+                className="px-2.5 py-1 rounded bg-indigo-50/70 hover:bg-indigo-100/80 text-[#414FA8] font-bold border border-[#414FA8]/30 transition-colors"
+              >
+                50 KB Photo
+              </Link>
+              <Link
                 href="/tools/14kb-photo-size"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >

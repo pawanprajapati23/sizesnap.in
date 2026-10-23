@@ -157,6 +157,38 @@ export function ExactKbPage({
                 </React.Suspense>
               </div>
 
+              {/* Quick Photo KB Switcher */}
+              <div className="bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs">
+                <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-2">
+                  Other Popular Photo &amp; Signature Sizes:
+                </h3>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {[
+                    { label: '20 KB Photo', href: '/tools/20kb-photo-size', kb: 20 },
+                    { label: '30 KB Photo', href: '/tools/30kb-photo-size', kb: 30 },
+                    { label: '50 KB Photo', href: '/tools/50kb-photo-size', kb: 50 },
+                    { label: '60 KB Photo', href: '/tools/60kb-photo-size', kb: 60 },
+                    { label: '100 KB Photo', href: '/tools/100kb-photo-size', kb: 100 },
+                    { label: '110 KB Photo', href: '/tools/110kb-photo-size', kb: 110 },
+                    { label: '14 KB Signature', href: '/tools/14kb-photo-size', kb: 14 },
+                    { label: 'Reduce in KB', href: '/tools/reduce-image-size-in-kb', kb: 0 },
+                    { label: '3.5 × 4.5 cm', href: '/tools/resize-image-3-5cm-4-5cm', kb: 0 },
+                  ].map((btn) => (
+                    <Link
+                      key={btn.label}
+                      href={btn.href}
+                      className={`px-3 py-1.5 rounded-[4px] transition-colors border font-medium ${
+                        btn.kb === targetKb
+                          ? 'bg-[#414FA8] text-white border-[#414FA8] shadow-xs'
+                          : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-[#EEF1FB] hover:border-[#414FA8] hover:text-[#414FA8]'
+                      }`}
+                    >
+                      {btn.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
 
               {/* Dynamic Article Section */}
               {articleHtml && (

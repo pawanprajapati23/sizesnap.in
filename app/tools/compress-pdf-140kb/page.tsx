@@ -68,14 +68,14 @@ const RELATED_SLUGS = [
 ];
 
 const PRESET_SIZES = [
-  { label: '10 KB', href: '/tools/compress-pdf?target=10', active: false },
   { label: '12 KB', href: '/tools/compress-pdf-12kb', active: false },
-  { label: '50 KB', href: '/tools/compress-pdf?target=50', active: false },
-  { label: '100 KB', href: '/tools/compress-pdf?target=100', active: false },
+  { label: '50 KB', href: '/tools/compress-pdf-50kb', active: false },
+  { label: '100 KB', href: '/tools/compress-pdf-100kb', active: false },
   { label: '140 KB', href: '/tools/compress-pdf-140kb', active: true },
-  { label: '200 KB', href: '/tools/compress-pdf?target=200', active: false },
+  { label: '200 KB', href: '/tools/compress-pdf-200kb', active: false },
   { label: '300 KB', href: '/tools/compress-pdf?target=300', active: false },
-  { label: '500 KB', href: '/tools/compress-pdf?target=500', active: false },
+  { label: '500 KB', href: '/tools/compress-pdf-500kb', active: false },
+  { label: '1 MB', href: '/tools/compress-pdf?target=1000', active: false },
 ];
 
 const FAQS = [

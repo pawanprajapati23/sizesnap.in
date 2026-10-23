@@ -65,7 +65,7 @@ const RELATED_SLUGS = [
 ];
 
 const PRESET_SIZES = [
-  { label: '50 KB', href: '/tools/compress-pdf?target=50', active: false },
+  { label: '50 KB', href: '/tools/compress-pdf-50kb', active: false },
   { label: '100 KB', href: '/tools/compress-pdf-100kb', active: false },
   { label: '140 KB', href: '/tools/compress-pdf-140kb', active: false },
   { label: '200 KB', href: '/tools/compress-pdf-200kb', active: false },

@@ -59,12 +59,12 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
-  'compress-pdf',
-  'merge-pdf',
-  'image-to-pdf',
-  'pdf-to-images',
-  'split-pdf',
-  'add-page-numbers-pdf',
+  '14kb-photo-size',
+  'jpg-to-pdf-under-150kb',
+  'passport-photo-maker',
+  'compress-pdf-200kb',
+  'compress-pdf-100kb',
+  'pan-card-photo-resizer',
 ];
 
 const PRESET_SIZES = [

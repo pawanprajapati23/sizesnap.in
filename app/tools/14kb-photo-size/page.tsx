@@ -31,10 +31,12 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
-  'compress-image-to-10kb',
-  'compress-image-to-20kb',
-  'reduce-image-size-in-kb',
-  'resize-image-pixel',
+  'compress-pdf-140kb',
+  '12kb-photo-size',
+  '13kb-photo-size',
+  '20kb-photo-size',
+  'passport-photo-maker',
+  'pan-card-photo-resizer',
 ];
 
 const FAQS = [

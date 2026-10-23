@@ -28,16 +28,22 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
   // Prioritize core high-intent money tools followed by top trending tools
   const popularTools = useMemo(() => {
     const pinnedSlugs = [
+      'compress-pdf-140kb',
+      '14kb-photo-size',
+      'jpg-to-pdf-under-150kb',
+      'passport-photo-maker',
+      'pan-card-photo-resizer',
+      '20kb-photo-size',
+      '50kb-photo-size',
+      '12kb-photo-size',
+      '13kb-photo-size',
+      '100kb-photo-size',
+      'compress-pdf-200kb',
       'compress-image-to-20kb',
       'compress-image-to-50kb',
-      'compress-image-to-100kb',
-      '14kb-photo-size',
       'resize-image-3-5cm-4-5cm',
       'add-name-and-date-on-photo',
       'white-background-passport-photo',
-      'jpg-to-pdf-under-200kb',
-      'compress-image-between-20kb-to-50kb',
-      'passport-photo-maker',
       'compress-pdf',
       'image-to-pdf',
     ];
@@ -199,22 +205,34 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
             </div>
             <div className="flex flex-wrap items-center gap-1.5 text-xs">
               <Link
-                href="/tools/compress-image-to-20kb"
-                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+                href="/tools/compress-pdf-140kb"
+                className="px-2.5 py-1 rounded bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold border border-amber-300 transition-colors"
               >
-                20 KB Photo
+                140 KB PDF
               </Link>
               <Link
-                href="/tools/compress-image-to-50kb"
-                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+                href="/tools/jpg-to-pdf-under-150kb"
+                className="px-2.5 py-1 rounded bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold border border-amber-300 transition-colors"
               >
-                50 KB Photo
+                150 KB PDF
               </Link>
               <Link
-                href="/tools/compress-image-to-100kb"
+                href="/tools/14kb-photo-size"
+                className="px-2.5 py-1 rounded bg-indigo-50/80 hover:bg-indigo-100 text-[#414FA8] font-bold border border-[#414FA8]/30 transition-colors"
+              >
+                14 KB Signature
+              </Link>
+              <Link
+                href="/tools/12kb-photo-size"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
-                100 KB Photo
+                12 KB Photo
+              </Link>
+              <Link
+                href="/tools/13kb-photo-size"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                13 KB Photo
               </Link>
               <Link
                 href="/tools/20kb-photo-size"
@@ -229,10 +247,22 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 50 KB Photo
               </Link>
               <Link
-                href="/tools/14kb-photo-size"
+                href="/tools/100kb-photo-size"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
-                14 KB Signature
+                100 KB Photo
+              </Link>
+              <Link
+                href="/tools/pan-card-photo-resizer"
+                className="px-2.5 py-1 rounded bg-indigo-50/70 hover:bg-indigo-100/80 text-[#414FA8] font-bold border border-[#414FA8]/30 transition-colors"
+              >
+                PAN Card (213×213)
+              </Link>
+              <Link
+                href="/tools/200-dpi-converter"
+                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
+              >
+                200 DPI Scan
               </Link>
               <Link
                 href="/tools/resize-image-3-5cm-4-5cm"

@@ -102,7 +102,8 @@ export default function AnalyticsTracker() {
           (hasDownloadAttr || text.includes('download'));
 
         if (hasDownloadAttr || isDownloadButton || isDownloadLink) {
-          trackDownload();
+          const pathSlug = pathname ? pathname.replace(/^\/tools\//, '').replace(/^\//, '').split('/')[0] : undefined;
+          trackDownload(pathSlug);
           // Post-download sponsor ad: Triggers only AFTER user completes their task
           triggerPostDownloadVignette();
           break; // Stop climbing the DOM tree once we matched

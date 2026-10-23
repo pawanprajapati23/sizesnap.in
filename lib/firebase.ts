@@ -63,13 +63,122 @@ export const trackToolUsage = async (slug: string) => {
   }
 };
 
-export const trackDownload = async () => {
+export interface ProcessingTelemetry {
+  tool: string;
+  toolName?: string;
+  fileType?: 'image' | 'pdf' | 'text' | 'other';
+  inputKb?: number;
+  outputKb?: number;
+  targetKb?: number;
+}
+
+export const trackProcessingSuccess = async (data: ProcessingTelemetry): Promise<string | null> => {
   try {
-    const timestamp = getCurrentHourTimestamp();
-    const downloadRef = ref(db, `downloads/${timestamp}`);
+    const now = Date.now();
+    const hourTimestamp = getCurrentHourTimestamp();
+
+    // 1. Increment standard toolUsage counter
+    const usageRef = ref(db, `toolUsage/${data.tool}/${hourTimestamp}`);
+    await set(usageRef, increment(1));
+
+    // 2. Increment toolSuccess counter
+    const successRef = ref(db, `toolUsage/_success/${data.tool}/${hourTimestamp}`);
+    await set(successRef, increment(1));
+
+    // 3. Record recent live activity item (non-blocking)
+    const activityRef = ref(db, `toolUsage/_activity`);
+    const newActivityRef = push(activityRef);
+    await set(newActivityRef, {
+      tool: data.tool,
+      toolName: data.toolName || data.tool,
+      fileType: data.fileType || 'file',
+      inputKb: data.inputKb || 0,
+      outputKb: data.outputKb || 0,
+      targetKb: data.targetKb || 0,
+      status: 'success',
+      timestamp: now
+    });
+
+    return newActivityRef.key;
+  } catch (err) {
+    console.error("Failed to track processing success:", err);
+    return null;
+  }
+};
+
+export const trackProcessingError = async (tool: string, reason?: string) => {
+  try {
+    const now = Date.now();
+    const hourTimestamp = getCurrentHourTimestamp();
+
+    // Increment error counter
+    const errRef = ref(db, `toolUsage/_errors/${tool}/${hourTimestamp}`);
+    await set(errRef, increment(1));
+
+    // Also call existing trackToolError
+    trackToolError(tool, 'processing_failed', reason).catch(() => {});
+
+    // Record to live activity
+    const activityRef = ref(db, `toolUsage/_activity`);
+    const newActivityRef = push(activityRef);
+    await set(newActivityRef, {
+      tool,
+      status: 'error',
+      errorMessage: reason || 'Processing failed',
+      timestamp: now
+    });
+  } catch (err) {
+    console.error("Failed to track processing error:", err);
+  }
+};
+
+export const trackDownload = async (tool?: string, activityId?: string) => {
+  try {
+    const hourTimestamp = getCurrentHourTimestamp();
+    const downloadRef = ref(db, `downloads/${hourTimestamp}`);
     await set(downloadRef, increment(1));
+
+    if (tool) {
+      const toolDlRef = ref(db, `toolUsage/_downloads/${tool}/${hourTimestamp}`);
+      await set(toolDlRef, increment(1));
+    }
+
+    if (activityId) {
+      const itemRef = ref(db, `toolUsage/_activity/${activityId}/downloaded`);
+      await set(itemRef, true);
+    }
   } catch (err) {
     console.error("Failed to track download:", err);
+  }
+};
+
+export interface LiveActivityItem {
+  id: string;
+  tool: string;
+  toolName?: string;
+  fileType?: string;
+  inputKb?: number;
+  outputKb?: number;
+  targetKb?: number;
+  status: 'success' | 'error';
+  errorMessage?: string;
+  downloaded?: boolean;
+  timestamp: number;
+}
+
+export const fetchLiveActivity = async (limitCount = 60): Promise<LiveActivityItem[]> => {
+  try {
+    const snapshot = await get(ref(db, 'toolUsage/_activity'));
+    if (!snapshot.exists()) return [];
+    const val = snapshot.val();
+    const items: LiveActivityItem[] = Object.entries(val).map(([id, item]: [string, any]) => ({
+      id,
+      ...item
+    }));
+    return items.sort((a, b) => b.timestamp - a.timestamp).slice(0, limitCount);
+  } catch (err) {
+    console.error("Failed to fetch live activity:", err);
+    return [];
   }
 };
 

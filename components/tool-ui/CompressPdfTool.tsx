@@ -16,6 +16,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { getPdfJs, getPdfCMapConfig } from '@/lib/pdfjs';
+import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 
 interface PdfMeta {
   file: File;
@@ -49,6 +50,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
   const [isLoadingPdf, setIsLoadingPdf] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const lastActivityIdRef = useRef<string | null>(null);
 
   const [isDragging, setIsDragging] = useState(false);
   
@@ -293,11 +295,29 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
         totalPages: pdfMeta.totalPages,
       });
 
+      // Track processing success telemetry
+      const pdfSlug = initialTargetKB ? `compress-pdf-${initialTargetKB}kb` : 'compress-pdf';
+      trackProcessingSuccess({
+        tool: pdfSlug,
+        toolName: `Compress PDF to ${targetKB}KB`,
+        fileType: 'pdf',
+        inputKb: Math.round(pdfMeta.size / 1024),
+        outputKb: Math.round(compressedBlob.size / 1024),
+        targetKb: targetKB,
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
+      }).catch(() => {});
+
       setIsCompressing(false);
       setProgressPercent(100);
       setProgressText('');
     } catch (err: any) {
       setIsCompressing(false);
+      const pdfSlug = initialTargetKB ? `compress-pdf-${initialTargetKB}kb` : 'compress-pdf';
+      trackProcessingError(
+        pdfSlug,
+        err instanceof Error ? err.message : 'PDF compression failed'
+      );
       setErrorMsg(
         err instanceof Error
           ? err.message
@@ -308,6 +328,9 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
 
   const handleDownload = () => {
     if (!result) return;
+    const pdfSlug = initialTargetKB ? `compress-pdf-${initialTargetKB}kb` : 'compress-pdf';
+    trackDownload(pdfSlug, lastActivityIdRef.current || undefined);
+
     const a = document.createElement('a');
     a.href = result.url;
     const rawName = pdfMeta?.name.replace('.pdf', '') || 'document';

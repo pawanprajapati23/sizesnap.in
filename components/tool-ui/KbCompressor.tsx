@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { formatBytes, calculateSavings, sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import { useSearchParams } from 'next/navigation';
 import {
   Sparkles,
@@ -48,6 +49,7 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [result, setResult] = useState<KbCompressResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const lastActivityIdRef = useRef<string | null>(null);
 
   // Object URL tracking
   const objectUrlsRef = useRef<string[]>([]);
@@ -250,9 +252,27 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
         reachedTarget: finalBlob.size <= targetBytes,
       });
 
+      // Track processing success telemetry
+      const toolSlug = targetKb ? `${targetKb}kb-photo-size` : 'compress-image-to-kb';
+      trackProcessingSuccess({
+        tool: toolSlug,
+        toolName: title || `${targetKb} KB Photo Resizer`,
+        fileType: 'image',
+        inputKb: Math.round(selectedImage.size / 1024),
+        outputKb: Math.round(finalBlob.size / 1024),
+        targetKb,
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
+      }).catch(() => {});
+
       setIsProcessing(false);
     } catch (err) {
       setIsProcessing(false);
+      const toolSlug = targetKb ? `${targetKb}kb-photo-size` : 'compress-image-to-kb';
+      trackProcessingError(
+        toolSlug,
+        err instanceof Error ? err.message : 'Target KB processing failed'
+      );
       setErrorMsg(
         err instanceof Error ? err.message : 'An error occurred during target KB processing.'
       );
@@ -261,6 +281,9 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
 
   const handleDownload = () => {
     if (!result) return;
+    const toolSlug = result.targetKb ? `${result.targetKb}kb-photo-size` : 'compress-image-to-kb';
+    trackDownload(toolSlug, lastActivityIdRef.current || undefined);
+
     const a = document.createElement('a');
     a.href = result.url;
     a.download = result.filename;

@@ -52,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapData: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly',
+    changeFrequency: 'daily',
     priority: route === '' ? 1.0 : (route === '/blog' || route === '/exams' ? 0.9 : (route.includes('-tools') || route.includes('-calculator') ? 0.9 : 0.8)),
   }));
 
@@ -67,7 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       sitemapData.push({
         url: `${baseUrl}/tools/${tool.slug}`,
         lastModified: new Date(),
-        changeFrequency: 'monthly',
+        changeFrequency: 'daily',
         priority: priority,
       });
     }
@@ -78,7 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemapData.push({
       url: `${baseUrl}/exams/${exam.slug}`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 0.9,
     });
   });
@@ -96,7 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         sitemapData.push({
           url: `${baseUrl}/blog/${article.slug}`,
           lastModified: article.updatedAt ? new Date(article.updatedAt) : (article.publishedAt ? new Date(article.publishedAt) : new Date()),
-          changeFrequency: 'weekly',
+          changeFrequency: 'daily',
           priority: 0.8,
         });
       }
@@ -107,7 +107,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       sitemapData.push({
         url: `${baseUrl}/blog/category/${categorySlug}`,
         lastModified: new Date(),
-        changeFrequency: 'weekly',
+        changeFrequency: 'daily',
         priority: 0.7,
       });
     });

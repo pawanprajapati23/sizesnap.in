@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import type { ExamPreset, ExamDocumentSpec } from '@/data/exam-presets';
 import { formatBytes } from '@/lib/format-utils';
+import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import {
   Upload,
   CheckCircle2,
@@ -113,6 +114,7 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
   }, [cleanupUrls]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const lastActivityIdRef = useRef<string | null>(null);
 
   // Apply pure white background via client-side AI background cutout
   const handleApplyWhiteBg = async () => {
@@ -325,8 +327,23 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
         filename: safeName,
         isValidSize,
       });
+
+      // Track exam photo/signature processing
+      const toolSlug = exam.id ? `${exam.id}-photo-signature-resizer` : 'exam-photo-resizer';
+      trackProcessingSuccess({
+        tool: toolSlug,
+        toolName: `${exam.name || exam.id} Resizer`,
+        fileType: 'image',
+        inputKb: Math.round(sourceImage.size / 1024),
+        outputKb: finalSizeKb,
+        targetKb: targetKb,
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
+      }).catch(() => {});
     } catch (err: unknown) {
       console.error(err);
+      const toolSlug = exam.id ? `${exam.id}-photo-signature-resizer` : 'exam-photo-resizer';
+      trackProcessingError(toolSlug, err instanceof Error ? err.message : 'Exam resizing failed');
       setErrorMsg(err instanceof Error ? err.message : 'An error occurred during resizing.');
     } finally {
       setIsProcessing(false);
@@ -357,6 +374,9 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
 
   const handleDownload = () => {
     if (!result) return;
+    const toolSlug = exam.id ? `${exam.id}-photo-signature-resizer` : 'exam-photo-resizer';
+    trackDownload(toolSlug, lastActivityIdRef.current || undefined);
+
     const a = document.createElement('a');
     a.href = result.url;
     a.download = result.filename;

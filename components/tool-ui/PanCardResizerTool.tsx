@@ -19,6 +19,7 @@ import {
   Sliders,
 } from 'lucide-react';
 import { formatBytes } from '@/lib/format-utils';
+import { trackProcessingSuccess, trackDownload } from '@/lib/firebase';
 
 type PanMode = 'photo' | 'signature';
 
@@ -77,6 +78,7 @@ export function PanCardResizerTool() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const lastActivityIdRef = useRef<string | null>(null);
 
   const activePreset = PAN_PRESETS[mode];
 
@@ -198,12 +200,24 @@ export function PanCardResizerTool() {
         filename,
         isWithinLimit: bestBlob.size <= activePreset.maxKb * 1024,
       });
+
+      // Track PAN card resizing telemetry
+      trackProcessingSuccess({
+        tool: 'pan-card-photo-resizer',
+        toolName: `PAN Card ${mode === 'photo' ? 'Photo' : 'Signature'} Resizer`,
+        fileType: 'image',
+        inputKb: selectedFile ? Math.round(selectedFile.size / 1024) : 0,
+        outputKb: Math.round(bestBlob.size / 1024),
+        targetKb: customKb || activePreset.maxKb,
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
+      }).catch(() => {});
     } catch (err) {
       console.error('PAN Card Resizing error:', err);
     } finally {
       setProcessing(false);
     }
-  }, [imageSrc, activePreset, customKb, zoom, mode]);
+  }, [imageSrc, activePreset, customKb, zoom, mode, selectedFile]);
 
   useEffect(() => {
     if (imageSrc) {
@@ -214,6 +228,7 @@ export function PanCardResizerTool() {
 
   const handleDownload = () => {
     if (!result) return;
+    trackDownload('pan-card-photo-resizer', lastActivityIdRef.current || undefined);
     const a = document.createElement('a');
     a.href = result.url;
     a.download = result.filename;

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { PDFDocument, rgb } from 'pdf-lib';
 import { formatBytes } from '@/lib/format-utils';
+import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import {
   Upload,
   FilePlus,
@@ -60,6 +61,7 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [progressText, setProgressText] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const lastActivityIdRef = useRef<string | null>(null);
 
   // Result state
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
@@ -446,10 +448,30 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
       setPdfBlob(blob);
       setPdfUrl(downloadUrl);
       setPdfPageCount(images.length);
+
+      // Track processing success
+      const toolSlug = targetMaxKb ? `jpg-to-pdf-under-${targetMaxKb}kb` : 'image-to-pdf';
+      const totalInputKb = Math.round(images.reduce((acc, img) => acc + img.size, 0) / 1024);
+      trackProcessingSuccess({
+        tool: toolSlug,
+        toolName: targetMaxKb ? `JPG to PDF Under ${targetMaxKb}KB` : 'Image to PDF Converter',
+        fileType: 'pdf',
+        inputKb: totalInputKb,
+        outputKb: Math.round(blob.size / 1024),
+        targetKb: targetMaxKb || undefined,
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
+      }).catch(() => {});
+
       setIsGenerating(false);
       setProgressText('');
     } catch (err) {
       setIsGenerating(false);
+      const toolSlug = targetMaxKb ? `jpg-to-pdf-under-${targetMaxKb}kb` : 'image-to-pdf';
+      trackProcessingError(
+        toolSlug,
+        err instanceof Error ? err.message : 'PDF generation failed'
+      );
       setErrorMsg(
         err instanceof Error ? err.message : 'An unexpected error occurred during PDF generation.'
       );
@@ -458,6 +480,9 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
 
   const handleDownload = () => {
     if (!pdfUrl) return;
+    const toolSlug = targetMaxKb ? `jpg-to-pdf-under-${targetMaxKb}kb` : 'image-to-pdf';
+    trackDownload(toolSlug, lastActivityIdRef.current || undefined);
+
     const a = document.createElement('a');
     a.href = pdfUrl;
     a.download = targetMaxKb ? `sizesnap-images-under-${targetMaxKb}kb.pdf` : 'sizesnap-images.pdf';

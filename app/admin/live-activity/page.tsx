@@ -102,7 +102,7 @@ export default function LiveActivityPage() {
         const uses = aggregateWithin(usesMap, ms);
         calculatedUses += uses;
 
-        // Tool-specific downloads from _downloads node, fallback to proportional
+        // Tool-specific real downloads from _downloads node
         const tDlMap = (dlToolRecords[t.slug] ?? {}) as unknown as Record<string, number>;
         const tDl = aggregateWithin(tDlMap, ms);
 
@@ -111,7 +111,7 @@ export default function LiveActivityPage() {
         const errs = aggregateWithin(tErrMap, ms);
         calculatedErrs += errs;
 
-        const effectiveDls = tDl > 0 ? tDl : (uses > 0 && calculatedDls > 0 ? Math.min(uses, Math.round(uses * 0.85)) : 0);
+        const effectiveDls = tDl;
         const conversionRate = uses > 0 ? Math.min(100, Math.round((effectiveDls / uses) * 100)) : 0;
 
         let status: 'Healthy' | 'Moderate' | 'Low' = 'Healthy';
@@ -131,9 +131,8 @@ export default function LiveActivityPage() {
       }).sort((a, b) => b.uses - a.uses);
 
       setTotalUses(calculatedUses);
-      // If global downloads is low because it was just hooked up, provide the active aggregated downloads
-      const activeDls = Math.max(calculatedDls, stats.reduce((acc, curr) => acc + curr.downloads, 0));
-      setTotalDownloads(activeDls);
+      const sumToolDls = stats.reduce((acc, curr) => acc + curr.downloads, 0);
+      setTotalDownloads(Math.max(calculatedDls, sumToolDls));
       setTotalErrors(calculatedErrs);
       setToolStats(stats);
       setActivityItems(liveLogs);

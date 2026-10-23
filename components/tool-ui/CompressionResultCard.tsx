@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Download, RefreshCw, CheckCircle2, ArrowRight, Eye, ShieldCheck } from 'lucide-react';
 import { formatBytes, calculateSavings } from '@/lib/format-utils';
+import { trackDownload } from '@/lib/firebase';
 
 export interface CompressedResult {
   blob: Blob;
@@ -38,6 +39,7 @@ export function CompressionResultCard({
   const savings = calculateSavings(originalSize, result.size);
 
   const handleDownload = () => {
+    trackDownload('compress-image');
     const link = document.createElement('a');
     link.href = result.url;
     link.download = result.filename;

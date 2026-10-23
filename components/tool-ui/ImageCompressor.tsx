@@ -6,6 +6,7 @@ import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { CompressionSettings, type OutputFormatOption } from './CompressionSettings';
 import { CompressionResultCard, type CompressedResult } from './CompressionResultCard';
 import { sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { trackProcessingSuccess } from '@/lib/firebase';
 import { AlertCircle } from 'lucide-react';
 
 export function ImageCompressor() {
@@ -150,6 +151,14 @@ export function ImageCompressor() {
                 format: targetMime,
                 filename,
               });
+
+              trackProcessingSuccess({
+                tool: 'compress-image',
+                toolName: 'Image Compressor',
+                fileType: 'image',
+                inputKb: Math.round(selectedImage.size / 1024),
+                outputKb: Math.round(blob.size / 1024),
+              }).catch(() => {});
             },
             targetMime,
             qualityParam

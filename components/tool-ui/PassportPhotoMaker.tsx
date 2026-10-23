@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { formatBytes, sanitizeFilename } from '@/lib/format-utils';
+import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import {
   Crop,
   ZoomIn,
@@ -216,6 +217,7 @@ export function PassportPhotoMaker() {
 
   // Memory management
   const objectUrlsRef = useRef<string[]>([]);
+  const lastActivityIdRef = useRef<string | null>(null);
   const registerUrl = useCallback((url: string) => {
     objectUrlsRef.current.push(url);
     return url;
@@ -520,6 +522,18 @@ export function PassportPhotoMaker() {
         filename: sanitizeFilename(`${baseFilename}_${dpi}dpi`, 'jpg'),
       });
 
+      // Track passport photo generation
+      trackProcessingSuccess({
+        tool: 'passport-photo-maker',
+        toolName: `Passport Photo (${activeWidth}x${activeHeight}${activeUnit})`,
+        fileType: 'image',
+        inputKb: Math.round(selectedImage.size / 1024),
+        outputKb: Math.round(hqBlob.size / 1024),
+        targetKb: 50,
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
+      }).catch(() => {});
+
       // 2. Generate Govt Portal Ready (20KB - 50KB) version
       try {
         let portalBlob: Blob | null = null;
@@ -551,6 +565,7 @@ export function PassportPhotoMaker() {
       setIsProcessing(false);
     } catch (err) {
       setIsProcessing(false);
+      trackProcessingError('passport-photo-maker', err instanceof Error ? err.message : 'Error generating passport photo.');
       setErrorMsg(err instanceof Error ? err.message : 'Error generating passport photo.');
     }
   };
@@ -688,6 +703,7 @@ export function PassportPhotoMaker() {
 
   const handleDownloadPortal = () => {
     if (!portalResult) return;
+    trackDownload('passport-photo-maker', lastActivityIdRef.current || undefined);
     const a = document.createElement('a');
     a.href = portalResult.url;
     a.download = portalResult.filename;
@@ -698,6 +714,7 @@ export function PassportPhotoMaker() {
 
   const handleDownloadSingle = () => {
     if (!singleResult) return;
+    trackDownload('passport-photo-maker', lastActivityIdRef.current || undefined);
     const a = document.createElement('a');
     a.href = singleResult.url;
     a.download = singleResult.filename;
@@ -708,6 +725,7 @@ export function PassportPhotoMaker() {
 
   const handleDownloadSheet = () => {
     if (!sheetResult) return;
+    trackDownload('passport-photo-maker', lastActivityIdRef.current || undefined);
     const a = document.createElement('a');
     a.href = sheetResult.url;
     a.download = sheetResult.filename;

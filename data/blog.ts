@@ -2306,4 +2306,482 @@ Yes, religious headgear (such as a turban or hijab) is permitted, provided it do
 <p>Candidates claiming reservation under OBC-NCL, SC, ST, Gen-EWS, or PwD categories must upload a scanned copy of their certificate issued on or after the prescribed date in central government format. The file must be in <strong>PDF format between 50 KB and 300 KB</strong>. Use our <a href="/tools/compress-pdf">SizeSnap PDF Compressor</a> to ensure your document fits within this range while remaining 100% legible.</p>
 `,
   },
+  {
+    id: "ssc-live-photo-capture-signature-upload-error-fix-2026",
+    title: "SSC Live Photo Capture Not Working? How to Fix Webcam Errors & Signature Upload (2026)",
+    slug: "ssc-live-photo-capture-signature-upload-error-fix-2026",
+    excerpt: "Facing 'Face not detected', camera permission blocked, or signature rejected on ssc.gov.in? Follow this complete troubleshooting guide for mobile and PC, plus exact 10KB\u201320KB signature resizing rules.",
+    category: "exam-guides",
+    tags: ["SSC Live Photo", "SSC Webcam Error", "SSC Signature Size", "ssc.gov.in", "Face Not Detected", "14KB Signature", "SSC CGL", "SSC CHSL", "SSC MTS"],
+    status: "PUBLISHED",
+    featured: true,
+    priority: 10,
+    author: {
+      name: "SizeSnap Exam Research Team",
+      role: "Govt Exam Documentation Specialist",
+    },
+    readingTime: 7,
+    publishedAt: 1774000000000,
+    createdAt: 1774000000000,
+    seoTitle: "SSC Live Photo Capture Error Fix & Signature Size 10KB-20KB (2026) | ssc.gov.in",
+    seoDescription: "Fix SSC live photo capture errors (Face Not Detected, Camera Permission Blocked) on mobile/PC and resize signature to exact 10KB-20KB (14KB sweet spot) for ssc.gov.in.",
+    canonicalUrl: "https://www.sizesnap.in/blog/ssc-live-photo-capture-signature-upload-error-fix-2026",
+    relatedTools: ["14kb-photo-size", "compress-image-between-10kb-to-20kb", "ssc-photo-signature-resizer", "passport-photo-maker", "white-background-passport-photo"],
+    relatedArticles: ["ssc-cgl-photo-size-name-date-guidelines-2026", "ssc-chsl-photo-signature-size-guidelines-2026", "how-to-resize-signature-to-10kb-20kb-online"],
+    officialSources: [{"name": "Staff Selection Commission Official Portal", "url": "https://ssc.gov.in"}],
+    examYear: "2026",
+    examName: "SSC CGL / CHSL / MTS / GD / CPO",
+    content: `<h2>Why SSC Switched to Live Photo Capture on ssc.gov.in</h2>
+<p>Starting with the launch of the new official portal (<strong>ssc.gov.in</strong>), the Staff Selection Commission (SSC) discontinued the practice of uploading pre-scanned passport photos for major examinations including SSC CGL, CHSL, MTS, Stenographer, and GD Constable. Candidates must now capture a <strong>live facial photograph using their laptop webcam or smartphone camera</strong> during the One-Time Registration (OTR) and application process.</p>
+<p>However, tens of thousands of applicants encounter errors like <em>"Face Not Detected"</em>, <em>"Camera Permission Denied"</em>, or an unclickable capture button, causing severe delays near application closing dates. Below is the tested, step-by-step fix for every live capture problem, plus the official rules for your signature upload.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">SSC Parameter</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Live Photo Requirement</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Signature Requirement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Capture / Upload Mode</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Live Webcam or MySSC Mobile App</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Scanned Image File Upload (JPG/JPEG)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>File Size Limit</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Auto-compressed by SSC Server</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Strictly <strong>10.0 KB to 20.0 KB</strong> (14KB ideal)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Dimensions</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Head &amp; Shoulders centered (80% frame)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">4.0 cm width &times; 2.0 cm height (horizontal)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Background</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Plain white or off-white wall without objects</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Pure white unruled paper</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Ink Specification</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">N/A (No caps, spectacles, or masks)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Black ink pen (running handwriting, not CAPITAL)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ Instant Fix for SSC Signature Resizing:</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">SSC servers strictly reject signatures below 10KB or above 20KB. Resize your signature instantly to the golden 14KB target using the <a href="/tools/14kb-photo-size" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 14KB Photo &amp; Signature Resizer</a> or explore our dedicated <a href="/tools/ssc-photo-signature-resizer" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SSC Photo &amp; Signature Resizer Tool</a>.</p>
+</div>
+
+<h2>Common SSC Live Photo Errors &amp; Step-by-Step Fixes</h2>
+
+<h3>1. "Camera Permission Denied / Webcam Blocked"</h3>
+<p>If your browser shows a blank grey box or says camera access is denied:</p>
+<ul>
+  <li><strong>On Android (Google Chrome):</strong> Tap the 3 dots (top right) &rarr; <em>Settings</em> &rarr; <em>Site settings</em> &rarr; <em>Camera</em>. Ensure <code>https://ssc.gov.in</code> is listed under <strong>Allowed</strong>, not Blocked. Reload the tab.</li>
+  <li><strong>On Laptop / Windows:</strong> Open Windows <em>Settings</em> &rarr; <em>Privacy &amp; Security</em> &rarr; <em>Camera</em>. Make sure &quot;Allow apps to access your camera&quot; and &quot;Allow desktop apps / browser to access your camera&quot; are both turned <strong>ON</strong>.</li>
+  <li><strong>Incognito Mode Warning:</strong> By default, private/incognito tabs disable microphone and camera permissions. Use a normal browsing tab.</li>
+</ul>
+
+<h3>2. "Face Not Detected" or Red Bounding Box</h3>
+<p>The SSC portal runs real-time facial recognition algorithms. A red box or detection failure happens when:</p>
+<ul>
+  <li><strong>Backlighting:</strong> You are sitting with a window or light bulb behind you. The light must hit your face directly from the front so your features, eyes, and ears are evenly illuminated without harsh shadows.</li>
+  <li><strong>Spectacles / Glasses:</strong> SSC strictly forbids tinted glasses or spectacles with flash glare. Remove spectacles for the live capture.</li>
+  <li><strong>Distance:</strong> You are sitting too far or too close. Position yourself so your face and top of your shoulders occupy approximately 75% to 80% of the live capture oval.</li>
+  <li><strong>Background Distractions:</strong> Posters, calendars, curtains, or people walking in the background cause the AI detector to fail. Stand against a plain white wall.</li>
+</ul>
+
+<h3>3. MySSC Mobile App QR Code Sync Failing</h3>
+<p>If laptop capture is failing, SSC allows capturing via the <strong>MySSC App</strong> on Google Play Store. If scanning the QR code doesn't sync:</p>
+<ol>
+  <li>Ensure your smartphone and laptop are connected to the same Wi-Fi or have stable 4G/5G connections.</li>
+  <li>Check camera permissions inside Android App Info for &quot;MySSC&quot;.</li>
+  <li>If the sync times out, clear app cache, log in directly via the mobile browser in Desktop Mode, and use the mobile camera directly on <code>ssc.gov.in</code> without the app.</li>
+</ol>
+
+<h2>Official SSC Signature Upload Rules (10 KB to 20 KB)</h2>
+<p>While the photograph is captured live, the <strong>signature must be scanned and uploaded as an image file</strong>. This is where over 40% of applicants face rejections:</p>
+<ul>
+  <li><strong>File Size Window:</strong> Strictly between <strong>10.0 KB and 20.0 KB</strong>. An image of 9.8 KB or 20.1 KB will be rejected by the validation script.</li>
+  <li><strong>Target Size:</strong> Aim for <strong>14 KB</strong>. This leaves a safe margin against binary byte rounding differences between local operating systems and SSC servers.</li>
+  <li><strong>Image Resolution:</strong> 4.0 cm width &times; 2.0 cm height (equivalent to 140 &times; 60 pixels at 100 DPI or 280 &times; 120 pixels at 200 DPI).</li>
+  <li><strong>Handwriting Style:</strong> Sign in running handwriting with a black ballpoint pen. Do not write your name in CAPITAL LETTERS; capital letter signatures are invalidated during document verification.</li>
+</ul>
+
+<h2>How to Resize SSC Signature Online Free on SizeSnap</h2>
+<ol>
+  <li>Sign clearly on an unruled, clean white paper using a dark black pen.</li>
+  <li>Take a close-up photo in good daylight with your mobile phone.</li>
+  <li>Open the <a href="/tools/14kb-photo-size">SizeSnap 14KB Photo Resizer</a> or <a href="/tools/compress-image-between-10kb-to-20kb">10KB to 20KB Image Compressor</a>.</li>
+  <li>Upload your photo. SizeSnap will automatically crop the edges, enhance ink contrast, and calibrate the output file size to exactly 14 KB.</li>
+  <li>Download the file and upload it directly to ssc.gov.in with zero errors.</li>
+</ol>`,
+  },
+  {
+    id: "bihar-bssc-inter-level-photo-signature-pdf-rules-2026",
+    title: "Bihar BSSC Inter Level & BPSC 2026: Photo, Hindi & English Signature Size, and 140KB PDF Rules",
+    slug: "bihar-bssc-inter-level-photo-signature-pdf-rules-2026",
+    excerpt: "Applying for BSSC Inter Level, BSSC CGL, or BPSC 71st CCE? Master separate Hindi and English signature resizing (10KB\u201320KB), live webcam capture, and marksheet PDF compression strictly under 140KB/150KB.",
+    category: "exam-guides",
+    tags: ["BSSC Inter Level", "BSSC CGL", "BPSC 71st CCE", "Hindi Signature", "English Signature", "140KB PDF", "Bihar Govt Exam", "Patna Exam"],
+    status: "PUBLISHED",
+    featured: true,
+    priority: 10,
+    author: {
+      name: "SizeSnap Exam Research Team",
+      role: "Govt Exam Documentation Specialist",
+    },
+    readingTime: 7,
+    publishedAt: 1774010000000,
+    createdAt: 1774010000000,
+    seoTitle: "BSSC Inter Level 2026 Photo, Hindi & English Signature Size, 140KB PDF Rules",
+    seoDescription: "Official guidelines for Bihar BSSC Inter Level & BPSC 2026: 3.5x4.5 cm photo (20-50KB), separate Hindi & English signatures (10-20KB), and 140KB marksheet PDF compression.",
+    canonicalUrl: "https://www.sizesnap.in/blog/bihar-bssc-inter-level-photo-signature-pdf-rules-2026",
+    relatedTools: ["compress-pdf-140kb", "14kb-photo-size", "jpg-to-pdf-under-150kb", "photo-and-signature-joiner", "compress-image-to-20kb"],
+    relatedArticles: ["bpsc-tre-4-teacher-photo-signature-guidelines-2026", "how-to-compress-pdf-to-100kb-140kb-for-govt-portals", "how-to-resize-signature-to-10kb-20kb-online"],
+    officialSources: [{"name": "Bihar Staff Selection Commission (BSSC)", "url": "https://bssc.bihar.gov.in"}, {"name": "Bihar Public Service Commission (BPSC)", "url": "https://www.bpsc.bih.nic.in"}],
+    examYear: "2026",
+    examName: "BSSC 2nd Inter Level / BSSC CGL 4 / BPSC CCE",
+    content: `<h2>Document Upload Standards for Bihar State Recruitments (BSSC &amp; BPSC)</h2>
+<p>Bihar government examinations—including the massive <strong>BSSC 2nd Inter Level Examination (12,199+ vacancies)</strong>, <strong>BSSC CGL 4</strong>, and the <strong>BPSC Combined Competitive Examination (CCE)</strong>—enforce some of the most rigid document upload protocols in India. The recruitment portals managed by the Bihar Staff Selection Commission (bssc.bihar.gov.in) and BPSC (bpsc.bih.nic.in) automatically validate file dimensions, byte limits, and language signatures.</p>
+<p>Uploading an oversized marksheet PDF or mixing up Hindi and English signatures leads to instant rejection or disqualification during certificate verification. Here is your definitive compliance blueprint.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Upload Field</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Size Limit</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Dimensions / Pixel Specs</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Passport Photograph</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">20 KB to 50 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">3.5 cm &times; 4.5 cm (200 &times; 230 px)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG / JPEG (White / Light Background)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>English Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">3.5 cm &times; 1.5 cm (200 &times; 100 px)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG / JPEG (Black / Dark Blue Ink)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Hindi Signature</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">3.5 cm &times; 1.5 cm (200 &times; 100 px)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">JPG / JPEG (Devanagari Script)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>10th / 12th Marksheet &amp; Passing Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Under 150 KB (Ideal: <strong>140 KB</strong>)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Standard A4 Document (150 DPI)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only (Text must be clearly readable)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Bihar Domicile / NCL / EWS Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Under 150 KB (Ideal: <strong>140 KB</strong>)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Standard A4 Document (150 DPI)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">PDF Only with visible QR &amp; Digital Sign</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ One-Click Bihar Exam Resizing Tools:</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Compress your Bihar exam marksheets safely below 150KB using our <a href="/tools/compress-pdf-140kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 140KB PDF Compressor</a>, convert phone photos to PDF with <a href="/tools/jpg-to-pdf-under-150kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">JPG to PDF Under 150KB</a>, and resize Hindi &amp; English signatures with our <a href="/tools/14kb-photo-size" style="color: #414FA8; font-weight: bold; text-decoration: underline;">14KB Signature Resizer</a>.</p>
+</div>
+
+<h2>The Dual Signature Mandate: Hindi &amp; English Rules</h2>
+<p>Unlike national exams (SSC, UPSC) which require only one signature, Bihar state recruitment commissions mandate <strong>two separate signature uploads</strong>:</p>
+<ol>
+  <li><strong>English Signature:</strong> Must be signed in cursive/running English handwriting. Capital block letters (e.g., &quot;AMIT KUMAR&quot;) are disqualified.</li>
+  <li><strong>Hindi Signature:</strong> Must be signed in clear Devanagari script (e.g., &quot;अमित कुमार&quot;). Do not transcribe English spelling into phonetic letters carelessly; write your genuine Hindi signature.</li>
+  <li><strong>Do NOT combine both signatures into one image!</strong> The portal provides two separate browse fields: <code>Upload English Signature</code> and <code>Upload Hindi Signature</code>. Each individual file must weigh between 10 KB and 20 KB.</li>
+</ol>
+
+<h2>Why 140KB is the Golden Target for Marksheet PDFs</h2>
+<p>BSSC and BPSC specify an upper file limit of 150 KB for supporting documents (Matric certificate, Intermediate marksheet, Domicile certificate, Non-Creamy Layer NCL certificate, and Disability PwD certificate). However, if your file is 150.2 KB, the portal immediately throws an error: <em>&quot;File size exceeds maximum allowed limit&quot;</em>.</p>
+<p>Setting your compression target to <strong>140 KB</strong> provides a 10KB safety cushion against server storage discrepancies while preserving 100% legibility of your Roll Number, Marks Table, Mother's/Father's name, and Revenue Officer digital signature.</p>
+
+<h2>Step-by-Step Guide for BSSC / BPSC Document Preparation</h2>
+<ol>
+  <li><strong>Photograph:</strong> Stand against a plain white or light cream wall with ears visible. Crop to 3.5 &times; 4.5 cm and compress to 30KB using <a href="/tools/passport-photo-maker">SizeSnap Passport Photo Maker</a>.</li>
+  <li><strong>Signatures:</strong> Sign your Hindi and English signatures on separate sections of a blank white paper with black ballpoint pen. Crop each signature individually and process both through the <a href="/tools/14kb-photo-size">14KB Signature Resizer</a>.</li>
+  <li><strong>Marksheets &amp; Certificates:</strong> Take clean, glare-free photos of your documents or scan them. Upload the JPGs to <a href="/tools/jpg-to-pdf-under-150kb">JPG to PDF Under 150KB</a> or compress existing PDFs with <a href="/tools/compress-pdf-140kb">SizeSnap 140KB PDF Tool</a>.</li>
+</ol>`,
+  },
+  {
+    id: "passport-size-photo-35x45-cm-white-background-mobile-guide",
+    title: "How to Make 3.5\u00d74.5 cm Passport Size Photo on Mobile with Pure White Background (Free 2026)",
+    slug: "passport-size-photo-35x45-cm-white-background-mobile-guide",
+    excerpt: "Step-by-step mobile tutorial to create an official 3.5 x 4.5 cm passport size photo with a pure white background for Indian exams, passports, and visas \u2014 100% free with no apps or signups.",
+    category: "how-to",
+    tags: ["Passport Photo Maker", "3.5 x 4.5 cm Photo", "White Background Photo", "Mobile Passport Photo", "Sarkari Photo Size", "Photo Resizer"],
+    status: "PUBLISHED",
+    featured: true,
+    priority: 9,
+    author: {
+      name: "SizeSnap Technical Team",
+      role: "Digital Imaging & Document Specialist",
+    },
+    readingTime: 6,
+    publishedAt: 1774020000000,
+    createdAt: 1774020000000,
+    seoTitle: "How to Make 3.5x4.5 cm Passport Photo on Mobile (White Background) Free",
+    seoDescription: "Make an official 3.5x4.5 cm passport photo on Android or iPhone with clean white background, 300 DPI, and 20KB-50KB file size. Free online tool without watermarks.",
+    canonicalUrl: "https://www.sizesnap.in/blog/passport-size-photo-35x45-cm-white-background-mobile-guide",
+    relatedTools: ["passport-photo-maker", "white-background-passport-photo", "reduce-image-size-in-kb", "compress-image-to-50kb", "compress-image-between-20kb-to-50kb"],
+    relatedArticles: ["ssc-cgl-photo-size-name-date-guidelines-2026", "pan-card-photo-signature-size-nsdl-utiitsl-guidelines", "how-to-reduce-image-size-in-kb-without-losing-quality"],
+    officialSources: [{"name": "Passport Seva Portal, Govt of India", "url": "https://passportindia.gov.in"}],
+    content: `<h2>Why 3.5 cm &times; 4.5 cm is the Universal Indian Standard</h2>
+<p>Whether you are applying for an <strong>Indian Passport on the Passport Seva portal</strong>, registering for competitive examinations (SSC, UPSC, Banking, Railways, State PSCs), or applying for foreign visas (Schengen, UK, Dubai, Singapore), the standard dimension demanded is <strong>3.5 cm width &times; 4.5 cm height (35 mm &times; 45 mm)</strong> with a pure white background.</p>
+<p>Visiting a photo studio every time you need a new application photo costs Rs. 100 to Rs. 200 and often leaves you with physical glossy prints rather than the compressed digital JPG file required for web portals. Today, you can create a 100% compliant, studio-grade passport photo directly from your smartphone in under 60 seconds.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Resolution Standard</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Dimensions in Pixels (3.5 &times; 4.5 cm)</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Recommended Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>300 DPI (High Resolution)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>413 &times; 531 pixels</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Official Passport Seva, Visa applications, Studio printing</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>200 DPI (Standard Govt)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>276 &times; 354 pixels</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">UPSC OTR, SSC CGL/CHSL, State PSCs, IBPS Bank forms</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>100 DPI (Web Preview)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>138 &times; 177 pixels</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Low-bandwidth portals with strict 20KB limits</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ Create Your Passport Photo in 30 Seconds:</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Skip the photo studio. Use our free <a href="/tools/passport-photo-maker" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap Passport Photo Maker</a> to crop to exact 3.5 &times; 4.5 cm dimensions, or replace messy backgrounds with our <a href="/tools/white-background-passport-photo" style="color: #414FA8; font-weight: bold; text-decoration: underline;">Pure White Background Tool</a>.</p>
+</div>
+
+<h2>Smartphone Photography Checklist: Do's and Don'ts</h2>
+<p>To avoid rejection by automated government biometric validation filters, follow these photography rules:</p>
+<ul>
+  <li><strong>Lighting:</strong> Stand 3 feet in front of a window or light source. Do not use camera flash directly in a dark room as it causes harsh shadows behind your ears and red-eye reflections.</li>
+  <li><strong>Background:</strong> Stand in front of any solid wall. Even if your wall is beige, cream, or light grey, our online tool will cleanly isolate your portrait and replace it with pure studio white (<code>#FFFFFF</code>).</li>
+  <li><strong>Clothing:</strong> Wear a dark-coloured shirt, t-shirt, or blazer (navy blue, black, maroon, dark grey). Do not wear a white shirt, as white clothing blends into the white background and fails border detection.</li>
+  <li><strong>Head &amp; Eyes:</strong> Look straight into the camera lens with a neutral facial expression (mouth closed, no wide smile). Both ears and eyebrows must be uncovered and clearly visible.</li>
+  <li><strong>Spectacles &amp; Headgear:</strong> Remove sunglasses, spectacles with glare, and caps. Religious headgear (such as turbans or hijabs) is permitted provided the full face from chin to forehead is visible.</li>
+</ul>
+
+<h2>How to Make the Photo on SizeSnap (Step-by-Step)</h2>
+<ol>
+  <li><strong>Snap or Select Photo:</strong> Open <a href="/tools/passport-photo-maker">SizeSnap Passport Photo Maker</a> on your mobile browser (Chrome or Safari).</li>
+  <li><strong>Upload Image:</strong> Select your selfie or portrait photo. SizeSnap processes the image locally in your browser, ensuring complete privacy.</li>
+  <li><strong>Select Preset:</strong> Choose <strong>India Passport / Sarkari Exam (3.5 &times; 4.5 cm)</strong>.</li>
+  <li><strong>Adjust Face Frame:</strong> Position the crop circle so your face occupies 70% to 80% of the frame.</li>
+  <li><strong>Set Target KB:</strong> Enter <strong>20KB – 50KB</strong> (the standard range for Indian recruitment portals).</li>
+  <li><strong>Download:</strong> Tap Download JPG. Your passport photo is ready to upload immediately!</li>
+</ol>
+
+<h2>Need Physical Prints? Print an 8-Photo Sheet for Rs. 10</h2>
+<p>If you also need physical prints for your exam hall ticket, interview, or college admission, do not order expensive studio sets. You can arrange 6 or 8 passport photos onto a standard 4&times;6 inch photo card using SizeSnap. Take that single 4&times;6 image file to any local printing kiosk or studio and print it as a standard postcard photo for just Rs. 5 to Rs. 10!</p>`,
+  },
+  {
+    id: "how-to-resize-photo-signature-to-14kb-15kb-online",
+    title: "How to Resize Photo & Signature to 14KB / 15KB Online for Sarkari Exam Forms (Free)",
+    slug: "how-to-resize-photo-signature-to-14kb-15kb-online",
+    excerpt: "Need a photo or signature between 10KB and 20KB? Learn why 14KB is the golden target size for SSC, UPSC, State PSCs, and IBPS, and how to compress your file to exactly 14KB without losing stroke clarity.",
+    category: "how-to",
+    tags: ["14KB Photo Size", "14KB Signature", "10KB to 20KB Resizer", "12KB Photo", "15KB Photo", "Govt Form Photo Size", "Compress Image in KB"],
+    status: "PUBLISHED",
+    featured: true,
+    priority: 9,
+    author: {
+      name: "SizeSnap Technical Team",
+      role: "Document Optimization Specialist",
+    },
+    readingTime: 6,
+    publishedAt: 1774030000000,
+    createdAt: 1774030000000,
+    seoTitle: "How to Resize Photo & Signature to 14KB / 15KB Online Free (Exact Size in KB)",
+    seoDescription: "Resize any photo or signature to exact 14KB, 12KB, or 15KB online for government job applications (SSC, UPPSC, BPSC, IBPS). 100% free, sharp quality, zero privacy risk.",
+    canonicalUrl: "https://www.sizesnap.in/blog/how-to-resize-photo-signature-to-14kb-15kb-online",
+    relatedTools: ["14kb-photo-size", "12kb-photo-size", "13kb-photo-size", "compress-image-between-10kb-to-20kb", "compress-image-to-20kb"],
+    relatedArticles: ["how-to-resize-signature-to-10kb-20kb-online", "ssc-live-photo-capture-signature-upload-error-fix-2026", "how-to-reduce-image-size-in-kb-without-losing-quality"],
+    content: `<h2>The 10KB–20KB Dilemma: Why Portals Reject 9.9KB and 20.1KB</h2>
+<p>If you have ever applied for an Indian government examination—such as SSC CGL, CHSL, MTS, UPPSC, BPSC, IBPS Bank PO/Clerk, DSSSB, or Railway RRB—you have likely encountered the infamous error message: <em>&quot;Uploaded file size must be between 10 KB and 20 KB&quot;</em>.</p>
+<p>Application portal validation scripts evaluate file sizes strictly at the byte level. If your resized signature measures <strong>9.95 KB (10,188 bytes)</strong>, the server marks it as under 10KB and blocks submission. Similarly, if your file is <strong>20.08 KB (20,560 bytes)</strong>, it is flagged as exceeding 20KB. Furthermore, operating systems (Windows, macOS, Android) calculate kilobytes differently (1 KB = 1024 bytes vs 1000 bytes), causing confusing file discrepancies.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Examination Portal</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Required Size Range</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Target Sweet Spot</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Recommended Tool</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Staff Selection Commission (SSC)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB (Signature)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>14 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/14kb-photo-size">SizeSnap 14KB Tool</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>UPPSC &amp; UPSSSC (Uttar Pradesh)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB (Signature)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>14 KB / 15 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/compress-image-between-10kb-to-20kb">10-20KB Resizer</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>BSSC &amp; BPSC (Bihar)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB (Hindi &amp; English)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>13 KB – 14 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/14kb-photo-size">SizeSnap 14KB Tool</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>IBPS / SBI Bank PO &amp; Clerk</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB (Signature &amp; Thumb)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>14 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/compress-image-to-20kb">Compress to 20KB</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Railway Recruitment Board (RRB)</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">10 KB to 20 KB (Signature)</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>14 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/14kb-photo-size">SizeSnap 14KB Tool</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ The 14KB Golden Rule:</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;"><strong>14 KB is the mathematically ideal target.</strong> It provides a +4KB buffer above the minimum limit (10KB) and a -6KB cushion below the ceiling (20KB). Use our free <a href="/tools/14kb-photo-size" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap 14KB Photo &amp; Signature Resizer</a> or <a href="/tools/compress-image-between-10kb-to-20kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">10KB to 20KB Resizer</a> to hit exact byte limits every time.</p>
+</div>
+
+<h2>Why Standard Image Compressors Destroy Signature Quality</h2>
+<p>When you compress a small image down to 14KB using basic editing apps or messaging apps (like WhatsApp), the compression algorithm reduces quality uniformly across the entire image. This causes severe issues:</p>
+<ul>
+  <li><strong>Faded Signature Strokes:</strong> Fine ballpoint ink lines break apart or turn into faint grey pixels, making the signature look illegible.</li>
+  <li><strong>Dirty Background Artifacts:</strong> JPEG compression blocks (8&times;8 pixel macroblocks) appear around high-contrast edges, creating messy grey haze around your signature.</li>
+  <li><strong>Heavy EXIF Metadata:</strong> Phone cameras embed 5KB to 10KB of invisible metadata (camera lens info, GPS, timestamps). If an image has 10KB of metadata and is compressed to 14KB, only 4KB is left for the actual image data!</li>
+</ul>
+
+<h2>How SizeSnap Generates Crystal Clear 14KB Signatures</h2>
+<p>SizeSnap uses an advanced in-browser canvas algorithm engineered specifically for official identity documents:</p>
+<ol>
+  <li><strong>EXIF Stripping:</strong> All non-image metadata is instantly stripped, freeing up maximum file weight for high-resolution ink pixels.</li>
+  <li><strong>Contrast Thresholding:</strong> It distinguishes white paper from dark ink strokes, preserving black ink density while turning the surrounding paper into pure, clean white.</li>
+  <li><strong>Bisection Byte Search:</strong> Rather than guessing a quality slider percentage, SizeSnap iteratively calibrates JPEG quality until the resulting file measures exactly ~14.0 KB.</li>
+</ol>
+
+<h2>Quick 3-Step Guide to Resize Your Signature to 14KB</h2>
+<ol>
+  <li>Take a clean photo of your signature signed on plain unruled white paper with black ballpoint pen.</li>
+  <li>Visit <a href="/tools/14kb-photo-size">SizeSnap 14KB Photo &amp; Signature Resizer</a> on your phone or PC.</li>
+  <li>Upload your image, crop closely around the signature box, and click <strong>Download 14KB JPG</strong>. The output is ready for immediate portal submission!</li>
+</ol>`,
+  },
+  {
+    id: "how-to-convert-jpg-to-pdf-under-140kb-150kb-online",
+    title: "How to Convert JPG to PDF Under 140KB & 150KB Online Free (Without Quality Loss)",
+    slug: "how-to-convert-jpg-to-pdf-under-140kb-150kb-online",
+    excerpt: "Convert phone photos of marksheets, Aadhaar cards, and caste certificates into clean, readable PDF documents strictly under 140KB or 150KB for Sarkari job portals \u2014 free, private, and fast.",
+    category: "tool-guides",
+    tags: ["JPG to PDF Under 150KB", "Compress PDF 140KB", "Marksheet to PDF", "Govt Exam PDF", "Convert Image to PDF", "PDF Compressor"],
+    status: "PUBLISHED",
+    featured: true,
+    priority: 9,
+    author: {
+      name: "SizeSnap Technical Team",
+      role: "Document Optimization Specialist",
+    },
+    readingTime: 6,
+    publishedAt: 1774040000000,
+    createdAt: 1774040000000,
+    seoTitle: "JPG to PDF Under 140KB & 150KB Converter Free | Sarkari Exam Document Tool",
+    seoDescription: "Convert mobile photos (JPG/JPEG) to PDF under 140KB or 150KB online for free. Keep marksheets, roll numbers, and official seals crystal clear while meeting strict govt upload limits.",
+    canonicalUrl: "https://www.sizesnap.in/blog/how-to-convert-jpg-to-pdf-under-140kb-150kb-online",
+    relatedTools: ["jpg-to-pdf-under-150kb", "compress-pdf-140kb", "compress-pdf-100kb", "compress-pdf", "compress-pdf-50kb"],
+    relatedArticles: ["how-to-compress-pdf-to-100kb-140kb-for-govt-portals", "bihar-bssc-inter-level-photo-signature-pdf-rules-2026", "how-to-merge-pdf-files-online-free-guide"],
+    content: `<h2>The Mobile Marksheet Dilemma: 4MB Camera Photos vs 150KB PDF Limits</h2>
+<p>Modern smartphone cameras capture incredibly sharp photos—typically ranging from 3 MB to 8 MB in JPG format. However, almost every major Indian government recruitment portal (including BPSC, BSSC, UPPSC, State Police, Railway DV, and SSC) enforces a strict upload ceiling: <strong>&quot;Upload supporting document in PDF format, file size must not exceed 150 KB (or 100 KB)&quot;</strong>.</p>
+<p>If you upload your photo to a standard online PDF converter, it simply wraps the original 4MB JPG inside a PDF container, producing a 4.1MB file that the government server instantly rejects. If you use an aggressive random compressor, the text of your 10th marksheet, roll number, or gazetted authority seal blurs into an illegible smudge.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #E5E7EB;">
+  <thead>
+    <tr style="background-color: #F3F4F6; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Document Type</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Official Portal Limit</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Safe Target Size</th>
+      <th style="padding: 10px; border: 1px solid #E5E7EB;">Recommended SizeSnap Tool</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>10th / 12th Marksheet &amp; Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 150 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>135 KB &ndash; 140 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/compress-pdf-140kb">Compress PDF to 140KB</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Caste / EWS / OBC-NCL Certificate</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">Max 150 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>130 KB &ndash; 140 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/jpg-to-pdf-under-150kb">JPG to PDF Under 150KB</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>Bihar BSSC / BPSC Domicile Proof</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">50 KB to 150 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>140 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/compress-pdf-140kb">Compress PDF to 140KB</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>UPSC CSE / OTR ID Proof</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;">20 KB to 300 KB</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><strong>150 KB &ndash; 200 KB</strong></td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB;"><a href="/tools/compress-pdf">Free PDF Compressor</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background-color: #EEF2FF; border-left: 4px solid #414FA8; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; font-weight: bold; color: #1E1B4B;">⚡ Direct Solution for 150KB PDF Errors:</p>
+  <p style="margin: 6px 0 0 0; color: #312E81;">Convert your JPG photos to PDF calibrated exactly under 150KB using our <a href="/tools/jpg-to-pdf-under-150kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">SizeSnap JPG to PDF Under 150KB Converter</a>, or compress existing PDF files down to the safe 140KB limit with our <a href="/tools/compress-pdf-140kb" style="color: #414FA8; font-weight: bold; text-decoration: underline;">140KB PDF Compressor</a>.</p>
+</div>
+
+<h2>Why Setting Target Size to 140KB is Essential</h2>
+<p>When a government portal specifies <em>&quot;Max 150 KB&quot;</em>, aiming for 149 KB is risky. Here is why targeting <strong>140 KB</strong> is the optimal strategy:</p>
+<ol>
+  <li><strong>Byte Conversion Buffers:</strong> Some web servers compute 150 KB as 153,600 bytes (150 &times; 1024), while others compute it as 150,000 bytes (150 &times; 1000). A file measuring 151,200 bytes will fail on the latter.</li>
+  <li><strong>MIME Header Overhead:</strong> During browser upload, multi-part form boundary data and headers add minor network overhead.</li>
+  <li><strong>Zero Text Degradation:</strong> At 140 KB, a single-page document scanned or converted at 150 DPI retains razor-sharp typography, ensuring the verification officer can clearly read every grade and signature.</li>
+</ol>
+
+<h2>How to Convert JPG to PDF Under 150KB on SizeSnap (In 3 Steps)</h2>
+<ol>
+  <li><strong>Take a Clean Photo:</strong> Place your marksheet on a flat table under daylight. Capture the photo directly from above to avoid angled distortion.</li>
+  <li><strong>Open the Tool:</strong> Visit <a href="/tools/jpg-to-pdf-under-150kb">SizeSnap JPG to PDF Under 150KB</a> on your smartphone or computer.</li>
+  <li><strong>Upload &amp; Convert:</strong> Select your JPG/JPEG image. SizeSnap will automatically adjust DPI, balance black-and-white text contrast, and assemble an A4-standard PDF weighing safely under 150 KB (typically 135KB–142KB).</li>
+  <li><strong>Download:</strong> Click <strong>Download PDF</strong>. Your file is ready to upload with guaranteed compliance.</li>
+</ol>
+
+<h2>Privacy Guarantee: Your Sensitive Documents Never Leave Your Device</h2>
+<p>Marksheets, caste certificates, and identity cards contain sensitive personal data: your Aadhaar number, birth date, mother's name, and permanent address. Unlike traditional PDF conversion websites that upload your files to remote third-party cloud servers, <strong>SizeSnap processes all image and PDF operations 100% client-side inside your browser engine</strong>. Your documents are never stored, logged, or viewed by anyone.</p>`,
+  },
 ];

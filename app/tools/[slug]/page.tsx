@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ALL_TOOLS, getToolBySlug, type ToolItem } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
+import { ToolSeoContent } from '@/components/ToolSeoContent';
 const TextFormatterTool = dynamic(() => import('@/components/tool-ui/writing/TextFormatterTool').then(mod => mod.TextFormatterTool));
 const ParagraphFormatterTool = dynamic(() => import('@/components/tool-ui/writing/ParagraphFormatterTool').then(mod => mod.ParagraphFormatterTool));
 const RemoveLineBreaksTool = dynamic(() => import('@/components/tool-ui/writing/RemoveLineBreaksTool').then(mod => mod.RemoveLineBreaksTool));
@@ -235,40 +236,89 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     ],
   };
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `Is the ${tool.name} tool free to use?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `Yes, the ${tool.name} tool provided by SizeSnap is 100% free to use. There are no hidden fees, premium subscriptions, or watermarks.`
-        }
-      },
-      tool.processingType === 'client' ? {
-        '@type': 'Question',
-        name: `Are my files safe when using ${tool.name}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `Absolutely. SizeSnap prioritizes your privacy. All processing for the ${tool.name} tool happens directly in your browser. Your files are never uploaded to our servers.`
-        }
-      } : {
-        '@type': 'Question',
-        name: `Are my files safe when using ${tool.name}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `SizeSnap takes your privacy seriously. Your files are processed securely and are never shared or stored longer than necessary.`
-        }
-      }
-    ]
-  };
+  // Category-tailored How-to Steps
+  const howToSteps = (() => {
+    if (tool.categoryId === 'calculator' || tool.categoryId === 'student') {
+      return [
+        `Enter your numeric values or parameters into the ${tool.name} inputs above.`,
+        `SizeSnap automatically computes instant, mathematically verified results in real time.`,
+        `Inspect the calculated percentage, grades, or duration breakdown with formula explanation.`,
+        `Copy the result or use it directly for your academic schedules, exams, or financial records.`
+      ];
+    }
+    if (tool.categoryId === 'developer' || tool.categoryId === 'seo') {
+      return [
+        `Paste or input your code, JSON, URL, or metadata into the workspace editor.`,
+        `Select your desired transformation (Format, Minify, Validate, Encode, or Preview).`,
+        `Review the syntax-highlighted, error-checked output processed directly by your browser.`,
+        `Click "Copy to Clipboard" to paste the clean, deterministic result into your code or website.`
+      ];
+    }
+    if (tool.categoryId === 'writing' || tool.categoryId === 'text') {
+      return [
+        `Paste or type your text content into the input box above.`,
+        `Select your preferred formatting rules (Case conversion, line sorting, space cleaning, or counting).`,
+        `SizeSnap processes your text instantly with live character and word counters.`,
+        `Click Copy to save your polished, publication-ready text directly to your clipboard.`
+      ];
+    }
+    return [
+      `Enter or upload your data into the ${tool.name} workspace above.`,
+      `Adjust any custom parameters or options according to your requirements.`,
+      `Preview the real-time processed output generated locally in your browser.`,
+      `Download or copy the completed result with 100% privacy and zero watermarks.`
+    ];
+  })();
+
+  const toolFeatures = [
+    {
+      title: '100% Client-Side Processing',
+      desc: 'All calculations and conversions run entirely inside your browser memory. No data is sent to external servers.'
+    },
+    {
+      title: 'Real-Time Instant Execution',
+      desc: 'Experience zero-delay, live output updates without page reloads or server queuing delays.'
+    },
+    {
+      title: 'Free & Without Watermarks',
+      desc: 'Enjoy full access with zero daily limits, no hidden subscription paywalls, and no branding watermarks.'
+    },
+    {
+      title: 'Touch & Mobile Friendly',
+      desc: 'Optimized responsive UI for Android smartphones, iPhones, iPads, laptops, and wide desktop screens.'
+    }
+  ];
+
+  const toolFaqs = [
+    {
+      question: `How do I use the ${tool.name} tool on SizeSnap?`,
+      answer: `Open the tool, enter or paste your information into the fields above, and view instant results. SizeSnap executes everything locally in real time without needing complex software.`
+    },
+    {
+      question: `Are my data and inputs safe when using ${tool.name}?`,
+      answer: `Yes, completely. SizeSnap prioritizes strict user privacy. All processing for ${tool.name} happens 100% on your device using client-side JavaScript APIs. Your data, code, and text are never uploaded, logged, or shared.`
+    },
+    {
+      question: `Can I use ${tool.name} on my smartphone?`,
+      answer: `Yes! ${tool.name} is fully mobile-responsive. You can access it on any smartphone browser (Google Chrome, Safari, Firefox, Edge) with smooth touch controls and zero app installations.`
+    },
+    {
+      question: `Is ${tool.name} free with unlimited usage?`,
+      answer: `Yes, 100% free with unlimited daily usage. There are no paywalls, hidden credits, or watermarks added to your results.`
+    }
+  ];
+
+  const targetKeywords = Array.from(new Set([
+    ...(tool.keywords || []),
+    ...(tool.aliases || []),
+    `${tool.name.toLowerCase()} online`,
+    `free ${tool.name.toLowerCase()}`,
+    `${tool.name.toLowerCase()} tool`
+  ])).slice(0, 10);
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
 
@@ -436,20 +486,16 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
           </div>
         )}
 
-        {/* FAQ Section */}
-        <div className="bg-white p-5 mt-6 rounded-[4px] border border-gray-200 shadow-xs">
-          <h2 className="text-sm font-bold text-gray-800 mb-3 border-b border-gray-100 pb-2">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-4">
-            {faqSchema.mainEntity.map((faq, idx) => (
-              <div key={idx} className="border-b border-gray-50 pb-3 last:border-b-0 last:pb-0">
-                <h3 className="text-xs font-bold text-gray-800 mb-1">{faq.name}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Dynamic Rich SEO Content & FAQs */}
+        <ToolSeoContent
+          title={tool.name}
+          subtitle={`Category: ${tool.categoryTitle} | Processing Mode: ${tool.processingType === 'server' ? 'Secure Server' : '100% Client-Side Private'}`}
+          description={tool.shortDescription || `SizeSnap ${tool.name} is a high-speed, free online utility designed to streamline your daily workflow with accuracy and privacy.`}
+          howToSteps={howToSteps}
+          features={toolFeatures}
+          faqs={toolFaqs}
+          keywords={targetKeywords}
+        />
       </main>
 
       <Footer />

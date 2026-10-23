@@ -29,23 +29,25 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
   const popularTools = useMemo(() => {
     const pinnedSlugs = [
       'compress-pdf-140kb',
-      '14kb-photo-size',
+      'compress-pdf',
       'jpg-to-pdf-under-150kb',
+      'merge-pdf',
+      '14kb-photo-size',
       'passport-photo-maker',
+      'image-to-pdf',
+      'compress-pdf-200kb',
+      'compress-pdf-100kb',
       'pan-card-photo-resizer',
       '20kb-photo-size',
       '50kb-photo-size',
       '12kb-photo-size',
       '13kb-photo-size',
       '100kb-photo-size',
-      'compress-pdf-200kb',
       'compress-image-to-20kb',
       'compress-image-to-50kb',
       'resize-image-3-5cm-4-5cm',
       'add-name-and-date-on-photo',
       'white-background-passport-photo',
-      'compress-pdf',
-      'image-to-pdf',
     ];
 
     const slugSet = new Set<string>();

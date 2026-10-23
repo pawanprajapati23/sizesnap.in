@@ -81,4 +81,8 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'remove-object-from-photo': '/tools/remove-background',
   'split-image': '/tools/crop-image',
   'password-generator': '/developer-tools',
+  'cgpa-to-percentage': '/cgpa-to-percentage',
+  'sgpa-to-percentage': '/sgpa-to-percentage',
+  'required-marks-calculator': '/required-marks-calculator',
+  'exam-percentage-calculator': '/exam-percentage-calculator',
 };

@@ -69,7 +69,71 @@ export default function RootLayout({
         '@id': 'https://www.sizesnap.in/#website',
         url: 'https://www.sizesnap.in/',
         name: 'SizeSnap',
+        alternateName: ['SizeSnap.in', 'Size Snap', 'SizeSnap India'],
         description: 'Free Online Image Compressor, Resizer, Converter & PDF Tools',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://www.sizesnap.in/#directory?q={search_term_string}',
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': 'https://www.sizesnap.in/#sitelinks',
+        name: 'SizeSnap Core Tools & Hubs',
+        itemListElement: [
+          {
+            '@type': 'SiteNavigationElement',
+            position: 1,
+            name: 'Compress PDF Online Free',
+            url: 'https://www.sizesnap.in/tools/compress-pdf',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 2,
+            name: 'Compress PDF to 140KB',
+            url: 'https://www.sizesnap.in/tools/compress-pdf-140kb',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 3,
+            name: 'JPG to PDF Under 150KB',
+            url: 'https://www.sizesnap.in/tools/jpg-to-pdf-under-150kb',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 4,
+            name: 'Merge PDF Online',
+            url: 'https://www.sizesnap.in/tools/merge-pdf',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 5,
+            name: '14KB Photo Size',
+            url: 'https://www.sizesnap.in/tools/14kb-photo-size',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 6,
+            name: 'Passport Photo Maker',
+            url: 'https://www.sizesnap.in/tools/passport-photo-maker',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 7,
+            name: 'Govt Exam Tools',
+            url: 'https://www.sizesnap.in/exams',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 8,
+            name: 'SizeSnap Blog',
+            url: 'https://www.sizesnap.in/blog',
+          },
+        ],
       },
       {
         '@type': 'WebApplication',

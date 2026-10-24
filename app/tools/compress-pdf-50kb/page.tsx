@@ -69,7 +69,7 @@ const PRESET_SIZES = [
   { label: '100 KB', href: '/tools/compress-pdf-100kb', active: false },
   { label: '140 KB', href: '/tools/compress-pdf-140kb', active: false },
   { label: '200 KB', href: '/tools/compress-pdf-200kb', active: false },
-  { label: '300 KB', href: '/tools/compress-pdf?target=300', active: false },
+  { label: '300 KB', href: '/tools/compress-pdf-300kb', active: false },
   { label: '500 KB', href: '/tools/compress-pdf-500kb', active: false },
   { label: '1 MB', href: '/tools/compress-pdf?target=1000', active: false },
 ];

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { trackToolUsage, trackDownload } from '@/lib/firebase';
 import { ALL_TOOLS } from '@/data/tools';
@@ -66,6 +66,11 @@ function initMonetagInPagePush() {
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
+  const pathnameRef = useRef(pathname);
+
+  useEffect(() => {
+    pathnameRef.current = pathname;
+  }, [pathname]);
 
   useEffect(() => {
     // Track tool usage based on page view
@@ -102,7 +107,7 @@ export default function AnalyticsTracker() {
           (hasDownloadAttr || text.includes('download'));
 
         if (hasDownloadAttr || isDownloadButton || isDownloadLink) {
-          const pathSlug = pathname ? pathname.replace(/^\/tools\//, '').replace(/^\//, '').split('/')[0] : undefined;
+          const pathSlug = pathnameRef.current ? pathnameRef.current.replace(/^\/tools\//, '').replace(/^\//, '').split('/')[0] : undefined;
           trackDownload(pathSlug);
           // Post-download sponsor ad: Triggers only AFTER user completes their task
           triggerPostDownloadVignette();

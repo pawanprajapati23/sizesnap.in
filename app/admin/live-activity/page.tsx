@@ -112,6 +112,7 @@ export default function LiveActivityPage() {
   }, [activeRange]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     loadData();
   }, [loadData]);

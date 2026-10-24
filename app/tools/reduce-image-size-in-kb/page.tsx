@@ -10,9 +10,9 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Reduce Image Size in KB Online Free (Exact 20KB, 50KB, 100KB) | SizeSnap',
+  title: 'Reduce Image Size in KB Online Free (Exact 10KB, 20KB, 50KB, 100KB) | SizeSnap',
   description:
-    'Reduce image size in KB online for free. Select exact target (10KB, 20KB, 50KB, 100KB, 200KB) for SSC, UPSC, Railway RRB, and exam forms. Zero quality loss, 100% private in browser.',
+    'Reduce image size in KB online for free. Select exact target (10KB, 14KB, 20KB, 50KB, 100KB, 200KB) for SSC, UPSC, Railway RRB, and exam forms. Zero quality loss, 100% private in browser.',
   keywords: [
     'reduce image size in kb',
     'reduce image size',
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
   },
   openGraph: {
-    title: 'Reduce Image Size in KB Online Free (Exact 20KB, 50KB, 100KB) | SizeSnap',
+    title: 'Reduce Image Size in KB Online Free (Exact 10KB, 20KB, 50KB, 100KB) | SizeSnap',
     description:
-      'Compress photos and signatures to exact 20KB, 50KB, or 100KB online for free with SizeSnap. Zero server uploads.',
+      'Compress photos and signatures to exact 10KB, 20KB, 50KB, or 100KB online for free with SizeSnap. Zero server uploads.',
     url: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
     siteName: 'SizeSnap',
     type: 'website',
@@ -46,9 +46,9 @@ const RELATED_SLUGS = [
   'compress-image-to-10kb',
   'compress-image-to-20kb',
   'compress-image-to-50kb',
+  '14kb-photo-size',
   'compress-image',
   'resize-image-pixel',
-  'resize-signature',
   'passport-photo-maker',
 ];
 
@@ -66,17 +66,81 @@ const FAQS = [
     a: 'SizeSnap preserves facial features and clarity by intelligently balancing JPEG/WebP quantization tables and scaling dimensions just enough to fit within your specified KB limit while maintaining the original aspect ratio.',
   },
   {
-    q: 'Can I reduce signature images to 10KB or 20KB?',
-    a: 'Yes. For black & white or blue ink signatures on white paper, SizeSnap optimizes the background pixels and reduces file size to 10KB–20KB in milliseconds.',
+    q: 'Can I reduce signature images to 10KB or 14KB?',
+    a: 'Yes. For black & white or blue ink signatures on white paper, SizeSnap optimizes the background pixels and reduces file size to 10KB–20KB in milliseconds, fully compliant with SSC and UPSC rules.',
   },
 ];
 
 export default function ReduceImageSizeKbPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://www.sizesnap.in/tools/reduce-image-size-in-kb#webapp',
+        name: 'SizeSnap Reduce Image Size in KB Online',
+        url: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
+        applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+        description:
+          'Free client-side tool to reduce image size to exact KB (10KB, 20KB, 50KB, 100KB, 200KB) for government and job portal submissions.',
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Reduce Image Size in KB Online',
+        description:
+          'Step-by-step instructions to compress and reduce photo or signature size to exact KB without quality loss.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Upload Photo or Signature',
+            text: 'Upload or drag and drop your JPG or PNG image into the box.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Select or Type Target KB',
+            text: 'Choose an exact target like 10KB, 20KB, 50KB, or 100KB.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Compress and Download',
+            text: 'Click Reduce Image and download the optimized file instantly.',
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Breadcrumb */}
@@ -101,8 +165,33 @@ export default function ReduceImageSizeKbPage() {
                 Reduce Image Size in KB Online
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 leading-normal">
-                Reduce image file size to exact target KB (20KB, 50KB, 100KB, 200KB) for job applications, passports, and exam portals without server uploads.
+                Reduce image file size to exact target KB (10KB, 20KB, 50KB, 100KB, 200KB) for job applications, passports, and exam portals without server uploads.
               </p>
+            </div>
+
+            {/* Quick KB Presets Navigation Pills */}
+            <div className="bg-white p-3.5 sm:p-4 rounded-[4px] border border-gray-200 shadow-xs">
+              <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-2">
+                Popular Exact KB Presets for Indian Govt Forms:
+              </span>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {[
+                  { label: '10 KB (Signature)', href: '/tools/compress-image-to-10kb' },
+                  { label: '14 KB (SSC Signature)', href: '/tools/14kb-photo-size' },
+                  { label: '20 KB (Govt Photo)', href: '/tools/compress-image-to-20kb' },
+                  { label: '50 KB (UPSC / State PSC)', href: '/tools/compress-image-to-50kb' },
+                  { label: '100 KB (Admit Card / ID)', href: '/tools/compress-image-to-100kb' },
+                  { label: '200 KB (Certificate)', href: '/tools/compress-image-to-200kb' },
+                ].map((preset) => (
+                  <Link
+                    key={preset.label}
+                    href={preset.href}
+                    className="inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#414FA8] hover:text-white border border-[#414FA8]/20 transition-all"
+                  >
+                    {preset.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Interactive Target KB Engine */}

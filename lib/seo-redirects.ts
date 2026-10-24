@@ -233,6 +233,9 @@ export function getSeoRedirect(pathname: string): string | null {
 
   if (
     cleanPath.includes('scanner-black-and-white') ||
+    cleanPath.includes('black-and-white-scanner') ||
+    cleanPath.includes('pdf-shadow-remover') ||
+    cleanPath.includes('shadow-remover') ||
     cleanPath.includes('remove-shadow') ||
     cleanPath.includes('online-document-shadow-removal') ||
     cleanPath.includes('shadow-removal') ||
@@ -253,6 +256,20 @@ export function getSeoRedirect(pathname: string): string | null {
     cleanPath.includes('200dpi')
   ) {
     return '/tools/200-dpi-converter';
+  }
+
+  // 2.6. General Reduce Image Size Hub (High GSC Impression queries)
+  if (
+    cleanPath === '/reduce-image-size-in-kb' ||
+    cleanPath === '/reduce-image-size-kb' ||
+    cleanPath === '/reduce-image-size' ||
+    cleanPath === '/reduce-photo-size-in-kb' ||
+    cleanPath === '/reduce-photo-size' ||
+    cleanPath === '/photo-compressor-in-kb' ||
+    cleanPath === '/size-reducer-in-kb' ||
+    cleanPath === '/image-size-reducer-in-kb'
+  ) {
+    return '/tools/reduce-image-size-in-kb';
   }
 
   // 3. WhatsApp DP, square crop & social crops
@@ -301,32 +318,47 @@ export function getSeoRedirect(pathname: string): string | null {
     return '/tools/generate-signature';
   }
 
-  // 6. PDF Compression with exact KB/MB (Top ranking on GSC: to-12kb, to-10kb, to-140kb, etc.)
-  const pdfKbMatch = cleanPath.match(/compress-pdf.*?(?:to-)?(\d+)(?:-)?kb/);
-  if (pdfKbMatch) {
-    const targetKb = pdfKbMatch[1];
-    const exactPdfSlug = `compress-pdf-${targetKb}kb`;
-    if (TOOL_SLUG_SET.has(exactPdfSlug) || KNOWN_EXTRA_TOOLS.has(exactPdfSlug)) {
-      return `/tools/${exactPdfSlug}`;
+  // 6. Universal PDF Compression with exact KB/MB (Top ranking on GSC: 140kb, 100kb, 200kb, 500kb, 12kb, etc.)
+  // Handles all query permutations: /pdf-140-kb, /140kb-pdf, /pdf-compressor-140kb, /compress-pdf-to-140kb, /pdf-resize-140kb
+  if (cleanPath.includes('pdf')) {
+    const pdfExactKbMatch = cleanPath.match(/(?:(\d+)\s*(?:-|–|_)?\s*kb.*pdf|pdf.*?(?:to-)?(\d+)\s*(?:-|–|_)?\s*kb)/);
+    if (pdfExactKbMatch) {
+      const targetKb = pdfExactKbMatch[1] || pdfExactKbMatch[2];
+      const exactPdfSlug = `compress-pdf-${targetKb}kb`;
+      if (TOOL_SLUG_SET.has(exactPdfSlug) || KNOWN_EXTRA_TOOLS.has(exactPdfSlug)) {
+        return `/tools/${exactPdfSlug}`;
+      }
+      return `/tools/compress-pdf?target=${targetKb}`;
     }
-    return `/tools/compress-pdf?target=${targetKb}`;
-  }
 
-  const pdfMbMatch = cleanPath.match(/compress-pdf.*?(?:to-)?(\d+)(?:-)?mb/);
-  if (pdfMbMatch) {
-    const kbVal = parseInt(pdfMbMatch[1], 10) * 1000;
-    return `/tools/compress-pdf?target=${kbVal}`;
-  }
+    const pdfExactMbMatch = cleanPath.match(/(?:(\d+(?:\.\d+)?)\s*(?:-|–|_)?\s*mb.*pdf|pdf.*?(?:to-)?(\d+(?:\.\d+)?)\s*(?:-|–|_)?\s*mb)/);
+    if (pdfExactMbMatch) {
+      const mbVal = pdfExactMbMatch[1] || pdfExactMbMatch[2];
+      const kbVal = Math.round(parseFloat(mbVal) * 1024);
+      const exactPdfSlug = `compress-pdf-${kbVal}kb`;
+      if (TOOL_SLUG_SET.has(exactPdfSlug) || KNOWN_EXTRA_TOOLS.has(exactPdfSlug)) {
+        return `/tools/${exactPdfSlug}`;
+      }
+      return `/tools/compress-pdf?target=${kbVal}`;
+    }
 
-  if (cleanPath === '/compress-pdf' || cleanPath.startsWith('/compress-pdf/')) {
-    return '/tools/compress-pdf';
-  }
+    if (
+      cleanPath === '/compress-pdf' ||
+      cleanPath.startsWith('/compress-pdf/') ||
+      cleanPath === '/pdf-compressor' ||
+      cleanPath === '/pdf-compress' ||
+      cleanPath === '/pdf-resizer' ||
+      cleanPath === '/pdf-size-reducer'
+    ) {
+      return '/tools/compress-pdf';
+    }
 
-  if (cleanPath.includes('pdf-under-500kb') || cleanPath.includes('pdf-under-')) {
-    const underMatch = cleanPath.match(/pdf-under-(\d+)kb/);
-    return underMatch
-      ? `/tools/compress-pdf?target=${underMatch[1]}`
-      : '/tools/compress-pdf';
+    if (cleanPath.includes('pdf-under-')) {
+      const underMatch = cleanPath.match(/pdf-under-(\d+)kb/);
+      return underMatch
+        ? `/tools/compress-pdf?target=${underMatch[1]}`
+        : '/tools/compress-pdf';
+    }
   }
 
   // 6.5. Range Image Compression (e.g. 20kb-50kb, 10kb-20kb, 30kb-70kb)
@@ -507,6 +539,19 @@ export function getSeoRedirect(pathname: string): string | null {
     '28kb-photo-size': 'compress-image-to-28kb',
     '150kb-photo-size': 'compress-image-to-150kb',
     'resize-image-to-150kb': 'compress-image-to-150kb',
+    'pdf-shadow-remover': 'remove-shadow-from-document',
+    'document-shadow-remover': 'remove-shadow-from-document',
+    'black-and-white-scanner': 'remove-shadow-from-document',
+    '140kb-pdf': 'compress-pdf-140kb',
+    'pdf-140kb': 'compress-pdf-140kb',
+    '100kb-pdf': 'compress-pdf-100kb',
+    'pdf-100kb': 'compress-pdf-100kb',
+    '200kb-pdf': 'compress-pdf-200kb',
+    'pdf-200kb': 'compress-pdf-200kb',
+    '500kb-pdf': 'compress-pdf-500kb',
+    'pdf-500kb': 'compress-pdf-500kb',
+    '50kb-pdf': 'compress-pdf-50kb',
+    'pdf-50kb': 'compress-pdf-50kb',
   };
 
   if (ALIAS_MAP[slug]) {

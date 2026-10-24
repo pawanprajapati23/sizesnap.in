@@ -359,6 +359,7 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
     useWhiteBg,
     cutoutUrl,
     exam.id,
+    exam.name,
     registerUrl,
   ]);
 

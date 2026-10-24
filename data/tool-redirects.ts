@@ -99,4 +99,8 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'photo-compressor-in-kb': '/tools/reduce-image-size-in-kb',
   'size-reducer-in-kb': '/tools/reduce-image-size-in-kb',
   'reduce-photo-size-in-kb': '/tools/reduce-image-size-in-kb',
+  'left-thumb-impression-resizer': '/tools/thumb-impression-resizer',
+  'thumb-resizer': '/tools/thumb-impression-resizer',
+  'ibps-thumb-resizer': '/tools/thumb-impression-resizer',
+  'thumb-impression': '/tools/thumb-impression-resizer',
 };

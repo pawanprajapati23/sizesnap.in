@@ -29,6 +29,7 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'compress-pdf-100kb',
   'compress-pdf-500kb',
   'compress-pdf-50kb',
+  'thumb-impression-resizer',
   'jpg-to-pdf-under-200kb',
   'jpeg-to-pdf-under-200kb',
   'jpg-to-pdf-under-100kb',
@@ -555,6 +556,11 @@ export function getSeoRedirect(pathname: string): string | null {
     'pdf-500kb': 'compress-pdf-500kb',
     '50kb-pdf': 'compress-pdf-50kb',
     'pdf-50kb': 'compress-pdf-50kb',
+    'thumb-impression-resizer': 'thumb-impression-resizer',
+    'left-thumb-impression-resizer': 'thumb-impression-resizer',
+    'thumb-resizer': 'thumb-impression-resizer',
+    'ibps-thumb-resizer': 'thumb-impression-resizer',
+    'thumb-impression': 'thumb-impression-resizer',
   };
 
   if (ALIAS_MAP[slug]) {

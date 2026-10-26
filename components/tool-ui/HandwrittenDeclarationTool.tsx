@@ -19,6 +19,7 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import { formatBytes } from '@/lib/format-utils';
+import { padJpegBlob } from '@/lib/image-padding';
 import { trackProcessingSuccess, trackDownload } from '@/lib/firebase';
 
 type ExamType = 'ibps' | 'sbi' | 'rrb' | 'custom';
@@ -264,6 +265,11 @@ export function HandwrittenDeclarationTool() {
       }
 
       if (!bestBlob) throw new Error('Image generation failed');
+
+      // Safely pad JPEG if compressed output is below targetBytes
+      if (bestBlob.size < targetBytes) {
+        bestBlob = await padJpegBlob(bestBlob, targetBytes);
+      }
 
       const url = URL.createObjectURL(bestBlob);
       const filename = `ibps_handwritten_declaration_${targetW}x${targetH}.jpg`;

@@ -92,6 +92,7 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const addMoreInputRef = useRef<HTMLInputElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   // Helper to load file into ImageItem
   const processFiles = useCallback((files: FileList | File[]) => {
@@ -231,30 +232,41 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
             }
           }
 
-          // If even lowest quality on full dimension exceeds maxBytes, downscale by 25%
-          if (!bestBytes || bestBytes.length > maxBytes) {
-            const scale = 0.75;
+          // If bytes still exceed maxBytes (e.g. huge 20MB-50MB mobile photos), iteratively downscale dimensions
+          let currentCanvas = canvas;
+          let iterations = 0;
+          while ((!bestBytes || bestBytes.length > maxBytes) && currentCanvas.width > 350 && iterations < 5) {
+            iterations++;
+            const scaleFactor = 0.75;
             const smallCanvas = document.createElement('canvas');
-            smallCanvas.width = Math.max(100, Math.round(width * scale));
-            smallCanvas.height = Math.max(100, Math.round(height * scale));
+            smallCanvas.width = Math.max(250, Math.round(currentCanvas.width * scaleFactor));
+            smallCanvas.height = Math.max(250, Math.round(currentCanvas.height * scaleFactor));
             const sCtx = smallCanvas.getContext('2d');
-            if (sCtx) {
-              sCtx.fillStyle = '#FFFFFF';
-              sCtx.fillRect(0, 0, smallCanvas.width, smallCanvas.height);
-              sCtx.drawImage(canvas, 0, 0, smallCanvas.width, smallCanvas.height);
+            if (!sCtx) break;
+            sCtx.fillStyle = '#FFFFFF';
+            sCtx.fillRect(0, 0, smallCanvas.width, smallCanvas.height);
+            sCtx.drawImage(currentCanvas, 0, 0, smallCanvas.width, smallCanvas.height);
+
+            // Test quality levels from 0.70 down to 0.35
+            for (const q of [0.70, 0.52, 0.38]) {
               const blob: Blob | null = await new Promise((res) =>
-                smallCanvas.toBlob((b) => res(b), 'image/jpeg', 0.6)
+                smallCanvas.toBlob((b) => res(b), 'image/jpeg', q)
               );
               if (blob) {
                 const buf = await blob.arrayBuffer();
-                bestBytes = new Uint8Array(buf);
+                const bytes = new Uint8Array(buf);
+                if (bytes.length <= maxBytes || !bestBytes || bytes.length < bestBytes.length) {
+                  bestBytes = bytes;
+                  if (bytes.length <= maxBytes) break;
+                }
               }
             }
+            currentCanvas = smallCanvas;
           }
 
           if (!bestBytes) {
             const blob: Blob | null = await new Promise((res) =>
-              canvas.toBlob((b) => res(b), 'image/jpeg', 0.5)
+              canvas.toBlob((b) => res(b), 'image/jpeg', 0.45)
             );
             const buf = blob ? await blob.arrayBuffer() : new ArrayBuffer(0);
             bestBytes = new Uint8Array(buf);
@@ -465,6 +477,11 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
 
       setIsGenerating(false);
       setProgressText('');
+
+      // Auto-scroll smoothly to the Download section so mobile users see the download action immediately
+      setTimeout(() => {
+        resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
     } catch (err) {
       setIsGenerating(false);
       const toolSlug = targetMaxKb ? `jpg-to-pdf-under-${targetMaxKb}kb` : 'image-to-pdf';
@@ -816,35 +833,51 @@ export function ImageToPdfConverter({ initialTargetMaxKb }: { initialTargetMaxKb
               </p>
             </div>
 
-            {/* Action Generate Button */}
+            {/* Action Generate / Download Button */}
             <div className="pt-2">
-              <button
-                type="button"
-                onClick={handleGeneratePdf}
-                disabled={isGenerating}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2b3470] disabled:bg-gray-400 text-white font-semibold text-xs sm:text-sm rounded-[4px] shadow-xs transition-colors cursor-pointer disabled:cursor-not-allowed"
-              >
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin text-white" />
-                    <span>{progressText || 'Creating PDF document...'}</span>
-                  </>
-                ) : (
-                  <>
-                    <FileText className="h-4 w-4 text-amber-300" />
-                    <span>
-                      Convert {images.length} Image{images.length > 1 ? 's' : ''} to PDF
-                      {targetMaxKb ? ` (Under ${targetMaxKb} KB)` : ''}
-                    </span>
-                  </>
-                )}
-              </button>
+              {pdfBlob && pdfUrl ? (
+                <button
+                  type="button"
+                  onClick={handleDownload}
+                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-[4px] shadow-sm transition-all cursor-pointer"
+                >
+                  <Download className="h-4 w-4" />
+                  <span>
+                    ✓ PDF Ready! Click to Download ({formatBytes(pdfBlob.size)})
+                  </span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleGeneratePdf}
+                  disabled={isGenerating}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#414FA8] hover:bg-[#343f88] active:bg-[#2b3470] disabled:bg-gray-400 text-white font-semibold text-xs sm:text-sm rounded-[4px] shadow-xs transition-colors cursor-pointer disabled:cursor-not-allowed"
+                >
+                  {isGenerating ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin text-white" />
+                      <span>{progressText || 'Creating PDF document...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <FileText className="h-4 w-4 text-amber-300" />
+                      <span>
+                        Convert {images.length} Image{images.length > 1 ? 's' : ''} to PDF
+                        {targetMaxKb ? ` (Under ${targetMaxKb} KB)` : ''}
+                      </span>
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
 
           {/* 3. Generated PDF Result View */}
           {pdfBlob && pdfUrl && (
-            <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4 animate-in fade-in duration-200">
+            <div
+              ref={resultRef}
+              className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4 animate-in fade-in duration-200"
+            >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0" />

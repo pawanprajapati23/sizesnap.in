@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { formatBytes, calculateSavings, sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { padJpegBlob } from '@/lib/image-padding';
 import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -222,13 +223,19 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
         }
       }
 
-      const finalBlob = bestBlob || smallestBlobEver;
+      let finalBlob = bestBlob || smallestBlobEver;
       const finalScale = bestBlob ? bestScale : smallestScaleEver;
 
       if (!finalBlob) {
         setIsProcessing(false);
         setErrorMsg('Could not process this image to target size.');
         return;
+      }
+
+      // If target is JPEG and output is smaller than requested targetBytes,
+      // safely pad JPEG with standard COM markers so user gets their exact desired file size
+      if (targetMime === 'image/jpeg' && finalBlob.size < targetBytes * 0.95) {
+        finalBlob = await padJpegBlob(finalBlob, targetBytes);
       }
 
       const finalW = Math.round(origW * finalScale);

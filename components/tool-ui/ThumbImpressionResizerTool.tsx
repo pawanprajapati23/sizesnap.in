@@ -19,6 +19,7 @@ import {
   Check,
 } from 'lucide-react';
 import { formatBytes } from '@/lib/format-utils';
+import { padJpegBlob } from '@/lib/image-padding';
 import { trackProcessingSuccess, trackDownload } from '@/lib/firebase';
 
 type ExamType = 'ibps' | 'rrb' | 'state' | 'custom';
@@ -238,6 +239,11 @@ export function ThumbImpressionResizerTool() {
       }
 
       if (!bestBlob) throw new Error('Image generation failed');
+
+      // Safely pad JPEG if compressed output is below targetBytes
+      if (bestBlob.size < targetBytes) {
+        bestBlob = await padJpegBlob(bestBlob, targetBytes);
+      }
 
       const url = URL.createObjectURL(bestBlob);
       const filename = `left_thumb_impression_${targetW}x${targetH}.jpg`;

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import type { ExamPreset, ExamDocumentSpec } from '@/data/exam-presets';
 import { formatBytes } from '@/lib/format-utils';
+import { padJpegBlob } from '@/lib/image-padding';
 import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import {
   Upload,
@@ -312,6 +313,12 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
         throw new Error('Failed to encode JPEG blob from canvas.');
       }
 
+      // If compressed blob is below targetBytes or below minBytes (common for low-res inputs),
+      // safely pad JPEG with standard COM markers so file reaches target size and satisfies portal limits
+      if (bestBlob.size < targetBytes) {
+        bestBlob = await padJpegBlob(bestBlob, targetBytes);
+      }
+
       const finalSizeKb = Math.round(bestBlob.size / 1024);
       const isValidSize = bestBlob.size >= minBytes && bestBlob.size <= maxBytes;
 
@@ -516,7 +523,7 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
         <div className="space-y-5">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             {/* Left Controls Column (5 cols) */}
-            <div className="lg:col-span-5 bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
+            <div className="order-2 lg:order-1 lg:col-span-5 bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
               <div className="flex items-center justify-between border-b border-gray-100 pb-2.5">
                 <span className="text-xs font-bold text-gray-900">Customization &amp; Stamp</span>
                 <button
@@ -701,7 +708,7 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
             </div>
 
             {/* Right Live Preview & Download (7 cols) */}
-            <div className="lg:col-span-7 bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
+            <div className="order-1 lg:order-2 lg:col-span-7 bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
               <div className="flex items-center justify-between border-b border-gray-100 pb-2.5">
                 <span className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
                   <Eye className="h-3.5 w-3.5 text-[#414FA8]" /> Live Processed Output

@@ -103,4 +103,9 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'thumb-resizer': '/tools/thumb-impression-resizer',
   'ibps-thumb-resizer': '/tools/thumb-impression-resizer',
   'thumb-impression': '/tools/thumb-impression-resizer',
+  'ibps-declaration-resizer': '/tools/handwritten-declaration-resizer',
+  'declaration-resizer': '/tools/handwritten-declaration-resizer',
+  'sbi-declaration-resizer': '/tools/handwritten-declaration-resizer',
+  'handwritten-declaration-800x400': '/tools/handwritten-declaration-resizer',
+  'bank-declaration-resizer': '/tools/handwritten-declaration-resizer',
 };

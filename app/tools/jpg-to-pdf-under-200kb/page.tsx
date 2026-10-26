@@ -35,12 +35,12 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
-  'image-to-pdf',
-  'compress-pdf',
+  'jpg-to-pdf-under-150kb',
+  'jpg-to-pdf-under-100kb',
+  'jpg-to-pdf-under-500kb',
+  'compress-pdf-140kb',
+  'compress-pdf-300kb',
   'document-scanner',
-  'crop-image',
-  'compress-image',
-  'passport-photo-maker',
 ];
 
 const FAQS = [

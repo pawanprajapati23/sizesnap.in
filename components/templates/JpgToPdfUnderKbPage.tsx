@@ -158,6 +158,36 @@ export function JpgToPdfUnderKbPage({
                 </div>
               </div>
 
+              {/* Quick KB Preset Switcher Pills */}
+              <div className="bg-white p-3.5 sm:p-4 rounded-[4px] border border-gray-200 shadow-xs">
+                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-2">
+                  Select Exact Target PDF Size:
+                </span>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {[
+                    { label: 'JPG to PDF Under 100 KB', href: '/tools/jpg-to-pdf-under-100kb', kb: 100 },
+                    { label: 'JPG to PDF Under 150 KB', href: '/tools/jpg-to-pdf-under-150kb', kb: 150 },
+                    { label: 'JPG to PDF Under 200 KB', href: '/tools/jpg-to-pdf-under-200kb', kb: 200 },
+                    { label: 'JPG to PDF Under 500 KB', href: '/tools/jpg-to-pdf-under-500kb', kb: 500 },
+                    { label: 'Compress PDF 140KB', href: '/tools/compress-pdf-140kb', kb: 140 },
+                    { label: 'Compress PDF 300KB', href: '/tools/compress-pdf-300kb', kb: 300 },
+                    { label: 'Document Scanner', href: '/tools/document-scanner', kb: 0 },
+                  ].map((btn) => (
+                    <Link
+                      key={btn.label}
+                      href={btn.href}
+                      className={`px-3 py-1.5 rounded-[4px] transition-all font-semibold border ${
+                        btn.kb === targetKb
+                          ? 'bg-[#414FA8] text-white border-[#414FA8] shadow-xs'
+                          : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-[#EEF1FB] hover:border-[#414FA8] hover:text-[#414FA8]'
+                      }`}
+                    >
+                      {btn.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               {/* Tool core */}
               <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
                 <ImageToPdfConverter initialTargetMaxKb={targetKb} />

@@ -56,11 +56,11 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
-  'pan-card-photo-resizer',
+  'handwritten-declaration-resizer',
   'passport-photo-maker',
   '14kb-photo-size',
+  'pan-card-photo-resizer',
   'reduce-image-size-in-kb',
-  'compress-image-to-20kb',
   'photo-and-signature-joiner',
 ];
 

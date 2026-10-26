@@ -30,6 +30,7 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'compress-pdf-500kb',
   'compress-pdf-50kb',
   'thumb-impression-resizer',
+  'handwritten-declaration-resizer',
   'jpg-to-pdf-under-200kb',
   'jpeg-to-pdf-under-200kb',
   'jpg-to-pdf-under-100kb',
@@ -561,6 +562,12 @@ export function getSeoRedirect(pathname: string): string | null {
     'thumb-resizer': 'thumb-impression-resizer',
     'ibps-thumb-resizer': 'thumb-impression-resizer',
     'thumb-impression': 'thumb-impression-resizer',
+    'handwritten-declaration-resizer': 'handwritten-declaration-resizer',
+    'ibps-declaration-resizer': 'handwritten-declaration-resizer',
+    'declaration-resizer': 'handwritten-declaration-resizer',
+    'sbi-declaration-resizer': 'handwritten-declaration-resizer',
+    'handwritten-declaration-800x400': 'handwritten-declaration-resizer',
+    'bank-declaration-resizer': 'handwritten-declaration-resizer',
   };
 
   if (ALIAS_MAP[slug]) {

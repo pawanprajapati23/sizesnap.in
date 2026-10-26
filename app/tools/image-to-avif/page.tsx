@@ -55,9 +55,99 @@ const FAQS = [
 export default function ImageToAvifPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://www.sizesnap.in/tools/image-to-avif#webapp',
+        name: 'SizeSnap Image to AVIF Converter',
+        url: 'https://www.sizesnap.in/tools/image-to-avif',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+        },
+        featureList: [
+          'Ultra-efficient AVIF image conversion',
+          'Up to 80% compression savings over JPEG',
+          'Batch convert multiple images with ZIP export',
+          '100% Client-side browser execution',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Image Tools',
+            item: 'https://www.sizesnap.in/#directory',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Image to AVIF',
+            item: 'https://www.sizesnap.in/tools/image-to-avif',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Convert Image to AVIF Online Free',
+        description: 'Convert JPG, PNG, and WebP images into ultra-compact next-generation AVIF files.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Upload Photos',
+            text: 'Choose or drag JPG, PNG, or WebP images.',
+            position: 1,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Select AVIF Quality',
+            text: 'Adjust your preferred AVIF quality slider for optimal compression.',
+            position: 2,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Download AVIF',
+            text: 'Click Convert to AVIF and download files individually or packed in a single ZIP.',
+            position: 3,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">

@@ -568,6 +568,22 @@ export function getSeoRedirect(pathname: string): string | null {
     'sbi-declaration-resizer': 'handwritten-declaration-resizer',
     'handwritten-declaration-800x400': 'handwritten-declaration-resizer',
     'bank-declaration-resizer': 'handwritten-declaration-resizer',
+    'jpeg-to-jpg': 'png-to-jpg',
+    'jpg-to-jpeg': 'png-to-jpg',
+    'image-to-jpg': 'png-to-jpg',
+    'image-to-png': 'jpg-to-png',
+    'webp-to-png': 'jpg-to-png',
+    'png-to-webp': 'image-to-webp',
+    'heic-to-jpg': 'png-to-jpg',
+    'heic-to-png': 'jpg-to-png',
+    'pdf-to-jpg': 'pdf-to-images',
+    'pdf-to-png': 'pdf-to-images',
+    'pdf-to-image': 'pdf-to-images',
+    'png-to-pdf': 'image-to-pdf',
+    'photo-to-pdf': 'image-to-pdf',
+    'photos-to-pdf': 'image-to-pdf',
+    'picture-to-pdf': 'image-to-pdf',
+    'document-to-pdf': 'image-to-pdf',
   };
 
   if (ALIAS_MAP[slug]) {

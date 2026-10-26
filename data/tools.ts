@@ -5253,6 +5253,8 @@ export const NAV_MENUS: NavMenu[] = [
       { name: 'Blur Background', slug: 'blur-background' },
       { name: 'AI Photo Enhancer', slug: 'ai-photo-enhancer' },
       { name: 'Document Scanner', slug: 'document-scanner' },
+      { name: 'JPG to PNG', slug: 'jpg-to-png' },
+      { name: 'PNG to JPG', slug: 'png-to-jpg' },
       { name: 'Photo Collage Maker', slug: 'photo-collage-maker' },
       { name: 'Watermark Images', slug: 'watermark-images' },
     ],

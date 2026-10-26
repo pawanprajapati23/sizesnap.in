@@ -68,8 +68,8 @@ export function PngToJpgConverter() {
   const processFiles = useCallback((files: FileList | File[]) => {
     setErrorMsg(null);
     Array.from(files).forEach((file) => {
-      if (!file.type.match(/^image\/(png|webp)$/i) && !file.name.match(/\.(png|webp)$/i)) {
-        setErrorMsg('Please select PNG (or WebP) images.');
+      if (!file.type.match(/^image\/(png|webp|jpeg|jpg|jfif|avif|heic|heif)$/i) && !file.name.match(/\.(png|webp|jpe?g|jfif|avif|heic|heif)$/i)) {
+        setErrorMsg('Please select a valid image file (PNG, WebP, JPEG, etc.).');
         return;
       }
 
@@ -246,7 +246,7 @@ export function PngToJpgConverter() {
             ref={fileInputRef}
             type="file"
             multiple
-            accept="image/png,image/webp,.png,.webp"
+            accept="image/png,image/webp,image/jpeg,image/jpg,.png,.webp,.jpeg,.jpg,.jfif,.avif"
             onChange={(e) => e.target.files && processFiles(e.target.files)}
             className="sr-only"
           />
@@ -304,7 +304,7 @@ export function PngToJpgConverter() {
                 ref={addMoreInputRef}
                 type="file"
                 multiple
-                accept="image/png,image/webp,.png,.webp"
+                accept="image/png,image/webp,image/jpeg,image/jpg,.png,.webp,.jpeg,.jpg,.jfif,.avif"
                 onChange={(e) => e.target.files && processFiles(e.target.files)}
                 className="sr-only"
               />

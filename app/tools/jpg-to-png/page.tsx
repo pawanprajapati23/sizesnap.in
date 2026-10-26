@@ -55,9 +55,99 @@ const FAQS = [
 export default function JpgToPngPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://www.sizesnap.in/tools/jpg-to-png#webapp',
+        name: 'SizeSnap JPG to PNG Converter',
+        url: 'https://www.sizesnap.in/tools/jpg-to-png',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+        },
+        featureList: [
+          'Lossless JPG to PNG conversion',
+          'Batch convert multiple files simultaneously',
+          'One-click ZIP archive export',
+          '100% Client-side privacy protection',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Image Tools',
+            item: 'https://www.sizesnap.in/#directory',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'JPG to PNG',
+            item: 'https://www.sizesnap.in/tools/jpg-to-png',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Convert JPG to PNG Online Free',
+        description: 'Convert JPG, JPEG, and WebP images to lossless PNG format in batch without quality loss.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Upload JPG Files',
+            text: 'Drag and drop or browse to select one or multiple JPG or JPEG files.',
+            position: 1,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Batch Convert to PNG',
+            text: 'Click Convert to PNG. The conversion is processed instantly inside your web browser.',
+            position: 2,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Download PNG or ZIP',
+            text: 'Download individual lossless PNG files or click Download All as ZIP for 1-click archiving.',
+            position: 3,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">

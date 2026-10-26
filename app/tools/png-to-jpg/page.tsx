@@ -55,9 +55,100 @@ const FAQS = [
 export default function PngToJpgPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://www.sizesnap.in/tools/png-to-jpg#webapp',
+        name: 'SizeSnap PNG to JPG Converter',
+        url: 'https://www.sizesnap.in/tools/png-to-jpg',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+        },
+        featureList: [
+          'High-speed PNG to JPG conversion',
+          'Custom background color for transparency fill',
+          'Adjustable JPEG compression quality slider',
+          'Batch conversion with 1-click ZIP export',
+          '100% Client-side browser privacy',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Image Tools',
+            item: 'https://www.sizesnap.in/#directory',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'PNG to JPG',
+            item: 'https://www.sizesnap.in/tools/png-to-jpg',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Convert PNG to JPG Online Free',
+        description: 'Convert heavy PNG images to compact JPGs with custom transparency background fill in batch.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Upload PNG Files',
+            text: 'Drag and drop or browse to select your PNG or WebP images.',
+            position: 1,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Set Background & Quality',
+            text: 'Choose white or custom background fill for transparent areas and adjust JPEG quality level.',
+            position: 2,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Convert & Download',
+            text: 'Click Convert to JPG. Download single JPG files or get all images together in a ZIP file.',
+            position: 3,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">

@@ -59,9 +59,100 @@ const FAQS = [
 export default function PdfToImagesPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://www.sizesnap.in/tools/pdf-to-images#webapp',
+        name: 'SizeSnap PDF to Images Converter',
+        url: 'https://www.sizesnap.in/tools/pdf-to-images',
+        applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+        },
+        featureList: [
+          'High resolution PDF to JPG and PNG rendering',
+          'Custom DPI selection (72, 150, 200, 300 DPI)',
+          'Selective page range extraction',
+          '1-Click bulk ZIP file export',
+          '100% Client-side WebAssembly processing',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'PDF Tools',
+            item: 'https://www.sizesnap.in/pdf-tools',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'PDF to Images',
+            item: 'https://www.sizesnap.in/tools/pdf-to-images',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Convert PDF Pages to JPG / PNG Images Online',
+        description: 'Render and extract pages from any PDF document into crisp JPG or PNG images directly in your browser.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Upload PDF File',
+            text: 'Drop or browse to select your PDF document (multi-page supported).',
+            position: 1,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Choose Format & Resolution',
+            text: 'Select output format (JPG or PNG), DPI resolution (150 or 300 DPI), and optional page range.',
+            position: 2,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Extract & Download',
+            text: 'Click Convert PDF Pages. Download individual pages or click Download All as ZIP.',
+            position: 3,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Breadcrumb Navigation */}

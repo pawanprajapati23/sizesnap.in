@@ -59,9 +59,100 @@ const FAQS = [
 export default function ImageToPdfPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://www.sizesnap.in/tools/image-to-pdf#webapp',
+        name: 'SizeSnap Image to PDF Converter',
+        url: 'https://www.sizesnap.in/tools/image-to-pdf',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+        },
+        featureList: [
+          'Convert multiple JPG, PNG, and WebP images to a single PDF',
+          'Drag-and-drop page reordering',
+          'Standard A4, US Letter, and Fit-Image page size options',
+          'Optional target KB size limits (under 100KB, 200KB, 500KB)',
+          '100% Client-side browser privacy',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'PDF Tools',
+            item: 'https://www.sizesnap.in/pdf-tools',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Image to PDF',
+            item: 'https://www.sizesnap.in/tools/image-to-pdf',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Convert Images to PDF Online Free',
+        description: 'Combine and convert multiple JPG, JPEG, and PNG images into a clean PDF document.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Upload Photos',
+            text: 'Drop or select one or multiple JPG, PNG, or WebP images.',
+            position: 1,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Arrange Pages & Set Margins',
+            text: 'Reorder pages using the arrow buttons and customize page size (A4 / Letter).',
+            position: 2,
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Convert & Download PDF',
+            text: 'Click Convert to PDF. Your file is compiled locally in your browser for instant download.',
+            position: 3,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Breadcrumb Navigation */}

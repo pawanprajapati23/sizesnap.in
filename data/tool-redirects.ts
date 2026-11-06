@@ -125,4 +125,33 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'photos-to-pdf': '/tools/image-to-pdf',
   'picture-to-pdf': '/tools/image-to-pdf',
   'document-to-pdf': '/tools/image-to-pdf',
+  // Color code & picker high-volume queries (Pi7 #1 keywords)
+  'color-code-from-image': '/tools/image-color-picker',
+  'what-color-is-this': '/tools/image-color-picker',
+  'what-is-this-color': '/tools/image-color-picker',
+  'hex-color-picker': '/tools/image-color-picker',
+  'hexadecimal-color-picker': '/tools/image-color-picker',
+  'color-finder-hex': '/tools/image-color-picker',
+  'color-picker-from-image': '/tools/image-color-picker',
+  // Black to white converter aliases (74,000 search volume)
+  'black-to-white': '/tools/convert-black-image-to-white',
+  'convert-black-to-white': '/tools/convert-black-image-to-white',
+  'black-image-to-white': '/tools/convert-black-image-to-white',
+  'invert-black-to-white': '/tools/convert-black-image-to-white',
+  'convert-black-image-to-white': '/tools/convert-black-image-to-white',
+  // Flip image vertical to horizontal (110,000 search volume)
+  'vertical-to-horizontal': '/tools/flip-image',
+  'horizontal-to-vertical': '/tools/flip-image',
+  'mirror-image': '/tools/flip-image',
+  'mirror-photo': '/tools/flip-image',
+  // High volume image into pdf queries
+  'convert-into-pdf': '/tools/image-to-pdf',
+  'jpegs-to-pdf': '/tools/image-to-pdf',
+  'foto-to-pdf': '/tools/image-to-pdf',
+  'image-into-pdf': '/tools/image-to-pdf',
+  'images-into-pdf': '/tools/image-to-pdf',
+  'photos-into-pdf': '/tools/image-to-pdf',
+  'pics-to-pdf': '/tools/image-to-pdf',
+  'picture-pdf': '/tools/image-to-pdf',
+  'png-to-jpeg': '/tools/png-to-jpg',
 };

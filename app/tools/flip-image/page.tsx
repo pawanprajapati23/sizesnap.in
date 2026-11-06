@@ -10,14 +10,27 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Flip Image - Flip Photos Horizontally & Vertically Online Free | SizeSnap',
+  title: 'Flip Image Online Free - Vertical to Horizontal Mirror Photo | SizeSnap',
   description:
-    'Flip JPG, PNG, and WebP images online for free. Mirror selfie photos horizontally or flip pictures vertically upside-down. Batch flip multiple images and download as ZIP. 100% private in browser.',
+    'Flip image vertical to horizontal or horizontal to vertical online for free. Mirror selfie photos horizontally or flip pictures vertically upside-down. Batch flip multiple images and download as ZIP. 100% private in browser.',
+  keywords: [
+    'vertical to horizontal',
+    'flip image',
+    'flip photo horizontally',
+    'horizontal to vertical image',
+    'mirror image online',
+    'mirror photo online free',
+    'flip image vertically',
+    'flip picture upside down',
+    'invert photo horizontally',
+    'flip picture',
+    'mirror image',
+  ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/flip-image',
   },
   openGraph: {
-    title: 'Flip Image - Flip Photos Horizontally & Vertically Online Free | SizeSnap',
+    title: 'Flip Image Online Free - Vertical to Horizontal Mirror Photo | SizeSnap',
     description:
       'Mirror photos horizontally or flip vertically with instant live preview and bulk ZIP download.',
     url: 'https://www.sizesnap.in/tools/flip-image',
@@ -55,9 +68,92 @@ const FAQS = [
 export default function FlipImagePage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        name: 'Flip Image Online (Vertical to Horizontal)',
+        url: 'https://www.sizesnap.in/tools/flip-image',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'All',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+        description:
+          'Free online tool to flip images vertical to horizontal or horizontal to vertical and mirror selfie photos.',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Image Tools',
+            item: 'https://www.sizesnap.in/image-tools',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Flip Image',
+            item: 'https://www.sizesnap.in/tools/flip-image',
+          },
+        ],
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Flip Image Vertical to Horizontal Online',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Upload Photo',
+            text: 'Drop or select one or more photos (JPG, PNG, WebP).',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Flip Horizontally or Vertically',
+            text: 'Click "Flip Horizontal" to mirror or "Flip Vertical" to invert upside down.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Download Flipped Image',
+            text: 'Download individual flipped photos or save all as a ZIP archive.',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
-      <Navbar />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+        <Navbar />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">
@@ -187,5 +283,6 @@ export default function FlipImagePage() {
 
       <Footer />
     </div>
+    </>
   );
 }

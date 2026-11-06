@@ -584,6 +584,36 @@ export function getSeoRedirect(pathname: string): string | null {
     'photos-to-pdf': 'image-to-pdf',
     'picture-to-pdf': 'image-to-pdf',
     'document-to-pdf': 'image-to-pdf',
+    // Color code & picker high-volume queries (Pi7 #1 keywords)
+    'color-code-from-image': 'image-color-picker',
+    'what-color-is-this': 'image-color-picker',
+    'what-is-this-color': 'image-color-picker',
+    'hex-color-picker': 'image-color-picker',
+    'hexadecimal-color-picker': 'image-color-picker',
+    'color-finder-hex': 'image-color-picker',
+    'color-picker-from-image': 'image-color-picker',
+    // Black to white converter aliases (74,000 search volume)
+    'black-to-white': 'convert-black-image-to-white',
+    'convert-black-to-white': 'convert-black-image-to-white',
+    'black-image-to-white': 'convert-black-image-to-white',
+    'invert-black-to-white': 'convert-black-image-to-white',
+    'convert-black-image-to-white': 'convert-black-image-to-white',
+    // Flip image vertical to horizontal (110,000 search volume)
+    'vertical-to-horizontal': 'flip-image',
+    'horizontal-to-vertical': 'flip-image',
+    'mirror-image': 'flip-image',
+    'mirror-photo': 'flip-image',
+    // High volume image into pdf queries
+    'convert-into-pdf': 'image-to-pdf',
+    'jpegs-to-pdf': 'image-to-pdf',
+    'foto-to-pdf': 'image-to-pdf',
+    'image-into-pdf': 'image-to-pdf',
+    'images-into-pdf': 'image-to-pdf',
+    'photos-into-pdf': 'image-to-pdf',
+    'pics-to-pdf': 'image-to-pdf',
+    'picture-pdf': 'image-to-pdf',
+    'webp-to-jpg': 'png-to-jpg',
+    'png-to-jpeg': 'png-to-jpg',
   };
 
   if (ALIAS_MAP[slug]) {

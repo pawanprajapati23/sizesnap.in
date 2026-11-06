@@ -10,14 +10,29 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Image Color Picker - Extract HEX, RGB & HSL from Image Online Free | SizeSnap',
+  title: 'Image Color Picker - Color Code from Image, HEX & RGB Finder | SizeSnap',
   description:
-    'Extract HEX, RGB, HSL, and CMYK color codes from any image online for free. Click or hover on any pixel, extract dominant color palettes, and copy codes with 1-click. 100% private in browser.',
+    'Free online image color picker & color code finder. Find what color is this with pixel crosshair pipette. Extract HEX, RGB, HSL, and CMYK color codes, dominant palettes, and 1-click clipboard copy. 100% private in browser.',
+  keywords: [
+    'color picker',
+    'color code from image',
+    'image color picker',
+    'what color is this',
+    'what is this color',
+    'hex color picker',
+    'color finder hex',
+    'hexadecimal color picker',
+    'pick color from image',
+    'hex code from image',
+    'rgb color picker from image',
+    'extract color from image online',
+    'find color code from picture',
+  ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/image-color-picker',
   },
   openGraph: {
-    title: 'Image Color Picker - Extract HEX, RGB & HSL from Image Online Free | SizeSnap',
+    title: 'Image Color Picker - Color Code from Image, HEX & RGB Finder | SizeSnap',
     description:
       'Extract color codes from images with crosshair pipette precision, dominant palettes, and 1-click clipboard copy.',
     url: 'https://www.sizesnap.in/tools/image-color-picker',
@@ -55,9 +70,92 @@ const FAQS = [
 export default function ImageColorPickerPage() {
   const relatedTools = ALL_TOOLS.filter((t) => RELATED_SLUGS.includes(t.slug));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        name: 'Image Color Picker & Color Code Finder',
+        url: 'https://www.sizesnap.in/tools/image-color-picker',
+        applicationCategory: 'DesignApplication',
+        operatingSystem: 'All',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+        description:
+          'Free online tool to extract HEX, RGB, HSL, and CMYK color codes from any image or picture with pixel precision.',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Image Tools',
+            item: 'https://www.sizesnap.in/image-tools',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Image Color Picker',
+            item: 'https://www.sizesnap.in/tools/image-color-picker',
+          },
+        ],
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to Pick Color and Find Color Code from an Image Online',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Upload Image',
+            text: 'Drop or select your photo, logo, or screenshot into the tool.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Hover and Click Pixel',
+            text: 'Move crosshair pipette across image to inspect real-time colors, and click to lock.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Copy Color Code',
+            text: 'Click to copy HEX, RGB, HSL, or CMYK values directly to clipboard.',
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
-      <Navbar />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+        <Navbar />
 
       <main className="flex-1 w-full max-w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
         <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4" aria-label="Breadcrumb">
@@ -187,5 +285,6 @@ export default function ImageColorPickerPage() {
 
       <Footer />
     </div>
+    </>
   );
 }

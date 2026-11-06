@@ -11,14 +11,14 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.sizesnap.in'),
-  title: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
-  description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
+  title: 'SizeSnap - Free Online Size Reducer, Image Compressor & PDF Tools',
+  description: 'Free online size reducer and compressor for images & PDFs. Reduce image size in KB, resize photos, and compress PDFs instantly with 100% client-side privacy.',
   alternates: {
     canonical: 'https://www.sizesnap.in/',
   },
   openGraph: {
-    title: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
-    description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
+    title: 'SizeSnap - Free Online Size Reducer, Image Compressor & PDF Tools',
+    description: 'Free online size reducer and compressor for images & PDFs. Reduce image size in KB, resize photos, and compress PDFs instantly with 100% client-side privacy.',
     url: 'https://www.sizesnap.in/',
     siteName: 'SizeSnap',
     type: 'website',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         url: 'https://www.sizesnap.in/logo.png',
         width: 1200,
         height: 630,
-        alt: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
+        alt: 'SizeSnap - Free Online Size Reducer, Image Compressor & PDF Tools',
       },
     ],
   },
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SizeSnap - Free Image Compressor, Resizer & PDF Tools',
-    description: 'Compress, resize, convert and edit images and PDFs online with free SizeSnap tools.',
+    title: 'SizeSnap - Free Online Size Reducer, Image Compressor & PDF Tools',
+    description: 'Free online size reducer and compressor for images & PDFs. Reduce image size in KB, resize photos, and compress PDFs instantly with 100% client-side privacy.',
     images: ['https://www.sizesnap.in/logo.png'],
   },
   verification: {

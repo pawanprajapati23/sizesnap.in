@@ -11,13 +11,17 @@ import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
 
 export const metadata: Metadata = {
-  title: 'Resize Image to 3.5cm x 4.5cm Online Free - 35x45mm Photo Maker | SizeSnap',
+  title: '3.5 x 4.5 cm Photo Size (4.5 x 3.5 cm) Online Free - 35x45mm Resizer | SizeSnap',
   description:
-    'Resize image and photo to official 3.5 x 4.5 cm (35mm x 45mm) online for free. Compress to 20KB-50KB for SSC, UPSC, Indian Passport, and government exam forms.',
+    'Resize image & photo to official 3.5 x 4.5 cm (or 4.5 x 3.5 cm / 35mm x 45mm) online for free. Compress to 20KB-50KB for SSC, UPSC, Indian Passport, and government exam forms. 100% private.',
   keywords: [
+    '3.5 cm x 4.5 cm photo size',
+    '4.5 cm x 3.5 cm photo size online free',
+    '4.5 x 3.5 cm photo size',
     'resize image to 3.5cm x 4.5cm',
     'resize image 3.5cm 4.5cm',
     '3.5 x 4.5 cm photo converter',
+    '3.5 cm x 4.5 cm in pixels at 200 dpi',
     'photo resize 3.5 x 4.5 cm online',
     '35mm x 45mm photo resizer online',
     'passport photo size 3.5 x 4.5 cm in kb',
@@ -28,9 +32,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/resize-image-3-5cm-4-5cm',
   },
   openGraph: {
-    title: 'Resize Image to 3.5cm x 4.5cm Online Free - 35x45mm Photo Maker | SizeSnap',
+    title: '3.5 x 4.5 cm Photo Size (4.5 x 3.5 cm) Online Free - 35x45mm Resizer | SizeSnap',
     description:
-      'Free online tool to resize photo to exact 3.5cm x 4.5cm (35mm x 45mm) dimensions and 20KB-50KB for Indian Passport, SSC, and UPSC forms.',
+      'Free online tool to resize photo to exact 3.5cm x 4.5cm (35mm x 45mm / 4.5x3.5 cm) dimensions and 20KB-50KB for Indian Passport, SSC, and UPSC forms.',
     url: 'https://www.sizesnap.in/tools/resize-image-3-5cm-4-5cm',
     type: 'website',
   },

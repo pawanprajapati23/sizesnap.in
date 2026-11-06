@@ -3,16 +3,19 @@ import type { Metadata } from 'next';
 import { ExactKbPage } from '@/components/templates/ExactKbPage';
 
 export const metadata: Metadata = {
-  title: '110KB Photo Size - Resize Image to 110KB Online Free | SizeSnap',
+  title: '110KB Photo Size - Resize Image to 110KB (Exact KB) Online Free | SizeSnap',
   description:
-    'Make your photo size exactly 110KB for banking, SSC, and recruitment portals. Reduce image size to 110KB without losing quality. 100% free, private, and instant.',
+    'Convert and resize photo to exact 110KB (under 110 KB) online for free without blur. Instant 110 KB photo converter for banking, IBPS, police & govt recruitment forms. 100% private.',
   keywords: [
     '110 kb photo size',
     '110kb photo size',
+    '110 kb',
+    'photo 110 kb',
+    'photo size 110 kb',
+    '110 kb photo size converter',
+    '110kb photo size converter',
     'resize image to 110kb',
     'compress image to 110kb',
-    '110 kb photo size converter',
-    'photo size 110 kb',
     'reduce image size to 110kb',
     'compress photo to 110kb online',
   ],
@@ -20,9 +23,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/110kb-photo-size',
   },
   openGraph: {
-    title: '110KB Photo Size - Resize Image to 110KB Online Free | SizeSnap',
+    title: '110KB Photo Size - Resize Image to 110KB (Exact KB) Online Free | SizeSnap',
     description:
-      'Compress and resize photos to exact 110KB online for free without quality loss. Ideal for banking and government applications.',
+      'Convert and resize photo to exact 110KB online for free without quality loss. Ideal for banking, IBPS, and government applications.',
     url: 'https://www.sizesnap.in/tools/110kb-photo-size',
     siteName: 'SizeSnap',
     type: 'website',

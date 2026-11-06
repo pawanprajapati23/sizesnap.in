@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Sidebar } from '@/components/Sidebar';
-import { DocumentScannerTool } from '@/components/tool-ui/DocumentScannerTool';
+import { DocumentShadowRemoverTool } from '@/components/tool-ui/DocumentShadowRemoverTool';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import {
@@ -38,11 +38,15 @@ export const metadata: Metadata = {
     'black and white scan',
     'remove shadow from document photo',
     'shadow remover from pdf',
+    'remove shadow from photo online',
     'document shadow remover free',
     'clean document photo online',
     'whiten document background',
+    'photo ko photocopy jaisa banaye',
     'remove shadow from certificate photo',
-    'scan filter online',
+    'scan in black and white',
+    'mobile shadow remover',
+    'clean marksheet shadow online',
   ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/remove-shadow-from-document',
@@ -239,9 +243,9 @@ export default function RemoveShadowFromDocumentPage() {
               </p>
             </div>
 
-            {/* Interactive Scanner Tool with Shadow Removal */}
+            {/* Interactive Document Shadow Remover Engine */}
             <div id="tool-area" className="scroll-mt-24">
-              <DocumentScannerTool />
+              <DocumentShadowRemoverTool />
             </div>
 
             {/* Feature Highlights Grid */}

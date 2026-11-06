@@ -30,19 +30,19 @@ import {
   Eye,
   Settings2,
   Maximize2,
+  Wand2,
 } from 'lucide-react';
 import { trackProcessingSuccess, trackDownload } from '@/lib/firebase';
-import { formatBytes } from '@/lib/format-utils';
 import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
 // Studio background color presets popular in Indian Cyber Cafes & CSC Kendras
 const STUDIO_BG_COLORS = [
+  { id: 'lightblue', name: 'Studio Sky Blue', hex: '#CBE3FB', border: '#93C5FD', desc: 'India Cyber Cafe #1 Choice (School, Police, State Exams)' },
   { id: 'white', name: 'White', hex: '#FFFFFF', border: '#D1D5DB', desc: 'Indian Passport, US Visa, SSC, Banking' },
-  { id: 'lightblue', name: 'Studio Sky Blue', hex: '#CBE3FB', border: '#93C5FD', desc: 'Most Popular in India (School, Police, State Exams)' },
   { id: 'royalblue', name: 'Royal Blue', hex: '#1E3A8A', border: '#1E40AF', desc: 'Formal Studio Backdrop' },
   { id: 'grey', name: 'Studio Grey', hex: '#E2E8F0', border: '#CBD5E1', desc: 'Corporate & Embassy Formal' },
   { id: 'cream', name: 'Off-White', hex: '#F8F9FA', border: '#E2E8F0', desc: 'Soft Neutral Off-White' },
-  { id: 'red', name: 'Studio Red', hex: '#DC2626', border: '#B91C1C', desc: 'State Admissions & Special Badges' },
+  { id: 'red', name: 'Studio Red', hex: '#DC2626', border: '#B91C1C', desc: 'State Badges & Special Admissions' },
 ];
 
 // Quick Sheet Count Presets for Cyber Cafe
@@ -56,17 +56,20 @@ const QUICK_PACKS = [
 
 export function CyberCafePassportPhotoTool() {
   // Input image state
+  const [rawFile, setRawFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [imageFilename, setImageFilename] = useState<string>('photo');
   const [imageNaturalSize, setImageNaturalSize] = useState<{ width: number; height: number } | null>(null);
 
-  // Background state
+  // Background states
   const [cutoutSrc, setCutoutSrc] = useState<string | null>(null);
-  const [selectedBgId, setSelectedBgId] = useState<string>('lightblue');
-  const [customBgColor, setCustomBgColor] = useState<string>('#FFFFFF');
+  const [smartCutoutSrc, setSmartCutoutSrc] = useState<string | null>(null);
+  const [selectedBgId, setSelectedBgId] = useState<string>('lightblue'); // default is popular Sky Blue
+  const [customBgColor, setCustomBgColor] = useState<string>('#CBE3FB');
   const [isRemovingBg, setIsRemovingBg] = useState<boolean>(false);
   const [bgRemovalProgress, setBgRemovalProgress] = useState<number>(0);
   const [useOriginalBg, setUseOriginalBg] = useState<boolean>(false);
+  const [aiErrorMsg, setAiErrorMsg] = useState<string | null>(null);
 
   // Biometric Alignment / Crop controls
   const [zoom, setZoom] = useState<number>(1.0);
@@ -131,6 +134,121 @@ export function CyberCafePassportPhotoTool() {
     };
   }, []);
 
+  // Get active background hex color
+  const getActiveBgColor = useCallback(() => {
+    if (selectedBgId === 'custom') return customBgColor;
+    const preset = STUDIO_BG_COLORS.find((c) => c.id === selectedBgId);
+    return preset ? preset.hex : '#FFFFFF';
+  }, [selectedBgId, customBgColor]);
+
+  // Instant Smart Corner-Key Color Replace Fallback (runs in 10ms on canvas)
+  const generateSmartCornerReplace = useCallback(
+    (sourceImg: HTMLImageElement, targetHex: string): string => {
+      const canvas = document.createElement('canvas');
+      canvas.width = sourceImg.width;
+      canvas.height = sourceImg.height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return sourceImg.src;
+
+      ctx.drawImage(sourceImg, 0, 0);
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Sample 4 corners for background color estimation
+      const sampleCoords = [
+        [Math.min(10, w - 1), Math.min(10, h - 1)],
+        [Math.max(0, w - 11), Math.min(10, h - 1)],
+        [Math.min(15, w - 1), Math.min(25, h - 1)],
+        [Math.max(0, w - 16), Math.min(25, h - 1)],
+      ];
+
+      let sR = 0, sG = 0, sB = 0;
+      for (const [sx, sy] of sampleCoords) {
+        const idx = (sy * w + sx) * 4;
+        sR += data[idx];
+        sG += data[idx + 1];
+        sB += data[idx + 2];
+      }
+      sR = Math.round(sR / sampleCoords.length);
+      sG = Math.round(sG / sampleCoords.length);
+      sB = Math.round(sB / sampleCoords.length);
+
+      // Target background RGB
+      const rT = parseInt(targetHex.slice(1, 3), 16) || 255;
+      const gT = parseInt(targetHex.slice(3, 5), 16) || 255;
+      const bT = parseInt(targetHex.slice(5, 7), 16) || 255;
+
+      const tolerance = 42;
+      const tolSq = tolerance * tolerance * 3;
+
+      // Scan and replace outer pixels
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const i = (y * w + x) * 4;
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          const dr = r - sR;
+          const dg = g - sG;
+          const db = b - sB;
+          const distSq = dr * dr + dg * dg + db * db;
+
+          if (distSq < tolSq) {
+            const factor = Math.min(1, Math.max(0, (tolSq - distSq) / (tolSq * 0.4)));
+            data[i] = Math.round(r * (1 - factor) + rT * factor);
+            data[i + 1] = Math.round(g * (1 - factor) + gT * factor);
+            data[i + 2] = Math.round(b * (1 - factor) + bT * factor);
+          }
+        }
+      }
+
+      ctx.putImageData(imgData, 0, 0);
+      return canvas.toDataURL('image/png');
+    },
+    []
+  );
+
+  // Background Cutout with AI (@imgly/background-removal)
+  // Passed directly as a Blob / File to prevent string URL corruption
+  const executeAiRemoveBg = useCallback(
+    async (fileToProcess: File): Promise<void> => {
+      setIsRemovingBg(true);
+      setBgRemovalProgress(10);
+      setAiErrorMsg(null);
+      setStatusMessage('Removing background with AI (running 100% in your browser)...');
+
+      try {
+        const { removeBackground } = await import('@imgly/background-removal');
+
+        // Pass File (Blob) directly!
+        const blob = await removeBackground(fileToProcess, {
+          publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.5.0/dist/',
+          progress: (key, current, total) => {
+            if (total > 0) {
+              setBgRemovalProgress(Math.min(95, Math.round((current / total) * 100)));
+            }
+          },
+        });
+
+        const cutoutUrl = registerUrl(URL.createObjectURL(blob));
+        setCutoutSrc(cutoutUrl);
+        setUseOriginalBg(false);
+        setStatusMessage('Background removed cleanly with AI.');
+      } catch (err: unknown) {
+        console.error('AI background removal error:', err);
+        setAiErrorMsg('AI cutout encountered a browser issue. Applied Smart Studio Color Match.');
+        setStatusMessage('Applied Smart Studio Color Match.');
+      } finally {
+        setIsRemovingBg(false);
+        setBgRemovalProgress(0);
+      }
+    },
+    [registerUrl]
+  );
+
   // Handle Photo File Upload
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -140,27 +258,31 @@ export function CyberCafePassportPhotoTool() {
   };
 
   const loadImageFile = (file: File) => {
+    setRawFile(file);
     const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
     setImageFilename(nameWithoutExt);
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const src = event.target?.result as string;
-      const img = new window.Image();
-      img.onload = () => {
-        setImageNaturalSize({ width: img.width, height: img.height });
-        setImageSrc(src);
-        setCutoutSrc(null); // Reset cutout on new upload
-        setUseOriginalBg(false);
-        setZoom(1.0);
-        setPanX(0);
-        setPanY(0);
-        setRotation(0);
-        setStatusMessage('Photo uploaded successfully.');
-      };
-      img.src = src;
+    const objectUrl = registerUrl(URL.createObjectURL(file));
+    const img = new window.Image();
+    img.onload = () => {
+      setImageNaturalSize({ width: img.width, height: img.height });
+      setImageSrc(objectUrl);
+      setCutoutSrc(null);
+      setUseOriginalBg(false);
+      setZoom(1.0);
+      setPanX(0);
+      setPanY(0);
+      setRotation(0);
+      setStatusMessage('Photo loaded. Changing background to Studio Sky Blue...');
+
+      // Immediately generate instant smart corner replace
+      const instantReplaced = generateSmartCornerReplace(img, getActiveBgColor());
+      setSmartCutoutSrc(instantReplaced);
+
+      // Automatically launch AI background removal
+      executeAiRemoveBg(file);
     };
-    reader.readAsDataURL(file);
+    img.src = objectUrl;
   };
 
   // Drag & drop handlers
@@ -171,45 +293,31 @@ export function CyberCafePassportPhotoTool() {
     }
   };
 
-  // Background Cutout with AI (@imgly/background-removal)
-  const handleAiRemoveBg = async () => {
-    if (!imageSrc) return;
-    setIsRemovingBg(true);
-    setBgRemovalProgress(15);
-    setStatusMessage('Loading AI background removal model (100% in browser)...');
+  // User clicks a Studio Background Color (White, Sky Blue, Navy, etc.)
+  const handleSelectColor = (colorId: string) => {
+    setSelectedBgId(colorId);
+    setUseOriginalBg(false);
 
-    try {
-      const { removeBackground } = await import('@imgly/background-removal');
-      const blob = await removeBackground(imageSrc, {
-        progress: (key, current, total) => {
-          if (total > 0) {
-            setBgRemovalProgress(Math.min(95, Math.round((current / total) * 100)));
-          }
-        },
-      });
-      const cutoutUrl = registerUrl(URL.createObjectURL(blob));
-      setCutoutSrc(cutoutUrl);
-      setUseOriginalBg(false);
-      setStatusMessage('Background removed cleanly with AI.');
-    } catch (err) {
-      console.error('Failed to remove background:', err);
-      setStatusMessage('AI background removal failed. Using color overlay mode.');
-    } finally {
-      setIsRemovingBg(false);
-      setBgRemovalProgress(0);
+    // If cutout is not yet available and not currently processing, trigger it now
+    if (!cutoutSrc && rawFile && !isRemovingBg) {
+      executeAiRemoveBg(rawFile);
+    }
+
+    // Also update instant smart replace
+    if (imageSrc && !cutoutSrc) {
+      const img = new window.Image();
+      img.onload = () => {
+        const hex = colorId === 'custom' ? customBgColor : (STUDIO_BG_COLORS.find((c) => c.id === colorId)?.hex || '#FFFFFF');
+        const instant = generateSmartCornerReplace(img, hex);
+        setSmartCutoutSrc(instant);
+      };
+      img.src = imageSrc;
     }
   };
 
   // Revert to original background
   const handleToggleOriginalBg = () => {
     setUseOriginalBg(!useOriginalBg);
-  };
-
-  // Get active background hex color
-  const getActiveBgColor = () => {
-    if (selectedBgId === 'custom') return customBgColor;
-    const preset = STUDIO_BG_COLORS.find((c) => c.id === selectedBgId);
-    return preset ? preset.hex : '#FFFFFF';
   };
 
   // Render Single Passport Photo (3.5 × 4.5 cm at 300 DPI)
@@ -225,16 +333,29 @@ export function CyberCafePassportPhotoTool() {
 
       const bgColor = getActiveBgColor();
 
-      // Draw background
+      // 1. Draw solid background color
       ctx.fillStyle = bgColor;
       ctx.fillRect(0, 0, widthPx, heightPx);
 
-      // Determine active image source (cutout if available, else original)
-      const currentSrc = !useOriginalBg && cutoutSrc ? cutoutSrc : imageSrc;
-      if (!currentSrc) return;
+      // 2. Select image source:
+      // Priority:
+      // 1) Original photo if "Keep Original" is toggled
+      // 2) AI Cutout (Transparent PNG) if ready
+      // 3) Smart Corner Replaced if AI is still running
+      // 4) Fallback original image
+      let activeSource = imageSrc;
+      if (useOriginalBg) {
+        activeSource = imageSrc;
+      } else if (cutoutSrc) {
+        activeSource = cutoutSrc;
+      } else if (smartCutoutSrc) {
+        activeSource = smartCutoutSrc;
+      }
+
+      if (!activeSource) return;
 
       const img = new window.Image();
-      img.src = currentSrc;
+      img.src = activeSource;
       await new Promise<void>((res) => {
         if (img.complete) return res();
         img.onload = () => res();
@@ -324,9 +445,9 @@ export function CyberCafePassportPhotoTool() {
     [
       imageSrc,
       cutoutSrc,
+      smartCutoutSrc,
       useOriginalBg,
-      selectedBgId,
-      customBgColor,
+      getActiveBgColor,
       zoom,
       panX,
       panY,
@@ -345,14 +466,10 @@ export function CyberCafePassportPhotoTool() {
       const singleCanvas = document.createElement('canvas');
       await renderSinglePhotoToCanvas(singleCanvas);
 
-      // Sheet physical dimensions in mm at 300 DPI
-      // 4x6" = 101.6 × 152.4 mm (Standard Indian Glossy Photo Paper)
-      // A4   = 210.0 × 297.0 mm (Standard Document / Multi-photo Paper)
       const dpi = 300;
       let sheetW_mm = paperSize === '4x6' ? 101.6 : 210.0;
       let sheetH_mm = paperSize === '4x6' ? 152.4 : 297.0;
 
-      // In 4x6 paper, if 8 photos are selected, landscape layout (152.4 x 101.6 mm) fits 4 cols x 2 rows
       const isLandscape4x6 = paperSize === '4x6' && copiesCount === 8;
       if (isLandscape4x6) {
         sheetW_mm = 152.4;
@@ -386,7 +503,6 @@ export function CyberCafePassportPhotoTool() {
 
       if (paperSize === '4x6') {
         if (isLandscape4x6) {
-          // 4 cols x 2 rows = 8 photos
           cols = 4;
           rows = 2;
           gapX_mm = 2.5;
@@ -396,19 +512,16 @@ export function CyberCafePassportPhotoTool() {
           marginX_mm = Math.max(2, (sheetW_mm - totalW_mm) / 2);
           marginY_mm = Math.max(2, (sheetH_mm - totalH_mm) / 2);
         } else {
-          // Standard 4x6 Portrait: 2 cols x 3 rows = 6 photos
           cols = 2;
           rows = 3;
           gapX_mm = 4;
           gapY_mm = 4.5;
-          const totalW_mm = cols * photoW_mm + (cols - 1) * gapX_mm; // 70 + 4 = 74mm
-          const totalH_mm = rows * photoH_mm + (rows - 1) * gapY_mm; // 135 + 9 = 144mm
-          marginX_mm = (sheetW_mm - totalW_mm) / 2; // ~13.8mm margin
-          marginY_mm = (sheetH_mm - totalH_mm) / 2; // ~4.2mm margin
+          const totalW_mm = cols * photoW_mm + (cols - 1) * gapX_mm;
+          const totalH_mm = rows * photoH_mm + (rows - 1) * gapY_mm;
+          marginX_mm = (sheetW_mm - totalW_mm) / 2;
+          marginY_mm = (sheetH_mm - totalH_mm) / 2;
         }
       } else {
-        // A4 sheet: 210 x 297 mm
-        // 4 cols x 6 rows = 24 photos OR 4 cols x 8 rows = 32 photos
         if (copiesCount > 24) {
           cols = 4;
           rows = 8;
@@ -456,9 +569,6 @@ export function CyberCafePassportPhotoTool() {
         }
         if (placed >= targetCount) break;
       }
-
-      // NOTE: ZERO WATERMARK / ZERO FOOTER TEXT ADDED HERE
-      // The canvas remains 100% white-label and clean for the cyber cafe operator.
     },
     [paperSize, copiesCount, fillMode, hasBorder, renderSinglePhotoToCanvas]
   );
@@ -478,6 +588,7 @@ export function CyberCafePassportPhotoTool() {
   }, [
     imageSrc,
     cutoutSrc,
+    smartCutoutSrc,
     useOriginalBg,
     selectedBgId,
     customBgColor,
@@ -505,12 +616,9 @@ export function CyberCafePassportPhotoTool() {
     try {
       const dataUrl = sheetCanvasRef.current.toDataURL('image/jpeg', 0.98);
 
-      // Determine paper dimensions for @page style
       const isLandscape4x6 = paperSize === '4x6' && copiesCount === 8;
-      const pageOrientation = isLandscape4x6 ? 'landscape' : 'portrait';
       const pageSize = paperSize === '4x6' ? (isLandscape4x6 ? '6in 4in' : '4in 6in') : 'A4';
 
-      // Create hidden iframe for silent, perfectly formatted print
       const printIframe = document.createElement('iframe');
       printIframe.style.position = 'fixed';
       printIframe.style.right = '0';
@@ -677,7 +785,7 @@ export function CyberCafePassportPhotoTool() {
               Cyber Cafe Passport Photo Sheet Maker (4×6 & A4)
             </h1>
             <p className="text-xs sm:text-sm text-blue-100 mt-1 max-w-2xl">
-              Upload 1 Photo &rarr; 1-Click White/Blue Background &rarr; Line up 6, 8, 12, or 32 photos on 4×6" photo paper.
+              Upload 1 Photo &rarr; Auto White or Studio Blue Background &rarr; Line up 6, 8, 12, or 32 photos on 4×6" photo paper.
               Zero watermark, scissor cutting lines, instant Ctrl+P direct print.
             </p>
           </div>
@@ -704,8 +812,10 @@ export function CyberCafePassportPhotoTool() {
               {imageSrc && (
                 <button
                   onClick={() => {
+                    setRawFile(null);
                     setImageSrc(null);
                     setCutoutSrc(null);
+                    setSmartCutoutSrc(null);
                     if (fileInputRef.current) fileInputRef.current.value = '';
                   }}
                   className="text-xs text-red-600 hover:text-red-700 font-medium flex items-center gap-1"
@@ -737,7 +847,7 @@ export function CyberCafePassportPhotoTool() {
                 <span className="text-sm font-bold text-gray-800">Click to Upload or Drag & Drop Photo</span>
                 <span className="text-xs text-gray-500 mt-1">Accepts JPG, PNG, WEBP (Phone photo, Selfie, or Studio snap)</span>
                 <span className="inline-flex items-center gap-1 mt-3 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[11px] font-semibold">
-                  ⚡ Auto 3.5×4.5 cm Passport Alignment
+                  ⚡ Auto Changes to Studio Blue on Upload
                 </span>
               </label>
             ) : (
@@ -766,57 +876,50 @@ export function CyberCafePassportPhotoTool() {
             )}
           </div>
 
-          {/* Step 2: Background Selector (Studio Colors + AI Cutout) */}
+          {/* Step 2: Background Selector (Studio Colors + Instant Trigger) */}
           <div className="bg-white rounded-xl border border-gray-200 shadow-xs p-4 sm:p-5 space-y-3.5">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
                 <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#414FA8] text-white text-xs font-bold">2</span>
-                <span>Passport Background Color</span>
+                <span>Select Background Color (1-Click)</span>
               </h2>
-              {cutoutSrc && (
-                <span className="text-[11px] font-medium text-emerald-600 flex items-center gap-1">
+              {isRemovingBg ? (
+                <span className="text-[11px] font-bold text-blue-600 flex items-center gap-1 animate-pulse">
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" /> Processing AI... {bgRemovalProgress}%
+                </span>
+              ) : cutoutSrc ? (
+                <span className="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5" /> AI Cutout Active
+                </span>
+              ) : (
+                <span className="text-[11px] font-medium text-gray-500 flex items-center gap-1">
+                  <Wand2 className="w-3.5 h-3.5 text-blue-500" /> Click to Apply
                 </span>
               )}
             </div>
 
-            {/* AI Remove Background Button */}
-            <div className="pt-1">
-              <button
-                type="button"
-                onClick={handleAiRemoveBg}
-                disabled={!imageSrc || isRemovingBg}
-                className={`w-full py-2.5 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-xs ${
-                  cutoutSrc
-                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700'
-                } disabled:opacity-50 disabled:cursor-not-allowed`}
-              >
-                {isRemovingBg ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Removing Background with AI ({bgRemovalProgress}%)...</span>
-                  </>
-                ) : cutoutSrc ? (
-                  <>
-                    <RefreshCw className="w-3.5 h-3.5" />
-                    <span>Background Cutout Done (Click to Re-cut)</span>
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="w-4 h-4 text-amber-300" />
-                    <span>Auto Remove Background with AI (1-Click)</span>
-                  </>
-                )}
-              </button>
-              <p className="text-[11px] text-gray-500 mt-1 text-center">
-                Runs 100% inside your browser. No photos uploaded to any server.
-              </p>
-            </div>
+            {/* AI Status / Re-cut bar */}
+            {isRemovingBg && (
+              <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-xs text-blue-800 space-y-1">
+                <div className="flex items-center justify-between font-semibold">
+                  <span className="flex items-center gap-1.5">
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-[#414FA8]" />
+                    <span>Removing background &amp; applying color...</span>
+                  </span>
+                  <span>{bgRemovalProgress}%</span>
+                </div>
+                <div className="w-full bg-blue-200 h-1.5 rounded-full overflow-hidden">
+                  <div
+                    className="bg-[#414FA8] h-full transition-all duration-300"
+                    style={{ width: `${Math.max(10, bgRemovalProgress)}%` }}
+                  ></div>
+                </div>
+              </div>
+            )}
 
             {/* Color Swatches Grid */}
-            <div className="space-y-1.5 pt-1">
-              <label className="text-xs font-semibold text-gray-700">Select Studio Background Color:</label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-gray-700">Choose Studio Background Color:</label>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {STUDIO_BG_COLORS.map((color) => {
                   const isSelected = selectedBgId === color.id && !useOriginalBg;
@@ -824,18 +927,15 @@ export function CyberCafePassportPhotoTool() {
                     <button
                       key={color.id}
                       type="button"
-                      onClick={() => {
-                        setSelectedBgId(color.id);
-                        setUseOriginalBg(false);
-                      }}
+                      onClick={() => handleSelectColor(color.id)}
                       className={`relative flex flex-col items-center justify-center p-2 rounded-lg border text-center transition-all ${
                         isSelected
-                          ? 'border-[#414FA8] ring-2 ring-[#414FA8]/30 shadow-xs bg-blue-50/40'
+                          ? 'border-[#414FA8] ring-2 ring-[#414FA8]/30 shadow-xs bg-blue-50/50'
                           : 'border-gray-200 hover:border-gray-300 bg-white'
                       }`}
                     >
                       <span
-                        className="w-7 h-7 rounded-full border shadow-inner mb-1 flex items-center justify-center"
+                        className="w-8 h-8 rounded-full border shadow-inner mb-1 flex items-center justify-center"
                         style={{ backgroundColor: color.hex, borderColor: color.border }}
                       >
                         {isSelected && (
@@ -866,20 +966,25 @@ export function CyberCafePassportPhotoTool() {
               </button>
 
               <div className="flex items-center gap-1.5">
-                <span className="text-gray-600 text-[11px]">Custom:</span>
+                <span className="text-gray-600 text-[11px]">Custom Color:</span>
                 <input
                   type="color"
                   value={customBgColor}
                   onChange={(e) => {
                     setCustomBgColor(e.target.value);
-                    setSelectedBgId('custom');
-                    setUseOriginalBg(false);
+                    handleSelectColor('custom');
                   }}
                   className="w-7 h-7 rounded border border-gray-300 cursor-pointer p-0.5 bg-white"
                   title="Choose custom background color"
                 />
               </div>
             </div>
+
+            {aiErrorMsg && (
+              <p className="text-[11px] text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 font-medium">
+                {aiErrorMsg}
+              </p>
+            )}
           </div>
 
           {/* Step 3: Cyber Cafe Sheet Setup (Photo Count & 4x6 / A4) */}
@@ -1155,6 +1260,15 @@ export function CyberCafePassportPhotoTool() {
               </div>
             ) : (
               <div className="relative flex items-center justify-center max-w-full">
+                {/* Processing Overlay over Preview */}
+                {isRemovingBg && (
+                  <div className="absolute inset-0 z-20 bg-black/40 backdrop-blur-xs rounded flex flex-col items-center justify-center text-white p-4">
+                    <Loader2 className="w-8 h-8 animate-spin text-white mb-2" />
+                    <p className="text-sm font-bold">Removing Background with AI...</p>
+                    <p className="text-xs text-blue-200 mt-0.5">{bgRemovalProgress}% complete</p>
+                  </div>
+                )}
+
                 {/* Printable Sheet View */}
                 <div className={`transition-all ${activeTab === 'sheet' ? 'block' : 'hidden'}`}>
                   <canvas

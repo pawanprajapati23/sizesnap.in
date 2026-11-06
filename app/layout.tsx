@@ -153,6 +153,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="306772"
+          async
+          data-cfasync="false"
+        />
+      </head>
       <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased" suppressHydrationWarning>
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (

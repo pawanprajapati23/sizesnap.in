@@ -7,7 +7,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { PassportPhotoMaker } from '@/components/tool-ui/PassportPhotoMaker';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
-import { ChevronRight, HelpCircle, Lock, Zap, Shield, FileCheck } from 'lucide-react';
+import { ChevronRight, HelpCircle, Lock, Zap, Shield, FileCheck, Printer, ArrowRight } from 'lucide-react';
 import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
 import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
@@ -43,6 +43,8 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
+  'cyber-cafe-passport-photo-maker',
+  'white-background-passport-photo',
   'reduce-image-size-in-kb',
   'resize-image-pixel',
   'compress-image',
@@ -118,6 +120,31 @@ export default function PassportPhotoMakerPage() {
               <p className="text-xs sm:text-sm text-gray-600 leading-normal">
                 Crop and format photos for SSC, UPSC, Govt Exams, PAN Card &amp; Visas. Add Name &amp; Date of photo (DOP), compress to 20KB–50KB, and export printable A4 or 4×6 photo paper sheets.
               </p>
+            </div>
+
+            {/* Cyber Cafe 6-Photo Sheet Callout Banner */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3.5 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#414FA8] text-white flex items-center justify-center shrink-0">
+                  <Printer className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xs sm:text-sm font-bold text-gray-900 flex items-center gap-1.5">
+                    <span>Cyber Cafe / CSC Operator? Need 6 Photos on 4×6" Paper?</span>
+                    <span className="px-1.5 py-0.5 rounded bg-amber-500 text-white text-[10px] font-extrabold uppercase">Hot</span>
+                  </h2>
+                  <p className="text-[11px] sm:text-xs text-gray-600">
+                    Use our dedicated Cyber Cafe tool: 1-click white/blue background, 6 or 8 copies on 4x6" paper, scissor cutting lines, and zero watermark.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/tools/cyber-cafe-passport-photo-maker"
+                className="shrink-0 px-3.5 py-2 rounded-lg bg-[#414FA8] hover:bg-[#343f88] text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs"
+              >
+                <span>Open Cyber Cafe Tool</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
 
             {/* Interactive Passport Photo Maker Engine */}

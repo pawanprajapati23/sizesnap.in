@@ -51,6 +51,7 @@ const KNOWN_EXTRA_TOOLS = new Set([
   'add-name-and-date-on-photo',
   'name-and-date-on-photo',
   'white-background-passport-photo',
+  'cyber-cafe-passport-photo-maker',
   'remove-shadow-from-document',
   'pan-card-photo-resizer',
   'ssc-photo-and-signature-resizer',

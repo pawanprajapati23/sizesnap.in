@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 };
 
 const RELATED_SLUGS = [
+  'cyber-cafe-passport-photo-maker',
   'passport-photo-maker',
   'resize-image-3-5cm-4-5cm',
   'add-name-and-date-on-photo',

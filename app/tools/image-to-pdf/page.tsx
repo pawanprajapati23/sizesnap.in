@@ -7,7 +7,9 @@ import { Sidebar } from '@/components/Sidebar';
 import { ImageToPdfConverter } from '@/components/tool-ui/ImageToPdfConverter';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
-import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
+import { ChevronRight, HelpCircle, Lock, Zap, Shield, FileCheck } from 'lucide-react';
+import { KbTargetPills } from '@/components/KbTargetPills';
+import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
 export const metadata: Metadata = {
   title: 'Image to PDF Converter - Convert JPG to PDF & Pictures to PDF Free | SizeSnap',
@@ -198,8 +200,74 @@ export default function ImageToPdfPage() {
               </p>
             </div>
 
+            {/* Quick PDF Target KB Presets Network */}
+            <KbTargetPills type="pdf" />
+
             {/* Interactive Image to PDF Converter Engine */}
             <ImageToPdfConverter />
+
+            {/* Featured Snippet Table: Standard PDF Document Sizes */}
+            <div className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
+              <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <FileCheck className="w-5 h-5 text-[#414FA8]" />
+                Standard Document Page Sizes &amp; DPI Resolution Chart for PDF
+              </h2>
+              <p className="text-xs text-gray-600 mb-4">
+                Official physical dimensions and print resolutions (300 DPI) for document compilation and printing.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border border-gray-200 rounded">
+                  <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200">
+                    <tr>
+                      <th className="p-3">Paper Format</th>
+                      <th className="p-3">Millimeters (mm)</th>
+                      <th className="p-3">Inches (in)</th>
+                      <th className="p-3">Pixel Dimensions (300 DPI)</th>
+                      <th className="p-3">Standard Usage</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 text-gray-600">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">A4 Document (Standard)</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">210 × 297 mm</td>
+                      <td className="p-3">8.27 × 11.69 in</td>
+                      <td className="p-3 font-semibold">2480 × 3508 px</td>
+                      <td className="p-3">Govt Forms, Marksheets, Resumes</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">US Letter (North America)</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">216 × 279 mm</td>
+                      <td className="p-3">8.50 × 11.00 in</td>
+                      <td className="p-3 font-semibold">2550 × 3300 px</td>
+                      <td className="p-3">US Visa, Academic Portfolios</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">US Legal</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">216 × 356 mm</td>
+                      <td className="p-3">8.50 × 14.00 in</td>
+                      <td className="p-3 font-semibold">2550 × 4200 px</td>
+                      <td className="p-3">Affidavits, Agreements, Deeds</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">Fit to Image (Original)</td>
+                      <td className="p-3 font-semibold text-emerald-700">Auto (100% Native)</td>
+                      <td className="p-3">Dynamic</td>
+                      <td className="p-3 font-semibold text-emerald-700">Zero Crop Loss</td>
+                      <td className="p-3">Receipts, Invoices, Artwork</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100">
+                <span className="text-[11px] text-gray-500">
+                  Tip: Use the pills above to compress your generated PDF to exact KB size (under 140KB / 100KB).
+                </span>
+                <WhatsAppShareButton
+                  title="Free Image to PDF Converter (SizeSnap)"
+                  url="https://www.sizesnap.in/tools/image-to-pdf"
+                />
+              </div>
+            </div>
 
             {/* Sister Tools Shortcut Links */}
             <div className="bg-white p-4 rounded-[4px] border border-gray-200">

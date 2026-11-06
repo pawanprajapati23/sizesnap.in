@@ -8,6 +8,7 @@ import { ImageCompressor } from '@/components/tool-ui/ImageCompressor';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ArrowLeft, HelpCircle, Shield, Zap, Lock, ChevronRight } from 'lucide-react';
+import { KbTargetPills } from '@/components/KbTargetPills';
 
 export const metadata: Metadata = {
   title: 'Compress Image Online - Reduce File Size Free | SizeSnap',
@@ -105,6 +106,9 @@ export default function CompressImagePage() {
                 Reduce file size for JPG, JPEG, PNG, and WebP images directly in your browser. Fast, private, and no watermarks added.
               </p>
             </div>
+
+            {/* Quick Target KB Presets Network */}
+            <KbTargetPills type="image" activeSlug="compress-image" />
 
             {/* Interactive Image Compressor Engine */}
             <ImageCompressor />

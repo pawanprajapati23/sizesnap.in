@@ -20,6 +20,7 @@ import {
   Sparkles,
   Layers,
 } from 'lucide-react';
+import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
 export const metadata: Metadata = {
   title: 'Compress PDF to 140KB Online Free - 140 KB PDF Converter & Resizer | SizeSnap',
@@ -268,6 +269,13 @@ export default function CompressPdf140kbPage() {
             {/* Interactive Tool Area */}
             <div id="tool-area" className="scroll-mt-24">
               <CompressPdfTool initialTargetKB={140} />
+            </div>
+
+            <div className="flex justify-end">
+              <WhatsAppShareButton
+                title="Compress PDF to 140KB Online Free (Govt Forms)"
+                url="https://www.sizesnap.in/tools/compress-pdf-140kb"
+              />
             </div>
 
             {/* Feature Highlights Grid */}

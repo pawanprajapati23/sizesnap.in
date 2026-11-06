@@ -7,8 +7,9 @@ import { Sidebar } from '@/components/Sidebar';
 import { PassportPhotoMaker } from '@/components/tool-ui/PassportPhotoMaker';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
-import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
+import { ChevronRight, HelpCircle, Lock, Zap, Shield, FileCheck } from 'lucide-react';
 import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
+import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
 export const metadata: Metadata = {
   title: 'Passport Photo Maker Online (3.5 x 4.5 cm) - Dimensions, SSC, UPSC, Govt Exams (20KB - 50KB) | SizeSnap',
@@ -206,6 +207,83 @@ export default function PassportPhotoMakerPage() {
                 </div>
               </div>
             )}
+
+            {/* Featured Snippet Table: Official Passport Photo Dimensions (India, US, UK, Schengen) */}
+            <div className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
+              <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <FileCheck className="w-5 h-5 text-[#414FA8]" />
+                Official Passport Photo Dimensions &amp; Size Specifications (India &amp; Global)
+              </h2>
+              <p className="text-xs text-gray-600 mb-4">
+                Exact physical dimensions, pixel counts at 300 DPI, and file size limits for passports and visas worldwide.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border border-gray-200 rounded">
+                  <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200">
+                    <tr>
+                      <th className="p-3">Document / Country</th>
+                      <th className="p-3">Physical Size (cm / in)</th>
+                      <th className="p-3">Pixel Dimensions (300 DPI)</th>
+                      <th className="p-3">Required File Size (KB)</th>
+                      <th className="p-3">Background</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 text-gray-600">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">Indian Passport &amp; Visa</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">3.5 × 4.5 cm (35 × 45 mm)</td>
+                      <td className="p-3">413 × 531 px</td>
+                      <td className="p-3 font-semibold text-emerald-700">&lt; 100 KB</td>
+                      <td className="p-3">Plain White / Off-White</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">SSC CGL, CHSL, GD, MTS</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">3.5 × 4.5 cm</td>
+                      <td className="p-3">350 × 450 px</td>
+                      <td className="p-3 font-semibold text-emerald-700">20 KB – 50 KB (Strict)</td>
+                      <td className="p-3">Light / Plain White</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">UPSC (Civil Services OTR)</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">3.5 × 4.5 cm</td>
+                      <td className="p-3">350 × 350 px min</td>
+                      <td className="p-3 font-semibold text-emerald-700">20 KB – 300 KB</td>
+                      <td className="p-3">White / Light Grey</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">US Visa &amp; Passport (DS-160)</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">2 × 2 inches (51 × 51 mm)</td>
+                      <td className="p-3">600 × 600 px</td>
+                      <td className="p-3 font-semibold text-emerald-700">&lt; 240 KB</td>
+                      <td className="p-3">Pure White</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">Schengen Visa (Europe)</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">3.5 × 4.5 cm</td>
+                      <td className="p-3">413 × 531 px</td>
+                      <td className="p-3 font-semibold text-emerald-700">&lt; 200 KB</td>
+                      <td className="p-3">Light Grey</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">PAN Card (UTIITSL &amp; NSDL)</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">3.5 × 2.5 cm (213 × 213 px)</td>
+                      <td className="p-3">213 × 213 px (300 DPI)</td>
+                      <td className="p-3 font-semibold text-amber-700">&lt; 30 KB (UTI) / &lt; 50 KB</td>
+                      <td className="p-3">White Background</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100">
+                <span className="text-[11px] text-gray-500">
+                  Tip: All crop guides inside SizeSnap strictly align with official ICAO biometric specifications.
+                </span>
+                <WhatsAppShareButton
+                  title="Official Passport Photo Dimensions & Size Guide (SizeSnap)"
+                  url="https://www.sizesnap.in/tools/passport-photo-maker"
+                />
+              </div>
+            </div>
 
             {/* Comprehensive SEO Article Section (Inspired by Pi7) */}
             <article className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs text-gray-700">

@@ -8,6 +8,7 @@ import { CompressPdfTool } from '@/components/tool-ui/CompressPdfTool';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
+import { KbTargetPills } from '@/components/KbTargetPills';
 
 export const metadata: Metadata = {
   title: 'Compress PDF Online - Reduce PDF File Size Free | SizeSnap',
@@ -104,6 +105,9 @@ export default function CompressPdfPage() {
                 Reduce PDF file size while maintaining readability. Choose between visual downsampling for scanned documents or structural stream optimization. 100% private in your browser.
               </p>
             </div>
+
+            {/* Quick PDF Target KB Presets Network */}
+            <KbTargetPills type="pdf" activeSlug="compress-pdf" />
 
             {/* Interactive PDF Compression Engine */}
             <React.Suspense fallback={<div className="p-8 text-center text-sm text-gray-500">Loading SizeSnap PDF Compressor...</div>}>

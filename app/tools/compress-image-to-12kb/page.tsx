@@ -5,21 +5,22 @@ import { ExactKbPage } from '@/components/templates/ExactKbPage';
 import { ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: '12KB Photo & Signature Resizer (Exact 12 KB) - Free Online | SizeSnap',
+  title: '12 KB Photo Size - Compress Image to 12KB (JPG Converter) | SizeSnap',
   description:
-    'Compress and resize photo or signature to exact 12KB online for free without blur. Instant 12KB JPG converter & resizer for SSC, UPSC OTR, and online form uploads. 100% private.',
+    'Compress image to 12KB online free. Resize photo & signature to exact 12 KB JPG size for SSC, UPSC, and Sarkari job forms without blur or rejection. 100% private in browser.',
   keywords: [
     '12 kb photo size',
     '12kb photo size',
-    '12kb image compressor',
     'compress image to 12kb',
     'image compressor to 12kb',
-    '12 kb converter',
+    '12kb jpg converter',
     'resize image to 12kb',
+    '12 kb photo size jpg',
+    '12kb image compressor',
+    '12 kb converter',
     'photo ko 12kb kaise banaye',
     'signature resize 12kb',
     'compress photo to 12kb online',
-    '12 kb photo size jpg',
     'ssc signature 10 to 20 kb',
     'reduce image size to 12kb',
   ],

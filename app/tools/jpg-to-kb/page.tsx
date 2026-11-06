@@ -8,6 +8,7 @@ import { KbCompressor } from '@/components/tool-ui/KbCompressor';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield, CheckCircle2, Sliders } from 'lucide-react';
+import { KbTargetPills } from '@/components/KbTargetPills';
 
 export const metadata: Metadata = {
   title: 'JPG to KB - Compress JPG Image File to Exact KB Size Online Free | SizeSnap',
@@ -217,6 +218,9 @@ export default function JpgToKbPage() {
                 <span>100% Client-Side Privacy</span>
               </span>
             </div>
+
+            {/* Quick Target KB Presets Network */}
+            <KbTargetPills type="image" activeSlug="jpg-to-kb" />
 
             {/* Tool Interactive Card */}
             <div className="bg-white rounded-[4px] border border-[#9AA3C8] shadow-xs p-4 sm:p-6">

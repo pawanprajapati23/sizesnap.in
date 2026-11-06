@@ -7,7 +7,9 @@ import { Sidebar } from '@/components/Sidebar';
 import { KbCompressor } from '@/components/tool-ui/KbCompressor';
 import { ALL_TOOLS } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
-import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
+import { ChevronRight, HelpCircle, Lock, Zap, Shield, FileCheck, Bookmark } from 'lucide-react';
+import { KbTargetPills } from '@/components/KbTargetPills';
+import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
 export const metadata: Metadata = {
   title: 'Reduce Image Size in KB - Image Resizer in KB & Size Decrease Online | SizeSnap',
@@ -181,30 +183,8 @@ export default function ReduceImageSizeKbPage() {
               </p>
             </div>
 
-            {/* Quick KB Presets Navigation Pills */}
-            <div className="bg-white p-3.5 sm:p-4 rounded-[4px] border border-gray-200 shadow-xs">
-              <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-2">
-                Popular Exact KB Presets for Indian Govt Forms:
-              </span>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {[
-                  { label: '10 KB (Signature)', href: '/tools/compress-image-to-10kb' },
-                  { label: '14 KB (SSC Signature)', href: '/tools/14kb-photo-size' },
-                  { label: '20 KB (Govt Photo)', href: '/tools/compress-image-to-20kb' },
-                  { label: '50 KB (UPSC / State PSC)', href: '/tools/compress-image-to-50kb' },
-                  { label: '100 KB (Admit Card / ID)', href: '/tools/compress-image-to-100kb' },
-                  { label: '200 KB (Certificate)', href: '/tools/compress-image-to-200kb' },
-                ].map((preset) => (
-                  <Link
-                    key={preset.label}
-                    href={preset.href}
-                    className="inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#414FA8] hover:text-white border border-[#414FA8]/20 transition-all"
-                  >
-                    {preset.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {/* Quick KB Presets Navigation Pills Silo */}
+            <KbTargetPills type="image" activeSlug="reduce-image-size-in-kb" />
 
             {/* Interactive Target KB Engine */}
             <React.Suspense fallback={<div className="p-8 text-center text-sm text-gray-500">Loading SizeSnap Compressor...</div>}>
@@ -284,6 +264,90 @@ export default function ReduceImageSizeKbPage() {
                 </div>
               </div>
             )}
+
+            {/* Featured Snippet Table: Official Exam Size Guidelines */}
+            <div className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
+              <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <FileCheck className="w-5 h-5 text-[#414FA8]" />
+                Official Government Exam Photo &amp; Signature Size Chart (2026)
+              </h2>
+              <p className="text-xs text-gray-600 mb-4">
+                Quick reference guide for file size (KB) and dimensions required across major Indian recruitment portals.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border border-gray-200 rounded">
+                  <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200">
+                    <tr>
+                      <th className="p-3">Exam / Portal</th>
+                      <th className="p-3">Photo Size (KB)</th>
+                      <th className="p-3">Photo Dimensions</th>
+                      <th className="p-3">Signature Size (KB)</th>
+                      <th className="p-3">Signature Dimensions</th>
+                      <th className="p-3">Format</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 text-gray-600">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">SSC (CGL, CHSL, GD, MTS)</td>
+                      <td className="p-3 font-semibold text-emerald-700">20 KB – 50 KB</td>
+                      <td className="p-3">3.5 × 4.5 cm</td>
+                      <td className="p-3 font-semibold text-emerald-700">10 KB – 20 KB (Strict)</td>
+                      <td className="p-3">4.0 × 2.0 cm</td>
+                      <td className="p-3">JPEG / JPG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">UPSC (Civil Services, NDA, CDS)</td>
+                      <td className="p-3 font-semibold text-emerald-700">20 KB – 300 KB</td>
+                      <td className="p-3">350 × 350 px min</td>
+                      <td className="p-3 font-semibold text-emerald-700">20 KB – 300 KB</td>
+                      <td className="p-3">350 × 350 px min</td>
+                      <td className="p-3">JPG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-amber-700">PAN Card (UTIITSL)</td>
+                      <td className="p-3 font-semibold text-amber-700">&lt; 30 KB (Strict)</td>
+                      <td className="p-3">213 × 213 px (300 DPI)</td>
+                      <td className="p-3 font-semibold text-amber-700">&lt; 60 KB</td>
+                      <td className="p-3">400 × 200 px (600 DPI)</td>
+                      <td className="p-3">JPEG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-blue-700">PAN Card (NSDL / Protean)</td>
+                      <td className="p-3 font-semibold text-blue-700">&lt; 50 KB</td>
+                      <td className="p-3">3.5 × 2.5 cm (200 DPI)</td>
+                      <td className="p-3 font-semibold text-blue-700">&lt; 20 KB (Strict)</td>
+                      <td className="p-3">2 × 4.5 cm (200 DPI)</td>
+                      <td className="p-3">JPEG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">State Police (UP, Delhi, Bihar)</td>
+                      <td className="p-3 font-semibold text-emerald-700">20 KB – 50 KB</td>
+                      <td className="p-3">35 × 45 mm</td>
+                      <td className="p-3 font-semibold text-emerald-700">10 KB – 20 KB</td>
+                      <td className="p-3">40 × 20 mm</td>
+                      <td className="p-3">JPG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-gray-900">NTA (NEET / JEE Main)</td>
+                      <td className="p-3 font-semibold text-emerald-700">10 KB – 200 KB</td>
+                      <td className="p-3">Passport &amp; Postcard (4×6 in)</td>
+                      <td className="p-3 font-semibold text-emerald-700">4 KB – 30 KB</td>
+                      <td className="p-3">3.5 × 1.5 cm</td>
+                      <td className="p-3">JPG</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100">
+                <span className="text-[11px] text-gray-500">
+                  Tip: Use the pills above to resize your photo to exact KB in 1 click.
+                </span>
+                <WhatsAppShareButton
+                  title="Govt Exam Photo & Signature Size Chart (SizeSnap)"
+                  url="https://www.sizesnap.in/tools/reduce-image-size-in-kb"
+                />
+              </div>
+            </div>
 
             {/* Comprehensive SEO Article Section */}
             <article className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs text-gray-700">

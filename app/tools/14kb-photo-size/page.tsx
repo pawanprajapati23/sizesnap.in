@@ -3,27 +3,30 @@ import type { Metadata } from 'next';
 import { ExactKbPage } from '@/components/templates/ExactKbPage';
 
 export const metadata: Metadata = {
-  title: '14KB Photo Size - Resize Image to 14KB Online Free | SizeSnap',
+  title: '14 KB Photo Size - Resize Image to 14KB (JPG Compressor) | SizeSnap',
   description:
-    'Resize and compress your photo or signature to exact 14KB online free without losing quality. Ideal for SSC, UPSC, and government job portals. 100% private.',
+    'Compress image to 14KB online for free. Resize photo and signature to exact 14 KB JPG format for SSC, UPSC, and government job portals without blur or rejection. 100% private.',
   keywords: [
-    '14kb photo size',
     '14 kb photo size',
+    '14kb photo size',
     'resize image to 14kb',
+    'image compressor to 14kb',
     '14 kb photo size jpg',
     'compress image to 14kb',
+    '14kb jpg converter',
+    'photo compressor 14kb',
+    'signature resize 14kb',
     'photo resize 14 kb',
     'jpg 14 kb',
-    'signature resize 14kb',
     'reduce image size to 14kb',
   ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/14kb-photo-size',
   },
   openGraph: {
-    title: '14KB Photo Size - Resize Image to 14KB Online Free | SizeSnap',
+    title: '14 KB Photo Size - Resize Image to 14KB (JPG Compressor) | SizeSnap',
     description:
-      'Resize and compress your photo or signature to exact 14KB online free. Ideal for government exam applications.',
+      'Compress and resize your photo or signature to exact 14 KB JPG size online free. Ideal for SSC & government exam applications.',
     url: 'https://www.sizesnap.in/tools/14kb-photo-size',
     siteName: 'SizeSnap',
     type: 'website',

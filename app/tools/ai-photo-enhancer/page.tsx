@@ -10,12 +10,17 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'AI Photo Enhancer Online Free (Unblur, HD Clarity & Color) | SizeSnap',
+  title: 'Photo Enhancer Online Free - AI Image Enhancer & Quality Booster | SizeSnap',
   description:
-    'Instantly enhance old, blurry, or low-light photos with AI for free. Automatic color correction, sharpness boost, and noise reduction. 100% private, no watermark.',
+    'Free online photo enhancer and AI image enhancer. Instantly increase image quality, unblur photos, boost sharpness, fix low lighting, and restore facial clarity. 100% private, no watermark.',
   keywords: [
+    'photo enhancer',
+    'image enhancer',
     'ai photo enhancer',
     'photo enhancer online free',
+    'image enhance',
+    'images quality enhancer',
+    'increase image quality',
     'unblur image online',
     'increase photo quality',
     'ai image quality enhancer',

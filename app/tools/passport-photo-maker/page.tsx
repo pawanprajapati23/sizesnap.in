@@ -11,11 +11,15 @@ import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 import { FAQSchema, SoftwareAppSchema } from '@/components/SeoSchemas';
 
 export const metadata: Metadata = {
-  title: 'Passport Photo Maker Online (3.5 x 4.5 cm) - SSC, UPSC, Govt Exams (20KB - 50KB) | SizeSnap',
+  title: 'Passport Photo Maker Online (3.5 x 4.5 cm) - Dimensions, SSC, UPSC, Govt Exams (20KB - 50KB) | SizeSnap',
   description:
-    'Free online passport size photo maker. Resize & crop photos to official 3.5×4.5 cm, 2×2 inches (US Visa), stamp size, 20KB-50KB for SSC CGL, UPSC, PAN Card, admit cards with printable A4 sheets.',
+    'Free online passport size photo maker with official passport photo dimensions (3.5×4.5 cm, 2×2 inches US Visa). Resize images to 20KB-50KB for SSC CGL, UPSC, PAN Card, admit cards with printable A4 sheets.',
   keywords: [
     'passport photo maker online',
+    'passport photo dimensions',
+    'passport size photo dimensions',
+    'passport size images',
+    'passport size photo',
     'passport size photo maker 3.5 x 4.5 cm',
     'ssc cgl photo resizer 20kb to 50kb',
     'passport photo with name and date',

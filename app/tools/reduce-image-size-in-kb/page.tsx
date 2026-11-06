@@ -10,13 +10,22 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Size Reducer Online Free - Reduce Image Size in KB (Exact KB) | SizeSnap',
+  title: 'Reduce Image Size in KB - Image Resizer in KB & Size Decrease Online | SizeSnap',
   description:
-    'Free online size reducer to reduce image size in KB without losing quality. Choose exact target (10KB, 14KB, 20KB, 50KB, 100KB, 200KB) for SSC, UPSC, and govt forms. 100% private in browser.',
+    'Free online size reducer and image resizer in KB. Decrease image size to exact KB (10KB, 14KB, 20KB, 50KB, 100KB, 200KB) for SSC, UPSC, and government portals without losing quality. 100% private.',
   keywords: [
-    'size reducer',
+    'image resizer in kb',
+    'image size decrease',
     'reduce image size in kb',
-    'reduce image size',
+    'size reducer',
+    'pic size decrease',
+    'reduce images size',
+    'photo resize kb',
+    'photos resize in kb',
+    'resize image by kb',
+    'resize photo kb',
+    'resize pic in kb',
+    'image resolution decrease',
     'image size reducer',
     'photo size reducer',
     'photo compressor in kb',
@@ -36,9 +45,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
   },
   openGraph: {
-    title: 'Size Reducer Online Free - Reduce Image Size in KB (Exact KB) | SizeSnap',
+    title: 'Reduce Image Size in KB - Image Resizer in KB & Size Decrease Online | SizeSnap',
     description:
-      'Free online size reducer to compress photos and signatures to exact 10KB, 20KB, 50KB, or 100KB online with SizeSnap. Zero server uploads.',
+      'Free online image resizer in KB and size reducer to decrease photos to exact 10KB, 20KB, 50KB, or 100KB with SizeSnap. Zero server uploads.',
     url: 'https://www.sizesnap.in/tools/reduce-image-size-in-kb',
     siteName: 'SizeSnap',
     type: 'website',

@@ -147,6 +147,10 @@ const DEDICATED_TOOL_SLUGS = [
   '14kb-photo-size',
   'compress-pdf-12kb',
   'compress-pdf-140kb',
+  'convert-black-image-to-white',
+  'picture-to-pixel-art',
+  'jpeg-to-jpg',
+  'jpg-to-kb',
 ];
 
 export async function generateStaticParams() {

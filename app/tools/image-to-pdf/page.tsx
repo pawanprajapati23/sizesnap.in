@@ -10,9 +10,26 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Image to PDF Converter - Convert JPG & PNG to PDF Free | SizeSnap',
+  title: 'Image to PDF Converter - Convert JPG to PDF & Pictures to PDF Free | SizeSnap',
   description:
-    'Combine JPG, JPEG, PNG, and WebP images into a single PDF online for free. Custom paper size (A4, Letter), margins, orientation, and reorderable pages. 100% private in browser.',
+    'Convert JPG to PDF and combine PNG, JPEG, and WebP pictures into a clean PDF document online for free. Custom paper sizes (A4, Letter), margins, orientation, and reorderable pages. 100% private in browser.',
+  keywords: [
+    'convert jpg to pdf',
+    'image to pdf',
+    'change jpg to pdf',
+    'pic to pdf converter',
+    'image convert pdf',
+    'photo convert in pdf',
+    'picture convert to pdf',
+    'pic into pdf',
+    'image file convert to pdf',
+    'pdf image',
+    'convert into pdf',
+    'jpegs to pdf',
+    'images into pdf',
+    'photos into pdf',
+    'pics to pdf',
+  ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/image-to-pdf',
   },

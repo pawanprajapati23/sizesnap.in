@@ -37,7 +37,6 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'unblur-image': '/tools/image-filters?mode=sharpen',
   'motion-blur': '/tools/image-filters?mode=blur',
   'pixelate-image': '/tools/image-filters?mode=pixelate',
-  'picture-to-pixel-art': '/tools/image-filters?mode=pixelate',
   'deep-fry-photo': '/tools/image-filters?mode=deepfry',
   'censor-photo': '/tools/image-filters?mode=pixelate',
   'blur-face': '/tools/image-filters?mode=blur',
@@ -137,7 +136,6 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'convert-black-to-white': '/tools/convert-black-image-to-white',
   'black-image-to-white': '/tools/convert-black-image-to-white',
   'invert-black-to-white': '/tools/convert-black-image-to-white',
-  'convert-black-image-to-white': '/tools/convert-black-image-to-white',
   // Flip image vertical to horizontal (110,000 search volume)
   'vertical-to-horizontal': '/tools/flip-image',
   'horizontal-to-vertical': '/tools/flip-image',

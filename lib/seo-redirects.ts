@@ -596,7 +596,6 @@ export function getSeoRedirect(pathname: string): string | null {
     'convert-black-to-white': 'convert-black-image-to-white',
     'black-image-to-white': 'convert-black-image-to-white',
     'invert-black-to-white': 'convert-black-image-to-white',
-    'convert-black-image-to-white': 'convert-black-image-to-white',
     // Flip image vertical to horizontal (110,000 search volume)
     'vertical-to-horizontal': 'flip-image',
     'horizontal-to-vertical': 'flip-image',

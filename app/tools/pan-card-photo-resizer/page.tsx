@@ -24,19 +24,22 @@ import {
 import { FAQSchema, SoftwareAppSchema, HowToSchema } from '@/components/SeoSchemas';
 
 export const metadata: Metadata = {
-  title: 'PAN Card Photo & Signature Resizer Online Free (213x213 px, 300 DPI) | SizeSnap',
+  title: 'PAN Card Photo & Signature Resizer (UTIITSL & NSDL 213x213) | SizeSnap',
   description:
-    'Free online PAN card photo and signature resizer for NSDL and UTIITSL portals. Resize photo to 213x213 pixels (under 50KB) and signature to 400x213 pixels (under 30KB) with 300 DPI. 100% client-side private.',
+    'Free online PAN card photo and signature resizer for UTIITSL and NSDL / Protean. Resize photo to 213x213 px (<30KB for UTI / <50KB for NSDL) and signature to 400x200 px in 1 click with 2-in-1 combo download. 100% private in browser.',
   keywords: [
     'pan card photo resizer',
     'pan card photo size',
     'pan card signature resizer',
     '213x213 photo resizer',
+    'uti pan card photo size 213x213',
+    'uti photo and signature resizer',
+    'nsdl pan card photo and signature resizer',
+    'pan card photo 213x213 under 30kb',
+    'pan card signature resize under 20kb',
     'pan card photo and signature resize online',
     'pan card photo resize 300 dpi',
-    'nsdl pan card photo size',
-    'uti pan card photo resizer',
-    'resize image to pan card size',
+    'uti pan card photo and signature crop tool',
     'pan card signature size 400x213',
     'pan card photo maker free',
   ],
@@ -44,9 +47,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.sizesnap.in/tools/pan-card-photo-resizer',
   },
   openGraph: {
-    title: 'PAN Card Photo & Signature Resizer Online Free (213x213 px, 300 DPI) | SizeSnap',
+    title: 'PAN Card Photo & Signature Resizer (UTIITSL & NSDL 213x213) | SizeSnap',
     description:
-      'Online PAN card photo (213x213 px, <50KB) and signature (400x213 px, <30KB) resizer for NSDL & UTIITSL. 300 DPI, zero upload, 100% free.',
+      'Online PAN card photo (213x213 px, <30KB/<50KB) and signature resizer for UTIITSL & NSDL. 2-in-1 combo download, zero upload, 100% free.',
     url: 'https://www.sizesnap.in/tools/pan-card-photo-resizer',
     siteName: 'SizeSnap',
     type: 'website',
@@ -55,7 +58,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'PAN Card Photo & Signature Resizer Online Free | SizeSnap',
     description:
-      'Instant NSDL & UTIITSL PAN card photo (213x213) and signature (400x213) resizer with 300 DPI.',
+      'Instant UTIITSL & NSDL PAN card photo (213x213) and signature resizer with 2-in-1 combo download.',
   },
 };
 
@@ -70,28 +73,28 @@ const RELATED_SLUGS = [
 
 const FAQS = [
   {
-    q: 'What are the exact photo specifications for NSDL and UTIITSL PAN Card applications?',
-    a: 'For both Protean (NSDL) and UTIITSL online PAN card applications, your photograph must be exactly 213 × 213 pixels (or 3.5 cm × 2.5 cm), formatted at 300 DPI in color, with a file size strictly under 50 KB (SizeSnap recommends between 25 KB and 40 KB for optimal clarity and instant server acceptance).',
+    q: 'What is the difference between UTIITSL and NSDL PAN card photo & signature requirements?',
+    a: 'UTIITSL strictly requires applicant photo to be 213 × 213 pixels, 300 DPI, and strictly under 30 KB (and signature under 60 KB at 600 DPI). In contrast, Protean (NSDL) requires photo to be under 50 KB at 200 DPI, and signature strictly under 20 KB at 200 DPI. SizeSnap lets you select either "UTIITSL" or "NSDL" mode with 1 click to automatically apply the exact pixel dimensions and compression limits.',
   },
   {
-    q: 'What are the required dimensions for a PAN card signature upload?',
-    a: 'The PAN card signature must be 400 × 213 pixels (or 2 cm × 4.5 cm) at 300 DPI resolution. The file size must be strictly under 30 KB (SizeSnap targets ~20 KB). The signature should be signed with black ink on plain white paper for sharp contrast.',
+    q: 'How does the "Photo + Signature (2-in-1 Combo)" mode work?',
+    a: 'SizeSnap\'s 2-in-1 combo allows you to upload your passport photo and signature at the same time. You can zoom and align both images side-by-side, and click "Download Both as ZIP" or download each separately. Both files are automatically formatted according to your selected portal (UTIITSL or NSDL) in seconds.',
   },
   {
-    q: 'Why does the NSDL / UTI portal show "Invalid File Dimension or DPI" error?',
-    a: 'The Protean and UTIITSL portal upload engines validate the pixel header and DPI metadata. If your image resolution is 72 DPI (standard mobile camera default) or the pixel canvas is not exactly 213×213, the portal instantly rejects it. SizeSnap automatically formats your image to exact 213×213 pixels and 300 DPI to guarantee 100% acceptance.',
+    q: 'Why does the UTIITSL portal show "Photo size should be less than 30KB" or "Invalid DPI"?',
+    a: 'UTIITSL has an automated validator that checks both DPI (300 DPI) and maximum file size (< 30 KB). Normal photo editors compress images to 72 DPI or leave the file size above 30 KB. SizeSnap embeds 300 DPI metadata and iteratively compresses the photo to ~25 KB so UTI accepts it immediately on the first attempt.',
+  },
+  {
+    q: 'What are the required dimensions for NSDL PAN card signature upload?',
+    a: 'For Protean (NSDL), the signature must be 2 cm × 4.5 cm (approx 400 × 200 px) and strictly under 20 KB at 200 DPI. For UTIITSL, the signature can be up to 60 KB at 600 DPI. SizeSnap configures both automatically.',
   },
   {
     q: 'Is my Aadhaar card or PAN applicant photo uploaded to any third-party server?',
-    a: 'Never. SizeSnap runs entirely inside your web browser using HTML5 Canvas client-side technology. Your biometric photographs and legal signatures never leave your device and are never transmitted over the internet or saved on any database.',
+    a: 'Never. SizeSnap runs 100% inside your web browser using HTML5 Canvas client-side technology. Your biometric photographs and legal signatures never leave your device and are never transmitted over the internet or saved on any database.',
   },
   {
     q: 'How do I take a clear photo of my signature for PAN card upload?',
-    a: 'Sign clearly using a black ballpoint or gel pen on a clean, unlined white sheet of paper. Take a photo in bright, even daylight without shadows or flash reflection. Upload it to SizeSnap\'s PAN Card Signature tool, which will automatically crop, sharpen, and compress it to the exact 400×213 px and <30KB standard.',
-  },
-  {
-    q: 'What is the difference between NSDL and UTIITSL photo requirements?',
-    a: 'Both government agencies follow the identical technical specifications: 213×213 px photo (<50KB) and 400×213 px signature (<30KB) at 300 DPI in JPEG/JPG format. SizeSnap images comply with both portals seamlessly.',
+    a: 'Sign clearly using a black ballpoint or gel pen on a clean, unlined white sheet of paper. Take a photo in bright, even daylight without shadows or flash reflection. Upload it to SizeSnap\'s PAN Card Signature tool, which will automatically crop, sharpen, and compress it to the exact portal standard.',
   },
 ];
 
@@ -167,46 +170,63 @@ export default function PanCardResizerPage() {
             <div className="bg-white p-5 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
               <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
                 <FileCheck className="w-5 h-5 text-[#414FA8]" />
-                Official PAN Card Document Requirements (NSDL &amp; UTIITSL)
+                Official PAN Card Document Requirements: UTIITSL vs NSDL (Protean)
               </h2>
               <p className="text-xs text-gray-600 mb-4">
-                Both Protean (formerly NSDL e-Gov) and UTIITSL adhere to strict technical guidelines. Any deviation
-                in pixels or file size results in an immediate upload error on the portal.
+                Different PAN portals require different DPI and file size limits. UTIITSL rejects photos over 30KB, while NSDL allows up to 50KB. Use the table below or select your portal preset inside the tool above.
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs text-left border border-gray-200 rounded">
                   <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200">
                     <tr>
-                      <th className="p-3">Document Type</th>
+                      <th className="p-3">Portal</th>
+                      <th className="p-3">Document</th>
                       <th className="p-3">Pixel Dimensions</th>
-                      <th className="p-3">Physical Size</th>
-                      <th className="p-3">Resolution (DPI)</th>
+                      <th className="p-3">DPI</th>
                       <th className="p-3">Max File Size</th>
                       <th className="p-3">Format</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 text-gray-600">
                     <tr className="hover:bg-gray-50/50">
-                      <td className="p-3 font-bold text-gray-900 flex items-center gap-1.5">
-                        <Camera className="w-3.5 h-3.5 text-[#414FA8]" />
-                        Applicant Photo
+                      <td className="p-3 font-bold text-amber-700">UTIITSL</td>
+                      <td className="p-3 font-medium text-gray-900 flex items-center gap-1">
+                        <Camera className="w-3.5 h-3.5 text-amber-600" /> Photo
                       </td>
                       <td className="p-3 font-semibold text-[#414FA8]">213 × 213 px</td>
-                      <td className="p-3">3.5 × 2.5 cm</td>
-                      <td className="p-3 font-semibold">300 DPI</td>
-                      <td className="p-3 font-bold text-emerald-700">&lt; 50 KB</td>
-                      <td className="p-3">JPEG / JPG</td>
+                      <td className="p-3">300 DPI</td>
+                      <td className="p-3 font-bold text-emerald-700">&lt; 30 KB (Strict)</td>
+                      <td className="p-3">JPEG</td>
                     </tr>
                     <tr className="hover:bg-gray-50/50">
-                      <td className="p-3 font-bold text-gray-900 flex items-center gap-1.5">
-                        <PenTool className="w-3.5 h-3.5 text-[#414FA8]" />
-                        Applicant Signature
+                      <td className="p-3 font-bold text-amber-700">UTIITSL</td>
+                      <td className="p-3 font-medium text-gray-900 flex items-center gap-1">
+                        <PenTool className="w-3.5 h-3.5 text-amber-600" /> Signature
                       </td>
-                      <td className="p-3 font-semibold text-[#414FA8]">400 × 213 px</td>
-                      <td className="p-3">2.0 × 4.5 cm</td>
-                      <td className="p-3 font-semibold">300 DPI</td>
-                      <td className="p-3 font-bold text-emerald-700">&lt; 30 KB</td>
-                      <td className="p-3">JPEG / JPG</td>
+                      <td className="p-3 font-semibold text-[#414FA8]">400 × 200 px</td>
+                      <td className="p-3">600 DPI</td>
+                      <td className="p-3 font-bold text-emerald-700">&lt; 60 KB</td>
+                      <td className="p-3">JPEG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-blue-700">NSDL / Protean</td>
+                      <td className="p-3 font-medium text-gray-900 flex items-center gap-1">
+                        <Camera className="w-3.5 h-3.5 text-blue-600" /> Photo
+                      </td>
+                      <td className="p-3 font-semibold text-[#414FA8]">213 × 213 px (3.5×2.5 cm)</td>
+                      <td className="p-3">200 DPI</td>
+                      <td className="p-3 font-bold text-emerald-700">&lt; 50 KB</td>
+                      <td className="p-3">JPEG</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="p-3 font-bold text-blue-700">NSDL / Protean</td>
+                      <td className="p-3 font-medium text-gray-900 flex items-center gap-1">
+                        <PenTool className="w-3.5 h-3.5 text-blue-600" /> Signature
+                      </td>
+                      <td className="p-3 font-semibold text-[#414FA8]">400 × 200 px (2×4.5 cm)</td>
+                      <td className="p-3">200 DPI</td>
+                      <td className="p-3 font-bold text-emerald-700">&lt; 20 KB (Strict)</td>
+                      <td className="p-3">JPEG</td>
                     </tr>
                   </tbody>
                 </table>

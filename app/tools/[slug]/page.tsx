@@ -151,6 +151,8 @@ const DEDICATED_TOOL_SLUGS = [
   'picture-to-pixel-art',
   'jpeg-to-jpg',
   'jpg-to-kb',
+  'pan-card-photo-resizer',
+  'heic-to-jpg',
 ];
 
 export async function generateStaticParams() {

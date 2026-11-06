@@ -1615,27 +1615,6 @@ export const ALL_TOOLS: ToolItem[] = [
     "popular": true
   },
   {
-    "id": "resize-image-3-5cm-4-5cm",
-    "name": "Resize Image (3.5cm x 4.5cm)",
-    "slug": "resize-image-3-5cm-4-5cm",
-    "categoryId": "image",
-    "categoryTitle": "Image Tools",
-    "shortDescription": "Free online tool for resize image (3.5cm x 4.5cm).",
-    "keywords": [
-      "resize image (3.5cm x 4.5cm)",
-      "most used tools"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "High",
-    "analyticsIdentifier": "resize-image-3-5cm-4-5cm",
-    "popular": true
-  },
-  {
     "id": "blur-background",
     "name": "Blur Background",
     "slug": "blur-background",
@@ -3917,27 +3896,6 @@ export const ALL_TOOLS: ToolItem[] = [
     "popular": true
   },
   {
-    "id": "percentage-calculator",
-    "name": "Percentage Calculator",
-    "slug": "percentage-calculator",
-    "categoryId": "calculator",
-    "categoryTitle": "Calculator Tools",
-    "shortDescription": "Free online tool for percentage calculator.",
-    "keywords": [
-      "percentage calculator",
-      "student calculators"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "High",
-    "analyticsIdentifier": "percentage-calculator",
-    "popular": true
-  },
-  {
     "id": "cgpa-to-percentage",
     "name": "CGPA to Percentage Calculator",
     "slug": "cgpa-to-percentage",
@@ -3980,90 +3938,6 @@ export const ALL_TOOLS: ToolItem[] = [
     "popular": true
   },
   {
-    "id": "marks-percentage-calculator",
-    "name": "Marks Percentage Calculator",
-    "slug": "marks-percentage-calculator",
-    "categoryId": "calculator",
-    "categoryTitle": "Calculator Tools",
-    "shortDescription": "Free online tool for marks percentage calculator.",
-    "keywords": [
-      "marks percentage calculator",
-      "student calculators"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "High",
-    "analyticsIdentifier": "marks-percentage-calculator",
-    "popular": true
-  },
-  {
-    "id": "attendance-calculator",
-    "name": "Attendance Calculator",
-    "slug": "attendance-calculator",
-    "categoryId": "calculator",
-    "categoryTitle": "Calculator Tools",
-    "shortDescription": "Free online tool for attendance calculator.",
-    "keywords": [
-      "attendance calculator",
-      "student calculators"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "High",
-    "analyticsIdentifier": "attendance-calculator",
-    "popular": true
-  },
-  {
-    "id": "age-calculator",
-    "name": "Age Calculator",
-    "slug": "age-calculator",
-    "categoryId": "calculator",
-    "categoryTitle": "Calculator Tools",
-    "shortDescription": "Free online tool for age calculator.",
-    "keywords": [
-      "age calculator",
-      "student calculators"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "Medium",
-    "analyticsIdentifier": "age-calculator",
-    "popular": false
-  },
-  {
-    "id": "cgpa-calculator",
-    "name": "CGPA Calculator",
-    "slug": "cgpa-calculator",
-    "categoryId": "calculator",
-    "categoryTitle": "Calculator Tools",
-    "shortDescription": "Free online tool for cgpa calculator.",
-    "keywords": [
-      "cgpa calculator",
-      "student calculators"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "Medium",
-    "analyticsIdentifier": "cgpa-calculator",
-    "popular": false
-  },
-  {
     "id": "required-marks-calculator",
     "name": "Required Marks Calculator",
     "slug": "required-marks-calculator",
@@ -4103,27 +3977,6 @@ export const ALL_TOOLS: ToolItem[] = [
     "status": "production",
     "seoPriority": "Medium",
     "analyticsIdentifier": "exam-percentage-calculator",
-    "popular": false
-  },
-  {
-    "id": "study-hours-calculator",
-    "name": "Study Hours Calculator",
-    "slug": "study-hours-calculator",
-    "categoryId": "calculator",
-    "categoryTitle": "Calculator Tools",
-    "shortDescription": "Free online tool for study hours calculator.",
-    "keywords": [
-      "study hours calculator",
-      "student calculators"
-    ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
-    "processingType": "client",
-    "status": "production",
-    "seoPriority": "Medium",
-    "analyticsIdentifier": "study-hours-calculator",
     "popular": false
   },
   // ==========================================

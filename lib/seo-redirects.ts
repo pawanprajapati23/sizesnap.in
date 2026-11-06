@@ -614,6 +614,27 @@ export function getSeoRedirect(pathname: string): string | null {
     'picture-pdf': 'image-to-pdf',
     'webp-to-jpg': 'png-to-jpg',
     'png-to-jpeg': 'png-to-jpg',
+    // Pixel art aliases (301,000 search volume)
+    'art-pixel': 'picture-to-pixel-art',
+    'pixel-art': 'picture-to-pixel-art',
+    'image-to-pixel-art': 'picture-to-pixel-art',
+    'photo-to-pixel-art': 'picture-to-pixel-art',
+    '8-bit-photo-maker': 'picture-to-pixel-art',
+    // Background removal high volume queries (74,000 search volume each)
+    'remove-image-background': 'remove-background',
+    'delete-background-from-image': 'remove-background',
+    'delete-background-of-image': 'remove-background',
+    'image-background-remover': 'remove-background',
+    'bg-remove-image': 'remove-background',
+    'remove-bg-from-picture': 'remove-background',
+    // High volume image compressor queries (60,500 search volume each)
+    'compress-photo': 'compress-image',
+    'compress-photos': 'compress-image',
+    'pic-compressor': 'compress-image',
+    'picture-compressor': 'compress-image',
+    'photo-compression': 'compress-image',
+    'change-size-of-image': 'reduce-image-size-in-kb',
+    'pic-image-resize': 'reduce-image-size-in-kb',
   };
 
   if (ALIAS_MAP[slug]) {

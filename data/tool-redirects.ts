@@ -154,4 +154,25 @@ export const TOOL_REDIRECT_MAP: Record<string, string> = {
   'pics-to-pdf': '/tools/image-to-pdf',
   'picture-pdf': '/tools/image-to-pdf',
   'png-to-jpeg': '/tools/png-to-jpg',
+  // Pixel art aliases (301,000 search volume)
+  'art-pixel': '/tools/picture-to-pixel-art',
+  'pixel-art': '/tools/picture-to-pixel-art',
+  'image-to-pixel-art': '/tools/picture-to-pixel-art',
+  'photo-to-pixel-art': '/tools/picture-to-pixel-art',
+  '8-bit-photo-maker': '/tools/picture-to-pixel-art',
+  // Background removal high volume queries (74,000 search volume each)
+  'remove-image-background': '/tools/remove-background',
+  'delete-background-from-image': '/tools/remove-background',
+  'delete-background-of-image': '/tools/remove-background',
+  'image-background-remover': '/tools/remove-background',
+  'bg-remove-image': '/tools/remove-background',
+  'remove-bg-from-picture': '/tools/remove-background',
+  // High volume image compressor queries (60,500 search volume each)
+  'compress-photo': '/tools/compress-image',
+  'compress-photos': '/tools/compress-image',
+  'pic-compressor': '/tools/compress-image',
+  'picture-compressor': '/tools/compress-image',
+  'photo-compression': '/tools/compress-image',
+  'change-size-of-image': '/tools/reduce-image-size-in-kb',
+  'pic-image-resize': '/tools/reduce-image-size-in-kb',
 };

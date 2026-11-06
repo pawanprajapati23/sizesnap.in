@@ -12,11 +12,18 @@ import { ArrowLeft } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Free AI Background Remover Online (HD Transparent PNG) | SizeSnap',
   description:
-    'Remove image backgrounds instantly with AI for free. Download crystal-clear transparent PNGs for passport photos, e-commerce products, and profiles. 100% private, no watermark.',
+    'Remove image backgrounds instantly with AI for free. Download crystal-clear transparent PNGs for passport photos, e-commerce products, and profiles. 100% private in browser, no watermark.',
   keywords: [
+    'remove background from image',
+    'remove image background',
     'remove background online free',
     'ai background remover',
+    'image background remover',
+    'delete background from image',
     'remove bg free',
+    'bg remove image',
+    'remove bg from picture',
+    'remove background from picture',
     'transparent background png',
     'photo background remover no watermark',
     'product photo background remove',

@@ -2334,20 +2334,26 @@ export const ALL_TOOLS: ToolItem[] = [
     "slug": "picture-to-pixel-art",
     "categoryId": "image",
     "categoryTitle": "Image Tools",
-    "shortDescription": "Free online tool for picture to pixel art.",
+    "shortDescription": "Convert photos and pictures into retro 8-bit, 16-bit, Game Boy, and arcade pixel art online free.",
+    "route": "/tools/picture-to-pixel-art",
     "keywords": [
       "picture to pixel art",
-      "blur, pixelate and special effects"
+      "art pixel",
+      "image to pixel art",
+      "convert picture to pixel art",
+      "photo to 8 bit",
+      "pixel art generator from image",
+      "turn photo into pixel art"
     ],
-    "aliases": [],
-    "searchIntent": "Utility",
-    "relatedTools": [],
-    "supportedFormats": [],
+    "aliases": ["art-pixel", "pixel-art", "image-to-pixel-art", "photo-to-pixel-art", "8-bit-photo-maker"],
+    "searchIntent": "Convert pictures and photos into retro pixel art online",
+    "relatedTools": ["convert-black-image-to-white", "image-color-picker", "flip-image", "crop-image"],
+    "supportedFormats": ["jpg", "png", "webp"],
     "processingType": "client",
     "status": "production",
-    "seoPriority": "Medium",
+    "seoPriority": "High",
     "analyticsIdentifier": "picture-to-pixel-art",
-    "popular": false
+    "popular": true
   },
   {
     "id": "add-white-border-to-image",
@@ -5287,6 +5293,7 @@ export const NAV_MENUS: NavMenu[] = [
       { name: 'PNG to JPG', slug: 'png-to-jpg' },
       { name: 'Black to White Image', slug: 'convert-black-image-to-white' },
       { name: 'Image Color Picker', slug: 'image-color-picker' },
+      { name: 'Picture to Pixel Art', slug: 'picture-to-pixel-art' },
       { name: 'Photo Collage Maker', slug: 'photo-collage-maker' },
       { name: 'Watermark Images', slug: 'watermark-images' },
     ],

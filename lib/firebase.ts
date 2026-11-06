@@ -166,7 +166,7 @@ export interface LiveActivityItem {
   timestamp: number;
 }
 
-export const fetchLiveActivity = async (limitCount = 60): Promise<LiveActivityItem[]> => {
+export const fetchLiveActivity = async (limitCount = 1000): Promise<LiveActivityItem[]> => {
   try {
     const snapshot = await get(ref(db, 'toolUsage/_activity'));
     if (!snapshot.exists()) return [];
@@ -175,7 +175,8 @@ export const fetchLiveActivity = async (limitCount = 60): Promise<LiveActivityIt
       id,
       ...item
     }));
-    return items.sort((a, b) => b.timestamp - a.timestamp).slice(0, limitCount);
+    const sorted = items.sort((a, b) => b.timestamp - a.timestamp);
+    return limitCount ? sorted.slice(0, limitCount) : sorted;
   } catch (err) {
     console.error("Failed to fetch live activity:", err);
     return [];

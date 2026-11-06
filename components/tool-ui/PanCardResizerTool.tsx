@@ -239,6 +239,7 @@ export function PanCardResizerTool() {
   const processCombo = useCallback(async () => {
     if (!comboPhotoSrc && !comboSigSrc) return;
     setComboProcessing(true);
+    let totalComboBytes = 0;
 
     try {
       if (comboPhotoSrc) {
@@ -249,6 +250,7 @@ export function PanCardResizerTool() {
           activeSpec.photoRecKb,
           100
         );
+        totalComboBytes += photoBlob.size;
         const photoUrl = URL.createObjectURL(photoBlob);
         setComboPhotoResult({
           blob: photoBlob,
@@ -269,6 +271,7 @@ export function PanCardResizerTool() {
           activeSpec.sigRecKb,
           100
         );
+        totalComboBytes += sigBlob.size;
         const sigUrl = URL.createObjectURL(sigBlob);
         setComboSigResult({
           blob: sigBlob,
@@ -285,7 +288,9 @@ export function PanCardResizerTool() {
         tool: 'pan-card-photo-resizer',
         toolName: `PAN Card 2-in-1 Combo (${portal.toUpperCase()})`,
         fileType: 'image',
-        outputKb: (comboPhotoResult?.size || 0) + (comboSigResult?.size || 0),
+        outputKb: Math.round(totalComboBytes / 1024),
+      }).then((id) => {
+        if (id) lastActivityIdRef.current = id;
       }).catch(() => {});
     } catch (err) {
       console.error('PAN Combo resize error:', err);
@@ -366,7 +371,7 @@ export function PanCardResizerTool() {
   };
 
   const downloadComboItem = (res: ProcessedResult) => {
-    trackDownload('pan-card-photo-resizer');
+    trackDownload('pan-card-photo-resizer', lastActivityIdRef.current || undefined);
     const a = document.createElement('a');
     a.href = res.url;
     a.download = res.filename;
@@ -395,7 +400,7 @@ export function PanCardResizerTool() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      trackDownload('pan-card-photo-resizer');
+      trackDownload('pan-card-photo-resizer', lastActivityIdRef.current || undefined);
     } catch (err) {
       console.error('ZIP generation error:', err);
     } finally {

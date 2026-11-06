@@ -1,120 +1,224 @@
 'use client';
 
 import '@/app/globals.css';
-import { Navbar } from '@/components/Navbar';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import AdminGuard from '@/components/AdminGuard';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
+import { 
+  LayoutDashboard, 
+  Activity, 
+  Wrench, 
+  TrendingUp, 
+  AlertTriangle, 
+  HeartPulse, 
+  Inbox, 
+  BookOpen, 
+  LogOut, 
+  ExternalLink, 
+  Menu, 
+  X, 
+  ShieldCheck 
+} from 'lucide-react';
+
+const NAV_ITEMS = [
+  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin/live-activity', label: 'Live Activity', icon: Activity },
+  { href: '/admin/tools', label: 'Tools Management', icon: Wrench },
+  { href: '/admin/performance', label: 'Tool Performance', icon: TrendingUp },
+  { href: '/admin/errors', label: 'Tool Errors', icon: AlertTriangle },
+  { href: '/admin/health', label: 'Site Health', icon: HeartPulse },
+  { href: '/admin/inbox', label: 'User Inbox', icon: Inbox },
+  { href: '/admin/blog', label: 'Blog Content', icon: BookOpen },
+];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const isLoginPage = pathname === '/admin/login';
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       router.push('/admin/login');
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error('Logout failed:', error);
     }
   };
 
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-gray-50 flex flex-col">
-        {!isLoginPage && <Navbar />}
-        
-        <div className="flex flex-1 overflow-hidden">
-          {/* Sidebar - Hidden on Login Page */}
+      <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
+        {/* Dedicated Admin Header - Isolated from public website */}
+        {!isLoginPage && (
+          <header className="sticky top-0 z-40 w-full bg-slate-900 text-white border-b border-slate-800 shadow-md">
+            <div className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+              {/* Left Section: Mobile Toggle & Brand */}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+                  aria-label="Toggle navigation drawer"
+                >
+                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 p-1.5 flex items-center justify-center border border-white/10">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/logo.png" alt="SizeSnap Logo" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-base tracking-tight text-white">SizeSnap</span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                      <ShieldCheck className="w-3 h-3" /> Admin
+                    </span>
+                  </div>
+                </div>
+
+                {/* System Status Indicator (Hidden on mobile) */}
+                <div className="hidden sm:flex items-center gap-2 pl-4 border-l border-slate-800 text-xs text-slate-400">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span>System Live</span>
+                </div>
+              </div>
+
+              {/* Right Section: View Public Site + Profile + Logout */}
+              <div className="flex items-center gap-3 sm:gap-4">
+                <Link
+                  href="/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white transition-all border border-slate-700/80 shadow-sm"
+                  title="Open live public website in new tab"
+                >
+                  <span>Public Site</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                </Link>
+
+                {/* Profile Pill */}
+                <div className="flex items-center gap-2 pl-2 sm:pl-3 border-l border-slate-800">
+                  <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-700 bg-slate-800 flex-shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/pawan.jpeg" alt="Pawan Prajapati" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="hidden md:block text-left">
+                    <p className="text-xs font-bold text-slate-200 leading-tight">Pawan Prajapati</p>
+                    <p className="text-[10px] text-slate-400 leading-tight">Super Admin</p>
+                  </div>
+                </div>
+
+                {/* Quick Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors"
+                  title="Logout from Admin"
+                  aria-label="Logout"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </header>
+        )}
+
+        {/* Admin Shell Body */}
+        <div className="flex flex-1 overflow-hidden relative">
+          {/* Mobile Sidebar Overlay Backdrop */}
+          {!isLoginPage && mobileMenuOpen && (
+            <div 
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-30 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+          )}
+
+          {/* Sidebar (Desktop Persistent + Mobile Drawer) */}
           {!isLoginPage && (
-            <aside className="w-64 bg-white border-r border-gray-200 shadow-sm flex flex-col hidden md:flex">
-              <div className="p-5 border-b border-gray-200 flex flex-col items-center text-center bg-gray-50/50">
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm mb-3">
+            <aside
+              className={`
+                fixed md:static inset-y-0 left-0 z-30 w-64 bg-white border-r border-slate-200 shadow-lg md:shadow-none flex flex-col transition-transform duration-200 ease-in-out
+                ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+              `}
+            >
+              {/* Profile Card Header */}
+              <div className="p-5 border-b border-slate-100 flex flex-col items-center text-center bg-slate-50/70">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md mb-2.5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/pawan.jpeg" alt="Pawan Prajapati" className="w-full h-full object-cover" />
                 </div>
-                <h2 className="text-sm font-bold text-gray-900">Pawan Prajapati</h2>
-                <a href="mailto:diplomawithbtech@gmail.com" className="text-xs text-gray-500 hover:text-[#414FA8] hover:underline mt-0.5">
+                <h2 className="text-sm font-bold text-slate-900">Pawan Prajapati</h2>
+                <a
+                  href="mailto:diplomawithbtech@gmail.com"
+                  className="text-xs text-slate-500 hover:text-indigo-600 hover:underline mt-0.5 truncate max-w-full px-2"
+                >
                   diplomawithbtech@gmail.com
                 </a>
               </div>
-              <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-                <Link 
-                  href="/admin" 
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-                  Dashboard
-                </Link>
-                <Link 
-                  href="/admin/live-activity" 
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/live-activity' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                  Live Activity
-                </Link>
-                <Link 
-                  href="/admin/tools" 
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/tools' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  Tools Management
-                </Link>
-                <Link
-                  href="/admin/performance"
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/performance' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                  Tool Performance
-                </Link>
-                <Link
-                  href="/admin/errors"
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/errors' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                  Tool Errors
-                </Link>
-                <Link
-                  href="/admin/health"
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/health' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                  Site Health
-                </Link>
-                <Link 
-                  href="/admin/inbox" 
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/inbox' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
-                  User Inbox
-                </Link>
 
-                <Link
-                  href="/admin/blog"
-                  className={`flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-[#EEF1FB] hover:text-[#414FA8] transition-colors ${pathname === '/admin/blog' ? 'bg-[#EEF1FB] text-[#414FA8]' : ''}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
-                  Blog Content
-                </Link>
-                <div className="pt-4 mt-4 border-t border-gray-200">
-                  <button 
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-red-600 font-medium rounded-lg hover:bg-red-50 transition-colors"
+              {/* Navigation Links */}
+              <nav className="flex-1 p-3.5 space-y-1.5 overflow-y-auto">
+                {NAV_ITEMS.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+                        isActive
+                          ? 'bg-indigo-50 text-indigo-700 shadow-xs border border-indigo-100'
+                          : 'text-slate-600 hover:bg-slate-100/80 hover:text-slate-900'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+
+                <div className="pt-3 mt-3 border-t border-slate-100">
+                  <Link
+                    href="/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between px-3.5 py-2 text-xs font-medium text-slate-500 hover:bg-slate-100 rounded-lg transition-colors md:hidden"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-                    Logout
+                    <span className="flex items-center gap-2">
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      View Public Site
+                    </span>
+                    <span className="text-[10px] text-slate-400">sizesnap.in</span>
+                  </Link>
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-50 rounded-lg transition-colors mt-1"
+                  >
+                    <LogOut className="w-4 h-4 text-rose-500" />
+                    <span>Logout</span>
                   </button>
                 </div>
               </nav>
             </aside>
           )}
 
-          {/* Main Content */}
-          <main className="flex-1 max-w-full p-4 sm:p-6 overflow-y-auto" id="admin-main">
+          {/* Main Dashboard Content Area */}
+          <main className="flex-1 max-w-full p-4 sm:p-6 lg:p-8 overflow-y-auto bg-[#F8FAFC]" id="admin-main">
             {children}
           </main>
         </div>

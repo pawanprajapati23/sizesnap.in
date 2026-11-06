@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 const FeedbackWidget = dynamic(() => import('@/components/FeedbackWidget'));
 const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'));
+const AdScripts = dynamic(() => import('@/components/AdScripts'));
 
 import './globals.css';
 
@@ -155,13 +156,8 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased" suppressHydrationWarning>
-        {/* Ad Network Tag (Non-blocking high-performance) */}
-        <Script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="306772"
-          strategy="afterInteractive"
-          data-cfasync="false"
-        />
+        {/* Dynamic Ad & Monetization Scripts (Auto-disabled on /admin) */}
+        <AdScripts />
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
@@ -183,16 +179,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-
-        {/* Google AdSense */}
-        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
-            crossOrigin="anonymous"
-            strategy="lazyOnload"
-          />
-        )}
 
         <AnalyticsTracker />
         <FeedbackWidget />

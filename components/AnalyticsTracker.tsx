@@ -8,6 +8,11 @@ export default function AnalyticsTracker() {
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
 
+  // Disable analytics tracking inside admin panel
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   useEffect(() => {
     pathnameRef.current = pathname;
   }, [pathname]);

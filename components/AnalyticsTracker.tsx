@@ -2,15 +2,18 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { trackToolUsage, trackDownload } from '@/lib/firebase';
+import { recordPageVisit } from '@/lib/traffic-analytics';
 import { ALL_TOOLS } from '@/data/tools';
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
 
+  // Record visitor traffic telemetry across all pages
   useEffect(() => {
-    if (pathname?.startsWith('/admin')) return;
+    if (!pathname || pathname.startsWith('/admin')) return;
     pathnameRef.current = pathname;
+    recordPageVisit(pathname).catch(() => undefined);
   }, [pathname]);
 
   useEffect(() => {

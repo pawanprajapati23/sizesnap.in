@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import FilterTabs, { TimeRange } from '@/app/admin/components/FilterTabs';
 import StatCard from '@/app/admin/components/StatCard';
+import { UserTrafficAnalytics } from '@/app/admin/components/UserTrafficAnalytics';
 import { fetchUsage, aggregateWithin } from '@/lib/firebase';
 import { ALL_TOOLS } from '@/data/tools';
 
@@ -88,54 +89,63 @@ export default function AdminDashboard() {
   const downloadRate = totalToolUses > 0 ? ((totalDownloads / totalToolUses) * 100).toFixed(2) + '%' : 'N/A';
 
   return (
-    <section className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">📊 Admin Dashboard</h1>
-        <FilterTabs active={activeRange} setActive={setActiveRange} />
-      </div>
+    <section className="max-w-5xl mx-auto space-y-10">
+      {/* 1. Real-Time Visitor Traffic & User Analytics (24h, 30d, 3m filters) */}
+      <UserTrafficAnalytics />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
-        <StatCard title="Active Tools" value={totalAvailableTools} />
-        <StatCard title="Tool Uses" value={loading ? '...' : totalToolUses} />
-        <StatCard title="Downloads" value={loading ? '...' : totalDownloads} />
-        <StatCard title="Download Rate" value={loading ? '...' : downloadRate} />
-        <StatCard title="Tool Errors" value={loading ? '...' : totalErrors} />
-        <StatCard title="Error Rate" value={loading ? '...' : errorRate} />
-      </div>
-
-      <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Top Performing Tools</h2>
-
-        {loading ? (
-          <div className="text-center p-8 text-gray-500">Loading metrics...</div>
-        ) : topTools.length === 0 || topTools[0].uses === 0 ? (
-          <div className="text-center p-8 text-gray-500 bg-gray-50 rounded border border-gray-100">
-            Not enough data for the selected period.
+      {/* 2. Tool Performance Overview */}
+      <div className="pt-8 border-t border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">🛠️ Tool Performance &amp; Usage</h2>
+            <p className="text-sm text-gray-500">Summary of tool calls, conversions, and error rates</p>
           </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead className="bg-[#EEF1FB] border-b border-gray-200">
-                <tr>
-                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Tool</th>
-                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Category</th>
-                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Uses</th>
-                  <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Errors</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {topTools.map(t => (
-                  <tr key={t.slug} className="hover:bg-gray-50">
-                    <td className="p-4 text-sm font-medium text-gray-900">{t.name}</td>
-                    <td className="p-4 text-sm text-gray-500">{t.categoryTitle}</td>
-                    <td className="p-4 text-sm text-gray-900 font-semibold text-right">{t.uses}</td>
-                    <td className="p-4 text-sm text-gray-500 text-right">{t.errors}</td>
+          <FilterTabs active={activeRange} setActive={setActiveRange} />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+          <StatCard title="Active Tools" value={totalAvailableTools} />
+          <StatCard title="Tool Uses" value={loading ? '...' : totalToolUses} />
+          <StatCard title="Downloads" value={loading ? '...' : totalDownloads} />
+          <StatCard title="Download Rate" value={loading ? '...' : downloadRate} />
+          <StatCard title="Tool Errors" value={loading ? '...' : totalErrors} />
+          <StatCard title="Error Rate" value={loading ? '...' : errorRate} />
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+          <h3 className="text-lg font-bold text-gray-800 mb-4">Top Performing Tools</h3>
+
+          {loading ? (
+            <div className="text-center p-8 text-gray-500">Loading metrics...</div>
+          ) : topTools.length === 0 || topTools[0].uses === 0 ? (
+            <div className="text-center p-8 text-gray-500 bg-gray-50 rounded border border-gray-100">
+              Not enough data for the selected period.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[600px]">
+                <thead className="bg-[#EEF1FB] border-b border-gray-200">
+                  <tr>
+                    <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Tool</th>
+                    <th className="p-4 text-xs font-bold text-[#414FA8] uppercase">Category</th>
+                    <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Uses</th>
+                    <th className="p-4 text-xs font-bold text-[#414FA8] uppercase text-right">Errors</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {topTools.map(t => (
+                    <tr key={t.slug} className="hover:bg-gray-50">
+                      <td className="p-4 text-sm font-medium text-gray-900">{t.name}</td>
+                      <td className="p-4 text-sm text-gray-500">{t.categoryTitle}</td>
+                      <td className="p-4 text-sm text-gray-900 font-semibold text-right">{t.uses}</td>
+                      <td className="p-4 text-sm text-gray-500 text-right">{t.errors}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin', label: 'Traffic & Dashboard', icon: LayoutDashboard },
   { href: '/admin/live-activity', label: 'Live Activity', icon: Activity },
   { href: '/admin/tools', label: 'Tools Management', icon: Wrench },
   { href: '/admin/performance', label: 'Tool Performance', icon: TrendingUp },

@@ -161,7 +161,13 @@ export function ExactKbPage({
               {/* Quick Target KB Size Pills Network */}
               <KbTargetPills
                 type="image"
-                activeSlug={targetKb === 14 ? '14kb-photo-size' : (targetKb === 60 ? '60kb-photo-size' : (targetKb === 20 ? 'compress-image-to-20kb' : (targetKb === 50 ? 'compress-image-to-50kb' : `compress-image-to-${targetKb}kb`)))}
+                activeSlug={
+                  targetKb === 14
+                    ? '14kb-photo-size'
+                    : targetKb === 60
+                    ? '60kb-photo-size'
+                    : `compress-image-to-${targetKb}kb`
+                }
               />
 
 
@@ -190,7 +196,20 @@ export function ExactKbPage({
                 </div>
               )}
 
-              <RelatedTools category="Compress" currentSlug={`compress-image-to-${targetKb}kb`} />
+              {relatedTools.length > 0 ? (
+                <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
+                  <h2 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">
+                    Related Compression &amp; Exam Tools
+                  </h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+                    {relatedTools.map((tool) => (
+                      <ToolButton key={tool.id} tool={tool} />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <RelatedTools category="Compress" currentSlug={`compress-image-to-${targetKb}kb`} />
+              )}
             </div>
 
             <div className="w-full lg:col-span-4 xl:col-span-3">

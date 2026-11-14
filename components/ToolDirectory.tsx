@@ -4,31 +4,51 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Search, X, Sparkles } from 'lucide-react';
 import { ALL_TOOLS, TOOL_CATEGORIES, type ToolItem } from '@/data/tools';
+import { TOOL_REDIRECT_MAP } from '@/data/tool-redirects';
 import { ToolButton } from '@/components/ToolButton';
-export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
+
+const CANONICAL_PRODUCTION_TOOLS = ALL_TOOLS.filter(
+  (t) => !TOOL_REDIRECT_MAP[t.slug] && t.status !== 'draft' && t.status !== 'deprecated'
+);
+
+export function ToolDirectory({
+  topTools = [],
+  hideHeroHeading = false,
+}: {
+  topTools?: string[];
+  hideHeroHeading?: boolean;
+}) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [mounted, setMounted] = useState(false);
 
   React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
+    if (typeof window === 'undefined') return;
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) {
+      queueMicrotask(() => setSearchQuery(q));
+    }
   }, []);
 
-  // Filter tools client-side dynamically
+  // Filter tools client-side dynamically across name, category, description, keywords, aliases
   const filteredTools = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    if (!query) return ALL_TOOLS;
-    return ALL_TOOLS.filter((tool) =>
-      tool.name.toLowerCase().includes(query) ||
-      tool.categoryTitle.toLowerCase().includes(query)
-    );
+    if (!query) return CANONICAL_PRODUCTION_TOOLS;
+    return CANONICAL_PRODUCTION_TOOLS.filter((tool) => {
+      if (tool.name.toLowerCase().includes(query)) return true;
+      if (tool.categoryTitle.toLowerCase().includes(query)) return true;
+      if (tool.shortDescription?.toLowerCase().includes(query)) return true;
+      if (tool.keywords?.some((kw) => kw.toLowerCase().includes(query))) return true;
+      if (tool.aliases?.some((al) => al.toLowerCase().includes(query))) return true;
+      return false;
+    });
   }, [searchQuery]);
 
-  // Group tools by category for normal browsing view
   // Prioritize core high-intent money tools followed by top trending tools
   const popularTools = useMemo(() => {
     const pinnedSlugs = [
       'compress-pdf-140kb',
+      'signature-resizer-10kb-to-20kb',
+      'id-card-front-back-merger',
+      'postcard-size-photo-maker',
       'compress-pdf',
       'jpg-to-pdf-under-150kb',
       'merge-pdf',
@@ -40,8 +60,8 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
       'pan-card-photo-resizer',
       '20kb-photo-size',
       '50kb-photo-size',
-      '12kb-photo-size',
-      '13kb-photo-size',
+      'compress-image-to-12kb',
+      'compress-image-to-13kb',
       '100kb-photo-size',
       'compress-image-to-20kb',
       'compress-image-to-50kb',
@@ -55,7 +75,7 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
 
     // First add pinned high-intent tools
     for (const slug of pinnedSlugs) {
-      const tool = ALL_TOOLS.find(t => t.slug === slug);
+      const tool = CANONICAL_PRODUCTION_TOOLS.find((t) => t.slug === slug);
       if (tool && !slugSet.has(tool.slug)) {
         slugSet.add(tool.slug);
         result.push(tool);
@@ -65,8 +85,8 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
     // Then append any extra topTools from Firebase
     for (const slug of topTools) {
       if (!slugSet.has(slug)) {
-        const tool = ALL_TOOLS.find(t => t.slug === slug);
-        if (tool && tool.status !== 'draft' && tool.status !== 'deprecated') {
+        const tool = CANONICAL_PRODUCTION_TOOLS.find((t) => t.slug === slug);
+        if (tool) {
           slugSet.add(tool.slug);
           result.push(tool);
         }
@@ -76,17 +96,40 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
     return result.slice(0, 12);
   }, [topTools]);
 
-  // Group tools by category for normal browsing view
-  // Only keep requested curated categories
+  // Group tools by category matching TOOL_CATEGORIES ids
   const categorizedTools = useMemo(() => {
-    const curatedCategoryIds = ['image', 'pdf', 'text', 'developer', 'student', 'exam', 'seo', 'social', 'ecommerce'];
-    return TOOL_CATEGORIES
-      .filter(c => curatedCategoryIds.includes(c.id))
-      .map((category) => ({
-        category,
-        // Take at most 6 curated tools per category to keep the homepage manageable
-        tools: ALL_TOOLS.filter((t) => t.categoryId === category.id).slice(0, 6),
-      }));
+    const curatedCategoryIds = [
+      'image',
+      'pdf',
+      'exam-tools',
+      'student-tools',
+      'ecommerce',
+      'calculator',
+      'developer',
+      'seo',
+      'writing',
+      'text',
+    ];
+    return TOOL_CATEGORIES.filter((c) => curatedCategoryIds.includes(c.id))
+      .map((category) => {
+        const matchingTools = CANONICAL_PRODUCTION_TOOLS.filter((t) => {
+          if (category.id === 'exam-tools') return t.categoryId === 'exam-tools' || t.categoryId === 'exam';
+          if (category.id === 'student-tools') return t.categoryId === 'student-tools' || t.categoryId === 'student';
+          return t.categoryId === category.id;
+        }).sort((a, b) => {
+          const scoreA = (a.popular ? 2 : 0) + (a.seoPriority === 'High' ? 1 : 0);
+          const scoreB = (b.popular ? 2 : 0) + (b.seoPriority === 'High' ? 1 : 0);
+          return scoreB - scoreA;
+        });
+
+        return {
+          category,
+          totalCount: matchingTools.length,
+          // Take at most 6 curated canonical tools per category to keep the homepage fast & scannable
+          tools: matchingTools.slice(0, 6),
+        };
+      })
+      .filter((group) => group.tools.length > 0);
   }, []);
 
   const handleClear = () => {
@@ -99,13 +142,21 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
     <div id="directory" className="space-y-6">
       {/* Header and Search Box */}
       <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
-        {/* Main H1 - Single H1 on page */}
-        <h1 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#333333] tracking-tight mb-1.5">
-          Compress, Resize &amp; Edit Pictures
-        </h1>
-        <p className="text-xs sm:text-sm text-gray-600 mb-4 leading-normal">
-          Free online tools to compress, resize, convert and edit images and PDF files.
-        </p>
+        {!hideHeroHeading ? (
+          <>
+            {/* Main H1 - Single H1 on homepage */}
+            <h1 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#333333] tracking-tight mb-1.5">
+              Free Online Image Compressor, Exact KB Photo Resizer &amp; PDF Tools
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-600 mb-4 leading-normal">
+              Compress photos to 10KB, 20KB, 50KB or 140KB PDFs, resize passport &amp; govt exam documents, and convert files 100% locally in your browser.
+            </p>
+          </>
+        ) : (
+          <h2 className="text-base sm:text-lg font-bold text-[#333333] tracking-tight mb-3">
+            Search &amp; Filter All Tools
+          </h2>
+        )}
 
         {/* Search Bar */}
         <div className="relative w-full max-w-2xl">
@@ -225,13 +276,13 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 14 KB Signature
               </Link>
               <Link
-                href="/tools/12kb-photo-size"
+                href="/tools/compress-image-to-12kb"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
                 12 KB Photo
               </Link>
               <Link
-                href="/tools/13kb-photo-size"
+                href="/tools/compress-image-to-13kb"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
                 13 KB Photo
@@ -285,22 +336,10 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 White BG Photo
               </Link>
               <Link
-                href="/tools/pan-card-photo-resizer"
-                className="px-2.5 py-1 rounded bg-indigo-50/70 hover:bg-indigo-100/80 text-[#414FA8] font-bold border border-[#414FA8]/30 transition-colors"
-              >
-                PAN Card (213×213)
-              </Link>
-              <Link
                 href="/tools/compress-pdf-100kb"
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
                 100 KB PDF
-              </Link>
-              <Link
-                href="/tools/compress-pdf-140kb"
-                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
-              >
-                140 KB PDF
               </Link>
               <Link
                 href="/tools/compress-pdf-200kb"
@@ -319,12 +358,6 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
               >
                 60 KB Photo
-              </Link>
-              <Link
-                href="/tools/200-dpi-converter"
-                className="px-2.5 py-1 rounded bg-gray-50 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium border border-gray-200 hover:border-emerald-300 transition-colors"
-              >
-                200 DPI Scan
               </Link>
               <Link
                 href="/tools/remove-shadow-from-document"
@@ -420,11 +453,8 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
             </div>
           </section>
 
-          {categorizedTools.map(({ category, tools }, index) => {
-            // Only render the first category during SSR and initial paint to drastically improve LCP/FCP
-            // Render the rest only after the component has mounted (client-side)
-            if (!mounted && index > 0) return null;
-            
+          {categorizedTools.map(({ category, tools }) => {
+            const categoryHref = category.id.endsWith('-tools') ? `/${category.id}` : `/${category.id}-tools`;
             return (
               <section
                 key={category.id}
@@ -457,7 +487,7 @@ export function ToolDirectory({ topTools = [] }: { topTools?: string[] }) {
                 ))}
               </div>
               <div className="mt-3 text-right">
-                <Link href={`/${category.id}-tools`} className="text-xs font-semibold text-[#414FA8] hover:underline">
+                <Link href={categoryHref} className="text-xs font-semibold text-[#414FA8] hover:underline">
                   View All {category.title} →
                 </Link>
               </div>

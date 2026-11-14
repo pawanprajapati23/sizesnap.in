@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   Upload, 
@@ -11,7 +11,7 @@ import {
   Lock, 
   ArrowRight, 
   CheckCircle2, 
-  Image as ImageIcon 
+  AlertCircle,
 } from 'lucide-react';
 
 interface PresetItem {
@@ -69,13 +69,13 @@ const POPULAR_PRESETS: PresetItem[] = [
     id: 'square-dp',
     name: 'WhatsApp DP (1:1)',
     shortDesc: 'Square crop without blur',
-    url: '/tools/square-crop',
+    url: '/tools/crop-image',
   },
   {
     id: 'scanner',
     name: 'Document Scanner (B&W)',
     shortDesc: 'Shadow removal & contrast',
-    url: '/tools/black-and-white',
+    url: '/tools/image-filters?mode=bw',
   },
 ];
 
@@ -86,13 +86,15 @@ export function HeroQuickDropzone() {
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFile = useCallback((file: File) => {
     if (!file.type.startsWith('image/')) {
-      alert('Please upload an image file (JPG, PNG, WebP).');
+      setErrorMsg('Please upload an image file (JPG, PNG, WebP).');
       return;
     }
+    setErrorMsg(null);
     setSelectedFile(file);
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
@@ -110,6 +112,24 @@ export function HeroQuickDropzone() {
     };
     reader.readAsDataURL(file);
   }, []);
+
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (const item of Array.from(items)) {
+        if (item.type.startsWith('image/')) {
+          const file = item.getAsFile();
+          if (file) {
+            handleFile(file);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('paste', onPaste);
+    return () => window.removeEventListener('paste', onPaste);
+  }, [handleFile]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -203,6 +223,15 @@ export function HeroQuickDropzone() {
         </div>
 
         {/* Step 2: Interactive Drag & Drop Area */}
+        {errorMsg && (
+          <div className="flex items-center gap-2 p-2.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-[4px]">
+            <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
+            <span className="flex-1">{errorMsg}</span>
+            <button type="button" onClick={() => setErrorMsg(null)} className="font-semibold hover:underline">
+              Dismiss
+            </button>
+          </div>
+        )}
         <div
           onDrop={handleDrop}
           onDragOver={handleDragOver}

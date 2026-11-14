@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import Link from 'next/link';
 import type { ExamPreset, ExamDocumentSpec } from '@/data/exam-presets';
-import { formatBytes } from '@/lib/format-utils';
+import { formatBytes, consumeCachedHeroImage } from '@/lib/format-utils';
 import { padJpegBlob } from '@/lib/image-padding';
 import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import {
@@ -151,7 +152,7 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
   };
 
   // Handle file select
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = useCallback((file: File) => {
     if (!file.type.startsWith('image/')) {
       setErrorMsg('Please select a valid image file (JPG, PNG, or WebP).');
       return;
@@ -178,7 +179,19 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
       setErrorMsg('Failed to load image. The file may be corrupt.');
     };
     img.src = url;
-  };
+  }, [registerUrl]);
+
+  useEffect(() => {
+    let cancelled = false;
+    consumeCachedHeroImage().then((file) => {
+      if (file && !cancelled) {
+        handleFileSelect(file);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [handleFileSelect]);
 
   // Perform Image Rendering and Compression
   const processImage = useCallback(async () => {
@@ -709,13 +722,13 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
 
             {/* Right Live Preview & Download (7 cols) */}
             <div className="order-1 lg:order-2 lg:col-span-7 bg-white p-4 sm:p-5 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-2.5">
                 <span className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
-                  <Eye className="h-3.5 w-3.5 text-[#414FA8]" /> Live Processed Output
+                  <Eye className="h-3.5 w-3.5 text-[#414FA8]" /> Live Spec &amp; Visual Inspector
                 </span>
                 {result && (
                   <span
-                    className={`text-[11px] font-bold px-2 py-0.5 rounded flex items-center gap-1 ${
+                    className={`text-[11px] font-bold px-2.5 py-0.5 rounded flex items-center gap-1 tabular-nums ${
                       result.isValidSize
                         ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                         : 'bg-amber-50 text-amber-700 border border-amber-200'
@@ -723,7 +736,7 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
                   >
                     {result.isValidSize ? (
                       <>
-                        <CheckCircle2 className="h-3 w-3" /> Exact Portal Compliant
+                        <CheckCircle2 className="h-3 w-3" /> PASS: {exam.shortTitle} Compliant ({Math.round(result.size / 1024)} KB)
                       </>
                     ) : (
                       <>
@@ -734,36 +747,53 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
                 )}
               </div>
 
-              {/* Visual Preview Box */}
-              <div className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded border border-gray-200">
-                {result ? (
-                  <div className="relative group max-w-full">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={result.url}
-                      alt="Processed Exam Output"
-                      className="max-h-72 object-contain border border-gray-300 shadow-sm rounded-xs bg-white"
-                    />
-                  </div>
-                ) : (
-                  <div className="py-12 flex flex-col items-center text-gray-400 text-xs">
-                    <Sparkles className="h-6 w-6 text-[#414FA8] animate-pulse mb-2" />
-                    <span>Processing live image...</span>
-                  </div>
-                )}
+              {/* Visual Preview Box (Before vs Processed Output) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 bg-gray-50 rounded border border-gray-200 items-center">
+                <div className="flex flex-col items-center justify-center text-center">
+                  <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5 font-mono">
+                    Original ({formatBytes(sourceImage.size)} • {sourceImage.width}×{sourceImage.height}px)
+                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={sourceImage.url}
+                    alt="Original Input"
+                    className="max-h-56 object-contain border border-gray-200 rounded-xs bg-white"
+                  />
+                </div>
+
+                <div className="flex flex-col items-center justify-center text-center">
+                  <span className="text-[10px] font-bold text-[#414FA8] uppercase tracking-wider mb-1.5 font-mono">
+                    Portal Ready ({result ? `${formatBytes(result.size)} • ${result.width}×${result.height}px` : 'Processing...'})
+                  </span>
+                  {result ? (
+                    <div className="relative group max-w-full">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={result.url}
+                        alt="Processed Exam Output"
+                        className="max-h-56 object-contain border-2 border-[#414FA8]/40 shadow-sm rounded-xs bg-white"
+                      />
+                    </div>
+                  ) : (
+                    <div className="py-12 flex flex-col items-center text-gray-400 text-xs">
+                      <Sparkles className="h-6 w-6 text-[#414FA8] animate-pulse mb-2" />
+                      <span>Processing live image...</span>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Metrics Bar */}
               {result && (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs tabular-nums">
                   <div className="p-2 bg-gray-50 rounded border border-gray-100">
                     <div className="text-[10px] text-gray-500">Output Size</div>
-                    <div className="font-bold text-[#414FA8]">{formatBytes(result.size)}</div>
+                    <div className="font-bold text-[#414FA8] font-mono">{formatBytes(result.size)}</div>
                   </div>
                   <div className="p-2 bg-gray-50 rounded border border-gray-100">
                     <div className="text-[10px] text-gray-500">Allowed KB</div>
-                    <div className="font-semibold text-gray-800">
-                      {activeDoc.minKb} - {activeDoc.maxKb} KB
+                    <div className="font-semibold text-gray-800 font-mono">
+                      {activeDoc.minKb} – {activeDoc.maxKb} KB
                     </div>
                   </div>
                   <div className="p-2 bg-gray-50 rounded border border-gray-100">
@@ -773,14 +803,14 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
                     </div>
                   </div>
                   <div className="p-2 bg-gray-50 rounded border border-gray-100">
-                    <div className="text-[10px] text-gray-500">File Type</div>
-                    <div className="font-semibold text-emerald-700">JPEG</div>
+                    <div className="text-[10px] text-gray-500">Format &amp; Status</div>
+                    <div className="font-semibold text-emerald-700 font-mono">JPEG • Ready</div>
                   </div>
                 </div>
               )}
 
               {/* Download Action */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
                 <button
                   type="button"
                   onClick={handleDownload}
@@ -788,13 +818,22 @@ export function ExamPhotoResizer({ exam, initialDocId }: ExamPhotoResizerProps) 
                   className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 bg-[#414FA8] hover:bg-[#343f88] active:scale-[0.99] text-white text-xs sm:text-sm font-semibold rounded-[4px] shadow-sm transition-all cursor-pointer disabled:opacity-50"
                 >
                   <Download className="h-4 w-4" />
-                  <span>Download {activeDoc.title} for {exam.shortTitle}</span>
+                  <span>Download {activeDoc.title} ({result ? formatBytes(result.size) : ''})</span>
                 </button>
               </div>
 
-              <p className="text-[11px] text-gray-400 text-center">
-                SizeSnap guaranteed 0% rejection guarantee when uploaded with correct background and posture.
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100 text-[11px] text-gray-500">
+                <span className="flex items-center gap-1">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+                  <span>100% Private Browser Processing</span>
+                </span>
+                <a
+                  href="/tools/cyber-cafe-passport-photo-maker"
+                  className="font-semibold text-[#414FA8] hover:underline"
+                >
+                  Need 8–36 Passport Photos on a 4×6 / A4 Sheet? →
+                </a>
+              </div>
             </div>
           </div>
         </div>

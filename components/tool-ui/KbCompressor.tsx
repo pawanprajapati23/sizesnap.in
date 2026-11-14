@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
-import { formatBytes, calculateSavings, sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { formatBytes, calculateSavings, sanitizeFilename, getExtensionFromMime, consumeCachedHeroImage } from '@/lib/format-utils';
 import { padJpegBlob } from '@/lib/image-padding';
 import { trackProcessingSuccess, trackProcessingError, trackDownload } from '@/lib/firebase';
 import { useSearchParams } from 'next/navigation';
@@ -74,7 +74,7 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
     return () => cleanupUrls();
   }, [cleanupUrls]);
 
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = useCallback((file: File) => {
     setErrorMsg(null);
     setResult(null);
 
@@ -98,14 +98,26 @@ export function KbCompressor({ initialTargetKb, title, showSeoContent }: { initi
     };
 
     img.src = url;
-  };
+  }, [registerUrl]);
+
+  useEffect(() => {
+    let cancelled = false;
+    consumeCachedHeroImage().then((file) => {
+      if (file && !cancelled) {
+        handleFileSelect(file);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [handleFileSelect]);
 
   const handleReset = () => {
     cleanupUrls();
     setSelectedImage(null);
     setResult(null);
     setErrorMsg(null);
-    setTargetKb(50);
+    setCustomKb(null);
     setOutputFormat('auto');
   };
 

@@ -45,6 +45,38 @@ const EXAM_BLOG_GUIDES: Record<string, { title: string; href: string }> = {
     title: 'RRB Railway 2026: Photo & Signature Size Guidelines',
     href: '/blog/rrb-railway-photo-signature-size-guidelines-2026',
   },
+  'neet-jee': {
+    title: 'Photo Par Naam Aur Date (DOP) Kaise Likhe — Complete Guide',
+    href: '/guides/ssc-upsc-photo-par-naam-aur-date-kaise-likhe',
+  },
+  'ctet-kvs': {
+    title: 'Mobile Se Photo Ka Size 20KB–50KB Kaise Kare Guide',
+    href: '/guides/photo-ka-size-20kb-kaise-kare-mobile-se',
+  },
+  'bihar-bpsc': {
+    title: 'Signature Size 10KB–20KB (No Blur) Mobile Scan Guide',
+    href: '/guides/signature-size-10kb-to-20kb-kaise-banaye',
+  },
+  'rajasthan-rsmssb': {
+    title: 'Mobile Se Photo & Signature Exact KB Kaise Banaye Guide',
+    href: '/guides/photo-ka-size-20kb-kaise-kare-mobile-se',
+  },
+  'mpesb-vyapam': {
+    title: 'MPESB & Exam Photo Par Naam Aur Date (DOP) Guide',
+    href: '/guides/ssc-upsc-photo-par-naam-aur-date-kaise-likhe',
+  },
+  'india-post-gds': {
+    title: 'GDS 140×60 px Signature (10KB–20KB) Complete Guide',
+    href: '/guides/signature-size-10kb-to-20kb-kaise-banaye',
+  },
+  'gate-jam': {
+    title: 'How to Compress & Resize Exam Photos Without Blur',
+    href: '/guides/how-to-compress-image',
+  },
+  'pan-card-nsdl': {
+    title: 'PAN Card Photo (213×213 px, 300 DPI) & Signature Guide',
+    href: '/guides/pan-card-photo-signature-size-nsdl-utiitsl-guide',
+  },
 };
 
 interface ExamPageProps {
@@ -92,13 +124,14 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
     notFound();
   }
 
-  // Schema.org FAQ and Tool Data
+  // Schema.org SoftwareApplication + HowTo + FAQPage + BreadcrumbList
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'SoftwareApplication',
         name: exam.name,
+        url: `https://www.sizesnap.in/exams/${exam.slug}`,
         applicationCategory: 'MultimediaApplication',
         operatingSystem: 'All',
         offers: {
@@ -107,6 +140,37 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
           priceCurrency: 'INR',
         },
         description: exam.metaDescription,
+      },
+      {
+        '@type': 'HowTo',
+        name: `How to Resize Photo and Signature for ${exam.shortTitle}`,
+        description: exam.summary,
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Select Document Tab',
+            text: `Choose between ${exam.documents.map((d) => d.title).join(', ')} at the top of the resizer.`,
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Upload Your Image',
+            text: 'Select your photo or signature from your mobile gallery or computer.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Configure Name & Date or White Background',
+            text: 'Optionally enable the Name & Date (DOP) bar or 1-click AI White Background.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 4,
+            name: 'Verify Compliance & Download',
+            text: 'Check the green Exact Portal Compliant badge and download your JPEG file.',
+          },
+        ],
       },
       {
         '@type': 'FAQPage',
@@ -118,6 +182,29 @@ export default async function DedicatedExamPage({ params }: ExamPageProps) {
             text: faq.a,
           },
         })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.sizesnap.in/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Govt Exams',
+            item: 'https://www.sizesnap.in/exams',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: exam.shortTitle,
+            item: `https://www.sizesnap.in/exams/${exam.slug}`,
+          },
+        ],
       },
     ],
   };

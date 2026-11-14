@@ -19,7 +19,7 @@ export function Sidebar() {
           {SIDEBAR_QUICK_LINKS.map((link) => (
             <Link prefetch={false}
               key={link.title}
-              href={`/tools/${link.slug}`}
+              href={link.href || `/tools/${link.slug}`}
               className="flex items-center justify-center text-center p-2 rounded-[4px] border border-[#9AA3C8] bg-white hover:border-[#414FA8] hover:bg-[#F2F4FC] hover:text-[#414FA8] text-[#333333] transition-colors duration-150 min-h-[46px] group"
               title={link.title}
             >

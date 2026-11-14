@@ -2,13 +2,13 @@
 
 import React, { useState, useRef, useEffect, Suspense } from 'react';
 import { Upload, Download, RefreshCw, SlidersHorizontal, Image as ImageIcon } from 'lucide-react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { consumeCachedHeroImage } from '@/lib/format-utils';
 
 type FilterMode = 'grayscale' | 'bw' | 'blur' | 'pixelate' | 'invert' | 'sepia' | 'deepfry' | 'sharpen';
 
 function FilterToolContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   
   const initialMode = (searchParams.get('mode') as FilterMode) || 'grayscale';
   
@@ -19,6 +19,24 @@ function FilterToolContent() {
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originalImageRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    consumeCachedHeroImage().then((file) => {
+      if (!file || cancelled) return;
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        if (cancelled) return;
+        originalImageRef.current = img;
+        setImageSrc(url);
+      };
+      img.src = url;
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Sync mode with URL if needed, but not strictly necessary to update URL on every click
   const handleModeChange = (newMode: FilterMode) => {

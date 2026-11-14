@@ -10,16 +10,26 @@ import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight, HelpCircle, Lock, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Resize Image Pixel - Change Width & Height in Pixels Free | SizeSnap',
+  title: 'Resize Image in Pixels, CM, MM & Inches Online (With DPI & KB) | SizeSnap',
   description:
-    'Free online pixel resizer tool. Change image width and height in pixels with aspect ratio lock, resolution presets (720p, 1080p, 4K), and high-quality canvas scaling.',
+    'Free online image resizer in Pixels (px), Centimeters (cm), Millimeters (mm), and Inches with 200/300 DPI calibration and exact KB file size lock (20KB, 50KB) for SSC, UPSC, PAN & printing.',
+  keywords: [
+    'resize image pixel',
+    'resize image in cm',
+    'resize image in mm',
+    'resize image in inches',
+    'change image width and height in pixels',
+    '3.5 x 4.5 cm photo converter',
+    'resize photo with 200 dpi and kb',
+    '140x60 pixel signature converter',
+  ],
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/resize-image-pixel',
   },
   openGraph: {
-    title: 'Resize Image Pixel - Change Width & Height in Pixels Free | SizeSnap',
+    title: 'Resize Image in Pixels, CM, MM & Inches Online (With DPI & KB) | SizeSnap',
     description:
-      'Resize JPG, PNG, and WebP images to exact pixel dimensions directly in your browser without quality loss.',
+      'Resize JPG, PNG, and WebP images to exact Pixels, CM, MM, or Inches with 200/300 DPI metadata and target KB lock in your browser.',
     url: 'https://www.sizesnap.in/tools/resize-image-pixel',
   },
 };
@@ -27,32 +37,32 @@ export const metadata: Metadata = {
 const RELATED_SLUGS = [
   'compress-image',
   'reduce-image-size-in-kb',
-  'resize-in-centimeters',
+  'signature-resizer-10kb-to-20kb',
   'resize-image-3-5cm-4-5cm',
-  'crop-png',
-  'change-aspect-ratio',
+  'postcard-size-photo-maker',
+  'passport-photo-maker',
 ];
 
 const FAQS = [
   {
-    q: 'How do I resize an image to exact pixel dimensions?',
-    a: 'Upload your photo, type your target width or height into the pixel boxes, and click "Resize Image". SizeSnap calculates proportional dimensions automatically when Aspect Ratio Lock is enabled, or allows freeform custom dimensions when unlocked.',
+    q: 'How do I resize an image in Centimeters (cm), Millimeters (mm), or Pixels (px)?',
+    a: 'Upload your photo, choose your preferred measurement unit (Pixels, CM, MM, or Inches) at the top, select your target DPI (200 DPI for online exams or 300 DPI for printing/NSDL PAN), and enter your width and height. SizeSnap automatically converts physical dimensions into exact canvas pixels.',
+  },
+  {
+    q: 'Can I set both custom dimensions (like 3.5×4.5 cm) and an exact KB file size (like 20KB or 50KB) together?',
+    a: 'Yes! Check the "Lock Exact Target File Size in KB" box below the dimension inputs, pick 20 KB or 50 KB (or type any custom KB), and click Resize. SizeSnap will resize the dimensions, embed the JFIF DPI header, and lock the file size under your KB limit in one step.',
+  },
+  {
+    q: 'How does changing DPI (200 DPI vs 300 DPI) affect CM and MM dimensions?',
+    a: 'Physical units like 3.5 × 4.5 cm depend on resolution density (Dots Per Inch). At 200 DPI (standard for SSC/UPSC), 3.5 × 4.5 cm equals 276 × 354 pixels. At 300 DPI (standard for NSDL PAN Card and photo studio printing), 3.5 × 4.5 cm equals 413 × 531 pixels.',
   },
   {
     q: 'Will resizing stretch or distort my image?',
-    a: 'Not unless you intentionally unlock the aspect ratio. By default, Aspect Ratio Lock is turned ON so changing the width automatically recalculates the proportional height without stretching.',
-  },
-  {
-    q: 'What is the difference between resizing and compressing?',
-    a: 'Resizing changes the physical pixel grid (e.g. 1920×1080 to 1280×720). Compressing reduces the file storage footprint (e.g. 2MB to 300KB) while keeping the original pixel dimensions identical.',
-  },
-  {
-    q: 'Can I enlarge a small photo to HD without blur?',
-    a: 'Enlarging (upscaling) an image creates new pixels by interpolating existing data. While SizeSnap applies high-quality bicubic smoothing, enlarging a tiny image by 300% or more will naturally look softer than a native high-resolution photo.',
+    a: 'Not when Aspect Ratio Lock is enabled. When you apply an exact exam preset (such as 140×60 px signature or 213×213 px PAN photo), Aspect Ratio Lock unlocks automatically so your output matches the strict portal pixel grid.',
   },
   {
     q: 'Are transparent PNG backgrounds preserved after resizing?',
-    a: 'Yes. If you select PNG or WebP output, transparent alpha channels are strictly preserved throughout the canvas resize pipeline.',
+    a: 'Yes. If you leave Target KB Lock unchecked and select PNG or WebP output, transparent alpha channels are strictly preserved throughout the canvas resize pipeline.',
   },
 ];
 
@@ -89,7 +99,7 @@ export default function ResizeImagePixelPage() {
             Image Tools
           </Link>
           <ChevronRight className="h-3 w-3 text-gray-400" />
-          <span className="text-gray-800 font-semibold">Resize Image Pixel</span>
+          <span className="text-gray-800 font-semibold">Resize Image (Pixels, CM, MM, Inches)</span>
         </nav>
 
         {/* 2-Column Responsive Layout */}
@@ -98,10 +108,10 @@ export default function ResizeImagePixelPage() {
             {/* Header Box */}
             <div className="bg-white p-4 sm:p-6 rounded-[4px] border border-gray-200 shadow-xs">
               <h1 className="text-xl sm:text-2xl font-bold text-[#333333] tracking-tight mb-1.5">
-                Resize Image Pixel Online
+                Resize Image in Pixels, CM, MM &amp; Inches Online (With DPI &amp; KB Lock)
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 leading-normal">
-                Change width and height in pixels for JPG, PNG, and WebP images. Lock aspect ratio, select standard resolution presets, and export directly in your browser.
+                Change image width and height in <strong>Pixels (px)</strong>, <strong>Centimeters (cm)</strong>, <strong>Millimeters (mm)</strong>, or <strong>Inches</strong> with <strong>200/300 DPI calibration</strong> and optional <strong>Target KB File Size Lock</strong> for SSC, UPSC, IBPS, PAN Card, and HD printing.
               </p>
             </div>
 
@@ -121,7 +131,7 @@ export default function ResizeImagePixelPage() {
                   Compress Image (Reduce MB/KB) →
                 </Link>
                 <Link
-                  href="/tools/reduce-image-size-kb"
+                  href="/tools/reduce-image-size-in-kb"
                   className="px-3 py-1.5 rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#E2E7F8] font-medium border border-[#9AA3C8]/40 transition-colors"
                 >
                   Reduce to Exact 20KB / 50KB →

@@ -264,7 +264,7 @@ export default function CyberCafePassportPhotoPage() {
                     <tbody className="divide-y divide-gray-200 text-gray-700">
                       <tr className="hover:bg-blue-50/40 bg-white font-medium">
                         <td className="p-2.5 border border-gray-200 font-bold text-[#414FA8]">
-                          4 × 6" Glossy Paper (Portrait)
+                          4 × 6&quot; Glossy Paper (Portrait)
                         </td>
                         <td className="p-2.5 border border-gray-200">101.6 × 152.4 mm</td>
                         <td className="p-2.5 border border-gray-200 font-bold">6 Photos (2 × 3 Grid)</td>
@@ -273,7 +273,7 @@ export default function CyberCafePassportPhotoPage() {
                       </tr>
                       <tr className="hover:bg-blue-50/40 bg-gray-50">
                         <td className="p-2.5 border border-gray-200 font-bold text-gray-900">
-                          4 × 6" Glossy Paper (Landscape)
+                          4 × 6&quot; Glossy Paper (Landscape)
                         </td>
                         <td className="p-2.5 border border-gray-200">152.4 × 101.6 mm</td>
                         <td className="p-2.5 border border-gray-200 font-bold">8 Photos (4 × 2 Grid)</td>
@@ -282,7 +282,7 @@ export default function CyberCafePassportPhotoPage() {
                       </tr>
                       <tr className="hover:bg-blue-50/40 bg-white">
                         <td className="p-2.5 border border-gray-200 font-bold text-gray-900">
-                          4 × 6" Stamp Size Sheet
+                          4 × 6&quot; Stamp Size Sheet
                         </td>
                         <td className="p-2.5 border border-gray-200">101.6 × 152.4 mm</td>
                         <td className="p-2.5 border border-gray-200 font-bold">12 Photos (3 × 4 Grid)</td>

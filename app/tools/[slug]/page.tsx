@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { notFound, permanentRedirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { ALL_TOOLS, getToolBySlug, type ToolItem } from '@/data/tools';
+import { ALL_TOOLS, getToolBySlug } from '@/data/tools';
 import { ToolButton } from '@/components/ToolButton';
 import { ToolSeoContent } from '@/components/ToolSeoContent';
 const TextFormatterTool = dynamic(() => import('@/components/tool-ui/writing/TextFormatterTool').then(mod => mod.TextFormatterTool));
@@ -77,11 +78,6 @@ const SeoContentAnalyzerTool = dynamic(() => import('@/components/tool-ui/seo/Se
 const HreflangGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/HreflangGeneratorTool').then(mod => mod.HreflangGeneratorTool));
 const HtaccessRedirectGeneratorTool = dynamic(() => import('@/components/tool-ui/seo/HtaccessRedirectGeneratorTool').then(mod => mod.HtaccessRedirectGeneratorTool));
 
-
-
-
-import dynamic from 'next/dynamic';
-
 const WordCounterTool = dynamic(() => import('@/components/tool-ui/text/WordCounterTool').then(mod => mod.WordCounterTool));
 const CharacterCounterTool = dynamic(() => import('@/components/tool-ui/text/CharacterCounterTool').then(mod => mod.CharacterCounterTool));
 const SentenceCounterTool = dynamic(() => import('@/components/tool-ui/text/SentenceCounterTool').then(mod => mod.SentenceCounterTool));
@@ -97,7 +93,7 @@ const TextReverseTool = dynamic(() => import('@/components/tool-ui/text/TextReve
 const CharacterFrequencyCounterTool = dynamic(() => import('@/components/tool-ui/text/CharacterFrequencyCounterTool').then(mod => mod.CharacterFrequencyCounterTool));
 const LineCounterTool = dynamic(() => import('@/components/tool-ui/text/LineCounterTool').then(mod => mod.LineCounterTool));
 
-import { ArrowLeft, Upload, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
 interface ToolPageProps {
   params: Promise<{
@@ -153,6 +149,9 @@ const DEDICATED_TOOL_SLUGS = [
   'jpg-to-kb',
   'pan-card-photo-resizer',
   'heic-to-jpg',
+  'signature-resizer-10kb-to-20kb',
+  'postcard-size-photo-maker',
+  'id-card-front-back-merger',
 ];
 
 export async function generateStaticParams() {
@@ -217,6 +216,10 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     (t) => t.categoryId === tool.categoryId && t.slug !== tool.slug
   ).slice(0, 6);
 
+  const categoryHref = tool.categoryId.endsWith('-tools')
+    ? `/${tool.categoryId}`
+    : `/${tool.categoryId}-tools`;
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -231,7 +234,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         '@type': 'ListItem',
         position: 2,
         name: tool.categoryTitle,
-        item: `https://www.sizesnap.in/${tool.categoryId}-tools`,
+        item: `https://www.sizesnap.in${categoryHref}`,
       },
       {
         '@type': 'ListItem',
@@ -314,6 +317,53 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     }
   ];
 
+  const categoryTable = (() => {
+    if (tool.categoryId === 'calculator' || tool.categoryId === 'student' || tool.categoryId === 'student-tools') {
+      return {
+        caption: `${tool.name} — Quick Reference Formulas & Academic Standards`,
+        headers: ['Metric / Scale', 'Standard Formula / Rule', 'Common Indian Board / University Usage'],
+        rows: [
+          ['CBSE / Engineering CGPA to %', 'Percentage = CGPA × 9.5', 'CBSE Class 10/12, NITs, Central Universities'],
+          ['10-Point SGPA / GPA Scale', 'Percentage = (SGPA - 0.75) × 10', 'AICTE, SPPU, Mumbai University, MAKAUT'],
+          ['Direct Marks Percentage', '(Obtained Marks ÷ Total Marks) × 100', 'SSC, Banking, State Board Marksheets'],
+          ['Minimum Attendance Rule', '(Attended Classes ÷ Total Held) × 100 ≥ 75%', 'UGC, IITs, Medical & Degree Colleges'],
+        ],
+      };
+    }
+    if (tool.categoryId === 'developer') {
+      return {
+        caption: `${tool.name} — Technical Encoding & Validation Specifications`,
+        headers: ['Operation Mode', 'Execution Engine', 'Standard / RFC Compliance'],
+        rows: [
+          ['Syntax & Schema Parsing', '100% In-Browser V8 / Web Crypto API', 'RFC 8259 (JSON) / RFC 4648 (Base64)'],
+          ['Character Encoding', 'UTF-8 Safe Byte Serialization', 'Zero server round-trips or logging'],
+          ['Max Payload Capacity', 'Up to 10 MB local text/code buffer', 'Instant sub-10ms execution'],
+        ],
+      };
+    }
+    if (tool.categoryId === 'seo') {
+      return {
+        caption: `${tool.name} — 2026 Google Search & Social Snippet Guidelines`,
+        headers: ['SEO Element', 'Recommended Length / Spec', 'Impact on Search Visibility'],
+        rows: [
+          ['Title Tag', '50 – 60 characters (~580px)', 'Primary clickable headline in Google SERP'],
+          ['Meta Description', '140 – 160 characters (~920px)', 'Boosts organic click-through rate (CTR)'],
+          ['Open Graph Image', '1200 × 630 pixels (1.91:1)', 'Rich preview cards on WhatsApp, X & LinkedIn'],
+          ['JSON-LD Structured Data', 'Schema.org @graph format', 'Enables FAQ, HowTo & Software rich results'],
+        ],
+      };
+    }
+    return {
+      caption: `${tool.name} — Quick Specification & Processing Overview`,
+      headers: ['Feature', 'Specification', 'Benefit'],
+      rows: [
+        ['Processing Architecture', '100% Client-Side Browser Engine', 'Files and text never leave your device'],
+        ['Output Quality', 'Deterministic Lossless / Target-Locked', 'Zero watermarks or formatting corruption'],
+        ['Device Compatibility', 'Android, iOS, Windows, macOS', 'Works instantly without installing apps'],
+      ],
+    };
+  })();
+
   const targetKeywords = Array.from(new Set([
     ...(tool.keywords || []),
     ...(tool.aliases || []),
@@ -335,7 +385,9 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             <ArrowLeft className="h-3.5 w-3.5" /> All Tools
           </Link>
           <span>/</span>
-          <span>{tool.categoryTitle}</span>
+          <Link href={categoryHref} className="hover:text-[#414FA8] font-medium transition-colors">
+            {tool.categoryTitle}
+          </Link>
           <span>/</span>
           <span className="text-gray-800 font-semibold">{tool.name}</span>
         </div>
@@ -501,6 +553,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
           features={toolFeatures}
           faqs={toolFaqs}
           keywords={targetKeywords}
+          table={categoryTable}
         />
       </main>
 

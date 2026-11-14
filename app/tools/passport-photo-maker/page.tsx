@@ -48,9 +48,9 @@ const RELATED_SLUGS = [
   'reduce-image-size-in-kb',
   'resize-image-pixel',
   'compress-image',
-  'resize-in-centimeters',
+  'add-name-and-date-on-photo',
   'resize-image-3-5cm-4-5cm',
-  'resize-signature',
+  'generate-signature',
 ];
 
 const FAQS = [
@@ -130,11 +130,11 @@ export default function PassportPhotoMakerPage() {
                 </div>
                 <div>
                   <h2 className="text-xs sm:text-sm font-bold text-gray-900 flex items-center gap-1.5">
-                    <span>Cyber Cafe / CSC Operator? Need 6 Photos on 4×6" Paper?</span>
+                    <span>Cyber Cafe / CSC Operator? Need 6 Photos on 4×6&quot; Paper?</span>
                     <span className="px-1.5 py-0.5 rounded bg-amber-500 text-white text-[10px] font-extrabold uppercase">Hot</span>
                   </h2>
                   <p className="text-[11px] sm:text-xs text-gray-600">
-                    Use our dedicated Cyber Cafe tool: 1-click white/blue background, 6 or 8 copies on 4x6" paper, scissor cutting lines, and zero watermark.
+                    Use our dedicated Cyber Cafe tool: 1-click white/blue background, 6 or 8 copies on 4x6&quot; paper, scissor cutting lines, and zero watermark.
                   </p>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function PassportPhotoMakerPage() {
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
                 <Link
-                  href="/tools/reduce-image-size-kb"
+                  href="/tools/reduce-image-size-in-kb"
                   className="px-3 py-1.5 rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#E2E7F8] font-medium border border-[#9AA3C8]/40 transition-colors"
                 >
                   Compress to 20KB / 50KB for Govt Portals →

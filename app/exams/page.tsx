@@ -179,56 +179,64 @@ export default function ExamsHubPage() {
 
         {/* Official Dimension Reference Table */}
         <div className="bg-white p-6 rounded-[4px] border border-gray-200 shadow-xs space-y-4">
-          <h2 className="text-base sm:text-lg font-bold text-gray-900">
-            Quick Reference: India Govt Exam Photo &amp; Signature Dimensions (2026)
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h2 className="text-base sm:text-lg font-bold text-gray-900">
+              Quick Reference: India Govt Exam &amp; ID Portal Photo &amp; Signature Specs (2026)
+            </h2>
+            <Link
+              href="/guides"
+              className="text-xs font-bold text-[#414FA8] hover:underline inline-flex items-center gap-1"
+            >
+              <span>Read Hindi / Hinglish Step-by-Step Guides</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-gray-700 border-collapse">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200 text-gray-800 font-bold">
-                  <th className="py-2.5 px-3">Exam Board</th>
+                  <th className="py-2.5 px-3">Exam / Portal Board</th>
                   <th className="py-2.5 px-3">Photo Dimensions</th>
                   <th className="py-2.5 px-3">Photo File Size</th>
                   <th className="py-2.5 px-3">Signature Specs</th>
-                  <th className="py-2.5 px-3">Special Requirement</th>
+                  <th className="py-2.5 px-3">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
-                <tr className="hover:bg-gray-50/50">
-                  <td className="py-2.5 px-3 font-semibold text-gray-900">SSC (CGL, CHSL, GD)</td>
-                  <td className="py-2.5 px-3 font-mono">3.5 × 4.5 cm (350×450 px)</td>
-                  <td className="py-2.5 px-3 font-semibold text-[#414FA8]">20 KB – 50 KB</td>
-                  <td className="py-2.5 px-3 font-mono">4.0 × 2.0 cm (10–20 KB)</td>
-                  <td className="py-2.5 px-3 text-gray-500">No cap or dark spectacles</td>
-                </tr>
-                <tr className="hover:bg-gray-50/50">
-                  <td className="py-2.5 px-3 font-semibold text-gray-900">UPSC (CSE, NDA, CDS)</td>
-                  <td className="py-2.5 px-3 font-mono">350×350 to 1000×1000 px</td>
-                  <td className="py-2.5 px-3 font-semibold text-[#414FA8]">20 KB – 300 KB</td>
-                  <td className="py-2.5 px-3 font-mono">350×350 min (20–300 KB)</td>
-                  <td className="py-2.5 px-3 text-amber-700 font-medium">Name &amp; Date within 10 days</td>
-                </tr>
-                <tr className="hover:bg-gray-50/50">
-                  <td className="py-2.5 px-3 font-semibold text-gray-900">Delhi Police Constable</td>
-                  <td className="py-2.5 px-3 font-mono">3.5 × 4.5 cm (350×450 px)</td>
-                  <td className="py-2.5 px-3 font-semibold text-[#414FA8]">20 KB – 50 KB</td>
-                  <td className="py-2.5 px-3 font-mono">4.0 × 2.0 cm (10–20 KB)</td>
-                  <td className="py-2.5 px-3 text-gray-500">Pure white background</td>
-                </tr>
-                <tr className="hover:bg-gray-50/50">
-                  <td className="py-2.5 px-3 font-semibold text-gray-900">UP Police Bharti</td>
-                  <td className="py-2.5 px-3 font-mono">35 × 45 mm (350×450 px)</td>
-                  <td className="py-2.5 px-3 font-semibold text-[#414FA8]">20 KB – 50 KB</td>
-                  <td className="py-2.5 px-3 font-mono">3.5 × 1.5 cm (5–20 KB)</td>
-                  <td className="py-2.5 px-3 text-gray-500">Strictly black ink signature</td>
-                </tr>
-                <tr className="hover:bg-gray-50/50">
-                  <td className="py-2.5 px-3 font-semibold text-gray-900">IBPS / SBI Banking</td>
-                  <td className="py-2.5 px-3 font-mono">200 × 230 px</td>
-                  <td className="py-2.5 px-3 font-semibold text-[#414FA8]">20 KB – 50 KB</td>
-                  <td className="py-2.5 px-3 font-mono">140 × 60 px (10–20 KB)</td>
-                  <td className="py-2.5 px-3 text-gray-500">Thumb (20-50KB) &amp; Decl (50-100KB)</td>
-                </tr>
+              <tbody className="divide-y divide-gray-100 tabular-nums">
+                {EXAM_PRESETS.map((exam) => {
+                  const photoDoc = exam.documents.find((d) => d.id === 'photo') || exam.documents[0];
+                  const signDoc = exam.documents.find((d) => d.id === 'signature');
+                  return (
+                    <tr key={exam.id} className="hover:bg-gray-50/70">
+                      <td className="py-2.5 px-3 font-semibold text-gray-900">
+                        <Link href={`/exams/${exam.slug}`} className="hover:text-[#414FA8] hover:underline">
+                          {exam.shortTitle}
+                        </Link>
+                      </td>
+                      <td className="py-2.5 px-3 font-mono">
+                        {photoDoc.widthPx}×{photoDoc.heightPx} px
+                        {photoDoc.widthCm ? ` (${photoDoc.widthCm}×${photoDoc.heightCm}cm)` : ''}
+                      </td>
+                      <td className="py-2.5 px-3 font-semibold text-[#414FA8] font-mono">
+                        {photoDoc.minKb} KB – {photoDoc.maxKb} KB
+                      </td>
+                      <td className="py-2.5 px-3 font-mono">
+                        {signDoc
+                          ? `${signDoc.widthPx}×${signDoc.heightPx} px (${signDoc.minKb}–${signDoc.maxKb} KB)`
+                          : 'Standard'}
+                      </td>
+                      <td className="py-2.5 px-3">
+                        <Link
+                          href={`/exams/${exam.slug}`}
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#414FA8] hover:underline"
+                        >
+                          <span>Resize</span>
+                          <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

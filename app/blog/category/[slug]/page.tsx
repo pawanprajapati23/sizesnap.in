@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import { getArticlesByCategory } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import BlogCard from '@/components/blog/BlogCard';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 export const revalidate = 3600;
@@ -59,7 +60,9 @@ export default async function CategoryPage({ params }: Props) {
   const articles = await getArticlesByCategory(resolvedParams.slug);
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7]">
+    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+      <Navbar />
+      <div className="flex-1">
       <section className="bg-white border-b border-gray-200 pt-12 pb-10 px-4">
         <div className="max-w-5xl mx-auto">
           <nav className="text-sm text-gray-500 mb-6 flex items-center gap-2">
@@ -96,6 +99,8 @@ export default async function CategoryPage({ params }: Props) {
           </div>
         )}
       </div>
+      </div>
+      <Footer />
     </div>
   );
 }

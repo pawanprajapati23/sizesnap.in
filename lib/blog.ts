@@ -14,6 +14,16 @@ export const generateId = () => {
 
 // Fetch all articles
 export const getArticles = async (): Promise<Article[]> => {
+  const sortedBuiltin = [...BUILTIN_ARTICLES].sort(
+    (a: Article, b: Article) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt)
+  );
+
+  // On the server during SSR / sitemap generation, return built-in articles immediately
+  // to avoid hanging or timing out on outbound Firebase connections.
+  if (typeof window === 'undefined') {
+    return sortedBuiltin;
+  }
+
   try {
     const articlesRef = ref(db, 'blog/articles');
     const snapshot = await get(articlesRef);
@@ -42,7 +52,7 @@ export const getArticles = async (): Promise<Article[]> => {
     return mergedArticles.sort((a: Article, b: Article) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt));
   } catch (error) {
     console.error('Error fetching articles from Firebase:', error);
-    return BUILTIN_ARTICLES;
+    return sortedBuiltin;
   }
 };
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { getPublishedArticles, getFeaturedArticle, getArticlesByCategory } from '@/lib/blog';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
+import { getPublishedArticles, getFeaturedArticle } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import BlogSearch from '@/components/blog/BlogSearch';
@@ -29,7 +31,9 @@ export default async function BlogPage() {
   const popularArticles = remainingArticles;
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7]">
+    <div className="min-h-screen flex flex-col bg-[#F5F5F7]">
+      <Navbar />
+      <div className="flex-1">
       {/* Blog Hero section with Theme Gradient */}
       <section className="relative overflow-hidden bg-white border-b border-gray-200">
         {/* Abstract Background Shapes */}
@@ -166,6 +170,8 @@ export default async function BlogPage() {
           </div>
         </section>
       </div>
+      </div>
+      <Footer />
     </div>
   );
 }

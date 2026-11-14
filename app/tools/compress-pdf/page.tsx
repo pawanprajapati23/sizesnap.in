@@ -13,7 +13,7 @@ import { KbTargetPills } from '@/components/KbTargetPills';
 export const metadata: Metadata = {
   title: 'Compress PDF Online - Reduce PDF File Size Free | SizeSnap',
   description:
-    'Compress and reduce PDF file size online for free. Choose Low, Recommended, or High compression presets. Ideal for government portals (SSC, UPSC) and email attachments. 100% private in browser.',
+    'Compress and reduce PDF file size online to exact KB targets (50KB, 100KB, 140KB, 200KB, 500KB). Ideal for government portals (SSC, UPSC, DigiLocker) and email attachments. 100% private in browser.',
   alternates: {
     canonical: 'https://www.sizesnap.in/tools/compress-pdf',
   },
@@ -36,16 +36,16 @@ const RELATED_SLUGS = [
 
 const FAQS = [
   {
-    q: 'How do I compress a PDF file for government exam portals (SSC, UPSC, State PSC)?',
-    a: 'Upload your PDF document, select "Visual & Image Compression" with the "Recommended" (120 DPI) or "High Compression" (96 DPI) preset, and click "Compress & Optimize PDF". This significantly downsamples image streams and scanned paperwork so it meets the strict 500KB or 1MB upload thresholds on official recruitment portals.',
+    q: 'How do I compress a PDF file to a specific KB size (e.g., 140KB, 200KB, 500KB) for govt portals?',
+    a: 'Upload your PDF document, enter your exact target size in KB (or click quick presets like 100KB, 140KB, 200KB, 500KB, or 1MB), and click "Compress PDF". SizeSnap runs an automated multi-scale quality search locally to fit your document cleanly under portal upload limits.',
   },
   {
     q: 'Does compressing a PDF guarantee a smaller file size?',
-    a: 'Not always. If your PDF is already composed of clean vector text, subset fonts, or heavily compressed JPEG images, further compression may produce negligible reduction or even a slight increase in header metadata. SizeSnap provides honest before/after metrics so you can verify the exact file size before downloading.',
+    a: 'If your target KB is lower than your input PDF, SizeSnap automatically scales page resolution and JPEG compression until it reaches or approaches that target. For tiny multi-page limits (e.g. a 10-page document compressed under 100KB), image sharpness will be reduced to fit the byte budget, and SizeSnap shows exact before/after metrics before download.',
   },
   {
-    q: 'What is the difference between "Visual & Image Compression" and "Structural Stream Optimizer"?',
-    a: 'Structural Stream Optimizer strips redundant metadata and reorganizes cross-reference tables while keeping selectable text, fonts, and vector paths untouched. Visual & Image Compression renders each page to an optimized raster image, which achieves huge file reductions on scanned paperwork, photographs, and certificates, but flattens selectable text.',
+    q: 'Will text inside my compressed PDF remain selectable?',
+    a: 'To hit strict KB targets required by SSC, UPSC, and scholarship portals reliably, SizeSnap renders PDF pages into optimized JPEG streams inside a clean PDF container. Visual appearance and print readability are preserved, while selectable vector text becomes image-based.',
   },
   {
     q: 'Are my confidential documents, bank statements, or certificates safe?',
@@ -102,7 +102,7 @@ export default function CompressPdfPage() {
                 Compress PDF Online
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 leading-normal">
-                Reduce PDF file size while maintaining readability. Choose between visual downsampling for scanned documents or structural stream optimization. 100% private in your browser.
+                Reduce PDF file size to an exact KB target (e.g., 100KB, 140KB, 200KB, 500KB) with automatic scale and quality optimization. 100% private in your browser.
               </p>
             </div>
 

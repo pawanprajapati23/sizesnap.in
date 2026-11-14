@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 
 const FeedbackWidget = dynamic(() => import('@/components/FeedbackWidget'));
 const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'));
-const AdScripts = dynamic(() => import('@/components/AdScripts'));
 
 import './globals.css';
 
@@ -76,7 +75,7 @@ export default function RootLayout({
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: 'https://www.sizesnap.in/#directory?q={search_term_string}',
+            urlTemplate: 'https://www.sizesnap.in/?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
@@ -131,6 +130,12 @@ export default function RootLayout({
           {
             '@type': 'SiteNavigationElement',
             position: 8,
+            name: 'SizeSnap Guides Hub',
+            url: 'https://www.sizesnap.in/guides',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 9,
             name: 'SizeSnap Blog',
             url: 'https://www.sizesnap.in/blog',
           },
@@ -156,8 +161,6 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className="min-h-screen bg-[#F5F5F7] text-[#333333] font-sans antialiased" suppressHydrationWarning>
-        {/* Dynamic Ad & Monetization Scripts (Auto-disabled on /admin) */}
-        <AdScripts />
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>

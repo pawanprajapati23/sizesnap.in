@@ -21,23 +21,9 @@ export default function PdfToolsPage() {
   return (
     <CategoryHubPage
       title="PDF Tools"
-      description="Easily compress, merge, split and modify PDF documents completely locally and privately."
+      description="Easily compress PDFs to exact KB targets, merge, split, rotate, extract, and convert PDF documents locally and privately."
       breadcrumbs={breadcrumbs}
       category="pdf"
-      customSlugs={[
-        'compress-pdf',
-        'compress-pdf-140kb',
-        'compress-pdf-12kb',
-        'merge-pdf',
-        'split-pdf',
-        'rotate-pdf',
-        'image-to-pdf',
-        'pdf-to-images',
-        'delete-pdf-pages',
-        'extract-pdf-pages',
-        'add-watermark-pdf',
-        'add-page-numbers-pdf'
-      ]}
     />
   );
 }

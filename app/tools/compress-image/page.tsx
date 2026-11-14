@@ -31,7 +31,7 @@ const RELATED_SLUGS = [
   'compress-image-to-50kb',
   'compress-image-to-100kb',
   'resize-image-pixel',
-  'jpg-to-webp',
+  'image-to-webp',
 ];
 
 const FAQS = [
@@ -153,7 +153,7 @@ export default function CompressImagePage() {
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
                 <Link
-                  href="/tools/reduce-image-size-kb"
+                  href="/tools/reduce-image-size-in-kb"
                   className="px-3 py-1.5 rounded bg-[#EEF1FB] text-[#414FA8] hover:bg-[#E2E7F8] font-medium border border-[#9AA3C8]/40 transition-colors"
                 >
                   Reduce Image to Exact 20KB / 50KB / 100KB →

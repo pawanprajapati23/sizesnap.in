@@ -47,3 +47,20 @@ export function getExtensionFromMime(mime: string, fallbackName: string): string
   const match = fallbackName.match(/\.([a-zA-Z0-9]+)$/);
   return match ? match[1].toLowerCase() : 'jpg';
 }
+
+export async function consumeCachedHeroImage(): Promise<File | null> {
+  if (typeof window === 'undefined') return null;
+  try {
+    const base64 = window.sessionStorage.getItem('sizesnap_cached_image');
+    if (!base64) return null;
+    const filename = window.sessionStorage.getItem('sizesnap_cached_filename') || 'photo.jpg';
+    window.sessionStorage.removeItem('sizesnap_cached_image');
+    window.sessionStorage.removeItem('sizesnap_cached_filename');
+
+    const res = await fetch(base64);
+    const blob = await res.blob();
+    return new File([blob], filename, { type: blob.type || 'image/jpeg' });
+  } catch {
+    return null;
+  }
+}

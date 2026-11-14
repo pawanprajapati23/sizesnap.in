@@ -743,7 +743,7 @@ export function CyberCafePassportPhotoTool() {
               Cyber Cafe Passport Photo Sheet Maker (4×6 & A4)
             </h1>
             <p className="text-xs sm:text-sm text-blue-100 mt-1 max-w-2xl">
-              Upload 1 Photo &rarr; 1-Click Studio Background (White/Sky Blue) &rarr; Line up 6, 8, 12, or 32 photos on 4×6" photo paper.
+              Upload 1 Photo &rarr; 1-Click Studio Background (White/Sky Blue) &rarr; Line up 6, 8, 12, or 32 photos on 4×6&quot; photo paper.
               Zero watermark, scissor cutting lines, instant Ctrl+P direct print.
             </p>
           </div>
@@ -1225,7 +1225,7 @@ export function CyberCafePassportPhotoTool() {
                 </div>
                 <h3 className="text-base font-bold text-gray-800">Print Sheet Preview Area</h3>
                 <p className="text-xs text-gray-600 mt-1">
-                  Upload a photo on the left to instantly generate a 6, 8, 12, or 32 passport photo sheet formatted for 4×6"
+                  Upload a photo on the left to instantly generate a 6, 8, 12, or 32 passport photo sheet formatted for 4×6&quot;
                   or A4 paper.
                 </p>
               </div>

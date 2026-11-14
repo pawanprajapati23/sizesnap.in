@@ -11,7 +11,7 @@ interface ToolButtonProps {
 export function ToolButton({ tool, className = '', isSidebar = false }: ToolButtonProps) {
   return (
     <Link prefetch={false}
-      href={`/tools/${tool.slug}`}
+      href={tool.route || `/tools/${tool.slug}`}
       title={tool.name}
       className={`group relative flex items-center justify-center text-center rounded-[4px] border border-[#9AA3C8] bg-white transition-all duration-150 ease-in-out hover:border-[#414FA8] hover:bg-[#F2F4FC] hover:shadow-xs active:bg-[#E8ECF8] focus-visible:outline-2 focus-visible:outline-[#414FA8] focus-visible:outline-offset-1 select-none overflow-hidden ${
         isSidebar

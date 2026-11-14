@@ -8,16 +8,13 @@ export default function AnalyticsTracker() {
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
 
-  // Disable analytics tracking inside admin panel
-  if (pathname?.startsWith('/admin')) {
-    return null;
-  }
-
   useEffect(() => {
+    if (pathname?.startsWith('/admin')) return;
     pathnameRef.current = pathname;
   }, [pathname]);
 
   useEffect(() => {
+    if (pathname?.startsWith('/admin')) return;
     // Track tool usage based on page view
     if (pathname) {
       // Find if the current path matches any tool slug
@@ -35,6 +32,7 @@ export default function AnalyticsTracker() {
   }, [pathname]);
 
   useEffect(() => {
+    if (pathname?.startsWith('/admin')) return;
     // Global click listener for downloads
     const handleClick = (e: MouseEvent) => {
       // Find closest element with href containing 'download' or text containing 'download'
@@ -64,7 +62,7 @@ export default function AnalyticsTracker() {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [pathname]);
 
   return null; // This component doesn't render anything
 }

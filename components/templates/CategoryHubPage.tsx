@@ -4,6 +4,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Sidebar } from '@/components/Sidebar';
 import { ALL_TOOLS } from '@/data/tools';
+import { TOOL_REDIRECT_MAP } from '@/data/tool-redirects';
 import { ToolButton } from '@/components/ToolButton';
 import { ChevronRight } from 'lucide-react';
 
@@ -11,7 +12,7 @@ interface CategoryHubPageProps {
   title: string;
   description: string;
   breadcrumbs: { name: string; url: string }[];
-  category: string; // E.g., 'Image', 'PDF', 'Compress', 'Resize', 'Social', 'Exam'
+  category: string; // E.g., 'image', 'pdf', 'Compress', 'Resize', 'exam-tools', 'student-tools'
   customSlugs?: string[];
 }
 
@@ -23,16 +24,31 @@ export function CategoryHubPage({
   customSlugs
 }: CategoryHubPageProps) {
 
-  let tools = ALL_TOOLS;
+  const canonicalTools = ALL_TOOLS.filter(
+    (t) => !TOOL_REDIRECT_MAP[t.slug] && t.status !== 'draft' && t.status !== 'deprecated'
+  );
+  let tools = canonicalTools;
 
   if (customSlugs && customSlugs.length > 0) {
-    tools = ALL_TOOLS.filter(t => customSlugs.includes(t.slug));
+    tools = canonicalTools.filter((t) => customSlugs.includes(t.slug));
   } else if (category === 'Compress') {
-    tools = ALL_TOOLS.filter(t => t.slug.includes('compress') || t.slug.includes('reduce'));
+    tools = canonicalTools.filter(
+      (t) => t.slug.includes('compress') || t.slug.includes('reduce') || t.slug.includes('kb-photo-size')
+    );
   } else if (category === 'Resize') {
-    tools = ALL_TOOLS.filter(t => t.slug.includes('resize') || t.slug.includes('crop'));
+    tools = canonicalTools.filter(
+      (t) =>
+        t.slug.includes('resize') ||
+        t.slug.includes('crop') ||
+        t.slug.includes('passport') ||
+        t.slug.includes('postcard')
+    );
+  } else if (category === 'exam-tools') {
+    tools = canonicalTools.filter((t) => t.categoryId === 'exam-tools' || t.categoryId === 'exam');
+  } else if (category === 'student-tools') {
+    tools = canonicalTools.filter((t) => t.categoryId === 'student-tools' || t.categoryId === 'student');
   } else {
-    tools = ALL_TOOLS.filter(t => t.categoryId === category);
+    tools = canonicalTools.filter((t) => t.categoryId === category);
   }
 
   const breadcrumbSchema = {
@@ -42,7 +58,7 @@ export function CategoryHubPage({
       '@type': 'ListItem',
       position: idx + 1,
       name: crumb.name,
-      item: crumb.url,
+      item: crumb.url.startsWith('http') ? crumb.url : `https://www.sizesnap.in${crumb.url}`,
     })),
   };
 

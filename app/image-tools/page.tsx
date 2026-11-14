@@ -21,19 +21,9 @@ export default function ImageToolsPage() {
   return (
     <CategoryHubPage
       title="Image Tools"
-      description="All your essential image processing needs in one place. Fast, local, and private."
+      description="All your essential image compression, resizing, format conversion, and photo editing tools in one place. Fast, local, and private."
       breadcrumbs={breadcrumbs}
       category="image"
-      customSlugs={[
-        'compress-image',
-        'resize-image-pixel',
-        'crop-image',
-        'remove-background',
-        'image-to-webp',
-        'image-to-pdf',
-        'blur-background',
-        'image-watermark',
-      ]}
     />
   );
 }

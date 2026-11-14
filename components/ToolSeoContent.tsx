@@ -1,5 +1,6 @@
 import React from 'react';
-import { CheckCircle2, ShieldCheck, Zap, HelpCircle, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { CheckCircle2, BookOpen, Award, ArrowRight } from 'lucide-react';
 
 export interface ToolFaq {
   question: string;
@@ -36,23 +37,62 @@ export function ToolSeoContent({
   keywords,
   table,
 }: ToolSeoContentProps) {
-  const faqSchema = {
+  const graphSchema = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
+    '@graph': [
+      {
+        '@type': 'SoftwareApplication',
+        name: `${title} - SizeSnap`,
+        applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires HTML5 and JavaScript',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+        },
+        description,
       },
-    })),
+      ...(howToSteps && howToSteps.length > 0
+        ? [
+            {
+              '@type': 'HowTo',
+              name: `How to Use ${title} Online Free`,
+              description,
+              step: howToSteps.map((stepText, idx) => ({
+                '@type': 'HowToStep',
+                position: idx + 1,
+                name: `Step ${idx + 1}`,
+                text: stepText,
+              })),
+            },
+          ]
+        : []),
+      ...(faqs && faqs.length > 0
+        ? [
+            {
+              '@type': 'FAQPage',
+              mainEntity: faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 
   return (
     <div className="space-y-6 mt-8">
-      {/* Schema Injection */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {/* Unified @graph JSON-LD Schema Injection (SoftwareApplication + HowTo + FAQPage) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(graphSchema) }}
+      />
 
       {/* Overview & How-To Section */}
       <div className="bg-white p-6 sm:p-8 rounded-[4px] border border-gray-200 shadow-xs space-y-6">
@@ -93,7 +133,7 @@ export function ToolSeoContent({
               <h3 className="text-sm font-bold text-gray-800 mb-2">{table.caption}</h3>
             )}
             <div className="overflow-x-auto">
-              <table className="w-full text-xs sm:text-sm border-collapse border border-gray-200">
+              <table className="w-full text-xs sm:text-sm border-collapse border border-gray-200 tabular-nums">
                 <thead>
                   <tr className="bg-gray-50 text-left">
                     {table.headers.map((h, i) => (
@@ -140,6 +180,45 @@ export function ToolSeoContent({
             </div>
           </div>
         )}
+
+        {/* Internal Authority Cluster Strip (Exam Presets + Bilingual Guides) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100">
+          <Link
+            href="/exams"
+            className="p-3.5 rounded-[4px] border border-gray-200 bg-gray-50/60 hover:bg-[#EEF1FB] hover:border-[#414FA8] transition-colors flex items-center justify-between group"
+          >
+            <div className="flex items-center gap-2.5">
+              <Award className="h-4 w-4 text-[#414FA8] shrink-0" />
+              <div>
+                <div className="text-xs font-bold text-gray-900 group-hover:text-[#414FA8]">
+                  Govt Exam Photo &amp; Sign Hub
+                </div>
+                <div className="text-[11px] text-gray-500">
+                  SSC, UPSC, IBPS, Railway, NEET, BPSC &amp; PAN Presets
+                </div>
+              </div>
+            </div>
+            <ArrowRight className="h-3.5 w-3.5 text-gray-400 group-hover:text-[#414FA8]" />
+          </Link>
+
+          <Link
+            href="/guides"
+            className="p-3.5 rounded-[4px] border border-gray-200 bg-gray-50/60 hover:bg-[#EEF1FB] hover:border-[#414FA8] transition-colors flex items-center justify-between group"
+          >
+            <div className="flex items-center gap-2.5">
+              <BookOpen className="h-4 w-4 text-[#414FA8] shrink-0" />
+              <div>
+                <div className="text-xs font-bold text-gray-900 group-hover:text-[#414FA8]">
+                  Hindi &amp; English Compression Guides
+                </div>
+                <div className="text-[11px] text-gray-500">
+                  20KB Photo, 15KB Sign, DOP Stamp &amp; 140KB PDF Tutorials
+                </div>
+              </div>
+            </div>
+            <ArrowRight className="h-3.5 w-3.5 text-gray-400 group-hover:text-[#414FA8]" />
+          </Link>
+        </div>
 
         {/* Keywords */}
         {keywords && keywords.length > 0 && (

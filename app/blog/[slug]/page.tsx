@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import { getPublishedArticleBySlug } from '@/lib/blog';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import { notFound } from 'next/navigation';
@@ -105,7 +107,9 @@ export default async function ArticlePage({ params }: Props) {
   };
 
   return (
-    <div className="bg-[#F5F5F7] min-h-screen pb-16">
+    <div className="bg-[#F5F5F7] min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-1 pb-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -283,6 +287,8 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         )}
       </div>
+      </div>
+      <Footer />
     </div>
   );
 }

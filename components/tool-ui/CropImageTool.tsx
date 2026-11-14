@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { formatBytes } from '@/lib/format-utils';
+import { formatBytes, consumeCachedHeroImage } from '@/lib/format-utils';
 import {
   Upload,
   FilePlus,
@@ -74,7 +74,7 @@ export function CropImageTool() {
     return () => cleanupUrls();
   }, [cleanupUrls]);
 
-  const loadImage = (file: File) => {
+  const loadImage = useCallback((file: File) => {
     setErrorMsg(null);
     if (!file.type.startsWith('image/')) {
       setErrorMsg('Please select an image file (JPG, PNG, WebP).');
@@ -101,7 +101,19 @@ export function CropImageTool() {
     };
     img.onerror = () => setErrorMsg('Failed to load image.');
     img.src = previewUrl;
-  };
+  }, [registerUrl]);
+
+  useEffect(() => {
+    let cancelled = false;
+    consumeCachedHeroImage().then((file) => {
+      if (file && !cancelled) {
+        loadImage(file);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [loadImage]);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();

@@ -1,6 +1,13 @@
-self.options = {
-    "domain": "3nbf4.com",
-    "zoneId": 12206356
-}
-self.lary = ""
-importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
+// Self-unregistering cleanup service worker replacing third-party push spam worker
+self.addEventListener('install', () => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', () => {
+  self.registration
+    .unregister()
+    .then(() => self.clients.matchAll())
+    .then((clients) => {
+      clients.forEach((client) => client.navigate(client.url));
+    });
+});

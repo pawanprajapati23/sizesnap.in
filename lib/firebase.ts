@@ -12,7 +12,17 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getDatabase(app);
+
+let _dbInstance: ReturnType<typeof getDatabase> | null = null;
+export const db = new Proxy({} as ReturnType<typeof getDatabase>, {
+  get(_, prop) {
+    if (!_dbInstance) {
+      _dbInstance = getDatabase(app);
+    }
+    const val = (_dbInstance as any)[prop];
+    return typeof val === "function" ? val.bind(_dbInstance) : val;
+  },
+});
 
 // Lazy Auth instance: Only initializes if code actually uses auth (e.g. in /admin)
 // Prevents downloading the hidden auth iframe on public tool pages
@@ -22,7 +32,8 @@ export const auth = new Proxy({} as ReturnType<typeof getAuth>, {
     if (!_authInstance) {
       _authInstance = getAuth(app);
     }
-    return (_authInstance as any)[prop];
+    const val = (_authInstance as any)[prop];
+    return typeof val === "function" ? val.bind(_authInstance) : val;
   },
 });
 
@@ -41,6 +52,39 @@ export function aggregateWithin(records: Record<string, number>, ms: number): nu
     if (now - ts <= ms) total += cnt;
   }
   return total;
+}
+
+export async function fetchTopToolUsage(limit = 12): Promise<string[]> {
+  // On the server, return immediately so SSR never blocks or triggers undici ConnectTimeoutError
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const snapshot = await get(ref(db, "toolUsage"));
+    if (!snapshot.exists()) return [];
+    const data = snapshot.val();
+    if (!data || typeof data !== "object") return [];
+
+    const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000;
+    const counts = Object.entries(data)
+      .filter(([slug]) => !slug.startsWith("_"))
+      .map(([slug, records]) => ({
+        slug,
+        count:
+          records && typeof records === "object"
+            ? aggregateWithin(records as Record<string, number>, thirtyDaysMs)
+            : 0,
+      }));
+
+    return counts
+      .filter((item) => item.count > 0)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, limit)
+      .map((item) => item.slug);
+  } catch {
+    return [];
+  }
 }
 
 // ---- NEW TRACKING LOGIC ----

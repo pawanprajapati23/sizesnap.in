@@ -45,7 +45,11 @@ function formatBytes(bytes: number, decimals = 2) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 }
 
-export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: number }) {
+export function CompressPdfTool({ initialTargetKB }: { initialTargetKB?: number }) {
+  const hasExplicitProp = typeof initialTargetKB === 'number' && initialTargetKB > 0;
+  const defaultTargetKB = hasExplicitProp ? initialTargetKB : 500;
+  const lockedTargetRef = useRef<number | null>(hasExplicitProp ? initialTargetKB : null);
+
   const [pdfMeta, setPdfMeta] = useState<PdfMeta | null>(null);
   const [isLoadingPdf, setIsLoadingPdf] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
@@ -72,7 +76,20 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
 
 
   // Settings
-  const [targetKB, setTargetKB] = useState<number | ''>(initialTargetKB);
+  const [targetKB, setTargetKB] = useState<number | ''>(defaultTargetKB);
+
+  // Sync URL query (?target= or ?kb=) on client without requiring Suspense boundaries on static KB pages
+  useEffect(() => {
+    if (hasExplicitProp || typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('target') || params.get('kb');
+    if (!raw) return;
+    const parsed = parseInt(raw, 10);
+    if (!isNaN(parsed) && parsed > 0) {
+      lockedTargetRef.current = parsed;
+      queueMicrotask(() => setTargetKB(parsed));
+    }
+  }, [hasExplicitProp]);
 
   // Progress & Results
   const [progressPercent, setProgressPercent] = useState(0);
@@ -122,12 +139,14 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
 
       const pdfDoc = await loadingTask.promise;
       
-      // Auto-suggest a target KB based on original size (50% reduction by default, max 1000KB)
-      const originalKB = file.size / 1024;
-      let suggestedKB = Math.floor(originalKB * 0.5);
-      if (suggestedKB > 1000) suggestedKB = 1000;
-      if (suggestedKB < 100) suggestedKB = 100;
-      setTargetKB(suggestedKB);
+      // Auto-suggest target KB ONLY if page/URL didn't lock a specific target
+      if (lockedTargetRef.current === null) {
+        const originalKB = file.size / 1024;
+        let suggestedKB = Math.floor(originalKB * 0.5);
+        if (suggestedKB > 1000) suggestedKB = 1000;
+        if (suggestedKB < 100) suggestedKB = 100;
+        setTargetKB(suggestedKB);
+      }
 
       setPdfMeta({
         file,
@@ -344,7 +363,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
     setPdfMeta(null);
     setResult(null);
     setErrorMsg(null);
-    setTargetKB(500);
+    setTargetKB(lockedTargetRef.current ?? defaultTargetKB);
     setProgressPercent(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -467,7 +486,7 @@ export function CompressPdfTool({ initialTargetKB = 500 }: { initialTargetKB?: n
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {[20, 50, 100, 300, 500, 1000].map((preset) => (
+                    {[20, 50, 100, 140, 200, 300, 500, 1000].map((preset) => (
                       <button
                         key={preset}
                         onClick={() => setTargetKB(preset)}

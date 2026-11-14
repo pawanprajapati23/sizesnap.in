@@ -47,7 +47,7 @@ export default function ToolsDirectoryPage() {
               </p>
           </div>
 
-          <ToolDirectory />
+          <ToolDirectory hideHeroHeading />
 
         </main>
 

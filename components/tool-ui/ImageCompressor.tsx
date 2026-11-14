@@ -5,7 +5,7 @@ import { DropzoneUpload } from './DropzoneUpload';
 import { ImagePreviewCard, type ImageMetadata } from './ImagePreviewCard';
 import { CompressionSettings, type OutputFormatOption } from './CompressionSettings';
 import { CompressionResultCard, type CompressedResult } from './CompressionResultCard';
-import { sanitizeFilename, getExtensionFromMime } from '@/lib/format-utils';
+import { sanitizeFilename, getExtensionFromMime, consumeCachedHeroImage } from '@/lib/format-utils';
 import { trackProcessingSuccess } from '@/lib/firebase';
 import { AlertCircle } from 'lucide-react';
 
@@ -44,7 +44,7 @@ export function ImageCompressor() {
   }, [revokeAllUrls]);
 
   // Handle file select from dropzone or picker
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = useCallback((file: File) => {
     setProcessError(null);
     setCompressionResult(null);
 
@@ -68,7 +68,19 @@ export function ImageCompressor() {
     };
 
     img.src = objectUrl;
-  };
+  }, [registerUrl]);
+
+  useEffect(() => {
+    let cancelled = false;
+    consumeCachedHeroImage().then((file) => {
+      if (file && !cancelled) {
+        handleFileSelect(file);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [handleFileSelect]);
 
   // Reset entire state
   const handleReset = () => {

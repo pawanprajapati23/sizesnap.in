@@ -301,11 +301,14 @@ export function PanCardResizerTool() {
 
   // Trigger processing
   useEffect(() => {
-    if (mode === 'combo') {
-      processCombo();
-    } else if (imageSrc) {
-      processSingleImage();
-    }
+    const timer = setTimeout(() => {
+      if (mode === 'combo') {
+        processCombo();
+      } else if (imageSrc) {
+        processSingleImage();
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [mode, portal, imageSrc, customKb, zoom, comboPhotoSrc, comboSigSrc, processCombo, processSingleImage]);
 
   // Mode change handler

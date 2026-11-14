@@ -222,7 +222,7 @@ export default function EcommerceToolsPage() {
              {[
                { title: 'Compress PDF', desc: 'Reduce PDF file size', slug: 'compress-pdf' },
                { title: 'Split PDF', desc: 'Separate pages from a PDF', slug: 'split-pdf' },
-               { title: 'Merge PDFs', desc: 'Combine multiple PDFs into one', slug: 'merge-pdfs' },
+               { title: 'Merge PDFs', desc: 'Combine multiple PDFs into one', slug: 'merge-pdf' },
                { title: 'Rotate PDF', desc: 'Rotate PDF pages', slug: 'rotate-pdf' }
              ].map(tool => (
                <Link
@@ -259,7 +259,7 @@ export default function EcommerceToolsPage() {
               <span className="block text-sm font-medium text-gray-900 mb-1">Split a large shipping PDF</span>
               <span className="text-xs text-[#414FA8] flex items-center">Start workflow <ArrowRight className="h-3 w-3 ml-1" /></span>
             </Link>
-            <Link href="/tools/merge-pdfs" className="block bg-white border border-gray-200 rounded-xl p-4 hover:bg-[#F8F9FA] transition-colors">
+            <Link href="/tools/merge-pdf" className="block bg-white border border-gray-200 rounded-xl p-4 hover:bg-[#F8F9FA] transition-colors">
               <span className="block text-sm font-medium text-gray-900 mb-1">Merge seller documents</span>
               <span className="text-xs text-[#414FA8] flex items-center">Start workflow <ArrowRight className="h-3 w-3 ml-1" /></span>
             </Link>

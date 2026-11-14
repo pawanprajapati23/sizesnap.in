@@ -1,7 +1,9 @@
-import { ref, get, set, push, query, limitToLast, orderByKey } from 'firebase/database';
+import { ref, get, set, push, query, limitToLast } from 'firebase/database';
 import { db, fetchUsage, aggregateWithin } from '@/lib/firebase';
+import { ALL_TOOLS } from '@/data/tools';
+import { TOOL_REDIRECT_MAP } from '@/data/tool-redirects';
 
-export type TimeRange = '24h' | '30d' | '3m';
+export type TimeRange = '24h' | '7d' | '30d' | '3m';
 
 export interface TrafficVisitRecord {
   id: string;
@@ -24,6 +26,16 @@ export interface TopPageStat {
   percentage: number;
 }
 
+export interface TopToolStat {
+  slug: string;
+  name: string;
+  categoryTitle: string;
+  uses: number;
+  downloads: number;
+  conversionPct: number;
+  errors: number;
+}
+
 export interface TrafficReport {
   timeframe: TimeRange;
   timeframeLabel: string;
@@ -31,7 +43,10 @@ export interface TrafficReport {
   uniqueVisitors: number;
   totalToolUses: number;
   totalDownloads: number;
+  totalErrors: number;
+  conversionRatePct: number;
   topPages: TopPageStat[];
+  topTools: TopToolStat[];
   deviceBreakdown: {
     desktop: number;
     mobile: number;
@@ -85,7 +100,6 @@ let lastLoggedTime = 0;
 export async function recordPageVisit(path: string): Promise<void> {
   if (typeof window === 'undefined') return;
 
-  // Never track internal admin routes or static assets
   if (
     path.startsWith('/admin') ||
     path.startsWith('/api') ||
@@ -121,17 +135,24 @@ export async function recordPageVisit(path: string): Promise<void> {
   }
 }
 
+const CANONICAL_TOOLS = ALL_TOOLS.filter(
+  (t) => !TOOL_REDIRECT_MAP[t.slug] && t.status !== 'draft' && t.status !== 'deprecated'
+);
+
 export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<TrafficReport> {
   const now = Date.now();
   let startTime = now - 24 * 60 * 60 * 1000;
   let timeframeLabel = 'Last 24 Hours';
 
-  if (timeframe === '30d') {
+  if (timeframe === '7d') {
+    startTime = now - 7 * 24 * 60 * 60 * 1000;
+    timeframeLabel = 'Last 7 Days';
+  } else if (timeframe === '30d') {
     startTime = now - 30 * 24 * 60 * 60 * 1000;
     timeframeLabel = 'Last 30 Days';
   } else if (timeframe === '3m') {
     startTime = now - 90 * 24 * 60 * 60 * 1000;
-    timeframeLabel = 'Last 3 Months (90 Days)';
+    timeframeLabel = 'Last 90 Days';
   }
 
   const ms = now - startTime;
@@ -140,8 +161,7 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
   const rawVisits: TrafficVisitRecord[] = [];
 
   try {
-    // Query latest 2000 visits
-    const visitsQuery = query(ref(db, 'trafficVisits'), limitToLast(2000));
+    const visitsQuery = query(ref(db, 'trafficVisits'), limitToLast(2500));
     const snap = await get(visitsQuery);
     if (snap.exists()) {
       const data = snap.val();
@@ -166,29 +186,68 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
     console.error('Failed to query trafficVisits:', error);
   }
 
-  // Sort descending by timestamp
   rawVisits.sort((a, b) => b.timestamp - a.timestamp);
 
-  // 2. Fetch tool uses and downloads for cross-correlation
+  // 2. Fetch tool uses, per-tool downloads, and errors
   let totalToolUses = 0;
   let totalDownloads = 0;
+  let totalErrors = 0;
+  const topToolsList: TopToolStat[] = [];
 
   try {
-    const [toolRecords, dlRecords] = await Promise.all([
+    const [toolRecords, dlRecords, errRecords] = await Promise.all([
       fetchUsage('toolUsage'),
       fetchUsage('downloads'),
+      fetchUsage('toolErrors'),
     ]);
 
-    totalDownloads = aggregateWithin(dlRecords, ms);
+    const perToolDlMap = (toolRecords['_downloads'] ?? {}) as unknown as Record<
+      string,
+      Record<string, number>
+    >;
+    const perToolErrMap = (toolRecords['_errors'] ?? {}) as unknown as Record<
+      string,
+      Record<string, number>
+    >;
+
+    let summedToolDownloads = 0;
 
     for (const [key, records] of Object.entries(toolRecords)) {
-      if (!key.startsWith('_') && typeof records === 'object' && records !== null) {
-        totalToolUses += aggregateWithin(records as Record<string, number>, ms);
+      if (key.startsWith('_') || typeof records !== 'object' || records === null) continue;
+      const uses = aggregateWithin(records as unknown as Record<string, number>, ms);
+      const dls = perToolDlMap[key] ? aggregateWithin(perToolDlMap[key], ms) : 0;
+      const errsFromToolUsage = perToolErrMap[key] ? aggregateWithin(perToolErrMap[key], ms) : 0;
+      const errsFromLegacy =
+        errRecords[key] && typeof errRecords[key] === 'object'
+          ? aggregateWithin(errRecords[key] as unknown as Record<string, number>, ms)
+          : 0;
+      const errs = Math.max(errsFromToolUsage, errsFromLegacy);
+
+      totalToolUses += uses;
+      summedToolDownloads += dls;
+      totalErrors += errs;
+
+      if (uses > 0 || dls > 0 || errs > 0) {
+        const meta = CANONICAL_TOOLS.find((t) => t.slug === key) || ALL_TOOLS.find((t) => t.slug === key);
+        topToolsList.push({
+          slug: key,
+          name: meta ? meta.name : key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+          categoryTitle: meta?.categoryTitle || 'Utility',
+          uses,
+          downloads: dls,
+          conversionPct: uses > 0 ? Math.min(100, Math.round((dls / uses) * 100)) : 0,
+          errors: errs,
+        });
       }
     }
+
+    const globalDownloads = aggregateWithin(dlRecords, ms);
+    totalDownloads = Math.max(globalDownloads, summedToolDownloads);
   } catch {
     // Ignore if fetchUsage fails
   }
+
+  topToolsList.sort((a, b) => b.uses - a.uses);
 
   // 3. Aggregate Unique Visitors, Page Hits, Devices
   const uniqueVisitorIds = new Set<string>();
@@ -209,7 +268,6 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
   const totalVisits = rawVisits.length;
   const uniqueVisitors = uniqueVisitorIds.size;
 
-  // Top Pages
   const topPages: TopPageStat[] = Object.entries(pageHits)
     .map(([path, count]) => ({
       path,
@@ -219,7 +277,6 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
     .sort((a, b) => b.visits - a.visits)
     .slice(0, 10);
 
-  // Device Breakdown
   const deviceTotal = desktopCount + mobileCount + tabletCount || 1;
   const deviceBreakdown = {
     desktop: desktopCount,
@@ -234,7 +291,6 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
   const timeSeries: TimeSeriesBucket[] = [];
 
   if (timeframe === '24h') {
-    // 24 one-hour buckets
     const bucketDuration = 60 * 60 * 1000;
     for (let i = 23; i >= 0; i--) {
       const bucketStart = now - (i + 1) * bucketDuration;
@@ -252,8 +308,25 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
         uniqueUsers: bucketUniq,
       });
     }
+  } else if (timeframe === '7d') {
+    const bucketDuration = 24 * 60 * 60 * 1000;
+    for (let i = 6; i >= 0; i--) {
+      const bucketStart = now - (i + 1) * bucketDuration;
+      const bucketEnd = now - i * bucketDuration;
+      const bucketDate = new Date(bucketEnd);
+      const label = bucketDate.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric' });
+
+      const inBucket = rawVisits.filter((v) => v.timestamp >= bucketStart && v.timestamp < bucketEnd);
+      const bucketUniq = new Set(inBucket.map((v) => v.visitorId)).size;
+
+      timeSeries.push({
+        label,
+        timestamp: bucketEnd,
+        visits: inBucket.length,
+        uniqueUsers: bucketUniq,
+      });
+    }
   } else if (timeframe === '30d') {
-    // 30 one-day buckets
     const bucketDuration = 24 * 60 * 60 * 1000;
     for (let i = 29; i >= 0; i--) {
       const bucketStart = now - (i + 1) * bucketDuration;
@@ -272,7 +345,6 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
       });
     }
   } else {
-    // 3m: 12 weekly buckets
     const bucketDuration = 7 * 24 * 60 * 60 * 1000;
     for (let i = 12; i >= 0; i--) {
       const bucketStart = now - (i + 1) * bucketDuration;
@@ -292,6 +364,9 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
     }
   }
 
+  const conversionRatePct =
+    totalToolUses > 0 ? Math.min(100, Math.round((totalDownloads / totalToolUses) * 100)) : 0;
+
   return {
     timeframe,
     timeframeLabel,
@@ -299,7 +374,10 @@ export async function getTrafficAnalyticsReport(timeframe: TimeRange): Promise<T
     uniqueVisitors,
     totalToolUses,
     totalDownloads,
+    totalErrors,
+    conversionRatePct,
     topPages,
+    topTools: topToolsList.slice(0, 10),
     deviceBreakdown,
     timeSeries,
     recentVisits: rawVisits.slice(0, 20),

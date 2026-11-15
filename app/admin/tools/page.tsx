@@ -55,9 +55,8 @@ export function ToolsCatalogView({ initialMode = 'all' }: { initialMode?: ViewMo
 
   const loadData = useCallback(async () => {
     try {
-      const [usageRecords, errorRecords] = await Promise.all([
+      const [usageRecords] = await Promise.all([
         fetchUsage('toolUsage'),
-        fetchUsage('toolErrors'),
       ]);
       const ms = rangeToMs(activeRange);
 
@@ -74,14 +73,9 @@ export function ToolsCatalogView({ initialMode = 'all' }: { initialMode?: ViewMo
         const usesMap = (usageRecords[t.slug] ?? {}) as unknown as Record<string, number>;
         const dlMap = perToolDlMap[t.slug] ?? {};
         const errFromUsage = perToolErrMap[t.slug] ? aggregateWithin(perToolErrMap[t.slug], ms) : 0;
-        const errFromLegacy =
-          errorRecords[t.slug] && typeof errorRecords[t.slug] === 'object'
-            ? aggregateWithin(errorRecords[t.slug] as unknown as Record<string, number>, ms)
-            : 0;
-
         const uses = aggregateWithin(usesMap, ms);
         const downloads = aggregateWithin(dlMap, ms);
-        const errors = Math.max(errFromUsage, errFromLegacy);
+        const errors = errFromUsage;
         const conversionPct = uses > 0 ? Math.min(100, Math.round((downloads / uses) * 100)) : 0;
 
         let status: 'Healthy' | 'Warning' | 'Critical' = 'Healthy';

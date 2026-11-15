@@ -86,9 +86,8 @@ export default function LiveActivityPage() {
       const ms = rangeToMs(activeRange);
       const now = Date.now();
 
-      const [toolRecords, dlRecords, allLiveLogs] = await Promise.all([
+      const [toolRecords, allLiveLogs] = await Promise.all([
         fetchUsage('toolUsage'),
-        fetchUsage('downloads'),
         fetchLiveActivity(2000),
       ]);
 
@@ -155,7 +154,9 @@ export default function LiveActivityPage() {
         }
       }
 
-      const globalDls = aggregateWithin(dlRecords, ms);
+      const globalDls = dlToolRecords['_total']
+        ? aggregateWithin(dlToolRecords['_total'] as unknown as Record<string, number>, ms)
+        : 0;
       const effectiveDls = Math.max(globalDls, calculatedToolDls);
 
       toolPerformanceList.sort((a, b) => b.uses - a.uses);

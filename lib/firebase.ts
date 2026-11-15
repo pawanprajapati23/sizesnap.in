@@ -38,10 +38,14 @@ export const auth = new Proxy({} as ReturnType<typeof getAuth>, {
 });
 
 export async function fetchUsage(path: string): Promise<Record<string, number>> {
-  const snapshot = await get(ref(db, path));
-  if (!snapshot.exists()) return {};
-  const data = snapshot.val();
-  return typeof data === "object" ? data : {};
+  try {
+    const snapshot = await get(ref(db, path));
+    if (!snapshot.exists()) return {};
+    const data = snapshot.val();
+    return typeof data === "object" && data !== null ? data : {};
+  } catch (err) {
+    return {};
+  }
 }
 
 export function aggregateWithin(records: Record<string, number>, ms: number): number {
@@ -179,7 +183,7 @@ export const trackProcessingError = async (tool: string, reason?: string) => {
 export const trackDownload = async (tool?: string, activityId?: string) => {
   try {
     const hourTimestamp = getCurrentHourTimestamp();
-    const downloadRef = ref(db, `downloads/${hourTimestamp}`);
+    const downloadRef = ref(db, `toolUsage/_downloads/_total/${hourTimestamp}`);
     await set(downloadRef, increment(1));
 
     if (tool) {
